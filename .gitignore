@@ -1,6 +1,7 @@
 # IDE
 .idea/
 .vs/
+scion.code-workspace
 
 # Node Modules
 node_modules/
