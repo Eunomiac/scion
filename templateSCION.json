@@ -1,0 +1,345 @@
+{
+    "Actor": {
+        "types": ["Major Character", "Minor Character", "Antagonist", "Group"],
+        "templates": {
+            "bio": {
+                "chronicle": "Scion: Advance Recon",
+                "player": "",
+                "concept": "",
+                "tier": {
+                    "label": "Tier",
+                    "value": "mortal"
+                },
+                "tiers": {
+                    "mortal": {
+                        "label": "Mortal",
+                        "minLegend": 0,
+                        "maxLegend": 0,
+                        "targetNumber": 8
+                    },
+                    "heroic": {
+                        "label": "Heroic",
+                        "minLegend": 1,
+                        "maxLegend": 4,
+                        "targetNumber": 8
+                    },
+                    "demigod": {
+                        "label": "Demigod",
+                        "minLegend": 5,
+                        "maxLegend": 8,
+                        "targetNumber": 7
+                    },
+                    "divine": {
+                        "label": "Divine",
+                        "minLegend": 9,
+                        "maxLegend": 12,
+                        "targetNumber": 7
+                    }
+                }
+            },
+            "divinity": {
+                "pantheon": "",
+                "pantheons": {
+                    "aesir": {
+                        "label": "Æsir"
+                    },
+                    "deva": {
+                        "label": "Deva"
+                    },
+                    "kami": {
+                        "label": "Kami"
+                    },
+                    "manitou": {
+                        "label": "Manitou"
+                    },
+                    "netjer": {
+                        "label": "Netjer"
+                    },
+                    "orisha": {
+                        "label": "Orisha"
+                    },
+                    "shen": {
+                        "label": "Shen"
+                    },
+                    "teotl": {
+                        "label": "Teotl"
+                    },
+                    "theoi": {
+                        "label": "Theoi"
+                    },
+                    "tuathaDeDanann": {
+                        "label": "Tuatha De Danann"
+                    }
+                },
+                "parent": ""
+            },
+            "attributes": {
+                "intellect": {
+                    "label": "Intellect",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "mental",
+                    "approach": "power"
+                },
+                "cunning": {
+                    "label": "Cunning",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "mental",
+                    "approach": "finesse"
+                },
+                "resolve": {
+                    "label": "Resolve",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "mental",
+                    "approach": "resilience"
+                },
+                "might": {
+                    "label": "Might",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "physical",
+                    "approach": "power"
+                },
+                "dexterity": {
+                    "label": "Dexterity",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "physical",
+                    "approach": "finesse"
+                },
+                "stamina": {
+                    "label": "Stamina",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "physical",
+                    "approach": "resilience"
+                },
+                "presence": {
+                    "label": "Presence",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "social",
+                    "approach": "power"
+                },
+                "manipulation": {
+                    "label": "Manipulation",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "social",
+                    "approach": "finesse"
+                },
+                "composure": {
+                    "label": "Composure",
+                    "min": 0,
+                    "value": 1,
+                    "max": 5,
+                    "modifier": [],
+                    "arena": "social",
+                    "approach": "resilience"
+                }                
+            },
+            "skills": {
+                "academics": {
+                    "label": "Academics",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "athletics": {
+                    "label": "Athletics",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "close_combat": {
+                    "label": "Close Combat",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "culture": {
+                    "label": "Culture",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "empathy": {
+                    "label": "Empathy",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "firearms": {
+                    "label": "Firearms",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "integrity": {
+                    "label": "Integrity",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "leadership": {
+                    "label": "Leadership",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "medicine": {
+                    "label": "Medicine",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "occult": {
+                    "label": "Occult",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "persuasion": {
+                    "label": "Persuasion",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "pilot": {
+                    "label": "Pilot",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "science": {
+                    "label": "Science",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "subterfuge": {
+                    "label": "Subterfuge",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "survival": {
+                    "label": "Survival",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                },
+                "technology": {
+                    "label": "Technology",
+                    "min": 0,
+                    "value": 0,
+                    "max": 5,
+                    "modifier": [],
+                    "specialty": ""
+                }
+            }
+        },
+        "Major Character": {
+            "templates": ["bio", "divinity", "attributes", "skills"]
+        },
+        "Minor Character": {
+            "templates": ["bio", "divinity", "attributes", "skills"],
+            "type": ["creature", "follower", "mortal"]
+        },
+        "Antagonist": {
+            "templates": ["bio", "divinity", "attributes", "skills"],
+            "type": ["mook", "professional", "villain", "monster", "foe", "rival", "nemesis", "titanspawn"]
+        },        
+        "Group": {
+            "templates": ["bio", "divinity", "attributes", "skills"]
+        }
+    },
+    "Item": {
+        "types": ["calling", "knack", "purview", "boon", "follower", "creature", "guide", "relic"],
+        "templates": {
+            "base": {
+                "description": ""
+            },
+            "rating": {
+                "min": 0,
+                "value": 0,
+                "max": 5
+            }
+        },
+        "calling": {
+            "templates": ["rating"],
+            "types": ["Creator", "Guardian", "Healer", "Hunter", "Judge", "Leader", "Lover", "Liminal", "Sage", "Trickster", "Warrior"]
+        },
+        "knack": {
+            "templates": ["base"]
+        },
+        "purview": {
+            "templates": [],
+            "types": ["Artistry", "Beasts", "Beauty", "Chaos", "Darkness", "Death", "Deception", "Earth", "Epic Dexterity", "Epic Stamina", "Epic Strength", "Fertility", "Fire", "Forge", "Fortune", "Frost", "Health", "Journeys", "Order", "Passion", "Prosperity", "Sky", "Stars", "Sun", "War", "Water", "Wild", "Wyrd", "Yoga", "Yaoyorozu-No-Kamigami", "Cheval", "Dodaem", "Heku", "Tianming", "Nextlahualli", "Metamorphosis", "Geasa"],
+            "focus": ""
+        },
+        "boon": {
+            "templates": ["base"]
+        },
+        "follower": {
+            "templates": ["base", "rating"]
+        },
+        "creature": {
+            "templates": ["base", "rating"]
+        },
+        "guide": {
+            "templates": ["base", "rating"]
+        },
+        "relic": {
+            "templates": ["base", "rating"]
+        }
+    }
+  }

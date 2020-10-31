@@ -1,0 +1,40 @@
+.grid {
+    display: grid;
+    height: auto;
+    grid-gap: 0px;
+    position: absolute;
+    z-index: 20000;
+    overflow: hidden;
+}
+
+.scion {
+    .grid {
+        width: 800px;
+            grid: "header header header header header header" 100px
+                  "attributes attributes paths paths paths paths" 150px
+                  "attributes attributes paths paths paths paths" 150px
+                  "attributes attributes paths paths paths paths" 150px 
+                  "virtues virtues paths paths paths paths" 60px
+                  / 1fr 1fr 1fr 1fr 1fr 1fr;
+        .header {
+            grid-area: header;
+            background-color: #ccffff;
+            text-align: center;
+            font-family: "Metamorphous";
+            color: black;
+            font-size: 32px;
+        }
+        .attributes {
+            grid-area: attributes;
+            background-color: #ffccff;
+        }
+        .paths {
+            grid-area: paths;
+            background-color: #ffffcc;
+        }
+        .virtues {
+            grid-area: virtues;
+            background-color: #ccffff;
+        }
+    }
+}

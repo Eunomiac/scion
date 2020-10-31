@@ -1,55 +1,51 @@
 // Import Modules
-import { BoilerplateActor } from "./actor/actor.js";
-import { BoilerplateActorSheet } from "./actor/actor-sheet.js";
-import { BoilerplateItem } from "./item/item.js";
-import { BoilerplateItemSheet } from "./item/item-sheet.js";
+import {ScionActor} from "./actor/actor.js";
+import {ScionActorSheet} from "./actor/actor-sheet.js";
+import {ScionItem} from "./item/item.js";
+import {ScionItemSheet} from "./item/item-sheet.js";
 
-Hooks.once('init', async function() {
+Hooks.once("init", async () => {
+    game.scion = {
+        ScionActor,
+        ScionItem,
+        rollItemMacro
+    };
 
-  game.boilerplate = {
-    BoilerplateActor,
-    BoilerplateItem,
-    rollItemMacro
-  };
-
-  /**
+    /**
    * Set an initiative formula for the system
    * @type {String}
    */
-  CONFIG.Combat.initiative = {
-    formula: "1d20 + @abilities.dex.mod",
-    decimals: 2
-  };
+    CONFIG.Combat.initiative = {
+        formula: "1d20 + @abilities.dex.mod",
+        decimals: 2
+    };
 
-  // Define custom Entity classes
-  CONFIG.Actor.entityClass = BoilerplateActor;
-  CONFIG.Item.entityClass = BoilerplateItem;
+    // Define custom Entity classes
+    CONFIG.Actor.entityClass = ScionActor;
+    CONFIG.Item.entityClass = ScionItem;
 
-  // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("boilerplate", BoilerplateActorSheet, { makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("boilerplate", BoilerplateItemSheet, { makeDefault: true });
+    // Register sheet application classes
+    Actors.unregisterSheet("core", ActorSheet);
+    Actors.registerSheet("scion", ScionActorSheet, {makeDefault: true});
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("scion", ScionItemSheet, {makeDefault: true});
 
-  // If you need to add Handlebars helpers, here are a few useful examples:
-  Handlebars.registerHelper('concat', function() {
-    var outStr = '';
-    for (var arg in arguments) {
-      if (typeof arguments[arg] != 'object') {
-        outStr += arguments[arg];
-      }
-    }
-    return outStr;
-  });
+    // If you need to add Handlebars helpers, here are a few useful examples:
+    Handlebars.registerHelper("concat", (...args) => {
+        let outStr = "";
+        for (const arg in args)
+            if (typeof args[arg] !== "object")
+                outStr += args[arg];
 
-  Handlebars.registerHelper('toLowerCase', function(str) {
-    return str.toLowerCase();
-  });
+        return outStr;
+    });
+
+    Handlebars.registerHelper("toLowerCase", (str) => str.toLowerCase());
 });
 
-Hooks.once("ready", async function() {
-  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => createBoilerplateMacro(data, slot));
+Hooks.once("ready", async () => {
+    // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
+    Hooks.on("hotbarDrop", (bar, data, slot) => createScionMacro(data, slot));
 });
 
 /* -------------------------------------------- */
@@ -63,25 +59,28 @@ Hooks.once("ready", async function() {
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-async function createBoilerplateMacro(data, slot) {
-  if (data.type !== "Item") return;
-  if (!("data" in data)) return ui.notifications.warn("You can only create macro buttons for owned Items");
-  const item = data.data;
+async function createScionMacro(data, slot) {
+    if (data.type !== "Item")
+        return;
+    if (!("data" in data)) {
+        ui.notifications.warn("You can only create macro buttons for owned Items");
+        return;
+    }
+    const item = data.data;
 
-  // Create the macro command
-  const command = `game.boilerplate.rollItemMacro("${item.name}");`;
-  let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
-  if (!macro) {
-    macro = await Macro.create({
-      name: item.name,
-      type: "script",
-      img: item.img,
-      command: command,
-      flags: { "boilerplate.itemMacro": true }
-    });
-  }
-  game.user.assignHotbarMacro(macro, slot);
-  return false;
+    // Create the macro command
+    const command = `game.scion.rollItemMacro("${item.name}");`;
+    let macro = game.macros.entities.find((m) => (m.name === item.name) && (m.command === command));
+    if (!macro)
+        macro = await Macro.create({
+            name: item.name,
+            type: "script",
+            img: item.img,
+            command,
+            flags: {"scion.itemMacro": true}
+        });
+
+    game.user.assignHotbarMacro(macro, slot);
 }
 
 /**
@@ -91,13 +90,16 @@ async function createBoilerplateMacro(data, slot) {
  * @return {Promise}
  */
 function rollItemMacro(itemName) {
-  const speaker = ChatMessage.getSpeaker();
-  let actor;
-  if (speaker.token) actor = game.actors.tokens[speaker.token];
-  if (!actor) actor = game.actors.get(speaker.actor);
-  const item = actor ? actor.items.find(i => i.name === itemName) : null;
-  if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
+    const speaker = ChatMessage.getSpeaker();
+    let actor;
+    if (speaker.token)
+        actor = game.actors.tokens[speaker.token];
+    if (!actor)
+        actor = game.actors.get(speaker.actor);
+    const item = actor ? actor.items.find((i) => i.name === itemName) : null;
+    if (!item)
+        return ui.notifications.warn(`Your controlled Actor does not have an item named ${itemName}`);
 
-  // Trigger the item roll
-  return item.roll();
+    // Trigger the item roll
+    return item.roll();
 }

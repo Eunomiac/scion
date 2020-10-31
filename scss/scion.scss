@@ -4,13 +4,11 @@
 @import 'utils/mixins';
 @import 'utils/variables';
 
-/* Global styles */
-@import 'global/window';
-@import 'global/grid';
-@import 'global/flex';
+/* Layout styles */
+@import 'grid/grid';
 
-/* Styles limited to boilerplate sheets */
-.boilerplate {
+/* Styles limited to scion sheets */
+.scion {
   @import 'components/forms';
   @import 'components/resource';
   @import 'components/tabs';

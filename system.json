@@ -1,14 +1,14 @@
 {
-  "name": "boilerplate",
-  "title": "Boilerplate",
-  "description": "The Boilerplate system for FoundryVTT!",
-  "version": "1.0.3",
+  "name": "scion",
+  "title": "Scion Second Edition",
+  "description": "An implementation of the Scion Second Edition rules system by Onyx Path Publishing for Foundry Virtual Tabletop.",
+  "version": "0.0.1",
   "minimumCoreVersion": "0.5.5",
   "compatibleCoreVersion": "0.5.5",
   "templateVersion": 2,
-  "author": "John Doe",
-  "esmodules": ["module/boilerplate.js"],
-  "styles": ["css/boilerplate.css"],
+  "author": "Ryan West",
+  "esmodules": ["module/scion.js"],
+  "styles": ["css/scion.css"],
   "scripts": [],
   "packs": [],
   "languages": [
@@ -18,12 +18,12 @@
       "path": "lang/en.json"
     }
   ],
-  "gridDistance": 5,
-  "gridUnits": "ft",
-  "primaryTokenAttribute": "health",
-  "secondaryTokenAttribute": "power",
-  "url": "",
-  "manifest": "",
-  "download": "",
+  "gridDistance": null,
+  "gridUnits": null,
+  "primaryTokenAttribute": null,
+  "secondaryTokenAttribute": null,
+  "url": null,
+  "manifest": null,
+  "download": null,
   "license": "LICENSE.txt"
 }
