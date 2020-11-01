@@ -21,3 +21,20 @@ input[type="text"] {
     resize: none;
     overflow: hidden;
 }
+
+div {
+    // background-color: rgba(0, 0, 0, 0.05);
+}
+
+div.pantheonImage {
+    position: relative;
+    top: 100px;
+    left: 250px;
+    height: 500px;
+    width: 500px;
+    background-image: var(--pantheonImage);
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.1;
+    margin-bottom: -500px;
+}

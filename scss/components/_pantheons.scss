@@ -10,6 +10,7 @@
     --fontWeightTitle: normal;
     --textTransformTitle: none;
     --fontSizeTitle: 32px;
+    --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorSubTitle: var(--fontColorTitle);
     --bgColorSubTitle: var(--bgColorTitle);
@@ -19,6 +20,7 @@
     --fontWeightSubTitle: normal;
     --textTransformSubTitle: none;
     --fontSizeSubTitle: 24px;
+    --textShadowSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorSubSubTitle: var(--fontColorTitle);
     --bgColorSubSubTitle: var(--bgColorTitle);
@@ -28,6 +30,7 @@
     --fontWeightSubSubTitle: normal;
     --textTransformSubSubTitle: none;
     --fontSizeSubSubTitle: 24px;
+    --textShadowSubSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorBody: #{$c-black};
     --fontFamilyBody: "#{$fontFamilyBodyDefault}";
@@ -35,19 +38,32 @@
 }
 
 .netjer {
-    $primaryColor: #FFD700;
+    $matteColor: #f7e5d6;
+    $headingColor: #6e4a28;
+    $accentColor: #373127;
+    $bodyColor: #261b12;
 
-    --bgColor1: #{scale-color($primaryColor, $lightness: 85%, $saturation: -35%)};
+    // $primaryColor: #FFD700;
 
-    --fontColorTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --bgColor1: #{scale-color($matteColor, $lightness: 45%, $saturation: -35%)};
+    // --bgColor1: #{$matteColor};
+    
+    // --fontColorTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontColorTitle: #{$headingColor};
     --fontFamilyTitle: "Yatra One";
 
-    --fontColorSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    // --fontColorSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontColorSubTitle: #{$headingColor};
     --fontFamilySubTitle: "Reem Kufi";
     --fontSizeSubTitle: 28px;
 
-    --fontColorSubSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    //--fontColorSubSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontColorSubSubTitle: #{$accentColor};
     --fontWeightSubSubTitle: bold;
+
+    --fontColorBody: #{$bodyColor};
+
+    --pantheonImage: url("https://i.imgur.com/ADtHyUx.png");
 }
 
 .tuathaDeDannan {
@@ -64,4 +80,6 @@
 
     --fontColorSubSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
     --fontWeightSubSubTitle: bold;
+
+    --pantheonImage: url("https://i.imgur.com/ROSCtgV.png");
 }

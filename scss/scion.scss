@@ -13,7 +13,6 @@
 
 /* Styles limited to scion sheets */
 .scion {
-  @debug "#{$fontFamilyBodyDefault}";
   @import 'components/base';
   @import 'components/pantheons';
   @import 'components/tabs';

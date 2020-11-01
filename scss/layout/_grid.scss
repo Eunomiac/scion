@@ -6,7 +6,7 @@
     padding: 0px;
     border: none;
     font-size: 0px;    
-    grid-gap: 0px;
+    grid-gap: 5px;
 }
 
 .Character {
@@ -34,13 +34,14 @@
                       "legendDisplay parentage parentage parentage xpDisplay" 1fr
                       "legendDisplay title title title xpDisplay" 1fr
                       "legendDisplay title title title xpDisplay" 1fr
-                      / 20% 1fr 1fr 1fr 1fr;
+                      / 150px 1fr 1fr 1fr 100px;
                 .legendDisplay {grid-area: legendDisplay;}
                 .charName {grid-area: charName;}
                 .healthDisplay {grid-area: healthDisplay;}
                 .parentage {grid-area: parentage;}
                 .title {grid-area: title;}
                 .xpDisplay {grid-area: xpDisplay;}
+                // div {background-color: rgba(0, 0, 0, 0.2);}
                 // div {border: 1px dashed blue;}
             }
         }

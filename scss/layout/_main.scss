@@ -1,4 +1,6 @@
 .scion .Character {
+    padding: 10px;
+
     .main {
         .header {
             .legendDisplay { }
@@ -12,6 +14,7 @@
                     font-weight: var(--fontWeightTitle);
                     text-transform: var(--textTransformTitle);
                     font-size: var(--fontSizeTitle);
+                    text-shadow: var(--textShadowTitle);
                     text-align: center;
                 }
             }
@@ -26,6 +29,7 @@
                     font-weight: var(--fontWeightSubTitle);
                     text-transform: var(--textTransformSubTitle);
                     font-size: var(--fontSizeSubTitle);
+                    text-shadow: var(--textShadowSubTitle);
                     text-align: center;
                     line-height: var(--fontSizeSubTitle);
                 }
@@ -40,6 +44,7 @@
                     font-weight: var(--fontWeightSubSubTitle);
                     text-transform: var(--textTransformSubSubTitle);
                     font-size: var(--fontSizeSubSubTitle);
+                    text-shadow: var(--textShadowSubSubTitle);
                     text-align: center;
                 }
             }
