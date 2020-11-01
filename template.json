@@ -9,13 +9,13 @@
                 "tier": ""
             },
             "divinity": {
-                "pantheon": "tuathaDeDannan",
+                "pantheon": "netjer",
                 "parent": {
-                    "name": "Aengus the Mac Og",
-                    "mantle": "God of Youth and Love"
+                    "name": "Horus",
+                    "mantle": "God of Justice"
                 },
                 "heritage": "",
-                "divinetitle": "Bright Eyes"
+                "divineTitle": "The Sin-Eater"
             },
             "attributes": {
                 "intellect": {

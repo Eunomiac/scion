@@ -1,34 +1,67 @@
-.tuathaDeDannan {
-    --bgColor1: #d9ead3;
 
-    --fontColorTitle: #38761d;
+& {
+    --bgColor1: #{$c-white};
+
+    --fontColorTitle: #{$c-black};
     --bgColorTitle: transparent;
-    --fontFamilyTitle: "Berkshire Swash";
+    --fontFamilyTitle: "#{$fontFamilyTitleDefault}";
     --fontStyleTitle: normal;
     --fontVariantTitle: normal;
     --fontWeightTitle: normal;
     --textTransformTitle: none;
     --fontSizeTitle: 32px;
 
-    --fontColorSubTitle: #38761d;
-    --bgColorSubTitle: transparent;
-    --fontFamilySubTitle: "Della Respira";
-    --fontStyleSubTitle: italic;
+    --fontColorSubTitle: var(--fontColorTitle);
+    --bgColorSubTitle: var(--bgColorTitle);
+    --fontFamilySubTitle: "#{$fontFamilyTitleDefault}";
+    --fontStyleSubTitle: normal;
     --fontVariantSubTitle: normal;
     --fontWeightSubTitle: normal;
     --textTransformSubTitle: none;
     --fontSizeSubTitle: 24px;
 
-    --fontColorSubSubTitle: #38761d;
-    --bgColorSubSubTitle: transparent;
-    --fontFamilySubSubTitle: "Overlock SC";
+    --fontColorSubSubTitle: var(--fontColorTitle);
+    --bgColorSubSubTitle: var(--bgColorTitle);
+    --fontFamilySubSubTitle: "#{$fontFamilyBodyDefault}";
     --fontStyleSubSubTitle: normal;
     --fontVariantSubSubTitle: normal;
     --fontWeightSubSubTitle: normal;
     --textTransformSubSubTitle: none;
     --fontSizeSubSubTitle: 24px;
 
-    --fontColorBody: $c-black;
-    --fontFamilyBody: "Overlock SC";
+    --fontColorBody: #{$c-black};
+    --fontFamilyBody: "#{$fontFamilyBodyDefault}";
     --fontSizeBody: 18px;
+}
+
+.netjer {
+    $primaryColor: #FFD700;
+
+    --bgColor1: #{scale-color($primaryColor, $lightness: 85%, $saturation: -35%)};
+
+    --fontColorTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontFamilyTitle: "Yatra One";
+
+    --fontColorSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontFamilySubTitle: "Reem Kufi";
+    --fontSizeSubTitle: 28px;
+
+    --fontColorSubSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontWeightSubSubTitle: bold;
+}
+
+.tuathaDeDannan {
+    $primaryColor: #32CD32;
+
+    --bgColor1: #{scale-color($primaryColor, $lightness: 85%, $saturation: -35%)};
+
+    --fontColorTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontFamilyTitle: "Berkshire Swash";
+
+    --fontColorSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontFamilySubTitle: "Della Respira";
+    --fontStyleSubTitle: italic;
+
+    --fontColorSubSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontWeightSubSubTitle: bold;
 }

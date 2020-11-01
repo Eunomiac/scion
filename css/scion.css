@@ -1,6 +1,7 @@
 /* #region IMPORT */
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&display=swap");
+@use "sass:string";
 /* Utilities */
-@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&display=swap");
 /* Layout */
 .grid {
   display: grid;
@@ -61,10 +62,6 @@
 
 .Character .grid.main .header .grid .xpDisplay {
   grid-area: xpDisplay;
-}
-
-.Character .grid.main .header .grid div {
-  border: 1px dashed blue;
 }
 
 .Character .grid.main .sheet-body .front .grid {
@@ -153,6 +150,7 @@
   text-transform: var(--textTransformSubTitle);
   font-size: var(--fontSizeSubTitle);
   text-align: center;
+  line-height: var(--fontSizeSubTitle);
 }
 
 .scion .Character .main .header .title textarea {
@@ -193,35 +191,57 @@
   overflow: hidden;
 }
 
-.scion .tuathaDeDannan {
-  --bgColor1: #d9ead3;
-  --fontColorTitle: #38761d;
+.scion {
+  --bgColor1: #fff;
+  --fontColorTitle: #000;
   --bgColorTitle: transparent;
-  --fontFamilyTitle: "Berkshire Swash";
+  --fontFamilyTitle: "Marcellus SC";
   --fontStyleTitle: normal;
   --fontVariantTitle: normal;
   --fontWeightTitle: normal;
   --textTransformTitle: none;
   --fontSizeTitle: 32px;
-  --fontColorSubTitle: #38761d;
-  --bgColorSubTitle: transparent;
-  --fontFamilySubTitle: "Della Respira";
-  --fontStyleSubTitle: italic;
+  --fontColorSubTitle: var(--fontColorTitle);
+  --bgColorSubTitle: var(--bgColorTitle);
+  --fontFamilySubTitle: "Marcellus SC";
+  --fontStyleSubTitle: normal;
   --fontVariantSubTitle: normal;
   --fontWeightSubTitle: normal;
   --textTransformSubTitle: none;
   --fontSizeSubTitle: 24px;
-  --fontColorSubSubTitle: #38761d;
-  --bgColorSubSubTitle: transparent;
+  --fontColorSubSubTitle: var(--fontColorTitle);
+  --bgColorSubSubTitle: var(--bgColorTitle);
   --fontFamilySubSubTitle: "Overlock SC";
   --fontStyleSubSubTitle: normal;
   --fontVariantSubSubTitle: normal;
   --fontWeightSubSubTitle: normal;
   --textTransformSubSubTitle: none;
   --fontSizeSubSubTitle: 24px;
-  --fontColorBody: $c-black;
+  --fontColorBody: #000;
   --fontFamilyBody: "Overlock SC";
   --fontSizeBody: 18px;
+}
+
+.scion .netjer {
+  --bgColor1: #f8f4df;
+  --fontColorTitle: #665600;
+  --fontFamilyTitle: "Yatra One";
+  --fontColorSubTitle: #665600;
+  --fontFamilySubTitle: "Reem Kufi";
+  --fontSizeSubTitle: 28px;
+  --fontColorSubSubTitle: #665600;
+  --fontWeightSubSubTitle: bold;
+}
+
+.scion .tuathaDeDannan {
+  --bgColor1: #e4f3e4;
+  --fontColorTitle: #0a5c0a;
+  --fontFamilyTitle: "Berkshire Swash";
+  --fontColorSubTitle: #0a5c0a;
+  --fontFamilySubTitle: "Della Respira";
+  --fontStyleSubTitle: italic;
+  --fontColorSubSubTitle: #0a5c0a;
+  --fontWeightSubSubTitle: bold;
 }
 
 .scion nav.sheet-tabs {
