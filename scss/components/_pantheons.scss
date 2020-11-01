@@ -1,0 +1,34 @@
+.tuathaDeDannan {
+    --bgColor1: #d9ead3;
+
+    --fontColorTitle: #38761d;
+    --bgColorTitle: transparent;
+    --fontFamilyTitle: "Berkshire Swash";
+    --fontStyleTitle: normal;
+    --fontVariantTitle: normal;
+    --fontWeightTitle: normal;
+    --textTransformTitle: none;
+    --fontSizeTitle: 32px;
+
+    --fontColorSubTitle: #38761d;
+    --bgColorSubTitle: transparent;
+    --fontFamilySubTitle: "Della Respira";
+    --fontStyleSubTitle: italic;
+    --fontVariantSubTitle: normal;
+    --fontWeightSubTitle: normal;
+    --textTransformSubTitle: none;
+    --fontSizeSubTitle: 24px;
+
+    --fontColorSubSubTitle: #38761d;
+    --bgColorSubSubTitle: transparent;
+    --fontFamilySubSubTitle: "Overlock SC";
+    --fontStyleSubSubTitle: normal;
+    --fontVariantSubSubTitle: normal;
+    --fontWeightSubSubTitle: normal;
+    --textTransformSubSubTitle: none;
+    --fontSizeSubSubTitle: 24px;
+
+    --fontColorBody: $c-black;
+    --fontFamilyBody: "Overlock SC";
+    --fontSizeBody: 18px;
+}

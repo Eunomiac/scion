@@ -4,7 +4,7 @@
   "description": "An implementation of the Scion Second Edition rules system by Onyx Path Publishing for Foundry Virtual Tabletop.",
   "version": "0.0.1",
   "minimumCoreVersion": "0.5.5",
-  "compatibleCoreVersion": "0.5.5",
+  "compatibleCoreVersion": "0.7.5",
   "templateVersion": 2,
   "author": "Ryan West",
   "esmodules": ["module/scion.js"],

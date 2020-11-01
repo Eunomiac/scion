@@ -1,172 +1,245 @@
-@import url("https://fonts.googleapis.com/css2?family=Martel:wght@400;800&family=Roboto:wght@300;400;500&display=swap");
-/* Layout styles */
+/* #region IMPORT */
+/* Utilities */
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&display=swap");
+/* Layout */
 .grid {
   display: grid;
-  height: auto;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  font-size: 0px;
   grid-gap: 0px;
-  position: absolute;
-  z-index: 20000;
-  overflow: hidden;
 }
 
-.scion .grid {
-  width: 800px;
-  grid: "header header header header header header" 100px "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 60px / 1fr 1fr 1fr 1fr 1fr 1fr;
+.Character {
+  background-color: var(--bgColor1);
 }
 
-.scion .grid .header {
+.Character .grid.main {
+  height: 900px;
+  width: 1000px;
+  grid: "nav" 40px "header" 100px "body" auto / 1fr;
+}
+
+.Character .grid.main .nav {
+  grid-area: nav;
+}
+
+.Character .grid.main .header {
   grid-area: header;
-  background-color: #ccffff;
-  text-align: center;
-  font-family: "Metamorphous";
-  color: black;
-  font-size: 32px;
 }
 
-.scion .grid .attributes {
+.Character .grid.main .sheet-body {
+  grid-area: body;
+}
+
+.Character .grid.main .header .grid {
+  grid: "legendDisplay charName charName charName healthDisplay" 1fr "legendDisplay charName charName charName healthDisplay" 1fr "legendDisplay charName charName charName healthDisplay" 1fr "legendDisplay parentage parentage parentage ." 1fr "legendDisplay parentage parentage parentage xpDisplay" 1fr "legendDisplay title title title xpDisplay" 1fr "legendDisplay title title title xpDisplay" 1fr / 20% 1fr 1fr 1fr 1fr;
+}
+
+.Character .grid.main .header .grid .legendDisplay {
+  grid-area: legendDisplay;
+}
+
+.Character .grid.main .header .grid .charName {
+  grid-area: charName;
+}
+
+.Character .grid.main .header .grid .healthDisplay {
+  grid-area: healthDisplay;
+}
+
+.Character .grid.main .header .grid .parentage {
+  grid-area: parentage;
+}
+
+.Character .grid.main .header .grid .title {
+  grid-area: title;
+}
+
+.Character .grid.main .header .grid .xpDisplay {
+  grid-area: xpDisplay;
+}
+
+.Character .grid.main .header .grid div {
+  border: 1px dashed blue;
+}
+
+.Character .grid.main .sheet-body .front .grid {
+  grid: "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.Character .grid.main .sheet-body .front .grid .attributes {
   grid-area: attributes;
-  background-color: #ffccff;
 }
 
-.scion .grid .paths {
+.Character .grid.main .sheet-body .front .grid .paths {
   grid-area: paths;
-  background-color: #ffffcc;
 }
 
-.scion .grid .virtues {
+.Character .grid.main .sheet-body .front .grid .virtues {
   grid-area: virtues;
-  background-color: #ccffff;
+}
+
+.Character .grid.main .sheet-body .heritage .grid {
+  grid: "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.Character .grid.main .sheet-body .heritage .grid .attributes {
+  grid-area: attributes;
+}
+
+.Character .grid.main .sheet-body .heritage .grid .paths {
+  grid-area: paths;
+}
+
+.Character .grid.main .sheet-body .heritage .grid .virtues {
+  grid-area: virtues;
+}
+
+.Character .grid.main .sheet-body .details .grid {
+  grid: "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.Character .grid.main .sheet-body .details .grid .attributes {
+  grid-area: attributes;
+}
+
+.Character .grid.main .sheet-body .details .grid .paths {
+  grid-area: paths;
+}
+
+.Character .grid.main .sheet-body .details .grid .virtues {
+  grid-area: virtues;
+}
+
+.Character .grid.main .sheet-body .experience .grid {
+  grid: "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.Character .grid.main .sheet-body .experience .grid .attributes {
+  grid-area: attributes;
+}
+
+.Character .grid.main .sheet-body .experience .grid .paths {
+  grid-area: paths;
+}
+
+.Character .grid.main .sheet-body .experience .grid .virtues {
+  grid-area: virtues;
+}
+
+.scion .Character .main .header .charName input[type="text"] {
+  color: var(--fontColorTitle);
+  background-color: var(--bgColorTitle);
+  font-family: var(--fontFamilyTitle);
+  font-style: var(--fontStyleTitle);
+  font-variant: var(--fontVariantTitle);
+  font-weight: var(--fontWeightTitle);
+  text-transform: var(--textTransformTitle);
+  font-size: var(--fontSizeTitle);
+  text-align: center;
+}
+
+.scion .Character .main .header .parentage textarea {
+  color: var(--fontColorSubTitle);
+  background-color: var(--bgColorSubTitle);
+  font-family: var(--fontFamilySubTitle);
+  font-style: var(--fontStyleSubTitle);
+  font-variant: var(--fontVariantSubTitle);
+  font-weight: var(--fontWeightSubTitle);
+  text-transform: var(--textTransformSubTitle);
+  font-size: var(--fontSizeSubTitle);
+  text-align: center;
+}
+
+.scion .Character .main .header .title textarea {
+  color: var(--fontColorSubSubTitle);
+  background-color: var(--bgColorSubSubTitle);
+  font-family: var(--fontFamilySubSubTitle);
+  font-style: var(--fontStyleSubSubTitle);
+  font-variant: var(--fontVariantSubSubTitle);
+  font-weight: var(--fontWeightSubSubTitle);
+  text-transform: var(--textTransformSubSubTitle);
+  font-size: var(--fontSizeSubSubTitle);
+  text-align: center;
 }
 
 /* Styles limited to scion sheets */
-.scion .item-form {
-  font-family: "Roboto", sans-serif;
+.scion .text {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
 }
 
-.scion .sheet-header {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 210px;
-  flex: 0 0 210px;
-  overflow: hidden;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  margin-bottom: 10px;
-}
-
-.scion .sheet-header .profile-img {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
-  flex: 0 0 100px;
-  height: 100px;
-  margin-right: 10px;
-}
-
-.scion .sheet-header .header-fields {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.scion .sheet-header h1.charname {
-  height: 50px;
-  padding: 0px;
-  margin: 5px 0;
-  border-bottom: 0;
-}
-
-.scion .sheet-header h1.charname input {
+.scion textarea,
+.scion input[type="text"] {
+  height: 100%;
+  min-height: unset;
   width: 100%;
-  height: 100%;
-  margin: 0;
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
-.scion .sheet-tabs {
-  -webkit-box-flex: 0;
-  -ms-flex: 0;
-  flex: 0;
+.scion .readonly {
+  pointer-events: none;
+  resize: none;
+  overflow: hidden;
 }
 
-.scion .sheet-body,
-.scion .sheet-body .tab,
-.scion .sheet-body .tab .editor {
-  height: 100%;
+.scion .tuathaDeDannan {
+  --bgColor1: #d9ead3;
+  --fontColorTitle: #38761d;
+  --bgColorTitle: transparent;
+  --fontFamilyTitle: "Berkshire Swash";
+  --fontStyleTitle: normal;
+  --fontVariantTitle: normal;
+  --fontWeightTitle: normal;
+  --textTransformTitle: none;
+  --fontSizeTitle: 32px;
+  --fontColorSubTitle: #38761d;
+  --bgColorSubTitle: transparent;
+  --fontFamilySubTitle: "Della Respira";
+  --fontStyleSubTitle: italic;
+  --fontVariantSubTitle: normal;
+  --fontWeightSubTitle: normal;
+  --textTransformSubTitle: none;
+  --fontSizeSubTitle: 24px;
+  --fontColorSubSubTitle: #38761d;
+  --bgColorSubSubTitle: transparent;
+  --fontFamilySubSubTitle: "Overlock SC";
+  --fontStyleSubSubTitle: normal;
+  --fontVariantSubSubTitle: normal;
+  --fontWeightSubSubTitle: normal;
+  --textTransformSubSubTitle: none;
+  --fontSizeSubSubTitle: 24px;
+  --fontColorBody: $c-black;
+  --fontFamilyBody: "Overlock SC";
+  --fontSizeBody: 18px;
 }
 
-.scion .tox .tox-editor-container {
-  background: #fff;
-}
-
-.scion .tox .tox-edit-area {
-  padding: 0 8px;
-}
-
-.scion .resource-label {
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.scion .tabs {
+.scion nav.sheet-tabs {
   height: 40px;
+  margin: 0px;
   border-top: 1px solid #AAA;
   border-bottom: 1px solid #AAA;
 }
 
-.scion .tabs .item {
+.scion nav.sheet-tabs .item {
   line-height: 40px;
   font-weight: bold;
+  font-size: 14px;
 }
 
-.scion .tabs .item.active {
+.scion nav.sheet-tabs .item.active {
   text-decoration: underline;
   text-shadow: none;
 }
 
-.scion .items-list {
-  list-style: none;
-  margin: 7px 0;
-  padding: 0;
-  overflow-y: auto;
-}
-
-.scion .items-list .item-header {
-  font-weight: bold;
-}
-
-.scion .items-list .item {
-  height: 30px;
-  line-height: 24px;
-  padding: 3px 0;
-  border-bottom: 1px solid #BBB;
-}
-
-.scion .items-list .item .item-image {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 24px;
-  flex: 0 0 24px;
-  margin-right: 5px;
-}
-
-.scion .items-list .item img {
-  display: block;
-}
-
-.scion .items-list .item-name {
-  margin: 0;
-}
-
-.scion .items-list .item-controls {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 86px;
-  flex: 0 0 86px;
-  text-align: right;
-}
+/* #endregion */

@@ -44,6 +44,7 @@ module.exports = {
         curly: ["warn", "multi", "consistent"],
         "default-case": "warn",
         // "dot-location": ["warn", "object"],
+        "doctype-first": 0,
         "dot-notation": ["warn", {allowKeywords: false}],
         eqeqeq: ["warn", "always"],
         "function-paren-newline": "warn",

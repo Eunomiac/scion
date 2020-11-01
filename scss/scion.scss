@@ -1,16 +1,21 @@
-// Import utilities.
-@import 'utils/typography';
-@import 'utils/colors';
-@import 'utils/mixins';
-@import 'utils/variables';
+/* #region IMPORT */
 
-/* Layout styles */
-@import 'grid/grid';
+/* Utilities */
+@import 'utils/variables'; // Variables
+@import 'utils/typography'; // Fonts & Font Styling
+@import 'utils/colors'; // Color definitions
+@import 'utils/mixins'; // Mixins
+
+/* Layout */
+@import 'layout/grid';
+@import 'layout/main';
 
 /* Styles limited to scion sheets */
 .scion {
-  @import 'components/forms';
-  @import 'components/resource';
+  @import 'components/base';
+  @import 'components/pantheons';
   @import 'components/tabs';
-  @import 'components/items';
+//  @import 'components/items';
 }
+
+/* #endregion */
