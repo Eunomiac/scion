@@ -1,6 +1,6 @@
 
 & {
-    --bgColor1: #{$c-white};
+    --bgColorMatte: #{$c-white};
 
     --fontColorTitle: #{$c-black};
     --bgColorTitle: transparent;
@@ -9,7 +9,7 @@
     --fontVariantTitle: normal;
     --fontWeightTitle: normal;
     --textTransformTitle: none;
-    --fontSizeTitle: 32px;
+    --fontSizeTitle: 2.6rem;
     --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorSubTitle: var(--fontColorTitle);
@@ -19,7 +19,7 @@
     --fontVariantSubTitle: normal;
     --fontWeightSubTitle: normal;
     --textTransformSubTitle: none;
-    --fontSizeSubTitle: 24px;
+    --fontSizeSubTitle: 1.5rem;
     --textShadowSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorSubSubTitle: var(--fontColorTitle);
@@ -29,57 +29,59 @@
     --fontVariantSubSubTitle: normal;
     --fontWeightSubSubTitle: normal;
     --textTransformSubSubTitle: none;
-    --fontSizeSubSubTitle: 24px;
+    --fontSizeSubSubTitle: 1.5rem;
     --textShadowSubSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorBody: #{$c-black};
     --fontFamilyBody: "#{$fontFamilyBodyDefault}";
-    --fontSizeBody: 18px;
+    --fontSizeBody: 1rem;
 }
 
 .netjer {
-    $matteColor: #f7e5d6;
-    $headingColor: #6e4a28;
-    $accentColor: #373127;
-    $bodyColor: #261b12;
+    $matteColor: #f6f0e2;
+    $headingColor1: #554a39;
+    $headingColor2: #6e4a28;
+    $accentColor: #834107;
+    $bodyColor: #2d2d2f;
 
-    // $primaryColor: #FFD700;
-
-    --bgColor1: #{scale-color($matteColor, $lightness: 45%, $saturation: -35%)};
-    // --bgColor1: #{$matteColor};
+    --bgImage: url("https://i.imgur.com/yflp59R.jpg");
+    --bgColorMatte: #{$matteColor};
+    --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
+    --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
     
-    // --fontColorTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
-    --fontColorTitle: #{$headingColor};
+    --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Yatra One";
 
-    // --fontColorSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
-    --fontColorSubTitle: #{$headingColor};
+    --fontColorSubTitle: #{$headingColor2};
     --fontFamilySubTitle: "Reem Kufi";
-    --fontSizeSubTitle: 28px;
 
-    //--fontColorSubSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
-    --fontColorSubSubTitle: #{$accentColor};
+    --fontColorSubSubTitle: #{$headingColor1};
     --fontWeightSubSubTitle: bold;
 
     --fontColorBody: #{$bodyColor};
-
-    --pantheonImage: url("https://i.imgur.com/ADtHyUx.png");
 }
 
-.tuathaDeDannan {
-    $primaryColor: #32CD32;
+.tuathaDeDanann {
+    $matteColor: #efffd1;
+    $headingColor1: #296f17;
+    $headingColor2: #19430e;
+    $accentColor: #25951f;
+    $bodyColor: #1a211d;
 
-    --bgColor1: #{scale-color($primaryColor, $lightness: 85%, $saturation: -35%)};
-
-    --fontColorTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --bgImage: none; // url("https://i.imgur.com/yflp59R.jpg");
+    --bgColorMatte: #{$matteColor};
+    --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
+    --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
+    
+    --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Berkshire Swash";
 
-    --fontColorSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontColorSubTitle: #{$headingColor2};
     --fontFamilySubTitle: "Della Respira";
     --fontStyleSubTitle: italic;
 
-    --fontColorSubSubTitle: #{scale-color($primaryColor, $lightness: -60%, $saturation: 50%)};
+    --fontColorSubSubTitle: #{$headingColor1};
     --fontWeightSubSubTitle: bold;
 
-    --pantheonImage: url("https://i.imgur.com/ROSCtgV.png");
+    --fontColorBody: #{$bodyColor};
 }

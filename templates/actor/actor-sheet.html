@@ -1,20 +1,7 @@
 <form class="{{cssClass}} {{actor.type}} {{data.pantheon}}" autocomplete="off">
-    <div class="pantheonImage"></div>
+    {{log "!!!!!!!!!!!!!!!!!!"}} 
+    {{log this}}
     <div class="grid main">
-            {{!-- Sheet Header --}}
-            <div class="header">
-                <div class="grid">
-                    <div class="legendDisplay text">LEGEND</div>
-                    <div class="charName text"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></div>
-                    <div class="healthDisplay text">HEALTH</div>
-                    <div class="parentage text"><textarea class="readonly" name="parentage" readonly >Scion of {{data.parent.name}}, {{data.parent.mantle}}</textarea></div>
-                    <div class="title text"><textarea class="readonly" name="title" readonly >&quot;{{data.divineTitle}}&quot;</textarea></div>
-                    <div class="xpDisplay text">EXPERIENCE</div>
-                </div>
-                <!-- <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>     -->      
-                
-            </div>
-
             {{!-- Sheet Tab Navigation --}}
             <nav class="sheet-tabs tabs" data-group="primary">
                 <a class="item" data-tab="front">Front</a>
@@ -23,11 +10,27 @@
                 <a class="item" data-tab="experience">Experience</a>
             </nav>
 
+            {{!-- Sheet Header --}}
+            <div class="header">
+                <div class="grid">
+                    <div class="legendDisplay text">LEGEND</div>
+                    <div class="charName text"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></div>
+                    <div class="healthDisplay text">HEALTH</div>
+                    <div class="parentage text">{{#if data.parentageLine}}<textarea class="readonly" name="parentage" readonly >{{data.parentageLine}}</textarea>{{/if}}</div>
+                    <div class="title text"><input name="data.divineTitle" type="text" value="{{data.divineTitle}}" placeholder="" /></div>
+                    <div class="xpDisplay text">EXPERIENCE</div>
+                </div>
+                <!-- <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>     -->      
+                
+            </div>
+
+
+
             <section class="sheet-body">
                 {{!-- Front Tab --}}
                 <div class="tab front" data-group="primary" data-tab="front">
                     <div class="grid">
-                        <div class="attributes text">Attributes</div>
+                        <div class="attributes text">ATTRIBUTES</div>
                         <div class="paths text">Paths</div>
                         <div class="virtues text">Virtues</div>
                     </div>
@@ -35,7 +38,20 @@
                 {{!-- Divine Heritage Tab --}}
                 <div class="tab heritage" data-group="primary" data-tab="heritage">
                     <div class="grid">
-                        <div class="attributes text">Attributes</div>
+                        <div class="heritage text">                            
+                            <select name="data.pantheon">
+                                <option name=""></option>
+                                {{selectOptions data.SYSTEMDATA.PANTHEONS selected=data.pantheon}}
+                            </select>                            
+                            <select name="data.parent.name">
+                                <option name=""></option>
+                                {{selectOptions data.SYSTEMDATA.PANTHEONMEMBERS selected=data.parent.name}}
+                            </select>                           
+                            <select name="data.heritage">
+                                <option name=""></option>
+                                {{selectOptions data.SYSTEMDATA.HERITAGES selected=data.heritage}}
+                            </select>
+                        </div>
                         <div class="paths text">Paths</div>
                         <div class="virtues text">Virtues</div>
                     </div>

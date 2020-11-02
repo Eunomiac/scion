@@ -7,16 +7,22 @@
 @import 'utils/colors'; // Color definitions
 @import 'utils/mixins'; // Mixins
 
-/* Layout */
-@import 'layout/grid';
-@import 'layout/main';
+/* Globals: All Sheets */
+@import 'global/base';
 
-/* Styles limited to scion sheets */
-.scion {
-  @import 'components/base';
-  @import 'components/pantheons';
-  @import 'components/tabs';
-//  @import 'components/items';
+/* Layout */
+
+
+/* SCION ACTOR: All Scion Actors */
+.scion.actor {  
+  @import 'scionActor/scionActorMain';
+  @import 'scionActor/pantheons';
+}
+
+/* SCION ITEMS: All Scion Items */
+.scion.item {
+  @import 'scionItem/grid';
+  @import 'scionItem/main';
 }
 
 /* #endregion */

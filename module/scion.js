@@ -28,7 +28,6 @@ Hooks.once("init", async () => {
         for (const arg in args)
             if (typeof args[arg] !== "object")
                 outStr += args[arg];
-
         return outStr;
     });
     // #endregion

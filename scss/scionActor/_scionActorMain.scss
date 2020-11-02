@@ -1,0 +1,174 @@
+& {
+    .window-content {
+        color: var(--fontColorBody);
+        padding: 0px;
+        background: none;
+    }
+
+    .Character {
+        background-color: var(--bgColorMatte);        
+        background-image: var(--bgImage);
+        background-size: 100%;
+        
+        .grid.main {
+            height: map-get($charSheet, "height");
+            width: map-get($charSheet, "width");
+            padding: 0 2.8%;
+
+            grid: "nav" 1.5rem
+                  "header" 8rem
+                  "body" auto;
+
+            .sheet-tabs {
+                grid-area: nav;
+                height: 1.5rem;
+                margin: 0px;
+                border: none;
+
+                .item {
+                    line-height: 1.5rem;
+                    font-weight: bold;
+                    font-size: 1rem;
+                    text-shadow: none;
+                }
+                .item:hover { background-color: var(--bgColorSoft); }
+                .item.active { background-color: var(--bgColorStrong); }
+            }
+            .header {
+                grid-area: header;
+
+                .grid {
+                    grid: ". charName . healthDisplay" 1rem
+                          "legendDisplay charName . healthDisplay" 2rem
+                          "legendDisplay parentage . ." 1rem
+                          "legendDisplay parentage . xpDisplay" 1rem
+                          ". title . xpDisplay" 2rem/150px 1fr 50px 100px;
+                    grid-gap: 0;
+
+                    .legendDisplay {
+                        grid-area: legendDisplay;
+                    }
+                    .charName {
+                        grid-area: charName;
+                        input[type="text"] { 
+                            color: var(--fontColorTitle);
+                            background-color: var(--bgColorTitle);
+                            font-family: var(--fontFamilyTitle);
+                            font-style: var(--fontStyleTitle);
+                            font-variant: var(--fontVariantTitle);
+                            font-weight: var(--fontWeightTitle);
+                            text-transform: var(--textTransformTitle);
+                            font-size: var(--fontSizeTitle);
+                            text-shadow: var(--textShadowTitle);
+                            text-align: center;
+                            line-height: 3rem;
+                        }
+                    }
+                    .healthDisplay {
+                        grid-area: healthDisplay;
+                    }
+                    .parentage {
+                        grid-area: parentage;
+                        textarea {
+                            color: var(--fontColorSubTitle);
+                            background-color: var(--bgColorSubTitle);
+                            font-family: var(--fontFamilySubTitle);
+                            font-style: var(--fontStyleSubTitle);
+                            font-variant: var(--fontVariantSubTitle);
+                            font-weight: var(--fontWeightSubTitle);
+                            text-transform: var(--textTransformSubTitle);
+                            font-size: var(--fontSizeSubTitle);
+                            text-shadow: var(--textShadowSubTitle);
+                            text-align: center;
+                            line-height: 2rem;
+                        }
+                    }
+                    .title,
+                    .title input[type="text"] {
+                        grid-area: title;
+                        color: var(--fontColorSubSubTitle);
+                        background-color: var(--bgColorSubSubTitle);
+                        font-family: var(--fontFamilySubSubTitle);
+                        font-style: var(--fontStyleSubSubTitle);
+                        font-variant: var(--fontVariantSubSubTitle);
+                        font-weight: var(--fontWeightSubSubTitle);
+                        text-transform: var(--textTransformSubSubTitle);
+                        font-size: var(--fontSizeSubSubTitle);
+                        text-shadow: var(--textShadowSubSubTitle);
+                        text-align: center;
+                        line-height: 2rem;
+                    }
+                    .xpDisplay {
+                        grid-area: xpDisplay;
+                    }
+                }
+            }
+            .sheet-body {
+                grid-area: body;
+
+                .front {
+                    .grid {
+                        grid: "attributes paths"  10rem
+                              "virtues paths" 2rem
+                            / 1fr 2fr;
+                        .attributes {
+                            grid-area: attributes;
+                        }
+                        .paths {
+                            grid-area: paths;
+                        }
+                        .virtues {
+                            grid-area: virtues;
+                        }
+                    }                    
+                }
+                .heritage {
+                    .grid {
+                        grid: "heritage heritage" 4rem
+                              "paths paths" 10rem
+                              "virtues ." 2rem
+                            / 1fr 1fr;
+                        .heritage {
+                            grid-area: attributes;
+                        }
+                        .paths {
+                            grid-area: paths;
+                        }
+                        .virtues {
+                            grid-area: virtues;
+                        }
+                    }
+                }
+                .details {
+                    .grid {
+                        grid: "attributes paths" 8rem
+                            "virtues paths" 20rem
+                            / 1fr 2fr;
+                        .attributes {
+                            grid-area: attributes;
+                        }
+                        .paths {
+                            grid-area: paths;
+                        }
+                        .virtues {
+                            grid-area: virtues;
+                        }
+                    }
+                }
+                .experience {
+                    .grid {
+                        grid: "paths" 4rem
+                              "virtues" 10rem
+                            / 1fr;
+                        .paths {
+                            grid-area: paths;
+                        }
+                        .virtues {
+                            grid-area: virtues;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

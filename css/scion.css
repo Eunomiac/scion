@@ -2,185 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&display=swap");
 @use "sass:string";
 /* Utilities */
-/* Layout */
-.grid {
-  display: grid;
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-  border: none;
-  font-size: 0px;
-  grid-gap: 5px;
-}
-
-.Character {
-  background-color: var(--bgColor1);
-}
-
-.Character .grid.main {
-  height: 900px;
-  width: 100%;
-  grid: "nav" 40px "header" 100px "body" auto / 1fr;
-}
-
-.Character .grid.main .nav {
-  grid-area: nav;
-}
-
-.Character .grid.main .header {
-  grid-area: header;
-}
-
-.Character .grid.main .sheet-body {
-  grid-area: body;
-}
-
-.Character .grid.main .header .grid {
-  grid: "legendDisplay charName charName charName healthDisplay" 1fr "legendDisplay charName charName charName healthDisplay" 1fr "legendDisplay charName charName charName healthDisplay" 1fr "legendDisplay parentage parentage parentage ." 1fr "legendDisplay parentage parentage parentage xpDisplay" 1fr "legendDisplay title title title xpDisplay" 1fr "legendDisplay title title title xpDisplay" 1fr / 150px 1fr 1fr 1fr 100px;
-}
-
-.Character .grid.main .header .grid .legendDisplay {
-  grid-area: legendDisplay;
-}
-
-.Character .grid.main .header .grid .charName {
-  grid-area: charName;
-}
-
-.Character .grid.main .header .grid .healthDisplay {
-  grid-area: healthDisplay;
-}
-
-.Character .grid.main .header .grid .parentage {
-  grid-area: parentage;
-}
-
-.Character .grid.main .header .grid .title {
-  grid-area: title;
-}
-
-.Character .grid.main .header .grid .xpDisplay {
-  grid-area: xpDisplay;
-}
-
-.Character .grid.main .sheet-body .front .grid {
-  grid: "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.Character .grid.main .sheet-body .front .grid .attributes {
-  grid-area: attributes;
-}
-
-.Character .grid.main .sheet-body .front .grid .paths {
-  grid-area: paths;
-}
-
-.Character .grid.main .sheet-body .front .grid .virtues {
-  grid-area: virtues;
-}
-
-.Character .grid.main .sheet-body .heritage .grid {
-  grid: "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.Character .grid.main .sheet-body .heritage .grid .attributes {
-  grid-area: attributes;
-}
-
-.Character .grid.main .sheet-body .heritage .grid .paths {
-  grid-area: paths;
-}
-
-.Character .grid.main .sheet-body .heritage .grid .virtues {
-  grid-area: virtues;
-}
-
-.Character .grid.main .sheet-body .details .grid {
-  grid: "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px "attributes attributes paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.Character .grid.main .sheet-body .details .grid .attributes {
-  grid-area: attributes;
-}
-
-.Character .grid.main .sheet-body .details .grid .paths {
-  grid-area: paths;
-}
-
-.Character .grid.main .sheet-body .details .grid .virtues {
-  grid-area: virtues;
-}
-
-.Character .grid.main .sheet-body .experience .grid {
-  grid: "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px "paths paths paths paths paths paths" 150px  "virtues virtues paths paths paths paths" 100px / 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.Character .grid.main .sheet-body .experience .grid .attributes {
-  grid-area: attributes;
-}
-
-.Character .grid.main .sheet-body .experience .grid .paths {
-  grid-area: paths;
-}
-
-.Character .grid.main .sheet-body .experience .grid .virtues {
-  grid-area: virtues;
-}
-
-.scion .Character {
-  padding: 10px;
-}
-
-.scion .Character .main .header .charName input[type="text"] {
-  color: var(--fontColorTitle);
-  background-color: var(--bgColorTitle);
-  font-family: var(--fontFamilyTitle);
-  font-style: var(--fontStyleTitle);
-  font-variant: var(--fontVariantTitle);
-  font-weight: var(--fontWeightTitle);
-  text-transform: var(--textTransformTitle);
-  font-size: var(--fontSizeTitle);
-  text-shadow: var(--textShadowTitle);
-  text-align: center;
-}
-
-.scion .Character .main .header .parentage textarea {
-  color: var(--fontColorSubTitle);
-  background-color: var(--bgColorSubTitle);
-  font-family: var(--fontFamilySubTitle);
-  font-style: var(--fontStyleSubTitle);
-  font-variant: var(--fontVariantSubTitle);
-  font-weight: var(--fontWeightSubTitle);
-  text-transform: var(--textTransformSubTitle);
-  font-size: var(--fontSizeSubTitle);
-  text-shadow: var(--textShadowSubTitle);
-  text-align: center;
-  line-height: var(--fontSizeSubTitle);
-}
-
-.scion .Character .main .header .title textarea {
-  color: var(--fontColorSubSubTitle);
-  background-color: var(--bgColorSubSubTitle);
-  font-family: var(--fontFamilySubSubTitle);
-  font-style: var(--fontStyleSubSubTitle);
-  font-variant: var(--fontVariantSubSubTitle);
-  font-weight: var(--fontWeightSubSubTitle);
-  text-transform: var(--textTransformSubSubTitle);
-  font-size: var(--fontSizeSubSubTitle);
-  text-shadow: var(--textShadowSubSubTitle);
-  text-align: center;
-}
-
-/* Styles limited to scion sheets */
-.scion .text {
-  color: var(--fontColorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-}
-
-.scion textarea,
-.scion input[type="text"] {
+/* Globals: All Sheets */
+textarea,
+input[type="text"] {
   height: 100%;
   min-height: unset;
   width: 100%;
@@ -192,27 +16,211 @@
   box-shadow: none;
 }
 
-.scion .readonly {
+.readonly {
   pointer-events: none;
   resize: none;
   overflow: hidden;
 }
 
-.scion div.pantheonImage {
-  position: relative;
-  top: 100px;
-  left: 250px;
-  height: 500px;
-  width: 500px;
-  background-image: var(--pantheonImage);
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.1;
-  margin-bottom: -500px;
+.grid {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 0;
+  grid-gap: 0.25rem;
 }
 
-.scion {
-  --bgColor1: #fff;
+.text {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+}
+
+/* Layout */
+/* SCION ACTOR: All Scion Actors */
+.scion.actor .window-content {
+  color: var(--fontColorBody);
+  padding: 0px;
+  background: none;
+}
+
+.scion.actor .Character {
+  background-color: var(--bgColorMatte);
+  background-image: var(--bgImage);
+  background-size: 100%;
+}
+
+.scion.actor .Character .grid.main {
+  height: 900px;
+  width: 100%;
+  padding: 0 2.8%;
+  grid: "nav" 1.5rem "header" 8rem "body" auto;
+}
+
+.scion.actor .Character .grid.main .sheet-tabs {
+  grid-area: nav;
+  height: 1.5rem;
+  margin: 0px;
+  border: none;
+}
+
+.scion.actor .Character .grid.main .sheet-tabs .item {
+  line-height: 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: none;
+}
+
+.scion.actor .Character .grid.main .sheet-tabs .item:hover {
+  background-color: var(--bgColorSoft);
+}
+
+.scion.actor .Character .grid.main .sheet-tabs .item.active {
+  background-color: var(--bgColorStrong);
+}
+
+.scion.actor .Character .grid.main .header {
+  grid-area: header;
+}
+
+.scion.actor .Character .grid.main .header .grid {
+  grid: ". charName . healthDisplay" 1rem "legendDisplay charName . healthDisplay" 2rem "legendDisplay parentage . ." 1rem "legendDisplay parentage . xpDisplay" 1rem ". title . xpDisplay" 2rem/150px 1fr 50px 100px;
+  grid-gap: 0;
+}
+
+.scion.actor .Character .grid.main .header .grid .legendDisplay {
+  grid-area: legendDisplay;
+}
+
+.scion.actor .Character .grid.main .header .grid .charName {
+  grid-area: charName;
+}
+
+.scion.actor .Character .grid.main .header .grid .charName input[type="text"] {
+  color: var(--fontColorTitle);
+  background-color: var(--bgColorTitle);
+  font-family: var(--fontFamilyTitle);
+  font-style: var(--fontStyleTitle);
+  font-variant: var(--fontVariantTitle);
+  font-weight: var(--fontWeightTitle);
+  text-transform: var(--textTransformTitle);
+  font-size: var(--fontSizeTitle);
+  text-shadow: var(--textShadowTitle);
+  text-align: center;
+  line-height: 3rem;
+}
+
+.scion.actor .Character .grid.main .header .grid .healthDisplay {
+  grid-area: healthDisplay;
+}
+
+.scion.actor .Character .grid.main .header .grid .parentage {
+  grid-area: parentage;
+}
+
+.scion.actor .Character .grid.main .header .grid .parentage textarea {
+  color: var(--fontColorSubTitle);
+  background-color: var(--bgColorSubTitle);
+  font-family: var(--fontFamilySubTitle);
+  font-style: var(--fontStyleSubTitle);
+  font-variant: var(--fontVariantSubTitle);
+  font-weight: var(--fontWeightSubTitle);
+  text-transform: var(--textTransformSubTitle);
+  font-size: var(--fontSizeSubTitle);
+  text-shadow: var(--textShadowSubTitle);
+  text-align: center;
+  line-height: 2rem;
+}
+
+.scion.actor .Character .grid.main .header .grid .title,
+.scion.actor .Character .grid.main .header .grid .title input[type="text"] {
+  grid-area: title;
+  color: var(--fontColorSubSubTitle);
+  background-color: var(--bgColorSubSubTitle);
+  font-family: var(--fontFamilySubSubTitle);
+  font-style: var(--fontStyleSubSubTitle);
+  font-variant: var(--fontVariantSubSubTitle);
+  font-weight: var(--fontWeightSubSubTitle);
+  text-transform: var(--textTransformSubSubTitle);
+  font-size: var(--fontSizeSubSubTitle);
+  text-shadow: var(--textShadowSubSubTitle);
+  text-align: center;
+  line-height: 2rem;
+}
+
+.scion.actor .Character .grid.main .header .grid .xpDisplay {
+  grid-area: xpDisplay;
+}
+
+.scion.actor .Character .grid.main .sheet-body {
+  grid-area: body;
+}
+
+.scion.actor .Character .grid.main .sheet-body .front .grid {
+  grid: "attributes paths"  10rem "virtues paths" 2rem / 1fr 2fr;
+}
+
+.scion.actor .Character .grid.main .sheet-body .front .grid .attributes {
+  grid-area: attributes;
+}
+
+.scion.actor .Character .grid.main .sheet-body .front .grid .paths {
+  grid-area: paths;
+}
+
+.scion.actor .Character .grid.main .sheet-body .front .grid .virtues {
+  grid-area: virtues;
+}
+
+.scion.actor .Character .grid.main .sheet-body .heritage .grid {
+  grid: "heritage heritage" 4rem "paths paths" 10rem "virtues ." 2rem / 1fr 1fr;
+}
+
+.scion.actor .Character .grid.main .sheet-body .heritage .grid .heritage {
+  grid-area: attributes;
+}
+
+.scion.actor .Character .grid.main .sheet-body .heritage .grid .paths {
+  grid-area: paths;
+}
+
+.scion.actor .Character .grid.main .sheet-body .heritage .grid .virtues {
+  grid-area: virtues;
+}
+
+.scion.actor .Character .grid.main .sheet-body .details .grid {
+  grid: "attributes paths" 8rem "virtues paths" 20rem / 1fr 2fr;
+}
+
+.scion.actor .Character .grid.main .sheet-body .details .grid .attributes {
+  grid-area: attributes;
+}
+
+.scion.actor .Character .grid.main .sheet-body .details .grid .paths {
+  grid-area: paths;
+}
+
+.scion.actor .Character .grid.main .sheet-body .details .grid .virtues {
+  grid-area: virtues;
+}
+
+.scion.actor .Character .grid.main .sheet-body .experience .grid {
+  grid: "paths" 4rem "virtues" 10rem / 1fr;
+}
+
+.scion.actor .Character .grid.main .sheet-body .experience .grid .paths {
+  grid-area: paths;
+}
+
+.scion.actor .Character .grid.main .sheet-body .experience .grid .virtues {
+  grid-area: virtues;
+}
+
+.scion.actor {
+  --bgColorMatte: #fff;
   --fontColorTitle: #000;
   --bgColorTitle: transparent;
   --fontFamilyTitle: "Marcellus SC";
@@ -220,7 +228,7 @@
   --fontVariantTitle: normal;
   --fontWeightTitle: normal;
   --textTransformTitle: none;
-  --fontSizeTitle: 32px;
+  --fontSizeTitle: 2.6rem;
   --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontColorSubTitle: var(--fontColorTitle);
   --bgColorSubTitle: var(--bgColorTitle);
@@ -229,7 +237,7 @@
   --fontVariantSubTitle: normal;
   --fontWeightSubTitle: normal;
   --textTransformSubTitle: none;
-  --fontSizeSubTitle: 24px;
+  --fontSizeSubTitle: 1.5rem;
   --textShadowSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontColorSubSubTitle: var(--fontColorTitle);
   --bgColorSubSubTitle: var(--bgColorTitle);
@@ -238,54 +246,41 @@
   --fontVariantSubSubTitle: normal;
   --fontWeightSubSubTitle: normal;
   --textTransformSubSubTitle: none;
-  --fontSizeSubSubTitle: 24px;
+  --fontSizeSubSubTitle: 1.5rem;
   --textShadowSubSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontColorBody: #000;
   --fontFamilyBody: "Overlock SC";
-  --fontSizeBody: 18px;
+  --fontSizeBody: 1rem;
 }
 
-.scion .netjer {
-  --bgColor1: #f7f1ec;
-  --fontColorTitle: #6e4a28;
+.scion.actor .netjer {
+  --bgImage: url("https://i.imgur.com/yflp59R.jpg");
+  --bgColorMatte: #f6f0e2;
+  --bgColorSoft: #fdd8b7;
+  --bgColorStrong: #f99c4b;
+  --fontColorTitle: #554a39;
   --fontFamilyTitle: "Yatra One";
   --fontColorSubTitle: #6e4a28;
   --fontFamilySubTitle: "Reem Kufi";
-  --fontSizeSubTitle: 28px;
-  --fontColorSubSubTitle: #373127;
+  --fontColorSubSubTitle: #554a39;
   --fontWeightSubSubTitle: bold;
-  --fontColorBody: #261b12;
-  --pantheonImage: url("https://i.imgur.com/ADtHyUx.png");
+  --fontColorBody: #2d2d2f;
 }
 
-.scion .tuathaDeDannan {
-  --bgColor1: #e4f3e4;
-  --fontColorTitle: #0a5c0a;
+.scion.actor .tuathaDeDanann {
+  --bgImage: none;
+  --bgColorMatte: #efffd1;
+  --bgColorSoft: #c7f8c4;
+  --bgColorStrong: #73ed6c;
+  --fontColorTitle: #296f17;
   --fontFamilyTitle: "Berkshire Swash";
-  --fontColorSubTitle: #0a5c0a;
+  --fontColorSubTitle: #19430e;
   --fontFamilySubTitle: "Della Respira";
   --fontStyleSubTitle: italic;
-  --fontColorSubSubTitle: #0a5c0a;
+  --fontColorSubSubTitle: #296f17;
   --fontWeightSubSubTitle: bold;
-  --pantheonImage: url("https://i.imgur.com/ROSCtgV.png");
+  --fontColorBody: #1a211d;
 }
 
-.scion nav.sheet-tabs {
-  height: 40px;
-  margin: 0px;
-  border-top: 1px solid #AAA;
-  border-bottom: 1px solid #AAA;
-}
-
-.scion nav.sheet-tabs .item {
-  line-height: 40px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.scion nav.sheet-tabs .item.active {
-  text-decoration: underline;
-  text-shadow: none;
-}
-
+/* SCION ITEMS: All Scion Items */
 /* #endregion */

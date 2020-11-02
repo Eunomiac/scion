@@ -24,6 +24,7 @@ export class ScionActor extends Actor {
    */
     _prepareCharacterData(actorData) {
         const data = actorData.data;
+        
 
         // Make modifications to data here.
     }

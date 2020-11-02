@@ -9,13 +9,14 @@
                 "tier": ""
             },
             "divinity": {
-                "pantheon": "netjer",
+                "pantheon": "",
                 "parent": {
-                    "name": "Horus",
-                    "mantle": "God of Skies and Kings"
+                    "name": "",
+                    "mantle": ""
                 },
                 "heritage": "",
-                "divineTitle": "The Tempered Lawgiver"
+                "parentageLine": "",
+                "divineTitle": ""
             },
             "attributes": {
                 "intellect": {
@@ -117,7 +118,7 @@
                     "modifier": [],
                     "specialty": ""
                 },
-                "close_combat": {
+                "closeCombat": {
                     "label": "Close Combat",
                     "min": 0,
                     "value": 0,
