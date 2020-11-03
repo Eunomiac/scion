@@ -2,16 +2,14 @@
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-import {PANTHEONS} from "../data/constants.js";
-
 export class ScionActorSheet extends ActorSheet {
     /** @override */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "actor"],
             template: "systems/scion/templates/actor/actor-sheet.html",
-            width: 1000,
-            height: 1000,
+            width: 700,
+            height: 700,
             tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "front"}]
         });
     }
@@ -19,40 +17,41 @@ export class ScionActorSheet extends ActorSheet {
     /** @override */
     getData() {
         const data = super.getData();
+
         const actorData = data.data;
+
         actorData.SYSTEMDATA = {
+            TIERS: CONFIG.TIERS,
             PANTHEONS: {},
             PANTHEONMEMBERS: {},
-            HERITAGES: {
-                Born: "Born",
-                Chosen: "Chosen",
-                Incarnation: "Incarnation",
-                Created: "Created"
-            },
+            HERITAGES: CONFIG.HERITAGES,
             ASSETSKILLS: {},
             PARENTCALLINGS: {},
             PARENTPURVIEWS: {}
         };
+        console.log(CONFIG.TIERS);
         const sysData = actorData.SYSTEMDATA;
-        for (const [pantheonKey, pantheonData] of Object.entries(PANTHEONS))
+        for (const [pantheonKey, pantheonData] of Object.entries(CONFIG.PANTHEONS)) // Update list of Pantheons
             sysData.PANTHEONS[pantheonKey] = pantheonData.label;
-        if (actorData.pantheon in PANTHEONS) { // If a Pantheon has been chosen, populate Asset Skills & pantheon members
-            for (const assetSkill of PANTHEONS[actorData.pantheon].assetSkills)
-                actorData.SYSTEMDATA.ASSETSKILLS[assetSkill] = assetSkill in actorData ? actorData[assetSkill].label : assetSkill;
-            for (const member of Object.keys(PANTHEONS[actorData.pantheon].members))
+        if (actorData.pantheon in CONFIG.PANTHEONS) { //                     If a Pantheon has been chosen:
+            const PANTHEONDATA = CONFIG.PANTHEONS[actorData.pantheon];
+            for (const assetSkill of PANTHEONDATA.assetSkills) //      ... update Asset Skills
+                sysData.ASSETSKILLS[assetSkill] = assetSkill in actorData ? actorData[assetSkill].label : assetSkill;
+            for (const member of Object.keys(PANTHEONDATA.members)) // ... update Pantheon Members (for Divine Parent selection)
                 sysData.PANTHEONMEMBERS[member] = member;
-            if (actorData.parent.name in sysData.PANTHEONMEMBERS) { // If a parent has been chosen, update mantle, callings & purviews
-                actorData.parent.mantle = PANTHEONS[actorData.pantheon].members[actorData.parent.name].mantle;
-                for (const calling of PANTHEONS[actorData.pantheon].members[actorData.parent.name].callings)
+            if (actorData.parent.name in sysData.PANTHEONMEMBERS) { //      If a Divine Parent has been chosen:
+                const PARENTDATA = PANTHEONDATA.members[actorData.parent.name];
+                actorData.parent.mantle = PARENTDATA.mantle;
+                for (const calling of PARENTDATA.callings) // ... update Callings
                     sysData.PARENTCALLINGS[calling] = calling;
-                for (const purview of PANTHEONS[actorData.pantheon].members[actorData.parent.name].purviews)
+                for (const purview of PARENTDATA.purviews) // ... update Purviews
                     sysData.PARENTPURVIEWS[purview] = purview;
-                if (actorData.heritage in sysData.HERITAGES)
-                    switch (actorData.heritage) {
-                        case "Born": actorData.parentageLine = `Scion of ${actorData.parent.name}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle}`; break;
-                        case "Chosen": actorData.parentageLine = `Chosen of ${actorData.parent.name}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle}`; break;
-                        case "Incarnation": actorData.parentageLine = `${actorData.parent.name}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle} Incarnate`; break;
-                        case "Created": actorData.parentageLine = `Creation of ${actorData.parent.name}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle}`; break;
+                if (actorData.heritage in sysData.HERITAGES) //                    If a Divine Heritage has been chosen:
+                    switch (actorData.heritage) { //                                                     ... update Parentage Line
+                        case "Born": actorData.parentageLine = `Scion of ${actorData.parent.name.replace(/^The/u, "the")}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle}`; break;
+                        case "Chosen": actorData.parentageLine = `Chosen of ${actorData.parent.name.replace(/^The/u, "the")}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle}`; break;
+                        case "Incarnation": actorData.parentageLine = `${actorData.parent.name.replace(/^The/u, "the")}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle} Incarnate`; break;
+                        case "Created": actorData.parentageLine = `Creation of ${actorData.parent.name.replace(/^The/u, "the")}${actorData.parent.mantle ? ", " : ""}${actorData.parent.mantle}`; break;
                         // no default
                     }
                 else
@@ -66,6 +65,29 @@ export class ScionActorSheet extends ActorSheet {
             actorData.parent.mantle = "";
             actorData.parentageLine = "";
         }
-        return data; // handlebar access: {{data.SYSTEMDATA.PANTHEONS}}
+
+        data.blocks = {
+            chargen: {
+                class: "charGen",
+                template: () => "systems/scion/templates/actor/actor-chargen.html"
+            }
+        };
+
+        return data; // handlebar access: {{data.SYSTEMDATA}}
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+        // Everything below here is only needed if the sheet is editable
+        if (!this.options.editable)
+            return;
+
+        if (this.actor.owner) {
+            const handler = (event) => this._onDragItemStart(event);
+            html.find("div.dot").each((i, div) => {
+                div.setAttribute("draggable", true);
+                div.addEventListener("dragstart", handler, false);
+            });
+        }
     }
 }

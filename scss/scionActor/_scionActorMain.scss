@@ -1,23 +1,85 @@
 & {
+    pointer-events: none;
+    border: none;
+    box-shadow: none;
+    background: none;
+
+    header.window-header.flexrow.draggable.resizable {
+        width: 65%;
+        position: relative;
+        z-index: 2;
+        margin-bottom: -30px;
+        margin-left: 20%;
+        padding-left: 5%;
+        border: none;
+        overflow: visible;
+        h4.window-title { display: none; }
+        a.header-button {
+            pointer-events: all;
+            height: 1rem;
+        }
+
+    }
+    header.window-header.flexrow.draggable.resizable::before {
+        background-image: url("https://i.imgur.com/ADtHyUx.png");
+        background-size: 80%;
+        pointer-events: all;
+        cursor: move;
+        display: block;
+        width: 100px;
+        height: 100px;
+        content: "";
+        position: relative;
+        background-repeat: no-repeat;
+        left: -45%;
+        bottom: -50%;
+        background-color: red;
+        border-radius: 50%;
+        background-position: center;
+    }
+
+    div.window-resizable-handle {
+        display: none;
+        bottom: 6%;
+        right: 6%;
+        z-index: 3;
+        pointer-events: all;
+    }
     .window-content {
         color: var(--fontColorBody);
         padding: 0px;
-        background: none;
+        background: var(--bgColorMatte);
+        pointer-events: all;
+        border-radius: 25%;
+        // border: 25px solid var(--fontColorTitle);
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
     }
 
-    .Character {
-        background-color: var(--bgColorMatte);        
-        background-image: var(--bgImage);
-        background-size: 100%;
-        
-        .grid.main {
-            height: map-get($charSheet, "height");
-            width: map-get($charSheet, "width");
-            padding: 0 2.8%;
 
-            grid: "nav" 1.5rem
-                  "header" 8rem
-                  "body" auto;
+    .Character {
+        @keyframes characterSheet {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }        
+        .grid.main {
+            height: 100%;
+            width: 100%;
+            padding: 0 2.8%;
+            background: var(--bgColorMatte);
+            background-image: var(--bgImage);
+            background-size: 100%;
+            background-repeat: repeat-y;
+            opacity: 1;        
+            animation-name: characterSheet;
+            animation-duration: 1s;
+
+            grid: ". nav ." 1.5rem
+                  "header header header" 5.25rem
+                  "body body body" auto
+                  ". footer ." 1.5rem
+                  /10% 1fr 10%;
 
             .sheet-tabs {
                 grid-area: nav;
@@ -31,6 +93,12 @@
                     font-size: 1rem;
                     text-shadow: none;
                 }
+                .item.icon {
+                    height: 20px;
+                    width: 20px;
+                    flex: none;
+                    margin: 10px 5% -10px 5%;
+                }
                 .item:hover { background-color: var(--bgColorSoft); }
                 .item.active { background-color: var(--bgColorStrong); }
             }
@@ -38,15 +106,19 @@
                 grid-area: header;
 
                 .grid {
-                    grid: ". charName . healthDisplay" 1rem
-                          "legendDisplay charName . healthDisplay" 2rem
-                          "legendDisplay parentage . ." 1rem
-                          "legendDisplay parentage . xpDisplay" 1rem
-                          ". title . xpDisplay" 2rem/150px 1fr 50px 100px;
+                    grid: ". charName . healthDisplay" 0.75rem
+                          "legendDisplay charName . healthDisplay" 1.5rem
+                          "legendDisplay parentage . ." 0.75rem
+                          "legendDisplay parentage . xpDisplay" 0.75rem
+                          ". title . xpDisplay" 1.5rem/150px 1fr 50px 100px;
+                    grid: "charName" 2.25rem
+                          "parentage" 1.5rem
+                          "title" 1.5rem;
                     grid-gap: 0;
 
                     .legendDisplay {
                         grid-area: legendDisplay;
+                        display: none;
                     }
                     .charName {
                         grid-area: charName;
@@ -61,11 +133,12 @@
                             font-size: var(--fontSizeTitle);
                             text-shadow: var(--textShadowTitle);
                             text-align: center;
-                            line-height: 3rem;
+                            line-height: 1.5rem;
                         }
                     }
                     .healthDisplay {
                         grid-area: healthDisplay;
+                        display: none;
                     }
                     .parentage {
                         grid-area: parentage;
@@ -80,7 +153,7 @@
                             font-size: var(--fontSizeSubTitle);
                             text-shadow: var(--textShadowSubTitle);
                             text-align: center;
-                            line-height: 2rem;
+                            line-height: 1rem;
                         }
                     }
                     .title,
@@ -96,15 +169,35 @@
                         font-size: var(--fontSizeSubSubTitle);
                         text-shadow: var(--textShadowSubSubTitle);
                         text-align: center;
-                        line-height: 2rem;
+                        line-height: 1rem;
                     }
                     .xpDisplay {
                         grid-area: xpDisplay;
+                        display: none;
                     }
                 }
             }
             .sheet-body {
                 grid-area: body;
+
+                .settings {
+                    .grid {
+                        grid: "tier pantheon heritage parent" 2rem
+                        / 12% 20% 15% 1fr;
+                        .tier {
+                            grid-area: tier;
+                        }
+                        .pantheon {
+                            grid-area: pantheon;
+                        }
+                        .parent {
+                            grid-area: parent;
+                        }
+                        .heritage {
+                            grid-area: heritage;
+                        }
+                    }
+                }
 
                 .front {
                     .grid {

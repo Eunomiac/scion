@@ -4,10 +4,11 @@
 /* Utilities */
 /* Globals: All Sheets */
 textarea,
-input[type="text"] {
+input[type="text"],
+select {
   height: 100%;
-  min-height: unset;
   width: 100%;
+  min-height: unset;
   margin: 0px;
   padding: 0px;
   background-color: transparent;
@@ -39,25 +40,115 @@ input[type="text"] {
   font-size: var(--fontSizeBody);
 }
 
+.dot {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
 /* Layout */
 /* SCION ACTOR: All Scion Actors */
-.scion.actor .window-content {
-  color: var(--fontColorBody);
-  padding: 0px;
+.scion.actor {
+  pointer-events: none;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
   background: none;
 }
 
-.scion.actor .Character {
-  background-color: var(--bgColorMatte);
-  background-image: var(--bgImage);
-  background-size: 100%;
+.scion.actor header.window-header.flexrow.draggable.resizable {
+  width: 65%;
+  position: relative;
+  z-index: 2;
+  margin-bottom: -30px;
+  margin-left: 20%;
+  padding-left: 5%;
+  border: none;
+  overflow: visible;
+}
+
+.scion.actor header.window-header.flexrow.draggable.resizable h4.window-title {
+  display: none;
+}
+
+.scion.actor header.window-header.flexrow.draggable.resizable a.header-button {
+  pointer-events: all;
+  height: 1rem;
+}
+
+.scion.actor header.window-header.flexrow.draggable.resizable::before {
+  background-image: url("https://i.imgur.com/ADtHyUx.png");
+  background-size: 80%;
+  pointer-events: all;
+  cursor: move;
+  display: block;
+  width: 100px;
+  height: 100px;
+  content: "";
+  position: relative;
+  background-repeat: no-repeat;
+  left: -45%;
+  bottom: -50%;
+  background-color: red;
+  border-radius: 50%;
+  background-position: center;
+}
+
+.scion.actor div.window-resizable-handle {
+  display: none;
+  bottom: 6%;
+  right: 6%;
+  z-index: 3;
+  pointer-events: all;
+}
+
+.scion.actor .window-content {
+  color: var(--fontColorBody);
+  padding: 0px;
+  background: var(--bgColorMatte);
+  pointer-events: all;
+  border-radius: 25%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+@-webkit-keyframes characterSheet {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes characterSheet {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .scion.actor .Character .grid.main {
-  height: 900px;
+  height: 100%;
   width: 100%;
   padding: 0 2.8%;
-  grid: "nav" 1.5rem "header" 8rem "body" auto;
+  background: var(--bgColorMatte);
+  background-image: var(--bgImage);
+  background-size: 100%;
+  background-repeat: repeat-y;
+  opacity: 1;
+  -webkit-animation-name: characterSheet;
+  animation-name: characterSheet;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  grid: ". nav ." 1.5rem "header header header" 5.25rem "body body body" auto ". footer ." 1.5rem /10% 1fr 10%;
 }
 
 .scion.actor .Character .grid.main .sheet-tabs {
@@ -74,6 +165,15 @@ input[type="text"] {
   text-shadow: none;
 }
 
+.scion.actor .Character .grid.main .sheet-tabs .item.icon {
+  height: 20px;
+  width: 20px;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+  margin: 10px 5% -10px 5%;
+}
+
 .scion.actor .Character .grid.main .sheet-tabs .item:hover {
   background-color: var(--bgColorSoft);
 }
@@ -87,12 +187,14 @@ input[type="text"] {
 }
 
 .scion.actor .Character .grid.main .header .grid {
-  grid: ". charName . healthDisplay" 1rem "legendDisplay charName . healthDisplay" 2rem "legendDisplay parentage . ." 1rem "legendDisplay parentage . xpDisplay" 1rem ". title . xpDisplay" 2rem/150px 1fr 50px 100px;
+  grid: ". charName . healthDisplay" 0.75rem "legendDisplay charName . healthDisplay" 1.5rem "legendDisplay parentage . ." 0.75rem "legendDisplay parentage . xpDisplay" 0.75rem ". title . xpDisplay" 1.5rem/150px 1fr 50px 100px;
+  grid: "charName" 2.25rem "parentage" 1.5rem "title" 1.5rem;
   grid-gap: 0;
 }
 
 .scion.actor .Character .grid.main .header .grid .legendDisplay {
   grid-area: legendDisplay;
+  display: none;
 }
 
 .scion.actor .Character .grid.main .header .grid .charName {
@@ -110,11 +212,12 @@ input[type="text"] {
   font-size: var(--fontSizeTitle);
   text-shadow: var(--textShadowTitle);
   text-align: center;
-  line-height: 3rem;
+  line-height: 1.5rem;
 }
 
 .scion.actor .Character .grid.main .header .grid .healthDisplay {
   grid-area: healthDisplay;
+  display: none;
 }
 
 .scion.actor .Character .grid.main .header .grid .parentage {
@@ -132,7 +235,7 @@ input[type="text"] {
   font-size: var(--fontSizeSubTitle);
   text-shadow: var(--textShadowSubTitle);
   text-align: center;
-  line-height: 2rem;
+  line-height: 1rem;
 }
 
 .scion.actor .Character .grid.main .header .grid .title,
@@ -148,15 +251,36 @@ input[type="text"] {
   font-size: var(--fontSizeSubSubTitle);
   text-shadow: var(--textShadowSubSubTitle);
   text-align: center;
-  line-height: 2rem;
+  line-height: 1rem;
 }
 
 .scion.actor .Character .grid.main .header .grid .xpDisplay {
   grid-area: xpDisplay;
+  display: none;
 }
 
 .scion.actor .Character .grid.main .sheet-body {
   grid-area: body;
+}
+
+.scion.actor .Character .grid.main .sheet-body .settings .grid {
+  grid: "tier pantheon heritage parent" 2rem / 12% 20% 15% 1fr;
+}
+
+.scion.actor .Character .grid.main .sheet-body .settings .grid .tier {
+  grid-area: tier;
+}
+
+.scion.actor .Character .grid.main .sheet-body .settings .grid .pantheon {
+  grid-area: pantheon;
+}
+
+.scion.actor .Character .grid.main .sheet-body .settings .grid .parent {
+  grid-area: parent;
+}
+
+.scion.actor .Character .grid.main .sheet-body .settings .grid .heritage {
+  grid-area: heritage;
 }
 
 .scion.actor .Character .grid.main .sheet-body .front .grid {
@@ -228,7 +352,7 @@ input[type="text"] {
   --fontVariantTitle: normal;
   --fontWeightTitle: normal;
   --textTransformTitle: none;
-  --fontSizeTitle: 2.6rem;
+  --fontSizeTitle: 1.8rem;
   --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontColorSubTitle: var(--fontColorTitle);
   --bgColorSubTitle: var(--bgColorTitle);
@@ -237,7 +361,7 @@ input[type="text"] {
   --fontVariantSubTitle: normal;
   --fontWeightSubTitle: normal;
   --textTransformSubTitle: none;
-  --fontSizeSubTitle: 1.5rem;
+  --fontSizeSubTitle: 1rem;
   --textShadowSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontColorSubSubTitle: var(--fontColorTitle);
   --bgColorSubSubTitle: var(--bgColorTitle);
@@ -246,7 +370,7 @@ input[type="text"] {
   --fontVariantSubSubTitle: normal;
   --fontWeightSubSubTitle: normal;
   --textTransformSubSubTitle: none;
-  --fontSizeSubSubTitle: 1.5rem;
+  --fontSizeSubSubTitle: 1rem;
   --textShadowSubSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontColorBody: #000;
   --fontFamilyBody: "Overlock SC";

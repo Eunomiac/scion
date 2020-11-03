@@ -1,12 +1,16 @@
 // #region Import Modules
+import {updateCONFIG} from "./data/constants.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
 import {ScionItem} from "./item/item.js";
 import {ScionItemSheet} from "./item/item-sheet.js";
+import {preloadHandlebarsTemplates} from "./templates.js";
 // #endregion
 
 // #region Hook: Initialization
 Hooks.once("init", async () => {
+    updateCONFIG();
+
     game.scion = {
         ScionActor,
         ScionItem
@@ -21,6 +25,9 @@ Hooks.once("init", async () => {
     Actors.registerSheet("scion", ScionActorSheet, {makeDefault: true});
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("scion", ScionItemSheet, {makeDefault: true});
+
+    // Preload Handlebars Templates
+    preloadHandlebarsTemplates();
 
     // #region Handlebar Helpers
     Handlebars.registerHelper("concat", (...args) => {

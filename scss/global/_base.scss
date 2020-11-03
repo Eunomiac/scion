@@ -1,8 +1,9 @@
 textarea,
-input[type="text"] {
+input[type="text"],
+select {
     height: 100%;
-    min-height: unset;
     width: 100%;
+    min-height: unset;
     margin: 0px;
     padding: 0px;
     background-color: transparent;
@@ -31,4 +32,13 @@ input[type="text"] {
     color: var(--fontColorBody);
     font-family: var(--fontFamilyBody);
     font-size: var(--fontSizeBody);
+}
+
+.dot {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid black;
 }
