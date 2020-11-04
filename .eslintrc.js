@@ -162,6 +162,7 @@ module.exports = {
         Macro: "readonly",
         Roll: "readonly",
         duplicate: "readonly",
+        loadTemplates: "readonly",
         mergeObject: "readonly",
         ui: "readonly"
     },

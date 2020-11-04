@@ -5,37 +5,38 @@
     background: none;
 
     header.window-header.flexrow.draggable.resizable {
+        height: 1rem;
         width: 65%;
+        margin: -1rem 0 0 20%;
+        padding: 0 0 0 5%;
+        display: block;
+        flex: none;
         position: relative;
         z-index: 2;
-        margin-bottom: -30px;
-        margin-left: 20%;
-        padding-left: 5%;
-        border: none;
         overflow: visible;
+        border: none;
         h4.window-title { display: none; }
         a.header-button {
             pointer-events: all;
             height: 1rem;
         }
-
-    }
-    header.window-header.flexrow.draggable.resizable::before {
-        background-image: url("https://i.imgur.com/ADtHyUx.png");
-        background-size: 80%;
-        pointer-events: all;
-        cursor: move;
-        display: block;
-        width: 100px;
-        height: 100px;
-        content: "";
-        position: relative;
-        background-repeat: no-repeat;
-        left: -45%;
-        bottom: -50%;
-        background-color: red;
-        border-radius: 50%;
-        background-position: center;
+        &::before {
+            background-image: url("https://i.imgur.com/ADtHyUx.png");
+            background-size: 80%;
+            pointer-events: all;
+            cursor: move;
+            display: block;
+            width: 100px;
+            height: 100px;
+            content: "";
+            position: relative;
+            background-repeat: no-repeat;
+            left: -45%;
+            bottom: -50%;
+            border-radius: 50%;
+            background-position: center;
+            margin-bottom: -107px;
+        }
     }
 
     div.window-resizable-handle {
@@ -46,28 +47,23 @@
         pointer-events: all;
     }
     .window-content {
-        color: var(--fontColorBody);
         padding: 0px;
-        background: var(--bgColorMatte);
-        pointer-events: all;
-        border-radius: 25%;
-        // border: 25px solid var(--fontColorTitle);
-        overflow: hidden;
+        background: transparent;
+        pointer-events: none;
+        overflow: visible;
         position: relative;
         z-index: 1;
     }
-
 
     .Character {
         @keyframes characterSheet {
             from {opacity: 0;}
             to {opacity: 1;}
         }        
-        .grid.main {
+        .main {
             height: 100%;
             width: 100%;
-            padding: 0 2.8%;
-            background: var(--bgColorMatte);
+            padding: 0 4%;
             background-image: var(--bgImage);
             background-size: 100%;
             background-repeat: repeat-y;
@@ -75,190 +71,243 @@
             animation-name: characterSheet;
             animation-duration: 1s;
 
-            grid: ". nav ." 1.5rem
-                  "header header header" 5.25rem
+            grid: ". nav ." 1rem
+                  "header header header" 6rem
                   "body body body" auto
                   ". footer ." 1.5rem
-                  /10% 1fr 10%;
+                  /12% 1fr 12%;
 
             .sheet-tabs {
                 grid-area: nav;
-                height: 1.5rem;
+                height: 100%;
                 margin: 0px;
+                padding-top: 1px;
                 border: none;
+                pointer-events: all;
 
                 .item {
-                    line-height: 1.5rem;
+                    height: 100%;
+                    line-height: 1.25rem;
                     font-weight: bold;
-                    font-size: 1rem;
+                    font-size: 0.75rem;
                     text-shadow: none;
                 }
                 .item.icon {
                     height: 20px;
                     width: 20px;
                     flex: none;
-                    margin: 10px 5% -10px 5%;
+                    margin: -20px -20px 0 0;
+                    color: white;
+                    font-size: 1rem;
+
                 }
                 .item:hover { background-color: var(--bgColorSoft); }
                 .item.active { background-color: var(--bgColorStrong); }
+                .item.icon:hover { background-color: transparent; color: var(--fontColorSubTitle); }
+                .item.icon.active { background-color: transparent; color: var(--fontColorSubSubTitle); }
             }
             .header {
                 grid-area: header;
+                grid:   ". . ." 0.5rem
+                        ". title ." 1.5rem
+                        ". charName ." 2.5rem
+                        "parentage parentage parentage" 1.5rem
+                        /12% 1fr 12%;
+                grid-gap: 0;
 
-                .grid {
-                    grid: ". charName . healthDisplay" 0.75rem
-                          "legendDisplay charName . healthDisplay" 1.5rem
-                          "legendDisplay parentage . ." 0.75rem
-                          "legendDisplay parentage . xpDisplay" 0.75rem
-                          ". title . xpDisplay" 1.5rem/150px 1fr 50px 100px;
-                    grid: "charName" 2.25rem
-                          "parentage" 1.5rem
-                          "title" 1.5rem;
-                    grid-gap: 0;
-
-                    .legendDisplay {
-                        grid-area: legendDisplay;
-                        display: none;
-                    }
-                    .charName {
-                        grid-area: charName;
-                        input[type="text"] { 
-                            color: var(--fontColorTitle);
-                            background-color: var(--bgColorTitle);
-                            font-family: var(--fontFamilyTitle);
-                            font-style: var(--fontStyleTitle);
-                            font-variant: var(--fontVariantTitle);
-                            font-weight: var(--fontWeightTitle);
-                            text-transform: var(--textTransformTitle);
-                            font-size: var(--fontSizeTitle);
-                            text-shadow: var(--textShadowTitle);
-                            text-align: center;
-                            line-height: 1.5rem;
-                        }
-                    }
-                    .healthDisplay {
-                        grid-area: healthDisplay;
-                        display: none;
-                    }
-                    .parentage {
-                        grid-area: parentage;
-                        textarea {
-                            color: var(--fontColorSubTitle);
-                            background-color: var(--bgColorSubTitle);
-                            font-family: var(--fontFamilySubTitle);
-                            font-style: var(--fontStyleSubTitle);
-                            font-variant: var(--fontVariantSubTitle);
-                            font-weight: var(--fontWeightSubTitle);
-                            text-transform: var(--textTransformSubTitle);
-                            font-size: var(--fontSizeSubTitle);
-                            text-shadow: var(--textShadowSubTitle);
-                            text-align: center;
-                            line-height: 1rem;
-                        }
-                    }
-                    .title,
-                    .title input[type="text"] {
-                        grid-area: title;
-                        color: var(--fontColorSubSubTitle);
-                        background-color: var(--bgColorSubSubTitle);
-                        font-family: var(--fontFamilySubSubTitle);
-                        font-style: var(--fontStyleSubSubTitle);
-                        font-variant: var(--fontVariantSubSubTitle);
-                        font-weight: var(--fontWeightSubSubTitle);
-                        text-transform: var(--textTransformSubSubTitle);
-                        font-size: var(--fontSizeSubSubTitle);
-                        text-shadow: var(--textShadowSubSubTitle);
+                .legendDisplay {
+                    grid-area: legendDisplay;
+                    pointer-events: all;
+                    display: none;
+                }
+                .charName {
+                    grid-area: charName;
+                    pointer-events: all;
+                    input[type="text"] { 
+                        color: var(--fontColorTitle);
+                        background-color: var(--bgColorTitle);
+                        font-family: var(--fontFamilyTitle);
+                        font-style: var(--fontStyleTitle);
+                        font-variant: var(--fontVariantTitle);
+                        font-weight: var(--fontWeightTitle);
+                        text-transform: var(--textTransformTitle);
+                        font-size: var(--fontSizeTitle);
+                        text-shadow: var(--textShadowTitle);
                         text-align: center;
-                        line-height: 1rem;
                     }
-                    .xpDisplay {
-                        grid-area: xpDisplay;
-                        display: none;
+                }
+                .healthDisplay {
+                    grid-area: healthDisplay;
+                    pointer-events: all;
+                    display: none;
+                }
+                .parentage {
+                    grid-area: parentage;
+                    pointer-events: all;
+                    textarea {
+                        color: var(--fontColorSubTitle);
+                        background-color: var(--bgColorSubTitle);
+                        font-family: var(--fontFamilySubTitle);
+                        font-style: var(--fontStyleSubTitle);
+                        font-variant: var(--fontVariantSubTitle);
+                        font-weight: var(--fontWeightSubTitle);
+                        text-transform: var(--textTransformSubTitle);
+                        font-size: var(--fontSizeSubTitle);
+                        text-shadow: var(--textShadowSubTitle);
+                        text-align: center;
+                        line-height: 1.5rem;
                     }
+                }
+                .title,
+                .title input[type="text"] {
+                    grid-area: title;
+                    pointer-events: all;
+                    color: var(--fontColorSubSubTitle);
+                    background-color: var(--bgColorSubSubTitle);
+                    font-family: var(--fontFamilySubSubTitle);
+                    font-style: var(--fontStyleSubSubTitle);
+                    font-variant: var(--fontVariantSubSubTitle);
+                    font-weight: var(--fontWeightSubSubTitle);
+                    text-transform: var(--textTransformSubSubTitle);
+                    font-size: var(--fontSizeSubSubTitle);
+                    text-shadow: var(--textShadowSubSubTitle);
+                    text-align: center;
+                    line-height: 1.5rem;
+                }
+                .xpDisplay {
+                    grid-area: xpDisplay;
+                    pointer-events: all;
+                    display: none;
                 }
             }
             .sheet-body {
                 grid-area: body;
+                pointer-events: all;
+                
+                .heading {
+                    color: var(--fontColorHeading);
+                    background-color: var(--bgColorHeading);
+                    font-family: var(--fontFamilyHeading);
+                    font-style: var(--fontStyleHeading);
+                    font-variant: var(--fontVariantHeading);
+                    font-weight: var(--fontWeightHeading);
+                    text-transform: var(--textTransformHeading);
+                    font-size: var(--fontSizeHeading);
+                    text-shadow: var(--textShadowHeading);
+                    border-bottom: var(--borderBottomHeading);
+                    text-align: left;
+                    line-height: 1.5rem;
+                }
 
                 .settings {
-                    .grid {
-                        grid: "tier pantheon heritage parent" 2rem
-                        / 12% 20% 15% 1fr;
-                        .tier {
-                            grid-area: tier;
-                        }
-                        .pantheon {
-                            grid-area: pantheon;
-                        }
-                        .parent {
-                            grid-area: parent;
-                        }
-                        .heritage {
-                            grid-area: heritage;
-                        }
+                    grid: "tier pantheon heritage parent" 2rem
+                    / 12% 20% 15% 1fr;
+                    .tier {
+                        grid-area: tier;
+                    }
+                    .pantheon {
+                        grid-area: pantheon;
+                    }
+                    .parent {
+                        grid-area: parent;
+                    }
+                    .heritage {
+                        grid-area: heritage;
                     }
                 }
-
                 .front {
-                    .grid {
-                        grid: "attributes paths"  10rem
-                              "virtues paths" 2rem
-                            / 1fr 2fr;
-                        .attributes {
-                            grid-area: attributes;
+                    grid: "attributes paths"  14rem
+                            "virtues paths" 2rem
+                        / 1fr 2fr;
+                    .attributes {
+                        grid-area: attributes;
+                        grid:   "heading" 1.5rem
+                                "." 0.5rem
+                                "primary" 3rem
+                                "." 1rem
+                                "secondary" 3rem
+                                "." 1rem
+                                "tertiary" 3rem
+                                "." 1rem;
+
+                        .heading {
+                            grid-area: heading;    
                         }
-                        .paths {
-                            grid-area: paths;
+                        .attrBlock {
+                            grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+                            grid-template-rows: 1rem 1rem 1rem;
+                            .label {
+                                font-size: 1rem;
+                            }
                         }
-                        .virtues {
-                            grid-area: virtues;
+                        .primary {
+                            grid-area: primary;
                         }
-                    }                    
-                }
+                        .secondary {
+                            grid-area: secondary;
+                        }
+                        .tertiary {
+                            grid-area: tertiary;
+                        }
+                    }
+                    .paths {
+                        grid-area: paths;
+                        grid: "heading" 1.5rem
+                              "originpath" 5rem
+                              "rolepath" 5rem
+                              "pantheonpath" 5rem;
+                        .heading { grid-area: heading; }
+                        .originpath { grid-area: originpath; }
+                        .rolepath { grid-area: rolepath; }
+                        .pantheonpath { grid-area: pantheonpath }                        
+                    }
+                    .virtues {
+                        grid-area: virtues;
+                        grid: "leftvirtue dotline rightvirtue" / 1fr 1fr 1fr;
+                        background-color: var(--bgColorStrong);
+                        .leftvirtue { grid-area: leftvirtue; }
+                        .dotline { grid-area: dotline; }
+                        .rightvirtue { grid-area: rightvirtue; }
+                    }
+                }                    
                 .heritage {
-                    .grid {
-                        grid: "heritage heritage" 4rem
-                              "paths paths" 10rem
-                              "virtues ." 2rem
-                            / 1fr 1fr;
-                        .heritage {
-                            grid-area: attributes;
-                        }
-                        .paths {
-                            grid-area: paths;
-                        }
-                        .virtues {
-                            grid-area: virtues;
-                        }
+                    grid: "heritage heritage" 4rem
+                            "paths paths" 10rem
+                            "virtues ." 2rem
+                        / 1fr 1fr;
+                    .heritage {
+                        grid-area: attributes;
+                    }
+                    .paths {
+                        grid-area: paths;
+                    }
+                    .virtues {
+                        grid-area: virtues;
                     }
                 }
                 .details {
-                    .grid {
-                        grid: "attributes paths" 8rem
-                            "virtues paths" 20rem
-                            / 1fr 2fr;
-                        .attributes {
-                            grid-area: attributes;
-                        }
-                        .paths {
-                            grid-area: paths;
-                        }
-                        .virtues {
-                            grid-area: virtues;
-                        }
+                    grid: "attributes paths" 8rem
+                        "virtues paths" 20rem
+                        / 1fr 2fr;
+                    .attributes {
+                        grid-area: attributes;
+                    }
+                    .paths {
+                        grid-area: paths;
+                    }
+                    .virtues {
+                        grid-area: virtues;
                     }
                 }
                 .experience {
-                    .grid {
-                        grid: "paths" 4rem
-                              "virtues" 10rem
-                            / 1fr;
-                        .paths {
-                            grid-area: paths;
-                        }
-                        .virtues {
-                            grid-area: virtues;
-                        }
+                    grid: "paths" 4rem
+                            "virtues" 10rem
+                        / 1fr;
+                    .paths {
+                        grid-area: paths;
+                    }
+                    .virtues {
+                        grid-area: virtues;
                     }
                 }
             }

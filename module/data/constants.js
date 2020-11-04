@@ -1,11 +1,11 @@
-export const updateCONFIG = () => {
-    CONFIG.TIERS = {
+export const scionSystemData = {
+    TIERS: {
         Mortal: "Mortal",
         Hero: "Hero",
         Demigod: "Demigod",
         God: "God"
-    };
-    CONFIG.PANTHEONS = {
+    },
+    PANTHEONS: {
         aesir: {
             label: "Æsir",
             description: "the Norse Gods",
@@ -189,7 +189,7 @@ export const updateCONFIG = () => {
                     purviews: ["Beasts (Fox)", "Fertility", "Fortune", "Health", "Journeys", "Prosperity"]
                 },
                 "Ama-no-Uzume": {
-                    mantle: "Amatsukami of the Dawn, Revelry, and Mirth",
+                    mantle: "Amatsukami of Revelry, Mirth, and the Dawn",
                     callings: ["Liminal", "Lover", "Trickster"],
                     purviews: ["Artistry (Dance, Singing)", "Deception", "Passion (Lust, Mirth)"]
                 },
@@ -209,7 +209,7 @@ export const updateCONFIG = () => {
                     purviews: ["Beasts (Fish, Sharks, Whales)", "Epic Stamina", "Fortune", "Prosperity", "Wild"]
                 },
                 Ōkuninushi: {
-                    mantle: "former Kunitsukami and Fortune of Heroes, Magic, and Wealth",
+                    mantle: "Fortune of Heroes, Magic, and Wealth",
                     callings: ["Creator", "Leader", "Liminal"],
                     purviews: ["Beasts (all)", "Earth", "Darkness", "Fortune", "Prosperity"]
                 },
@@ -739,11 +739,26 @@ export const updateCONFIG = () => {
             }
 
         }
-    };
-    CONFIG.HERITAGES = {
+    },
+    HERITAGES: {
         Born: "Born",
         Chosen: "Chosen",
         Incarnation: "Incarnation",
         Created: "Created"
-    };
+    },
+    ATTRIBUTES: {
+        social: ["presence", "manipulation", "composure"],
+        mental: ["intellect", "cunning", "resolve"],
+        physical: ["might", "dexterity", "stamina"],
+        presence: {label: "Presence"},
+        manipulation: {label: "Manipulation"},
+        composure: {label: "Composure"},
+        intellect: {label: "Intellect"},
+        cunning: {label: "Cunning"},
+        resolve: {label: "Resolve"},
+        might: {label: "Might"},
+        dexterity: {label: "Dexterity"},
+        stamina: {label: "Stamina"}
+    },
+    SKILLS: {}
 };

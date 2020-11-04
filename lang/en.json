@@ -1,1 +1,80 @@
-{}
+{
+    "scion": {
+        "game": {
+            "tier": "Tier",
+            "pantheon": "Pantheon",
+            "pantheons": "Pantheons",
+            "parent": "Parent",
+            "attribute": "Attribute",
+            "attributes": "Attributes",
+            "skill": "Skill",
+            "skills": "Skills",
+            "physical": "Physical",
+            "mental": "Mental",
+            "social": "Social",
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "tertiary": "Tertiary",
+            "path": "Path",
+            "paths": "Paths",
+            "originPath": "Origin Path",
+            "rolePath": "Role Path",
+            "patheonPath": "Pantheon Path",
+            "societyPath": "Society Path",
+            "calling": "Calling",
+            "callings": "Callings",
+            "knack": "Knack",
+            "knacks": "Knacks",
+            "purview": "Purview",
+            "purviews": "Purviews",
+            "boon": "Boon",
+            "boons": "Boons",
+            "birthright": "Birthright",
+            "birthrights": "Birthrights"            
+        },
+        "tiers": {
+            "mortal": "Mortal",
+            "hero": "Hero",
+            "demigod": "Demigod",
+            "god": "God"
+        },
+        "pantheons": {
+            "aesir": "Æsir",
+            "deva": "Devá",
+            "kami": "Kami",
+            "manitou": "Manitou",
+            "netjer": "Netjer",
+            "orisha": "Óríshá",
+            "shen": "Shén",
+            "teotl": "Teōtl",
+            "theoi": "Theoi",
+            "tuathaDeDanann": "Tuatha dé Danann"
+        },
+        "attributes": {
+            "none": "",
+            "presence": "Presence",
+            "manipulation": "Manipulation",
+            "composure": "Composure",
+            "intellect": "Intellect",
+            "cunning": "Cunning",
+            "resolve": "Resolve",
+            "might": "Might",
+            "dexterity": "Dexterity",
+            "stamina": "Stamina"
+        },
+        "skills": { },
+        "callings": { },
+        "purviews": { },
+        "knacks": { },
+        "birthrights": {
+            "creature": "Creature",
+            "creatures": "Creatures",
+            "follower": "Follower",
+            "followers": "Followers",
+            "relic": "Relic",
+            "relics": "Relics",
+            "guide": "Guide",
+            "guides": "Guides"
+        }
+    }
+}

@@ -1,6 +1,11 @@
 
 & {
     --bgColorMatte: #{$c-white};
+    --bgImage: url("https://i.imgur.com/ZlaojpR.png");
+
+    --fontColorBody: #{$c-black};
+    --fontFamilyBody: "#{$fontFamilyBodyDefault}";
+    --fontSizeBody: 1rem;
 
     --fontColorTitle: #{$c-black};
     --bgColorTitle: transparent;
@@ -9,7 +14,7 @@
     --fontVariantTitle: normal;
     --fontWeightTitle: normal;
     --textTransformTitle: none;
-    --fontSizeTitle: 1.8rem;
+    --fontSizeTitle: 2.5rem;
     --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorSubTitle: var(--fontColorTitle);
@@ -17,24 +22,31 @@
     --fontFamilySubTitle: "#{$fontFamilyTitleDefault}";
     --fontStyleSubTitle: normal;
     --fontVariantSubTitle: normal;
-    --fontWeightSubTitle: normal;
+    --fontWeightSubTitle: bold;
     --textTransformSubTitle: none;
     --fontSizeSubTitle: 1rem;
-    --textShadowSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+    --textShadowSubTitle: var(--textShadowTitle);
 
     --fontColorSubSubTitle: var(--fontColorTitle);
     --bgColorSubSubTitle: var(--bgColorTitle);
-    --fontFamilySubSubTitle: "#{$fontFamilyBodyDefault}";
+    --fontFamilySubSubTitle: var(--fontFamilyBody);
     --fontStyleSubSubTitle: normal;
     --fontVariantSubSubTitle: normal;
     --fontWeightSubSubTitle: normal;
     --textTransformSubSubTitle: none;
-    --fontSizeSubSubTitle: 1rem;
-    --textShadowSubSubTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+    --fontSizeSubSubTitle: 1.5rem;
+    --textShadowSubSubTitle: var(--textShadowTitle);
 
-    --fontColorBody: #{$c-black};
-    --fontFamilyBody: "#{$fontFamilyBodyDefault}";
-    --fontSizeBody: 1rem;
+    --fontColorHeading: var(--fontColorSubTitle);
+    --bgColorHeading: transparent;
+    --fontFamilyHeading: var(--fontFamilyBody);
+    --fontStyleHeading: normal;
+    --fontVariantHeading: normal;
+    --fontWeightHeading: bold;
+    --textTransformHeading: none;
+    --fontSizeHeading: 1rem;
+    --textShadowHeading: none;
+    --borderBottomHeading: 1px solid var(--fontColorHeading);
 }
 
 .netjer {
@@ -44,7 +56,9 @@
     $accentColor: #834107;
     $bodyColor: #2d2d2f;
 
-    --bgImage: url("https://i.imgur.com/yflp59R.jpg");
+    --fontColorBody: #{$bodyColor};
+
+    --bgImage: url("https://i.imgur.com/WrZkPuw.png");
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
@@ -58,7 +72,9 @@
     --fontColorSubSubTitle: #{$headingColor1};
     --fontWeightSubSubTitle: bold;
 
-    --fontColorBody: #{$bodyColor};
+    --fontColorHeading: var(--fontColorSubTitle);
+    --borderBottomHeading: 1px solid var(--fontColorHeading);
+
 }
 
 .tuathaDeDanann {
@@ -68,13 +84,14 @@
     $accentColor: #25951f;
     $bodyColor: #1a211d;
 
-    --bgImage: none; // url("https://i.imgur.com/yflp59R.jpg");
+    // --bgImage: none;
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
     
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Berkshire Swash";
+    --fontSizeTitle: 2rem;
 
     --fontColorSubTitle: #{$headingColor2};
     --fontFamilySubTitle: "Della Respira";

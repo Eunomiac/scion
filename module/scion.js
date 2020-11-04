@@ -1,5 +1,5 @@
 // #region Import Modules
-import {updateCONFIG} from "./data/constants.js";
+import {scionSystemData} from "./data/constants.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
 import {ScionItem} from "./item/item.js";
@@ -9,7 +9,7 @@ import {preloadHandlebarsTemplates} from "./templates.js";
 
 // #region Hook: Initialization
 Hooks.once("init", async () => {
-    updateCONFIG();
+    CONFIG.scion = scionSystemData;
 
     game.scion = {
         ScionActor,
@@ -36,6 +36,29 @@ Hooks.once("init", async () => {
             if (typeof args[arg] !== "object")
                 outStr += args[arg];
         return outStr;
+    });
+
+    Handlebars.registerHelper("display", (...args) => {
+        const [category, key] = args;
+        if (category in CONFIG.scion && key in CONFIG.scion[category] && "label" in CONFIG.scion[category][key])
+            return CONFIG.scion[category][key].label;
+        return key;
+    });
+
+    Handlebars.registerHelper("dotstate", (...args) => {
+        const [trait, dotVal, data] = args;
+        const actData = data.data.root.data;
+        return (trait in actData && actData[trait].value >= parseInt(dotVal)) ? "full" : "";
+    });
+
+    Handlebars.registerHelper("for", (n, options) => {
+        const results = [];
+        const data = Handlebars.createFrame(options.data);
+        for (let i = 1; i <= n; i++) {
+            data.index = i;
+            results.push(options.fn(i, {data}));
+        }
+        return results.join("");
     });
     // #endregion
 });

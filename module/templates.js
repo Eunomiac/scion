@@ -7,7 +7,7 @@ export const preloadHandlebarsTemplates = async () => {
     // Define template paths to load
     const templatePaths = [
         // Actor Sheet Partials
-        "systems/scion/templates/actor/actor-chargen.html"
+        "systems/scion/templates/actor/actor-chargen.hbs"
     ];
 
     // Load the template parts
