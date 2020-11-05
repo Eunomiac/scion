@@ -68,8 +68,8 @@
             background-size: 100%;
             background-repeat: repeat-y;
             opacity: 1;        
-            animation-name: characterSheet;
-            animation-duration: 1s;
+            // animation-name: characterSheet;
+            // animation-duration: 1s;
 
             grid: ". nav ." 1rem
                   "header header header" 6rem
@@ -185,6 +185,7 @@
                 pointer-events: all;
                 
                 .heading {
+                    width: 100%;
                     color: var(--fontColorHeading);
                     background-color: var(--bgColorHeading);
                     font-family: var(--fontFamilyHeading);
@@ -200,54 +201,57 @@
                 }
 
                 .settings {
-                    grid: "tier pantheon heritage parent" 2rem
-                    / 12% 20% 15% 1fr;
-                    .tier {
-                        grid-area: tier;
-                    }
-                    .pantheon {
-                        grid-area: pantheon;
-                    }
-                    .parent {
-                        grid-area: parent;
-                    }
-                    .heritage {
-                        grid-area: heritage;
+                    flex-flow: column nowrap;
+                    div.flex {
+                        height: auto;
+                        flex-flow: row wrap;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        align-content: flex-start;
+
+                        select {
+                            height: auto;
+                            width: auto;
+                        }
                     }
                 }
                 .front {
-                    grid: "attributes paths"  14rem
+                    grid: "attributes paths"  17rem
                             "virtues paths" 2rem
                         / 1fr 2fr;
                     .attributes {
                         grid-area: attributes;
-                        grid:   "heading" 1.5rem
-                                "." 0.5rem
-                                "primary" 3rem
-                                "." 1rem
-                                "secondary" 3rem
-                                "." 1rem
-                                "tertiary" 3rem
-                                "." 1rem;
 
-                        .heading {
-                            grid-area: heading;    
+                        flex-flow: column nowrap;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .dotGrabBin {
+                            flex-wrap: wrap;
+                            height: auto;
+                            justify-content: flex-end;
                         }
-                        .attrBlock {
-                            grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
-                            grid-template-rows: 1rem 1rem 1rem;
-                            .label {
-                                font-size: 1rem;
+
+                        .attrBlock {                            
+                            margin: 0.5rem 0;
+                            flex-flow: column nowrap;
+
+                            .attrRow {
+                                grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+                                grid-template-rows: 1rem;
+                                .label {
+                                    font-size: 1rem;
+                                }
                             }
                         }
                         .primary {
-                            grid-area: primary;
+                            order: 1;
                         }
                         .secondary {
-                            grid-area: secondary;
+                            order: 2;
                         }
                         .tertiary {
-                            grid-area: tertiary;
+                            order: 3;
                         }
                     }
                     .paths {

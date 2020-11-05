@@ -154,6 +154,7 @@ module.exports = {
         ActorSheet: "readonly",
         ChatMessage: "readonly",
         Dialog: "readonly",
+        DragDrop: "readonly",
         Handlebars: "readonly",
         Hooks: "readonly",
         Item: "readonly",

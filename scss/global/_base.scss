@@ -29,6 +29,17 @@ select {
     grid-gap: 0;
 }
 
+.flex,
+.tab[data-tab].active.flex {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 0;
+}
+
 .text {
     color: var(--fontColorBody);
     font-family: var(--fontFamilyBody);
@@ -36,16 +47,29 @@ select {
 }
 
 .dot {
+    height: 15px;
+    width: 15px;
     margin: 1px 1px 0 0;
     border-radius: 50%;
     box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4), inset -1px -1px 1px white;
+
+    &.full {
+        background: radial-gradient(#444, #0a0a0a);
+        border: solid 2px black;
+        box-shadow: 1px 1px 2px black;
+    }
+
+    &.unspent {
+        background: radial-gradient(#900, #5a0000);
+        border: solid 2px #5a0000;
+        box-shadow: 1px 1px 2px black;
+    }
 }
 
 .dot.full {
-	background: #0a0a0a;
-	background: -moz-radial-gradient(#444, #0a0a0a);
-	background: -webkit-radial-gradient(#444, #0a0a0a);
-	background: radial-gradient(#444, #0a0a0a);
-    border: solid 2px black;
-    box-shadow: 1px 1px 2px black;
+
+}
+
+.dot.unspent {
+
 }

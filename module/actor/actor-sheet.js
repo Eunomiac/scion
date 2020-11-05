@@ -1,3 +1,5 @@
+import * as U from "../data/utils.js";
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -16,14 +18,7 @@ export class ScionActorSheet extends ActorSheet {
         return `systems/scion/templates/actor/${this.object.data.type}-sheet.hbs`;
     }
 
-    getData() {
-        const data = super.getData();
-
-        data.config = CONFIG.scion;
-
-        const actorData = data.data;
-        const systemData = data.config;
-
+    _prepareDivineHeritage(actorData, systemData) {
         actorData.SYSDATA = {
             PANTHEONS: {},
             PANTHEONMEMBERS: {},
@@ -66,18 +61,63 @@ export class ScionActorSheet extends ActorSheet {
             actorData.parent.mantle = "";
             actorData.parentageLine = "";
         }
+    }
 
-        const testPriorities = {
-            primary: "physical",
-            secondary: "social",
-            tertiary: "mental"
+    _prepareAttributes(actorData, systemData) {
+        console.log(actorData);
+        const unspentDots = {
+            general: parseInt(actorData.dotsPurchased),
+            primary: 0,
+            secondary: 0,
+            tertiary: 0
         };
+        const updateData = {};
+        // First, adjust minimum and set Favored Approach attributes:
+        console.log({favApproach: actorData.favoredApproach, arenas: systemData.ATTRIBUTES.approaches});
+        if (actorData.favoredApproach in systemData.ATTRIBUTES.approaches) {
+            for (const attribute of Object.keys(systemData.ATTRIBUTES.all)) {
+                if (systemData.ATTRIBUTES[actorData.favoredApproach].includes(attribute)) {
+                    actorData[attribute].value = Math.max(actorData[attribute].value, 3);
+                    actorData[attribute].min = 3;
+                } else {
+                    actorData[attribute].min = 1;
+                }
+                Object.assign(updateData, U.getUpdateData(this.actor, attribute, actorData[attribute].value, "value", true));
+                Object.assign(updateData, U.getUpdateData(this.actor, attribute, actorData[attribute].min, "min", true));
+            }
+        }
+        // For each Arena, calculate unspentDots:
+        for (const [priority, numDots] of Object.entries(systemData.ATTRIBUTES.priorities))
+            if (actorData.priorities[priority].arena) {
+                const attrList = systemData.ATTRIBUTES[actorData.priorities[priority].arena];
+                actorData.priorities[priority].attributes = attrList;
+                const assignedDots = attrList.reduce((tot, attr) => tot + actorData[attr].value - 1, 0);
+                unspentDots[priority] = numDots - assignedDots + (actorData.favoredApproach ? 2 : 0);
+                if (unspentDots[priority] < 0) {
+                    unspentDots.general += parseInt(unspentDots[priority]);
+                    unspentDots[priority] = 0;
+                }
+            }
+        Object.assign(updateData, U.getUpdateData(this.actor, "generalUnspentDots", unspentDots.general));
+        Object.assign(updateData, U.getUpdateData(this.actor, "priorities.primary.unspentDots", unspentDots.primary));
+        Object.assign(updateData, U.getUpdateData(this.actor, "priorities.secondary.unspentDots", unspentDots.secondary));
+        Object.assign(updateData, U.getUpdateData(this.actor, "priorities.tertiary.unspentDots", unspentDots.tertiary));
+        this.actor.update(updateData);
 
-        actorData.attributes = {
-            primary: systemData.ATTRIBUTES[testPriorities.primary],
-            secondary: systemData.ATTRIBUTES[testPriorities.secondary],
-            tertiary: systemData.ATTRIBUTES[testPriorities.tertiary]
-        };
+        console.log("UPDATE DATA:");
+        console.log(updateData);
+    }
+
+    getData() {
+        const data = super.getData();
+
+        data.config = CONFIG.scion;
+
+        const actorData = data.data;
+        const systemData = data.config;
+
+        this._prepareDivineHeritage(actorData, systemData);
+        this._prepareAttributes(actorData, systemData);
 
         data.blocks = {
             chargen: {
@@ -95,40 +135,83 @@ export class ScionActorSheet extends ActorSheet {
         if (!this.options.editable)
             return;
 
-        html.find(".dot").click(this._onDotClick.bind(this));
+        // html.find(".dot.click").click(this._onDotClick.bind(this));
 
-        if (this.actor.owner) {
-            const handler = (event) => this._onDragItemStart(event);
-            html.find("div.dot").each((i, div) => {
-                div.setAttribute("draggable", true);
-                div.addEventListener("dragstart", handler, false);
-            });
-        }
+        const [dragHandler, dropHandler] = [
+            (event) => this._onDotDrag(event),
+            (event) => this._onDotDrop(event)
+        ];
+        html.find(".dot").each((i, element) => {
+            element.setAttribute("draggable", true);
+            element.addEventListener("dragstart", dragHandler, false);
+        });
+        html.find(".dotDropBin").each((i, element) => {
+            element.addEventListener("drop", dropHandler, false);
+        });
     }
 
-    _onDotClick(event) {
+/*     _onDotClick(event) {
         event.preventDefault();
+        console.log("~~ _onDotClick(event) ~~  event =");
+        console.log(event);
         let element = event.currentTarget;
         const dataset = element.dataset;
-        // <span class="dot" data-trait="closeCombat" data-val=2></span>
         if ("trait" in dataset && "val" in dataset) {
-            if (element.className.includes("full")) {
+            if (element.classList.contains("full")) {
                 this.actor.update({[`data.${dataset.trait}.value`]: parseInt(dataset.val) - 1});
                 do {
-                    element.className = element.className.replace(/ ?full ?/gu, "");
+                    element.classList = element.classList.filter((x) => x !== "full");
                     element = element.nextElementSibling;
-                } while (element && element.className.includes("dot"));
+                } while (element && element.classList.contains("dot"));
             } else {
                 this.actor.update({[`data.${dataset.trait}.value`]: parseInt(dataset.val)});
                 do {
-                    element.className += " full";
+                    element.classList.push("full");
                     element = element.previousElementSibling;
-                } while (element && element.className.includes("dot"));
+                } while (element && element.classList.contains("dot"));
             }
             console.log(`Trait ${dataset.trait} set to ${this.object.data.data[dataset.trait].value}`);
         } else {
             console.log("Failed Dot Click:");
             console.log(event);
+        }
+    } */
+
+    _onDotDrag(event) {
+        console.log("~~ _onDragDotStart(event) ~~  event =");
+        console.log(event);
+
+        const element = event.target;
+        const dragData = {
+            dotType: element.dataset.dottype,
+            actorId: this.actor.id,
+            fromTrait: element.dataset.trait
+        };
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+    }
+
+    _onDotDrop(event) {
+        console.log("~~ _onDragDotStop(event) ~~  event =");
+        console.log(event);
+
+        const {dotType, actorId, fromTrait} = JSON.parse(event.dataTransfer.getData("text/plain"));
+        const binData = event.path.find((x) => x.classList.contains("dotDropBin")).dataset;
+        const updateData = {};
+        const fromTypes = dotType.split("|");
+        const toTypes = binData.dottype.split("|");
+        console.log({fromTypes, toTypes, fromTrait, toTrait: binData.trait});
+        if (fromTypes.filter((x) => toTypes.includes(x)).length && fromTrait !== binData.trait) {
+            const fromVal = U.getValue(this.actor.data.data, fromTrait);
+            const fromMin = U.getValue(this.actor.data.data, fromTrait, "min", true);
+            const toVal = U.getValue(this.actor.data.data, binData.trait);
+            const toMax = U.getValue(this.actor.data.data, binData.trait, "max", true);
+            if (fromVal > fromMin && toVal < toMax) {
+                Object.assign(updateData, U.getUpdateData(this.actor, fromTrait, fromVal - 1));
+                Object.assign(updateData, U.getUpdateData(this.actor, binData.trait, toVal + 1));
+                this.actor.update(updateData);
+            }
+            console.log("~~ UPDATE DATA: ~~");
+            console.log(updateData);
         }
     }
 }

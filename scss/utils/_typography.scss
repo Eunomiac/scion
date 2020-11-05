@@ -12,6 +12,14 @@
     @return $googleFontURL;
 }
 
+@function getFonts() {
+    $fontString: "";
+    @each $font, $weights in $fontMap {
+        $fontString: $fontString + "|" + $font;
+    }
+    @return $fontString;
+}
+
 @import url(importGoogleFonts((
     "Berkshire+Swash": (400),
     "Della+Respira": (400),

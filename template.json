@@ -19,6 +19,26 @@
                 "divineTitle": ""
             },
             "attributes": {
+                "priorities": {
+                    "primary": {
+                        "unspentDots": 6,
+                        "arena": "",
+                        "attributes": []
+                    },
+                    "secondary": {
+                        "unspentDots": 4,
+                        "arena": "",
+                        "attributes": []
+                    },
+                    "tertiary": {
+                        "unspentDots": 2,
+                        "arena": "",
+                        "attributes": []
+                    }
+                },
+                "dotsPurchased": 0,
+                "generalUnspentDots": 0,
+                "favoredApproach": "",
                 "intellect": {
                     "label": "Intellect",
                     "min": 0,
@@ -26,7 +46,7 @@
                     "max": 5,
                     "modifier": [],
                     "arena": "mental",
-                    "approach": "power"
+                    "approach": "force"
                 },
                 "cunning": {
                     "label": "Cunning",
@@ -53,7 +73,7 @@
                     "max": 5,
                     "modifier": [],
                     "arena": "physical",
-                    "approach": "power"
+                    "approach": "force"
                 },
                 "dexterity": {
                     "label": "Dexterity",
@@ -80,7 +100,7 @@
                     "max": 5,
                     "modifier": [],
                     "arena": "social",
-                    "approach": "power"
+                    "approach": "force"
                 },
                 "manipulation": {
                     "label": "Manipulation",

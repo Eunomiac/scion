@@ -35,6 +35,19 @@ select {
   grid-gap: 0;
 }
 
+.flex,
+.tab[data-tab].active.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 0;
+}
+
 .text {
   color: var(--fontColorBody);
   font-family: var(--fontFamilyBody);
@@ -42,6 +55,8 @@ select {
 }
 
 .dot {
+  height: 15px;
+  width: 15px;
   margin: 1px 1px 0 0;
   border-radius: 50%;
   -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
@@ -49,10 +64,17 @@ select {
 }
 
 .dot.full {
-  background: #0a0a0a;
   background: -o-radial-gradient(#444, #0a0a0a);
   background: radial-gradient(#444, #0a0a0a);
   border: solid 2px black;
+  -webkit-box-shadow: 1px 1px 2px black;
+  box-shadow: 1px 1px 2px black;
+}
+
+.dot.unspent {
+  background: -o-radial-gradient(#900, #5a0000);
+  background: radial-gradient(#900, #5a0000);
+  border: solid 2px #5a0000;
   -webkit-box-shadow: 1px 1px 2px black;
   box-shadow: 1px 1px 2px black;
 }
@@ -152,10 +174,6 @@ select {
   background-size: 100%;
   background-repeat: repeat-y;
   opacity: 1;
-  -webkit-animation-name: characterSheet;
-  animation-name: characterSheet;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
   grid: ". nav ." 1rem "header header header" 6rem "body body body" auto ". footer ." 1.5rem /12% 1fr 12%;
 }
 
@@ -289,6 +307,7 @@ select {
 }
 
 .scion.actor .Character .main .sheet-body .heading {
+  width: 100%;
   color: var(--fontColorHeading);
   background-color: var(--bgColorHeading);
   font-family: var(--fontFamilyHeading);
@@ -304,57 +323,93 @@ select {
 }
 
 .scion.actor .Character .main .sheet-body .settings {
-  grid: "tier pantheon heritage parent" 2rem / 12% 20% 15% 1fr;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
 }
 
-.scion.actor .Character .main .sheet-body .settings .tier {
-  grid-area: tier;
+.scion.actor .Character .main .sheet-body .settings div.flex {
+  height: auto;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
 }
 
-.scion.actor .Character .main .sheet-body .settings .pantheon {
-  grid-area: pantheon;
-}
-
-.scion.actor .Character .main .sheet-body .settings .parent {
-  grid-area: parent;
-}
-
-.scion.actor .Character .main .sheet-body .settings .heritage {
-  grid-area: heritage;
+.scion.actor .Character .main .sheet-body .settings div.flex select {
+  height: auto;
+  width: auto;
 }
 
 .scion.actor .Character .main .sheet-body .front {
-  grid: "attributes paths"  14rem "virtues paths" 2rem / 1fr 2fr;
+  grid: "attributes paths"  17rem "virtues paths" 2rem / 1fr 2fr;
 }
 
 .scion.actor .Character .main .sheet-body .front .attributes {
   grid-area: attributes;
-  grid: "heading" 1.5rem "." 0.5rem "primary" 3rem "." 1rem "secondary" 3rem "." 1rem "tertiary" 3rem "." 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .heading {
-  grid-area: heading;
+.scion.actor .Character .main .sheet-body .front .attributes .dotGrabBin {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: auto;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
 }
 
 .scion.actor .Character .main .sheet-body .front .attributes .attrBlock {
-  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
-  grid-template-rows: 1rem 1rem 1rem;
+  margin: 0.5rem 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .attrBlock .label {
+.scion.actor .Character .main .sheet-body .front .attributes .attrBlock .attrRow {
+  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+  grid-template-rows: 1rem;
+}
+
+.scion.actor .Character .main .sheet-body .front .attributes .attrBlock .attrRow .label {
   font-size: 1rem;
 }
 
 .scion.actor .Character .main .sheet-body .front .attributes .primary {
-  grid-area: primary;
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
 }
 
 .scion.actor .Character .main .sheet-body .front .attributes .secondary {
-  grid-area: secondary;
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 2;
+  order: 2;
 }
 
 .scion.actor .Character .main .sheet-body .front .attributes .tertiary {
-  grid-area: tertiary;
+  -webkit-box-ordinal-group: 4;
+  -ms-flex-order: 3;
+  order: 3;
 }
 
 .scion.actor .Character .main .sheet-body .front .paths {
@@ -442,7 +497,7 @@ select {
 
 .scion.actor {
   --bgColorMatte: #fff;
-  --bgImage: url("https://i.imgur.com/ZlaojpR.png");
+  --bgImage: url("../images/Generic.png");
   --fontColorBody: #000;
   --fontFamilyBody: "Overlock SC";
   --fontSizeBody: 1rem;
@@ -487,7 +542,7 @@ select {
 
 .scion.actor .netjer {
   --fontColorBody: #2d2d2f;
-  --bgImage: url("https://i.imgur.com/WrZkPuw.png");
+  --bgImage: url("../images/Netjer.png");
   --bgColorMatte: #f6f0e2;
   --bgColorSoft: #fdd8b7;
   --bgColorStrong: #f99c4b;
@@ -501,7 +556,12 @@ select {
   --borderBottomHeading: 1px solid var(--fontColorHeading);
 }
 
+.scion.actor .orisha {
+  --bgImage: url("../images/Orisha.png");
+}
+
 .scion.actor .tuathaDeDanann {
+  --bgImage: url("../images/Tuatha.png");
   --bgColorMatte: #efffd1;
   --bgColorSoft: #c7f8c4;
   --bgColorStrong: #73ed6c;

@@ -1,7 +1,7 @@
 
 & {
     --bgColorMatte: #{$c-white};
-    --bgImage: url("https://i.imgur.com/ZlaojpR.png");
+    --bgImage: url("../images/Generic.png");
 
     --fontColorBody: #{$c-black};
     --fontFamilyBody: "#{$fontFamilyBodyDefault}";
@@ -58,7 +58,7 @@
 
     --fontColorBody: #{$bodyColor};
 
-    --bgImage: url("https://i.imgur.com/WrZkPuw.png");
+    --bgImage: url("../images/Netjer.png");
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
@@ -74,7 +74,10 @@
 
     --fontColorHeading: var(--fontColorSubTitle);
     --borderBottomHeading: 1px solid var(--fontColorHeading);
+}
 
+.orisha {
+    --bgImage: url("../images/Orisha.png");
 }
 
 .tuathaDeDanann {
@@ -84,7 +87,7 @@
     $accentColor: #25951f;
     $bodyColor: #1a211d;
 
-    // --bgImage: none;
+    --bgImage: url("../images/Tuatha.png");
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};

@@ -1,4 +1,5 @@
 // #region Import Modules
+import * as U from "./data/utils.js";
 import {scionSystemData} from "./data/constants.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
@@ -39,10 +40,8 @@ Hooks.once("init", async () => {
     });
 
     Handlebars.registerHelper("display", (...args) => {
-        const [category, key] = args;
-        if (category in CONFIG.scion && key in CONFIG.scion[category] && "label" in CONFIG.scion[category][key])
-            return CONFIG.scion[category][key].label;
-        return key;
+        const [path, key] = args;
+        return U.getValue(CONFIG.scion, `${path}.${key}`, "label");
     });
 
     Handlebars.registerHelper("dotstate", (...args) => {

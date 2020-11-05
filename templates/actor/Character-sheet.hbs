@@ -21,20 +21,36 @@
                 
             <section class="sheet-body">
                 {{!-- Settings Tab --}}
-                <div class="tab settings grid {{blocks.chargen.class}}" data-group="primary" data-tab="settings">
+                <div class="tab settings flex {{blocks.chargen.class}}" data-group="primary" data-tab="settings">
                     {{> (blocks.chargen.template) }}
                 </div>
                 {{!-- Front Tab --}}
                 <div class="tab front grid" data-group="primary" data-tab="front">
-                    <div class="attributes grid">
+                    <div class="attributes flex">
                         <div class="heading">Attributes</div>
-                        {{#each data.attributes as |category key|}}
-                            <div class="attrBlock {{key}} grid">
-                                {{#each category as |attribute|}}
-                                    <div class="label">{{display "ATTRIBUTES" attribute}}</div>
-                                    {{#for 5}}
-                                        <span class="dot {{dotstate attribute @index}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
-                                    {{/for}}
+                        {{#if data.generalUnspentDots}}
+                            <div class="dotGrabBin dotDropBin flex">
+                                {{#for data.generalUnspentDots}}
+                                    <span class="dot unspent" data-dottype="primary|secondary|tertiary" data-trait="generalUnspentDots"></span>
+                                {{/for}}
+                            </div>
+                        {{/if}}
+                        {{#each data.priorities as |category key|}}
+                            <div class="attrBlock {{key}} flex">
+                                {{#if category.unspentDots}}
+                                    <div class="dotGrabBin dotDropBin flex">
+                                        {{#for category.unspentDots}}
+                                            <span class="dot unspent" data-dottype="{{key}}" data-trait="priorities.{{key}}.unspentDots"></span>
+                                        {{/for}}
+                                    </div>
+                                {{/if}}
+                                {{#each category.attributes as |attribute|}}
+                                    <div class="attrRow dotDropBin grid" data-dottype="{{key}}" data-trait="{{attribute}}">
+                                        <div class="label">{{display "ATTRIBUTES.all" attribute}}</div>
+                                        {{#for 5}}
+                                            <span class="dot click {{dotstate attribute @index}}" data-dottype="{{key}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
+                                        {{/for}}
+                                    </div>
                                 {{/each}}
                             </div>
                         {{/each}}

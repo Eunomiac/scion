@@ -1,16 +1,39 @@
-<select class="tier" name="data.tier">
-    <option name=""></option>
-    {{selectOptions config.TIERS selected=data.tier}}
-</select>
-<select class="pantheon" name="data.pantheon">
-    <option name=""></option>
-    {{selectOptions data.SYSDATA.PANTHEONS selected=data.pantheon}}
-</select>                            
-<select class="parent" name="data.parent.name">
-    <option name=""></option>
-    {{selectOptions data.SYSDATA.PANTHEONMEMBERS selected=data.parent.name}}
-</select>                           
-<select class="heritage" name="data.heritage">
-    <option name=""></option>
-    {{selectOptions config.HERITAGES selected=data.heritage}}
-</select>
+<div class="flex">
+    <select class="tier" name="data.tier">
+        <option name=""></option>
+        {{selectOptions config.TIERS selected=data.tier}}
+    </select>
+    <select class="pantheon" name="data.pantheon">
+        <option name=""></option>
+        {{selectOptions data.SYSDATA.PANTHEONS selected=data.pantheon}}
+    </select>                            
+    <select class="parent" name="data.parent.name">
+        <option name=""></option>
+        {{selectOptions data.SYSDATA.PANTHEONMEMBERS selected=data.parent.name}}
+    </select>                           
+    <select class="heritage" name="data.heritage">
+        <option name=""></option>
+        {{selectOptions config.HERITAGES selected=data.heritage}}
+    </select>
+</div>
+<div class="flex">               
+    <select class="priority" name="data.priorities.primary.arena">
+        <option name=""></option>
+        {{selectOptions config.ATTRIBUTES.arenas selected=data.priorities.primary.arena}}
+    </select>               
+    <select class="priority" name="data.priorities.secondary.arena">
+        <option name=""></option>
+        {{selectOptions config.ATTRIBUTES.arenas selected=data.priorities.secondary.arena}}
+    </select>               
+    <select class="priority" name="data.priorities.tertiary.arena">
+        <option name=""></option>
+        {{selectOptions config.ATTRIBUTES.arenas selected=data.priorities.tertiary.arena}}
+    </select>             
+    <select class="priority" name="data.favoredApproach">
+        <option name=""></option>
+        {{selectOptions config.ATTRIBUTES.approaches selected=data.favoredApproach}}
+    </select>
+</div>
+<div class="flex">
+    <input type="number" name="data.dotsPurchased" value="{{data.dotsPurchased}}" style="font-size: 1rem;">
+</div>

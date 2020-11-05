@@ -14,3 +14,9 @@
 @mixin hide {
   display: none;
 }
+
+@mixin drawerController {
+  &:not(:checked) > div {
+    display: none;
+  }
+}

@@ -747,18 +747,39 @@ export const scionSystemData = {
         Created: "Created"
     },
     ATTRIBUTES: {
+        all: {
+            presence: "Presence",
+            manipulation: "Manipulation",
+            composure: "Composure",
+            intellect: "Intellect",
+            cunning: "Cunning",
+            resolve: "Resolve",
+            might: "Might",
+            dexterity: "Dexterity",
+            stamina: "Stamina"
+        },
+        priorities: {
+            primary: 6,
+            secondary: 4,
+            tertiary: 2
+        },
+        arenas: {
+            social: "Social",
+            mental: "Mental",
+            physical: "Physical"
+        },
+        approaches: {
+            force: "Force",
+            finesse: "Finesse",
+            resilience: "Resilience"
+        },
         social: ["presence", "manipulation", "composure"],
         mental: ["intellect", "cunning", "resolve"],
         physical: ["might", "dexterity", "stamina"],
-        presence: {label: "Presence"},
-        manipulation: {label: "Manipulation"},
-        composure: {label: "Composure"},
-        intellect: {label: "Intellect"},
-        cunning: {label: "Cunning"},
-        resolve: {label: "Resolve"},
-        might: {label: "Might"},
-        dexterity: {label: "Dexterity"},
-        stamina: {label: "Stamina"}
+        force: ["presence", "intellect", "might"],
+        finesse: ["manipulation", "cunning", "dexterity"],
+        resilience: ["composure", "resolve", "stamina"],
+
     },
     SKILLS: {}
 };
