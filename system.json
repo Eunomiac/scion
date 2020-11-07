@@ -7,9 +7,13 @@
   "compatibleCoreVersion": "0.7.5",
   "templateVersion": 2,
   "author": "Ryan West",
-  "esmodules": ["module/scion.js"],
-  "styles": ["css/scion.css"],
-  "scripts": [],
+  "esmodules": [
+    "module/external/underscore/underscore-esm-min.js",
+    "module/scion.js"
+  ],
+  "styles": [
+    "css/scion.css"
+  ],
   "packs": [],
   "languages": [
     {

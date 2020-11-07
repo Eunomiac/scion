@@ -15,6 +15,7 @@
     --fontWeightTitle: normal;
     --textTransformTitle: none;
     --fontSizeTitle: 2.5rem;
+    --paddingTitle: 0;
     --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
     --fontColorSubTitle: var(--fontColorTitle);
@@ -49,6 +50,9 @@
     --borderBottomHeading: 1px solid var(--fontColorHeading);
 }
 
+.aesir {
+    --fontFamilyTitle: "Amarante";
+}
 .netjer {
     $matteColor: #f6f0e2;
     $headingColor1: #554a39;
@@ -62,6 +66,12 @@
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
+
+    --scaleX: #{scale-color($accentColor, $lightness: 100%, $saturation: 100%)};
+    --scale9: #{scale-color($accentColor, $lightness: 90%, $saturation: 90%)};
+    --scale8: #{scale-color($accentColor, $lightness: 80%, $saturation: 80%)};
+    --scale7: #{scale-color($accentColor, $lightness: 70%, $saturation: 70%)};
+    --scale6: #{scale-color($accentColor, $lightness: 60%, $saturation: 60%)};
     
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Yatra One";
@@ -78,6 +88,9 @@
 
 .orisha {
     --bgImage: url("../images/Orisha.png");
+    --fontFamilyTitle: "Finger Paint";
+    --fontSizeTitle: 2rem;
+    --paddingTitle: 0 0 0.1rem 0;
 }
 
 .tuathaDeDanann {

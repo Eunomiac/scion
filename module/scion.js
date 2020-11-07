@@ -1,5 +1,7 @@
 // #region Import Modules
+// import _, {map} from "./external/underscore/underscore-esm-min";
 import * as U from "./data/utils.js";
+// import "../scripts/inline/dragula.js";
 import {scionSystemData} from "./data/constants.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
@@ -11,6 +13,8 @@ import {preloadHandlebarsTemplates} from "./templates.js";
 // #region Hook: Initialization
 Hooks.once("init", async () => {
     CONFIG.scion = scionSystemData;
+    console.log("INITIALIZING!");
+    console.log(CONFIG.scion);
 
     game.scion = {
         ScionActor,
@@ -31,14 +35,6 @@ Hooks.once("init", async () => {
     preloadHandlebarsTemplates();
 
     // #region Handlebar Helpers
-    Handlebars.registerHelper("concat", (...args) => {
-        let outStr = "";
-        for (const arg in args)
-            if (typeof args[arg] !== "object")
-                outStr += args[arg];
-        return outStr;
-    });
-
     Handlebars.registerHelper("display", (...args) => {
         const [path, key] = args;
         return U.getValue(CONFIG.scion, `${path}.${key}`, "label");

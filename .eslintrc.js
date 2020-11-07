@@ -146,6 +146,7 @@ module.exports = {
     reportUnusedDisableDirectives: true,
     globals: {
         $: "readonly",
+        dragula: "readonly",
         CONFIG: "readonly",
         DEFAULT_TOKEN: "readonly",
         game: "readonly",

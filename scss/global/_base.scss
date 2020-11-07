@@ -8,7 +8,12 @@ select {
     padding: 0px;
     background-color: transparent;
     border: none;
-    box-shadow: none;    
+    box-shadow: none;
+
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    }
 }
 
 .readonly {
@@ -27,6 +32,24 @@ select {
     border: none;
     font-size: 0;    
     grid-gap: 0;
+
+    &.span1col {grid-column: span 1}
+    &.span2col {grid-column: span 2}
+    &.span3col {grid-column: span 3}
+    &.span4col {grid-column: span 4}
+    &.span5col {grid-column: span 5}
+    &.span6col {grid-column: span 6}
+    &.span7col {grid-column: span 7}
+    &.span8col {grid-column: span 8}
+
+    &.span1row {grid-row: span 1}
+    &.span2row {grid-row: span 2}
+    &.span3row {grid-row: span 3}
+    &.span4row {grid-row: span 4}
+    &.span5row {grid-row: span 5}
+    &.span6row {grid-row: span 6}
+    &.span7row {grid-row: span 7}
+    &.span8row {grid-row: span 8}
 }
 
 .flex,
@@ -66,10 +89,10 @@ select {
     }
 }
 
-.dot.full {
-
-}
-
-.dot.unspent {
-
+.edit {
+    &:focus {
+        box-shadow: none;
+        border: none;
+        outline: none;
+    }
 }

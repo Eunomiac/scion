@@ -123,18 +123,17 @@
                 .charName {
                     grid-area: charName;
                     pointer-events: all;
-                    input[type="text"] { 
-                        color: var(--fontColorTitle);
-                        background-color: var(--bgColorTitle);
-                        font-family: var(--fontFamilyTitle);
-                        font-style: var(--fontStyleTitle);
-                        font-variant: var(--fontVariantTitle);
-                        font-weight: var(--fontWeightTitle);
-                        text-transform: var(--textTransformTitle);
-                        font-size: var(--fontSizeTitle);
-                        text-shadow: var(--textShadowTitle);
-                        text-align: center;
-                    }
+                    color: var(--fontColorTitle);
+                    background-color: var(--bgColorTitle);
+                    font-family: var(--fontFamilyTitle);
+                    font-style: var(--fontStyleTitle);
+                    font-variant: var(--fontVariantTitle);
+                    font-weight: var(--fontWeightTitle);
+                    text-transform: var(--textTransformTitle);
+                    font-size: var(--fontSizeTitle);
+                    text-shadow: var(--textShadowTitle);
+                    padding: var(--paddingTitle);
+                    text-align: center;
                 }
                 .healthDisplay {
                     grid-area: healthDisplay;
@@ -158,8 +157,7 @@
                         line-height: 1.5rem;
                     }
                 }
-                .title,
-                .title input[type="text"] {
+                .title {
                     grid-area: title;
                     pointer-events: all;
                     color: var(--fontColorSubSubTitle);
@@ -200,20 +198,66 @@
                     line-height: 1.5rem;
                 }
 
-                .settings {
-                    flex-flow: column nowrap;
-                    div.flex {
-                        height: auto;
-                        flex-flow: row wrap;
-                        justify-content: space-between;
-                        align-items: flex-start;
-                        align-content: flex-start;
+                .settings {      
+                    height: 100%;
+                    width: 100%;              
+                    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+                    grid-template-rows: 2rem 2rem 2rem 2rem;
+                    row-gap: 1rem;
 
-                        select {
-                            height: auto;
-                            width: auto;
+                    div.grid {
+                        height: 100%;
+                        width: 100%;
+
+                        &.flex {
+                            flex-flow: row nowrap;
+                            justify-content: space-evenly;
+                            align-items: center;
+
+                            div {
+                                width: 25%;
+                                height: 100%;
+                            }
+                        }
+
+                        .container {
+                            background-color: rgba(0,0,0,0.1);
+                            border: 3px inset brown;
+                            border-radius: 19px;
+                            div {
+                                display: inline-block;
+                                width: 30%;
+                                margin: 0px 1.5%;
+                                color: white;
+                                font-size: 1.4rem;
+                                font-weight: bold;
+                                text-align: center;
+                                line-height: 26px;
+                                border: 3px outset grey;
+                                box-shadow: 2px 2px 2px grey;
+                                background-image: linear-gradient(0deg,rgba(0,0,0,0.7),transparent);
+                                font-family: var(--fontFamilySubTitle);
+                                color: var(--bgColorStrong);
+                                border-radius: 1rem;
+                                text-shadow: 1px 1px 1px rgba(255,255,255,0.2), -1px -1px 1px rgba(0,0,0,1);
+                            }
+                            .red {background-color: var(--scaleX);}
+                            .blue {background-color: var(--scale8);}
+                            .green {background-color: var(--scale6);}
                         }
                     }
+
+                    select {
+                        color: var(--fontColorBody);
+                        font-family: var(--fontFamilyBody);
+                        font-size: var(--fontSizeBody);
+                        font-weight: bold;
+                        border-radius: 1rem;
+                        background-color: rgba(0,0,0,0.2);
+                        border: inset 3px brown;
+
+                    }
+
                 }
                 .front {
                     grid: "attributes paths"  17rem

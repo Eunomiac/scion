@@ -17,6 +17,14 @@ select {
   box-shadow: none;
 }
 
+textarea:focus,
+input[type="text"]:focus,
+select:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+
 .readonly {
   pointer-events: none;
   resize: none;
@@ -33,6 +41,86 @@ select {
   border: none;
   font-size: 0;
   grid-gap: 0;
+}
+
+.grid.span1col,
+.tab[data-tab].active.grid.span1col {
+  grid-column: span 1;
+}
+
+.grid.span2col,
+.tab[data-tab].active.grid.span2col {
+  grid-column: span 2;
+}
+
+.grid.span3col,
+.tab[data-tab].active.grid.span3col {
+  grid-column: span 3;
+}
+
+.grid.span4col,
+.tab[data-tab].active.grid.span4col {
+  grid-column: span 4;
+}
+
+.grid.span5col,
+.tab[data-tab].active.grid.span5col {
+  grid-column: span 5;
+}
+
+.grid.span6col,
+.tab[data-tab].active.grid.span6col {
+  grid-column: span 6;
+}
+
+.grid.span7col,
+.tab[data-tab].active.grid.span7col {
+  grid-column: span 7;
+}
+
+.grid.span8col,
+.tab[data-tab].active.grid.span8col {
+  grid-column: span 8;
+}
+
+.grid.span1row,
+.tab[data-tab].active.grid.span1row {
+  grid-row: span 1;
+}
+
+.grid.span2row,
+.tab[data-tab].active.grid.span2row {
+  grid-row: span 2;
+}
+
+.grid.span3row,
+.tab[data-tab].active.grid.span3row {
+  grid-row: span 3;
+}
+
+.grid.span4row,
+.tab[data-tab].active.grid.span4row {
+  grid-row: span 4;
+}
+
+.grid.span5row,
+.tab[data-tab].active.grid.span5row {
+  grid-row: span 5;
+}
+
+.grid.span6row,
+.tab[data-tab].active.grid.span6row {
+  grid-row: span 6;
+}
+
+.grid.span7row,
+.tab[data-tab].active.grid.span7row {
+  grid-row: span 7;
+}
+
+.grid.span8row,
+.tab[data-tab].active.grid.span8row {
+  grid-row: span 8;
 }
 
 .flex,
@@ -77,6 +165,39 @@ select {
   border: solid 2px #5a0000;
   -webkit-box-shadow: 1px 1px 2px black;
   box-shadow: 1px 1px 2px black;
+}
+
+.edit:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80); */
+}
+
+.gu-hide {
+  display: none !important;
+}
+
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.gu-transit {
+  opacity: 0.2;
+  /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20); */
 }
 
 /* Layout */
@@ -238,9 +359,6 @@ select {
 .scion.actor .Character .main .header .charName {
   grid-area: charName;
   pointer-events: all;
-}
-
-.scion.actor .Character .main .header .charName input[type="text"] {
   color: var(--fontColorTitle);
   background-color: var(--bgColorTitle);
   font-family: var(--fontFamilyTitle);
@@ -250,6 +368,7 @@ select {
   text-transform: var(--textTransformTitle);
   font-size: var(--fontSizeTitle);
   text-shadow: var(--textShadowTitle);
+  padding: var(--paddingTitle);
   text-align: center;
 }
 
@@ -278,8 +397,7 @@ select {
   line-height: 1.5rem;
 }
 
-.scion.actor .Character .main .header .title,
-.scion.actor .Character .main .header .title input[type="text"] {
+.scion.actor .Character .main .header .title {
   grid-area: title;
   pointer-events: all;
   color: var(--fontColorSubSubTitle);
@@ -323,31 +441,81 @@ select {
 }
 
 .scion.actor .Character .main .sheet-body .settings {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+  grid-template-rows: 2rem 2rem 2rem 2rem;
+  row-gap: 1rem;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.flex {
-  height: auto;
+.scion.actor .Character .main .sheet-body .settings div.grid {
+  height: 100%;
+  width: 100%;
+}
+
+.scion.actor .Character .main .sheet-body .settings div.grid.flex {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.flex select {
-  height: auto;
-  width: auto;
+.scion.actor .Character .main .sheet-body .settings div.grid.flex div {
+  width: 25%;
+  height: 100%;
+}
+
+.scion.actor .Character .main .sheet-body .settings div.grid .container {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 3px inset brown;
+  border-radius: 19px;
+}
+
+.scion.actor .Character .main .sheet-body .settings div.grid .container div {
+  display: inline-block;
+  width: 30%;
+  margin: 0px 1.5%;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 26px;
+  border: 3px outset grey;
+  -webkit-box-shadow: 2px 2px 2px grey;
+  box-shadow: 2px 2px 2px grey;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(black), to(transparent));
+  background-image: -o-linear-gradient(bottom, black, transparent);
+  background-image: linear-gradient(0deg, black, transparent);
+  font-family: var(--fontFamilyTitle);
+  color: var(--bgColorStrong);
+}
+
+.scion.actor .Character .main .sheet-body .settings div.grid .container .red {
+  background-color: var(--scaleX);
+}
+
+.scion.actor .Character .main .sheet-body .settings div.grid .container .blue {
+  background-color: var(--scale8);
+}
+
+.scion.actor .Character .main .sheet-body .settings div.grid .container .green {
+  background-color: var(--scale6);
+}
+
+.scion.actor .Character .main .sheet-body .settings select {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: inset 3px brown;
 }
 
 .scion.actor .Character .main .sheet-body .front {
@@ -509,6 +677,7 @@ select {
   --fontWeightTitle: normal;
   --textTransformTitle: none;
   --fontSizeTitle: 2.5rem;
+  --paddingTitle: 0;
   --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontColorSubTitle: var(--fontColorTitle);
   --bgColorSubTitle: var(--bgColorTitle);
@@ -540,12 +709,21 @@ select {
   --borderBottomHeading: 1px solid var(--fontColorHeading);
 }
 
+.scion.actor .aesir {
+  --fontFamilyTitle: "Amarante";
+}
+
 .scion.actor .netjer {
   --fontColorBody: #2d2d2f;
   --bgImage: url("../images/Netjer.png");
   --bgColorMatte: #f6f0e2;
   --bgColorSoft: #fdd8b7;
   --bgColorStrong: #f99c4b;
+  --scaleX: white;
+  --scale9: #ffebda;
+  --scale8: #fed7b5;
+  --scale7: #fdc491;
+  --scale6: #fcb06d;
   --fontColorTitle: #554a39;
   --fontFamilyTitle: "Yatra One";
   --fontColorSubTitle: #6e4a28;
@@ -558,6 +736,9 @@ select {
 
 .scion.actor .orisha {
   --bgImage: url("../images/Orisha.png");
+  --fontFamilyTitle: "Finger Paint";
+  --fontSizeTitle: 2rem;
+  --paddingTitle: 0 0 0.1rem 0;
 }
 
 .scion.actor .tuathaDeDanann {

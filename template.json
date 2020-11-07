@@ -22,18 +22,15 @@
                 "priorities": {
                     "primary": {
                         "unspentDots": 6,
-                        "arena": "",
-                        "attributes": []
+                        "arena": ""
                     },
                     "secondary": {
                         "unspentDots": 4,
-                        "arena": "",
-                        "attributes": []
+                        "arena": ""
                     },
                     "tertiary": {
                         "unspentDots": 2,
-                        "arena": "",
-                        "attributes": []
+                        "arena": ""
                     }
                 },
                 "dotsPurchased": 0,
@@ -44,81 +41,63 @@
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "mental",
-                    "approach": "force"
+                    "modifier": []
                 },
                 "cunning": {
                     "label": "Cunning",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "mental",
-                    "approach": "finesse"
+                    "modifier": []
                 },
                 "resolve": {
                     "label": "Resolve",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "mental",
-                    "approach": "resilience"
+                    "modifier": []
                 },
                 "might": {
                     "label": "Might",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "physical",
-                    "approach": "force"
+                    "modifier": []
                 },
                 "dexterity": {
                     "label": "Dexterity",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "physical",
-                    "approach": "finesse"
+                    "modifier": []
                 },
                 "stamina": {
                     "label": "Stamina",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "physical",
-                    "approach": "resilience"
+                    "modifier": []
                 },
                 "presence": {
                     "label": "Presence",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "social",
-                    "approach": "force"
+                    "modifier": []
                 },
                 "manipulation": {
                     "label": "Manipulation",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "social",
-                    "approach": "finesse"
+                    "modifier": []
                 },
                 "composure": {
                     "label": "Composure",
                     "min": 0,
                     "value": 1,
                     "max": 5,
-                    "modifier": [],
-                    "arena": "social",
-                    "approach": "resilience"
+                    "modifier": []
                 }                
             },
             "skills": {

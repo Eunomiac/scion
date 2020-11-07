@@ -13,15 +13,15 @@
 
             {{!-- Sheet Header --}}
             <div class="header grid">
-                <div class="title text"><input name="data.divineTitle" type="text" value="{{data.divineTitle}}" placeholder="" /></div>
-                <div class="charName text"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></div>
-                <div class="parentage text">{{#if data.parentageLine}}<textarea class="readonly" name="parentage" readonly >{{data.parentageLine}}</textarea>{{/if}}</div>
+                <div class="title text edit" data-path="data.divineTitle"></div>
+                <div class="charName text edit" data-path="actor.name"></div>
+                <div class="parentage text"><textarea class="readonly" name="data.parentageLine" readonly >{{data.parentageLine}}</textarea></div>
             </div>
                 <!-- <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>     -->      
                 
             <section class="sheet-body">
                 {{!-- Settings Tab --}}
-                <div class="tab settings flex {{blocks.chargen.class}}" data-group="primary" data-tab="settings">
+                <div class="tab settings grid {{blocks.chargen.class}}" data-group="primary" data-tab="settings">
                     {{> (blocks.chargen.template) }}
                 </div>
                 {{!-- Front Tab --}}
@@ -35,10 +35,10 @@
                                 {{/for}}
                             </div>
                         {{/if}}
-                        {{#each data.priorities as |category key|}}
+                        {{#each data.priorities as |category key|}} 
                             <div class="attrBlock {{key}} flex">
                                 {{#if category.unspentDots}}
-                                    <div class="dotGrabBin dotDropBin flex">
+                                    <div class="dotGrabBin dotDropBin flex"> 
                                         {{#for category.unspentDots}}
                                             <span class="dot unspent" data-dottype="{{key}}" data-trait="priorities.{{key}}.unspentDots"></span>
                                         {{/for}}
