@@ -17,88 +17,63 @@ export class ScionActorSheet extends ActorSheet {
     get template() {
         return `systems/scion/templates/actor/${this.object.data.type}-sheet.hbs`;
     }
+    get charGenStep() {
+        const actorData = this.object.data.data;
+        if (actorData.concept && actorData.genesis && actorData.patron.name)
+            return 2;
+        return 1;
+    }
 
     getData() {
         const data = super.getData();
 
         data.config = CONFIG.scion;
-
-        const actorData = data.data;
-        const systemData = data.config;
-
-        this._updateChargen(data, false);
-
+        const [actorData, scionData] = [data.data, data.config];
+        actorData.charGen = actorData.charGen || {};
         data.blocks = {
             chargen: {
                 class: "charGen",
-                template: () => "systems/scion/templates/actor/actor-chargen.hbs"
+                template: () => `systems/scion/templates/actor/actor-chargen-step${actorData.charGen.charGenStep || 1}.hbs`
             }
         };
 
-        console.log({["@@ GETDATA: DATA @@"]: data});
+        console.log(this.object.data.data);
+        // Update Patronage Subheader
+        const {genesis, pantheon, patron} = actorData;
+        if (pantheon && patron.name && scionData.PANTHEONS[pantheon].members.includes(patron.name)) {
+            if (genesis) {
+                const mantle = scionData.GODS[patron.name].mantle ? U.localize(scionData.GODS[patron.name].mantle) : "";
+                actorData.patronageLine = U.localize(
+                    `scion.geneses.${genesis}Line`,
+                    {
+                        divinePatronName: U.localize(scionData.GODS[patron.name].label),
+                        mantleDelim: mantle ? ", " : "",
+                        divinePatronMantle: mantle
+                    }
+                );
+            } else {
+                actorData.patronageLine = "";
+            }
+        } else {
+            actorData.patron.name = "";
+            actorData.patronageLine = "";
+        }
 
-        return data; // handlebar access: {{data.SYSTEMDATA}}
-    }
-
-    _updateChargen(data = this.actor.data, isUpdatingActor = true) {
-        const actorData = data.data;
-
-        data.CHARGEN = {
-            tierList: U.makeDict(CONFIG.scion.TIERS),
-            pantheonList: U.makeDict(CONFIG.scion.PANTHEONS),
-            heritageList: U.makeDict(CONFIG.scion.HERITAGES),
-            parentList: actorData.pantheon
-                ? U.makeDict(
-                    CONFIG.scion.PANTHEONS[actorData.pantheon].members,
-                    undefined,
-                    (v) => CONFIG.scion.GODS[v],
-                    (k, v) => v
-                )
-                : false,
-            showAttributePriorities: Boolean(actorData.heritage),
-            arenaList: U.makeDict(
-                CONFIG.scion.ATTRIBUTES.arenas,
-                undefined,
-                (v, k) => U.localize(`scion.game.${k}`)
-            ),
-            showFavoredApproach: Object.keys(CONFIG.scion.ATTRIBUTES.priorities).reduce((allSet, x) => allSet && Boolean(actorData.priorities[x].arena), true),
-            favoredApproachList: U.makeDict(
-                CONFIG.scion.ATTRIBUTES.approaches,
-                undefined,
-                (v, k) => U.localize(`scion.game.${k}`)
-            )
-        };
-
-        if (actorData.heritage
-            && actorData.pantheon
-            && actorData.parent.name
-            && (CONFIG.scion.PANTHEONS[actorData.pantheon].members.includes(actorData.parent.name))) {
-            const mantle = CONFIG.scion.GODS[actorData.parent.name].mantle ? U.localize(CONFIG.scion.GODS[actorData.parent.name].mantle).trim() : "";
-            actorData.parentageLine = U.localize(
-                `scion.heritages.${actorData.heritage}Line`, {
-                    divineParentName: U.localize(CONFIG.scion.GODS[actorData.parent.name].label),
-                    mantleDelim: mantle ? ", " : "",
-                    divineParentMantle: mantle
-                }
+        // Update Patrons List
+        if (pantheon)
+            actorData.charGen.patronList = U.makeDict(
+                scionData.PANTHEONS[pantheon].members,
+                (v) => U.localize(`scion.gods.${v}`),
+                (k, v) => v
             );
-        } else {
-            actorData.parent.name = "";
-            actorData.parent.mantle = "";
-            actorData.parentageLine = "";
-        }
 
-        if (isUpdatingActor && actorData.favoredApproach) {
-            console.log({"@@@ UPDATING CHARGEN FULLY @@@": this, "@@ DATA @@": data, "@@ ACTOR DATA @@": actorData});
-            if (actorData.favoredApproach)
-                this._prepareAttributes(actorData);
-            else
-                this._resetAttributes();
-        } else {
-            console.log({"@@@ UPDATING CHARGEN (getData) @@@": this, "@@ DATA @@": data, "@@ ACTOR DATA @@": actorData});
-        }
+        // Update Character Creation Step (or false if character finished)
+        actorData.charGen.charGenStep = this.charGenStep;
+
+        return data;
     }
 
-    _prepareAttributes(actorData) {
+    _initializeAttributes(actorData) {
         const unspentDots = {
             general: parseInt(actorData.dotsPurchased),
             primary: 0,
@@ -109,9 +84,10 @@ export class ScionActorSheet extends ActorSheet {
         // First, adjust minimum and set Favored Approach attributes:
         for (const attribute of CONFIG.scion.ATTRIBUTES.all) {
             if (CONFIG.scion.ATTRIBUTES.approaches[actorData.favoredApproach].includes(attribute)) {
-                actorData[attribute].value = Math.max(actorData[attribute].value, 3);
+                actorData[attribute].value = 3;
                 actorData[attribute].min = 3;
             } else {
+                actorData[attribute].value = 1;
                 actorData[attribute].min = 1;
             }
             Object.assign(updateData, U.getUpdateData(this.actor, attribute, actorData[attribute].value, "value", true));
@@ -119,7 +95,8 @@ export class ScionActorSheet extends ActorSheet {
         }
 
         // For each Arena, calculate unspentDots:
-        for (const [priority, numDots] of Object.entries(CONFIG.scion.ATTRIBUTES.priorities))
+        for (const [priority, data] of Object.entries(CONFIG.scion.ATTRIBUTES.priorities)) {
+            const numDots = data.startingDots;
             if (actorData.priorities[priority].arena in CONFIG.scion.ATTRIBUTES.arenas) {
                 const attrList = CONFIG.scion.ATTRIBUTES.arenas[actorData.priorities[priority].arena];
                 const assignedDots = attrList.reduce((tot, attr) => tot + actorData[attr].value - 1, 0);
@@ -129,6 +106,7 @@ export class ScionActorSheet extends ActorSheet {
                     unspentDots[priority] = 0;
                 }
             }
+        }
         Object.assign(updateData, U.getUpdateData(this.actor, "generalUnspentDots", unspentDots.general));
         Object.assign(updateData, U.getUpdateData(this.actor, "priorities.primary.unspentDots", unspentDots.primary));
         Object.assign(updateData, U.getUpdateData(this.actor, "priorities.secondary.unspentDots", unspentDots.secondary));
@@ -156,30 +134,58 @@ export class ScionActorSheet extends ActorSheet {
 
     activateListeners(html) {
         super.activateListeners(html);
+
         // Everything below here is only needed if the sheet is editable
         if (!this.options.editable)
             return;
 
-        // Content-Editable Divs
-        const [editClickOnHandler, editClickOffHandler] = [
-            (event) => this._onEditClickOn(event),
-            (event) => this._onEditClickOff(event)
-        ];
-
+        // #region CONTENT-EDITABLE DIVS
         html.find(".edit").each((i, element) => {
             const data = element.dataset;
             element.setAttribute("contenteditable", false);
-            element.addEventListener("click", editClickOnHandler, false);
-            element.addEventListener("blur", editClickOffHandler, false);
+            element.addEventListener("click", (event) => this._onEditClickOn(event), false);
+            element.addEventListener("blur", (event) => this._onEditClickOff(event), false);
             if ("path" in data)
                 element.innerHTML = U.getValue(data.path.startsWith("actor") ? this : this.actor.data.data, data.path);
         });
+        // #endregion
 
-        // #region CHARGEN (SETTINGS) TAB
+        // #region CHARGEN
+        // > Listen for "change" on edit
         html.find(".chargen").each((i, element) => {
             element.addEventListener("change", () => {
-                this._updateChargen();
+                // this._updateChargen(undefined, undefined, element.className.includes(" priority"));
             }, false);
+        });
+
+        // > Dragula: Sort Attribute Priorities
+
+        /* FOR SORTING ON A GRID
+            1) Assign each grid a number, moving in an s-formation so all cells move on a track.
+            2) Be able to get closest grid of dragged element (that's where mirror snaps to)
+            3) Figure out which grids have to move to make room
+            4) Animate all moving cells
+        */
+
+        const priorityContainer = html.find("#prioritySort")[0];
+        const drake = dragula(
+            [priorityContainer],
+            {
+                direction: "horizontal",
+                mirrorContainer: html.find(".sortStorer")[0]
+            }
+        );
+        drake.on("drop", () => {
+            console.log({["@@ DRAKE DROP @@"]: this});
+            const prioritiesContainer = html.find("#prioritySort")[0];
+            const children = Array.from(prioritiesContainer.children).map((x) => ["mental", "physical", "social"].find((xx) => Array.from(x.classList).includes(xx)));
+            const updateData = {};
+            children.forEach((x, i) => {
+                updateData[`data.priorities.${Object.keys(CONFIG.scion.ATTRIBUTES.priorities)[i]}.arena`] = x;
+            });
+            console.log(updateData);
+            this.actor.update(updateData);
+            // this._updateChargen();
         });
         // #endregion
     }

@@ -56,10 +56,6 @@
     }
 
     .Character {
-        @keyframes characterSheet {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }        
         .main {
             height: 100%;
             width: 100%;
@@ -68,8 +64,6 @@
             background-size: 100%;
             background-repeat: repeat-y;
             opacity: 1;        
-            // animation-name: characterSheet;
-            // animation-duration: 1s;
 
             grid: ". nav ." 1rem
                   "header header header" 6rem
@@ -104,123 +98,38 @@
                 .item:hover { background-color: var(--bgColorSoft); }
                 .item.active { background-color: var(--bgColorStrong); }
                 .item.icon:hover { background-color: transparent; color: var(--fontColorSubTitle); }
-                .item.icon.active { background-color: transparent; color: var(--fontColorSubSubTitle); }
+                .item.icon.active { background-color: transparent; color: var(--fontColorSurTitle); }
             }
             .header {
                 grid-area: header;
                 grid:   ". . ." 0.5rem
-                        ". title ." 1.5rem
+                        ". divineTitle ." 1.5rem
                         ". charName ." 2.5rem
-                        "parentage parentage parentage" 1.5rem
+                        "patronage patronage patronage" 1.5rem
                         /12% 1fr 12%;
                 grid-gap: 0;
 
-                .legendDisplay {
-                    grid-area: legendDisplay;
-                    pointer-events: all;
-                    display: none;
-                }
-                .charName {
-                    grid-area: charName;
-                    pointer-events: all;
-                    color: var(--fontColorTitle);
-                    background-color: var(--bgColorTitle);
-                    font-family: var(--fontFamilyTitle);
-                    font-style: var(--fontStyleTitle);
-                    font-variant: var(--fontVariantTitle);
-                    font-weight: var(--fontWeightTitle);
-                    text-transform: var(--textTransformTitle);
-                    font-size: var(--fontSizeTitle);
-                    text-shadow: var(--textShadowTitle);
-                    padding: var(--paddingTitle);
-                    text-align: center;
-                }
-                .healthDisplay {
-                    grid-area: healthDisplay;
-                    pointer-events: all;
-                    display: none;
-                }
-                .parentage {
-                    grid-area: parentage;
-                    pointer-events: all;
-                    textarea {
-                        color: var(--fontColorSubTitle);
-                        background-color: var(--bgColorSubTitle);
-                        font-family: var(--fontFamilySubTitle);
-                        font-style: var(--fontStyleSubTitle);
-                        font-variant: var(--fontVariantSubTitle);
-                        font-weight: var(--fontWeightSubTitle);
-                        text-transform: var(--textTransformSubTitle);
-                        font-size: var(--fontSizeSubTitle);
-                        text-shadow: var(--textShadowSubTitle);
-                        text-align: center;
-                        line-height: 1.5rem;
-                    }
-                }
-                .title {
-                    grid-area: title;
-                    pointer-events: all;
-                    color: var(--fontColorSubSubTitle);
-                    background-color: var(--bgColorSubSubTitle);
-                    font-family: var(--fontFamilySubSubTitle);
-                    font-style: var(--fontStyleSubSubTitle);
-                    font-variant: var(--fontVariantSubSubTitle);
-                    font-weight: var(--fontWeightSubSubTitle);
-                    text-transform: var(--textTransformSubSubTitle);
-                    font-size: var(--fontSizeSubSubTitle);
-                    text-shadow: var(--textShadowSubSubTitle);
-                    text-align: center;
-                    line-height: 1.5rem;
-                }
-                .xpDisplay {
-                    grid-area: xpDisplay;
-                    pointer-events: all;
-                    display: none;
-                }
+                div { pointer-events: all; }
+
+                .divineTitle { grid-area: divineTitle; }
+                .charName { grid-area: charName; }
+                .patronage { grid-area: patronage; }
             }
             .sheet-body {
                 grid-area: body;
                 pointer-events: all;
-                
-                .heading {
-                    width: 100%;
-                    color: var(--fontColorHeading);
-                    background-color: var(--bgColorHeading);
-                    font-family: var(--fontFamilyHeading);
-                    font-style: var(--fontStyleHeading);
-                    font-variant: var(--fontVariantHeading);
-                    font-weight: var(--fontWeightHeading);
-                    text-transform: var(--textTransformHeading);
-                    font-size: var(--fontSizeHeading);
-                    text-shadow: var(--textShadowHeading);
-                    border-bottom: var(--borderBottomHeading);
-                    text-align: left;
-                    line-height: 1.5rem;
-                }
 
-                .settings {      
-                    height: 100%;
-                    width: 100%;              
+                .settings {            
                     grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
-                    grid-template-rows: 2rem 2rem 2rem 2rem;
-                    row-gap: 1rem;
+                    grid-template-rows: 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.5rem 2rem;
+                    row-gap: 0.25rem;
 
                     div.grid {
-                        height: 100%;
-                        width: 100%;
-
-                        &.flex {
-                            flex-flow: row nowrap;
-                            justify-content: space-evenly;
-                            align-items: center;
-
-                            div {
-                                width: 25%;
-                                height: 100%;
-                            }
+                        padding: 0 0.25rem;
+                        &.edit {
+                            line-height: 1.75rem;
                         }
-
-                        .container {
+                        .dragContainer {
                             background-color: rgba(0,0,0,0.1);
                             border: 3px inset brown;
                             border-radius: 19px;
@@ -247,16 +156,7 @@
                         }
                     }
 
-                    select {
-                        color: var(--fontColorBody);
-                        font-family: var(--fontFamilyBody);
-                        font-size: var(--fontSizeBody);
-                        font-weight: bold;
-                        border-radius: 1rem;
-                        background-color: rgba(0,0,0,0.2);
-                        border: inset 3px brown;
-
-                    }
+                    
 
                 }
                 .front {
@@ -318,12 +218,12 @@
                         .rightvirtue { grid-area: rightvirtue; }
                     }
                 }                    
-                .heritage {
-                    grid: "heritage heritage" 4rem
+                .genesis {
+                    grid: "genesis genesis" 4rem
                             "paths paths" 10rem
                             "virtues ." 2rem
                         / 1fr 1fr;
-                    .heritage {
+                    .genesis {
                         grid-area: attributes;
                     }
                     .paths {

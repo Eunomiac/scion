@@ -1,3 +1,6 @@
+export const baseConstants = {
+    noCapTitleCase: ["above", "after", "at", "below", "by", "down", "for", "from", "in", "onto", "of", "off", "on", "out", "to", "under", "up", "with", "for", "and", "nor", "but", "or", "yet", "so", "the", "an", "a"]
+};
 export const scionSystemData = {
     TIERS: {
         mortal: "scion.tiers.mortal",
@@ -11,8 +14,9 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.aesir",
             assetSkills: ["closeCombat", "occult"],
             pantheonPurview: "wyrd",
-            virtues: ["fatalism", "audacity"],
+            virtues: ["audacity", "fatalism"],
             scentTheDivine: "scion.scentTheDivine.aesir",
+            religion: "scion.religions.laukr",
             members: ["baldr", "bragi", "freya", "freyr", "frigg", "heimdall", "hel", "loki", "njörðr", "odin", "sif", "skaði", "thor", "tyr"],
             bookRef: "scion.books.hero",
             bookPage: 46
@@ -22,8 +26,9 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.deva",
             assetSkills: ["athletics", "survival"],
             pantheonPurview: "yoga",
-            virtues: ["pride", "dream"],
+            virtues: ["duty", "conscience"],
             scentTheDivine: "scion.scentTheDivine.deva",
+            religion: "scion.religions.hinduism",
             members: ["agni", "durga", "ganesha", "indra", "kali", "karttikeya", "lakshmi", "parvati", "sarasvati", "shiva", "surya", "varuna", "vishnu", "vishvakarman", "yamaraja"],
             bookRef: "scion.books.hero",
             bookPage: 58
@@ -33,8 +38,9 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.kami",
             assetSkills: ["culture", "persuasion"],
             pantheonPurview: "yaoyorozuNoKamigami",
-            virtues: ["egotism", "kinship"],
+            virtues: ["sincerety", "rightAction"],
             scentTheDivine: "scion.scentTheDivine.kami",
+            religion: "scion.religions.shinto",
             members: ["amaNoUzume", "amaterasu", "benzaiten", "bishamon", "ebisu", "fukurokuju", "hachiman", "hotei", "inari", "kisshōten", "ōkuninushi", "omoikane", "sarutahiko", "susanoO", "takemikazuchi", "tsukiyomi"],
             bookRef: "scion.books.hero",
             bookPage: 70
@@ -46,6 +52,7 @@ export const scionSystemData = {
             pantheonPurview: "cheval",
             virtues: ["balance", "justice"],
             scentTheDivine: "scion.scentTheDivine.loa",
+            religion: "scion.religions.vodou",
             members: ["baronCimetière", "baronLaCroix", "baronSamedi", "damballa", "ezili", "kalfu", "lasyren", "ogou", "papaLegba"],
             bookRef: "scion.books.hero",
             bookPage: 32
@@ -55,8 +62,9 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.manitou",
             assetSkills: ["medicine", "occult"],
             pantheonPurview: "dodaem",
-            virtues: ["sincerety", "rightAction"],
+            virtues: ["pride", "dream"],
             scentTheDivine: "scion.scentTheDivine.manitou",
+            religion: "scion.religions.midewiwin",
             members: ["biboonike", "cheebyAubOozoo", "geezhigoQuae", "ioskeha", "maudjeeKawiss", "muzzuKumikQuae", "nana", "pukawiss", "tawiscara", "winonah"],
             bookRef: "scion.books.hero",
             bookPage: 82
@@ -66,8 +74,9 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.netjer",
             assetSkills: ["academics", "occult"],
             pantheonPurview: "heku",
-            virtues: ["honor", "prowess"],
+            virtues: ["balance", "justice"],
             scentTheDivine: "scion.scentTheDivine.netjer",
+            religion: "scion.religions.kemeticism",
             members: ["anubis", "atum", "bastet", "hathor", "horus", "isis", "osiris", "ptah", "ra", "set", "sobek", "thoth", "upuaut"],
             bookRef: "scion.books.hero",
             bookPage: 94
@@ -77,7 +86,7 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.shen",
             assetSkills: ["academics", "leadership"],
             pantheonPurview: "tianming",
-            virtues: ["tradition", "innovation"],
+            virtues: ["yin", "yang"],
             scentTheDivine: "scion.scentTheDivine.shen",
             members: ["changE", "confucius", "doumu", "erlang", "fuxi", "guanYu", "guanshiyinPusa", "huangdi", "laozi", "nuwā", "princeNezha", "sunWukong", "yandiShennongshi"],
             bookRef: "scion.books.hero",
@@ -88,7 +97,7 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.teotl",
             assetSkills: ["culture", "empathy"],
             pantheonPurview: "nextlahualli",
-            virtues: ["conscience", "duty"],
+            virtues: ["hunger", "sacrifice"],
             scentTheDivine: "scion.scentTheDivine.teotl",
             members: ["chalchihuitlicue", "chantico", "chicoAndCenteo", "huehuecoyotl", "huītzilōpōchtli", "ītzpāpālōtl", "mictecacihuatl", "quetzalcoatl", "tezcatlipoca", "tlāloc", "xīpeTotēc", "xochipilli", "xochiquetzal", "xolotl"],
             bookRef: "scion.books.hero",
@@ -99,7 +108,7 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.theoi",
             assetSkills: ["empathy", "persuasion"],
             pantheonPurview: "metamorphosis",
-            virtues: ["yin", "yang"],
+            virtues: ["egotism", "kinship"],
             scentTheDivine: "scion.scentTheDivine.theoi",
             members: ["aphrodite", "apollo", "ares", "artemis", "athena", "demeter", "dionysus", "epona", "hades", "hecate", "hephaestus", "hera", "hermes", "hestia", "persephone", "poseidon", "zeus"],
             bookRef: "scion.books.hero",
@@ -110,7 +119,7 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.tuathaDeDanann",
             assetSkills: ["closeCombat", "culture"],
             pantheonPurview: "geasa",
-            virtues: ["hunger", "sacrifice"],
+            virtues: ["honor", "prowess"],
             scentTheDivine: "scion.scentTheDivine.tuathaDeDanann",
             members: ["aengus", "brigid", "dianCécht", "donn", "ériu", "goibniu", "lugh", "macLir", "midir", "nuada", "ogma", "theDagda", "morrigan"],
             bookRef: "scion.books.hero",
@@ -121,8 +130,9 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.nemetondevos",
             assetSkills: ["closeCombat", "survival"],
             pantheonPurview: "nemeton",
-            virtues: ["tradition", "innovation"],
+            virtues: ["memory", "purgation"],
             scentTheDivine: "scion.scentTheDivine.nemetondevos",
+            religion: "scion.religions.none",
             members: ["andarta", "belenos", "cernunnos", "esos", "gobannos", "nantosuelta", "nehalAndNodens", "sulis", "taranis"],
             bookRef: "scion.books.motw",
             bookPage: 38
@@ -132,8 +142,9 @@ export const scionSystemData = {
             description: "scion.pantheonDescriptions.orisha",
             assetSkills: ["medicine", "subterfuge"],
             pantheonPurview: "cheval",
-            virtues: ["memory", "purgation"],
+            virtues: ["tradition", "innovation"],
             scentTheDivine: "scion.scentTheDivine.orisha",
+            religion: "scion.religions.orisha",
             members: ["erinle", "èshùElègbará", "ìbejì", "morèmi", "obàtálá", "odùduwà", "ògún", "òrìshàOko", "òrúnmìlà", "òsanyìn", "oshóssí", "òshun", "oyaIyansan", "shàngó", "sònpònná", "yemojaOboto"],
             bookRef: "scion.books.hero",
             bookPage: 106
@@ -145,59 +156,10 @@ export const scionSystemData = {
             pantheonPurview: "asha",
             virtues: ["honesty", "freeWill"],
             scentTheDivine: "scion.scentTheDivine.yazata",
+            religion: "scion.religions.zoroastrianism",
             members: ["anahita", "ashi", "atar", "haoma", "hvareKhshaeta", "mangha", "mithra", "rashnu", "sraosha", "tishtrya", "vanant", "vataVayu", "verethragna", "zam", "zarathustra"],
             bookRef: "scion.books.motw",
             bookPage: 50
-        },
-        anunna: {
-            label: "scion.pantheons.anunna",
-            description: "scion.pantheonDescriptions.anunna",
-            assetSkills: ["culture", "leadership"],
-            pantheonPurview: "",
-            virtues: ["benefice", "authority"],
-            scentTheDivine: "scion.scentTheDivine.anunna",
-            members: [""],
-            bookRef: "scion.books.demigod"
-        },
-        apu: {
-            label: "scion.pantheons.apu",
-            description: "scion.pantheonDescriptions.apu",
-            assetSkills: ["culture", "leadership"],
-            pantheonPurview: "",
-            virtues: ["duty", "ambition"],
-            scentTheDivine: "scion.scentTheDivine.apu",
-            members: [""],
-            bookRef: "scion.books.demigod"
-        },
-        atua: {
-            label: "scion.pantheons.atua",
-            description: "scion.pantheonDescriptions.atua",
-            assetSkills: ["academics", "pilot"],
-            pantheonPurview: "",
-            virtues: ["respect", "wonder"],
-            scentTheDivine: "scion.scentTheDivine.atua",
-            members: [""],
-            bookRef: "scion.books.demigod"
-        },
-        bogovi: {
-            label: "scion.pantheons.bogovi",
-            description: "scion.pantheonDescriptions.bogovi",
-            assetSkills: ["culture", "survival"],
-            pantheonPurview: "dvoeverie",
-            virtues: ["found", "wayward"],
-            scentTheDivine: "scion.scentTheDivine.bogovi",
-            members: [""],
-            bookRef: "scion.books.demigod"
-        },
-        tengri: {
-            label: "scion.pantheons.tengri",
-            description: "scion.pantheonDescriptions.tengri",
-            assetSkills: ["culture", "pilot"],
-            pantheonPurview: "qut",
-            virtues: ["identity", "syncretism"],
-            scentTheDivine: "scion.scentTheDivine.tengri",
-            members: [""],
-            bookRef: "scion.books.demigod"
         }
     },
     GODS: {
@@ -208,7 +170,7 @@ export const scionSystemData = {
             bookRef: "scion.books.hero",
             bookPage: 46,
             callings: ["guardian", "liminal", "lover"],
-            purviews: ["beauty", "passion:Love", "passion:Peace", "health", "epicStamina", "sun"]
+            purviews: ["beauty", "passion:Love|Peace", "health", "epicStamina", "sun"]
         },
         bragi: {
             label: "scion.gods.bragi",
@@ -226,7 +188,7 @@ export const scionSystemData = {
             bookRef: "scion.books.hero",
             bookPage: 46,
             callings: ["lover", "guardian", "sage"],
-            purviews: ["beauty", "epicStamina", "death", "fertility", "fortune", "passion:Love", "passion:Lust", "war"]
+            purviews: ["beauty", "epicStamina", "fertility", "fortune", "passion:Love|Lust", "war"]
         },
         freyr: {
             label: "scion.gods.freyr",
@@ -262,7 +224,7 @@ export const scionSystemData = {
             bookRef: "scion.books.hero",
             bookPage: 46,
             callings: ["guardian", "judge", "liminal"],
-            purviews: ["death", "forge", "frost", "health", "passion:Fear", "passion:Disgust"]
+            purviews: ["death", "forge", "frost", "health", "passion:Fear|Disgust"]
         },
         loki: {
             label: "scion.gods.loki",
@@ -1768,11 +1730,11 @@ export const scionSystemData = {
             purviews: ["artistry:Poetry", "journeys", "order"]
         }
     },
-    HERITAGES: {
-        born: "scion.heritages.born",
-        created: "scion.heritages.created",
-        incarnation: "scion.heritages.incarnation",
-        chosen: "scion.heritages.chosen"
+    GENESES: {
+        born: "scion.geneses.born",
+        created: "scion.geneses.created",
+        incarnation: "scion.geneses.incarnation",
+        chosen: "scion.geneses.chosen"
     },
     ATTRIBUTES: {
         priorities: {

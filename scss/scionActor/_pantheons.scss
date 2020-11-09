@@ -3,10 +3,13 @@
     --bgColorMatte: #{$c-white};
     --bgImage: url("../images/Generic.png");
 
+    // Body Text
     --fontColorBody: #{$c-black};
     --fontFamilyBody: "#{$fontFamilyBodyDefault}";
     --fontSizeBody: 1rem;
+    --fontWeightBody: bold;
 
+    // Title: Character Name
     --fontColorTitle: #{$c-black};
     --bgColorTitle: transparent;
     --fontFamilyTitle: "#{$fontFamilyTitleDefault}";
@@ -16,8 +19,23 @@
     --textTransformTitle: none;
     --fontSizeTitle: 2.5rem;
     --paddingTitle: 0;
+    --lineHeightTitle: var(--fontSizeTitle);
     --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
 
+    // SurTitle: Divine Title
+    --fontColorSurTitle: var(--fontColorTitle);
+    --bgColorSurTitle: var(--bgColorTitle);
+    --fontFamilySurTitle: var(--fontFamilyBody);
+    --fontStyleSurTitle: normal;
+    --fontVariantSurTitle: normal;
+    --fontWeightSurTitle: normal;
+    --textTransformSurTitle: none;
+    --fontSizeSurTitle: 1.5rem;
+    --paddingSurTitle: 0;
+    --lineHeightSurTitle: var(--fontSizeSurTitle);
+    --textShadowSurTitle: var(--textShadowTitle);
+
+    // SubTitle: Divine Patronage
     --fontColorSubTitle: var(--fontColorTitle);
     --bgColorSubTitle: var(--bgColorTitle);
     --fontFamilySubTitle: "#{$fontFamilyTitleDefault}";
@@ -26,33 +44,69 @@
     --fontWeightSubTitle: bold;
     --textTransformSubTitle: none;
     --fontSizeSubTitle: 1rem;
+    --paddingSubTitle: 0;
+    --lineHeightSubTitle: var(--fontSizeSubTitle);
     --textShadowSubTitle: var(--textShadowTitle);
 
-    --fontColorSubSubTitle: var(--fontColorTitle);
-    --bgColorSubSubTitle: var(--bgColorTitle);
-    --fontFamilySubSubTitle: var(--fontFamilyBody);
-    --fontStyleSubSubTitle: normal;
-    --fontVariantSubSubTitle: normal;
-    --fontWeightSubSubTitle: normal;
-    --textTransformSubSubTitle: none;
-    --fontSizeSubSubTitle: 1.5rem;
-    --textShadowSubSubTitle: var(--textShadowTitle);
+    // Heading 1
+    --fontColorHeading1: var(--fontColorTitle);
+    --bgColorHeading1: transparent;
+    --fontFamilyHeading1: var(--fontFamilyTitle);
+    --fontStyleHeading1: normal;
+    --fontVariantHeading1: small-caps;
+    --fontWeightHeading1: normal;
+    --textTransformHeading1: none;
+    --fontSizeHeading1: 1.75rem;
+    --paddingHeading1: 0;
+    --lineHeightHeading1: var(--fontSizeHeading1);
+    --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+    --borderBottomHeading1: 2px solid var(--fontColorHeading1);
 
-    --fontColorHeading: var(--fontColorSubTitle);
-    --bgColorHeading: transparent;
-    --fontFamilyHeading: var(--fontFamilyBody);
-    --fontStyleHeading: normal;
-    --fontVariantHeading: normal;
-    --fontWeightHeading: bold;
-    --textTransformHeading: none;
-    --fontSizeHeading: 1rem;
-    --textShadowHeading: none;
-    --borderBottomHeading: 1px solid var(--fontColorHeading);
+    // Heading 2
+    --fontColorHeading2: var(--fontColorSubTitle);
+    --bgColorHeading2: transparent;
+    --fontFamilyHeading2: var(--fontFamilyBody);
+    --fontStyleHeading2: normal;
+    --fontVariantHeading2: normal;
+    --fontWeightHeading2: bold;
+    --textTransformHeading2: none;
+    --fontSizeHeading2: 1.25rem;
+    --paddingHeading2: 0;
+    --lineHeightHeading2: var(--fontSizeHeading2);
+    --textShadowHeading2: none;
+    --borderBottomHeading2: none;
+
+    // Heading 3
+    --fontColorHeading3: var(--fontColorSubTitle);
+    --bgColorHeading3: transparent;
+    --fontFamilyHeading3: var(--fontFamilyBody);
+    --fontStyleHeading3: normal;
+    --fontVariantHeading3: normal;
+    --fontWeightHeading3: bold;
+    --textTransformHeading3: none;
+    --fontSizeHeading3: 1rem;
+    --paddingHeading3: 0;
+    --lineHeightHeading3: var(--fontSizeHeading3);
+    --textShadowHeading3: none;
+    --borderBottomHeading3: none;
 }
 
 .aesir {
     --fontFamilyTitle: "Amarante";
 }
+
+// .deva { }
+
+// .kami { }
+
+.loa {
+    --bgImage: url("../images/Orisha.png");
+    --fontFamilyTitle: "Finger Paint";
+    --fontSizeTitle: 2rem;
+}
+
+// .manitou { }
+
 .netjer {
     $matteColor: #f6f0e2;
     $headingColor1: #554a39;
@@ -78,19 +132,27 @@
 
     --fontColorSubTitle: #{$headingColor2};
     --fontFamilySubTitle: "Reem Kufi";
+    --fontSizeSubTitle: 1.25rem;
+    --lineHeightSubTitle: 1.65rem;
 
-    --fontColorSubSubTitle: #{$headingColor1};
-    --fontWeightSubSubTitle: bold;
+    --fontColorSurTitle: #{$headingColor1};
+    --fontWeightSurTitle: bold;
 
-    --fontColorHeading: var(--fontColorSubTitle);
-    --borderBottomHeading: 1px solid var(--fontColorHeading);
+    --fontColorHeading1: var(--fontColorSubTitle);
+    --borderBottomHeading1: 1px solid var(--fontColorHeading);
 }
 
-.orisha {
-    --bgImage: url("../images/Orisha.png");
-    --fontFamilyTitle: "Finger Paint";
-    --fontSizeTitle: 2rem;
-    --paddingTitle: 0 0 0.1rem 0;
+// .shen { }
+
+.teotl {
+    --fontFamilyTitle: "Pirata One";
+ }
+
+.theoi {
+    --fontFamilyTitle: "Poiret One";
+    --fontWeightTitle: "bold";
+
+    --fontFamilySubTitle: "Della Respira";
 }
 
 .tuathaDeDanann {
@@ -107,14 +169,28 @@
     
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Berkshire Swash";
+    --fontColorHeading1: var(--fontColorTitle);
+    --fontFamilyHeading1: var(--fontFamilyTitle);
+    --borderBottomHeading1: 2px solid var(--fontColorTitle);
+    --fontVariantHeading1: normal;
     --fontSizeTitle: 2rem;
 
     --fontColorSubTitle: #{$headingColor2};
     --fontFamilySubTitle: "Della Respira";
     --fontStyleSubTitle: italic;
 
-    --fontColorSubSubTitle: #{$headingColor1};
-    --fontWeightSubSubTitle: bold;
+    --fontColorSurTitle: #{$headingColor1};
+    --fontWeightSurTitle: bold;
 
     --fontColorBody: #{$bodyColor};
 }
+
+// .nemetondevos { }
+
+.orisha {
+    --bgImage: url("../images/Orisha.png");
+    --fontFamilyTitle: "Finger Paint";
+    --fontSizeTitle: 2rem;
+}
+
+// .yazata { }

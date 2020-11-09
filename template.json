@@ -10,12 +10,12 @@
             },
             "divinity": {
                 "pantheon": "",
-                "parent": {
+                "patron": {
                     "name": "",
                     "mantle": ""
                 },
-                "heritage": "",
-                "parentageLine": "",
+                "genesis": "",
+                "patronageLine": "",
                 "divineTitle": ""
             },
             "attributes": {

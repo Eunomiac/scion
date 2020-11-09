@@ -12,13 +12,16 @@ import {preloadHandlebarsTemplates} from "./templates.js";
 
 // #region Hook: Initialization
 Hooks.once("init", async () => {
+    console.log("INITIALIZING SCION.JS ...");
     CONFIG.scion = scionSystemData;
-    console.log("INITIALIZING!");
-    console.log(CONFIG.scion);
 
     game.scion = {
         ScionActor,
-        ScionItem
+        ScionItem,
+        debug: {
+            isDebugging: true,
+            watchList: []
+        }
     };
 
     // Define custom Entity classes
@@ -61,7 +64,15 @@ Hooks.once("init", async () => {
 
 // #region Hook: Ready
 Hooks.once("ready", async () => {
-    // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-    // Hooks.on("hotbarDrop", (bar, data, slot) => createScionMacro(data, slot));
+    // Make Localized Dictionaries for Handlebar Select Options
+    CONFIG.scion.tierList = U.makeDict(CONFIG.scion.TIERS);
+    CONFIG.scion.pantheonList = U.makeDict(CONFIG.scion.PANTHEONS);
+    CONFIG.scion.genesisList = U.makeDict(CONFIG.scion.GENESES);
+    CONFIG.scion.favoredApproachList = U.makeDict(
+        CONFIG.scion.ATTRIBUTES.approaches,
+        (v, k) => U.localize(`scion.game.${k}`)
+    );
+
+    U.DB(CONFIG.scion, "config");
 });
 // #endregion

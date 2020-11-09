@@ -140,6 +140,7 @@ select:focus {
   color: var(--fontColorBody);
   font-family: var(--fontFamilyBody);
   font-size: var(--fontSizeBody);
+  font-weight: var(--fontWeightBody);
 }
 
 .dot {
@@ -167,11 +168,99 @@ select:focus {
   box-shadow: 1px 1px 2px black;
 }
 
+.edit {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: inset 3px brown;
+}
+
 .edit:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: none;
   outline: none;
+}
+
+.title {
+  color: var(--fontColorTitle);
+  background-color: var(--bgColorTitle);
+  font-family: var(--fontFamilyTitle);
+  font-style: var(--fontStyleTitle);
+  font-variant: var(--fontVariantTitle);
+  font-weight: var(--fontWeightTitle);
+  text-transform: var(--textTransformTitle);
+  font-size: var(--fontSizeTitle);
+  padding: var(--paddingTitle);
+  line-height: var(--lineHeightTitle);
+  text-shadow: var(--textShadowTitle);
+  text-align: center;
+  border: none;
+}
+
+.surTitle {
+  color: var(--fontColorSurTitle);
+  background-color: var(--bgColorSurTitle);
+  font-family: var(--fontFamilySurTitle);
+  font-style: var(--fontStyleSurTitle);
+  font-variant: var(--fontVariantSurTitle);
+  font-weight: var(--fontWeightSurTitle);
+  text-transform: var(--textTransformSurTitle);
+  font-size: var(--fontSizeSurTitle);
+  padding: var(--paddingSurTitle);
+  line-height: var(--lineHeightSurTitle);
+  text-shadow: var(--textShadowSurTitle);
+  text-align: center;
+  border: none;
+}
+
+.subTitle {
+  color: var(--fontColorSubTitle);
+  background-color: var(--bgColorSubTitle);
+  font-family: var(--fontFamilySubTitle);
+  font-style: var(--fontStyleSubTitle);
+  font-variant: var(--fontVariantSubTitle);
+  font-weight: var(--fontWeightSubTitle);
+  text-transform: var(--textTransformSubTitle);
+  font-size: var(--fontSizeSubTitle);
+  padding: var(--paddingSubTitle);
+  line-height: var(--lineHeightSubTitle);
+  text-shadow: var(--textShadowSubTitle);
+  text-align: center;
+  border: none;
+}
+
+.heading1 {
+  width: 100%;
+  color: var(--fontColorHeading1);
+  background-color: var(--bgColorHeading1);
+  font-family: var(--fontFamilyHeading1);
+  font-style: var(--fontStyleHeading1);
+  font-variant: var(--fontVariantHeading1);
+  font-weight: var(--fontWeightHeading1);
+  text-transform: var(--textTransformHeading1);
+  font-size: var(--fontSizeHeading1);
+  padding: var(--paddingHeading1);
+  line-height: var(--lineHeightHeading1);
+  text-shadow: var(--textShadowHeading1);
+  border-bottom: var(--borderBottomHeading1);
+}
+
+.heading2 {
+  color: var(--fontColorHeading2);
+  background-color: var(--bgColorHeading2);
+  font-family: var(--fontFamilyHeading2);
+  font-style: var(--fontStyleHeading2);
+  font-variant: var(--fontVariantHeading2);
+  font-weight: var(--fontWeightHeading2);
+  text-transform: var(--textTransformHeading2);
+  font-size: var(--fontSizeHeading2);
+  padding: var(--paddingHeading2);
+  line-height: var(--lineHeightHeading2);
+  text-shadow: var(--textShadowHeading2);
+  border-bottom: var(--borderBottomHeading2);
 }
 
 .gu-mirror {
@@ -269,24 +358,6 @@ select:focus {
   z-index: 1;
 }
 
-@-webkit-keyframes characterSheet {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes characterSheet {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .scion.actor .Character .main {
   height: 100%;
   width: 100%;
@@ -341,82 +412,29 @@ select:focus {
 
 .scion.actor .Character .main .sheet-tabs .item.icon.active {
   background-color: transparent;
-  color: var(--fontColorSubSubTitle);
+  color: var(--fontColorSurTitle);
 }
 
 .scion.actor .Character .main .header {
   grid-area: header;
-  grid: ". . ." 0.5rem ". title ." 1.5rem ". charName ." 2.5rem "parentage parentage parentage" 1.5rem /12% 1fr 12%;
+  grid: ". . ." 0.5rem ". divineTitle ." 1.5rem ". charName ." 2.5rem "patronage patronage patronage" 1.5rem /12% 1fr 12%;
   grid-gap: 0;
 }
 
-.scion.actor .Character .main .header .legendDisplay {
-  grid-area: legendDisplay;
+.scion.actor .Character .main .header div {
   pointer-events: all;
-  display: none;
+}
+
+.scion.actor .Character .main .header .divineTitle {
+  grid-area: divineTitle;
 }
 
 .scion.actor .Character .main .header .charName {
   grid-area: charName;
-  pointer-events: all;
-  color: var(--fontColorTitle);
-  background-color: var(--bgColorTitle);
-  font-family: var(--fontFamilyTitle);
-  font-style: var(--fontStyleTitle);
-  font-variant: var(--fontVariantTitle);
-  font-weight: var(--fontWeightTitle);
-  text-transform: var(--textTransformTitle);
-  font-size: var(--fontSizeTitle);
-  text-shadow: var(--textShadowTitle);
-  padding: var(--paddingTitle);
-  text-align: center;
 }
 
-.scion.actor .Character .main .header .healthDisplay {
-  grid-area: healthDisplay;
-  pointer-events: all;
-  display: none;
-}
-
-.scion.actor .Character .main .header .parentage {
-  grid-area: parentage;
-  pointer-events: all;
-}
-
-.scion.actor .Character .main .header .parentage textarea {
-  color: var(--fontColorSubTitle);
-  background-color: var(--bgColorSubTitle);
-  font-family: var(--fontFamilySubTitle);
-  font-style: var(--fontStyleSubTitle);
-  font-variant: var(--fontVariantSubTitle);
-  font-weight: var(--fontWeightSubTitle);
-  text-transform: var(--textTransformSubTitle);
-  font-size: var(--fontSizeSubTitle);
-  text-shadow: var(--textShadowSubTitle);
-  text-align: center;
-  line-height: 1.5rem;
-}
-
-.scion.actor .Character .main .header .title {
-  grid-area: title;
-  pointer-events: all;
-  color: var(--fontColorSubSubTitle);
-  background-color: var(--bgColorSubSubTitle);
-  font-family: var(--fontFamilySubSubTitle);
-  font-style: var(--fontStyleSubSubTitle);
-  font-variant: var(--fontVariantSubSubTitle);
-  font-weight: var(--fontWeightSubSubTitle);
-  text-transform: var(--textTransformSubSubTitle);
-  font-size: var(--fontSizeSubSubTitle);
-  text-shadow: var(--textShadowSubSubTitle);
-  text-align: center;
-  line-height: 1.5rem;
-}
-
-.scion.actor .Character .main .header .xpDisplay {
-  grid-area: xpDisplay;
-  pointer-events: all;
-  display: none;
+.scion.actor .Character .main .header .patronage {
+  grid-area: patronage;
 }
 
 .scion.actor .Character .main .sheet-body {
@@ -424,98 +442,57 @@ select:focus {
   pointer-events: all;
 }
 
-.scion.actor .Character .main .sheet-body .heading {
-  width: 100%;
-  color: var(--fontColorHeading);
-  background-color: var(--bgColorHeading);
-  font-family: var(--fontFamilyHeading);
-  font-style: var(--fontStyleHeading);
-  font-variant: var(--fontVariantHeading);
-  font-weight: var(--fontWeightHeading);
-  text-transform: var(--textTransformHeading);
-  font-size: var(--fontSizeHeading);
-  text-shadow: var(--textShadowHeading);
-  border-bottom: var(--borderBottomHeading);
-  text-align: left;
-  line-height: 1.5rem;
-}
-
 .scion.actor .Character .main .sheet-body .settings {
-  height: 100%;
-  width: 100%;
   grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
-  grid-template-rows: 2rem 2rem 2rem 2rem;
-  row-gap: 1rem;
+  grid-template-rows: 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.5rem 2rem;
+  row-gap: 0.25rem;
 }
 
 .scion.actor .Character .main .sheet-body .settings div.grid {
-  height: 100%;
-  width: 100%;
+  padding: 0 0.25rem;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.flex {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-pack: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.scion.actor .Character .main .sheet-body .settings div.grid.edit {
+  line-height: 1.75rem;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.flex div {
-  width: 25%;
-  height: 100%;
-}
-
-.scion.actor .Character .main .sheet-body .settings div.grid .container {
+.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer {
   background-color: rgba(0, 0, 0, 0.1);
   border: 3px inset brown;
   border-radius: 19px;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .container div {
+.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer div {
   display: inline-block;
   width: 30%;
   margin: 0px 1.5%;
   color: white;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: bold;
   text-align: center;
   line-height: 26px;
   border: 3px outset grey;
   -webkit-box-shadow: 2px 2px 2px grey;
   box-shadow: 2px 2px 2px grey;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(black), to(transparent));
-  background-image: -o-linear-gradient(bottom, black, transparent);
-  background-image: linear-gradient(0deg, black, transparent);
-  font-family: var(--fontFamilyTitle);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.7)), to(transparent));
+  background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.7), transparent);
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7), transparent);
+  font-family: var(--fontFamilySubTitle);
   color: var(--bgColorStrong);
+  border-radius: 1rem;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2), -1px -1px 1px black;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .container .red {
+.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer .red {
   background-color: var(--scaleX);
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .container .blue {
+.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer .blue {
   background-color: var(--scale8);
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .container .green {
+.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer .green {
   background-color: var(--scale6);
-}
-
-.scion.actor .Character .main .sheet-body .settings select {
-  color: var(--fontColorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: bold;
-  border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: inset 3px brown;
 }
 
 .scion.actor .Character .main .sheet-body .front {
@@ -619,19 +596,19 @@ select:focus {
   grid-area: rightvirtue;
 }
 
-.scion.actor .Character .main .sheet-body .heritage {
-  grid: "heritage heritage" 4rem "paths paths" 10rem "virtues ." 2rem / 1fr 1fr;
+.scion.actor .Character .main .sheet-body .genesis {
+  grid: "genesis genesis" 4rem "paths paths" 10rem "virtues ." 2rem / 1fr 1fr;
 }
 
-.scion.actor .Character .main .sheet-body .heritage .heritage {
+.scion.actor .Character .main .sheet-body .genesis .genesis {
   grid-area: attributes;
 }
 
-.scion.actor .Character .main .sheet-body .heritage .paths {
+.scion.actor .Character .main .sheet-body .genesis .paths {
   grid-area: paths;
 }
 
-.scion.actor .Character .main .sheet-body .heritage .virtues {
+.scion.actor .Character .main .sheet-body .genesis .virtues {
   grid-area: virtues;
 }
 
@@ -669,6 +646,7 @@ select:focus {
   --fontColorBody: #000;
   --fontFamilyBody: "Overlock SC";
   --fontSizeBody: 1rem;
+  --fontWeightBody: bold;
   --fontColorTitle: #000;
   --bgColorTitle: transparent;
   --fontFamilyTitle: "Marcellus SC";
@@ -678,7 +656,19 @@ select:focus {
   --textTransformTitle: none;
   --fontSizeTitle: 2.5rem;
   --paddingTitle: 0;
+  --lineHeightTitle: var(--fontSizeTitle);
   --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+  --fontColorSurTitle: var(--fontColorTitle);
+  --bgColorSurTitle: var(--bgColorTitle);
+  --fontFamilySurTitle: var(--fontFamilyBody);
+  --fontStyleSurTitle: normal;
+  --fontVariantSurTitle: normal;
+  --fontWeightSurTitle: normal;
+  --textTransformSurTitle: none;
+  --fontSizeSurTitle: 1.5rem;
+  --paddingSurTitle: 0;
+  --lineHeightSurTitle: var(--fontSizeSurTitle);
+  --textShadowSurTitle: var(--textShadowTitle);
   --fontColorSubTitle: var(--fontColorTitle);
   --bgColorSubTitle: var(--bgColorTitle);
   --fontFamilySubTitle: "Marcellus SC";
@@ -687,30 +677,55 @@ select:focus {
   --fontWeightSubTitle: bold;
   --textTransformSubTitle: none;
   --fontSizeSubTitle: 1rem;
+  --paddingSubTitle: 0;
+  --lineHeightSubTitle: var(--fontSizeSubTitle);
   --textShadowSubTitle: var(--textShadowTitle);
-  --fontColorSubSubTitle: var(--fontColorTitle);
-  --bgColorSubSubTitle: var(--bgColorTitle);
-  --fontFamilySubSubTitle: var(--fontFamilyBody);
-  --fontStyleSubSubTitle: normal;
-  --fontVariantSubSubTitle: normal;
-  --fontWeightSubSubTitle: normal;
-  --textTransformSubSubTitle: none;
-  --fontSizeSubSubTitle: 1.5rem;
-  --textShadowSubSubTitle: var(--textShadowTitle);
-  --fontColorHeading: var(--fontColorSubTitle);
-  --bgColorHeading: transparent;
-  --fontFamilyHeading: var(--fontFamilyBody);
-  --fontStyleHeading: normal;
-  --fontVariantHeading: normal;
-  --fontWeightHeading: bold;
-  --textTransformHeading: none;
-  --fontSizeHeading: 1rem;
-  --textShadowHeading: none;
-  --borderBottomHeading: 1px solid var(--fontColorHeading);
+  --fontColorHeading1: var(--fontColorTitle);
+  --bgColorHeading1: transparent;
+  --fontFamilyHeading1: var(--fontFamilyTitle);
+  --fontStyleHeading1: normal;
+  --fontVariantHeading1: small-caps;
+  --fontWeightHeading1: normal;
+  --textTransformHeading1: none;
+  --fontSizeHeading1: 1.75rem;
+  --paddingHeading1: 0;
+  --lineHeightHeading1: var(--fontSizeHeading1);
+  --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+  --borderBottomHeading1: 2px solid var(--fontColorHeading1);
+  --fontColorHeading2: var(--fontColorSubTitle);
+  --bgColorHeading2: transparent;
+  --fontFamilyHeading2: var(--fontFamilyBody);
+  --fontStyleHeading2: normal;
+  --fontVariantHeading2: normal;
+  --fontWeightHeading2: bold;
+  --textTransformHeading2: none;
+  --fontSizeHeading2: 1.25rem;
+  --paddingHeading2: 0;
+  --lineHeightHeading2: var(--fontSizeHeading2);
+  --textShadowHeading2: none;
+  --borderBottomHeading2: none;
+  --fontColorHeading3: var(--fontColorSubTitle);
+  --bgColorHeading3: transparent;
+  --fontFamilyHeading3: var(--fontFamilyBody);
+  --fontStyleHeading3: normal;
+  --fontVariantHeading3: normal;
+  --fontWeightHeading3: bold;
+  --textTransformHeading3: none;
+  --fontSizeHeading3: 1rem;
+  --paddingHeading3: 0;
+  --lineHeightHeading3: var(--fontSizeHeading3);
+  --textShadowHeading3: none;
+  --borderBottomHeading3: none;
 }
 
 .scion.actor .aesir {
   --fontFamilyTitle: "Amarante";
+}
+
+.scion.actor .loa {
+  --bgImage: url("../images/Orisha.png");
+  --fontFamilyTitle: "Finger Paint";
+  --fontSizeTitle: 2rem;
 }
 
 .scion.actor .netjer {
@@ -728,17 +743,22 @@ select:focus {
   --fontFamilyTitle: "Yatra One";
   --fontColorSubTitle: #6e4a28;
   --fontFamilySubTitle: "Reem Kufi";
-  --fontColorSubSubTitle: #554a39;
-  --fontWeightSubSubTitle: bold;
-  --fontColorHeading: var(--fontColorSubTitle);
-  --borderBottomHeading: 1px solid var(--fontColorHeading);
+  --fontSizeSubTitle: 1.25rem;
+  --lineHeightSubTitle: 1.65rem;
+  --fontColorSurTitle: #554a39;
+  --fontWeightSurTitle: bold;
+  --fontColorHeading1: var(--fontColorSubTitle);
+  --borderBottomHeading1: 1px solid var(--fontColorHeading);
 }
 
-.scion.actor .orisha {
-  --bgImage: url("../images/Orisha.png");
-  --fontFamilyTitle: "Finger Paint";
-  --fontSizeTitle: 2rem;
-  --paddingTitle: 0 0 0.1rem 0;
+.scion.actor .teotl {
+  --fontFamilyTitle: "Pirata One";
+}
+
+.scion.actor .theoi {
+  --fontFamilyTitle: "Poiret One";
+  --fontWeightTitle: "bold";
+  --fontFamilySubTitle: "Della Respira";
 }
 
 .scion.actor .tuathaDeDanann {
@@ -748,13 +768,23 @@ select:focus {
   --bgColorStrong: #73ed6c;
   --fontColorTitle: #296f17;
   --fontFamilyTitle: "Berkshire Swash";
+  --fontColorHeading1: var(--fontColorTitle);
+  --fontFamilyHeading1: var(--fontFamilyTitle);
+  --borderBottomHeading1: 2px solid var(--fontColorTitle);
+  --fontVariantHeading1: normal;
   --fontSizeTitle: 2rem;
   --fontColorSubTitle: #19430e;
   --fontFamilySubTitle: "Della Respira";
   --fontStyleSubTitle: italic;
-  --fontColorSubSubTitle: #296f17;
-  --fontWeightSubSubTitle: bold;
+  --fontColorSurTitle: #296f17;
+  --fontWeightSurTitle: bold;
   --fontColorBody: #1a211d;
+}
+
+.scion.actor .orisha {
+  --bgImage: url("../images/Orisha.png");
+  --fontFamilyTitle: "Finger Paint";
+  --fontSizeTitle: 2rem;
 }
 
 /* SCION ITEMS: All Scion Items */

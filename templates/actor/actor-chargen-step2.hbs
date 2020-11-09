@@ -1,0 +1,24 @@
+<div class="grid span8col"><span class="heading1">{{localize "scion.headings.charGenStep2"}}</span></div>
+<div class="grid span8col"></div>
+
+<div class="grid span3col heading">Prioritize Attributes:</div>
+<div id="prioritySortStorage" class="grid span5col">
+    <div id="prioritySort" class="dragContainer sortOnly" data-actorid="{{this.actor._id}}">
+        <div class="dragItem physical">Physical</div>
+        <div class="dragItem mental">Mental</div>
+        <div class="dragItem social">Social</div>
+    </div>
+    <div class="sortStorer"></div>
+</div>
+
+<div class="grid span2col">
+    {{#if config.showFavoredApproach}}           
+    <select class="chargen priority" name="data.favoredApproach">
+        <option name=""></option>
+        {{selectOptions config.favoredApproachList selected=data.favoredApproach}}
+    </select>
+    {{/if}}
+</div>
+<div class="grid span1col">
+    <input class="chargen" type="number" name="data.dotsPurchased" value="{{data.dotsPurchased}}" style="font-size: 1rem;">
+</div>

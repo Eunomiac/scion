@@ -13,9 +13,9 @@
 
             {{!-- Sheet Header --}}
             <div class="header grid">
-                <div class="title text edit" data-path="data.divineTitle"></div>
-                <div class="charName text edit" data-path="actor.name"></div>
-                <div class="parentage text"><textarea class="readonly" name="data.parentageLine" readonly >{{data.parentageLine}}</textarea></div>
+                <div class="divineTitle text surTitle edit" data-path="data.divineTitle"></div>
+                <div class="charName text title edit" data-path="actor.name"></div>
+                <div class="patronage"><textarea class="subTitle text readonly" name="data.patronageLine" readonly >{{data.patronageLine}}</textarea></div>
             </div>
                 <!-- <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>     -->      
                 
@@ -27,7 +27,7 @@
                 {{!-- Front Tab --}}
                 <div class="tab front grid" data-group="primary" data-tab="front">
                     <div class="attributes flex">
-                        <div class="heading">Attributes</div>
+                        <div class="heading1">Attributes</div>
                         {{#if data.generalUnspentDots}}
                             <div class="dotGrabBin dotDropBin flex">
                                 {{#for data.generalUnspentDots}}
@@ -56,7 +56,7 @@
                         {{/each}}
                     </div>
                     <div class="paths grid">
-                        <div class="heading">Paths</div>
+                        <div class="heading text heading1">Paths</div>
                         <div class="originpath"></div>
                         <div class="rolepath"></div>
                         <div class="pantheonpath"></div>
@@ -71,9 +71,9 @@
                         <div class="rightvirtue text">Prowess</div>
                     </div>
                 </div>
-                {{!-- Divine Heritage Tab --}}
-                <div class="tab heritage grid" data-group="primary" data-tab="heritage">
-                    <div class="heritage text">Heritage</div>
+                {{!-- Divine Genesis Tab --}}
+                <div class="tab genesis grid" data-group="primary" data-tab="genesis">
+                    <div class="genesis text">Genesis</div>
                     <div class="paths text">Paths</div>
                     <div class="virtues text">Virtues</div>
                 </div>

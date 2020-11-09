@@ -4,7 +4,10 @@
             "tier": "Tier",
             "pantheon": "Pantheon",
             "pantheons": "Pantheons",
-            "parent": "Parent",
+            "genesis": "Genesis",
+            "geneses": "Geneses",
+            "patron": "Patron",
+            "divinePatron": "Divine Patron",
             "attribute": "Attribute",
             "attributes": "Attributes",
             "skill": "Skill",
@@ -18,6 +21,7 @@
             "primary": "Primary",
             "secondary": "Secondary",
             "tertiary": "Tertiary",
+            "concept": "Concept",
             "path": "Path",
             "paths": "Paths",
             "originPath": "Origin Path",
@@ -34,6 +38,14 @@
             "boons": "Boons",
             "birthright": "Birthright",
             "birthrights": "Birthrights"            
+        },
+        "headings": {
+            "charGenStep1": "Step One: Concept & Origin",
+            "charGenStep2": "Step Two: Paths",
+            "charGenStep3": "Step Three: Attributes & Skills",
+            "charGenStep4": "Step Four: Divine Callings",
+            "charGenStep5": "Step Five: Purviews",
+            "charGenStep6": "Step Six: Finishing Touches"
         },
         "books": {
             "origin": "Scion: Origin",
@@ -114,6 +126,26 @@
             "atua": "the Polynesian Gods",
             "bogovi": "the Slavic Gods",
             "tengri": "the Mongolian Gods"
+        },
+        "religions": {
+            "aesir": "Laukr",
+            "deva": "Hinduism",
+            "kami": "Shintō",
+            "loa": "Vodou",
+            "manitou": "Midewiwin",
+            "netjer": "Kemeticism",
+            "shen": "Chinese Traditional Religion, Daoism, and Confucianism",
+            "teotl": "Mēxihcah",
+            "theoi": "Hellenismos",
+            "tuathaDeDanann": "Ind Iress",
+            "nemetondevos": "none",
+            "orisha": "Candomblé, Lukumi, the Shango Cult, and more",
+            "yazata": "Zoroastrianism",
+            "anunna": " ",
+            "apu": " ",
+            "atua": " ",
+            "bogovi": " ",
+            "tengri": " "
         },
         "gods": {
             "baldr": "Baldr",
@@ -467,15 +499,15 @@
             "zam": "Who Is the Earth",
             "zarathustra": "Ashavan and Founder of Mazdayasna"
         },
-        "heritages": {
+        "geneses": {
             "born": "Born",
-            "bornLine": "Scion of {divineParentName}{mantleDelim}{divineParentMantle}",
+            "bornLine": "Scion of {divinePatronName}{mantleDelim}{divinePatronMantle}",
             "created": "Created",
-            "createdLine": "Creation of {divineParentName}{mantleDelim}{divineParentMantle}",            
+            "createdLine": "Creation of {divinePatronName}{mantleDelim}{divinePatronMantle}",            
             "incarnation": "Incarnation", 
-            "incarnationLine": "{divineParentName}{mantleDelim}{divineParentMantle} Incarnate",
+            "incarnationLine": "{divinePatronName}{mantleDelim}{divinePatronMantle} Incarnate",
             "chosen": "Chosen",
-            "chosenLine": "Chosen of {divineParentName}{mantleDelim}{divineParentMantle}"
+            "chosenLine": "Chosen of {divinePatronName}{mantleDelim}{divinePatronMantle}"
         },
         "attributes": {
             "none": "",
