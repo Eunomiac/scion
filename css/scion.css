@@ -1,8 +1,10 @@
 /* #region IMPORT */
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&display=swap");
 @use "sass:string";
-/* Utilities */
-/* Globals: All Sheets */
+/* #region Global Variables & Configuration */
+/* #endregion */
+/* #region Components: Layouts, Mixins, Modules & Fundamentals */
+/* #region Element Default Styles */
 textarea,
 input[type="text"],
 select {
@@ -25,115 +27,20 @@ select:focus {
   outline: none;
 }
 
+textarea:invalid,
+input[type="text"]:invalid,
+select:invalid {
+  font-style: italic;
+  color: #888;
+  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
+}
+
+/* #endregion */
+/* #region Single-Purpose Classes */
 .readonly {
   pointer-events: none;
   resize: none;
   overflow: hidden;
-}
-
-.grid,
-.tab[data-tab].active.grid {
-  display: grid;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  font-size: 0;
-  grid-gap: 0;
-}
-
-.grid.span1col,
-.tab[data-tab].active.grid.span1col {
-  grid-column: span 1;
-}
-
-.grid.span2col,
-.tab[data-tab].active.grid.span2col {
-  grid-column: span 2;
-}
-
-.grid.span3col,
-.tab[data-tab].active.grid.span3col {
-  grid-column: span 3;
-}
-
-.grid.span4col,
-.tab[data-tab].active.grid.span4col {
-  grid-column: span 4;
-}
-
-.grid.span5col,
-.tab[data-tab].active.grid.span5col {
-  grid-column: span 5;
-}
-
-.grid.span6col,
-.tab[data-tab].active.grid.span6col {
-  grid-column: span 6;
-}
-
-.grid.span7col,
-.tab[data-tab].active.grid.span7col {
-  grid-column: span 7;
-}
-
-.grid.span8col,
-.tab[data-tab].active.grid.span8col {
-  grid-column: span 8;
-}
-
-.grid.span1row,
-.tab[data-tab].active.grid.span1row {
-  grid-row: span 1;
-}
-
-.grid.span2row,
-.tab[data-tab].active.grid.span2row {
-  grid-row: span 2;
-}
-
-.grid.span3row,
-.tab[data-tab].active.grid.span3row {
-  grid-row: span 3;
-}
-
-.grid.span4row,
-.tab[data-tab].active.grid.span4row {
-  grid-row: span 4;
-}
-
-.grid.span5row,
-.tab[data-tab].active.grid.span5row {
-  grid-row: span 5;
-}
-
-.grid.span6row,
-.tab[data-tab].active.grid.span6row {
-  grid-row: span 6;
-}
-
-.grid.span7row,
-.tab[data-tab].active.grid.span7row {
-  grid-row: span 7;
-}
-
-.grid.span8row,
-.tab[data-tab].active.grid.span8row {
-  grid-row: span 8;
-}
-
-.flex,
-.tab[data-tab].active.flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  font-size: 0;
 }
 
 .text {
@@ -143,6 +50,114 @@ select:focus {
   font-weight: var(--fontWeightBody);
 }
 
+.placeholder {
+  font-style: italic;
+  color: #888;
+  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
+}
+
+/* #endregion */
+/* #region Editable Divs */
+.edit {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: inset 3px brown;
+}
+
+.edit:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+
+/* #endregion */
+/* #region Collapsible Drawers */
+/* 
+    <div class="drawerContainer">
+        <input type="checkbox" name=<XXX> value="1">
+        <div class="drawerLabel heading1">HEADING & DRAWER HANDLE</div>
+        <div class="drawerContents">
+            ...
+        </div>
+    </div>
+*/
+.drawerContainer {
+  font-size: 0;
+  min-height: 1rem;
+}
+
+.drawerContainer > * {
+  font-size: initial;
+}
+
+.drawerContainer input[type="checkbox"] {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  margin: 0 -100% 0 0;
+  padding: 0;
+  opacity: 0;
+}
+
+.drawerContainer input[type="checkbox"] + .drawerLabel {
+  display: inline-block;
+}
+
+.drawerContainer input[type="checkbox"] + .drawerLabel::before {
+  content: "";
+  display: inline-block;
+  background-size: 100%;
+  height: 1rem;
+  width: 1rem;
+}
+
+.drawerContainer input[type="checkbox"] + .drawerLabel + .drawerContents {
+  -webkit-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  -webkit-transform-origin: 0% 0%;
+  -ms-transform-origin: 0% 0%;
+  transform-origin: 0% 0%;
+  -webkit-transition: opacity 200ms, margin 50ms, -webkit-transform 200ms;
+  transition: opacity 200ms, margin 50ms, -webkit-transform 200ms;
+  -o-transition: opacity 200ms, transform 200ms, margin 50ms;
+  transition: opacity 200ms, transform 200ms, margin 50ms;
+  transition: opacity 200ms, transform 200ms, margin 50ms, -webkit-transform 200ms;
+}
+
+.drawerContainer input[type="checkbox"]:checked + .drawerLabel::before {
+  background-image: url("../images/openDrawer.png");
+}
+
+.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel {
+  font-style: italic;
+  color: #888;
+  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
+}
+
+.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel::before {
+  background-image: url("../images/closedDrawer.png");
+}
+
+.drawerContainer input[type="checkbox"]:not(:checked) + .drawerContents {
+  opacity: 0;
+  margin-bottom: -100%;
+  -webkit-transform: scaleY(0);
+  -ms-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
+  transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
+  -o-transition: opacity 200ms, transform 200ms, margin 750ms;
+  transition: opacity 200ms, transform 200ms, margin 750ms;
+  transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
+}
+
+/* #endregion */
+/* #region Dot Trackers */
 .dot {
   height: 15px;
   width: 15px;
@@ -168,22 +183,7 @@ select:focus {
   box-shadow: 1px 1px 2px black;
 }
 
-.edit {
-  color: var(--fontColorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: bold;
-  border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: inset 3px brown;
-}
-
-.edit:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: none;
-}
-
+/* #endregion */
 .title {
   color: var(--fontColorTitle);
   background-color: var(--bgColorTitle);
@@ -263,13 +263,25 @@ select:focus {
   border-bottom: var(--borderBottomHeading2);
 }
 
+/* DRAGULA SETUP: 
+  Container Object:  
+  CONTAINER TYPES:
+    - dragContainer
+
+
+
+
+
+
+
+
+
+*/
 .gu-mirror {
   position: fixed !important;
   margin: 0 !important;
   z-index: 9999 !important;
   opacity: 0.8;
-  /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-  filter: alpha(opacity=80); */
 }
 
 .gu-hide {
@@ -285,11 +297,140 @@ select:focus {
 
 .gu-transit {
   opacity: 0.2;
-  /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
-  filter: alpha(opacity=20); */
 }
 
-/* Layout */
+/* .flex,
+.tab[data-tab].active.flex {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+} */
+/* #region FLEX LAYOUTS */
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: unset;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-align: safe flex-start;
+  -ms-flex-align: safe flex-start;
+  align-items: safe flex-start;
+  -webkit-box-pack: safe space-between;
+  -ms-flex-pack: safe space-between;
+  justify-content: safe space-between;
+  -ms-flex-line-pack: safe flex-start;
+  align-content: safe flex-start;
+}
+
+.flex > * {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  padding: 0.25rem;
+}
+
+.flexContainer {
+  height: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  /* #region Flex Items */
+  /* #endregion */
+}
+
+.flexContainer > * {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  padding: 0.25rem;
+}
+
+.flexContainer div {
+  width: 100%;
+}
+
+.flexContainer span {
+  display: inline-block;
+  width: auto;
+  margin: auto;
+}
+
+.flexContainer .flexRow {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+}
+
+.flexContainer .flexLabel {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+.flexContainer .flexStatic {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.flexContainer .edit {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+/* #endregion */
+/* #region GRID LAYOUTS */
+.grid,
+.tab[data-tab].active.grid {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  grid-gap: 0;
+}
+
+/* .grid,
+.tab[data-tab].active.grid {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    grid-gap: 0;
+
+    &.span1col {grid-column: span 1}
+    &.span2col {grid-column: span 2}
+    &.span3col {grid-column: span 3}
+    &.span4col {grid-column: span 4}
+    &.span5col {grid-column: span 5}
+    &.span6col {grid-column: span 6}
+    &.span7col {grid-column: span 7}
+    &.span8col {grid-column: span 8}
+
+    &.span1row {grid-row: span 1}
+    &.span2row {grid-row: span 2}
+    &.span3row {grid-row: span 3}
+    &.span4row {grid-row: span 4}
+    &.span5row {grid-row: span 5}
+    &.span6row {grid-row: span 6}
+    &.span7row {grid-row: span 7}
+    &.span8row {grid-row: span 8}
+} */
+/* #endregion */
+/* #endregion */
 /* SCION ACTOR: All Scion Actors */
 .scion.actor {
   pointer-events: none;
@@ -456,13 +597,13 @@ select:focus {
   line-height: 1.75rem;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer {
+.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer {
   background-color: rgba(0, 0, 0, 0.1);
   border: 3px inset brown;
   border-radius: 19px;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer div {
+.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer div {
   display: inline-block;
   width: 30%;
   margin: 0px 1.5%;
@@ -483,15 +624,15 @@ select:focus {
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2), -1px -1px 1px black;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer .red {
+.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer .red {
   background-color: var(--scaleX);
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer .blue {
+.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer .blue {
   background-color: var(--scale8);
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid .dragContainer .green {
+.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer .green {
   background-color: var(--scale6);
 }
 
@@ -734,11 +875,6 @@ select:focus {
   --bgColorMatte: #f6f0e2;
   --bgColorSoft: #fdd8b7;
   --bgColorStrong: #f99c4b;
-  --scaleX: white;
-  --scale9: #ffebda;
-  --scale8: #fed7b5;
-  --scale7: #fdc491;
-  --scale6: #fcb06d;
   --fontColorTitle: #554a39;
   --fontFamilyTitle: "Yatra One";
   --fontColorSubTitle: #6e4a28;
@@ -749,6 +885,16 @@ select:focus {
   --fontWeightSurTitle: bold;
   --fontColorHeading1: var(--fontColorSubTitle);
   --borderBottomHeading1: 1px solid var(--fontColorHeading);
+  --scale1: #100e0b;
+  --scale2: #261b12;
+  --scale3: #402813;
+  --scale4: #5f3510;
+  --scale5: #834107;
+  --scale6: #cc6409;
+  --scale7: #f88927;
+  --scale8: #fcb06d;
+  --scale9: #fed7b5;
+  --scale10: white;
 }
 
 .scion.actor .teotl {
@@ -779,6 +925,16 @@ select:focus {
   --fontColorSurTitle: #296f17;
   --fontWeightSurTitle: bold;
   --fontColorBody: #1a211d;
+  --scale1: #101410;
+  --scale2: #1c2d1b;
+  --scale3: #234b21;
+  --scale4: #266e22;
+  --scale5: #25951f;
+  --scale6: #2bd422;
+  --scale7: #55eb4d;
+  --scale8: #8af684;
+  --scale9: #c2fdbf;
+  --scale10: white;
 }
 
 .scion.actor .orisha {

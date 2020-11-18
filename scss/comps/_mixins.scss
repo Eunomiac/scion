@@ -1,0 +1,65 @@
+@mixin element-invisible {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin hide {
+  display: none;
+}
+
+@mixin scaled-colors ($baseColor) {
+    @for $i from 1 through 10 {
+      $thisScale: 10% * ($i * 2 - 10);      
+      $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);        
+      --scale#{$i}: #{$thisColor};
+  }
+}
+
+@mixin disabledText {  
+  font-style: italic;
+  color: #888;
+  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255,255,255,0.5);
+}
+
+@mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {
+  position: relative;
+  width:  $outer-circle-size;
+  height: $outer-circle-size;
+  top: -($outer-circle-size - $inner-circle-size)/2;
+  left: -($outer-circle-size - $inner-circle-size)/2;
+  padding: 0;
+  border-radius: 50%; 
+  list-style: none;       
+  
+  > * {
+    display: block;
+    position: absolute;
+    top:  50%; 
+    left: 50%;
+    width:  $item-size;
+    height: $item-size;
+    margin: -($item-size / 2);
+  
+    $angle: (360 / $item-count);
+    $rot: $initial-rotation;
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        transform: 
+          rotate($rot * 1deg) 
+          translate($outer-circle-size / 2) 
+          rotate($rot * -1deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+  }
+}

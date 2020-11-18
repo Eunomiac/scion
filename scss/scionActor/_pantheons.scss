@@ -121,12 +121,7 @@
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
 
-    --scaleX: #{scale-color($accentColor, $lightness: 100%, $saturation: 100%)};
-    --scale9: #{scale-color($accentColor, $lightness: 90%, $saturation: 90%)};
-    --scale8: #{scale-color($accentColor, $lightness: 80%, $saturation: 80%)};
-    --scale7: #{scale-color($accentColor, $lightness: 70%, $saturation: 70%)};
-    --scale6: #{scale-color($accentColor, $lightness: 60%, $saturation: 60%)};
-    
+
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Yatra One";
 
@@ -140,6 +135,8 @@
 
     --fontColorHeading1: var(--fontColorSubTitle);
     --borderBottomHeading1: 1px solid var(--fontColorHeading);
+
+    @include scaled-colors($accentColor);
 }
 
 // .shen { }
@@ -183,6 +180,8 @@
     --fontWeightSurTitle: bold;
 
     --fontColorBody: #{$bodyColor};
+    
+    @include scaled-colors($accentColor);
 }
 
 // .nemetondevos { }

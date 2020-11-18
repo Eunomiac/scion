@@ -139,24 +139,39 @@ export class ScionActorSheet extends ActorSheet {
         if (!this.options.editable)
             return;
 
-        // #region CONTENT-EDITABLE DIVS
+        // #region CONTENT-EDITABLE ELEMENTS
         html.find(".edit").each((i, element) => {
             const data = element.dataset;
             element.setAttribute("contenteditable", false);
             element.addEventListener("click", (event) => this._onEditClickOn(event), false);
             element.addEventListener("blur", (event) => this._onEditClickOff(event), false);
-            if ("path" in data)
-                element.innerHTML = U.getValue(data.path.startsWith("actor") ? this : this.actor.data.data, data.path);
+
+            // If dataset includes a path, fill the element with the current data:
+            if ("path" in data) {
+                const actorVal = U.getValue(data.path.startsWith("actor") ? this : this.actor.data.data, data.path);
+                if (actorVal)
+                    element.innerHTML = actorVal.trim();
+                else
+                    element.innerHTML = "";
+            }
+
+            // If element innerHTML is blank, populate with placeholder OR a single blank space (to preserve element height)
+            let isDisplayingPlaceholderText = false;
+            if (!element.innerText)
+                if ("placeholder" in data) {
+                    element.innerHTML = data.placeholder;
+                    isDisplayingPlaceholderText = true;
+                } else {
+                    element.innerHTML = "&nbsp;";
+                }
+
+            // Apply placeholder class if necessary:
+            if (isDisplayingPlaceholderText)
+                element.classList.add("placeholder");
+            else
+                element.classList.remove("placeholder");
         });
         // #endregion
-
-        // #region CHARGEN
-        // > Listen for "change" on edit
-        html.find(".chargen").each((i, element) => {
-            element.addEventListener("change", () => {
-                // this._updateChargen(undefined, undefined, element.className.includes(" priority"));
-            }, false);
-        });
 
         // > Dragula: Sort Attribute Priorities
 
@@ -195,6 +210,10 @@ export class ScionActorSheet extends ActorSheet {
         const element = event.currentTarget;
         console.log({"@@ CLICK ON @@": element});
         element.setAttribute("contenteditable", true);
+        if (element.classList.contains("placeholder")) {
+            element.innerHTML = " ";
+            element.classList.remove("placeholder");
+        }
     }
     _onEditClickOff(event) {
         event.preventDefault();
@@ -209,6 +228,20 @@ export class ScionActorSheet extends ActorSheet {
                 this.actor.update({[data.path.slice(6)]: element.innerText});
             else
                 this.actor.update({[data.path]: element.innerText});
+            let isDisplayingPlaceholderText = false;
+            if (!element.innerText)
+                if ("placeholder" in data) {
+                    element.innerHTML = data.placeholder;
+                    isDisplayingPlaceholderText = true;
+                } else {
+                    element.innerHTML = "&nbsp;";
+                }
+
+            // Apply placeholder class if necessary:
+            if (isDisplayingPlaceholderText)
+                element.classList.add("placeholder");
+            else
+                element.classList.remove("placeholder");
         }
     }
 

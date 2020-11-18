@@ -1,0 +1,225 @@
+/* #region Element Default Styles */
+textarea,
+input[type="text"],
+select {
+    height: 100%;
+    width: 100%;
+    min-height: unset;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    }
+
+    &:invalid {
+        @include disabledText;
+    }
+}
+/* #endregion */
+
+/* #region Single-Purpose Classes */
+.readonly {
+    pointer-events: none;
+    resize: none;
+    overflow: hidden;
+}
+
+.text {
+    color: var(--fontColorBody);
+    font-family: var(--fontFamilyBody);
+    font-size: var(--fontSizeBody);
+    font-weight: var(--fontWeightBody);
+}
+
+.placeholder {
+    @include disabledText;
+}
+/* #endregion */
+
+/* #region Editable Divs */
+.edit {
+    color: var(--fontColorBody);
+    font-family: var(--fontFamilyBody);
+    font-size: var(--fontSizeBody);
+    font-weight: bold;
+    border-radius: 1rem;
+    background-color: rgba(0,0,0,0.2);
+    border: inset 3px brown;
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    }
+}
+/* #endregion */
+
+/* #region Collapsible Drawers */
+/* 
+    <div class="drawerContainer">
+        <input type="checkbox" name=<XXX> value="1">
+        <div class="drawerLabel heading1">HEADING & DRAWER HANDLE</div>
+        <div class="drawerContents">
+            ...
+        </div>
+    </div>
+*/
+.drawerContainer {
+    font-size: 0;
+    min-height: 1rem;
+    & > * { font-size: initial; }
+
+    input[type="checkbox"] {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        margin: 0 -100% 0 0;
+        padding: 0;
+        opacity: 0;
+
+        & + .drawerLabel {
+            display: inline-block;
+            &::before {
+                content: "";
+                display: inline-block;
+                background-size: 100%;
+                height: 1rem;
+                width: 1rem;
+            }    
+            & + .drawerContents {
+                transition-timing-function: ease-in-out;
+                transform-origin: 0% 0%;
+                transition: opacity 200ms, transform 200ms, margin 50ms;
+            }
+        }
+        &:checked {
+            & + .drawerLabel {
+                &::before {
+                    background-image: url("../images/openDrawer.png");
+                }
+            }
+        }
+        &:not(:checked) {
+            & ~ .drawerLabel {
+                @include disabledText;
+                &::before {
+                    background-image: url("../images/closedDrawer.png");
+                }
+            }
+            & + .drawerContents {                    
+                opacity: 0;
+                margin-bottom: -100%;
+                transform: scaleY(0);
+                transition: opacity 200ms, transform 200ms, margin 750ms;
+            }
+        }
+    }
+    &.noClick input[type="checkbox"] {
+        pointer-events: none;
+    }
+}
+/* #endregion */
+
+/* #region Dot Trackers */
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 1px 1px 0 0;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4), inset -1px -1px 1px white;
+
+    &.full {
+        background: radial-gradient(#444, #0a0a0a);
+        border: solid 2px black;
+        box-shadow: 1px 1px 2px black;
+    }
+
+    &.unspent {
+        background: radial-gradient(#900, #5a0000);
+        border: solid 2px #5a0000;
+        box-shadow: 1px 1px 2px black;
+    }
+}
+/* #endregion */
+
+.title {
+    color: var(--fontColorTitle);
+    background-color: var(--bgColorTitle);
+    font-family: var(--fontFamilyTitle);
+    font-style: var(--fontStyleTitle);
+    font-variant: var(--fontVariantTitle);
+    font-weight: var(--fontWeightTitle);
+    text-transform: var(--textTransformTitle);
+    font-size: var(--fontSizeTitle);
+    padding: var(--paddingTitle);
+    line-height: var(--lineHeightTitle);
+    text-shadow: var(--textShadowTitle);
+    text-align: center;
+    border: none;
+}
+
+.surTitle {
+    color: var(--fontColorSurTitle);
+    background-color: var(--bgColorSurTitle);
+    font-family: var(--fontFamilySurTitle);
+    font-style: var(--fontStyleSurTitle);
+    font-variant: var(--fontVariantSurTitle);
+    font-weight: var(--fontWeightSurTitle);
+    text-transform: var(--textTransformSurTitle);
+    font-size: var(--fontSizeSurTitle);
+    padding: var(--paddingSurTitle);
+    line-height: var(--lineHeightSurTitle);
+    text-shadow: var(--textShadowSurTitle);
+    text-align: center;
+    border: none;
+}
+
+.subTitle {    
+    color: var(--fontColorSubTitle);
+    background-color: var(--bgColorSubTitle);
+    font-family: var(--fontFamilySubTitle);
+    font-style: var(--fontStyleSubTitle);
+    font-variant: var(--fontVariantSubTitle);
+    font-weight: var(--fontWeightSubTitle);
+    text-transform: var(--textTransformSubTitle);
+    font-size: var(--fontSizeSubTitle);
+    padding: var(--paddingSubTitle);
+    line-height: var(--lineHeightSubTitle);
+    text-shadow: var(--textShadowSubTitle);
+    text-align: center;
+    border: none;
+}
+
+.heading1 {   
+    width: 100%;
+    color: var(--fontColorHeading1);
+    background-color: var(--bgColorHeading1);
+    font-family: var(--fontFamilyHeading1);
+    font-style: var(--fontStyleHeading1);
+    font-variant: var(--fontVariantHeading1);
+    font-weight: var(--fontWeightHeading1);
+    text-transform: var(--textTransformHeading1);
+    font-size: var(--fontSizeHeading1);
+    padding: var(--paddingHeading1);
+    line-height: var(--lineHeightHeading1);
+    text-shadow: var(--textShadowHeading1);
+    border-bottom: var(--borderBottomHeading1);
+}
+
+.heading2 {
+    color: var(--fontColorHeading2);
+    background-color: var(--bgColorHeading2);
+    font-family: var(--fontFamilyHeading2);
+    font-style: var(--fontStyleHeading2);
+    font-variant: var(--fontVariantHeading2);
+    font-weight: var(--fontWeightHeading2);
+    text-transform: var(--textTransformHeading2);
+    font-size: var(--fontSizeHeading2);
+    padding: var(--paddingHeading2);
+    line-height: var(--lineHeightHeading2);
+    text-shadow: var(--textShadowHeading2);
+    border-bottom: var(--borderBottomHeading2);
+}

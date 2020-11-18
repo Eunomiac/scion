@@ -41,11 +41,17 @@
         },
         "headings": {
             "charGenStep1": "Step One: Concept & Origin",
+            "charGenStep1A": "Tier, Pantheon & Divine Genesis",
+            "charGenStep1B": "Who is your Divine Patron?",
             "charGenStep2": "Step Two: Paths",
             "charGenStep3": "Step Three: Attributes & Skills",
             "charGenStep4": "Step Four: Divine Callings",
             "charGenStep5": "Step Five: Purviews",
-            "charGenStep6": "Step Six: Finishing Touches"
+            "charGenStep6": "Step Six: Finishing Touches",
+            "conceptPlaceholder": "Describe your character in a sentence or two.",
+            "genesisPlaceholder": "Genesis",
+            "pantheonPlaceholder": "Pantheon",
+            "divinePatronPlaceholder": " "
         },
         "books": {
             "origin": "Scion: Origin",

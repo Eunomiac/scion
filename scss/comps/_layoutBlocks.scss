@@ -1,0 +1,82 @@
+/* .flex,
+.tab[data-tab].active.flex {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+} */
+
+/* #region FLEX LAYOUTS */
+.flex {
+    display: flex;
+    height: unset;
+    width: 100%;
+    flex-flow: row wrap;
+    align-items: safe flex-start;
+    justify-content: safe space-between;
+    align-content: safe flex-start;
+    
+    > * { flex: 0 1 auto; padding: 0.25rem; }
+}
+
+.flexContainer {
+    height: 100%;
+    flex-flow: row wrap;
+    
+    /* #region Flex Items */
+    > * { flex: 0 1 auto; padding: 0.25rem; } // initialize all contained items as default.
+
+    div { width: 100%; } // Divs assumed to take up whole row.
+    span { display: inline-block; width: auto; margin: auto; } // Use spans for inline labels, etc.
+
+    .flexRow { flex-flow: row nowrap; } // For one-line spacing.
+    .flexLabel { flex: 1 0 auto; } // Can grow, can't shrink.
+    .flexStatic { flex: 0 0 auto; }  // Can't grow or shrink.
+    .edit { flex: 1 1 auto; } // Editable elements have max flexibility.
+    /* #endregion */
+}
+/* #endregion */
+
+/* #region GRID LAYOUTS */
+.grid,
+.tab[data-tab].active.grid {    
+    display: grid;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    grid-gap: 0;
+}
+
+/* .grid,
+.tab[data-tab].active.grid {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    grid-gap: 0;
+
+    &.span1col {grid-column: span 1}
+    &.span2col {grid-column: span 2}
+    &.span3col {grid-column: span 3}
+    &.span4col {grid-column: span 4}
+    &.span5col {grid-column: span 5}
+    &.span6col {grid-column: span 6}
+    &.span7col {grid-column: span 7}
+    &.span8col {grid-column: span 8}
+
+    &.span1row {grid-row: span 1}
+    &.span2row {grid-row: span 2}
+    &.span3row {grid-row: span 3}
+    &.span4row {grid-row: span 4}
+    &.span5row {grid-row: span 5}
+    &.span6row {grid-row: span 6}
+    &.span7row {grid-row: span 7}
+    &.span8row {grid-row: span 8}
+} */
+/* #endregion */

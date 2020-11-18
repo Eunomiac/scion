@@ -1,17 +1,18 @@
 /* #region IMPORT */
 @use "sass:string";
 
-/* Utilities */
-@import 'utils/variables'; // Variables
-@import 'utils/typography'; // Fonts & Font Styling
-@import 'utils/colors'; // Color definitions
-@import 'utils/mixins'; // Mixins
+/* #region Global Variables & Configuration */
+@import 'params/variables'; //     Variables
+@import 'params/typography'; //    Fonts & Font Styling
+@import 'params/colors'; //        Color Definitions
+/* #endregion */
 
-/* Globals: All Sheets */
-@import 'global/base';
-@import 'global/dragula'; // Dragula Drag & Drop Styles
-
-/* Layout */
+/* #region Components: Layouts, Mixins, Modules & Fundamentals */
+@import 'comps/mixins'; //        Mixins
+@import 'comps/base'; //         Base Styles: HTML Elements, Headers
+@import 'comps/dragula'; //      Dragula Drag & Drop Components
+@import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
+/* #endregion */
 
 
 /* SCION ACTOR: All Scion Actors */
