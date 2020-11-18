@@ -94,7 +94,8 @@ select:invalid {
   font-size: initial;
 }
 
-.drawerContainer input[type="checkbox"] {
+.drawerContainer input[type="checkbox"],
+.drawerContainer input[type="radio"] {
   display: inline-block;
   height: 100%;
   width: 100%;
@@ -103,11 +104,13 @@ select:invalid {
   opacity: 0;
 }
 
-.drawerContainer input[type="checkbox"] + .drawerLabel {
+.drawerContainer input[type="checkbox"] + .drawerLabel,
+.drawerContainer input[type="radio"] + .drawerLabel {
   display: inline-block;
 }
 
-.drawerContainer input[type="checkbox"] + .drawerLabel::before {
+.drawerContainer input[type="checkbox"] + .drawerLabel::before,
+.drawerContainer input[type="radio"] + .drawerLabel::before {
   content: "";
   display: inline-block;
   background-size: 100%;
@@ -115,7 +118,8 @@ select:invalid {
   width: 1rem;
 }
 
-.drawerContainer input[type="checkbox"] + .drawerLabel + .drawerContents {
+.drawerContainer input[type="checkbox"] + .drawerLabel + .drawerContents,
+.drawerContainer input[type="radio"] + .drawerLabel + .drawerContents {
   -webkit-transition-timing-function: ease-in-out;
   -o-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
@@ -129,21 +133,25 @@ select:invalid {
   transition: opacity 200ms, transform 200ms, margin 50ms, -webkit-transform 200ms;
 }
 
-.drawerContainer input[type="checkbox"]:checked + .drawerLabel::before {
+.drawerContainer input[type="checkbox"]:checked + .drawerLabel::before,
+.drawerContainer input[type="radio"]:checked + .drawerLabel::before {
   background-image: url("../images/openDrawer.png");
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel {
+.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel,
+.drawerContainer input[type="radio"]:not(:checked) ~ .drawerLabel {
   font-style: italic;
   color: #888;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel::before {
+.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel::before,
+.drawerContainer input[type="radio"]:not(:checked) ~ .drawerLabel::before {
   background-image: url("../images/closedDrawer.png");
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) + .drawerContents {
+.drawerContainer input[type="checkbox"]:not(:checked) + .drawerContents,
+.drawerContainer input[type="radio"]:not(:checked) + .drawerContents {
   opacity: 0;
   margin-bottom: -100%;
   -webkit-transform: scaleY(0);
@@ -154,6 +162,10 @@ select:invalid {
   -o-transition: opacity 200ms, transform 200ms, margin 750ms;
   transition: opacity 200ms, transform 200ms, margin 750ms;
   transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
+}
+
+.drawerContainer.noClick input[type="checkbox"] {
+  pointer-events: none;
 }
 
 /* #endregion */

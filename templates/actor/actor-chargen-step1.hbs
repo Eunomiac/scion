@@ -1,31 +1,67 @@
-<div class="flex flexContainer">
-    <div class="heading1">{{localize "scion.headings.charGenStep1"}}</div>
-    <div class="heading2">{{localize "scion.headings.charGenStep1A"}}</div>
-    <div class="flex flexRow">
-        <select class="edit" name="data.tier" style="width: 25%;" required>
-            <option name="" value="" selected hidden disabled>{{localize "scion.game.tier"}}</option>
-            {{selectOptions config.tierList selected=data.tier}}
-        </select>                 
-        <select class="edit" name="data.genesis" style="width: 25%;" required>
-            <option name="" value="" selected hidden disabled>{{localize "scion.headings.genesisPlaceholder"}}</option>
-            {{selectOptions config.genesisList selected=data.genesis}}
-        </select>
-        <select class="edit" name="data.pantheon" style="width: 50%;" required>
-            <option name="" value="" selected hidden disabled>{{localize "scion.headings.pantheonPlaceholder"}}</option>
-            {{selectOptions config.pantheonList selected=data.pantheon}}
-        </select>
+<div class="flex flexContainer drawerContainer">
+    <input type="radio" name="data.charGen.charGenStep" value="1">
+    <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep1"}}</div>
+    <div class="drawerContents">
+        <div class="heading2">{{localize "scion.headings.charGenStep1A"}}</div>
+        <div class="flex flexRow">
+            <select class="edit" name="data.tier" style="width: 25%;" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.game.tier"}}</option>
+                {{selectOptions config.tierList selected=data.tier}}
+            </select>                 
+            <select class="edit" name="data.genesis" style="width: 25%;" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.headings.genesisPlaceholder"}}</option>
+                {{selectOptions config.genesisList selected=data.genesis}}
+            </select>
+            <select class="edit" name="data.pantheon" style="width: 50%;" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.headings.pantheonPlaceholder"}}</option>
+                {{selectOptions config.pantheonList selected=data.pantheon}}
+            </select>
+        </div>
+        {{#if data.charGen.patronList}}
+        <div class="heading2">{{localize "scion.headings.charGenStep1B"}}</div>
+        <div class="flex flexRow">
+            <select class="edit" name="data.patron.name" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.headings.divinePatronPlaceholder"}}</option>
+                {{selectOptions data.charGen.patronList selected=data.patron.name}}
+            </select>
+        </div>
+            {{#if data.patron.name}}
+            <span class="flexLabel heading2">{{localize "scion.game.concept"}}: </span>
+            <div id="concept" class="edit" data-path="data.concept" data-placeholder="{{localize "scion.headings.conceptPlaceholder"}}"></div>
+            {{/if}}
+        {{/if}}
     </div>
-    {{#if data.charGen.patronList}}
-    <div class="heading2">{{localize "scion.headings.charGenStep1B"}}</div>
-    <div class="flex flexRow">
-        <select class="edit" name="data.patron.name" required>
-            <option name="" value="" selected hidden disabled>{{localize "scion.headings.divinePatronPlaceholder"}}</option>
-            {{selectOptions data.charGen.patronList selected=data.patron.name}}
-        </select>
+    
+    <input type="radio" name="data.charGen.charGenStep" value="2">
+    <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep1"}}</div>
+    <div class="drawerContents">
+        <div class="heading2">{{localize "scion.headings.charGenStep1A"}}</div>
+        <div class="flex flexRow">
+            <select class="edit" name="data.tier" style="width: 25%;" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.game.tier"}}</option>
+                {{selectOptions config.tierList selected=data.tier}}
+            </select>                 
+            <select class="edit" name="data.genesis" style="width: 25%;" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.headings.genesisPlaceholder"}}</option>
+                {{selectOptions config.genesisList selected=data.genesis}}
+            </select>
+            <select class="edit" name="data.pantheon" style="width: 50%;" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.headings.pantheonPlaceholder"}}</option>
+                {{selectOptions config.pantheonList selected=data.pantheon}}
+            </select>
+        </div>
+        {{#if data.charGen.patronList}}
+        <div class="heading2">{{localize "scion.headings.charGenStep1B"}}</div>
+        <div class="flex flexRow">
+            <select class="edit" name="data.patron.name" required>
+                <option name="" value="" selected hidden disabled>{{localize "scion.headings.divinePatronPlaceholder"}}</option>
+                {{selectOptions data.charGen.patronList selected=data.patron.name}}
+            </select>
+        </div>
+        {{#if data.patron.name}}
+            <span class="flexLabel heading2">{{localize "scion.game.concept"}}: </span>
+            <div id="concept" class="edit" data-path="data.concept" data-placeholder="{{localize "scion.headings.conceptPlaceholder"}}"></div>
+        {{/if}}
+        {{/if}}
     </div>
-    {{#if data.patron.name}}
-        <span class="flexLabel heading2">{{localize "scion.game.concept"}}: </span>
-        <div id="concept" class="edit" data-path="data.concept" data-placeholder="{{localize "scion.headings.conceptPlaceholder"}}"></div>
-    {{/if}}
-    {{/if}}
 </div>      
