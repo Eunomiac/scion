@@ -1,14 +1,13 @@
 // #region Import Modules
 // import _, {map} from "./external/underscore/underscore-esm-min";
 import * as U from "./data/utils.js";
-// import "../scripts/inline/dragula.js";
 import {scionSystemData} from "./data/constants.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
 import {ScionItem} from "./item/item.js";
 import {ScionItemSheet} from "./item/item-sheet.js";
 import {preloadHandlebarsTemplates} from "./templates.js";
-import "../external/gl-matrix-min.js";
+import "./external/gl-matrix-min.js";
 // #endregion
 
 // #region Hook: Initialization
@@ -41,7 +40,7 @@ Hooks.once("init", async () => {
     // #region Handlebar Helpers
     Handlebars.registerHelper("display", (...args) => {
         const [path, key] = args;
-        return U.getValue(CONFIG.scion, `${path}.${key}`, "label");
+        return U.DigData(CONFIG.scion, `${path}.${key}`, "label");
     });
 
     Handlebars.registerHelper("dotstate", (...args) => {
@@ -66,14 +65,13 @@ Hooks.once("init", async () => {
 // #region Hook: Ready
 Hooks.once("ready", async () => {
     // Make Localized Dictionaries for Handlebar Select Options
-    CONFIG.scion.tierList = U.makeDict(CONFIG.scion.TIERS);
-    CONFIG.scion.pantheonList = U.makeDict(CONFIG.scion.PANTHEONS);
-    CONFIG.scion.genesisList = U.makeDict(CONFIG.scion.GENESES);
-    CONFIG.scion.favoredApproachList = U.makeDict(
+    CONFIG.scion.tierList = U.MakeDict(CONFIG.scion.TIERS);
+    CONFIG.scion.pantheonList = U.MakeDict(CONFIG.scion.PANTHEONS);
+    CONFIG.scion.genesisList = U.MakeDict(CONFIG.scion.GENESES);
+    CONFIG.scion.favoredApproachList = U.MakeDict(
         CONFIG.scion.ATTRIBUTES.approaches,
-        (v, k) => U.localize(`scion.game.${k}`)
+        (v, k) => U.Loc(`scion.game.${k}`)
     );
-
     U.DB(CONFIG.scion, "config");
 });
 // #endregion

@@ -23,10 +23,14 @@
   }
 }
 
-@mixin disabledText {  
+@mixin disabledText {
   font-style: italic;
-  color: #888;
+  color: #666 !important;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255,255,255,0.5);
+  font-family: "Della Respira" !important;
+  font-weight: normal !important;
+  text-indent: 3px;
+  line-height: 20px !important;
 }
 
 @mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {

@@ -16,223 +16,231 @@
                 },
                 "genesis": "",
                 "patronageLine": "",
-                "divineTitle": ""
+                "divineTitle": "",
+                "deeds": {
+                    "shortTerm": [],
+                    "longTerm": [],
+                    "band": []
+                },
+                "purviews": {
+                    "fromBirthrights": 0,                   
+                    "pantheon": "",
+                    "innate": "",
+                    "other": []                      
+                },
+                "birthrights": {
+                    "unspentDots": 0,
+                    "list": {}
+                },
+                "callings": {},
+                "knacks": {},
+                "finishingBonusOn": ""
             },
-            "attributes": {
-                "priorities": {
-                    "primary": {
-                        "unspentDots": 6,
-                        "arena": ""
+            "storyPath": {
+                "paths": []
+            },
+            "fullTraits": {
+                "attributes": {
+                    "priorities": {
+                        "primary": "",
+                        "secondary": "",
+                        "tertiary": ""
                     },
-                    "secondary": {
-                        "unspentDots": 4,
-                        "arena": ""
+                    "favoredApproach": "",
+                    "dotsPurchased": {
+                        "xp": 0,
+                        "other": 0
                     },
-                    "tertiary": {
-                        "unspentDots": 2,
-                        "arena": ""
+                    "unspentDots": {
+                        "general": 0,
+                        "primary": 0,
+                        "secondary": 0,
+                        "tertiary": 0,
+                        "favoredApproach": 0                  
+                    },
+                    "list": {
+                        "intellect": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "cunning": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "resolve": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "might": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "dexterity": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "stamina": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "presence": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "manipulation": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        },
+                        "composure": {
+                            "min": 0,
+                            "value": 1,
+                            "max": 5,
+                            "modifier": []
+                        }   
                     }
                 },
-                "dotsPurchased": 0,
-                "generalUnspentDots": 0,
-                "favoredApproach": "",
-                "intellect": {
-                    "label": "Intellect",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "cunning": {
-                    "label": "Cunning",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "resolve": {
-                    "label": "Resolve",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "might": {
-                    "label": "Might",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "dexterity": {
-                    "label": "Dexterity",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "stamina": {
-                    "label": "Stamina",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "presence": {
-                    "label": "Presence",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "manipulation": {
-                    "label": "Manipulation",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                },
-                "composure": {
-                    "label": "Composure",
-                    "min": 0,
-                    "value": 1,
-                    "max": 5,
-                    "modifier": []
-                }                
-            },
-            "skills": {
-                "academics": {
-                    "label": "Academics",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "athletics": {
-                    "label": "Athletics",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "closeCombat": {
-                    "label": "Close Combat",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "culture": {
-                    "label": "Culture",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "empathy": {
-                    "label": "Empathy",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "firearms": {
-                    "label": "Firearms",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "integrity": {
-                    "label": "Integrity",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "leadership": {
-                    "label": "Leadership",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "medicine": {
-                    "label": "Medicine",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "occult": {
-                    "label": "Occult",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "persuasion": {
-                    "label": "Persuasion",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "pilot": {
-                    "label": "Pilot",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "science": {
-                    "label": "Science",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "subterfuge": {
-                    "label": "Subterfuge",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "survival": {
-                    "label": "Survival",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
-                },
-                "technology": {
-                    "label": "Technology",
-                    "min": 0,
-                    "value": 0,
-                    "max": 5,
-                    "modifier": [],
-                    "specialty": ""
+                "skills": {
+                    "dotsPurchased": {
+                        "xp": 0,
+                        "other": 0
+                    },
+                    "specsPurchased": 0,                    
+                    "unspentDots": 0,
+                    "list": {
+                        "academics": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "athletics": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "closeCombat": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "culture": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "empathy": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "firearms": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "integrity": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "leadership": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "medicine": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "occult": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "persuasion": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "pilot": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "science": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "subterfuge": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "survival": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        },
+                        "technology": {
+                            "min": 0,
+                            "value": 0,
+                            "max": 5,
+                            "modifier": [],
+                            "specialty": ""
+                        }
+                    }
                 }
             }
         },
         "Character": {
-            "templates": ["bio", "divinity", "attributes", "skills"]
+            "templates": ["bio", "divinity", "fullTraits", "storyPath"]
         }
     },
     "Item": {

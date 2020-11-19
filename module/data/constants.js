@@ -1336,7 +1336,7 @@ export const scionSystemData = {
         nuada: {
             label: "scion.gods.nuada",
             pantheon: "tuathaDeDanann",
-            mantle: "scion.mantles.nuada",
+            mantle: false,
             bookRef: "scion.books.hero",
             bookPage: 154,
             callings: ["leader", "sage", "warrior"],
@@ -1597,7 +1597,7 @@ export const scionSystemData = {
         anahita: {
             label: "scion.gods.anahita",
             pantheon: "yazata",
-            mantle: "scion.mantles.anahita",
+            mantle: false,
             bookRef: "scion.books.motw",
             bookPage: 50,
             callings: ["creator", "healer", "warrior"],
@@ -1606,7 +1606,7 @@ export const scionSystemData = {
         ashi: {
             label: "scion.gods.ashi",
             pantheon: "yazata",
-            mantle: "scion.mantles.ashi",
+            mantle: false,
             bookRef: "scion.books.motw",
             bookPage: 50,
             callings: ["judge", "sage", "warrior"],
@@ -1651,7 +1651,7 @@ export const scionSystemData = {
         mithra: {
             label: "scion.gods.mithra",
             pantheon: "yazata",
-            mantle: "scion.mantles.mithra",
+            mantle: false,
             bookRef: "scion.books.motw",
             bookPage: 50,
             callings: ["guardian", "judge", "leader"],
@@ -1678,7 +1678,7 @@ export const scionSystemData = {
         tishtrya: {
             label: "scion.gods.tishtrya",
             pantheon: "yazata",
-            mantle: "scion.mantles.tishtrya",
+            mantle: false,
             bookRef: "scion.books.motw",
             bookPage: 50,
             callings: ["guardian", "healer", "warrior"],
@@ -1687,7 +1687,7 @@ export const scionSystemData = {
         vanant: {
             label: "scion.gods.vanant",
             pantheon: "yazata",
-            mantle: "scion.mantles.vanant",
+            mantle: false,
             bookRef: "scion.books.motw",
             bookPage: 50,
             callings: ["guardian", "hunter", "judge"],

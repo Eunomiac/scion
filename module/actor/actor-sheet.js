@@ -1,4 +1,4 @@
-import * as _ from "../external/underscore/underscore-esm-min.js";
+// import * as _ from "../external/underscore/underscore-esm-min.js";
 import * as U from "../data/utils.js";
 import "../external/dragula.min.js";
 /**
@@ -17,24 +17,15 @@ export class ScionActorSheet extends ActorSheet {
     get template() {
         return `systems/scion/templates/actor/${this.object.data.type}-sheet.hbs`;
     }
-    get charGenStep() {
-        const actorData = this.object.data.data;
-        if (actorData.concept && actorData.genesis && actorData.patron.name)
-            return 2;
-        return 1;
-    }
-
     getData() {
         const data = super.getData();
 
         data.config = CONFIG.scion;
-        data.test = {
-            groupName: "importantChoice",
-            choices: {a: "Choice A", b: "Choice B"},
-            chosen: "a"
-        };
-        const [actorData, scionData] = [data.data, data.config];
-        actorData.charGen = actorData.charGen || {};
+        const actorData = data.data;
+        const panthData = CONFIG.scion.PANTHEONS;
+        const godData = CONFIG.scion.GODS;
+
+        actorData.charGen = actorData.charGen || {charGenStep: "1"};
         data.blocks = {
             chargen: {
                 class: "charGen",
@@ -42,110 +33,40 @@ export class ScionActorSheet extends ActorSheet {
             }
         };
 
-        console.log(this.object.data.data);
         // Update Patronage Subheader
         const {genesis, pantheon, patron} = actorData;
-        if (pantheon && patron.name && scionData.PANTHEONS[pantheon].members.includes(patron.name)) {
-            if (genesis) {
-                const mantle = scionData.GODS[patron.name].mantle ? U.localize(scionData.GODS[patron.name].mantle) : "";
-                actorData.patronageLine = U.localize(
+        actorData.patronageLine = "";
+        if (pantheon && patron && panthData[pantheon].members.includes(patron)) {
+            if (genesis)
+                actorData.patronageLine = U.Loc(
                     `scion.geneses.${genesis}Line`,
                     {
-                        divinePatronName: U.localize(scionData.GODS[patron.name].label),
-                        mantleDelim: mantle ? ", " : "",
-                        divinePatronMantle: mantle
+                        divinePatronName: U.Loc(CONFIG.scion.GODS[patron].label),
+                        divinePatronMantle: CONFIG.scion.GODS[patron].mantle ? `, ${CONFIG.scion.GODS[patron].mantle}` : ""
                     }
                 );
-            } else {
-                actorData.patronageLine = "";
-            }
         } else {
             actorData.patron.name = "";
-            actorData.patronageLine = "";
         }
 
         // Update Patrons List
         if (pantheon)
-            actorData.charGen.patronList = U.makeDict(
-                scionData.PANTHEONS[pantheon].members,
-                (v) => U.localize(`scion.gods.${v}`),
+            actorData.charGen.patronList = U.MakeDict(
+                panthData[pantheon].members,
+                (v) => U.Loc(`scion.gods.${v}`),
                 (k, v) => v
             );
-
-        // Update Character Creation Step (or false if character finished)
-        actorData.charGen.charGenStep = this.charGenStep;
 
         return data;
     }
 
-    _initializeAttributes(actorData) {
-        const unspentDots = {
-            general: parseInt(actorData.dotsPurchased),
-            primary: 0,
-            secondary: 0,
-            tertiary: 0
-        };
-        const updateData = {};
-        // First, adjust minimum and set Favored Approach attributes:
-        for (const attribute of CONFIG.scion.ATTRIBUTES.all) {
-            if (CONFIG.scion.ATTRIBUTES.approaches[actorData.favoredApproach].includes(attribute)) {
-                actorData[attribute].value = 3;
-                actorData[attribute].min = 3;
-            } else {
-                actorData[attribute].value = 1;
-                actorData[attribute].min = 1;
-            }
-            Object.assign(updateData, U.getUpdateData(this.actor, attribute, actorData[attribute].value, "value", true));
-            Object.assign(updateData, U.getUpdateData(this.actor, attribute, actorData[attribute].min, "min", true));
-        }
-
-        // For each Arena, calculate unspentDots:
-        for (const [priority, data] of Object.entries(CONFIG.scion.ATTRIBUTES.priorities)) {
-            const numDots = data.startingDots;
-            if (actorData.priorities[priority].arena in CONFIG.scion.ATTRIBUTES.arenas) {
-                const attrList = CONFIG.scion.ATTRIBUTES.arenas[actorData.priorities[priority].arena];
-                const assignedDots = attrList.reduce((tot, attr) => tot + actorData[attr].value - 1, 0);
-                unspentDots[priority] = numDots - (assignedDots - 2); // Subtract 2 for favored approach dots.
-                if (unspentDots[priority] < 0) {
-                    unspentDots.general += parseInt(unspentDots[priority]);
-                    unspentDots[priority] = 0;
-                }
-            }
-        }
-        Object.assign(updateData, U.getUpdateData(this.actor, "generalUnspentDots", unspentDots.general));
-        Object.assign(updateData, U.getUpdateData(this.actor, "priorities.primary.unspentDots", unspentDots.primary));
-        Object.assign(updateData, U.getUpdateData(this.actor, "priorities.secondary.unspentDots", unspentDots.secondary));
-        Object.assign(updateData, U.getUpdateData(this.actor, "priorities.tertiary.unspentDots", unspentDots.tertiary));
-        console.log({"@@@ ACTOR.UPDATE (PREPARE ATTRIBUTES) @@@": updateData});
-        this.actor.update(updateData);
-    }
-
-    _resetAttributes() {
-        const updateData = {};
-        for (const attribute of CONFIG.scion.ATTRIBUTES.all) {
-            Object.assign(updateData, U.getUpdateData(this.actor, attribute, 1, "value", true));
-            Object.assign(updateData, U.getUpdateData(this.actor, attribute, 1, "min", true));
-            Object.assign(updateData, U.getUpdateData(this.actor, attribute, [], "modifier", true));
-        }
-        for (const [priority, data] of Object.entries(CONFIG.scion.ATTRIBUTES.priorities)) {
-            Object.assign(updateData, U.getUpdateData(this.actor, `priorities.${priority}.unspentDots`, data.startingDots));
-            Object.assign(updateData, U.getUpdateData(this.actor, `priorities.${priority}.arena`, ""));
-        }
-        Object.assign(updateData, U.getUpdateData(this.actor, "generalUnspentDots", 0));
-        Object.assign(updateData, U.getUpdateData(this.actor, "favoredApproach", ""));
-        console.log({"@@@ ACTOR.UPDATE (RESET ATTRIBUTES) @@@": updateData});
-        this.actor.update(updateData);
-    }
-
     activateListeners(html) {
         super.activateListeners(html);
-
-        // Everything below here is only needed if the sheet is editable
         if (!this.options.editable)
             return;
 
         // #region CONTENT-EDITABLE ELEMENTS
-        html.find(".edit").each((i, element) => {
+        html.find(".contentEditable").each((i, element) => {
             const data = element.dataset;
             element.setAttribute("contenteditable", false);
             element.addEventListener("click", (event) => this._onEditClickOn(event), false);
@@ -153,21 +74,21 @@ export class ScionActorSheet extends ActorSheet {
 
             // If dataset includes a path, fill the element with the current data:
             if ("path" in data) {
-                const actorVal = U.getValue(data.path.startsWith("actor") ? this : this.actor.data.data, data.path);
+                const actorVal = U.DigData(this, data.path);
                 if (actorVal)
                     element.innerHTML = actorVal.trim();
                 else
                     element.innerHTML = "";
             }
 
-            // If element innerHTML is blank, populate with placeholder OR a single blank space (to preserve element height)
+            // If element innerHTML is blank, populate with placeholder if one is available
             let isDisplayingPlaceholderText = false;
             if (!element.innerText)
                 if ("placeholder" in data) {
                     element.innerHTML = data.placeholder;
                     isDisplayingPlaceholderText = true;
                 } else {
-                    element.innerHTML = "&nbsp;";
+                    element.innerHTML = "";
                 }
 
             // Apply placeholder class if necessary:
@@ -175,6 +96,95 @@ export class ScionActorSheet extends ActorSheet {
                 element.classList.add("placeholder");
             else
                 element.classList.remove("placeholder");
+        });
+        // #endregion
+
+        // #region SPECIALIZED ON-CHANGE FUNCTIONS
+        const getCharGenStep = () => {
+            const actorData = this.getData().data;
+            const charGenStepReqs = {
+                10: {
+                    ["data.finishingBonusOn"]: (x) => Boolean(x)
+                },
+                7: {
+                    ["data.purviews"]: (x) => x.innate && x.pantheon && (x.other.length - 2) === x.fromBirthrights
+                },
+                6: {
+                    ["data.birthrights"]: (x) => x.unspentDots === 0 && Object.values(x.list).length
+                },
+                5: {
+                    ["data.callings"]: (x) => Object.keys(x).filter((xx) => x[xx].value >= 1).length === 3
+                                        && Object.values(x).reduce((tot, xx) => tot + xx.value, 0) === 5,
+                    ["data.knacks"]: (x) => Object.values(x).reduce((tot, xx) => ({heroic: 1, immortal: 2}[xx.knackType] * xx.value + tot), 0)
+                },
+                4: {
+                    ["data.attributes"]: (x) => Object.values(x.priorities).filter((xx) => Boolean(xx)).length === 3
+                                            && Boolean(x.favoredApproach),
+                    ["data.skills"]: (x) => true
+                },
+                3: {
+                    ["data.paths"]: (x) => x.length === 3
+                },
+                2: {
+                    ["data.patron"]: (x) => actorData.pantheon && x.name && CONFIG.scion.PANTHEONS[actorData.pantheon].members.includes(x.name),
+                    ["data.genesis"]: (x) => Boolean(x),
+                    ["data.concept"]: (x) => Boolean(x)/* ,
+                    ["data.deeds"]: (x) => x.shortTerm.length && x.longTerm.length */
+                }
+            };
+            const reportLines = [];
+            for (const [step, tests] of Object.entries(charGenStepReqs)) {
+                reportLines.push(`@@@ STEP: ${step} @@@`);
+                let isStepOK = true;
+                const testResults = [];
+                for (const [path, testFunc] of Object.entries(tests)) {
+                    isStepOK = isStepOK && testFunc(U.DigData(actorData, path));
+                    testResults.push([path, U.DigData(actorData, path), isStepOK]);
+                    if (!isStepOK)
+                        break;
+                }
+                reportLines.push(testResults);
+                if (isStepOK) {
+                    console.log({
+                        ["!!! RETURNING A STEP !!!"]: U.Int(step),
+                        [">> REPORT >>"]: reportLines
+                    });
+                    return U.Int(step);
+                }
+            }
+            console.log({
+                ["XXX RETURNING ONE XXX"]: 1,
+                [">> REPORT >>"]: reportLines
+            });
+            return 1;
+        };
+        const setCharGenToggles = (element) => {
+            const actorData = this.getData().data;
+            const elementStep = U.Int(element.dataset.chargenstep);
+            const charGenStep = U.Int(getCharGenStep());
+            const toggleClasses = ["hide", "noGlow", "halfGlow", "activeGlow"];
+            const classArray = Array.from(element.classList).filter((x) => !toggleClasses.includes(x));
+            if (charGenStep < (elementStep - 1))
+                classArray.push("hide");
+            else if (charGenStep < elementStep)
+                classArray.push("noGlow");
+            else if (charGenStep === elementStep)
+                classArray.push("activeGlow");
+            else if (charGenStep > elementStep)
+                classArray.push("halfGlow");
+            element.className = classArray.join(" ");
+            console.log({
+                ["@@ ELEMENT @@"]: element,
+                ["@@ ELEMENT STEP @@"]: elementStep,
+                ["actorData.charGen.charGenStep"]: actorData.charGen.charGenStep,
+                ["charGenStep"]: charGenStep
+            });
+        };
+        html.find(".charGenToggle").each((i, element) => {
+            setCharGenToggles.bind(this)(element);
+            element.addEventListener("change", (event) => {
+                setCharGenToggles.bind(this)(event.currentTarget);
+            });
         });
         // #endregion
 
@@ -216,7 +226,7 @@ export class ScionActorSheet extends ActorSheet {
         console.log({"@@ CLICK ON @@": element});
         element.setAttribute("contenteditable", true);
         if (element.classList.contains("placeholder")) {
-            element.innerHTML = " ";
+            element.innerHTML = "";
             element.classList.remove("placeholder");
         }
     }
@@ -228,18 +238,18 @@ export class ScionActorSheet extends ActorSheet {
         element.setAttribute("contenteditable", false);
         if ("path" in data) {
             if (data.path.endsWith("divineTitle") && element.innerText)
-                element.innerHTML = `"${element.innerHTML}"`.replace(/""/gu, "\"");
+                element.innerHTML = `"${element.innerText.replace(/(^\s*"+|"+\s*$)/gu, "").trim()}"`;
             if (data.path.startsWith("actor"))
-                this.actor.update({[data.path.slice(6)]: element.innerText});
+                this.actor.update({[data.path.slice(6)]: element.innerText.trim()});
             else
-                this.actor.update({[data.path]: element.innerText});
+                this.actor.update({[data.path]: element.innerText.trim()});
             let isDisplayingPlaceholderText = false;
             if (!element.innerText)
                 if ("placeholder" in data) {
                     element.innerHTML = data.placeholder;
                     isDisplayingPlaceholderText = true;
                 } else {
-                    element.innerHTML = "&nbsp;";
+                    element.innerHTML = "";
                 }
 
             // Apply placeholder class if necessary:

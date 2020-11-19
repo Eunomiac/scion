@@ -1,6 +1,5 @@
-<input class="hidden" type="radio" name="data.charGen.charGenStep" value="0">
 <div class="flex flexContainer drawerContainer">
-    <input type="radio" name="data.charGen.charGenStep" value="1">
+    <input class="charGenToggle" type="checkbox" data-chargenstep="1">
     <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep1"}}</div>
     <div class="drawerContents">
         <div class="heading2">{{localize "scion.headings.charGenStep1A"}}</div>
@@ -28,13 +27,15 @@
         </div>
             {{#if data.patron.name}}
             <span class="flexLabel heading2">{{localize "scion.game.concept"}}: </span>
-            <div id="concept" class="edit" data-path="data.concept" data-placeholder="{{localize "scion.headings.conceptPlaceholder"}}"></div>
+            <div class="flex flexRow">
+                <div id="concept" class="edit contentEditable" data-path="data.concept" data-placeholder="{{localize "scion.headings.conceptPlaceholder"}}"></div>
+            </div>
             {{/if}}
         {{/if}}
     </div>
 </div>
 <div class="flex flexContainer drawerContainer">
-    <input type="radio" name="data.charGen.charGenStep" value="2">
+    <input class="charGenToggle" type="checkbox" data-chargenstep="2">
     <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep2"}}</div>
     <div class="drawerContents">
         <div class="heading2">{{localize "scion.headings.charGenStep2A"}}</div>
@@ -42,6 +43,60 @@
             <div class="path">Role</div>
             <div class="path">Origin</div>
             <div class="path">Pantheon</div>
+        </div>
+    </div>
+</div>
+<div class="flex flexContainer drawerContainer">
+    <input class="charGenToggle" type="checkbox" data-chargenstep="3">
+    <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep3"}}</div>
+    <div class="drawerContents">
+        {{!-- <div class="heading2">{{localize "scion.headings.charGenStep2A"}}</div> --}}
+        <div class="flex flexRow">
+            <div class="edit editable">Step Three!</div>
+        </div>
+    </div>
+</div>
+
+<div class="flex flexContainer drawerContainer">
+    <input class="charGenToggle" type="checkbox" data-chargenstep="4">
+    <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep4"}}</div>
+    <div class="drawerContents">
+        {{!-- <div class="heading2">{{localize "scion.headings.charGenStep2A"}}</div> --}}
+        <div class="flex flexRow">
+            <div class="edit editable">Step Four!</div>
+        </div>
+    </div>
+</div>
+
+<div class="flex flexContainer drawerContainer">
+    <input class="charGenToggle" type="checkbox" data-chargenstep="5">
+    <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep5"}}</div>
+    <div class="drawerContents">
+        {{!-- <div class="heading2">{{localize "scion.headings.charGenStep2A"}}</div> --}}
+        <div class="flex flexRow">
+            <div class="edit editable">Step Five!</div>
+        </div>
+    </div>
+</div>
+
+<div class="flex flexContainer drawerContainer">
+    <input class="charGenToggle" type="checkbox" data-chargenstep="6">
+    <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep6"}}</div>
+    <div class="drawerContents">
+        {{!-- <div class="heading2">{{localize "scion.headings.charGenStep2A"}}</div> --}}
+        <div class="flex flexRow">
+            <div class="edit editable">Step Six!</div>
+        </div>
+    </div>
+</div>
+
+<div class="flex flexContainer drawerContainer">
+    <input class="charGenToggle" type="checkbox" data-chargenstep="7">
+    <div class="heading1 drawerLabel">{{localize "scion.headings.charGenStep7"}}</div>
+    <div class="drawerContents">
+        {{!-- <div class="heading2">{{localize "scion.headings.charGenStep2A"}}</div> --}}
+        <div class="flex flexRow">
+            <div class="edit editable">Step Seven!</div>
         </div>
     </div>
 </div>

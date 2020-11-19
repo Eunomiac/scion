@@ -18,15 +18,11 @@
     justify-content: safe space-between;
     align-content: safe flex-start;
     
-    > * { flex: 0 1 auto; padding: 0.25rem; }
+    > * { flex: 0 1 auto; margin: 0.25rem 0; } // initialize all contained items as default.
 }
 
 .flexContainer {
     height: 100%;
-    flex-flow: row wrap;
-    
-    /* #region Flex Items */
-    > * { flex: 0 1 auto; padding: 0.25rem; } // initialize all contained items as default.
 
     div { width: 100%; } // Divs assumed to take up whole row.
     span { display: inline-block; width: auto; margin: auto; } // Use spans for inline labels, etc.

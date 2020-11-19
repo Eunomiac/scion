@@ -1,6 +1,8 @@
 <form class="{{cssClass}} {{actor.type}} {{data.pantheon}}" autocomplete="off">
     {{log "!!!!!!!!!!!!!!!!!!"}} 
     {{log this}}
+    {{log this.actor.data}}
+    {{log "##################"}}
     <div class="grid main">
             {{!-- Sheet Tab Navigation --}}
             <nav class="sheet-tabs tabs" data-group="primary">
@@ -13,8 +15,8 @@
 
             {{!-- Sheet Header --}}
             <div class="header grid">
-                <div class="divineTitle text surTitle edit" data-path="data.divineTitle"></div>
-                <div class="charName text title edit" data-path="actor.name"></div>
+                <div class="divineTitle text surTitle edit contentEditable" data-path="data.divineTitle"></div>
+                <div class="charName text title edit contentEditable" data-path="actor.name"></div>
                 <div class="patronage"><textarea class="subTitle text readonly" name="data.patronageLine" readonly >{{data.patronageLine}}</textarea></div>
             </div>
                 <!-- <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>     -->      

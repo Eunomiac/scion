@@ -31,8 +31,12 @@ textarea:invalid,
 input[type="text"]:invalid,
 select:invalid {
   font-style: italic;
-  color: #888;
+  color: #666 !important;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
+  font-family: "Della Respira" !important;
+  font-weight: normal !important;
+  text-indent: 3px;
+  line-height: 20px !important;
 }
 
 /* #endregion */
@@ -56,8 +60,12 @@ select:invalid {
 
 .placeholder {
   font-style: italic;
-  color: #888;
+  color: #666 !important;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
+  font-family: "Della Respira" !important;
+  font-weight: normal !important;
+  text-indent: 3px;
+  line-height: 20px !important;
 }
 
 .half {
@@ -69,7 +77,7 @@ select:invalid {
 }
 
 /* #endregion */
-/* #region Editable Divs */
+/* #region Editable Input Elements */
 .edit {
   color: var(--fontColorBody);
   font-family: var(--fontFamilyBody);
@@ -78,9 +86,17 @@ select:invalid {
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.2);
   border: inset 3px brown;
+  /* #region Special Tweaks for Content-Editable DIV Elements */
+  /* #endregion */
 }
 
-.edit:focus {
+.edit.edit.contentEditable {
+  padding: 0.1rem 0.2rem 0.05rem 0.2rem;
+  height: 27px;
+  line-height: normal;
+}
+
+.edit.edit.contentEditable:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: none;
@@ -110,14 +126,16 @@ select:invalid {
 .drawerContainer input[type="radio"] {
   display: inline-block;
   height: 1.75rem;
-  width: 1.25rem;
-  margin: 0 -1rem 0 -0.5rem;
+  width: 100%;
+  margin: 0 -100% 0 0;
   padding: 0;
   opacity: 0;
   -webkit-box-flex: 0;
   -ms-flex: none;
   flex: none;
   font-size: 2rem;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .drawerContainer input[type="checkbox"] + .drawerLabel,
@@ -130,8 +148,10 @@ select:invalid {
   content: "";
   display: inline-block;
   background-size: 100%;
-  height: 1rem;
-  width: 1rem;
+  height: 1.75rem;
+  width: 1.75rem;
+  background-color: blue;
+  border-radius: 50%;
 }
 
 .drawerContainer input[type="checkbox"] + .drawerLabel ~ .drawerContents,
@@ -149,29 +169,20 @@ select:invalid {
   transition: opacity 200ms, transform 200ms, margin 50ms, -webkit-transform 200ms;
 }
 
-.drawerContainer input[type="checkbox"]:checked + .drawerLabel::before,
-.drawerContainer input[type="radio"]:checked + .drawerLabel::before {
-  background-image: url("../images/openDrawer.png");
-}
-
-.drawerContainer input[type="checkbox"]:not(:checked) + .drawerLabel,
-.drawerContainer input[type="radio"]:not(:checked) + .drawerLabel {
+.drawerContainer input[type="checkbox"].hide + .drawerLabel,
+.drawerContainer input[type="radio"].hide + .drawerLabel {
+  opacity: 0;
   height: 1.75rem;
-  font-size: 1.25rem;
-  line-height: 1.25rem;
   border-bottom: none;
-  font-style: italic;
-  font-weight: normal;
-  color: #444;
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) + .drawerLabel::before,
-.drawerContainer input[type="radio"]:not(:checked) + .drawerLabel::before {
-  background-image: url("../images/closedDrawer.png");
+.drawerContainer input[type="checkbox"].hide + .drawerLabel::before,
+.drawerContainer input[type="radio"].hide + .drawerLabel::before {
+  opacity: 0;
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerContents,
-.drawerContainer input[type="radio"]:not(:checked) ~ .drawerContents {
+.drawerContainer input[type="checkbox"].hide + .drawerLabel ~ .drawerContents,
+.drawerContainer input[type="radio"].hide + .drawerLabel ~ .drawerContents {
   opacity: 0;
   margin-bottom: -100%;
   -webkit-transform: scaleY(0);
@@ -182,6 +193,96 @@ select:invalid {
   -o-transition: opacity 200ms, transform 200ms, margin 750ms;
   transition: opacity 200ms, transform 200ms, margin 750ms;
   transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
+}
+
+.drawerContainer input[type="checkbox"].noGlow + .drawerLabel,
+.drawerContainer input[type="radio"].noGlow + .drawerLabel {
+  opacity: 0.5;
+  height: 1.75rem;
+  border-bottom: none;
+}
+
+.drawerContainer input[type="checkbox"].noGlow + .drawerLabel::before,
+.drawerContainer input[type="radio"].noGlow + .drawerLabel::before {
+  content: "";
+  background-size: 100%;
+  height: 1.75rem;
+  width: 1.75rem;
+  background-color: black;
+  border-radius: 50%;
+  float: left;
+}
+
+.drawerContainer input[type="checkbox"].noGlow + .drawerLabel ~ .drawerContents,
+.drawerContainer input[type="radio"].noGlow + .drawerLabel ~ .drawerContents {
+  display: none;
+  /* opacity: 0;
+                    margin-bottom: -100%;
+                    transform: scaleY(0);
+                    transition: opacity 200ms, transform 200ms, margin 750ms; */
+}
+
+.drawerContainer input[type="checkbox"].halfGlow,
+.drawerContainer input[type="radio"].halfGlow {
+  pointer-events: all;
+}
+
+.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel,
+.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel {
+  pointer-events: none;
+  opacity: 0.75;
+  height: 1.75rem;
+  border-bottom: none;
+}
+
+.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel::before,
+.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel::before {
+  content: "";
+  float: left;
+  background-size: 100%;
+  height: 1.75rem;
+  width: 1.75rem;
+  background-color: orange;
+  border-radius: 50%;
+}
+
+.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel ~ .drawerContents,
+.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel ~ .drawerContents {
+  opacity: 0;
+  margin-bottom: -100%;
+  -webkit-transform: scaleY(0);
+  -ms-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
+  transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
+  -o-transition: opacity 200ms, transform 200ms, margin 750ms;
+  transition: opacity 200ms, transform 200ms, margin 750ms;
+  transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
+}
+
+.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel,
+.drawerContainer input[type="radio"].activeGlow + .drawerLabel {
+  opacity: 1;
+}
+
+.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel::before,
+.drawerContainer input[type="radio"].activeGlow + .drawerLabel::before {
+  content: "";
+  float: left;
+  background-size: 100%;
+  height: 1.75rem;
+  width: 1.75rem;
+  background-color: green;
+  border-radius: 50%;
+}
+
+.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel ~ .drawerContents,
+.drawerContainer input[type="radio"].activeGlow + .drawerLabel ~ .drawerContents {
+  opacity: 1;
+  margin-bottom: 0%;
+  -webkit-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
 }
 
 .drawerContainer.noClick input[type="checkbox"] {
@@ -376,24 +477,12 @@ select:invalid {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
-  padding: 0.25rem;
+  margin: 0.25rem 0;
 }
 
 .flexContainer {
   height: 100%;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  /* #region Flex Items */
   /* #endregion */
-}
-
-.flexContainer > * {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  padding: 0.25rem;
 }
 
 .flexContainer div {
