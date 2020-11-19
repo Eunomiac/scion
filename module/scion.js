@@ -8,6 +8,7 @@ import {ScionActorSheet} from "./actor/actor-sheet.js";
 import {ScionItem} from "./item/item.js";
 import {ScionItemSheet} from "./item/item-sheet.js";
 import {preloadHandlebarsTemplates} from "./templates.js";
+import "../external/gl-matrix-min.js";
 // #endregion
 
 // #region Hook: Initialization

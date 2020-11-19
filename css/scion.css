@@ -43,6 +43,10 @@ select:invalid {
   overflow: hidden;
 }
 
+.hidden {
+  display: none;
+}
+
 .text {
   color: var(--fontColorBody);
   font-family: var(--fontFamilyBody);
@@ -54,6 +58,14 @@ select:invalid {
   font-style: italic;
   color: #888;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
+}
+
+.half {
+  width: 50%;
+}
+
+.quarter {
+  width: 25%;
 }
 
 /* #endregion */
@@ -97,11 +109,15 @@ select:invalid {
 .drawerContainer input[type="checkbox"],
 .drawerContainer input[type="radio"] {
   display: inline-block;
-  height: 100%;
-  width: 100%;
-  margin: 0 -100% 0 0;
+  height: 1.75rem;
+  width: 1.25rem;
+  margin: 0 -1rem 0 -0.5rem;
   padding: 0;
   opacity: 0;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+  font-size: 2rem;
 }
 
 .drawerContainer input[type="checkbox"] + .drawerLabel,
@@ -118,8 +134,8 @@ select:invalid {
   width: 1rem;
 }
 
-.drawerContainer input[type="checkbox"] + .drawerLabel + .drawerContents,
-.drawerContainer input[type="radio"] + .drawerLabel + .drawerContents {
+.drawerContainer input[type="checkbox"] + .drawerLabel ~ .drawerContents,
+.drawerContainer input[type="radio"] + .drawerLabel ~ .drawerContents {
   -webkit-transition-timing-function: ease-in-out;
   -o-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
@@ -138,20 +154,24 @@ select:invalid {
   background-image: url("../images/openDrawer.png");
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel,
-.drawerContainer input[type="radio"]:not(:checked) ~ .drawerLabel {
+.drawerContainer input[type="checkbox"]:not(:checked) + .drawerLabel,
+.drawerContainer input[type="radio"]:not(:checked) + .drawerLabel {
+  height: 1.75rem;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  border-bottom: none;
   font-style: italic;
-  color: #888;
-  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
+  font-weight: normal;
+  color: #444;
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerLabel::before,
-.drawerContainer input[type="radio"]:not(:checked) ~ .drawerLabel::before {
+.drawerContainer input[type="checkbox"]:not(:checked) + .drawerLabel::before,
+.drawerContainer input[type="radio"]:not(:checked) + .drawerLabel::before {
   background-image: url("../images/closedDrawer.png");
 }
 
-.drawerContainer input[type="checkbox"]:not(:checked) + .drawerContents,
-.drawerContainer input[type="radio"]:not(:checked) + .drawerContents {
+.drawerContainer input[type="checkbox"]:not(:checked) ~ .drawerContents,
+.drawerContainer input[type="radio"]:not(:checked) ~ .drawerContents {
   opacity: 0;
   margin-bottom: -100%;
   -webkit-transform: scaleY(0);
@@ -273,6 +293,17 @@ select:invalid {
   line-height: var(--lineHeightHeading2);
   text-shadow: var(--textShadowHeading2);
   border-bottom: var(--borderBottomHeading2);
+}
+
+.path {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
+  box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
+  font-size: 2rem;
+  color: black;
 }
 
 /* DRAGULA SETUP: 

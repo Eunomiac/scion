@@ -28,6 +28,11 @@ export class ScionActorSheet extends ActorSheet {
         const data = super.getData();
 
         data.config = CONFIG.scion;
+        data.test = {
+            groupName: "importantChoice",
+            choices: {a: "Choice A", b: "Choice B"},
+            chosen: "a"
+        };
         const [actorData, scionData] = [data.data, data.config];
         actorData.charGen = actorData.charGen || {};
         data.blocks = {
