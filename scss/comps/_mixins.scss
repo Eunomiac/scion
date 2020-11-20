@@ -28,9 +28,9 @@
   color: #666 !important;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255,255,255,0.5);
   font-family: "Della Respira" !important;
+  font-size: 0.75rem !important;
   font-weight: normal !important;
-  text-indent: 3px;
-  line-height: 20px !important;
+  line-height: 1.25rem !important;
 }
 
 @mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {

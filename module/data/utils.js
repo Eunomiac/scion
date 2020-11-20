@@ -13,15 +13,23 @@ const getEntityData = (dataObj) => {
     return dataObj;
 };
 
-const tracePathString = (dataObj, path) => {
-    dataObj = getEntityData(dataObj);
-    const pathRefs = path.replace(/^((actor\.)|(data\.)|(object\.))+/u, "").split(".");
+const tracePathString = (dataObj, path, isGettingRef = false) => {
+    if (!(dataObj instanceof Actor && path.startsWith("actor"))) {
+        dataObj = getEntityData(dataObj);
+        path = path.replace(/^((actor\.)|(data\.)|(object\.))+/u, "");
+    } else {
+        path = path.replace(/^actor\./u, "");
+    }
+    const pathRefs = path.split(".");
+    if (pathRefs.length && isGettingRef)
+        pathRefs.pop();
     while (pathRefs.length && typeof dataObj === "object")
         dataObj = dataObj[pathRefs.shift()];
     return pathRefs.length ? false : dataObj;
 };
 
-export const DigData = (dataObj, pathStr, subPropsToCheck = ["value"]) => {
+export const DigActor = (dataObj, pathStr, subPropsToCheck = ["value"]) => {
+    // Given Actor, ActorSheet or actor.data[.data], will follow path string and return value.
     dataObj = tracePathString(dataObj, pathStr);
     if (typeof dataObj === "object" && subPropsToCheck.find((x) => x in dataObj))
         return dataObj[subPropsToCheck.find((x) => x in dataObj)];

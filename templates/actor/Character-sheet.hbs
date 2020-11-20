@@ -30,27 +30,27 @@
                 <div class="tab front grid" data-group="primary" data-tab="front">
                     <div class="attributes flex">
                         <div class="heading1">Attributes</div>
-                        {{#if data.generalUnspentDots}}
+                        {{#if data.attributes.unspentDots.general}}
                             <div class="dotGrabBin dotDropBin flex">
-                                {{#for data.generalUnspentDots}}
-                                    <span class="dot unspent" data-dottype="primary|secondary|tertiary" data-trait="generalUnspentDots"></span>
+                                {{#for data.attributes.unspentDots.general}}
+                                    <span class="dot unspent" data-dottype="primary|secondary|tertiary" data-trait="data.attributes.unspentDots.general"></span>
                                 {{/for}}
                             </div>
                         {{/if}}
-                        {{#each data.priorities as |category key|}} 
-                            <div class="attrBlock {{key}} flex">
-                                {{#if category.unspentDots}}
+                        {{#each data.attributes.priorities as |arena priority|}}
+                            <div class="attrBlock {{arena}} flex">
+                                {{#if data.attributes.unspentDots.[arena]}}
                                     <div class="dotGrabBin dotDropBin flex"> 
-                                        {{#for category.unspentDots}}
-                                            <span class="dot unspent" data-dottype="{{key}}" data-trait="priorities.{{key}}.unspentDots"></span>
+                                        {{#for data.attributes.unspentDots.[arena]}}
+                                            <span class="dot unspent" data-dottype="{{arena}}" data-trait="data.attributes.unspentDots.{{arena}}"></span>
                                         {{/for}}
                                     </div>
                                 {{/if}}
-                                {{#each category.attributes as |attribute|}}
-                                    <div class="attrRow dotDropBin grid" data-dottype="{{key}}" data-trait="{{attribute}}">
-                                        <div class="label">{{display "ATTRIBUTES.all" attribute}}</div>
+                                {{#each (lookup ../config.ATTRIBUTES.arenas arena) as |attribute|}}
+                                    <div class="attrRow dotDropBin grid" data-dottype="{{arena}}" data-trait="{{attribute}}">
+                                        <div class="label">{{localize (concat "scion.attributes." attribute)}}</div>
                                         {{#for 5}}
-                                            <span class="dot click {{dotstate attribute @index}}" data-dottype="{{key}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
+                                            <span class="dot click {{dotstate attribute @index}}" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
                                         {{/for}}
                                     </div>
                                 {{/each}}
@@ -64,13 +64,17 @@
                         <div class="pantheonpath"></div>
                     </div>
                     <div class="virtues grid">
-                        <div class="leftvirtue text">Honor</div>
+                        {{#if data.pantheon}}
+                        {{#with (lookup config.PANTHEONS data.pantheon) as | pantheon |}}
+                        <div class="leftvirtue text">{{localize (concat "scion.virtues." pantheon.virtues.[0])}}</div>
                         <div class="dotline">
                             {{#for 5}}
-                                <span class="dot" data-trait="virtue" data-val="{{@index}}"></span>
+                                <span class="dot" data-dottype="{{arena}}" data-trait="virtue" data-val="{{@index}}"></span>
                             {{/for}}
                         </div>
-                        <div class="rightvirtue text">Prowess</div>
+                        <div class="rightvirtue text">{{localize (concat "scion.virtues." pantheon.virtues.[1])}}</div>
+                        {{/with}}
+                        {{/if}}
                     </div>
                 </div>
                 {{!-- Divine Genesis Tab --}}

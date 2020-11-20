@@ -40,12 +40,20 @@ Hooks.once("init", async () => {
     // #region Handlebar Helpers
     Handlebars.registerHelper("display", (...args) => {
         const [path, key] = args;
-        return U.DigData(CONFIG.scion, `${path}.${key}`, "label");
+        const pathParts = path.split(".");
+        let ref;
+        while (typeof ref === "object" && pathParts.length)
+            ref = ref[pathParts.shift()];
+        if (typeof ref === "object" && key in ref)
+            ref = ref[key];
+        if (typeof ref === "object" && "label" in ref)
+            ref = ref.label;
+        return typeof ref === "object" ? "&lt;DISPLAY ERROR&gt;" : ref;
     });
 
     Handlebars.registerHelper("dotstate", (...args) => {
         const [trait, dotVal, data] = args;
-        const actData = data.data.root.data;
+        const actData = data.data.root.data.attributes.list;
         return (trait in actData && actData[trait].value >= parseInt(dotVal)) ? "full" : "";
     });
 
@@ -58,6 +66,8 @@ Hooks.once("init", async () => {
         }
         return results.join("");
     });
+
+    Handlebars.registerHelper("concat", (...args) => args.slice(0, -1).join(""));
     // #endregion
 });
 // #endregion

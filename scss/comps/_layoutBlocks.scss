@@ -11,26 +11,27 @@
 /* #region FLEX LAYOUTS */
 .flex {
     display: flex;
-    height: unset;
     width: 100%;
     flex-flow: row wrap;
     align-items: safe flex-start;
-    justify-content: safe space-between;
+    justify-content: space-between;
     align-content: safe flex-start;
+
+    &.spaceCenter { justify-content: center; }
     
-    > * { flex: 0 1 auto; margin: 0.25rem 0; } // initialize all contained items as default.
+    > * { flex: 0 1 auto; margin: 0.15rem 0.25rem; } // initialize all contained items as default.
 }
 
 .flexContainer {
     height: 100%;
 
     div { width: 100%; } // Divs assumed to take up whole row.
-    span { display: inline-block; width: auto; margin: auto; } // Use spans for inline labels, etc.
+    span { display: inline-block; margin: auto 0; flex: 1 0 auto; } // Use spans for inline labels, etc.
 
     .flexRow { flex-flow: row nowrap; } // For one-line spacing.
     .flexLabel { flex: 1 0 auto; } // Can grow, can't shrink.
     .flexStatic { flex: 0 0 auto; }  // Can't grow or shrink.
-    .edit { flex: 1 1 auto; } // Editable elements have max flexibility.
+    .edit { flex: 0 1 auto; } // Editable elements have max flexibility.
     /* #endregion */
 }
 /* #endregion */

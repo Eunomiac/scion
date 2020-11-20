@@ -1,10 +1,12 @@
 // import * as _ from "../external/underscore/underscore-esm-min.js";
 import * as U from "../data/utils.js";
 import "../external/dragula.min.js";
+import {Dust} from "../external/dust.js";
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
+
 export class ScionActorSheet extends ActorSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -33,7 +35,7 @@ export class ScionActorSheet extends ActorSheet {
             }
         };
 
-        // Update Patronage Subheader
+        // #region HEADER
         const {genesis, pantheon, patron} = actorData;
         actorData.patronageLine = "";
         if (pantheon && patron && panthData[pantheon].members.includes(patron)) {
@@ -41,21 +43,24 @@ export class ScionActorSheet extends ActorSheet {
                 actorData.patronageLine = U.Loc(
                     `scion.geneses.${genesis}Line`,
                     {
-                        divinePatronName: U.Loc(CONFIG.scion.GODS[patron].label),
-                        divinePatronMantle: CONFIG.scion.GODS[patron].mantle ? `, ${CONFIG.scion.GODS[patron].mantle}` : ""
+                        divinePatronName: U.Loc(godData[patron].label),
+                        divinePatronMantle: godData[patron].mantle ? `, ${U.Loc(godData[patron].mantle)}` : ""
                     }
                 );
         } else {
-            actorData.patron.name = "";
+            actorData.patron = "";
         }
+        // #endregion
 
-        // Update Patrons List
+        // #region CHARGEN
+        // Update Patron List
         if (pantheon)
             actorData.charGen.patronList = U.MakeDict(
                 panthData[pantheon].members,
                 (v) => U.Loc(`scion.gods.${v}`),
                 (k, v) => v
             );
+        // #endregion
 
         return data;
     }
@@ -64,6 +69,62 @@ export class ScionActorSheet extends ActorSheet {
         super.activateListeners(html);
         if (!this.options.editable)
             return;
+        this.actor.update({
+            ["data.attributes.priorities.primary"]: "mental",
+            ["data.attributes.priorities.secondary"]: "physical",
+            ["data.attributes.priorities.tertiary"]: "social",
+            ["data.attributes.unspentDots.general"]: 0,
+            ["data.attributes.unspentDots.secondary"]: 0,
+            ["data.attributes.favoredApproach"]: "force",
+            ["data.attributes.list.intellect.value"]: 4,
+            ["data.attributes.list.cunning.value"]: 3
+        });
+
+        // #region PIXI Animation Canvas
+        /* const DUST = new Dust(PIXI);
+        const PIXILoader = new PIXI.Loader();
+        const PIXIResources = PIXILoader.resources;
+        const PIXISprite = PIXI.Sprite;
+        const PIXITextures = PIXI.utils.TextureCache;
+        const spriteLIB = {};
+
+        const app = new PIXI.Application({
+            width: 700,
+            height: 700,
+            antialias: true,
+            transparent: true
+        });
+        app.renderer.view.style.position = "relative";
+        app.renderer.view.style.display = "block";
+        app.renderer.view.style.top = "-100%";
+        app.renderer.view.style["margin-bottom"] = "-100%";
+        app.renderer.autoResize = true;
+
+        const stage = app.stage;
+
+        html.append(app.view);
+
+        ["SolarRays", "BrightSun", "GoldCircle", "StarFlare", "TwoOrbitSparks", "Spark"].forEach((name) => {
+            PIXILoader.add(name, `systems/scion/images/${name}.png`);
+        });
+        PIXILoader.load((loader, resources) => {
+            for (const [name, spriteData] of Object.entries(resources)) {
+                const sprite = new PIXISprite(spriteData.texture);
+                sprite.anchor.set(0.5, 0.5);
+                sprite.position.set(350, 350);
+                sprite.width = 70;
+                sprite.height = 70;
+                spriteLIB[name] = sprite;
+            }
+            app.ticker.add((delta) => gameLoop(delta));
+        });
+
+        const gameLoop = () => {
+            requestAnimationFrame(gameLoop);
+            DUST.update();
+        };
+        */
+        // #endregion
 
         // #region CONTENT-EDITABLE ELEMENTS
         html.find(".contentEditable").each((i, element) => {
@@ -74,7 +135,8 @@ export class ScionActorSheet extends ActorSheet {
 
             // If dataset includes a path, fill the element with the current data:
             if ("path" in data) {
-                const actorVal = U.DigData(this, data.path);
+                const actorVal = U.DigActor(this.actor, data.path);
+                U.DB([this.actor, data.path, actorVal], "contentEditable");
                 if (actorVal)
                     element.innerHTML = actorVal.trim();
                 else
@@ -82,20 +144,12 @@ export class ScionActorSheet extends ActorSheet {
             }
 
             // If element innerHTML is blank, populate with placeholder if one is available
-            let isDisplayingPlaceholderText = false;
-            if (!element.innerText)
-                if ("placeholder" in data) {
-                    element.innerHTML = data.placeholder;
-                    isDisplayingPlaceholderText = true;
-                } else {
-                    element.innerHTML = "";
-                }
-
-            // Apply placeholder class if necessary:
-            if (isDisplayingPlaceholderText)
+            if (!element.innerText && "placeholder" in data) {
+                element.innerHTML = data.placeholder;
                 element.classList.add("placeholder");
-            else
+            } else {
                 element.classList.remove("placeholder");
+            }
         });
         // #endregion
 
@@ -126,36 +180,35 @@ export class ScionActorSheet extends ActorSheet {
                     ["data.paths"]: (x) => x.length === 3
                 },
                 2: {
-                    ["data.patron"]: (x) => actorData.pantheon && x.name && CONFIG.scion.PANTHEONS[actorData.pantheon].members.includes(x.name),
-                    ["data.genesis"]: (x) => Boolean(x),
-                    ["data.concept"]: (x) => Boolean(x)/* ,
-                    ["data.deeds"]: (x) => x.shortTerm.length && x.longTerm.length */
+                    ["data.patron"]: (x) => actorData.pantheon && x && CONFIG.scion.PANTHEONS[actorData.pantheon].members.includes(x),
+                    ["data.concept"]: (x) => Boolean(x),
+                    ["data.genesis"]: (x) => Boolean(x)
+                    /* ["data.deeds"]: (x) => x.shortTerm.length && x.longTerm.length */
                 }
             };
-            const reportLines = [];
-            for (const [step, tests] of Object.entries(charGenStepReqs)) {
-                reportLines.push(`@@@ STEP: ${step} @@@`);
-                let isStepOK = true;
-                const testResults = [];
-                for (const [path, testFunc] of Object.entries(tests)) {
-                    isStepOK = isStepOK && testFunc(U.DigData(actorData, path));
-                    testResults.push([path, U.DigData(actorData, path), isStepOK]);
-                    if (!isStepOK)
-                        break;
+            // const reportLines = [];
+            for (let step = 10; step > 0; step--)
+                if (step in charGenStepReqs) {
+                    let isStepOK = true;
+                    // const testResults = [];
+                    for (const [path, testFunc] of Object.entries(charGenStepReqs[step])) {
+                        isStepOK = isStepOK && testFunc(U.DigActor(actorData, path));
+                        // testResults.push([path, U.DigActor(actorData, path), isStepOK]);
+                        if (!isStepOK)
+                            break;
+                    }
+                    // reportLines.push(testResults);
+                    if (isStepOK)
+                        /* console.log({
+                            ["!!! RETURNING A STEP !!!"]: U.Int(step),
+                            [">> REPORT >>"]: reportLines
+                        }); */
+                        return U.Int(step);
                 }
-                reportLines.push(testResults);
-                if (isStepOK) {
-                    console.log({
-                        ["!!! RETURNING A STEP !!!"]: U.Int(step),
-                        [">> REPORT >>"]: reportLines
-                    });
-                    return U.Int(step);
-                }
-            }
-            console.log({
+            /* console.log({
                 ["XXX RETURNING ONE XXX"]: 1,
                 [">> REPORT >>"]: reportLines
-            });
+            }); */
             return 1;
         };
         const setCharGenToggles = (element) => {
@@ -211,11 +264,10 @@ export class ScionActorSheet extends ActorSheet {
             const children = Array.from(prioritiesContainer.children).map((x) => ["mental", "physical", "social"].find((xx) => Array.from(x.classList).includes(xx)));
             const updateData = {};
             children.forEach((x, i) => {
-                updateData[`data.priorities.${Object.keys(CONFIG.scion.ATTRIBUTES.priorities)[i]}.arena`] = x;
+                updateData[`data.attributes.priorities.${Object.keys(CONFIG.scion.ATTRIBUTES.priorities)[i]}`] = x;
             });
             console.log(updateData);
             this.actor.update(updateData);
-            // this._updateChargen();
         });
         // #endregion
     }

@@ -3,8 +3,8 @@ textarea,
 input[type="text"],
 select {
     height: 100%;
+    min-height: 27px;
     width: 100%;
-    min-height: unset;
     margin: 0px;
     padding: 0px;
     background-color: transparent;
@@ -46,6 +46,10 @@ select {
 
 .half { width: 50%; }
 .quarter { width: 25%; }
+
+.alignLeft { text-align: left !important; text-align-last: left !important;}
+.alignCenter { text-align: center !important; text-align-last: center !important;}
+.alignRight { text-align: right !important; text-align-last: right !important;}
 /* #endregion */
 
 /* #region Editable Input Elements */
@@ -56,12 +60,11 @@ select {
     font-weight: bold;
     border-radius: 1rem;
     background-color: rgba(0,0,0,0.2);
-    border: inset 3px brown;
+    border: inset 3px var(--scale6);
     /* #region Special Tweaks for Content-Editable DIV Elements */
-    &.edit.contentEditable {
-        padding: 0.1rem 0.2rem 0.05rem 0.2rem;
+    &.contentEditable {
         height: 27px;
-        line-height: normal;        
+        text-indent: 5px;
         &:focus {
             box-shadow: none;
             outline: none;
@@ -90,26 +93,36 @@ select {
     input[type="checkbox"],
     input[type="radio"] {
         display: inline-block;
-        height: 1.75rem;
+        height: 1rem;
         width: 100%;
         margin: 0 -100% 0 0;
         padding: 0;
         opacity: 0;
         flex: none;
-        font-size: 2rem;
-        opacity: 0;
         pointer-events: none;
+        transform-origin: left center;
+        transform: scale(1);
 
         & + .drawerLabel {
             display: inline-block;
-            &::before {
+            border: none;
+            opacity: 1;
+            height: 1.5rem;
+            margin: 0.25rem 0;
+            transform-origin: left center;
+            transform: scale(1);
+            &::after {
                 content: "";
-                display: inline-block;
+                float: left;
+                height: 100px;
+                width: 100px;
+                margin: -40px -30px 0px -40px;
+                background-repeat: no-repeat;
+                background-position: center;
                 background-size: 100%;
-                height: 1.75rem;
-                width: 1.75rem;
-                background-color: blue;
                 border-radius: 50%;
+                transform-origin: left center;
+                transform: scale(1);
             }
             & ~ .drawerContents {
                 transition-timing-function: ease-in-out;
@@ -121,9 +134,9 @@ select {
         &.hide {
             & + .drawerLabel {
                 opacity: 0;
-                height: 1.75rem;
                 border-bottom: none;
-                &::before {
+                display: none;
+                &::after {
                     opacity: 0;
                 }
                 & ~ .drawerContents {                  
@@ -135,51 +148,30 @@ select {
             }
         }        
         &.noGlow {
+            transform: scale(0.66);
             & + .drawerLabel {
-                opacity: 0.5;
-                height: 1.75rem;
-                // font-size: 1.25rem;
+                transform: scale(0.66);
                 border-bottom: none;
-                // font-style: italic;
-                // font-weight: normal;
-                // color: #444;
-                &::before {
-                    content: "";
-                    background-size: 100%;
-                    height: 1.75rem;
-                    width: 1.75rem;
-                    background-color: black;
-                    border-radius: 50%;
-                    float: left;
+                &::after {
+                    transform: scale(0.66);
+                    background-image: url("../images/OFF.png");
                 }
                 & ~ .drawerContents {   
-                    display: none;               
-                    /* opacity: 0;
-                    margin-bottom: -100%;
-                    transform: scaleY(0);
-                    transition: opacity 200ms, transform 200ms, margin 750ms; */
+                    display: none;
                 }
             }
         }        
         &.halfGlow {
             pointer-events: all;
-            &:not(:checked) + .drawerLabel {
+            & + .drawerLabel {
                 pointer-events: none;
-                opacity: 0.75;
-                height: 1.75rem;
-                // font-size: 1.25rem;
+            }
+            &:not(:checked) + .drawerLabel {
+                transform: scale(0.66);
                 border-bottom: none;
-                // font-style: italic;
-                // font-weight: normal;
-                // color: #444;
-                &::before {
-                    content: "";
-                    float: left;
-                    background-size: 100%;
-                    height: 1.75rem;
-                    width: 1.75rem;
-                    background-color: orange;
-                    border-radius: 50%;
+                &::after {
+                    transform: scale(0.66);
+                    background-image: url("../images/DIM.png");
                 }
                 & ~ .drawerContents {                  
                     opacity: 0;
@@ -191,21 +183,13 @@ select {
         }      
         &.activeGlow {
             & + .drawerLabel {
-                opacity: 1;
-                &::before {
-                    content: "";
-                    float: left;
-                    background-size: 100%;
-                    height: 1.75rem;
-                    width: 1.75rem;
-                    background-color: green;
-                    border-radius: 50%;
+                &::after {
+                    background-image: url("../images/BRIGHT.png");
                 }
-                & ~ .drawerContents {                  
+                & + .drawerContents {                  
                     opacity: 1;
                     margin-bottom: 0%;
                     transform: scaleY(1);
-                    // transition: opacity 200ms, transform 200ms, margin 750ms;
                 }
             }
         }
@@ -300,6 +284,7 @@ select {
     line-height: var(--lineHeightHeading1);
     text-shadow: var(--textShadowHeading1);
     border-bottom: var(--borderBottomHeading1);
+    margin: 0px;
 }
 
 .heading2 {
@@ -316,6 +301,9 @@ select {
     text-shadow: var(--textShadowHeading2);
     border-bottom: var(--borderBottomHeading2);
 }
+
+.heading3 { }
+span.heading3 { margin-right: 0.5rem; }
 
 .path {
     height: 50px;

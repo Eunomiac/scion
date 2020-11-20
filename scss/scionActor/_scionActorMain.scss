@@ -131,7 +131,7 @@
                         }
                         &.dragContainer {
                             background-color: rgba(0,0,0,0.1);
-                            border: 3px inset brown;
+                            border: 3px inset var(--scale6);
                             border-radius: 19px;
                             div {
                                 display: inline-block;

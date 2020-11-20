@@ -147,6 +147,7 @@ module.exports = {
     globals: {
         $: "readonly",
         dragula: "readonly",
+        PIXI: "readonly",
         CONFIG: "readonly",
         DEFAULT_TOKEN: "readonly",
         game: "readonly",

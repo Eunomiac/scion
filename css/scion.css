@@ -9,8 +9,8 @@ textarea,
 input[type="text"],
 select {
   height: 100%;
+  min-height: 27px;
   width: 100%;
-  min-height: unset;
   margin: 0px;
   padding: 0px;
   background-color: transparent;
@@ -34,9 +34,9 @@ select:invalid {
   color: #666 !important;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
   font-family: "Della Respira" !important;
+  font-size: 0.75rem !important;
   font-weight: normal !important;
-  text-indent: 3px;
-  line-height: 20px !important;
+  line-height: 1.25rem !important;
 }
 
 /* #endregion */
@@ -63,9 +63,9 @@ select:invalid {
   color: #666 !important;
   text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
   font-family: "Della Respira" !important;
+  font-size: 0.75rem !important;
   font-weight: normal !important;
-  text-indent: 3px;
-  line-height: 20px !important;
+  line-height: 1.25rem !important;
 }
 
 .half {
@@ -74,6 +74,24 @@ select:invalid {
 
 .quarter {
   width: 25%;
+}
+
+.alignLeft {
+  text-align: left !important;
+  -moz-text-align-last: left !important;
+  text-align-last: left !important;
+}
+
+.alignCenter {
+  text-align: center !important;
+  -moz-text-align-last: center !important;
+  text-align-last: center !important;
+}
+
+.alignRight {
+  text-align: right !important;
+  -moz-text-align-last: right !important;
+  text-align-last: right !important;
 }
 
 /* #endregion */
@@ -85,18 +103,17 @@ select:invalid {
   font-weight: bold;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.2);
-  border: inset 3px brown;
+  border: inset 3px var(--scale6);
   /* #region Special Tweaks for Content-Editable DIV Elements */
   /* #endregion */
 }
 
-.edit.edit.contentEditable {
-  padding: 0.1rem 0.2rem 0.05rem 0.2rem;
+.edit.contentEditable {
   height: 27px;
-  line-height: normal;
+  text-indent: 5px;
 }
 
-.edit.edit.contentEditable:focus {
+.edit.contentEditable:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: none;
@@ -125,7 +142,7 @@ select:invalid {
 .drawerContainer input[type="checkbox"],
 .drawerContainer input[type="radio"] {
   display: inline-block;
-  height: 1.75rem;
+  height: 1rem;
   width: 100%;
   margin: 0 -100% 0 0;
   padding: 0;
@@ -133,25 +150,47 @@ select:invalid {
   -webkit-box-flex: 0;
   -ms-flex: none;
   flex: none;
-  font-size: 2rem;
-  opacity: 0;
   pointer-events: none;
+  -webkit-transform-origin: left center;
+  -ms-transform-origin: left center;
+  transform-origin: left center;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 
 .drawerContainer input[type="checkbox"] + .drawerLabel,
 .drawerContainer input[type="radio"] + .drawerLabel {
   display: inline-block;
+  border: none;
+  opacity: 1;
+  height: 1.5rem;
+  margin: 0.25rem 0;
+  -webkit-transform-origin: left center;
+  -ms-transform-origin: left center;
+  transform-origin: left center;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 
-.drawerContainer input[type="checkbox"] + .drawerLabel::before,
-.drawerContainer input[type="radio"] + .drawerLabel::before {
+.drawerContainer input[type="checkbox"] + .drawerLabel::after,
+.drawerContainer input[type="radio"] + .drawerLabel::after {
   content: "";
-  display: inline-block;
+  float: left;
+  height: 100px;
+  width: 100px;
+  margin: -40px -30px 0px -40px;
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: 100%;
-  height: 1.75rem;
-  width: 1.75rem;
-  background-color: blue;
   border-radius: 50%;
+  -webkit-transform-origin: left center;
+  -ms-transform-origin: left center;
+  transform-origin: left center;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 
 .drawerContainer input[type="checkbox"] + .drawerLabel ~ .drawerContents,
@@ -172,12 +211,12 @@ select:invalid {
 .drawerContainer input[type="checkbox"].hide + .drawerLabel,
 .drawerContainer input[type="radio"].hide + .drawerLabel {
   opacity: 0;
-  height: 1.75rem;
   border-bottom: none;
+  display: none;
 }
 
-.drawerContainer input[type="checkbox"].hide + .drawerLabel::before,
-.drawerContainer input[type="radio"].hide + .drawerLabel::before {
+.drawerContainer input[type="checkbox"].hide + .drawerLabel::after,
+.drawerContainer input[type="radio"].hide + .drawerLabel::after {
   opacity: 0;
 }
 
@@ -195,31 +234,32 @@ select:invalid {
   transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
 }
 
+.drawerContainer input[type="checkbox"].noGlow,
+.drawerContainer input[type="radio"].noGlow {
+  -webkit-transform: scale(0.66);
+  -ms-transform: scale(0.66);
+  transform: scale(0.66);
+}
+
 .drawerContainer input[type="checkbox"].noGlow + .drawerLabel,
 .drawerContainer input[type="radio"].noGlow + .drawerLabel {
-  opacity: 0.5;
-  height: 1.75rem;
+  -webkit-transform: scale(0.66);
+  -ms-transform: scale(0.66);
+  transform: scale(0.66);
   border-bottom: none;
 }
 
-.drawerContainer input[type="checkbox"].noGlow + .drawerLabel::before,
-.drawerContainer input[type="radio"].noGlow + .drawerLabel::before {
-  content: "";
-  background-size: 100%;
-  height: 1.75rem;
-  width: 1.75rem;
-  background-color: black;
-  border-radius: 50%;
-  float: left;
+.drawerContainer input[type="checkbox"].noGlow + .drawerLabel::after,
+.drawerContainer input[type="radio"].noGlow + .drawerLabel::after {
+  -webkit-transform: scale(0.66);
+  -ms-transform: scale(0.66);
+  transform: scale(0.66);
+  background-image: url("../images/OFF.png");
 }
 
 .drawerContainer input[type="checkbox"].noGlow + .drawerLabel ~ .drawerContents,
 .drawerContainer input[type="radio"].noGlow + .drawerLabel ~ .drawerContents {
   display: none;
-  /* opacity: 0;
-                    margin-bottom: -100%;
-                    transform: scaleY(0);
-                    transition: opacity 200ms, transform 200ms, margin 750ms; */
 }
 
 .drawerContainer input[type="checkbox"].halfGlow,
@@ -227,23 +267,25 @@ select:invalid {
   pointer-events: all;
 }
 
+.drawerContainer input[type="checkbox"].halfGlow + .drawerLabel,
+.drawerContainer input[type="radio"].halfGlow + .drawerLabel {
+  pointer-events: none;
+}
+
 .drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel,
 .drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel {
-  pointer-events: none;
-  opacity: 0.75;
-  height: 1.75rem;
+  -webkit-transform: scale(0.66);
+  -ms-transform: scale(0.66);
+  transform: scale(0.66);
   border-bottom: none;
 }
 
-.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel::before,
-.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel::before {
-  content: "";
-  float: left;
-  background-size: 100%;
-  height: 1.75rem;
-  width: 1.75rem;
-  background-color: orange;
-  border-radius: 50%;
+.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel::after,
+.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel::after {
+  -webkit-transform: scale(0.66);
+  -ms-transform: scale(0.66);
+  transform: scale(0.66);
+  background-image: url("../images/DIM.png");
 }
 
 .drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel ~ .drawerContents,
@@ -260,24 +302,13 @@ select:invalid {
   transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
 }
 
-.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel,
-.drawerContainer input[type="radio"].activeGlow + .drawerLabel {
-  opacity: 1;
+.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel::after,
+.drawerContainer input[type="radio"].activeGlow + .drawerLabel::after {
+  background-image: url("../images/BRIGHT.png");
 }
 
-.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel::before,
-.drawerContainer input[type="radio"].activeGlow + .drawerLabel::before {
-  content: "";
-  float: left;
-  background-size: 100%;
-  height: 1.75rem;
-  width: 1.75rem;
-  background-color: green;
-  border-radius: 50%;
-}
-
-.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel ~ .drawerContents,
-.drawerContainer input[type="radio"].activeGlow + .drawerLabel ~ .drawerContents {
+.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel + .drawerContents,
+.drawerContainer input[type="radio"].activeGlow + .drawerLabel + .drawerContents {
   opacity: 1;
   margin-bottom: 0%;
   -webkit-transform: scaleY(1);
@@ -379,6 +410,7 @@ select:invalid {
   line-height: var(--lineHeightHeading1);
   text-shadow: var(--textShadowHeading1);
   border-bottom: var(--borderBottomHeading1);
+  margin: 0px;
 }
 
 .heading2 {
@@ -394,6 +426,10 @@ select:invalid {
   line-height: var(--lineHeightHeading2);
   text-shadow: var(--textShadowHeading2);
   border-bottom: var(--borderBottomHeading2);
+}
+
+span.heading3 {
+  margin-right: 0.5rem;
 }
 
 .path {
@@ -457,7 +493,6 @@ select:invalid {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: unset;
   width: 100%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -466,18 +501,24 @@ select:invalid {
   -webkit-box-align: safe flex-start;
   -ms-flex-align: safe flex-start;
   align-items: safe flex-start;
-  -webkit-box-pack: safe space-between;
-  -ms-flex-pack: safe space-between;
-  justify-content: safe space-between;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -ms-flex-line-pack: safe flex-start;
   align-content: safe flex-start;
+}
+
+.flex.spaceCenter {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .flex > * {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
-  margin: 0.25rem 0;
+  margin: 0.15rem 0.25rem;
 }
 
 .flexContainer {
@@ -491,8 +532,10 @@ select:invalid {
 
 .flexContainer span {
   display: inline-block;
-  width: auto;
-  margin: auto;
+  margin: auto 0;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 .flexContainer .flexRow {
@@ -515,9 +558,9 @@ select:invalid {
 }
 
 .flexContainer .edit {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
 }
 
 /* #endregion */
@@ -731,7 +774,7 @@ select:invalid {
 
 .scion.actor .Character .main .sheet-body .settings div.grid.dragContainer {
   background-color: rgba(0, 0, 0, 0.1);
-  border: 3px inset brown;
+  border: 3px inset var(--scale6);
   border-radius: 19px;
 }
 
@@ -960,7 +1003,7 @@ select:invalid {
   --fontVariantHeading1: small-caps;
   --fontWeightHeading1: normal;
   --textTransformHeading1: none;
-  --fontSizeHeading1: 1.75rem;
+  --fontSizeHeading1: 1.5rem;
   --paddingHeading1: 0;
   --lineHeightHeading1: var(--fontSizeHeading1);
   --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);

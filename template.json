@@ -1,19 +1,18 @@
 {
     "Actor": {
-        "types": ["Character"],
+        "types": ["Character", "NPC"],
         "templates": {
-            "bio": {
-                "chronicle": "",
-                "player": "",
-                "concept": "",
-                "tier": ""
+            "PC": {
+                "playerName": ""
             },
-            "divinity": {
+            "BIO": {
+                "concept": "",
+                "description": "",
+                "imageURL": ""
+            },
+            "DIVINITY": {
                 "pantheon": "",
-                "patron": {
-                    "name": "",
-                    "mantle": ""
-                },
+                "patron": "",
                 "genesis": "",
                 "patronageLine": "",
                 "divineTitle": "",
@@ -36,10 +35,10 @@
                 "knacks": {},
                 "finishingBonusOn": ""
             },
-            "storyPath": {
+            "STORYPATH": {
                 "paths": []
             },
-            "fullTraits": {
+            "FULLTRAITS": {
                 "attributes": {
                     "priorities": {
                         "primary": "",
@@ -240,7 +239,10 @@
             }
         },
         "Character": {
-            "templates": ["bio", "divinity", "fullTraits", "storyPath"]
+            "templates": ["PC", "BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
+        },
+        "NPC": {
+            "templates": ["BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
         }
     },
     "Item": {

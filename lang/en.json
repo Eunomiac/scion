@@ -37,12 +37,19 @@
             "boon": "Boon",
             "boons": "Boons",
             "birthright": "Birthright",
-            "birthrights": "Birthrights"            
+            "birthrights": "Birthrights",
+            "deed": "Deed",
+            "deeds": "Deeds",
+            "shortTerm": "Short-Term",
+            "longTerm": "Long-Term",
+            "band": "Band"                   
         },
         "headings": {
-            "charGenStep1": "Step One: Concept & Origin",
-            "charGenStep1A": "Tier, Pantheon & Divine Genesis",
+            "charGenStep1": "Step One: Origin",
+            "charGenStep1A": "What is the nature of your Divinity?",
             "charGenStep1B": "Who is your Divine Patron?",
+            "charGenStep1C": "And who are YOU?",
+            "charGenStep1D": "From what early Deeds will your Legend rise?",
             "charGenStep2": "Step Two: Paths",
             "charGenStep2A": "What Paths Do You Walk?",
             "charGenStep3": "Step Three: Attributes & Skills",
@@ -51,8 +58,10 @@
             "charGenStep6": "Step Six: Purviews",
             "charGenStep7": "Step Seven: Finishing Touches",
             "conceptPlaceholder": "Describe your character in a sentence or two.",
-            "genesisPlaceholder": "Genesis",
-            "pantheonPlaceholder": "Pantheon",
+            "shortTermDeedPlaceholder": "Something you'll accomplish in a session.",
+            "longTermDeedPlaceholder": "Something you'll accomplish over a story.",
+            "genesisPlaceholder": "Choose Genesis",
+            "pantheonPlaceholder": "Choose Pantheon",
             "divinePatronPlaceholder": " "
         },
         "books": {
@@ -503,13 +512,13 @@
         },
         "geneses": {
             "born": "Born",
-            "bornLine": "Scion of {divinePatronName}{mantleDelim}{divinePatronMantle}",
+            "bornLine": "Scion of {divinePatronName}{divinePatronMantle}",
             "created": "Created",
-            "createdLine": "Creation of {divinePatronName}{mantleDelim}{divinePatronMantle}",            
+            "createdLine": "Creation of {divinePatronName}{divinePatronMantle}",            
             "incarnation": "Incarnation", 
-            "incarnationLine": "{divinePatronName}{mantleDelim}{divinePatronMantle} Incarnate",
+            "incarnationLine": "{divinePatronName}{divinePatronMantle} Incarnate",
             "chosen": "Chosen",
-            "chosenLine": "Chosen of {divinePatronName}{mantleDelim}{divinePatronMantle}"
+            "chosenLine": "Chosen of {divinePatronName}{divinePatronMantle}"
         },
         "attributes": {
             "none": "",
