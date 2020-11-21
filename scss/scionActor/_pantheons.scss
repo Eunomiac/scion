@@ -100,8 +100,9 @@
 // .kami { }
 
 .loa {
-    --bgImage: url("../images/Orisha.png");
+    --bgImage: url("../images/Loa.png");
     --fontFamilyTitle: "Finger Paint";
+    --menuRosetteImg: url("../images/MenuRosetteLoa.png");
     --fontSizeTitle: 2rem;
 }
 
@@ -117,6 +118,7 @@
     --fontColorBody: #{$bodyColor};
 
     --bgImage: url("../images/Netjer.png");
+    --menuRosetteImg: url("../images/MenuRosetteNetjer.png");
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
@@ -146,10 +148,45 @@
  }
 
 .theoi {
-    --fontFamilyTitle: "Poiret One";
-    --fontWeightTitle: "bold";
+    $matteColor: #ffffff;
+    $headingColor1: #000fb8;
+    $headingColor2: #4757ff; 
+    $accentColor: #8e52ff;
+    $bodyColor: #000538;
 
-    --fontFamilySubTitle: "Della Respira";
+    --bgImage: url("../images/Theoi.png");
+    --virtueDarkImg: url("../images/VirtueDarkTheoi.png");
+    --virtueGlowImg: url("../images/VirtueGlowTheoi.png");
+    --menuRosetteImg: url("../images/MenuRosetteTheoi.png");
+
+
+    --bgColorMatte: #{$matteColor};
+    --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
+    --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
+      
+    --fontColorTitle: #{$headingColor1};
+    --fontFamilyTitle: "Poiret One";
+    --fontWeightTitle: bold;
+    --fontColorHeading1: var(--fontColorTitle);
+    --fontFamilyHeading1: var(--fontFamilyTitle);
+    --fontWeightHeading1: bold;
+    --fontVariantHeading1: small-caps;
+    --borderBottomHeading1: 2px solid var(--fontColorTitle);
+
+    --fontColorSubTitle: #{$headingColor2};
+    --fontFamilySubTitle: "Elektra";
+    --fontSizeSubTitle: 1.2rem;
+    --fontWeightSubTitle: normal;
+
+    --fontColorSurTitle: #{$headingColor2};
+    --fontFamilySurTitle: "Poiret One";
+    --fontWeightSurTitle: bold;
+    --fontVariantSurTitle: small-caps;
+
+    --fontColorBody: #{$bodyColor};
+    --fontFamilyBody: "Poiret One";
+    
+    @include scaled-colors($accentColor);
 }
 
 .tuathaDeDanann {
@@ -160,6 +197,7 @@
     $bodyColor: #1a211d;
 
     --bgImage: url("../images/Tuatha.png");
+    --menuRosetteImg: url("../images/MenuRosetteTuatha.png");
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};

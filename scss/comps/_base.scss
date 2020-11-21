@@ -1,4 +1,11 @@
 /* #region Element Default Styles */
+* {
+    color: var(--fontColorBody);
+    font-family: var(--fontFamilyBody);
+    font-size: var(--fontSizeBody);
+    font-weight: var(--fontWeightBody);
+}
+
 textarea,
 input[type="text"],
 select {
@@ -50,6 +57,12 @@ select {
 .alignLeft { text-align: left !important; text-align-last: left !important;}
 .alignCenter { text-align: center !important; text-align-last: center !important;}
 .alignRight { text-align: right !important; text-align-last: right !important;}
+
+.strong { 
+    font-weight: bolder;
+    text-shadow: 0.5px 0.5px 1px black;
+    text-transform: uppercase;
+}
 /* #endregion */
 
 /* #region Editable Input Elements */
@@ -63,7 +76,6 @@ select {
     border: inset 3px var(--scale6);
     /* #region Special Tweaks for Content-Editable DIV Elements */
     &.contentEditable {
-        height: 27px;
         text-indent: 5px;
         &:focus {
             box-shadow: none;
@@ -201,23 +213,61 @@ select {
 /* #endregion */
 
 /* #region Dot Trackers */
-.dot {
-    height: 15px;
-    width: 15px;
-    margin: 1px 1px 0 0;
-    border-radius: 50%;
-    box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4), inset -1px -1px 1px white;
+.dotline {
+    grid-area: dotline;
+    display: grid;
+    grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
+    grid-template-rows: 1rem;
+    align-content: center;
+    justify-content: center;
 
-    &.full {
-        background: radial-gradient(#444, #0a0a0a);
-        border: solid 2px black;
-        box-shadow: 1px 1px 2px black;
+    &.labelledDotLine {
+        width: 100%;
+        grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+    } 
+
+    &.largeDots {
+        grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+        grid-template-rows: 1.25rem;
+        column-gap: 0.5rem;
     }
 
-    &.unspent {
-        background: radial-gradient(#900, #5a0000);
-        border: solid 2px #5a0000;
-        box-shadow: 1px 1px 2px black;
+    &.labelledDotLine.largeDots {
+        grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+    }
+    
+    .dot {
+        margin: 7% 7% 0 0;
+        border-radius: 50%;
+        box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4), inset -1px -1px 1px white;
+
+        &.full {
+            background: radial-gradient(#444, #0a0a0a);
+            border: solid 2px black;
+            box-shadow: 1px 1px 2px black;
+        }
+
+        &.unspent {
+            background: radial-gradient(#900, #5a0000);
+            border: solid 2px #5a0000;
+            box-shadow: 1px 1px 2px black;
+        }
+        
+        &.virtueCenter {
+            &::after {
+                content: "";
+                height: 150%;
+                width: 150%;
+                background-image: var(--virtueDarkImg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100%;
+            }
+
+            &.virtueFull::after {
+                background-image: var(--virtueGlowImg);
+            }
+        }
     }
 }
 /* #endregion */
@@ -232,7 +282,7 @@ select {
     text-transform: var(--textTransformTitle);
     font-size: var(--fontSizeTitle);
     padding: var(--paddingTitle);
-    line-height: var(--lineHeightTitle);
+    line-height: var(--lineHeightTitle); line-height: normal;
     text-shadow: var(--textShadowTitle);
     text-align: center;
     border: none;
@@ -248,7 +298,7 @@ select {
     text-transform: var(--textTransformSurTitle);
     font-size: var(--fontSizeSurTitle);
     padding: var(--paddingSurTitle);
-    line-height: var(--lineHeightSurTitle);
+    line-height: var(--lineHeightSurTitle); line-height: normal;
     text-shadow: var(--textShadowSurTitle);
     text-align: center;
     border: none;
@@ -264,7 +314,7 @@ select {
     text-transform: var(--textTransformSubTitle);
     font-size: var(--fontSizeSubTitle);
     padding: var(--paddingSubTitle);
-    line-height: var(--lineHeightSubTitle);
+    line-height: var(--lineHeightSubTitle); line-height: normal;
     text-shadow: var(--textShadowSubTitle);
     text-align: center;
     border: none;
@@ -281,7 +331,7 @@ select {
     text-transform: var(--textTransformHeading1);
     font-size: var(--fontSizeHeading1);
     padding: var(--paddingHeading1);
-    line-height: var(--lineHeightHeading1);
+    line-height: var(--lineHeightHeading1); line-height: normal;
     text-shadow: var(--textShadowHeading1);
     border-bottom: var(--borderBottomHeading1);
     margin: 0px;
@@ -297,7 +347,7 @@ select {
     text-transform: var(--textTransformHeading2);
     font-size: var(--fontSizeHeading2);
     padding: var(--paddingHeading2);
-    line-height: var(--lineHeightHeading2);
+    line-height: var(--lineHeightHeading2); line-height: normal;
     text-shadow: var(--textShadowHeading2);
     border-bottom: var(--borderBottomHeading2);
 }

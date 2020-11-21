@@ -1,4 +1,4 @@
-// import * as _ from "../external/underscore/underscore-esm-min.js";
+import * as _ from "../external/underscore/underscore-esm-min.js";
 import * as U from "../data/utils.js";
 import "../external/dragula.min.js";
 import {Dust} from "../external/dust.js";
@@ -11,8 +11,8 @@ export class ScionActorSheet extends ActorSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "actor"],
-            width: 700,
-            height: 700,
+            width: 750,
+            height: 750,
             tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "front"}]
         });
     }
@@ -69,16 +69,22 @@ export class ScionActorSheet extends ActorSheet {
         super.activateListeners(html);
         if (!this.options.editable)
             return;
-        this.actor.update({
-            ["data.attributes.priorities.primary"]: "mental",
-            ["data.attributes.priorities.secondary"]: "physical",
-            ["data.attributes.priorities.tertiary"]: "social",
-            ["data.attributes.unspentDots.general"]: 0,
-            ["data.attributes.unspentDots.secondary"]: 0,
-            ["data.attributes.favoredApproach"]: "force",
-            ["data.attributes.list.intellect.value"]: 4,
-            ["data.attributes.list.cunning.value"]: 3
-        });
+        if (!this.actor.data.data.testValsApplied) {
+            const testArenas = _.shuffle(["mental", "physical", "social"]);
+            const testApproach = _.sample(["force", "finesse", "resilience"]);
+            const testUpdateData = {
+                ["data.testValsApplied"]: true,
+                ["data.attributes.priorities.primary"]: testArenas[0],
+                ["data.attributes.priorities.secondary"]: testArenas[1],
+                ["data.attributes.priorities.tertiary"]: testArenas[2],
+                ["data.attributes.favoredApproach"]: testApproach
+            };
+            CONFIG.scion.ATTRIBUTES.all.forEach((x) => {
+                testUpdateData[`data.attributes.list.${x}.value`] = Math.floor(Math.random() * 3) + 1
+                    + (CONFIG.scion.ATTRIBUTES.approaches[testApproach].includes(x) ? 2 : 0);
+            });
+            this.actor.update(testUpdateData);
+        }
 
         // #region PIXI Animation Canvas
         /* const DUST = new Dust(PIXI);
@@ -89,8 +95,8 @@ export class ScionActorSheet extends ActorSheet {
         const spriteLIB = {};
 
         const app = new PIXI.Application({
-            width: 700,
-            height: 700,
+            width: 750,
+            height: 750,
             antialias: true,
             transparent: true
         });
@@ -127,11 +133,55 @@ export class ScionActorSheet extends ActorSheet {
         // #endregion
 
         // #region CONTENT-EDITABLE ELEMENTS
+        const _onEditKeyDown = (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                event.currentTarget.blur();
+            }
+        };
+        const _onEditClickOn = (event) => {
+            event.preventDefault();
+            const element = event.currentTarget;
+            element.setAttribute("contenteditable", true);
+            if (element.classList.contains("placeholder")) {
+                element.innerHTML = "";
+                element.classList.remove("placeholder");
+            }
+            // Add an event listener for when the player hits the 'Enter' key.
+            element.addEventListener("keydown", _onEditKeyDown.bind(this));
+            // Focus the element, which will fire the _onEditFocus event to select all text.
+            element.focus();
+        };
+        const _onEditFocus = () => { document.execCommand("selectAll") };
+        const _onEditClickOff = (event) => {
+            event.preventDefault();
+            const element = event.currentTarget;
+            const dataSet = element.dataset;
+            element.setAttribute("contenteditable", false);
+            element.removeEventListener("keydown", _onEditKeyDown);
+            if ("path" in dataSet) {
+                if (dataSet.path.endsWith("divineTitle") && element.innerText)
+                    element.innerHTML = `"${element.innerText.replace(/(^\s*"+|"+\s*$)/gu, "").trim()}"`;
+                if (dataSet.path.startsWith("actor"))
+                    this.actor.update({[dataSet.path.slice(6)]: element.innerText.trim()});
+                else
+                    this.actor.update({[dataSet.path]: element.innerText.trim()});
+
+                if (!element.innerText && "placeholder" in dataSet) {
+                    element.classList.add("placeholder");
+                    element.innerHTML = dataSet.placeholder;
+                } else {
+                    element.classList.remove("placeholder");
+                    element.innerHTML = "";
+                }
+            }
+        };
         html.find(".contentEditable").each((i, element) => {
             const data = element.dataset;
             element.setAttribute("contenteditable", false);
-            element.addEventListener("click", (event) => this._onEditClickOn(event), false);
-            element.addEventListener("blur", (event) => this._onEditClickOff(event), false);
+            element.addEventListener("click", _onEditClickOn.bind(this));
+            element.addEventListener("focus", _onEditFocus.bind(this));
+            element.addEventListener("blur", _onEditClickOff.bind(this));
 
             // If dataset includes a path, fill the element with the current data:
             if ("path" in data) {
@@ -270,46 +320,6 @@ export class ScionActorSheet extends ActorSheet {
             this.actor.update(updateData);
         });
         // #endregion
-    }
-
-    _onEditClickOn(event) {
-        event.preventDefault();
-        const element = event.currentTarget;
-        console.log({"@@ CLICK ON @@": element});
-        element.setAttribute("contenteditable", true);
-        if (element.classList.contains("placeholder")) {
-            element.innerHTML = "";
-            element.classList.remove("placeholder");
-        }
-    }
-    _onEditClickOff(event) {
-        event.preventDefault();
-        const element = event.currentTarget;
-        const data = element.dataset;
-        console.log({"@@ CLICK OFF @@": element});
-        element.setAttribute("contenteditable", false);
-        if ("path" in data) {
-            if (data.path.endsWith("divineTitle") && element.innerText)
-                element.innerHTML = `"${element.innerText.replace(/(^\s*"+|"+\s*$)/gu, "").trim()}"`;
-            if (data.path.startsWith("actor"))
-                this.actor.update({[data.path.slice(6)]: element.innerText.trim()});
-            else
-                this.actor.update({[data.path]: element.innerText.trim()});
-            let isDisplayingPlaceholderText = false;
-            if (!element.innerText)
-                if ("placeholder" in data) {
-                    element.innerHTML = data.placeholder;
-                    isDisplayingPlaceholderText = true;
-                } else {
-                    element.innerHTML = "";
-                }
-
-            // Apply placeholder class if necessary:
-            if (isDisplayingPlaceholderText)
-                element.classList.add("placeholder");
-            else
-                element.classList.remove("placeholder");
-        }
     }
 
     /*     _onDotClick(event) {

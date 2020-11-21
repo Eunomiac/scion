@@ -2,9 +2,66 @@
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&display=swap");
 @use "sass:string";
 /* #region Global Variables & Configuration */
+@font-face {
+  font-family: "Archeologicaps";
+  src: url(../fonts/Theoi/Archeologicaps.ttf);
+}
+
+@font-face {
+  font-family: "Dalek";
+  src: url(../fonts/Theoi/DALEK.ttf);
+}
+
+@font-face {
+  font-family: "Diogenes";
+  src: url(../fonts/Theoi/DIOGENES.ttf);
+}
+
+@font-face {
+  font-family: "Roman Font 7";
+  src: url(../fonts/Theoi/roman_font_7.ttf);
+}
+
+@font-face {
+  font-family: "Elektra";
+  src: url(../fonts/Theoi/elektra.ttf);
+}
+
+@font-face {
+  font-family: "Khaleefa";
+  src: url(../fonts/Netjer/Khaleefa.otf);
+}
+
+@font-face {
+  font-family: "Oh Mighty Isis";
+  src: url(../fonts/Netjer/ohmightyisisexpand.ttf);
+}
+
+@font-face {
+  font-family: "Zanzabar";
+  src: url(../fonts/Netjer/Zanzabar.otf);
+}
+
+@font-face {
+  font-family: "Sherwood";
+  src: url(../fonts/Tuatha/SHERWOOD.TTF);
+}
+
+@font-face {
+  font-family: "Stonehenge";
+  src: url(../fonts/Tuatha/stonehen.ttf);
+}
+
 /* #endregion */
 /* #region Components: Layouts, Mixins, Modules & Fundamentals */
 /* #region Element Default Styles */
+* {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: var(--fontWeightBody);
+}
+
 textarea,
 input[type="text"],
 select {
@@ -94,6 +151,12 @@ select:invalid {
   text-align-last: right !important;
 }
 
+.strong {
+  font-weight: bolder;
+  text-shadow: 0.5px 0.5px 1px black;
+  text-transform: uppercase;
+}
+
 /* #endregion */
 /* #region Editable Input Elements */
 .edit {
@@ -109,7 +172,6 @@ select:invalid {
 }
 
 .edit.contentEditable {
-  height: 27px;
   text-indent: 5px;
 }
 
@@ -322,16 +384,43 @@ select:invalid {
 
 /* #endregion */
 /* #region Dot Trackers */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 1px 1px 0 0;
+.dotline {
+  grid-area: dotline;
+  display: grid;
+  grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
+  grid-template-rows: 1rem;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.dotline.labelledDotLine {
+  width: 100%;
+  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+}
+
+.dotline.largeDots {
+  grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+  grid-template-rows: 1.25rem;
+  -webkit-column-gap: 0.5rem;
+  -moz-column-gap: 0.5rem;
+  column-gap: 0.5rem;
+}
+
+.dotline.labelledDotLine.largeDots {
+  grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+}
+
+.dotline .dot {
+  margin: 7% 7% 0 0;
   border-radius: 50%;
   -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
 }
 
-.dot.full {
+.dotline .dot.full {
   background: -o-radial-gradient(#444, #0a0a0a);
   background: radial-gradient(#444, #0a0a0a);
   border: solid 2px black;
@@ -339,12 +428,26 @@ select:invalid {
   box-shadow: 1px 1px 2px black;
 }
 
-.dot.unspent {
+.dotline .dot.unspent {
   background: -o-radial-gradient(#900, #5a0000);
   background: radial-gradient(#900, #5a0000);
   border: solid 2px #5a0000;
   -webkit-box-shadow: 1px 1px 2px black;
   box-shadow: 1px 1px 2px black;
+}
+
+.dotline .dot.virtueCenter::after {
+  content: "";
+  height: 150%;
+  width: 150%;
+  background-image: var(--virtueDarkImg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+.dotline .dot.virtueCenter.virtueFull::after {
+  background-image: var(--virtueGlowImg);
 }
 
 /* #endregion */
@@ -359,6 +462,7 @@ select:invalid {
   font-size: var(--fontSizeTitle);
   padding: var(--paddingTitle);
   line-height: var(--lineHeightTitle);
+  line-height: normal;
   text-shadow: var(--textShadowTitle);
   text-align: center;
   border: none;
@@ -375,6 +479,7 @@ select:invalid {
   font-size: var(--fontSizeSurTitle);
   padding: var(--paddingSurTitle);
   line-height: var(--lineHeightSurTitle);
+  line-height: normal;
   text-shadow: var(--textShadowSurTitle);
   text-align: center;
   border: none;
@@ -391,6 +496,7 @@ select:invalid {
   font-size: var(--fontSizeSubTitle);
   padding: var(--paddingSubTitle);
   line-height: var(--lineHeightSubTitle);
+  line-height: normal;
   text-shadow: var(--textShadowSubTitle);
   text-align: center;
   border: none;
@@ -408,6 +514,7 @@ select:invalid {
   font-size: var(--fontSizeHeading1);
   padding: var(--paddingHeading1);
   line-height: var(--lineHeightHeading1);
+  line-height: normal;
   text-shadow: var(--textShadowHeading1);
   border-bottom: var(--borderBottomHeading1);
   margin: 0px;
@@ -424,6 +531,7 @@ select:invalid {
   font-size: var(--fontSizeHeading2);
   padding: var(--paddingHeading2);
   line-height: var(--lineHeightHeading2);
+  line-height: normal;
   text-shadow: var(--textShadowHeading2);
   border-bottom: var(--borderBottomHeading2);
 }
@@ -613,6 +721,12 @@ span.heading3 {
   -webkit-box-shadow: none;
   box-shadow: none;
   background: none;
+  /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+
+        $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+            // The added "disappear" class contains either an animation or a transition, which starts immediately.
+            //    When the animation/transition is finished, the callback function removes the element.
+    */
 }
 
 .scion.actor header.window-header.flexrow.draggable.resizable {
@@ -634,27 +748,27 @@ span.heading3 {
   display: none;
 }
 
+.scion.actor header.window-header.flexrow.draggable.resizable a {
+  opacity: 0;
+}
+
 .scion.actor header.window-header.flexrow.draggable.resizable a.header-button {
   pointer-events: all;
   height: 1rem;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable::before {
-  background-image: url("https://i.imgur.com/ADtHyUx.png");
-  background-size: 80%;
+.scion.actor header.window-header.flexrow.draggable.resizable::after {
+  background: transparent;
   pointer-events: all;
   cursor: move;
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   content: "";
   position: relative;
-  background-repeat: no-repeat;
-  left: -45%;
-  bottom: -50%;
+  left: -57%;
+  top: -550%;
   border-radius: 50%;
-  background-position: center;
-  margin-bottom: -107px;
 }
 
 .scion.actor div.window-resizable-handle {
@@ -677,15 +791,16 @@ span.heading3 {
 .scion.actor .Character .main {
   height: 100%;
   width: 100%;
-  padding: 0 4%;
+  padding: 2% 8% 8% 6%;
   background-image: var(--bgImage);
   background-size: 100%;
   background-repeat: repeat-y;
   opacity: 1;
-  grid: ". nav ." 1rem "header header header" 6rem "body body body" auto ". footer ." 1.5rem /12% 1fr 12%;
+  grid: ". nav ." 1.3rem "header header header" 6rem "body body body" auto ". footer ." 1.5rem /12% 1fr 12%;
 }
 
 .scion.actor .Character .main .sheet-tabs {
+  opacity: 0;
   grid-area: nav;
   height: 100%;
   margin: 0px;
@@ -731,9 +846,24 @@ span.heading3 {
   color: var(--fontColorSurTitle);
 }
 
+.scion.actor .Character .main .menuRosette {
+  background-image: var(--menuRosetteImg);
+  background-size: 90%;
+  display: block;
+  width: 200px;
+  height: 200px;
+  content: "";
+  position: relative;
+  background-repeat: no-repeat;
+  left: -100%;
+  top: -250%;
+  border-radius: 50%;
+  background-position: center;
+}
+
 .scion.actor .Character .main .header {
   grid-area: header;
-  grid: ". . ." 0.5rem ". divineTitle ." 1.5rem ". charName ." 2.5rem "patronage patronage patronage" 1.5rem /12% 1fr 12%;
+  grid: ". . ." 0.5rem ". divineTitle ." 1.5rem ". charName ." 3rem "patronage patronage patronage" 1.5rem /12% 1fr 12%;
   grid-gap: 0;
 }
 
@@ -770,6 +900,7 @@ span.heading3 {
 
 .scion.actor .Character .main .sheet-body .settings div.grid.edit {
   line-height: 1.75rem;
+  line-height: normal;
 }
 
 .scion.actor .Character .main .sheet-body .settings div.grid.dragContainer {
@@ -812,7 +943,10 @@ span.heading3 {
 }
 
 .scion.actor .Character .main .sheet-body .front {
-  grid: "attributes paths"  17rem "virtues paths" 2rem / 1fr 2fr;
+  grid: "attributes paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
+  -webkit-column-gap: 0.5rem;
+  -moz-column-gap: 0.5rem;
+  column-gap: 0.5rem;
 }
 
 .scion.actor .Character .main .sheet-body .front .attributes {
@@ -844,11 +978,6 @@ span.heading3 {
   -webkit-box-direction: normal;
   -ms-flex-flow: column nowrap;
   flex-flow: column nowrap;
-}
-
-.scion.actor .Character .main .sheet-body .front .attributes .attrBlock .attrRow {
-  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
-  grid-template-rows: 1rem;
 }
 
 .scion.actor .Character .main .sheet-body .front .attributes .attrBlock .attrRow .label {
@@ -895,13 +1024,21 @@ span.heading3 {
 }
 
 .scion.actor .Character .main .sheet-body .front .virtues {
+  border-radius: 1rem;
   grid-area: virtues;
-  grid: "leftvirtue dotline rightvirtue" / 1fr 1fr 1fr;
-  background-color: var(--bgColorStrong);
+  grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
+  background-color: var(--scaleFade5);
+  border: 3px outset var(--scale5);
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin-left: -0.35rem;
+  height: calc(100% - 2 * 3px);
 }
 
 .scion.actor .Character .main .sheet-body .front .virtues .leftvirtue {
   grid-area: leftvirtue;
+  margin-left: 0.5rem;
+  line-height: 1rem;
 }
 
 .scion.actor .Character .main .sheet-body .front .virtues .dotline {
@@ -910,6 +1047,8 @@ span.heading3 {
 
 .scion.actor .Character .main .sheet-body .front .virtues .rightvirtue {
   grid-area: rightvirtue;
+  margin-right: 0.5rem;
+  line-height: 1rem;
 }
 
 .scion.actor .Character .main .sheet-body .genesis {
@@ -1039,14 +1178,16 @@ span.heading3 {
 }
 
 .scion.actor .loa {
-  --bgImage: url("../images/Orisha.png");
+  --bgImage: url("../images/Loa.png");
   --fontFamilyTitle: "Finger Paint";
+  --menuRosetteImg: url("../images/MenuRosetteLoa.png");
   --fontSizeTitle: 2rem;
 }
 
 .scion.actor .netjer {
   --fontColorBody: #2d2d2f;
   --bgImage: url("../images/Netjer.png");
+  --menuRosetteImg: url("../images/MenuRosetteNetjer.png");
   --bgColorMatte: #f6f0e2;
   --bgColorSoft: #fdd8b7;
   --bgColorStrong: #f99c4b;
@@ -1061,15 +1202,25 @@ span.heading3 {
   --fontColorHeading1: var(--fontColorSubTitle);
   --borderBottomHeading1: 1px solid var(--fontColorHeading);
   --scale1: #100e0b;
+  --scaleFade1: rgba(16, 14, 11, 0.5);
   --scale2: #261b12;
+  --scaleFade2: rgba(38, 27, 18, 0.5);
   --scale3: #402813;
+  --scaleFade3: rgba(64, 40, 19, 0.5);
   --scale4: #5f3510;
+  --scaleFade4: rgba(95, 53, 16, 0.5);
   --scale5: #834107;
+  --scaleFade5: rgba(131, 65, 7, 0.5);
   --scale6: #cc6409;
+  --scaleFade6: rgba(204, 100, 9, 0.5);
   --scale7: #f88927;
+  --scaleFade7: rgba(248, 137, 39, 0.5);
   --scale8: #fcb06d;
+  --scaleFade8: rgba(252, 176, 109, 0.5);
   --scale9: #fed7b5;
+  --scaleFade9: rgba(254, 215, 181, 0.5);
   --scale10: white;
+  --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
 .scion.actor .teotl {
@@ -1077,13 +1228,56 @@ span.heading3 {
 }
 
 .scion.actor .theoi {
+  --bgImage: url("../images/Theoi.png");
+  --virtueDarkImg: url("../images/VirtueDarkTheoi.png");
+  --virtueGlowImg: url("../images/VirtueGlowTheoi.png");
+  --menuRosetteImg: url("../images/MenuRosetteTheoi.png");
+  --bgColorMatte: #ffffff;
+  --bgColorSoft: #e8dcff;
+  --bgColorStrong: #c7a9ff;
+  --fontColorTitle: #000fb8;
   --fontFamilyTitle: "Poiret One";
-  --fontWeightTitle: "bold";
-  --fontFamilySubTitle: "Della Respira";
+  --fontWeightTitle: bold;
+  --fontColorHeading1: var(--fontColorTitle);
+  --fontFamilyHeading1: var(--fontFamilyTitle);
+  --fontWeightHeading1: bold;
+  --fontVariantHeading1: small-caps;
+  --borderBottomHeading1: 2px solid var(--fontColorTitle);
+  --fontColorSubTitle: #4757ff;
+  --fontFamilySubTitle: "Elektra";
+  --fontSizeSubTitle: 1.2rem;
+  --fontWeightSubTitle: normal;
+  --fontColorSurTitle: #4757ff;
+  --fontFamilySurTitle: "Poiret One";
+  --fontWeightSurTitle: bold;
+  --fontVariantSurTitle: small-caps;
+  --fontColorBody: #000538;
+  --fontFamilyBody: "Poiret One";
+  --scale1: #201b28;
+  --scaleFade1: rgba(32, 27, 40, 0.5);
+  --scale2: #3b285e;
+  --scaleFade2: rgba(59, 40, 94, 0.5);
+  --scale3: #5328a2;
+  --scaleFade3: rgba(83, 40, 162, 0.5);
+  --scale4: #6927e7;
+  --scaleFade4: rgba(105, 39, 231, 0.5);
+  --scale5: #8e52ff;
+  --scaleFade5: rgba(142, 82, 255, 0.5);
+  --scale6: #a575ff;
+  --scaleFade6: rgba(165, 117, 255, 0.5);
+  --scale7: #bb97ff;
+  --scaleFade7: rgba(187, 151, 255, 0.5);
+  --scale8: #d2baff;
+  --scaleFade8: rgba(210, 186, 255, 0.5);
+  --scale9: #e8dcff;
+  --scaleFade9: rgba(232, 220, 255, 0.5);
+  --scale10: white;
+  --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
 .scion.actor .tuathaDeDanann {
   --bgImage: url("../images/Tuatha.png");
+  --menuRosetteImg: url("../images/MenuRosetteTuatha.png");
   --bgColorMatte: #efffd1;
   --bgColorSoft: #c7f8c4;
   --bgColorStrong: #73ed6c;
@@ -1101,15 +1295,25 @@ span.heading3 {
   --fontWeightSurTitle: bold;
   --fontColorBody: #1a211d;
   --scale1: #101410;
+  --scaleFade1: rgba(16, 20, 16, 0.5);
   --scale2: #1c2d1b;
+  --scaleFade2: rgba(28, 45, 27, 0.5);
   --scale3: #234b21;
+  --scaleFade3: rgba(35, 75, 33, 0.5);
   --scale4: #266e22;
+  --scaleFade4: rgba(38, 110, 34, 0.5);
   --scale5: #25951f;
+  --scaleFade5: rgba(37, 149, 31, 0.5);
   --scale6: #2bd422;
+  --scaleFade6: rgba(43, 212, 34, 0.5);
   --scale7: #55eb4d;
+  --scaleFade7: rgba(85, 235, 77, 0.5);
   --scale8: #8af684;
+  --scaleFade8: rgba(138, 246, 132, 0.5);
   --scale9: #c2fdbf;
+  --scaleFade9: rgba(194, 253, 191, 0.5);
   --scale10: white;
+  --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
 .scion.actor .orisha {

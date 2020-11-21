@@ -13,6 +13,9 @@
                 <a class="item" data-tab="experience">Experience</a>
             </nav>
 
+            {{!-- Menu Rosette --}}
+            <div class="menuRosette"></div>
+
             {{!-- Sheet Header --}}
             <div class="header grid">
                 <div class="divineTitle text surTitle edit contentEditable" data-path="data.divineTitle"></div>
@@ -47,7 +50,7 @@
                                     </div>
                                 {{/if}}
                                 {{#each (lookup ../config.ATTRIBUTES.arenas arena) as |attribute|}}
-                                    <div class="attrRow dotDropBin grid" data-dottype="{{arena}}" data-trait="{{attribute}}">
+                                    <div class="attrRow dotDropBin dotline labelledDotLine" data-dottype="{{arena}}" data-trait="{{attribute}}">
                                         <div class="label">{{localize (concat "scion.attributes." attribute)}}</div>
                                         {{#for 5}}
                                             <span class="dot click {{dotstate attribute @index}}" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
@@ -57,7 +60,7 @@
                             </div>
                         {{/each}}
                     </div>
-                    <div class="paths grid">
+                    <div class="paths flex">
                         <div class="heading text heading1">Paths</div>
                         <div class="originpath"></div>
                         <div class="rolepath"></div>
@@ -66,13 +69,13 @@
                     <div class="virtues grid">
                         {{#if data.pantheon}}
                         {{#with (lookup config.PANTHEONS data.pantheon) as | pantheon |}}
-                        <div class="leftvirtue text">{{localize (concat "scion.virtues." pantheon.virtues.[0])}}</div>
-                        <div class="dotline">
+                        <div class="leftvirtue strong text">{{localize (concat "scion.virtues." pantheon.virtues.[0])}}</div>
+                        <div class="dotline largeDots">
                             {{#for 5}}
-                                <span class="dot" data-dottype="{{arena}}" data-trait="virtue" data-val="{{@index}}"></span>
+                                <span class="dot {{#if (eq (lookup ../data.virtue [value]) @index)}}virtueFull{{/if}} {{#if (eq @index 3)}}virtueCenter{{/if}}" data-trait="virtue" data-val="{{@index}}"></span>
                             {{/for}}
                         </div>
-                        <div class="rightvirtue text">{{localize (concat "scion.virtues." pantheon.virtues.[1])}}</div>
+                        <div class="rightvirtue strong text alignRight">{{localize (concat "scion.virtues." pantheon.virtues.[1])}}</div>
                         {{/with}}
                         {{/if}}
                     </div>

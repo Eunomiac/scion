@@ -21,6 +21,12 @@
                     "longTerm": [],
                     "band": []
                 },
+                "virtue": {
+                    "min": 0,
+                    "value": 3,
+                    "max": 5,
+                    "modifier": []
+                },
                 "purviews": {
                     "fromBirthrights": 0,                   
                     "pantheon": "",

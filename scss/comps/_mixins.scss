@@ -18,9 +18,11 @@
 @mixin scaled-colors ($baseColor) {
     @for $i from 1 through 10 {
       $thisScale: 10% * ($i * 2 - 10);      
-      $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);        
+      $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);
+      $thisHalfColor: scale-color($thisColor, $alpha: -50%);        
       --scale#{$i}: #{$thisColor};
-  }
+      --scaleFade#{$i}: #{$thisHalfColor};
+    }
 }
 
 @mixin disabledText {

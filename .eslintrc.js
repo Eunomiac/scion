@@ -99,7 +99,7 @@ module.exports = {
         "no-labels": "warn",
         "no-lone-blocks": "warn",
         "no-lonely-if": 0,
-        "no-loop-func": "warn",
+        "no-loop-func": "off", // "warn",
         // "no-mixed-spaces-and-tabs": [
         // "warn",
         // "smart-tabs"
