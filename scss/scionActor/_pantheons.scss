@@ -1,7 +1,7 @@
 
 & {
     --bgColorMatte: #{$c-white};
-    --bgImage: url("../images/Generic.png");
+    --bgImage: url("../images/actor-sheet/backgrounds/Generic.png");
 
     // Body Text
     --fontColorBody: #{$c-black};
@@ -100,9 +100,9 @@
 // .kami { }
 
 .loa {
-    --bgImage: url("../images/Loa.png");
+    --bgImage: url("../images/actor-sheet/backgrounds/Loa.png");
     --fontFamilyTitle: "Finger Paint";
-    --menuRosetteImg: url("../images/MenuRosetteLoa.png");
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
     --fontSizeTitle: 2rem;
 }
 
@@ -117,8 +117,8 @@
 
     --fontColorBody: #{$bodyColor};
 
-    --bgImage: url("../images/Netjer.png");
-    --menuRosetteImg: url("../images/MenuRosetteNetjer.png");
+    --bgImage: url("../images/actor-sheet/backgrounds/Netjer.png");
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
@@ -154,10 +154,8 @@
     $accentColor: #8e52ff;
     $bodyColor: #000538;
 
-    --bgImage: url("../images/Theoi.png");
-    --virtueDarkImg: url("../images/VirtueDarkTheoi.png");
-    --virtueGlowImg: url("../images/VirtueGlowTheoi.png");
-    --menuRosetteImg: url("../images/MenuRosetteTheoi.png");
+    --bgImage: url("../images/actor-sheet/backgrounds/Theoi.png");
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
 
 
     --bgColorMatte: #{$matteColor};
@@ -196,8 +194,8 @@
     $accentColor: #25951f;
     $bodyColor: #1a211d;
 
-    --bgImage: url("../images/Tuatha.png");
-    --menuRosetteImg: url("../images/MenuRosetteTuatha.png");
+    --bgImage: url("../images/actor-sheet/backgrounds/Tuatha.png");
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
     --bgColorMatte: #{$matteColor};
     --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
     --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
@@ -208,7 +206,7 @@
     --fontFamilyHeading1: var(--fontFamilyTitle);
     --borderBottomHeading1: 2px solid var(--fontColorTitle);
     --fontVariantHeading1: normal;
-    --fontSizeTitle: 2rem;
+    --fontSizeTitle: 2.5rem;
 
     --fontColorSubTitle: #{$headingColor2};
     --fontFamilySubTitle: "Della Respira";
@@ -225,7 +223,7 @@
 // .nemetondevos { }
 
 .orisha {
-    --bgImage: url("../images/Orisha.png");
+    --bgImage: url("../images/actor-sheet/backgrounds/Orisha.png");
     --fontFamilyTitle: "Finger Paint";
     --fontSizeTitle: 2rem;
 }

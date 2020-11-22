@@ -19,7 +19,7 @@
 
     &.spaceCenter { justify-content: center; }
     
-    > * { flex: 0 1 auto; margin: 0.15rem 0.25rem; } // initialize all contained items as default.
+    > *:not(.heading1) { flex: 0 1 auto; margin: 0.15rem 0.25rem; } // initialize all contained items as default.
 }
 
 .flexContainer {

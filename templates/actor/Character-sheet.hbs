@@ -6,7 +6,7 @@
     <div class="grid main">
             {{!-- Sheet Tab Navigation --}}
             <nav class="sheet-tabs tabs" data-group="primary">
-                <a class="item icon" data-tab="settings"><i class="fas fa-cog"></i></a>
+                <a class="item" data-tab="chargen">Chargen</a>
                 <a class="item" data-tab="front">Front</a>
                 <a class="item" data-tab="heritage">Divine Heritage</a>
                 <a class="item" data-tab="details">Details</a>
@@ -22,11 +22,10 @@
                 <div class="charName text title edit contentEditable" data-path="actor.name"></div>
                 <div class="patronage"><textarea class="subTitle text readonly" name="data.patronageLine" readonly >{{data.patronageLine}}</textarea></div>
             </div>
-                <!-- <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>     -->      
                 
             <section class="sheet-body">
-                {{!-- Settings Tab --}}
-                <div class="tab settings {{blocks.chargen.class}}" data-group="primary" data-tab="settings">
+                {{!-- Chargen Tab --}}
+                <div class="tab chargen {{blocks.chargen.class}}" data-group="primary" data-tab="chargen">
                     {{> (blocks.chargen.template) }}
                 </div>
                 {{!-- Front Tab --}}

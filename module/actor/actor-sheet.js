@@ -9,11 +9,50 @@ import {Dust} from "../external/dust.js";
 
 export class ScionActorSheet extends ActorSheet {
     static get defaultOptions() {
+        /*  super.defaultOptions = {
+                baseApplication: "ActorSheet",
+                classes: ["sheet"],
+                template: "templates/sheets/actor-sheet.html",
+                id: "",
+                title: "",
+                top: null,
+                left: null,
+                height: 720,
+                width: 800,
+                editable: true,
+                minimizable: true,
+                popOut: true,
+                resizable: true,
+                submitOnChange: true,
+                submitOnClose: true,
+                closeOnSubmit: false,
+                tabs: [],
+                filters: [],
+                scrollY: [],
+                dragDrop: [
+                    {
+                        dragSelector: ".item-list .item",
+                        dropSelector: null
+                    }
+                ],
+                viewPermission: 1
+            }; */
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "actor"],
             width: 750,
             height: 750,
-            tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "front"}]
+            tabs: [
+                {
+                    navSelector: ".sheet-tabs",
+                    contentSelector: ".sheet-body",
+                    initial: "front"
+                },
+                {
+                    navSelector: ".chargen-tabs",
+                    contentSelector: ".chargen-body",
+                    initial: "step-one"
+                }
+            ]
         });
     }
     get template() {
@@ -31,7 +70,7 @@ export class ScionActorSheet extends ActorSheet {
         data.blocks = {
             chargen: {
                 class: "charGen",
-                template: () => `systems/scion/templates/actor/actor-chargen-step${actorData.charGen.charGenStep || 1}.hbs`
+                template: () => "systems/scion/templates/actor/actor-chargen.hbs"
             }
         };
 
@@ -166,14 +205,15 @@ export class ScionActorSheet extends ActorSheet {
                     this.actor.update({[dataSet.path.slice(6)]: element.innerText.trim()});
                 else
                     this.actor.update({[dataSet.path]: element.innerText.trim()});
-
-                if (!element.innerText && "placeholder" in dataSet) {
-                    element.classList.add("placeholder");
-                    element.innerHTML = dataSet.placeholder;
-                } else {
-                    element.classList.remove("placeholder");
-                    element.innerHTML = "";
-                }
+            }
+            if (!element.innerText && "placeholder" in dataSet) {
+                U.DB([element.innerText, !element.innerText], "Inner Text Check");
+                element.classList.add("placeholder");
+                element.innerHTML = dataSet.placeholder;
+            } else {
+                U.DB([element.innerText, !element.innerText], "Inner Text Check");
+                element.classList.remove("placeholder");
+                // element.innerHTML = "";
             }
         };
         html.find(".contentEditable").each((i, element) => {

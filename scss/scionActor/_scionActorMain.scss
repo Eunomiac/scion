@@ -5,10 +5,9 @@
     background: none;
 
     header.window-header.flexrow.draggable.resizable {
-        height: 1rem;
-        width: 65%;
-        margin: -1rem 0 0 20%;
-        padding: 0 0 0 5%;
+        height: 2rem;
+        width: 80px;
+        margin: -1.5rem 0 -0.5rem 550px;
         display: block;
         flex: none;
         position: relative;
@@ -16,25 +15,28 @@
         overflow: visible;
         border: none;
         h4.window-title { display: none; }
-        a {
-            opacity: 0;
-        }
         a.header-button {
-            pointer-events: all;
-            height: 1rem;
+            display: none;
+
+            &.close {
+                display: inline;
+                pointer-events: all;
+                height: 1rem;
+                color: white;
+            }
         }
         &::after {
-            background: transparent;
-            pointer-events: all;
-            cursor: move;
-            display: block;
-            width: 200px;
-            height: 200px;
             content: "";
+
+            display: block;
             position: relative;
-            left: -57%;
-            top: -550%;
-            border-radius: 50%;
+            left: -560px;
+            top: -20px;
+            width: 125px;
+            height: 125px;           
+
+            cursor: move;
+            pointer-events: all;
         }
     }
 
@@ -62,7 +64,48 @@
         z-index: 1;
     }
 
+    .tabs {
+        grid-area: nav;
+        height: 100%;
+        margin: 0px;
+        padding-top: 1px;
+        border: none;
+        pointer-events: all;
+
+        .item {
+            height: 100%;
+            line-height: 1.25rem;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-shadow: none;
+        }
+        .item.icon {
+            height: 20px;
+            width: 20px;
+            flex: none;
+            margin: -20px -20px 0 0;
+            color: white;
+            font-size: 1rem;
+
+        }
+        .item:hover { 
+            background-color: var(--bgColorSoft); 
+        }
+        .item.active { 
+            background-color: var(--bgColorStrong); 
+        }
+        .item.icon:hover { 
+            background-color: transparent; 
+            color: var(--fontColorSubTitle); 
+        }
+        .item.icon.active { 
+            background-color: transparent; 
+            color: var(--fontColorSurTitle); 
+        }
+    }
+
     .Character {
+        transition: 0.5s;
         .main {
             height: 100%;
             width: 100%;
@@ -73,40 +116,49 @@
             opacity: 1;        
 
             grid: ". nav ." 1.3rem
+                  ". . ." 0.25rem
                   "header header header" 6rem
                   "body body body" auto
                   ". footer ." 1.5rem
-                  /12% 1fr 12%;
+                / 12% 1fr 12%;
 
             .sheet-tabs {
-                opacity: 0;
                 grid-area: nav;
-                height: 100%;
-                margin: 0px;
-                padding-top: 1px;
-                border: none;
-                pointer-events: all;
+                // height: 100%;
+                // margin: 0px;
+                // padding-top: 1px;
+                // border: none;
+                // pointer-events: all;
 
                 .item {
-                    height: 100%;
-                    line-height: 1.25rem;
-                    font-weight: bold;
-                    font-size: 0.75rem;
-                    text-shadow: none;
+                    // height: 100%;
+                    // line-height: 1.25rem;
+                    // font-weight: bold;
+                    // font-size: 0.75rem;
+                    // text-shadow: none;
                 }
                 .item.icon {
-                    height: 20px;
-                    width: 20px;
-                    flex: none;
-                    margin: -20px -20px 0 0;
-                    color: white;
-                    font-size: 1rem;
-
+                    // height: 20px;
+                    // width: 20px;
+                    // flex: none;
+                    // margin: -20px -20px 0 0;
+                    // color: white;
+                    // font-size: 1rem;
                 }
-                .item:hover { background-color: var(--bgColorSoft); }
-                .item.active { background-color: var(--bgColorStrong); }
-                .item.icon:hover { background-color: transparent; color: var(--fontColorSubTitle); }
-                .item.icon.active { background-color: transparent; color: var(--fontColorSurTitle); }
+                .item:hover { 
+                    // background-color: var(--bgColorSoft); 
+                }
+                .item.active { 
+                    // background-color: var(--bgColorStrong); 
+                }
+                .item.icon:hover { 
+                    // background-color: transparent; 
+                    // color: var(--fontColorSubTitle); 
+                }
+                .item.icon.active { 
+                    // background-color: transparent; 
+                    // color: var(--fontColorSurTitle); 
+                }
             }
             .menuRosette {                
                 background-image: var(--menuRosetteImg);
@@ -126,11 +178,10 @@
             }
             .header {
                 grid-area: header;
-                grid:   ". . ." 0.5rem
-                        ". divineTitle ." 1.5rem
-                        ". charName ." 3rem
-                        "patronage patronage patronage" 1.5rem
-                        /12% 1fr 12%;
+                grid: ". divineTitle ." 1.5rem
+                      ". charName ." 3rem
+                      "patronage patronage patronage" 2rem
+                    / 12% 1fr 12%;
                 grid-gap: 0;
 
                 div { pointer-events: all; }
@@ -143,7 +194,7 @@
                 grid-area: body;
                 pointer-events: all;
 
-                .settings {            
+                .chargen {            
                     grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
                     grid-template-rows: 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.5rem 2rem;
                     row-gap: 0.25rem;

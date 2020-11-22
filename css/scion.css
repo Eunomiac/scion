@@ -3,53 +3,33 @@
 @use "sass:string";
 /* #region Global Variables & Configuration */
 @font-face {
-  font-family: "Archeologicaps";
-  src: url(../fonts/Theoi/Archeologicaps.ttf);
-}
-
-@font-face {
-  font-family: "Dalek";
-  src: url(../fonts/Theoi/DALEK.ttf);
-}
-
-@font-face {
-  font-family: "Diogenes";
-  src: url(../fonts/Theoi/DIOGENES.ttf);
-}
-
-@font-face {
-  font-family: "Roman Font 7";
-  src: url(../fonts/Theoi/roman_font_7.ttf);
-}
-
-@font-face {
   font-family: "Elektra";
-  src: url(../fonts/Theoi/elektra.ttf);
+  src: url(../fonts/Elektra.ttf);
 }
 
 @font-face {
   font-family: "Khaleefa";
-  src: url(../fonts/Netjer/Khaleefa.otf);
+  src: url(../fonts/Khaleefa.otf);
 }
 
 @font-face {
   font-family: "Oh Mighty Isis";
-  src: url(../fonts/Netjer/ohmightyisisexpand.ttf);
-}
-
-@font-face {
-  font-family: "Zanzabar";
-  src: url(../fonts/Netjer/Zanzabar.otf);
+  src: url(../fonts/OhMightyIsisExpanded.ttf);
 }
 
 @font-face {
   font-family: "Sherwood";
-  src: url(../fonts/Tuatha/SHERWOOD.TTF);
+  src: url(../fonts/Sherwood.ttf);
 }
 
 @font-face {
   font-family: "Stonehenge";
-  src: url(../fonts/Tuatha/stonehen.ttf);
+  src: url(../fonts/Stonehenge.ttf);
+}
+
+@font-face {
+  font-family: "Zanzabar";
+  src: url(../fonts/Zanzabar.otf);
 }
 
 /* #endregion */
@@ -93,7 +73,6 @@ select:invalid {
   font-family: "Della Respira" !important;
   font-size: 0.75rem !important;
   font-weight: normal !important;
-  line-height: 1.25rem !important;
 }
 
 /* #endregion */
@@ -122,7 +101,6 @@ select:invalid {
   font-family: "Della Respira" !important;
   font-size: 0.75rem !important;
   font-weight: normal !important;
-  line-height: 1.25rem !important;
 }
 
 .half {
@@ -167,6 +145,7 @@ select:invalid {
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.2);
   border: inset 3px var(--scale6);
+  min-height: 1.6rem;
   /* #region Special Tweaks for Content-Editable DIV Elements */
   /* #endregion */
 }
@@ -179,207 +158,6 @@ select:invalid {
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: none;
-}
-
-/* #endregion */
-/* #region Collapsible Drawers */
-/* 
-    <div class="drawerContainer">
-        <input type="checkbox" name=<XXX> value="1">
-        <div class="drawerLabel heading1">HEADING & DRAWER HANDLE</div>
-        <div class="drawerContents">
-            ...
-        </div>
-    </div>
-*/
-.drawerContainer {
-  font-size: 0;
-  min-height: 1rem;
-}
-
-.drawerContainer > * {
-  font-size: initial;
-}
-
-.drawerContainer input[type="checkbox"],
-.drawerContainer input[type="radio"] {
-  display: inline-block;
-  height: 1rem;
-  width: 100%;
-  margin: 0 -100% 0 0;
-  padding: 0;
-  opacity: 0;
-  -webkit-box-flex: 0;
-  -ms-flex: none;
-  flex: none;
-  pointer-events: none;
-  -webkit-transform-origin: left center;
-  -ms-transform-origin: left center;
-  transform-origin: left center;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.drawerContainer input[type="checkbox"] + .drawerLabel,
-.drawerContainer input[type="radio"] + .drawerLabel {
-  display: inline-block;
-  border: none;
-  opacity: 1;
-  height: 1.5rem;
-  margin: 0.25rem 0;
-  -webkit-transform-origin: left center;
-  -ms-transform-origin: left center;
-  transform-origin: left center;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.drawerContainer input[type="checkbox"] + .drawerLabel::after,
-.drawerContainer input[type="radio"] + .drawerLabel::after {
-  content: "";
-  float: left;
-  height: 100px;
-  width: 100px;
-  margin: -40px -30px 0px -40px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  border-radius: 50%;
-  -webkit-transform-origin: left center;
-  -ms-transform-origin: left center;
-  transform-origin: left center;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.drawerContainer input[type="checkbox"] + .drawerLabel ~ .drawerContents,
-.drawerContainer input[type="radio"] + .drawerLabel ~ .drawerContents {
-  -webkit-transition-timing-function: ease-in-out;
-  -o-transition-timing-function: ease-in-out;
-  transition-timing-function: ease-in-out;
-  -webkit-transform-origin: 0% 0%;
-  -ms-transform-origin: 0% 0%;
-  transform-origin: 0% 0%;
-  -webkit-transition: opacity 200ms, margin 50ms, -webkit-transform 200ms;
-  transition: opacity 200ms, margin 50ms, -webkit-transform 200ms;
-  -o-transition: opacity 200ms, transform 200ms, margin 50ms;
-  transition: opacity 200ms, transform 200ms, margin 50ms;
-  transition: opacity 200ms, transform 200ms, margin 50ms, -webkit-transform 200ms;
-}
-
-.drawerContainer input[type="checkbox"].hide + .drawerLabel,
-.drawerContainer input[type="radio"].hide + .drawerLabel {
-  opacity: 0;
-  border-bottom: none;
-  display: none;
-}
-
-.drawerContainer input[type="checkbox"].hide + .drawerLabel::after,
-.drawerContainer input[type="radio"].hide + .drawerLabel::after {
-  opacity: 0;
-}
-
-.drawerContainer input[type="checkbox"].hide + .drawerLabel ~ .drawerContents,
-.drawerContainer input[type="radio"].hide + .drawerLabel ~ .drawerContents {
-  opacity: 0;
-  margin-bottom: -100%;
-  -webkit-transform: scaleY(0);
-  -ms-transform: scaleY(0);
-  transform: scaleY(0);
-  -webkit-transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
-  transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
-  -o-transition: opacity 200ms, transform 200ms, margin 750ms;
-  transition: opacity 200ms, transform 200ms, margin 750ms;
-  transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
-}
-
-.drawerContainer input[type="checkbox"].noGlow,
-.drawerContainer input[type="radio"].noGlow {
-  -webkit-transform: scale(0.66);
-  -ms-transform: scale(0.66);
-  transform: scale(0.66);
-}
-
-.drawerContainer input[type="checkbox"].noGlow + .drawerLabel,
-.drawerContainer input[type="radio"].noGlow + .drawerLabel {
-  -webkit-transform: scale(0.66);
-  -ms-transform: scale(0.66);
-  transform: scale(0.66);
-  border-bottom: none;
-}
-
-.drawerContainer input[type="checkbox"].noGlow + .drawerLabel::after,
-.drawerContainer input[type="radio"].noGlow + .drawerLabel::after {
-  -webkit-transform: scale(0.66);
-  -ms-transform: scale(0.66);
-  transform: scale(0.66);
-  background-image: url("../images/OFF.png");
-}
-
-.drawerContainer input[type="checkbox"].noGlow + .drawerLabel ~ .drawerContents,
-.drawerContainer input[type="radio"].noGlow + .drawerLabel ~ .drawerContents {
-  display: none;
-}
-
-.drawerContainer input[type="checkbox"].halfGlow,
-.drawerContainer input[type="radio"].halfGlow {
-  pointer-events: all;
-}
-
-.drawerContainer input[type="checkbox"].halfGlow + .drawerLabel,
-.drawerContainer input[type="radio"].halfGlow + .drawerLabel {
-  pointer-events: none;
-}
-
-.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel,
-.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel {
-  -webkit-transform: scale(0.66);
-  -ms-transform: scale(0.66);
-  transform: scale(0.66);
-  border-bottom: none;
-}
-
-.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel::after,
-.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel::after {
-  -webkit-transform: scale(0.66);
-  -ms-transform: scale(0.66);
-  transform: scale(0.66);
-  background-image: url("../images/DIM.png");
-}
-
-.drawerContainer input[type="checkbox"].halfGlow:not(:checked) + .drawerLabel ~ .drawerContents,
-.drawerContainer input[type="radio"].halfGlow:not(:checked) + .drawerLabel ~ .drawerContents {
-  opacity: 0;
-  margin-bottom: -100%;
-  -webkit-transform: scaleY(0);
-  -ms-transform: scaleY(0);
-  transform: scaleY(0);
-  -webkit-transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
-  transition: opacity 200ms, margin 750ms, -webkit-transform 200ms;
-  -o-transition: opacity 200ms, transform 200ms, margin 750ms;
-  transition: opacity 200ms, transform 200ms, margin 750ms;
-  transition: opacity 200ms, transform 200ms, margin 750ms, -webkit-transform 200ms;
-}
-
-.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel::after,
-.drawerContainer input[type="radio"].activeGlow + .drawerLabel::after {
-  background-image: url("../images/BRIGHT.png");
-}
-
-.drawerContainer input[type="checkbox"].activeGlow + .drawerLabel + .drawerContents,
-.drawerContainer input[type="radio"].activeGlow + .drawerLabel + .drawerContents {
-  opacity: 1;
-  margin-bottom: 0%;
-  -webkit-transform: scaleY(1);
-  -ms-transform: scaleY(1);
-  transform: scaleY(1);
-}
-
-.drawerContainer.noClick input[type="checkbox"] {
-  pointer-events: none;
 }
 
 /* #endregion */
@@ -622,7 +400,7 @@ span.heading3 {
   justify-content: center;
 }
 
-.flex > * {
+.flex > *:not(.heading1) {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
@@ -730,10 +508,9 @@ span.heading3 {
 }
 
 .scion.actor header.window-header.flexrow.draggable.resizable {
-  height: 1rem;
-  width: 65%;
-  margin: -1rem 0 0 20%;
-  padding: 0 0 0 5%;
+  height: 2rem;
+  width: 80px;
+  margin: -1.5rem 0 -0.5rem 550px;
   display: block;
   -webkit-box-flex: 0;
   -ms-flex: none;
@@ -748,27 +525,27 @@ span.heading3 {
   display: none;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable a {
-  opacity: 0;
+.scion.actor header.window-header.flexrow.draggable.resizable a.header-button {
+  display: none;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable a.header-button {
+.scion.actor header.window-header.flexrow.draggable.resizable a.header-button.close {
+  display: inline;
   pointer-events: all;
   height: 1rem;
+  color: white;
 }
 
 .scion.actor header.window-header.flexrow.draggable.resizable::after {
-  background: transparent;
-  pointer-events: all;
-  cursor: move;
-  display: block;
-  width: 200px;
-  height: 200px;
   content: "";
+  display: block;
   position: relative;
-  left: -57%;
-  top: -550%;
-  border-radius: 50%;
+  left: -560px;
+  top: -20px;
+  width: 125px;
+  height: 125px;
+  cursor: move;
+  pointer-events: all;
 }
 
 .scion.actor div.window-resizable-handle {
@@ -788,19 +565,7 @@ span.heading3 {
   z-index: 1;
 }
 
-.scion.actor .Character .main {
-  height: 100%;
-  width: 100%;
-  padding: 2% 8% 8% 6%;
-  background-image: var(--bgImage);
-  background-size: 100%;
-  background-repeat: repeat-y;
-  opacity: 1;
-  grid: ". nav ." 1.3rem "header header header" 6rem "body body body" auto ". footer ." 1.5rem /12% 1fr 12%;
-}
-
-.scion.actor .Character .main .sheet-tabs {
-  opacity: 0;
+.scion.actor .tabs {
   grid-area: nav;
   height: 100%;
   margin: 0px;
@@ -809,7 +574,7 @@ span.heading3 {
   pointer-events: all;
 }
 
-.scion.actor .Character .main .sheet-tabs .item {
+.scion.actor .tabs .item {
   height: 100%;
   line-height: 1.25rem;
   font-weight: bold;
@@ -817,7 +582,7 @@ span.heading3 {
   text-shadow: none;
 }
 
-.scion.actor .Character .main .sheet-tabs .item.icon {
+.scion.actor .tabs .item.icon {
   height: 20px;
   width: 20px;
   -webkit-box-flex: 0;
@@ -828,22 +593,43 @@ span.heading3 {
   font-size: 1rem;
 }
 
-.scion.actor .Character .main .sheet-tabs .item:hover {
+.scion.actor .tabs .item:hover {
   background-color: var(--bgColorSoft);
 }
 
-.scion.actor .Character .main .sheet-tabs .item.active {
+.scion.actor .tabs .item.active {
   background-color: var(--bgColorStrong);
 }
 
-.scion.actor .Character .main .sheet-tabs .item.icon:hover {
+.scion.actor .tabs .item.icon:hover {
   background-color: transparent;
   color: var(--fontColorSubTitle);
 }
 
-.scion.actor .Character .main .sheet-tabs .item.icon.active {
+.scion.actor .tabs .item.icon.active {
   background-color: transparent;
   color: var(--fontColorSurTitle);
+}
+
+.scion.actor .Character {
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.scion.actor .Character .main {
+  height: 100%;
+  width: 100%;
+  padding: 2% 8% 8% 6%;
+  background-image: var(--bgImage);
+  background-size: 100%;
+  background-repeat: repeat-y;
+  opacity: 1;
+  grid: ". nav ." 1.3rem ". . ." 0.25rem "header header header" 6rem "body body body" auto ". footer ." 1.5rem / 12% 1fr 12%;
+}
+
+.scion.actor .Character .main .sheet-tabs {
+  grid-area: nav;
 }
 
 .scion.actor .Character .main .menuRosette {
@@ -863,7 +649,7 @@ span.heading3 {
 
 .scion.actor .Character .main .header {
   grid-area: header;
-  grid: ". . ." 0.5rem ". divineTitle ." 1.5rem ". charName ." 3rem "patronage patronage patronage" 1.5rem /12% 1fr 12%;
+  grid: ". divineTitle ." 1.5rem ". charName ." 3rem "patronage patronage patronage" 2rem / 12% 1fr 12%;
   grid-gap: 0;
 }
 
@@ -888,28 +674,28 @@ span.heading3 {
   pointer-events: all;
 }
 
-.scion.actor .Character .main .sheet-body .settings {
+.scion.actor .Character .main .sheet-body .chargen {
   grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
   grid-template-rows: 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.5rem 2rem;
   row-gap: 0.25rem;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid {
+.scion.actor .Character .main .sheet-body .chargen div.grid {
   padding: 0 0.25rem;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.edit {
+.scion.actor .Character .main .sheet-body .chargen div.grid.edit {
   line-height: 1.75rem;
   line-height: normal;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer {
+.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer {
   background-color: rgba(0, 0, 0, 0.1);
   border: 3px inset var(--scale6);
   border-radius: 19px;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer div {
+.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer div {
   display: inline-block;
   width: 30%;
   margin: 0px 1.5%;
@@ -930,15 +716,15 @@ span.heading3 {
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2), -1px -1px 1px black;
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer .red {
+.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer .red {
   background-color: var(--scaleX);
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer .blue {
+.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer .blue {
   background-color: var(--scale8);
 }
 
-.scion.actor .Character .main .sheet-body .settings div.grid.dragContainer .green {
+.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer .green {
   background-color: var(--scale6);
 }
 
@@ -1097,7 +883,7 @@ span.heading3 {
 
 .scion.actor {
   --bgColorMatte: #fff;
-  --bgImage: url("../images/Generic.png");
+  --bgImage: url("../images/actor-sheet/backgrounds/Generic.png");
   --fontColorBody: #000;
   --fontFamilyBody: "Overlock SC";
   --fontSizeBody: 1rem;
@@ -1178,16 +964,16 @@ span.heading3 {
 }
 
 .scion.actor .loa {
-  --bgImage: url("../images/Loa.png");
+  --bgImage: url("../images/actor-sheet/backgrounds/Loa.png");
   --fontFamilyTitle: "Finger Paint";
-  --menuRosetteImg: url("../images/MenuRosetteLoa.png");
+  --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
   --fontSizeTitle: 2rem;
 }
 
 .scion.actor .netjer {
   --fontColorBody: #2d2d2f;
-  --bgImage: url("../images/Netjer.png");
-  --menuRosetteImg: url("../images/MenuRosetteNetjer.png");
+  --bgImage: url("../images/actor-sheet/backgrounds/Netjer.png");
+  --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
   --bgColorMatte: #f6f0e2;
   --bgColorSoft: #fdd8b7;
   --bgColorStrong: #f99c4b;
@@ -1228,10 +1014,8 @@ span.heading3 {
 }
 
 .scion.actor .theoi {
-  --bgImage: url("../images/Theoi.png");
-  --virtueDarkImg: url("../images/VirtueDarkTheoi.png");
-  --virtueGlowImg: url("../images/VirtueGlowTheoi.png");
-  --menuRosetteImg: url("../images/MenuRosetteTheoi.png");
+  --bgImage: url("../images/actor-sheet/backgrounds/Theoi.png");
+  --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
   --bgColorMatte: #ffffff;
   --bgColorSoft: #e8dcff;
   --bgColorStrong: #c7a9ff;
@@ -1276,8 +1060,8 @@ span.heading3 {
 }
 
 .scion.actor .tuathaDeDanann {
-  --bgImage: url("../images/Tuatha.png");
-  --menuRosetteImg: url("../images/MenuRosetteTuatha.png");
+  --bgImage: url("../images/actor-sheet/backgrounds/Tuatha.png");
+  --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
   --bgColorMatte: #efffd1;
   --bgColorSoft: #c7f8c4;
   --bgColorStrong: #73ed6c;
@@ -1287,7 +1071,7 @@ span.heading3 {
   --fontFamilyHeading1: var(--fontFamilyTitle);
   --borderBottomHeading1: 2px solid var(--fontColorTitle);
   --fontVariantHeading1: normal;
-  --fontSizeTitle: 2rem;
+  --fontSizeTitle: 2.5rem;
   --fontColorSubTitle: #19430e;
   --fontFamilySubTitle: "Della Respira";
   --fontStyleSubTitle: italic;
@@ -1317,7 +1101,7 @@ span.heading3 {
 }
 
 .scion.actor .orisha {
-  --bgImage: url("../images/Orisha.png");
+  --bgImage: url("../images/actor-sheet/backgrounds/Orisha.png");
   --fontFamilyTitle: "Finger Paint";
   --fontSizeTitle: 2rem;
 }
