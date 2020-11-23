@@ -1,0 +1,33 @@
+{{!-- Sheet Tab Navigation --}}
+<nav class="chargen-tabs tabs" data-group="chargen">
+    <a class="item" data-tab="step-one">One</a>
+    <a class="item" data-tab="step-two">Two</a>
+    <a class="item" data-tab="step-three">Three</a>
+    <a class="item" data-tab="step-four">Four</a>
+    <a class="item" data-tab="step-five">Five</a>
+    <a class="item" data-tab="step-six">Six</a>
+    <a class="item" data-tab="step-seven">Seven</a>
+</nav>
+<section class="chargen-body">
+    <div class="tab flex flexContainer chargenOne" data-group="chargen" data-tab="step-one">
+        {{> (blocks.chargen.step-one.template) }}
+    </div>
+    <div class="tab flex flexContainer chargenTwo" data-group="chargen" data-tab="step-two">
+        {{> (blocks.chargen.step-two.template) }}
+    </div>
+    <div class="tab flex flexContainer chargenThree" data-group="chargen" data-tab="step-three">
+        {{> (blocks.chargen.step-three.template) }}
+    </div>
+    <div class="tab flex flexContainer chargenFour" data-group="chargen" data-tab="step-four">
+        {{> (blocks.chargen.step-four.template) }}
+    </div>
+    <div class="tab flex flexContainer chargenFive" data-group="chargen" data-tab="step-five">
+        {{> (blocks.chargen.step-five.template) }}
+    </div>
+    <div class="tab flex flexContainer chargenSix" data-group="chargen" data-tab="step-six">
+        {{> (blocks.chargen.step-six.template) }}
+    </div>
+    <div class="tab flex flexContainer chargenSeven" data-group="chargen" data-tab="step-seven">
+        {{> (blocks.chargen.step-seven.template) }}
+    </div>
+</section>

@@ -1,30 +1,42 @@
+import * as U from "../data/utils.js";
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
 export class ScionActor extends Actor {
-    /**
-   * Augment the basic actor data with additional dynamic data.
-   */
     prepareData() {
         super.prepareData();
+        U.LOG(this, `${this.name} --- Actor.prepareData()`, "prepareData");
 
-        const actorData = this.data;
-        const data = actorData.data;
-        const flags = actorData.flags;
-
-        // Make separate methods for each Actor type (character, npc, etc.) to keep
-        // things organized.
-        if (actorData.type === "Character")
-            this._prepareCharacterData(actorData);
+        if (this.data.type === "character")
+            this._prepareCharacterData();
     }
 
-    /**
-   * Prepare Character type specific data
-   */
-    _prepareCharacterData(actorData) {
-        const data = actorData.data;
+    _prepareCharacterData() {
+        const ownedItems = Array.from(this.data.items);
 
-        // Make modifications to data here.
+        // #region PREPARE PATH ITEMS
+        const pathData = [];
+        // Find the first Path Item of each type, if it exists;
+        // ... if it doesn't exist, add its creation data to pathData
+        const currentPaths = ["originPath", "rolePath", "pantheonPath"].map((pathType) => {
+            const thisPathItem = ownedItems.find((xx) => xx.data.type === pathType);
+            if (thisPathItem)
+                return thisPathItem;
+            pathData.push({
+                name: U.Loc(`scion.game.${pathType}`),
+                type: "path",
+                data: {type: pathType}
+            });
+            return undefined;
+        });
+        U.LOG(currentPaths, `${this.name} --- Current Paths`, "prepareData", {isUngrouping: false});
+        if (pathData.length) {
+            this.createEmbeddedEntity("OwnedItem", pathData);
+            U.LOG(pathData, "Paths to Add", "prepareData");
+        }
+        console.groupEnd();
+        // #endregion
     }
 }
+

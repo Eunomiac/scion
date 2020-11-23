@@ -89,6 +89,8 @@
     --lineHeightHeading3: var(--fontSizeHeading3);
     --textShadowHeading3: none;
     --borderBottomHeading3: none;
+
+    @include scaled-colors(#aaaaaa);
 }
 
 .aesir {

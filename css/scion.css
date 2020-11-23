@@ -42,6 +42,11 @@
   font-weight: var(--fontWeightBody);
 }
 
+section {
+  height: 100%;
+  width: 100%;
+}
+
 textarea,
 input[type="text"],
 select {
@@ -109,6 +114,10 @@ select:invalid {
 
 .quarter {
   width: 25%;
+}
+
+.fifth {
+  width: 20%;
 }
 
 .alignLeft {
@@ -375,7 +384,8 @@ span.heading3 {
     border: none;
 } */
 /* #region FLEX LAYOUTS */
-.flex {
+.flex,
+.tab[data-tab].active.flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -394,29 +404,34 @@ span.heading3 {
   align-content: safe flex-start;
 }
 
-.flex.spaceCenter {
+.flex.spaceCenter,
+.tab[data-tab].active.flex.spaceCenter {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
 }
 
-.flex > *:not(.heading1) {
+.flex > *:not(.heading1),
+.tab[data-tab].active.flex > *:not(.heading1) {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
   margin: 0.15rem 0.25rem;
 }
 
-.flexContainer {
+.flexContainer,
+.tab[data-tab].active.flexContainer {
   height: 100%;
   /* #endregion */
 }
 
-.flexContainer div {
+.flexContainer div,
+.tab[data-tab].active.flexContainer div {
   width: 100%;
 }
 
-.flexContainer span {
+.flexContainer span,
+.tab[data-tab].active.flexContainer span {
   display: inline-block;
   margin: auto 0;
   -webkit-box-flex: 1;
@@ -424,26 +439,30 @@ span.heading3 {
   flex: 1 0 auto;
 }
 
-.flexContainer .flexRow {
+.flexContainer .flexRow,
+.tab[data-tab].active.flexContainer .flexRow {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
 }
 
-.flexContainer .flexLabel {
+.flexContainer .flexLabel,
+.tab[data-tab].active.flexContainer .flexLabel {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
 }
 
-.flexContainer .flexStatic {
+.flexContainer .flexStatic,
+.tab[data-tab].active.flexContainer .flexStatic {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
 
-.flexContainer .edit {
+.flexContainer .edit,
+.tab[data-tab].active.flexContainer .edit {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
@@ -550,10 +569,6 @@ span.heading3 {
 
 .scion.actor div.window-resizable-handle {
   display: none;
-  bottom: 6%;
-  right: 6%;
-  z-index: 3;
-  pointer-events: all;
 }
 
 .scion.actor .window-content {
@@ -566,8 +581,7 @@ span.heading3 {
 }
 
 .scion.actor .tabs {
-  grid-area: nav;
-  height: 100%;
+  height: 18px;
   margin: 0px;
   padding-top: 1px;
   border: none;
@@ -611,28 +625,22 @@ span.heading3 {
   color: var(--fontColorSurTitle);
 }
 
-.scion.actor .Character {
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-}
-
-.scion.actor .Character .main {
+.scion.actor .character .main {
   height: 100%;
   width: 100%;
   padding: 2% 8% 8% 6%;
   background-image: var(--bgImage);
   background-size: 100%;
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
   opacity: 1;
-  grid: ". nav ." 1.3rem ". . ." 0.25rem "header header header" 6rem "body body body" auto ". footer ." 1.5rem / 12% 1fr 12%;
+  grid: ". nav ." 1.3rem ". . ." 0.25rem "header header header" 6rem "body body body" auto ". footer ." 6rem / 12% 1fr 12%;
 }
 
-.scion.actor .Character .main .sheet-tabs {
+.scion.actor .character .main .sheet-tabs {
   grid-area: nav;
 }
 
-.scion.actor .Character .main .menuRosette {
+.scion.actor .character .main .menuRosette {
   background-image: var(--menuRosetteImg);
   background-size: 90%;
   display: block;
@@ -647,95 +655,60 @@ span.heading3 {
   background-position: center;
 }
 
-.scion.actor .Character .main .header {
+.scion.actor .character .main .header {
   grid-area: header;
   grid: ". divineTitle ." 1.5rem ". charName ." 3rem "patronage patronage patronage" 2rem / 12% 1fr 12%;
   grid-gap: 0;
 }
 
-.scion.actor .Character .main .header div {
+.scion.actor .character .main .header div {
   pointer-events: all;
 }
 
-.scion.actor .Character .main .header .divineTitle {
+.scion.actor .character .main .header .divineTitle {
   grid-area: divineTitle;
 }
 
-.scion.actor .Character .main .header .charName {
+.scion.actor .character .main .header .charName {
   grid-area: charName;
 }
 
-.scion.actor .Character .main .header .patronage {
+.scion.actor .character .main .header .patronage {
   grid-area: patronage;
 }
 
-.scion.actor .Character .main .sheet-body {
+.scion.actor .character .main .sheet-body {
   grid-area: body;
   pointer-events: all;
 }
 
-.scion.actor .Character .main .sheet-body .chargen {
-  grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
-  grid-template-rows: 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.25rem 2rem 0.5rem 1.5rem 2rem;
-  row-gap: 0.25rem;
+.scion.actor .character .main .sheet-body .tab[data-tab].active {
+  height: 100%;
 }
 
-.scion.actor .Character .main .sheet-body .chargen div.grid {
-  padding: 0 0.25rem;
+.scion.actor .character .main .sheet-body .chargen-body .chargenTwo {
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
 }
 
-.scion.actor .Character .main .sheet-body .chargen div.grid.edit {
-  line-height: 1.75rem;
-  line-height: normal;
+.scion.actor .character .main .sheet-body .chargen-body .chargenTwo .path-block {
+  height: calc((100% - 2rem)/3);
+  border: inset 3px var(--scale6);
+  border-radius: 30px;
+  background-color: var(--scaleFade1);
 }
 
-.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer {
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 3px inset var(--scale6);
-  border-radius: 19px;
-}
-
-.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer div {
-  display: inline-block;
-  width: 30%;
-  margin: 0px 1.5%;
-  color: white;
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-align: center;
-  line-height: 26px;
-  border: 3px outset grey;
-  -webkit-box-shadow: 2px 2px 2px grey;
-  box-shadow: 2px 2px 2px grey;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.7)), to(transparent));
-  background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.7), transparent);
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7), transparent);
-  font-family: var(--fontFamilySubTitle);
-  color: var(--bgColorStrong);
-  border-radius: 1rem;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2), -1px -1px 1px black;
-}
-
-.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer .red {
-  background-color: var(--scaleX);
-}
-
-.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer .blue {
-  background-color: var(--scale8);
-}
-
-.scion.actor .Character .main .sheet-body .chargen div.grid.dragContainer .green {
-  background-color: var(--scale6);
-}
-
-.scion.actor .Character .main .sheet-body .front {
+.scion.actor .character .main .sheet-body .front {
   grid: "attributes paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
   -webkit-column-gap: 0.5rem;
   -moz-column-gap: 0.5rem;
   column-gap: 0.5rem;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes {
+.scion.actor .character .main .sheet-body .front .attributes {
   grid-area: attributes;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -749,7 +722,7 @@ span.heading3 {
   align-items: center;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .dotGrabBin {
+.scion.actor .character .main .sheet-body .front .attributes .dotGrabBin {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   height: auto;
@@ -758,7 +731,7 @@ span.heading3 {
   justify-content: flex-end;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .attrBlock {
+.scion.actor .character .main .sheet-body .front .attributes .attrBlock {
   margin: 0.5rem 0;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -766,50 +739,50 @@ span.heading3 {
   flex-flow: column nowrap;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .attrBlock .attrRow .label {
+.scion.actor .character .main .sheet-body .front .attributes .attrBlock .attrRow .label {
   font-size: 1rem;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .primary {
+.scion.actor .character .main .sheet-body .front .attributes .primary {
   -webkit-box-ordinal-group: 2;
   -ms-flex-order: 1;
   order: 1;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .secondary {
+.scion.actor .character .main .sheet-body .front .attributes .secondary {
   -webkit-box-ordinal-group: 3;
   -ms-flex-order: 2;
   order: 2;
 }
 
-.scion.actor .Character .main .sheet-body .front .attributes .tertiary {
+.scion.actor .character .main .sheet-body .front .attributes .tertiary {
   -webkit-box-ordinal-group: 4;
   -ms-flex-order: 3;
   order: 3;
 }
 
-.scion.actor .Character .main .sheet-body .front .paths {
+.scion.actor .character .main .sheet-body .front .paths {
   grid-area: paths;
   grid: "heading" 1.5rem "originpath" 5rem "rolepath" 5rem "pantheonpath" 5rem;
 }
 
-.scion.actor .Character .main .sheet-body .front .paths .heading {
+.scion.actor .character .main .sheet-body .front .paths .heading {
   grid-area: heading;
 }
 
-.scion.actor .Character .main .sheet-body .front .paths .originpath {
+.scion.actor .character .main .sheet-body .front .paths .originpath {
   grid-area: originpath;
 }
 
-.scion.actor .Character .main .sheet-body .front .paths .rolepath {
+.scion.actor .character .main .sheet-body .front .paths .rolepath {
   grid-area: rolepath;
 }
 
-.scion.actor .Character .main .sheet-body .front .paths .pantheonpath {
+.scion.actor .character .main .sheet-body .front .paths .pantheonpath {
   grid-area: pantheonpath;
 }
 
-.scion.actor .Character .main .sheet-body .front .virtues {
+.scion.actor .character .main .sheet-body .front .virtues {
   border-radius: 1rem;
   grid-area: virtues;
   grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
@@ -821,64 +794,20 @@ span.heading3 {
   height: calc(100% - 2 * 3px);
 }
 
-.scion.actor .Character .main .sheet-body .front .virtues .leftvirtue {
+.scion.actor .character .main .sheet-body .front .virtues .leftvirtue {
   grid-area: leftvirtue;
   margin-left: 0.5rem;
   line-height: 1rem;
 }
 
-.scion.actor .Character .main .sheet-body .front .virtues .dotline {
+.scion.actor .character .main .sheet-body .front .virtues .dotline {
   grid-area: dotline;
 }
 
-.scion.actor .Character .main .sheet-body .front .virtues .rightvirtue {
+.scion.actor .character .main .sheet-body .front .virtues .rightvirtue {
   grid-area: rightvirtue;
   margin-right: 0.5rem;
   line-height: 1rem;
-}
-
-.scion.actor .Character .main .sheet-body .genesis {
-  grid: "genesis genesis" 4rem "paths paths" 10rem "virtues ." 2rem / 1fr 1fr;
-}
-
-.scion.actor .Character .main .sheet-body .genesis .genesis {
-  grid-area: attributes;
-}
-
-.scion.actor .Character .main .sheet-body .genesis .paths {
-  grid-area: paths;
-}
-
-.scion.actor .Character .main .sheet-body .genesis .virtues {
-  grid-area: virtues;
-}
-
-.scion.actor .Character .main .sheet-body .details {
-  grid: "attributes paths" 8rem "virtues paths" 20rem / 1fr 2fr;
-}
-
-.scion.actor .Character .main .sheet-body .details .attributes {
-  grid-area: attributes;
-}
-
-.scion.actor .Character .main .sheet-body .details .paths {
-  grid-area: paths;
-}
-
-.scion.actor .Character .main .sheet-body .details .virtues {
-  grid-area: virtues;
-}
-
-.scion.actor .Character .main .sheet-body .experience {
-  grid: "paths" 4rem "virtues" 10rem / 1fr;
-}
-
-.scion.actor .Character .main .sheet-body .experience .paths {
-  grid-area: paths;
-}
-
-.scion.actor .Character .main .sheet-body .experience .virtues {
-  grid-area: virtues;
 }
 
 .scion.actor {
@@ -957,6 +886,26 @@ span.heading3 {
   --lineHeightHeading3: var(--fontSizeHeading3);
   --textShadowHeading3: none;
   --borderBottomHeading3: none;
+  --scale1: #222222;
+  --scaleFade1: rgba(34, 34, 34, 0.5);
+  --scale2: #444444;
+  --scaleFade2: rgba(68, 68, 68, 0.5);
+  --scale3: #666666;
+  --scaleFade3: rgba(102, 102, 102, 0.5);
+  --scale4: #888888;
+  --scaleFade4: rgba(136, 136, 136, 0.5);
+  --scale5: #aaaaaa;
+  --scaleFade5: rgba(170, 170, 170, 0.5);
+  --scale6: #c9adad;
+  --scaleFade6: rgba(201, 173, 173, 0.5);
+  --scale7: #e0b8b8;
+  --scaleFade7: rgba(224, 184, 184, 0.5);
+  --scale8: #f1c9c9;
+  --scaleFade8: rgba(241, 201, 201, 0.5);
+  --scale9: #fce0e0;
+  --scaleFade9: rgba(252, 224, 224, 0.5);
+  --scale10: white;
+  --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
 .scion.actor .aesir {

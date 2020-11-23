@@ -1,8 +1,4 @@
 <form class="{{cssClass}} {{actor.type}} {{data.pantheon}}" autocomplete="off">
-    {{log "!!!!!!!!!!!!!!!!!!"}} 
-    {{log this}}
-    {{log this.actor.data}}
-    {{log "##################"}}
     <div class="grid main">
             {{!-- Sheet Tab Navigation --}}
             <nav class="sheet-tabs tabs" data-group="primary">
@@ -18,15 +14,15 @@
 
             {{!-- Sheet Header --}}
             <div class="header grid">
-                <div class="divineTitle text surTitle edit contentEditable" data-path="data.divineTitle"></div>
+                <div class="divineTitle surTitle text"><textarea class="surTitle text readonly" name="data.divineTitle" readonly >{{~data.divineTitle~}}</textarea></div>
                 <div class="charName text title edit contentEditable" data-path="actor.name"></div>
                 <div class="patronage"><textarea class="subTitle text readonly" name="data.patronageLine" readonly >{{data.patronageLine}}</textarea></div>
             </div>
                 
             <section class="sheet-body">
                 {{!-- Chargen Tab --}}
-                <div class="tab chargen {{blocks.chargen.class}}" data-group="primary" data-tab="chargen">
-                    {{> (blocks.chargen.template) }}
+                <div class="tab chargen flexContainer {{blocks.chargen.class}}" data-group="primary" data-tab="chargen">
+                    {{> (blocks.chargen.template) this}}
                 </div>
                 {{!-- Front Tab --}}
                 <div class="tab front grid" data-group="primary" data-tab="front">

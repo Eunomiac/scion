@@ -1782,16 +1782,75 @@ export const scionSystemData = {
         technology: "scion.skills.technology"
     },
     CALLINGS: {
-        creator: "scion.callings.creator",
-        guardian: "scion.callings.guardian",
-        healer: "scion.callings.healer",
-        hunter: "scion.callings.hunter",
-        judge: "scion.callings.judge",
-        leader: "scion.callings.leader",
-        liminal: "scion.callings.liminal",
-        lover: "scion.callings.lover",
-        sage: "scion.callings.sage",
-        warrior: "scion.callings.warrior"
+        creator: {
+            label: "scion.callings.creator",
+            skills: ["academics", "culture", "technology"],
+            fateRoles: ["apprentice", "jinx", "rival"]
+        },
+        guardian: {
+            label: "scion.callings.guardian",
+            skills: ["athletics", "closeCombat", "empathy"],
+            fateRoles: ["canary", "martyr", "nemesis"]
+        },
+        healer: {
+            label: "scion.callings.healer",
+            skills: ["empathy", "medicine", "science"],
+            fateRoles: ["boonCompanion", "canary", "rival"]
+        },
+        hunter: {
+            label: "scion.callings.hunter",
+            skills: ["athletics", "firearms", "survival"],
+            fateRoles: ["boonCompanion", "paramour", "rival"]
+        },
+        judge: {
+            label: "scion.callings.judge",
+            skills: ["academics", "culture", "persuasion"],
+            fateRoles: ["balm", "traitor", "worshipper"]
+        },
+        leader: {
+            label: "scion.callings.leader",
+            skills: ["culture", "empathy", "leadership"],
+            fateRoles: ["boonCompanion", "traitor", "worshipper"]
+        },
+        liminal: {
+            label: "scion.callings.liminal",
+            skills: ["athletics", "pilot", "subterfuge"],
+            fateRoles: ["canary", "jinx", "unrequitedParamour"]
+        },
+        lover: {
+            label: "scion.callings.lover",
+            skills: ["culture", "empathy", "persuasion"],
+            fateRoles: ["balm", "paramour", "unrequitedParamour", "rival"]
+        },
+        sage: {
+            label: "scion.callings.sage",
+            skills: ["academics", "occult", "subterfuge"],
+            fateRoles: ["apprentice", "jinx", "traitor"]
+        },
+        trickster: {
+            label: "scion.callings.trickster",
+            skills: ["culture", "persuasion", "subterfuge"],
+            fateRoles: ["boonCompanion", "nemesis", "traitor"]
+        },
+        warrior: {
+            label: "scion.callings.warrior",
+            skills: ["athletics", "closeCombat", "firearms"],
+            fateRoles: ["balm", "nemesis", "rival"]
+        }
+    },
+    FATEROLES: {
+        apprentice: "scion.fateroles.apprentice",
+        balm: "scion.fateroles.balm",
+        boonCompanion: "scion.fateroles.boonCompanion",
+        canary: "scion.fateroles.canary",
+        jinx: "scion.fateroles.jinx",
+        martyr: "scion.fateroles.martyr",
+        nemesis: "scion.fateroles.nemesis",
+        paramour: "scion.fateroles.paramour",
+        rival: "scion.fateroles.rival",
+        traitor: "scion.fateroles.traitor",
+        unrequitedParamour: "scion.fateroles.unrequitedParamour",
+        worshipper: "scion.fateroles.worshipper"
     },
     PURVIEWS: {
         pantheon: {
@@ -1839,6 +1898,221 @@ export const scionSystemData = {
             war: "scion.purviews.war",
             water: "scion.purviews.water",
             wild: "scion.purviews.wild"
+        }
+    }
+};
+export const handlebarTemplates = {
+    chargen: {
+        template: () => "systems/scion/templates/actor/chargen/actor-chargen.hbs",
+        "step-one": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-one.hbs"},
+        "step-two": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-two.hbs"},
+        "step-three": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-three.hbs"},
+        "step-four": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-four.hbs"},
+        "step-five": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-five.hbs"},
+        "step-six": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-six.hbs"},
+        "step-seven": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-seven.hbs"}
+    },
+    items: {
+        path: {template: () => "systems/scion/templates/item/path-block.hbs"}
+    }
+};
+export const itemCategories = {
+    paths: ["path"],
+    callings: ["calling"],
+    knacks: ["knack"],
+    purviews: ["purview"],
+    boons: ["boon"],
+    birthrights: ["relic", "follower", "creature", "guide", "cult", "covenant"]
+};
+export const signatureChars = {
+    "Rhys Callaghan": {
+        genesis: "born",
+        concept: "Lead Singer and All Around Good Lad",
+        pantheon: "tuathaDeDanann",
+        patron: "aengus",
+        divineTitle: "\"Bright Eyes\"",
+        attributes: {
+            favoredApproach: "resilience",
+            list: {
+                presence: {value: 5},
+                manipulation: {value: 2},
+                composure: {value: 4},
+                intellect: {value: 2},
+                cunning: {value: 3},
+                resolve: {value: 4},
+                might: {value: 2},
+                dexterity: {value: 3},
+                stamina: {value: 4}
+            },
+            priorities: {
+                primary: "social",
+                secondary: "mental",
+                tertiary: "physical"
+            }
+        },
+        skills: {
+            list: {
+                athletics: {value: 4, specialty: "Acrobatics"},
+                culture: {value: 5, specialty: "Music"},
+                closeCombat: {value: 1},
+                empathy: {value: 3, specialty: "Motives/Desires"},
+                subterfuge: {value: 3, specialty: "Insistence"},
+                leadership: {value: 1},
+                persuasion: {value: 5, specialty: "Individuals"},
+                survival: {value: 1},
+                integrity: {value: 1}
+            }
+        }
+    },
+    "Horace Farrow": {
+        genesis: "born",
+        pantheon: "netjer",
+        patron: "horus",
+        divineTitle: "\"The Tempered Lawgiver\"",
+        attributes: {
+            favoredApproach: "finesse",
+            list: {
+                presence: {value: 3},
+                manipulation: {value: 2},
+                composure: {value: 2},
+                intellect: {value: 4},
+                cunning: {value: 3},
+                resolve: {value: 3},
+                might: {value: 3},
+                dexterity: {value: 4},
+                stamina: {value: 2}
+            },
+            priorities: {
+                primary: "mental",
+                secondary: "physical",
+                tertiary: "social"
+            }
+        },
+        skills: {
+            list: {
+                academics: {value: 2},
+                athletics: {value: 2},
+                closeCombat: {value: 4, specialty: "Street Fighting"},
+                firearms: {value: 4, specialty: "Heavy Pistols"},
+                integrity: {value: 3, specialty: "Meditations"},
+                leadership: {value: 4, specialty: "Leading the Team"},
+                occult: {value: 1},
+                subterfuge: {value: 1},
+                survival: {value: 2}
+            }
+        }
+    },
+    "Brigitte De La Croix": {
+        genesis: "chosen",
+        pantheon: "loa",
+        patron: "baronSamedi",
+        divineTitle: "\"Who Waits With Those In Darkness\"",
+        attributes: {
+            favoredApproach: "finesse",
+            list: {
+                presence: {value: 4},
+                manipulation: {value: 2},
+                composure: {value: 3},
+                intellect: {value: 3},
+                cunning: {value: 4},
+                resolve: {value: 4},
+                might: {value: 2},
+                dexterity: {value: 3},
+                stamina: {value: 2}
+            },
+            priorities: {
+                primary: "mental",
+                secondary: "social",
+                tertiary: "physical"
+            }
+        },
+        skills: {
+            list: {
+                academics: {value: 2},
+                athletics: {value: 2},
+                culture: {value: 3, specialty: "Death and Mourning"},
+                integrity: {value: 3, specialty: "Defending Tradition"},
+                leadership: {value: 2},
+                medicine: {value: 2},
+                occult: {value: 5, specialty: "Ghosts"},
+                persuasion: {value: 2},
+                science: {value: 2},
+                subterfuge: {value: 1}
+            }
+        }
+    },
+    "Adonis Rhodes": {
+        genesis: "born",
+        pantheon: "theoi",
+        patron: "aphrodite",
+        divineTitle: "\"Steward of the Heart\"",
+        attributes: {
+            favoredApproach: "finesse",
+            list: {
+                presence: {value: 3},
+                manipulation: {value: 5},
+                composure: {value: 3},
+                intellect: {value: 2},
+                cunning: {value: 4},
+                resolve: {value: 2},
+                might: {value: 2},
+                dexterity: {value: 5},
+                stamina: {value: 2}
+            },
+            priorities: {
+                primary: "social",
+                secondary: "physical",
+                tertiary: "mental"
+            }
+        },
+        skills: {
+            list: {
+                athletics: {value: 2},
+                culture: {value: 2},
+                empathy: {value: 5, specialty: "Getting to Know You"},
+                firearms: {value: 3, specialty: "Small Arms"},
+                persuasion: {value: 5, specialty: "Getting My Way"},
+                pilot: {value: 2},
+                subterfuge: {value: 2},
+                survival: {value: 2}
+            }
+        }
+    },
+    "Erik Donner": {
+        genesis: "born",
+        pantheon: "aesir",
+        patron: "thor",
+        divineTitle: "\"Guardian of Midgard\"",
+        attributes: {
+            favoredApproach: "force",
+            list: {
+                presence: {value: 4},
+                manipulation: {value: 1},
+                composure: {value: 4},
+                intellect: {value: 3},
+                cunning: {value: 2},
+                resolve: {value: 2},
+                might: {value: 5},
+                dexterity: {value: 2},
+                stamina: {value: 5}
+            },
+            priorities: {
+                primary: "physical",
+                secondary: "social",
+                tertiary: "mental"
+            }
+        },
+        skills: {
+            list: {
+                athletics: {value: 4, specialty: "Feats of Strength"},
+                closeCombat: {value: 4, specialty: "Bareknuckle Boxing"},
+                firearms: {value: 4, specialty: "Pistols"},
+                integrity: {value: 2},
+                leadership: {value: 2},
+                occult: {value: 1},
+                pilot: {value: 4, specialty: "Cars"},
+                survival: {value: 3, specialty: "Camping"}
+            }
         }
     }
 };

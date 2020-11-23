@@ -1,0 +1,14 @@
+.chargen-body {
+    .chargenTwo {
+        align-items: stretch;
+        align-content: stretch;
+        
+        .path-block {
+            height: calc((100% - 2rem)/3);
+            border: inset 3px var(--scale6);
+            border-radius: 30px;
+            background-color: var(--scaleFade1);
+
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
     "Actor": {
-        "types": ["Character", "NPC"],
+        "types": ["character", "sgc"],
         "templates": {
             "PC": {
                 "playerName": ""
@@ -244,36 +244,132 @@
                 }
             }
         },
-        "Character": {
+        "character": {
             "templates": ["PC", "BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
         },
-        "NPC": {
+        "sgc": {
             "templates": ["BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
         }
     },
     "Item": {
-        "types": ["Calling", "Follower", "Creature", "Guide", "Relic"],
+        "types": [
+            "path",
+            "connectionGroup",
+            "connectionContact",
+            "connectionAccess",
+            "condition",
+            "calling",
+            "legendaryTitle",
+            "fatebinding",
+            "knack",
+            "purview",
+            "boon",
+            "covenant",
+            "cult",
+            "follower",
+            "creature",
+            "guide",
+            "relic"
+        ],
         "templates": {
-            "rating": {
-                "min": 0,
-                "value": 0,
-                "max": 5
+            "CONNECTION": {
+                "description": "",
+                "details": "",
+                "pastUsage": ""
+            },
+            "DOTLINE": {
+                "dotline": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 5
+                }
             }
         },
+        "path": {
+            "type": "",
+            "concept": "",
+            "skills": [],
+            "connections": [],
+            "conditionID": "", 
+            "timesInvoked": 0,
+            "conditions": [],
+            "obligation": "",
+            "effect": "",
+            "enabledKnacks": {
+                "heroic": [],
+                "immortal": []
+            }
+        },
+        "connectionGroup": {
+            "templates": ["CONNECTION"]
+        },
+        "connectionContact": {
+            "templates": ["CONNECTION", "DOTLINE"],
+            "relationship": "",
+            "actorID": "",
+            "points": {
+                "creation": 1,
+                "addRating": 0,
+                "addTags": 0
+            },
+            "tags": {
+                "current": [],
+                "previous": []
+            },
+            "dotline.min": 1
+        },
+        "connectionAccess": {
+            "templates": ["CONNECTION"]
+        },
+        "condition": {
+            "description": "",
+            "effect": {
+                "description": "",
+                "API": []
+            },
+            "isPersistent": false,
+            "resolution": ""
+        },
         "calling": { 
-            "templates": ["rating"]
+            "templates": ["DOTLINE"],
+            "dotline.min": 1,
+            "keywords": [],
+            "usedKeywords": [],
+            "knacks": [],
+            "failureDeed": false
+        },
+        "legendaryTitle": {
+
+        },
+        "fatebinding": {
+            "templates": ["DOTLINE"]
+        },
+        "knack": {
+
+        },
+        "purview": {
+
+        },
+        "boon": {
+
+        },
+        "covenant": {
+            "templates": ["DOTLINE"]
+        },
+        "cult": {
+            "templates": ["DOTLINE"]
         },
         "follower": {
-            "templates": ["rating"]
+            "templates": ["DOTLINE"]
         },
         "creature": {
-            "templates": ["rating"]
+            "templates": ["DOTLINE"]
         },
         "guide": {
-            "templates": ["rating"]
+            "templates": ["DOTLINE"]
         },
         "relic": {
-            "templates": ["rating"]
+            "templates": ["DOTLINE"]
         }
     }
 }

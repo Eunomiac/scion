@@ -46,11 +46,12 @@ export const TCase = (str) => `${str}`.split(/\s/)
     .join(" ")
     .replace(/\s+/gu, " ")
     .trim();
-export const Loc = (locRef, replaceDict = {}) => {
+export const Loc = (locRef, replaceDict) => {
     let returnStr = game.i18n.localize(locRef);
     if (returnStr && returnStr !== locRef) {
-        for (const [ref, val] of Object.entries(replaceDict))
-            returnStr = returnStr.replace(new RegExp(`\\\{${ref}\\\}`, "gu"), val);
+        if (replaceDict)
+            for (const [ref, val] of Object.entries(replaceDict))
+                returnStr = returnStr.replace(new RegExp(`\\\{${ref}\\\}`, "gu"), val);
         return returnStr.trim();
     }
     console.error("Could not localize locRef:", locRef);
@@ -100,6 +101,25 @@ export const MakeDict = (objRef, valFunc = (v, k) => v, keyFunc = (k, v) => k) =
 // #endregion
 
 // #region DEBUG & ERROR: Console Logging
+const logStyles = {
+    data: "color: grey; background-color: white; font-family: Oswald; font-size: 12px; padding: 0px 5px;",
+    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 12px; padding: 0px 5px;"
+};
+export const LOG = (output, title, tag, options = {}) => {
+    options = Object.assign({style: "info", isLoud: false, isClearing: false, isGrouping: true, isUngrouping: true}, options);
+    if (game.scion.debug.isDebugging || options.isLoud || game.scion.debug.watchList.includes(tag)) {
+        if (options.isClearing)
+            console.clear();
+        if (options.isGrouping) {
+            console.groupCollapsed(`%c ${title} `, logStyles[options.style]);
+            console.log(output);
+        } else {
+            console.log(`%c ${title} `, logStyles[options.style], output);
+        }
+        if (options.isUngrouping)
+            console.groupEnd();
+    }
+};
 export const DB = (data, tag, options = {isLoud: false}) => {
     if (game.scion.debug.isDebugging || options.isLoud || game.scion.debug.watchList.includes(tag)) {
         tag = tag ? `[DB: ${tag}]` : "[DB]";

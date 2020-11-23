@@ -1,5 +1,6 @@
 import * as _ from "../external/underscore/underscore-esm-min.js";
 import * as U from "../data/utils.js";
+import {handlebarTemplates, itemCategories} from "../data/constants.js";
 import "../external/dragula.min.js";
 import {Dust} from "../external/dust.js";
 /**
@@ -60,19 +61,12 @@ export class ScionActorSheet extends ActorSheet {
     }
     getData() {
         const data = super.getData();
-
-        data.config = CONFIG.scion;
         const actorData = data.data;
         const panthData = CONFIG.scion.PANTHEONS;
         const godData = CONFIG.scion.GODS;
 
-        actorData.charGen = actorData.charGen || {charGenStep: "1"};
-        data.blocks = {
-            chargen: {
-                class: "charGen",
-                template: () => "systems/scion/templates/actor/actor-chargen.hbs"
-            }
-        };
+        data.config = CONFIG.scion;
+        data.blocks = handlebarTemplates;
 
         // #region HEADER
         const {genesis, pantheon, patron} = actorData;
@@ -92,6 +86,8 @@ export class ScionActorSheet extends ActorSheet {
         // #endregion
 
         // #region CHARGEN
+        actorData.charGen = actorData.charGen || {};
+
         // Update Patron List
         if (pantheon)
             actorData.charGen.patronList = U.MakeDict(
@@ -101,6 +97,13 @@ export class ScionActorSheet extends ActorSheet {
             );
         // #endregion
 
+        // #region OWNED ITEM SORTING
+        const itemsArray = Array.from(this.actor.items);
+        for (const [itemCategory, itemTypes] of Object.entries(itemCategories))
+            data[itemCategory] = itemsArray.filter((item) => itemTypes.includes(item.type));
+        // #endregion
+        U.LOG(data, `${this.actor.name} ActorSheet.getData()`, "getData", {style: "data"});
+        U.LOG(actorData, `${this.actor.name} actorData`, "getData", {style: "data"});
         return data;
     }
 
@@ -108,68 +111,8 @@ export class ScionActorSheet extends ActorSheet {
         super.activateListeners(html);
         if (!this.options.editable)
             return;
-        if (!this.actor.data.data.testValsApplied) {
-            const testArenas = _.shuffle(["mental", "physical", "social"]);
-            const testApproach = _.sample(["force", "finesse", "resilience"]);
-            const testUpdateData = {
-                ["data.testValsApplied"]: true,
-                ["data.attributes.priorities.primary"]: testArenas[0],
-                ["data.attributes.priorities.secondary"]: testArenas[1],
-                ["data.attributes.priorities.tertiary"]: testArenas[2],
-                ["data.attributes.favoredApproach"]: testApproach
-            };
-            CONFIG.scion.ATTRIBUTES.all.forEach((x) => {
-                testUpdateData[`data.attributes.list.${x}.value`] = Math.floor(Math.random() * 3) + 1
-                    + (CONFIG.scion.ATTRIBUTES.approaches[testApproach].includes(x) ? 2 : 0);
-            });
-            this.actor.update(testUpdateData);
-        }
-
-        // #region PIXI Animation Canvas
-        /* const DUST = new Dust(PIXI);
-        const PIXILoader = new PIXI.Loader();
-        const PIXIResources = PIXILoader.resources;
-        const PIXISprite = PIXI.Sprite;
-        const PIXITextures = PIXI.utils.TextureCache;
-        const spriteLIB = {};
-
-        const app = new PIXI.Application({
-            width: 750,
-            height: 750,
-            antialias: true,
-            transparent: true
-        });
-        app.renderer.view.style.position = "relative";
-        app.renderer.view.style.display = "block";
-        app.renderer.view.style.top = "-100%";
-        app.renderer.view.style["margin-bottom"] = "-100%";
-        app.renderer.autoResize = true;
-
-        const stage = app.stage;
-
-        html.append(app.view);
-
-        ["SolarRays", "BrightSun", "GoldCircle", "StarFlare", "TwoOrbitSparks", "Spark"].forEach((name) => {
-            PIXILoader.add(name, `systems/scion/images/${name}.png`);
-        });
-        PIXILoader.load((loader, resources) => {
-            for (const [name, spriteData] of Object.entries(resources)) {
-                const sprite = new PIXISprite(spriteData.texture);
-                sprite.anchor.set(0.5, 0.5);
-                sprite.position.set(350, 350);
-                sprite.width = 70;
-                sprite.height = 70;
-                spriteLIB[name] = sprite;
-            }
-            app.ticker.add((delta) => gameLoop(delta));
-        });
-
-        const gameLoop = () => {
-            requestAnimationFrame(gameLoop);
-            DUST.update();
-        };
-        */
-        // #endregion
+        if (!this.actor.data.data.testValsApplied)
+            this.applyTestVals();
 
         // #region CONTENT-EDITABLE ELEMENTS
         const _onEditKeyDown = (event) => {
@@ -226,7 +169,6 @@ export class ScionActorSheet extends ActorSheet {
             // If dataset includes a path, fill the element with the current data:
             if ("path" in data) {
                 const actorVal = U.DigActor(this.actor, data.path);
-                U.DB([this.actor, data.path, actorVal], "contentEditable");
                 if (actorVal)
                     element.innerHTML = actorVal.trim();
                 else
@@ -362,7 +304,24 @@ export class ScionActorSheet extends ActorSheet {
         // #endregion
     }
 
-    /*     _onDotClick(event) {
+    applyTestVals() {
+        const testArenas = _.shuffle(["mental", "physical", "social"]);
+        const testApproach = _.sample(["force", "finesse", "resilience"]);
+        const testUpdateData = {
+            ["data.testValsApplied"]: true,
+            ["data.attributes.priorities.primary"]: testArenas[0],
+            ["data.attributes.priorities.secondary"]: testArenas[1],
+            ["data.attributes.priorities.tertiary"]: testArenas[2],
+            ["data.attributes.favoredApproach"]: testApproach
+        };
+        CONFIG.scion.ATTRIBUTES.all.forEach((x) => {
+            testUpdateData[`data.attributes.list.${x}.value`] = Math.floor(Math.random() * 3) + 1
+                + (CONFIG.scion.ATTRIBUTES.approaches[testApproach].includes(x) ? 2 : 0);
+        });
+        this.actor.update(testUpdateData);
+    }
+}
+/*     _onDotClick(event) {
         event.preventDefault();
         console.log("~~ _onDotClick(event) ~~  event =");
         console.log(event);
@@ -426,4 +385,3 @@ export class ScionActorSheet extends ActorSheet {
             console.log(updateData);
         }
     } */
-}

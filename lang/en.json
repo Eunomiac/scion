@@ -1,4 +1,27 @@
 {
+    "ACTOR": {
+        "TypeCharacter": "Player Character",
+        "TypeSgc": "Storyguide Character"
+    },
+    "ITEM": {
+        "TypePath": "Path",
+        "TypeConnectionGroup": "Group",
+        "TypeConnectionContact": "Contact",
+        "TypeConnectionAccess": "Access",
+        "TypeCondition": "Condition",
+        "TypeCalling": "Calling",
+        "TypeFatebinding": "Fatebinding",
+        "TypeLegendaryTitle": "Legendary Title",
+        "TypeKnack": "Knack",
+        "TypePurview": "Purview",
+        "TypeBoon": "Boon",
+        "TypeRelic": "Relic",
+        "TypeFollower": "Follower",
+        "TypeCreature": "Creature",
+        "TypeGuide": "Guide",
+        "TypeCult": "Cult",
+        "TypeCovenant": "Covenant"
+    },
     "scion": {
         "game": {
             "tier": "Tier",
@@ -26,7 +49,7 @@
             "paths": "Paths",
             "originPath": "Origin Path",
             "rolePath": "Role Path",
-            "patheonPath": "Pantheon Path",
+            "pantheonPath": "Pantheon Path",
             "societyPath": "Society Path",
             "calling": "Calling",
             "callings": "Callings",
@@ -597,6 +620,20 @@
             "sage": "Sage",
             "trickster": "Trickster",
             "warrior": "Warrior"
+        },
+        "fateroles": {
+            "apprentice": "Apprentice",
+            "balm": "Balm",
+            "boonCompanion": "Boon Companion",
+            "canary": "Canary",
+            "jinx": "Jinx",
+            "martyr": "Martyr",
+            "nemesis": "Nemesis",
+            "paramour": "Paramour",
+            "rival": "Rival",
+            "traitor": "Traitor",
+            "unrequitedParamour": "Unrequited Paramour",
+            "worshipper": "Worshipper"
         },
         "purviews": {
             "artistry": "Artistry",

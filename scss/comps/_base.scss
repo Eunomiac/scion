@@ -6,6 +6,11 @@
     font-weight: var(--fontWeightBody);
 }
 
+section {
+    height: 100%;
+    width: 100%;
+}
+
 textarea,
 input[type="text"],
 select {
@@ -53,6 +58,7 @@ select {
 
 .half { width: 50%; }
 .quarter { width: 25%; }
+.fifth { width: 20%; }
 
 .alignLeft { text-align: left !important; text-align-last: left !important;}
 .alignCenter { text-align: center !important; text-align-last: center !important;}

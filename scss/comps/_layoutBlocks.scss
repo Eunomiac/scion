@@ -9,7 +9,8 @@
 } */
 
 /* #region FLEX LAYOUTS */
-.flex {
+.flex,
+.tab[data-tab].active.flex {
     display: flex;
     width: 100%;
     flex-flow: row wrap;
@@ -22,7 +23,8 @@
     > *:not(.heading1) { flex: 0 1 auto; margin: 0.15rem 0.25rem; } // initialize all contained items as default.
 }
 
-.flexContainer {
+.flexContainer,
+.tab[data-tab].active.flexContainer {
     height: 100%;
 
     div { width: 100%; } // Divs assumed to take up whole row.
