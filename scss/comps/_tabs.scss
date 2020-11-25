@@ -1,0 +1,37 @@
+.tabs {
+    height: 16px;
+    width: 100%;
+    margin: 0;
+    border: none;
+    pointer-events: all;
+
+    .item {
+        height: 100%;
+        margin: 0 0.25rem;
+        font-weight: bold;
+        font-size: 0.75rem;
+        text-shadow: none;
+        color: var(--scale9);
+        background-color: var(--scale4);
+        box-shadow: 0px 0px 2px var(--scale2), 0px 0px 2px var(--scale2), 0px 0px 6px var(--scale2);
+        line-height: normal;
+        border-radius: 2rem;
+    }
+    .item.icon {
+        height: 20px;
+        width: 20px;
+        flex: none;
+        margin: -20px -20px 0 0;
+        color: white;
+        font-size: 1rem;
+
+    }
+    .item:hover { 
+        background-color: var(--scale9);
+        color: var(--scale4);
+    }
+    .item.active { 
+        background-color: var(--scale7); 
+        color: var(--scale2);
+    }
+}

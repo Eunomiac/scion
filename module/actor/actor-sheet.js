@@ -102,8 +102,8 @@ export class ScionActorSheet extends ActorSheet {
         for (const [itemCategory, itemTypes] of Object.entries(itemCategories))
             data[itemCategory] = itemsArray.filter((item) => itemTypes.includes(item.type));
         // #endregion
-        U.LOG(data, `${this.actor.name} ActorSheet.getData()`, "getData", {style: "data"});
-        U.LOG(actorData, `${this.actor.name} actorData`, "getData", {style: "data"});
+        U.LOG(data, "[Sheet Context]", "getData", {style: "data", isGrouping: `[ActorSheet] ${this.actor.name}`});
+        U.LOG(actorData, "[Actor.Data]", "getData", {style: "data"});
         return data;
     }
 
@@ -111,8 +111,6 @@ export class ScionActorSheet extends ActorSheet {
         super.activateListeners(html);
         if (!this.options.editable)
             return;
-        if (!this.actor.data.data.testValsApplied)
-            this.applyTestVals();
 
         // #region CONTENT-EDITABLE ELEMENTS
         const _onEditKeyDown = (event) => {
@@ -159,7 +157,7 @@ export class ScionActorSheet extends ActorSheet {
                 // element.innerHTML = "";
             }
         };
-        html.find(".contentEditable").each((i, element) => {
+        html.find("div.contentEditable").each((i, element) => {
             const data = element.dataset;
             element.setAttribute("contenteditable", false);
             element.addEventListener("click", _onEditClickOn.bind(this));
@@ -185,92 +183,16 @@ export class ScionActorSheet extends ActorSheet {
         });
         // #endregion
 
-        // #region SPECIALIZED ON-CHANGE FUNCTIONS
-        const getCharGenStep = () => {
-            const actorData = this.getData().data;
-            const charGenStepReqs = {
-                10: {
-                    ["data.finishingBonusOn"]: (x) => Boolean(x)
-                },
-                7: {
-                    ["data.purviews"]: (x) => x.innate && x.pantheon && (x.other.length - 2) === x.fromBirthrights
-                },
-                6: {
-                    ["data.birthrights"]: (x) => x.unspentDots === 0 && Object.values(x.list).length
-                },
-                5: {
-                    ["data.callings"]: (x) => Object.keys(x).filter((xx) => x[xx].value >= 1).length === 3
-                                        && Object.values(x).reduce((tot, xx) => tot + xx.value, 0) === 5,
-                    ["data.knacks"]: (x) => Object.values(x).reduce((tot, xx) => ({heroic: 1, immortal: 2}[xx.knackType] * xx.value + tot), 0)
-                },
-                4: {
-                    ["data.attributes"]: (x) => Object.values(x.priorities).filter((xx) => Boolean(xx)).length === 3
-                                            && Boolean(x.favoredApproach),
-                    ["data.skills"]: (x) => true
-                },
-                3: {
-                    ["data.paths"]: (x) => x.length === 3
-                },
-                2: {
-                    ["data.patron"]: (x) => actorData.pantheon && x && CONFIG.scion.PANTHEONS[actorData.pantheon].members.includes(x),
-                    ["data.concept"]: (x) => Boolean(x),
-                    ["data.genesis"]: (x) => Boolean(x)
-                    /* ["data.deeds"]: (x) => x.shortTerm.length && x.longTerm.length */
-                }
-            };
-            // const reportLines = [];
-            for (let step = 10; step > 0; step--)
-                if (step in charGenStepReqs) {
-                    let isStepOK = true;
-                    // const testResults = [];
-                    for (const [path, testFunc] of Object.entries(charGenStepReqs[step])) {
-                        isStepOK = isStepOK && testFunc(U.DigActor(actorData, path));
-                        // testResults.push([path, U.DigActor(actorData, path), isStepOK]);
-                        if (!isStepOK)
-                            break;
-                    }
-                    // reportLines.push(testResults);
-                    if (isStepOK)
-                        /* console.log({
-                            ["!!! RETURNING A STEP !!!"]: U.Int(step),
-                            [">> REPORT >>"]: reportLines
-                        }); */
-                        return U.Int(step);
-                }
-            /* console.log({
-                ["XXX RETURNING ONE XXX"]: 1,
-                [">> REPORT >>"]: reportLines
-            }); */
-            return 1;
+        // #region OWNED ITEM POP-OUTS
+        const _onOpenOwnedItem = (event) => {
+            event.preventDefault();
+            const element = event.currentTarget;
+            const dataSet = element.dataset;
         };
-        const setCharGenToggles = (element) => {
-            const actorData = this.getData().data;
-            const elementStep = U.Int(element.dataset.chargenstep);
-            const charGenStep = U.Int(getCharGenStep());
-            const toggleClasses = ["hide", "noGlow", "halfGlow", "activeGlow"];
-            const classArray = Array.from(element.classList).filter((x) => !toggleClasses.includes(x));
-            if (charGenStep < (elementStep - 1))
-                classArray.push("hide");
-            else if (charGenStep < elementStep)
-                classArray.push("noGlow");
-            else if (charGenStep === elementStep)
-                classArray.push("activeGlow");
-            else if (charGenStep > elementStep)
-                classArray.push("halfGlow");
-            element.className = classArray.join(" ");
-            console.log({
-                ["@@ ELEMENT @@"]: element,
-                ["@@ ELEMENT STEP @@"]: elementStep,
-                ["actorData.charGen.charGenStep"]: actorData.charGen.charGenStep,
-                ["charGenStep"]: charGenStep
-            });
-        };
-        html.find(".charGenToggle").each((i, element) => {
-            setCharGenToggles.bind(this)(element);
-            element.addEventListener("change", (event) => {
-                setCharGenToggles.bind(this)(event.currentTarget);
-            });
+        html.find(".clickable.item-open").each((i, element) => {
+            element.addEventListener("click", _onOpenOwnedItem.bind(this));
         });
+
         // #endregion
 
         // > Dragula: Sort Attribute Priorities
@@ -302,23 +224,6 @@ export class ScionActorSheet extends ActorSheet {
             this.actor.update(updateData);
         });
         // #endregion
-    }
-
-    applyTestVals() {
-        const testArenas = _.shuffle(["mental", "physical", "social"]);
-        const testApproach = _.sample(["force", "finesse", "resilience"]);
-        const testUpdateData = {
-            ["data.testValsApplied"]: true,
-            ["data.attributes.priorities.primary"]: testArenas[0],
-            ["data.attributes.priorities.secondary"]: testArenas[1],
-            ["data.attributes.priorities.tertiary"]: testArenas[2],
-            ["data.attributes.favoredApproach"]: testApproach
-        };
-        CONFIG.scion.ATTRIBUTES.all.forEach((x) => {
-            testUpdateData[`data.attributes.list.${x}.value`] = Math.floor(Math.random() * 3) + 1
-                + (CONFIG.scion.ATTRIBUTES.approaches[testApproach].includes(x) ? 2 : 0);
-        });
-        this.actor.update(testUpdateData);
     }
 }
 /*     _onDotClick(event) {

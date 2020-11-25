@@ -1,0 +1,49 @@
+header.window-header.flexrow.draggable.resizable {
+  height: 2rem;
+  width: 80px;
+  margin: -1.5rem 0 -0.5rem 550px;
+  display: block;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  border: none;
+}
+
+header.window-header.flexrow.draggable.resizable h4.window-title {
+  display: none;
+}
+
+header.window-header.flexrow.draggable.resizable a.header-button {
+  display: none;
+}
+
+header.window-header.flexrow.draggable.resizable a.header-button.close {
+  display: inline;
+  pointer-events: all;
+  height: 1rem;
+  color: white;
+}
+
+header.window-header.flexrow.draggable.resizable::after {
+  content: "";
+  display: block;
+  position: relative;
+  left: -560px;
+  top: -20px;
+  width: 125px;
+  height: 125px;
+  cursor: move;
+  pointer-events: all;
+}
+
+.window-content {
+  padding: 0px;
+  background: transparent;
+  pointer-events: none;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}

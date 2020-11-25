@@ -1912,8 +1912,8 @@ export const handlebarTemplates = {
         "step-six": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-six.hbs"},
         "step-seven": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-seven.hbs"}
     },
-    items: {
-        path: {template: () => "systems/scion/templates/item/path-block.hbs"}
+    ownedItems: {
+        path: {template: () => "systems/scion/templates/actor/ownedItems/path-block.hbs"}
     }
 };
 export const itemCategories = {

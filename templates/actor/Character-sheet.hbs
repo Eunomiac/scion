@@ -1,33 +1,35 @@
 <form class="{{cssClass}} {{actor.type}} {{data.pantheon}}" autocomplete="off">
     <div class="grid main">
-            {{!-- Sheet Tab Navigation --}}
-            <nav class="sheet-tabs tabs" data-group="primary">
-                <a class="item" data-tab="chargen">Chargen</a>
-                <a class="item" data-tab="front">Front</a>
-                <a class="item" data-tab="heritage">Divine Heritage</a>
-                <a class="item" data-tab="details">Details</a>
-                <a class="item" data-tab="experience">Experience</a>
-            </nav>
+        {{!-- Menu Rosette --}}
+        <div class="menuRosette"></div>
+        
+        {{!-- Sheet Tab Navigation --}}
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="chargen">{{localize "scion.headings.main.chargenTab"}}</a>
+            <a class="item" data-tab="front">{{localize "scion.headings.main.frontTab"}}</a>
+            <a class="item" data-tab="heritage">{{localize "scion.headings.main.heritageTab"}}</a>
+            <a class="item" data-tab="details">{{localize "scion.headings.main.detailsTab"}}</a>
+            <a class="item" data-tab="experience">{{localize "scion.headings.main.experienceTab"}}</a>
+        </nav>
 
-            {{!-- Menu Rosette --}}
-            <div class="menuRosette"></div>
-
-            {{!-- Sheet Header --}}
-            <div class="header grid">
-                <div class="divineTitle surTitle text"><textarea class="surTitle text readonly" name="data.divineTitle" readonly >{{~data.divineTitle~}}</textarea></div>
-                <div class="charName text title edit contentEditable" data-path="actor.name"></div>
-                <div class="patronage"><textarea class="subTitle text readonly" name="data.patronageLine" readonly >{{data.patronageLine}}</textarea></div>
+        {{!-- Sheet Header --}}
+        <div class="header grid">
+            <div class="divineTitle surTitle">{{~data.divineTitle~}}</div>
+            <div class="charName title contentEditable" data-path="actor.name"></div>
+            <div class="patronage subTitle">{{~data.patronageLine~}}</div>
+        </div>
+            
+        <section class="sheet-body">
+            {{!-- Chargen Tab --}}
+            <div class="tab" data-group="primary" data-tab="chargen">
+                {{> (blocks.chargen.template) }}
             </div>
-                
-            <section class="sheet-body">
-                {{!-- Chargen Tab --}}
-                <div class="tab chargen flexContainer {{blocks.chargen.class}}" data-group="primary" data-tab="chargen">
-                    {{> (blocks.chargen.template) this}}
-                </div>
-                {{!-- Front Tab --}}
-                <div class="tab front grid" data-group="primary" data-tab="front">
+
+            {{!-- Front Tab --}}
+            <div class="tab" data-group="primary" data-tab="front">
+                <div class="front grid">
                     <div class="attributes flex">
-                        <div class="heading1">Attributes</div>
+                        <div class="heading1">{{localize "scion.game.attributes"}}</div>
                         {{#if data.attributes.unspentDots.general}}
                             <div class="dotGrabBin dotDropBin flex">
                                 {{#for data.attributes.unspentDots.general}}
@@ -56,7 +58,7 @@
                         {{/each}}
                     </div>
                     <div class="paths flex">
-                        <div class="heading text heading1">Paths</div>
+                        <div class="heading text heading1">{{localize "scion.game.paths"}}</div>
                         <div class="originpath"></div>
                         <div class="rolepath"></div>
                         <div class="pantheonpath"></div>
@@ -75,24 +77,31 @@
                         {{/if}}
                     </div>
                 </div>
-                {{!-- Divine Genesis Tab --}}
-                <div class="tab genesis grid" data-group="primary" data-tab="genesis">
+            </div>
+            {{!-- Divine Genesis Tab --}}
+            <div class="tab" data-group="primary" data-tab="genesis">
+                <div class="genesis grid">
                     <div class="genesis text">Genesis</div>
                     <div class="paths text">Paths</div>
                     <div class="virtues text">Virtues</div>
                 </div>
-                {{!-- Details Tab --}}
-                <div class="tab details grid" data-group="primary" data-tab="details">
+            </div>
+            {{!-- Details Tab --}}
+            <div class="tab" data-group="primary" data-tab="details">
+                <div class="details grid">
                     <div class="attributes text">Attributes</div>
                     <div class="paths text">Paths</div>
                     <div class="virtues text">Virtues</div>
                 </div>
-                {{!-- Experience Tab --}}
-                <div class="tab experience grid" data-group="primary" data-tab="experience">
+            </div>
+            {{!-- Experience Tab --}}
+            <div class="tab" data-group="primary" data-tab="experience">
+                <div class="experience grid">
                     <div class="attributes text">Attributes</div>
                     <div class="paths text">Paths</div>
                     <div class="virtues text">Virtues</div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+    </div>
 </form>

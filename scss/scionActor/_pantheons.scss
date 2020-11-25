@@ -9,7 +9,7 @@
     --fontSizeBody: 1rem;
     --fontWeightBody: bold;
 
-    // Title: Character Name
+    // Title
     --fontColorTitle: #{$c-black};
     --bgColorTitle: transparent;
     --fontFamilyTitle: "#{$fontFamilyTitleDefault}";
@@ -21,8 +21,10 @@
     --paddingTitle: 0;
     --lineHeightTitle: var(--fontSizeTitle);
     --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+    --fontScaleTitle: 1;
 
-    // SurTitle: Divine Title
+
+    // SurTitle
     --fontColorSurTitle: var(--fontColorTitle);
     --bgColorSurTitle: var(--bgColorTitle);
     --fontFamilySurTitle: var(--fontFamilyBody);
@@ -34,8 +36,9 @@
     --paddingSurTitle: 0;
     --lineHeightSurTitle: var(--fontSizeSurTitle);
     --textShadowSurTitle: var(--textShadowTitle);
+    --fontScaleSurTitle: 1;
 
-    // SubTitle: Divine Patronage
+    // SubTitle
     --fontColorSubTitle: var(--fontColorTitle);
     --bgColorSubTitle: var(--bgColorTitle);
     --fontFamilySubTitle: "#{$fontFamilyTitleDefault}";
@@ -47,6 +50,7 @@
     --paddingSubTitle: 0;
     --lineHeightSubTitle: var(--fontSizeSubTitle);
     --textShadowSubTitle: var(--textShadowTitle);
+    --fontScaleSubTitle: 1;
 
     // Heading 1
     --fontColorHeading1: var(--fontColorTitle);
@@ -60,6 +64,7 @@
     --paddingHeading1: 0;
     --lineHeightHeading1: var(--fontSizeHeading1);
     --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+    --fontScaleHeading1: 1;
     --borderBottomHeading1: 2px solid var(--fontColorHeading1);
 
     // Heading 2
@@ -118,21 +123,22 @@
     $bodyColor: #2d2d2f;
 
     --fontColorBody: #{$bodyColor};
+    --fontFamilyBody: "Gothic Ultra";
 
     --bgImage: url("../images/actor-sheet/backgrounds/Netjer.png");
     --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
     --bgColorMatte: #{$matteColor};
-    --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
-    --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
 
 
     --fontColorTitle: #{$headingColor1};
-    --fontFamilyTitle: "Yatra One";
+    --fontFamilyTitle: "Zanzabar";
 
     --fontColorSubTitle: #{$headingColor2};
-    --fontFamilySubTitle: "Reem Kufi";
-    --fontSizeSubTitle: 1.25rem;
+    --fontFamilySubTitle: "Carolingia";
+    --fontSizeSubTitle: 1.75rem;
     --lineHeightSubTitle: 1.65rem;
+    --fontWeightSubTitle: normal;
+    --fontScaleSubTitle: 0.75;
 
     --fontColorSurTitle: #{$headingColor1};
     --fontWeightSurTitle: bold;
@@ -161,8 +167,6 @@
 
 
     --bgColorMatte: #{$matteColor};
-    --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
-    --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
       
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Poiret One";
@@ -199,8 +203,6 @@
     --bgImage: url("../images/actor-sheet/backgrounds/Tuatha.png");
     --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
     --bgColorMatte: #{$matteColor};
-    --bgColorSoft: #{scale-color($accentColor, $lightness: 80%, $saturation: 35%)};
-    --bgColorStrong: #{scale-color($accentColor, $lightness: 50%, $saturation: 35%)};
     
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Berkshire Swash";

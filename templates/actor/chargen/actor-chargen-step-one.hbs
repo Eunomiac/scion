@@ -1,35 +1,37 @@
-<div class="heading1">{{localize "scion.headings.charGenStep1"}}</div>
-<div class="flex flexRow">
-    <span class="heading3">{{localize "scion.headings.charGenStep1A"}}</span>
-    <select class="edit fifth" name="data.genesis" required>
-        <option name="" value="" selected hidden disabled>{{localize "scion.headings.genesisPlaceholder"}}</option>
-        {{selectOptions config.genesisList selected=data.genesis}}
-    </select>
-    <span class="heading3 alignCenter">of the</span>
-    <select class="edit quarter" name="data.pantheon" required>
-        <option name="" value="" selected hidden disabled>{{localize "scion.headings.pantheonPlaceholder"}}</option>
-        {{selectOptions config.pantheonList selected=data.pantheon}}
-    </select> 
-</div>
-{{#if data.charGen.patronList}}
-<div class="flex flexRow">
-    <span class="heading3 flexLabel">{{localize "scion.headings.charGenStep1B"}}</span>
-    <select class="edit" name="data.patron" required>
-        <option name="" value="" selected hidden disabled>{{localize "scion.headings.divinePatronPlaceholder"}}</option>
-        {{selectOptions data.charGen.patronList selected=data.patron}}
-    </select>
-</div>
-{{/if}}
-{{#if data.patron}}
-<div class="flex flexRow">
-    <span class="heading3 flexLabel">{{localize "scion.headings.charGenStep1C"}}</span>
-    <div id="concept" class="edit contentEditable" data-path="data.concept" data-placeholder="{{localize "scion.headings.conceptPlaceholder"}}"></div>
-</div>
-    {{#if data.concept}}
-<div class="heading3 alignCenter">{{localize "scion.headings.charGenStep1D"}}</div>
-<div class="flex flexRow">
-    <div id="shortTermDeed" class="edit contentEditable" data-placeholder="{{localize "scion.headings.shortTermDeedPlaceholder"}}"></div>
-    <div id="longTermDeed" class="edit contentEditable" data-placeholder="{{localize "scion.headings.longTermDeedPlaceholder"}}"></div>
-</div>
+<div class="flex flexContainer chargenOne">
+    <div class="heading1">{{localize "scion.headings.chargen.stepOne"}}</div>
+    <div class="flex flexRow">
+        <span class="heading3">{{localize "scion.headings.chargen.stepOneA"}}</span>
+        <select class="contentEditable insetFrame fifth" name="data.genesis" required>
+            <option name="" value="" selected hidden disabled>{{localize "scion.headings.chargen.genesisPlaceholder"}}</option>
+            {{selectOptions config.genesisList selected=data.genesis}}
+        </select>
+        <span class="heading3 alignCenter">{{localize "scion.headings.chargen.stepOneAOfThe"}}</span>
+        <select class="contentEditable insetFrame quarter" name="data.pantheon" required>
+            <option name="" value="" selected hidden disabled>{{localize "scion.headings.chargen.pantheonPlaceholder"}}</option>
+            {{selectOptions config.pantheonList selected=data.pantheon}}
+        </select> 
+    </div>
+    {{#if data.charGen.patronList}}
+    <div class="flex flexRow">
+        <span class="heading3 flexLabel">{{localize "scion.headings.chargen.stepOneB"}}</span>
+        <select class="contentEditable insetFrame" name="data.patron" required>
+            <option name="" value="" selected hidden disabled>{{localize "scion.headings.chargen.divinePatronPlaceholder"}}</option>
+            {{selectOptions data.charGen.patronList selected=data.patron}}
+        </select>
+    </div>
     {{/if}}
-{{/if}}
+    {{#if data.patron}}
+    <div class="flex flexRow">
+        <span class="heading3 flexLabel">{{localize "scion.headings.chargen.stepOneC"}}</span>
+        <div id="concept" class="contentEditable insetFrame" data-path="data.concept" data-placeholder="{{localize "scion.headings.chargen.conceptPlaceholder"}}"></div>
+    </div>
+        {{#if data.concept}}
+    <div class="heading3 alignCenter">{{localize "scion.headings.chargen.stepOneD"}}</div>
+    <div class="flex flexRow">
+        <div id="shortTermDeed" class="contentEditable insetFrame" data-placeholder="{{localize "scion.headings.chargen.shortTermDeedPlaceholder"}}"></div>
+        <div id="longTermDeed" class="contentEditable insetFrame" data-placeholder="{{localize "scion.headings.chargen.longTermDeedPlaceholder"}}"></div>
+    </div>
+        {{/if}}
+    {{/if}}
+</div>

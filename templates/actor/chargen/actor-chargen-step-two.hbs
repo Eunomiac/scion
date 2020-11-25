@@ -1,6 +1,8 @@
-<div class="heading1">{{localize "scion.headings.charGenStep2"}}</div>
-{{#each paths as |thispath id|}}
-    {{#with ../blocks as | blocks |}}
-    {{> (blocks.items.path.template) thispath}}
-    {{/with}}
-{{/each}}
+<div class="flex flexContainer column chargenTwo">
+    <div class="heading1">{{localize "scion.headings.chargen.stepTwo"}}</div>
+    {{#each paths as |path id|}}
+        {{#with ../blocks as | blocks |}}
+        {{> (blocks.ownedItems.path.template) path}}
+        {{/with}}
+    {{/each}}
+</div>

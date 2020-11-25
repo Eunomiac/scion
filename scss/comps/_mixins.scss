@@ -15,23 +15,13 @@
   display: none;
 }
 
-@mixin scaled-colors ($baseColor) {
-    @for $i from 1 through 10 {
-      $thisScale: 10% * ($i * 2 - 10);      
-      $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);
-      $thisHalfColor: scale-color($thisColor, $alpha: -50%);        
-      --scale#{$i}: #{$thisColor};
-      --scaleFade#{$i}: #{$thisHalfColor};
-    }
-}
-
 @mixin disabledText {
   font-style: italic;
-  color: #666 !important;
-  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255,255,255,0.5);
-  font-family: "Della Respira" !important;
-  font-size: 0.75rem !important;
-  font-weight: normal !important;
+  color: var(--scaleGrey5);
+  text-shadow: -0.5px -0.5px 0px $c-black, 0.5px 0.5px 0px var(--scaleFadeWhite10);
+  font-family: "Della Respira";
+  font-size: 0.75rem;
+  font-weight: normal;
 }
 
 @mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {

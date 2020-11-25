@@ -1,2 +1,19 @@
-$c-white: #fff;
+$c-white: rgb(255, 255, 255);
+$c-grey: scale-color($c-white, $lightness: -50%);
 $c-black: #000;
+
+@mixin scaled-colors ($baseColor, $name: "") {
+    @for $i from 1 through 10 {
+      $thisScale: 10% * ($i * 2 - 10);      
+      $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);
+      $thisHalfColor: scale-color($thisColor, $alpha: -50%);
+      --scale#{$name}#{$i}: #{$thisColor};
+      --scaleFade#{$name}#{$i}: #{$thisHalfColor};
+    }
+}
+
+* {
+    @include scaled-colors($c-white, "White");
+    @include scaled-colors($c-grey, "Grey");
+    @include scaled-colors($c-black, "Black"); 
+}

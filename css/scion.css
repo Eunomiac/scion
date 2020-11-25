@@ -3,6 +3,60 @@
 @use "sass:string";
 /* #region Global Variables & Configuration */
 @font-face {
+  font-family: "Bootle";
+  src: url(../fonts/netjer/bootle.ttf);
+}
+
+@font-face {
+  font-family: "Carolingia";
+  src: url(../fonts/netjer/carolingia.ttf);
+}
+
+@font-face {
+  font-family: "Gothic Ultra";
+  src: url(../fonts/netjer/gothic_ultra_ot.otf);
+}
+
+@font-face {
+  font-family: "Zanzabar";
+  src: url(../fonts/netjer/Zanzabar.otf);
+}
+
+@font-face {
+  font-family: "Goodfish";
+  src: url(../fonts/teotl/goodfish.ttf);
+}
+
+@font-face {
+  font-family: "Kirsty";
+  src: url(../fonts/teotl/Kirsty.ttf);
+}
+
+@font-face {
+  font-family: "Kirsty";
+  font-weight: bold;
+  src: url(../fonts/teotl/KirstyBold.ttf);
+}
+
+@font-face {
+  font-family: "Kirsty";
+  font-style: italic;
+  src: url(../fonts/teotl/KirstyItalic.ttf);
+}
+
+@font-face {
+  font-family: "Kirsty";
+  font-weight: bold;
+  font-style: italic;
+  src: url(../fonts/teotl/KirstyBoldItalic.ttf);
+}
+
+@font-face {
+  font-family: "Voga";
+  src: url(../fonts/teotl/Voga-Medium.otf);
+}
+
+@font-face {
   font-family: "Elektra";
   src: url(../fonts/Elektra.ttf);
 }
@@ -27,317 +81,71 @@
   src: url(../fonts/Stonehenge.ttf);
 }
 
-@font-face {
-  font-family: "Zanzabar";
-  src: url(../fonts/Zanzabar.otf);
+* {
+  --scaleWhite1: #333333;
+  --scaleFadeWhite1: rgba(51, 51, 51, 0.5);
+  --scaleWhite2: #666666;
+  --scaleFadeWhite2: rgba(102, 102, 102, 0.5);
+  --scaleWhite3: #999999;
+  --scaleFadeWhite3: rgba(153, 153, 153, 0.5);
+  --scaleWhite4: #cccccc;
+  --scaleFadeWhite4: rgba(204, 204, 204, 0.5);
+  --scaleWhite5: white;
+  --scaleFadeWhite5: rgba(255, 255, 255, 0.5);
+  --scaleWhite6: white;
+  --scaleFadeWhite6: rgba(255, 255, 255, 0.5);
+  --scaleWhite7: white;
+  --scaleFadeWhite7: rgba(255, 255, 255, 0.5);
+  --scaleWhite8: white;
+  --scaleFadeWhite8: rgba(255, 255, 255, 0.5);
+  --scaleWhite9: white;
+  --scaleFadeWhite9: rgba(255, 255, 255, 0.5);
+  --scaleWhite10: white;
+  --scaleFadeWhite10: rgba(255, 255, 255, 0.5);
+  --scaleGrey1: #1a1a1a;
+  --scaleFadeGrey1: rgba(26, 26, 26, 0.5);
+  --scaleGrey2: #333333;
+  --scaleFadeGrey2: rgba(51, 51, 51, 0.5);
+  --scaleGrey3: #4d4d4d;
+  --scaleFadeGrey3: rgba(77, 77, 77, 0.5);
+  --scaleGrey4: #666666;
+  --scaleFadeGrey4: rgba(102, 102, 102, 0.5);
+  --scaleGrey5: gray;
+  --scaleFadeGrey5: rgba(128, 128, 128, 0.5);
+  --scaleGrey6: #ad8585;
+  --scaleFadeGrey6: rgba(173, 133, 133, 0.5);
+  --scaleGrey7: #d19494;
+  --scaleFadeGrey7: rgba(209, 148, 148, 0.5);
+  --scaleGrey8: #ebadad;
+  --scaleFadeGrey8: rgba(235, 173, 173, 0.5);
+  --scaleGrey9: #fad1d1;
+  --scaleFadeGrey9: rgba(250, 209, 209, 0.5);
+  --scaleGrey10: white;
+  --scaleFadeGrey10: rgba(255, 255, 255, 0.5);
+  --scaleBlack1: black;
+  --scaleFadeBlack1: rgba(0, 0, 0, 0.5);
+  --scaleBlack2: black;
+  --scaleFadeBlack2: rgba(0, 0, 0, 0.5);
+  --scaleBlack3: black;
+  --scaleFadeBlack3: rgba(0, 0, 0, 0.5);
+  --scaleBlack4: black;
+  --scaleFadeBlack4: rgba(0, 0, 0, 0.5);
+  --scaleBlack5: black;
+  --scaleFadeBlack5: rgba(0, 0, 0, 0.5);
+  --scaleBlack6: #3d2929;
+  --scaleFadeBlack6: rgba(61, 41, 41, 0.5);
+  --scaleBlack7: #8f3d3d;
+  --scaleFadeBlack7: rgba(143, 61, 61, 0.5);
+  --scaleBlack8: #d65c5c;
+  --scaleFadeBlack8: rgba(214, 92, 92, 0.5);
+  --scaleBlack9: #f5a3a3;
+  --scaleFadeBlack9: rgba(245, 163, 163, 0.5);
+  --scaleBlack10: white;
+  --scaleFadeBlack10: rgba(255, 255, 255, 0.5);
 }
 
 /* #endregion */
 /* #region Components: Layouts, Mixins, Modules & Fundamentals */
-/* #region Element Default Styles */
-* {
-  color: var(--fontColorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: var(--fontWeightBody);
-}
-
-section {
-  height: 100%;
-  width: 100%;
-}
-
-textarea,
-input[type="text"],
-select {
-  height: 100%;
-  min-height: 27px;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-  background-color: transparent;
-  border: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-textarea:focus,
-input[type="text"]:focus,
-select:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: none;
-}
-
-textarea:invalid,
-input[type="text"]:invalid,
-select:invalid {
-  font-style: italic;
-  color: #666 !important;
-  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
-  font-family: "Della Respira" !important;
-  font-size: 0.75rem !important;
-  font-weight: normal !important;
-}
-
-/* #endregion */
-/* #region Single-Purpose Classes */
-.readonly {
-  pointer-events: none;
-  resize: none;
-  overflow: hidden;
-}
-
-.hidden {
-  display: none;
-}
-
-.text {
-  color: var(--fontColorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: var(--fontWeightBody);
-}
-
-.placeholder {
-  font-style: italic;
-  color: #666 !important;
-  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
-  font-family: "Della Respira" !important;
-  font-size: 0.75rem !important;
-  font-weight: normal !important;
-}
-
-.half {
-  width: 50%;
-}
-
-.quarter {
-  width: 25%;
-}
-
-.fifth {
-  width: 20%;
-}
-
-.alignLeft {
-  text-align: left !important;
-  -moz-text-align-last: left !important;
-  text-align-last: left !important;
-}
-
-.alignCenter {
-  text-align: center !important;
-  -moz-text-align-last: center !important;
-  text-align-last: center !important;
-}
-
-.alignRight {
-  text-align: right !important;
-  -moz-text-align-last: right !important;
-  text-align-last: right !important;
-}
-
-.strong {
-  font-weight: bolder;
-  text-shadow: 0.5px 0.5px 1px black;
-  text-transform: uppercase;
-}
-
-/* #endregion */
-/* #region Editable Input Elements */
-.edit {
-  color: var(--fontColorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: bold;
-  border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: inset 3px var(--scale6);
-  min-height: 1.6rem;
-  /* #region Special Tweaks for Content-Editable DIV Elements */
-  /* #endregion */
-}
-
-.edit.contentEditable {
-  text-indent: 5px;
-}
-
-.edit.contentEditable:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: none;
-}
-
-/* #endregion */
-/* #region Dot Trackers */
-.dotline {
-  grid-area: dotline;
-  display: grid;
-  grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
-  grid-template-rows: 1rem;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.dotline.labelledDotLine {
-  width: 100%;
-  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
-}
-
-.dotline.largeDots {
-  grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
-  grid-template-rows: 1.25rem;
-  -webkit-column-gap: 0.5rem;
-  -moz-column-gap: 0.5rem;
-  column-gap: 0.5rem;
-}
-
-.dotline.labelledDotLine.largeDots {
-  grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
-}
-
-.dotline .dot {
-  margin: 7% 7% 0 0;
-  border-radius: 50%;
-  -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
-  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
-}
-
-.dotline .dot.full {
-  background: -o-radial-gradient(#444, #0a0a0a);
-  background: radial-gradient(#444, #0a0a0a);
-  border: solid 2px black;
-  -webkit-box-shadow: 1px 1px 2px black;
-  box-shadow: 1px 1px 2px black;
-}
-
-.dotline .dot.unspent {
-  background: -o-radial-gradient(#900, #5a0000);
-  background: radial-gradient(#900, #5a0000);
-  border: solid 2px #5a0000;
-  -webkit-box-shadow: 1px 1px 2px black;
-  box-shadow: 1px 1px 2px black;
-}
-
-.dotline .dot.virtueCenter::after {
-  content: "";
-  height: 150%;
-  width: 150%;
-  background-image: var(--virtueDarkImg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-}
-
-.dotline .dot.virtueCenter.virtueFull::after {
-  background-image: var(--virtueGlowImg);
-}
-
-/* #endregion */
-.title {
-  color: var(--fontColorTitle);
-  background-color: var(--bgColorTitle);
-  font-family: var(--fontFamilyTitle);
-  font-style: var(--fontStyleTitle);
-  font-variant: var(--fontVariantTitle);
-  font-weight: var(--fontWeightTitle);
-  text-transform: var(--textTransformTitle);
-  font-size: var(--fontSizeTitle);
-  padding: var(--paddingTitle);
-  line-height: var(--lineHeightTitle);
-  line-height: normal;
-  text-shadow: var(--textShadowTitle);
-  text-align: center;
-  border: none;
-}
-
-.surTitle {
-  color: var(--fontColorSurTitle);
-  background-color: var(--bgColorSurTitle);
-  font-family: var(--fontFamilySurTitle);
-  font-style: var(--fontStyleSurTitle);
-  font-variant: var(--fontVariantSurTitle);
-  font-weight: var(--fontWeightSurTitle);
-  text-transform: var(--textTransformSurTitle);
-  font-size: var(--fontSizeSurTitle);
-  padding: var(--paddingSurTitle);
-  line-height: var(--lineHeightSurTitle);
-  line-height: normal;
-  text-shadow: var(--textShadowSurTitle);
-  text-align: center;
-  border: none;
-}
-
-.subTitle {
-  color: var(--fontColorSubTitle);
-  background-color: var(--bgColorSubTitle);
-  font-family: var(--fontFamilySubTitle);
-  font-style: var(--fontStyleSubTitle);
-  font-variant: var(--fontVariantSubTitle);
-  font-weight: var(--fontWeightSubTitle);
-  text-transform: var(--textTransformSubTitle);
-  font-size: var(--fontSizeSubTitle);
-  padding: var(--paddingSubTitle);
-  line-height: var(--lineHeightSubTitle);
-  line-height: normal;
-  text-shadow: var(--textShadowSubTitle);
-  text-align: center;
-  border: none;
-}
-
-.heading1 {
-  width: 100%;
-  color: var(--fontColorHeading1);
-  background-color: var(--bgColorHeading1);
-  font-family: var(--fontFamilyHeading1);
-  font-style: var(--fontStyleHeading1);
-  font-variant: var(--fontVariantHeading1);
-  font-weight: var(--fontWeightHeading1);
-  text-transform: var(--textTransformHeading1);
-  font-size: var(--fontSizeHeading1);
-  padding: var(--paddingHeading1);
-  line-height: var(--lineHeightHeading1);
-  line-height: normal;
-  text-shadow: var(--textShadowHeading1);
-  border-bottom: var(--borderBottomHeading1);
-  margin: 0px;
-}
-
-.heading2 {
-  color: var(--fontColorHeading2);
-  background-color: var(--bgColorHeading2);
-  font-family: var(--fontFamilyHeading2);
-  font-style: var(--fontStyleHeading2);
-  font-variant: var(--fontVariantHeading2);
-  font-weight: var(--fontWeightHeading2);
-  text-transform: var(--textTransformHeading2);
-  font-size: var(--fontSizeHeading2);
-  padding: var(--paddingHeading2);
-  line-height: var(--lineHeightHeading2);
-  line-height: normal;
-  text-shadow: var(--textShadowHeading2);
-  border-bottom: var(--borderBottomHeading2);
-}
-
-span.heading3 {
-  margin-right: 0.5rem;
-}
-
-.path {
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
-  box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
-  font-size: 2rem;
-  color: black;
-}
-
 /* DRAGULA SETUP: 
   Container Object:  
   CONTAINER TYPES:
@@ -374,18 +182,507 @@ span.heading3 {
   opacity: 0.2;
 }
 
-/* .flex,
-.tab[data-tab].active.flex {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-} */
-/* #region FLEX LAYOUTS */
-.flex,
-.tab[data-tab].active.flex {
+/* #endregion */
+body.vtt.game.system-scion {
+  /* #region SHEET STYLES */
+  /* #endregion */
+}
+
+body.vtt.game.system-scion #logo {
+  display: none;
+}
+
+body.vtt.game.system-scion #navigation {
+  left: 0px;
+  top: 0px;
+}
+
+body.vtt.game.system-scion #navigation #nav-toggle {
+  height: 20px;
+}
+
+body.vtt.game.system-scion #navigation .nav-item {
+  margin: 0 4px 0 0;
+  line-height: 1.4rem;
+}
+
+body.vtt.game.system-scion #navigation #scene-list li {
+  height: 20px;
+}
+
+body.vtt.game.system-scion #navigation #scene-list li .scene-players {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls {
+  top: 30px;
+  left: 0;
+  padding: 0;
+}
+
+body.vtt.game.system-scion #controls .scene-control {
+  height: 20px;
+  width: 25px;
+  font-size: 20px;
+  line-height: normal;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Basic Controls"] li[title="Measure Distance"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Measurement Controls"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Tile Controls"] li[title=""] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Rectangle"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Ellipse"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Polygon"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Freehand"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Clear Drawings"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Wall Controls"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Reset Fog of War"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Clear Lights"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Ambient Sound Controls"] li[title="Clear Sounds"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Journal Notes"] li[title="Clear Notes"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools {
+  height: 25px;
+  top: -25px;
+  left: 35px;
+  position: relative;
+  margin: 0 0 -25px;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool {
+  display: inline-block;
+  height: 25px;
+  font-size: 20px;
+  line-height: normal;
+  margin: 0 3px;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool i {
+  width: 25px;
+}
+
+body.vtt.game.system-scion #controls .scene-control.active .control-tools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body.vtt.game.system-scion #sidebar {
+  -webkit-transform: scale(0.75);
+  -ms-transform: scale(0.75);
+  transform: scale(0.75);
+  -webkit-transform-origin: 100% 0%;
+  -ms-transform-origin: 100% 0%;
+  transform-origin: 100% 0%;
+  height: calc(99vh / 0.75);
+  max-height: calc(99vh / 0.75);
+}
+
+body.vtt.game.system-scion #sidebar #chat-log {
+  max-height: calc(100vh / 0.75);
+}
+
+body.vtt.game.system-scion #sidebar #chat-controls {
+  width: calc(100% * 0.75);
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 calc(28px / 0.75);
+  flex: 0 0 calc(28px / 0.75);
+  top: -55px;
+  position: relative;
+  -webkit-transform: scale(calc(1/0.75));
+  -ms-transform: scale(calc(1/0.75));
+  transform: scale(calc(1/0.75));
+  -webkit-transform-origin: 0% 100%;
+  -ms-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+}
+
+body.vtt.game.system-scion #sidebar #chat-form {
+  width: calc(100% * 0.75);
+  -webkit-box-flex: 0.1;
+  -ms-flex: 0.1 0 calc(100px * 0.75);
+  flex: 0.1 0 calc(100px * 0.75);
+  -webkit-transform: scale(calc(1 / 0.75));
+  -ms-transform: scale(calc(1 / 0.75));
+  transform: scale(calc(1 / 0.75));
+  -webkit-transform-origin: 0% 100%;
+  -ms-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion {
+  pointer-events: none;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: none;
+  /* #region Element Default Styles */
+  /* #endregion */
+  /* #region Editable Input Fields */
+  /* #endregion */
+  /* #region Single-Purpose Classes */
+  /* #endregion */
+  /* #region Dot Trackers */
+  /* #endregion */
+  /* #region FLEX LAYOUTS */
+  /* #endregion */
+  /* #region GRID LAYOUTS */
+  /* #endregion */
+  /* #region SHEET ACTORS */
+  /* #endregion */
+  /* #region ITEM SHEETS */
+  /* #endregion */
+}
+
+body.vtt.game.system-scion div.sheet.scion * {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: var(--fontWeightBody);
+}
+
+body.vtt.game.system-scion div.sheet.scion section {
+  height: 100%;
+  width: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion textarea,
+body.vtt.game.system-scion div.sheet.scion input[type="text"],
+body.vtt.game.system-scion div.sheet.scion select {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion textarea:invalid,
+body.vtt.game.system-scion div.sheet.scion input[type="text"]:invalid,
+body.vtt.game.system-scion div.sheet.scion select:invalid {
+  font-style: italic;
+  color: var(--scaleGrey5);
+  text-shadow: -0.5px -0.5px 0px #000, 0.5px 0.5px 0px var(--scaleFadeWhite10);
+  font-family: "Della Respira";
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+body.vtt.game.system-scion div.sheet.scion .contentEditable {
+  text-indent: 5px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion .contentEditable.insetFrame {
+  min-height: 27px;
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: inset 3px var(--scale6);
+}
+
+body.vtt.game.system-scion div.sheet.scion .readonly {
+  pointer-events: none;
+  resize: none;
+  overflow: hidden;
+}
+
+body.vtt.game.system-scion div.sheet.scion .hidden {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion .text {
+  color: var(--fontColorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: var(--fontWeightBody);
+}
+
+body.vtt.game.system-scion div.sheet.scion .placeholder {
+  font-style: italic;
+  color: var(--scaleGrey5);
+  text-shadow: -0.5px -0.5px 0px #000, 0.5px 0.5px 0px var(--scaleFadeWhite10);
+  font-family: "Della Respira";
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+body.vtt.game.system-scion div.sheet.scion .half {
+  width: 50%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .quarter {
+  width: 25%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .fifth {
+  width: 20%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .alignLeft {
+  text-align: left !important;
+  -moz-text-align-last: left !important;
+  text-align-last: left !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion .alignCenter {
+  text-align: center !important;
+  -moz-text-align-last: center !important;
+  text-align-last: center !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion .alignRight {
+  text-align: right !important;
+  -moz-text-align-last: right !important;
+  text-align-last: right !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion .strong {
+  font-weight: bolder;
+  text-shadow: 0.5px 0.5px 1px black;
+  text-transform: uppercase;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline {
+  grid-area: dotline;
+  display: grid;
+  grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
+  grid-template-rows: 1rem;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline.labelledDotLine {
+  width: 100%;
+  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline.largeDots {
+  grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+  grid-template-rows: 1.25rem;
+  -webkit-column-gap: 0.5rem;
+  -moz-column-gap: 0.5rem;
+  column-gap: 0.5rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline.labelledDotLine.largeDots {
+  grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline .dot {
+  margin: 7% 7% 0 0;
+  border-radius: 50%;
+  -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline .dot.full {
+  background: -o-radial-gradient(#444, #0a0a0a);
+  background: radial-gradient(#444, #0a0a0a);
+  border: solid 2px black;
+  -webkit-box-shadow: 1px 1px 2px black;
+  box-shadow: 1px 1px 2px black;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline .dot.unspent {
+  background: -o-radial-gradient(#900, #5a0000);
+  background: radial-gradient(#900, #5a0000);
+  border: solid 2px #5a0000;
+  -webkit-box-shadow: 1px 1px 2px black;
+  box-shadow: 1px 1px 2px black;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline .dot.virtueCenter::after {
+  content: "";
+  height: 150%;
+  width: 150%;
+  background-image: var(--virtueDarkImg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .dotline .dot.virtueCenter.virtueFull::after {
+  background-image: var(--virtueGlowImg);
+}
+
+body.vtt.game.system-scion div.sheet.scion .title {
+  color: var(--fontColorTitle);
+  background-color: var(--bgColorTitle);
+  font-family: var(--fontFamilyTitle);
+  font-style: var(--fontStyleTitle);
+  font-variant: var(--fontVariantTitle);
+  font-weight: var(--fontWeightTitle);
+  font-size: var(--fontSizeTitle);
+  text-transform: var(--textTransformTitle);
+  text-shadow: var(--textShadowTitle);
+  text-align: center;
+  -webkit-transform: scaleX(var(--fontScaleTitle));
+  -ms-transform: scaleX(var(--fontScaleTitle));
+  transform: scaleX(var(--fontScaleTitle));
+  -webkit-transform-origin: 0% 0%;
+  -ms-transform-origin: 0% 0%;
+  transform-origin: 0% 0%;
+  padding: var(--paddingTitle);
+  line-height: var(--lineHeightTitle);
+  line-height: normal;
+  width: calc(100% / var(--fontScaleTitle));
+  border: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion .surTitle {
+  color: var(--fontColorSurTitle);
+  background-color: var(--bgColorSurTitle);
+  font-family: var(--fontFamilySurTitle);
+  font-style: var(--fontStyleSurTitle);
+  font-variant: var(--fontVariantSurTitle);
+  font-weight: var(--fontWeightSurTitle);
+  text-transform: var(--textTransformSurTitle);
+  font-size: var(--fontSizeSurTitle);
+  padding: var(--paddingSurTitle);
+  line-height: var(--lineHeightSurTitle);
+  line-height: normal;
+  text-shadow: var(--textShadowSurTitle);
+  -webkit-transform-origin: 0% 0%;
+  -ms-transform-origin: 0% 0%;
+  transform-origin: 0% 0%;
+  -webkit-transform: scaleX(var(--fontScaleSurTitle));
+  -ms-transform: scaleX(var(--fontScaleSurTitle));
+  transform: scaleX(var(--fontScaleSurTitle));
+  width: calc(100% / var(--fontScaleSurTitle));
+  text-align: center;
+  border: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion .subTitle {
+  color: var(--fontColorSubTitle);
+  background-color: var(--bgColorSubTitle);
+  font-family: var(--fontFamilySubTitle);
+  font-style: var(--fontStyleSubTitle);
+  font-variant: var(--fontVariantSubTitle);
+  font-weight: var(--fontWeightSubTitle);
+  text-transform: var(--textTransformSubTitle);
+  font-size: var(--fontSizeSubTitle);
+  padding: var(--paddingSubTitle);
+  line-height: var(--lineHeightSubTitle);
+  line-height: normal;
+  text-shadow: var(--textShadowSubTitle);
+  -webkit-transform-origin: 0% 0%;
+  -ms-transform-origin: 0% 0%;
+  transform-origin: 0% 0%;
+  -webkit-transform: scaleX(var(--fontScaleSubTitle));
+  -ms-transform: scaleX(var(--fontScaleSubTitle));
+  transform: scaleX(var(--fontScaleSubTitle));
+  width: calc(100% / var(--fontScaleSubTitle));
+  text-align: center;
+  border: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion .heading1 {
+  width: 100%;
+  color: var(--fontColorHeading1);
+  background-color: var(--bgColorHeading1);
+  font-family: var(--fontFamilyHeading1);
+  font-style: var(--fontStyleHeading1);
+  font-variant: var(--fontVariantHeading1);
+  font-weight: var(--fontWeightHeading1);
+  text-transform: var(--textTransformHeading1);
+  font-size: var(--fontSizeHeading1);
+  padding: var(--paddingHeading1);
+  line-height: var(--lineHeightHeading1);
+  line-height: normal;
+  text-shadow: var(--textShadowHeading1);
+  border-bottom: var(--borderBottomHeading1);
+  -webkit-transform-origin: 0% 0%;
+  -ms-transform-origin: 0% 0%;
+  transform-origin: 0% 0%;
+  -webkit-transform: scaleX(var(--fontScaleHeading1));
+  -ms-transform: scaleX(var(--fontScaleHeading1));
+  transform: scaleX(var(--fontScaleHeading1));
+  width: calc(100% / var(--fontScaleHeading1));
+  margin: 0px;
+}
+
+body.vtt.game.system-scion div.sheet.scion .heading2 {
+  color: var(--fontColorHeading2);
+  background-color: var(--bgColorHeading2);
+  font-family: var(--fontFamilyHeading2);
+  font-style: var(--fontStyleHeading2);
+  font-variant: var(--fontVariantHeading2);
+  font-weight: var(--fontWeightHeading2);
+  text-transform: var(--textTransformHeading2);
+  font-size: var(--fontSizeHeading2);
+  padding: var(--paddingHeading2);
+  line-height: var(--lineHeightHeading2);
+  line-height: normal;
+  text-shadow: var(--textShadowHeading2);
+  border-bottom: var(--borderBottomHeading2);
+}
+
+body.vtt.game.system-scion div.sheet.scion span.heading3 {
+  margin-right: 0.5rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion .path {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
+  box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
+  font-size: 2rem;
+  color: black;
+}
+
+body.vtt.game.system-scion div.sheet.scion .flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -404,34 +701,28 @@ span.heading3 {
   align-content: safe flex-start;
 }
 
-.flex.spaceCenter,
-.tab[data-tab].active.flex.spaceCenter {
+body.vtt.game.system-scion div.sheet.scion .flex.flexContainer {
+  height: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .flex.spaceCenter {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
 }
 
-.flex > *:not(.heading1),
-.tab[data-tab].active.flex > *:not(.heading1) {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  margin: 0.15rem 0.25rem;
+body.vtt.game.system-scion div.sheet.scion .flex.column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
 }
 
-.flexContainer,
-.tab[data-tab].active.flexContainer {
-  height: 100%;
-  /* #endregion */
-}
-
-.flexContainer div,
-.tab[data-tab].active.flexContainer div {
+body.vtt.game.system-scion div.sheet.scion .flex div {
   width: 100%;
 }
 
-.flexContainer span,
-.tab[data-tab].active.flexContainer span {
+body.vtt.game.system-scion div.sheet.scion .flex span {
   display: inline-block;
   margin: auto 0;
   -webkit-box-flex: 1;
@@ -439,39 +730,42 @@ span.heading3 {
   flex: 1 0 auto;
 }
 
-.flexContainer .flexRow,
-.tab[data-tab].active.flexContainer .flexRow {
+body.vtt.game.system-scion div.sheet.scion .flex > *:not(.heading1) {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  margin: 0.15rem 0.25rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion .flex .flexRow {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.flexContainer .flexLabel,
-.tab[data-tab].active.flexContainer .flexLabel {
+body.vtt.game.system-scion div.sheet.scion .flex .flexLabel {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
 }
 
-.flexContainer .flexStatic,
-.tab[data-tab].active.flexContainer .flexStatic {
+body.vtt.game.system-scion div.sheet.scion .flex .flexStatic {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
 
-.flexContainer .edit,
-.tab[data-tab].active.flexContainer .edit {
+body.vtt.game.system-scion div.sheet.scion .flex .contentEditable {
   -webkit-box-flex: 0;
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
 }
 
-/* #endregion */
-/* #region GRID LAYOUTS */
-.grid,
-.tab[data-tab].active.grid {
+body.vtt.game.system-scion div.sheet.scion .grid {
   display: grid;
   height: 100%;
   width: 100%;
@@ -481,52 +775,50 @@ span.heading3 {
   grid-gap: 0;
 }
 
-/* .grid,
-.tab[data-tab].active.grid {
-    display: grid;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-    grid-gap: 0;
-
-    &.span1col {grid-column: span 1}
-    &.span2col {grid-column: span 2}
-    &.span3col {grid-column: span 3}
-    &.span4col {grid-column: span 4}
-    &.span5col {grid-column: span 5}
-    &.span6col {grid-column: span 6}
-    &.span7col {grid-column: span 7}
-    &.span8col {grid-column: span 8}
-
-    &.span1row {grid-row: span 1}
-    &.span2row {grid-row: span 2}
-    &.span3row {grid-row: span 3}
-    &.span4row {grid-row: span 4}
-    &.span5row {grid-row: span 5}
-    &.span6row {grid-row: span 6}
-    &.span7row {grid-row: span 7}
-    &.span8row {grid-row: span 8}
-} */
-/* #endregion */
-/* #endregion */
-/* SCION ACTOR: All Scion Actors */
-.scion.actor {
-  pointer-events: none;
+body.vtt.game.system-scion div.sheet.scion .tabs {
+  height: 16px;
+  width: 100%;
+  margin: 0;
   border: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  background: none;
-  /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
-
-        $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
-            // The added "disappear" class contains either an animation or a transition, which starts immediately.
-            //    When the animation/transition is finished, the callback function removes the element.
-    */
+  pointer-events: all;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable {
+body.vtt.game.system-scion div.sheet.scion .tabs .item {
+  height: 100%;
+  margin: 0 0.25rem;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-shadow: none;
+  color: var(--scale9);
+  background-color: var(--scale4);
+  -webkit-box-shadow: 0px 0px 2px var(--scale2), 0px 0px 2px var(--scale2), 0px 0px 6px var(--scale2);
+  box-shadow: 0px 0px 2px var(--scale2), 0px 0px 2px var(--scale2), 0px 0px 6px var(--scale2);
+  line-height: normal;
+  border-radius: 2rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion .tabs .item.icon {
+  height: 20px;
+  width: 20px;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+  margin: -20px -20px 0 0;
+  color: white;
+  font-size: 1rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion .tabs .item:hover {
+  background-color: var(--scale9);
+  color: var(--scale4);
+}
+
+body.vtt.game.system-scion div.sheet.scion .tabs .item.active {
+  background-color: var(--scale7);
+  color: var(--scale2);
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header {
   height: 2rem;
   width: 80px;
   margin: -1.5rem 0 -0.5rem 550px;
@@ -540,22 +832,26 @@ span.heading3 {
   border: none;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable h4.window-title {
+body.vtt.game.system-scion div.sheet.scion header.window-header h4.window-title {
   display: none;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable a.header-button {
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button {
   display: none;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable a.header-button.close {
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close {
   display: inline;
   pointer-events: all;
   height: 1rem;
   color: white;
 }
 
-.scion.actor header.window-header.flexrow.draggable.resizable::after {
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close i {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header::after {
   content: "";
   display: block;
   position: relative;
@@ -567,11 +863,7 @@ span.heading3 {
   pointer-events: all;
 }
 
-.scion.actor div.window-resizable-handle {
-  display: none;
-}
-
-.scion.actor .window-content {
+body.vtt.game.system-scion div.sheet.scion section.window-content {
   padding: 0px;
   background: transparent;
   pointer-events: none;
@@ -580,67 +872,36 @@ span.heading3 {
   z-index: 1;
 }
 
-.scion.actor .tabs {
-  height: 18px;
-  margin: 0px;
-  padding-top: 1px;
-  border: none;
-  pointer-events: all;
+body.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
+  display: none;
 }
 
-.scion.actor .tabs .item {
-  height: 100%;
-  line-height: 1.25rem;
-  font-weight: bold;
-  font-size: 0.75rem;
-  text-shadow: none;
+body.vtt.game.system-scion div.sheet.scion.actor .main {
+  /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+
+    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+        // The added "disappear" class contains either an animation or a transition, which starts immediately.
+        //    When the animation/transition is finished, the callback function removes the element.
+*/
 }
 
-.scion.actor .tabs .item.icon {
-  height: 20px;
-  width: 20px;
-  -webkit-box-flex: 0;
-  -ms-flex: none;
-  flex: none;
-  margin: -20px -20px 0 0;
-  color: white;
-  font-size: 1rem;
-}
-
-.scion.actor .tabs .item:hover {
-  background-color: var(--bgColorSoft);
-}
-
-.scion.actor .tabs .item.active {
-  background-color: var(--bgColorStrong);
-}
-
-.scion.actor .tabs .item.icon:hover {
-  background-color: transparent;
-  color: var(--fontColorSubTitle);
-}
-
-.scion.actor .tabs .item.icon.active {
-  background-color: transparent;
-  color: var(--fontColorSurTitle);
-}
-
-.scion.actor .character .main {
+body.vtt.game.system-scion div.sheet.scion.actor .main {
   height: 100%;
   width: 100%;
-  padding: 2% 8% 8% 6%;
+  padding: 18px 60px 38px 45px;
   background-image: var(--bgImage);
   background-size: 100%;
   background-repeat: no-repeat;
   opacity: 1;
-  grid: ". nav ." 1.3rem ". . ." 0.25rem "header header header" 6rem "body body body" auto ". footer ." 6rem / 12% 1fr 12%;
+  grid: ". nav ." 16px "header header header" 96px "body body body" 450px "footer footer footer" 96px / 14% 1fr 14%;
+  row-gap: 5px;
 }
 
-.scion.actor .character .main .sheet-tabs {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-tabs {
   grid-area: nav;
 }
 
-.scion.actor .character .main .menuRosette {
+body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette {
   background-image: var(--menuRosetteImg);
   background-size: 90%;
   display: block;
@@ -649,44 +910,52 @@ span.heading3 {
   content: "";
   position: relative;
   background-repeat: no-repeat;
-  left: -100%;
-  top: -250%;
+  left: -100px;
+  top: -75px;
   border-radius: 50%;
   background-position: center;
 }
 
-.scion.actor .character .main .header {
+body.vtt.game.system-scion div.sheet.scion.actor .main .header {
   grid-area: header;
-  grid: ". divineTitle ." 1.5rem ". charName ." 3rem "patronage patronage patronage" 2rem / 12% 1fr 12%;
-  grid-gap: 0;
+  grid: ". divineTitle ." 24px ". charName ." 48px "patronage patronage patronage" 24px / 12% 1fr 12%;
 }
 
-.scion.actor .character .main .header div {
+body.vtt.game.system-scion div.sheet.scion.actor .main .header div {
   pointer-events: all;
 }
 
-.scion.actor .character .main .header .divineTitle {
+body.vtt.game.system-scion div.sheet.scion.actor .main .header .divineTitle {
   grid-area: divineTitle;
+  line-height: 24px;
 }
 
-.scion.actor .character .main .header .charName {
+body.vtt.game.system-scion div.sheet.scion.actor .main .header .charName {
   grid-area: charName;
+  line-height: 48px;
 }
 
-.scion.actor .character .main .header .patronage {
+body.vtt.game.system-scion div.sheet.scion.actor .main .header .patronage {
   grid-area: patronage;
+  line-height: 24px;
 }
 
-.scion.actor .character .main .sheet-body {
+body.vtt.game.system-scion div.sheet.scion.actor .main .footer {
+  grid-area: footer;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body {
   grid-area: body;
   pointer-events: all;
+  /* #region Owned Item Partials */
+  /* #endregion */
 }
 
-.scion.actor .character .main .sheet-body .tab[data-tab].active {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab[data-tab].active {
   height: 100%;
 }
 
-.scion.actor .character .main .sheet-body .chargen-body .chargenTwo {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .chargen .chargenTwo {
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
@@ -694,21 +963,14 @@ span.heading3 {
   align-content: stretch;
 }
 
-.scion.actor .character .main .sheet-body .chargen-body .chargenTwo .path-block {
-  height: calc((100% - 2rem)/3);
-  border: inset 3px var(--scale6);
-  border-radius: 30px;
-  background-color: var(--scaleFade1);
-}
-
-.scion.actor .character .main .sheet-body .front {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front {
   grid: "attributes paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
   -webkit-column-gap: 0.5rem;
   -moz-column-gap: 0.5rem;
   column-gap: 0.5rem;
 }
 
-.scion.actor .character .main .sheet-body .front .attributes {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .attributes {
   grid-area: attributes;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -722,7 +984,7 @@ span.heading3 {
   align-items: center;
 }
 
-.scion.actor .character .main .sheet-body .front .attributes .dotGrabBin {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .attributes .dotGrabBin {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   height: auto;
@@ -731,7 +993,7 @@ span.heading3 {
   justify-content: flex-end;
 }
 
-.scion.actor .character .main .sheet-body .front .attributes .attrBlock {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .attributes .attrBlock {
   margin: 0.5rem 0;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -739,50 +1001,50 @@ span.heading3 {
   flex-flow: column nowrap;
 }
 
-.scion.actor .character .main .sheet-body .front .attributes .attrBlock .attrRow .label {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .attributes .attrBlock .attrRow .label {
   font-size: 1rem;
 }
 
-.scion.actor .character .main .sheet-body .front .attributes .primary {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .attributes .primary {
   -webkit-box-ordinal-group: 2;
   -ms-flex-order: 1;
   order: 1;
 }
 
-.scion.actor .character .main .sheet-body .front .attributes .secondary {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .attributes .secondary {
   -webkit-box-ordinal-group: 3;
   -ms-flex-order: 2;
   order: 2;
 }
 
-.scion.actor .character .main .sheet-body .front .attributes .tertiary {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .attributes .tertiary {
   -webkit-box-ordinal-group: 4;
   -ms-flex-order: 3;
   order: 3;
 }
 
-.scion.actor .character .main .sheet-body .front .paths {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .paths {
   grid-area: paths;
   grid: "heading" 1.5rem "originpath" 5rem "rolepath" 5rem "pantheonpath" 5rem;
 }
 
-.scion.actor .character .main .sheet-body .front .paths .heading {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .paths .heading {
   grid-area: heading;
 }
 
-.scion.actor .character .main .sheet-body .front .paths .originpath {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .paths .originpath {
   grid-area: originpath;
 }
 
-.scion.actor .character .main .sheet-body .front .paths .rolepath {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .paths .rolepath {
   grid-area: rolepath;
 }
 
-.scion.actor .character .main .sheet-body .front .paths .pantheonpath {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .paths .pantheonpath {
   grid-area: pantheonpath;
 }
 
-.scion.actor .character .main .sheet-body .front .virtues {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .virtues {
   border-radius: 1rem;
   grid-area: virtues;
   grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
@@ -794,24 +1056,47 @@ span.heading3 {
   height: calc(100% - 2 * 3px);
 }
 
-.scion.actor .character .main .sheet-body .front .virtues .leftvirtue {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .virtues .leftvirtue {
   grid-area: leftvirtue;
   margin-left: 0.5rem;
   line-height: 1rem;
 }
 
-.scion.actor .character .main .sheet-body .front .virtues .dotline {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .virtues .dotline {
   grid-area: dotline;
 }
 
-.scion.actor .character .main .sheet-body .front .virtues .rightvirtue {
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front .virtues .rightvirtue {
   grid-area: rightvirtue;
   margin-right: 0.5rem;
   line-height: 1rem;
 }
 
-.scion.actor {
-  --bgColorMatte: #fff;
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block {
+  height: calc((100% - 2rem)/3);
+  border: inset 3px var(--scale6);
+  background-color: var(--scaleFade1);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block .heading2:first-child {
+  margin: -7px 0 0 -7px;
+  width: calc(100% + 20px);
+  background-image: -webkit-gradient(linear, right top, left top, from(var(--scale3)), to(var(--scale7)));
+  background-image: -o-linear-gradient(right, var(--scale3), var(--scale7));
+  background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
+  text-indent: 10px;
+  color: var(--scale10);
+  border-bottom: 2px inset var(--scale3);
+  border-bottom-left-radius: 15px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor {
+  --bgColorMatte: white;
   --bgImage: url("../images/actor-sheet/backgrounds/Generic.png");
   --fontColorBody: #000;
   --fontFamilyBody: "Overlock SC";
@@ -828,6 +1113,7 @@ span.heading3 {
   --paddingTitle: 0;
   --lineHeightTitle: var(--fontSizeTitle);
   --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+  --fontScaleTitle: 1;
   --fontColorSurTitle: var(--fontColorTitle);
   --bgColorSurTitle: var(--bgColorTitle);
   --fontFamilySurTitle: var(--fontFamilyBody);
@@ -839,6 +1125,7 @@ span.heading3 {
   --paddingSurTitle: 0;
   --lineHeightSurTitle: var(--fontSizeSurTitle);
   --textShadowSurTitle: var(--textShadowTitle);
+  --fontScaleSurTitle: 1;
   --fontColorSubTitle: var(--fontColorTitle);
   --bgColorSubTitle: var(--bgColorTitle);
   --fontFamilySubTitle: "Marcellus SC";
@@ -850,6 +1137,7 @@ span.heading3 {
   --paddingSubTitle: 0;
   --lineHeightSubTitle: var(--fontSizeSubTitle);
   --textShadowSubTitle: var(--textShadowTitle);
+  --fontScaleSubTitle: 1;
   --fontColorHeading1: var(--fontColorTitle);
   --bgColorHeading1: transparent;
   --fontFamilyHeading1: var(--fontFamilyTitle);
@@ -861,6 +1149,7 @@ span.heading3 {
   --paddingHeading1: 0;
   --lineHeightHeading1: var(--fontSizeHeading1);
   --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+  --fontScaleHeading1: 1;
   --borderBottomHeading1: 2px solid var(--fontColorHeading1);
   --fontColorHeading2: var(--fontColorSubTitle);
   --bgColorHeading2: transparent;
@@ -908,30 +1197,31 @@ span.heading3 {
   --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
-.scion.actor .aesir {
+body.vtt.game.system-scion div.sheet.scion.actor .aesir {
   --fontFamilyTitle: "Amarante";
 }
 
-.scion.actor .loa {
+body.vtt.game.system-scion div.sheet.scion.actor .loa {
   --bgImage: url("../images/actor-sheet/backgrounds/Loa.png");
   --fontFamilyTitle: "Finger Paint";
   --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
   --fontSizeTitle: 2rem;
 }
 
-.scion.actor .netjer {
+body.vtt.game.system-scion div.sheet.scion.actor .netjer {
   --fontColorBody: #2d2d2f;
+  --fontFamilyBody: "Gothic Ultra";
   --bgImage: url("../images/actor-sheet/backgrounds/Netjer.png");
   --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
   --bgColorMatte: #f6f0e2;
-  --bgColorSoft: #fdd8b7;
-  --bgColorStrong: #f99c4b;
   --fontColorTitle: #554a39;
-  --fontFamilyTitle: "Yatra One";
+  --fontFamilyTitle: "Zanzabar";
   --fontColorSubTitle: #6e4a28;
-  --fontFamilySubTitle: "Reem Kufi";
-  --fontSizeSubTitle: 1.25rem;
+  --fontFamilySubTitle: "Carolingia";
+  --fontSizeSubTitle: 1.75rem;
   --lineHeightSubTitle: 1.65rem;
+  --fontWeightSubTitle: normal;
+  --fontScaleSubTitle: 0.75;
   --fontColorSurTitle: #554a39;
   --fontWeightSurTitle: bold;
   --fontColorHeading1: var(--fontColorSubTitle);
@@ -958,16 +1248,14 @@ span.heading3 {
   --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
-.scion.actor .teotl {
+body.vtt.game.system-scion div.sheet.scion.actor .teotl {
   --fontFamilyTitle: "Pirata One";
 }
 
-.scion.actor .theoi {
+body.vtt.game.system-scion div.sheet.scion.actor .theoi {
   --bgImage: url("../images/actor-sheet/backgrounds/Theoi.png");
   --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
   --bgColorMatte: #ffffff;
-  --bgColorSoft: #e8dcff;
-  --bgColorStrong: #c7a9ff;
   --fontColorTitle: #000fb8;
   --fontFamilyTitle: "Poiret One";
   --fontWeightTitle: bold;
@@ -1008,12 +1296,10 @@ span.heading3 {
   --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
-.scion.actor .tuathaDeDanann {
+body.vtt.game.system-scion div.sheet.scion.actor .tuathaDeDanann {
   --bgImage: url("../images/actor-sheet/backgrounds/Tuatha.png");
   --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
   --bgColorMatte: #efffd1;
-  --bgColorSoft: #c7f8c4;
-  --bgColorStrong: #73ed6c;
   --fontColorTitle: #296f17;
   --fontFamilyTitle: "Berkshire Swash";
   --fontColorHeading1: var(--fontColorTitle);
@@ -1049,11 +1335,10 @@ span.heading3 {
   --scaleFade10: rgba(255, 255, 255, 0.5);
 }
 
-.scion.actor .orisha {
+body.vtt.game.system-scion div.sheet.scion.actor .orisha {
   --bgImage: url("../images/actor-sheet/backgrounds/Orisha.png");
   --fontFamilyTitle: "Finger Paint";
   --fontSizeTitle: 2rem;
 }
 
-/* SCION ITEMS: All Scion Items */
 /* #endregion */

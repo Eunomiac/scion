@@ -98,25 +98,41 @@ export const MakeDict = (objRef, valFunc = (v, k) => v, keyFunc = (k, v) => k) =
     }
     return newDict;
 };
+
+export const FlattenNestedValues = (obj, flatVals = []) => {
+    if (obj && typeof obj === "object") {
+        for (const key of Object.keys(obj)) {
+            const val = obj[key];
+            if (val && typeof val === "object")
+                flatVals.push(...FlattenNestedValues(val));
+            else
+                flatVals.push(val);
+        }
+        return flatVals;
+    }
+    return [obj].flat();
+};
 // #endregion
 
 // #region DEBUG & ERROR: Console Logging
+const groupStyles = {
+    data: "color: black; background-color: white; font-family: Oswald; font-size: 16px; padding: 0px 5px;",
+    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 14px; padding: 0px 5px;"
+};
 const logStyles = {
-    data: "color: grey; background-color: white; font-family: Oswald; font-size: 12px; padding: 0px 5px;",
+    data: "color: black; background-color: white; font-family: Oswald; font-size: 14px; padding: 0px 5px;",
     info: "color: black; background-color: grey; font-family: Voltaire; font-size: 12px; padding: 0px 5px;"
 };
+
 export const LOG = (output, title, tag, options = {}) => {
-    options = Object.assign({style: "info", isLoud: false, isClearing: false, isGrouping: true, isUngrouping: true}, options);
+    options = Object.assign({style: "info", isLoud: false, isClearing: false, isGrouping: false, groupStyle: undefined, isUngrouping: true}, options);
     if (game.scion.debug.isDebugging || options.isLoud || game.scion.debug.watchList.includes(tag)) {
         if (options.isClearing)
             console.clear();
-        if (options.isGrouping) {
-            console.groupCollapsed(`%c ${title} `, logStyles[options.style]);
-            console.log(output);
-        } else {
-            console.log(`%c ${title} `, logStyles[options.style], output);
-        }
-        if (options.isUngrouping)
+        if (options.isGrouping)
+            console.groupCollapsed(`%c ${options.isGrouping} `, groupStyles[options.style]);
+        console.log(`%c ${title} `, logStyles[options.style], output);
+        if (options.isUngrouping && !options.isGrouping)
             console.groupEnd();
     }
 };

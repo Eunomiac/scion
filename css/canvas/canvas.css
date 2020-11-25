@@ -1,0 +1,159 @@
+#logo {
+  display: none;
+}
+
+#navigation {
+  left: 0px;
+  top: 0px;
+}
+
+#navigation #nav-toggle {
+  height: 20px;
+}
+
+#navigation .nav-item {
+  margin: 0 4px 0 0;
+  line-height: 1.4rem;
+}
+
+#navigation #scene-list li {
+  height: 20px;
+}
+
+#navigation #scene-list li .scene-players {
+  display: none;
+}
+
+#controls {
+  top: 30px;
+  left: 0;
+  padding: 0;
+}
+
+#controls .scene-control {
+  height: 20px;
+  width: 25px;
+  font-size: 20px;
+  line-height: normal;
+}
+
+#controls .scene-control[title="Basic Controls"] li[title="Measure Distance"] {
+  display: none;
+}
+
+#controls .scene-control[title="Measurement Controls"] {
+  display: none;
+}
+
+#controls .scene-control[title="Tile Controls"] li[title=""] {
+  display: none;
+}
+
+#controls .scene-control[title="Drawing Tools"] li[title="Draw Rectangle"] {
+  display: none;
+}
+
+#controls .scene-control[title="Drawing Tools"] li[title="Draw Ellipse"] {
+  display: none;
+}
+
+#controls .scene-control[title="Drawing Tools"] li[title="Draw Polygon"] {
+  display: none;
+}
+
+#controls .scene-control[title="Drawing Tools"] li[title="Draw Freehand"] {
+  display: none;
+}
+
+#controls .scene-control[title="Drawing Tools"] li[title="Clear Drawings"] {
+  display: none;
+}
+
+#controls .scene-control[title="Wall Controls"] {
+  display: none;
+}
+
+#controls .scene-control[title="Lighting Controls"] li[title="Reset Fog of War"] {
+  display: none;
+}
+
+#controls .scene-control[title="Lighting Controls"] li[title="Clear Lights"] {
+  display: none;
+}
+
+#controls .scene-control[title="Ambient Sound Controls"] li[title="Clear Sounds"] {
+  display: none;
+}
+
+#controls .scene-control[title="Journal Notes"] li[title="Clear Notes"] {
+  display: none;
+}
+
+#controls .scene-control .control-tools {
+  height: 25px;
+  top: -25px;
+  left: 35px;
+  position: relative;
+  margin: 0 0 -25px;
+}
+
+#controls .scene-control .control-tools .control-tool {
+  display: inline-block;
+  height: 25px;
+  font-size: 20px;
+  line-height: normal;
+  margin: 0 3px;
+}
+
+#controls .scene-control .control-tools .control-tool i {
+  width: 25px;
+}
+
+#controls .scene-control.active .control-tools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#sidebar {
+  -webkit-transform: scale(0.75);
+  -ms-transform: scale(0.75);
+  transform: scale(0.75);
+  -webkit-transform-origin: 100% 0%;
+  -ms-transform-origin: 100% 0%;
+  transform-origin: 100% 0%;
+  height: calc(99vh / 0.75);
+  max-height: calc(99vh / 0.75);
+}
+
+#sidebar #chat-log {
+  max-height: calc(100vh / 0.75);
+}
+
+#sidebar #chat-controls {
+  width: calc(100% * 0.75);
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 calc(28px / 0.75);
+  flex: 0 0 calc(28px / 0.75);
+  top: -55px;
+  position: relative;
+  -webkit-transform: scale(calc(1/0.75));
+  -ms-transform: scale(calc(1/0.75));
+  transform: scale(calc(1/0.75));
+  -webkit-transform-origin: 0% 100%;
+  -ms-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+}
+
+#sidebar #chat-form {
+  width: calc(100% * 0.75);
+  -webkit-box-flex: 0.1;
+  -ms-flex: 0.1 0 calc(100px * 0.75);
+  flex: 0.1 0 calc(100px * 0.75);
+  -webkit-transform: scale(calc(1 / 0.75));
+  -ms-transform: scale(calc(1 / 0.75));
+  transform: scale(calc(1 / 0.75));
+  -webkit-transform-origin: 0% 100%;
+  -ms-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+}

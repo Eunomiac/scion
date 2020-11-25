@@ -1,7 +1,7 @@
 // #region Import Modules
 // import _, {map} from "./external/underscore/underscore-esm-min";
+import {scionSystemData, itemCategories, handlebarTemplates, signatureChars} from "./data/constants.js";
 import * as U from "./data/utils.js";
-import {scionSystemData, itemCategories, signatureChars} from "./data/constants.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
 import {ScionItem} from "./item/item.js";
@@ -35,32 +35,8 @@ Hooks.once("init", async () => {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("scion", ScionItemSheet, {makeDefault: true});
 
-    // Preload Handlebars Templates
-    // preloadHandlebarsTemplates();
-    (async () => {
-        // Define template paths to load
-        const templatePaths = [
-            // Actor Sheet Partials
-            "systems/scion/templates/actor/chargen/actor-chargen.hbs",
-            "systems/scion/templates/actor/chargen/actor-chargen-step-one.hbs",
-            "systems/scion/templates/actor/chargen/actor-chargen-step-two.hbs",
-            "systems/scion/templates/actor/chargen/actor-chargen-step-three.hbs",
-            "systems/scion/templates/actor/chargen/actor-chargen-step-four.hbs",
-            "systems/scion/templates/actor/chargen/actor-chargen-step-five.hbs",
-            "systems/scion/templates/actor/chargen/actor-chargen-step-six.hbs",
-            "systems/scion/templates/actor/chargen/actor-chargen-step-seven.hbs",
-            // Item Sheet Partials
-            "systems/scion/templates/item/path-block.hbs"
-        ];
-        /* for (const itemTypes of Object.values(itemCategories))
-            for (const itemType of itemTypes)
-                templatePaths.push(`systems/scion/templates/item/${itemType}-block.hbs`);
-
-        U.DB({templatePaths}, "templatePaths"); */
-
-        // Load the template parts
-        return loadTemplates(templatePaths);
-    })();
+    // Preload Handlebars Template Partials
+    (async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates).map((x) => (typeof x === "function" ? x() : x))))();
 
     // #region Handlebar Helpers
     Handlebars.registerHelper("display", (...args) => {
@@ -110,10 +86,15 @@ Hooks.once("ready", async () => {
 
     // If any signature characters are missing, create them
     const sigChars = new Set();
-    Object.keys(signatureChars).forEach((sigName) => sigChars.add(sigName));
-    ActorDirectory.collection.forEach((data) => { sigChars.delete(data.name) });
+    const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
+    Object.keys(signatureChars).forEach((sigName) => {
+        if (!charNames.includes(sigName))
+            sigChars.add(sigName);
+    });
+    // ActorDirectory.collection.forEach((data) => { sigChars.delete(data.name) });
     sigChars.forEach((sigName) => {
         const actorData = signatureChars[sigName];
+        U.LOG(actorData, "Sig Char Creation", "hookReady");
         Actor.create({
             name: sigName,
             type: "character",
