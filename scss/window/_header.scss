@@ -23,13 +23,12 @@
     }
     &::after {
         content: "";
+        height: 26px;
+        width: 500px;
+        left: -450px;
 
         display: block;
-        position: relative;
-        left: -560px;
-        top: -20px;
-        width: 125px;
-        height: 125px;           
+        position: relative;           
 
         cursor: move;
         pointer-events: all;

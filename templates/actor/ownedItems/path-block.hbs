@@ -1,6 +1,6 @@
 <div class="path-block">
     {{log this}}
-    <div class="heading2 clickable item-open" data-path="">{{name}}</div>
+    <div class="heading2 clickable item-open" data-pathID="{{id}}">{{name}}</div>
     <div class="flexRow path-skills">
          {{#each data.data.skills as | skill |}}
             <div>{{localize (concat "scion.skills." skill)}}</div>

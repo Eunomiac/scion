@@ -46,7 +46,7 @@ export class ScionActorSheet extends ActorSheet {
                 {
                     navSelector: ".sheet-tabs",
                     contentSelector: ".sheet-body",
-                    initial: "front"
+                    initial: "chargen"
                 },
                 {
                     navSelector: ".chargen-tabs",
@@ -102,6 +102,7 @@ export class ScionActorSheet extends ActorSheet {
         for (const [itemCategory, itemTypes] of Object.entries(itemCategories))
             data[itemCategory] = itemsArray.filter((item) => itemTypes.includes(item.type));
         // #endregion
+
         U.LOG(data, "[Sheet Context]", "getData", {style: "data", isGrouping: `[ActorSheet] ${this.actor.name}`});
         U.LOG(actorData, "[Actor.Data]", "getData", {style: "data"});
         return data;
@@ -188,11 +189,20 @@ export class ScionActorSheet extends ActorSheet {
             event.preventDefault();
             const element = event.currentTarget;
             const dataSet = element.dataset;
+            const item = this.actor.items.get(dataSet.pathid);
+            U.LOG(dataSet, "[Data Set]", "openItem", {style: "data", isGrouping: `[Open Owned Item]`, groupStyle: "info"});
+            U.LOG(this.actor.items, "[Actor.Items]", "openItem", {style: "data", isUngrouping: false});
+            U.LOG(item, "[Item]", "openItem", {style: "data", isUngrouping: false});
+            U.LOG(item.sheet.render, "[Item.Render]", "openItem", {style: "data"});
+            item.sheet.render(true, {
+                left: 100,
+                top: 100,
+                log: true
+            });
         };
         html.find(".clickable.item-open").each((i, element) => {
             element.addEventListener("click", _onOpenOwnedItem.bind(this));
         });
-
         // #endregion
 
         // > Dragula: Sort Attribute Priorities

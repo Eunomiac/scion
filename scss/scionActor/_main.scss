@@ -7,27 +7,184 @@
     background-repeat: no-repeat;
     opacity: 1;        
 
-    grid: ". nav ." 16px
+    grid: ". . ." 16px
         "header header header" 96px
         "body body body" 450px
         "footer footer footer" 96px
         / 14% 1fr 14%;
     row-gap: 5px;
 
-    .sheet-tabs { grid-area: nav; }
-    .menuRosette {                
+    .menuRosette {
+        $menuOpenSize: 200px;
+        $menuButtonCircleSize: $menuOpenSize * 1.25;
+        $menuButtonFullSize: 120px;
+        $menuButtonMargin: -20px;
+        $numButtons: 5;
+        $numButtonsMod: 5;
+        
+        $menuButtonBG: url("../images/actor-sheet/menu/StoneButtonBG.png");
+        $darkIconMain: url("../images/actor-sheet/menu/DarkIconMain.png");
+        $glowOverlayMain: url("../images/actor-sheet/menu/GlowOverlayMain.png");
+        $darkIconMain2: url("../images/actor-sheet/menu/DarkIconMain2.png");
+        $glowOverlayMain2: url("../images/actor-sheet/menu/GlowOverlayMain2.png");
+        $darkIconHeritage: url("../images/actor-sheet/menu/DarkIconHeritage.png");
+        $glowOverlayHeritage: url("../images/actor-sheet/menu/GlowOverlayHeritage.png");
+        $darkIconExperience: url("../images/actor-sheet/menu/DarkIconExperience.png");
+        $glowOverlayExperience: url("../images/actor-sheet/menu/GlowOverlayExperience.png");
+        $darkIconChargen: url("../images/actor-sheet/menu/DarkIconChargen.png");
+        $glowOverlayChargen: url("../images/actor-sheet/menu/GlowOverlayChargen.png");
+        $darkIconSettings: url("../images/actor-sheet/menu/DarkIconSettings.png");
+        $glowOverlaySettings: url("../images/actor-sheet/menu/GlowOverlaySettings.png");
+        
+        $menuButtonSize: $menuButtonFullSize + $menuButtonMargin;
+
         background-image: var(--menuRosetteImg);
-        background-size: 90%;
+        background-size: 50%;
         display: block;
-        width: 200px;
-        height: 200px;
+        width: $menuOpenSize;
+        height: $menuOpenSize;
         content: "";
         position: relative;
         background-repeat: no-repeat;
-        left: -100px;
-        top: -75px;
+        left: $menuOpenSize * (-3/8);
+        top: $menuOpenSize * (-1/4);
         border-radius: 50%;
         background-position: center;
+        pointer-events: all;
+        border: none;
+        transition: 0.5s;
+
+        & > div {
+            // pointer-events: none;
+        }
+
+        &:hover {
+            background-size: 100%;
+            transform: translate(-20px, -20px);
+    
+            div.circleMenuContainer {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+        .menuText {
+            position: relative;
+            display: block !important;
+            height: auto !important;
+            width: $menuButtonSize * 2 !important;
+            margin-left: $menuButtonSize / -2 !important;
+            margin-top: -20px;
+            font-family: Voltaire;
+            text-transform: uppercase;
+            color: #ffff00;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000,
+            1px 1px 2px #000;
+            opacity: 0;
+            letter-spacing: 10px;
+            transform: scale(2);
+            transition: 0.25s !important;
+            pointer-events: none;
+        }
+    
+        div.circleMenuContainer {
+            @include on-circle(
+                $item-count: 8,
+                $inner-circle-size: $menuOpenSize,
+                $outer-circle-size: $menuButtonCircleSize,
+                $item-size: $menuButtonSize,
+                $initial-rotation: 135
+            );
+            transform: scale(0.2) rotate(-125deg) translate(0);
+            opacity: 0;
+            transition: 0.5s;
+    
+            .menuButtonContainer {
+                @for $i from 1 through $numButtons {
+                    &:nth-child(#{$i}) > .menuButton {
+                        animation-delay: $i * 1s / $numButtons;
+                    }
+                }
+                div, a {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                    background-size: 100%;
+                    background-position: center;
+                    transition: 0.5s;
+                }
+                .menuButton {
+                    display: inline-block;
+                    position: relative;
+                    height: 100%;
+                    width: 100%;
+                    background-image: $menuButtonBG;
+                    background-size: $menuButtonSize;
+                    background-position: center;
+                    transition: 0.5s;
+        
+                    @keyframes slowBob {
+                        from { top: 0px; }
+                        to { top: 10px; }
+                    }
+                    animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
+
+                    &:hover { transform: scale(1.2); }
+        
+                    .menuIconDark {
+                        &.iconMain {
+                            background-image: $darkIconMain;
+                            .menuIconGlow { background-image: $glowOverlayMain; }
+                        }
+                        &.iconChargen {
+                            background-image: $darkIconChargen;
+                            .menuIconGlow { background-image: $glowOverlayChargen; }
+                        }
+                        &.iconSettings {
+                            background-image: $darkIconSettings;
+                            .menuIconGlow { background-image: $glowOverlaySettings; }
+                        }
+                        &.iconExperience {
+                            background-image: $darkIconExperience;
+                            .menuIconGlow { background-image: $glowOverlayExperience; }
+                        }
+                        &.iconHeritage {
+                            background-image: $darkIconHeritage;
+                            .menuIconGlow { background-image: $glowOverlayHeritage; }
+                        }
+                        &:hover + .menuText {
+                            letter-spacing: normal;
+                            transform: scale(1);
+                            opacity: 1;
+                        }
+                        .menuIconGlow {
+                            opacity: 0;
+                            vertical-align: bottom;
+                            &:hover { opacity: 1; }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
     .header {
         grid-area: header;

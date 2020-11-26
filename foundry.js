@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 /* ----------------------------------------- */
 /*  Reusable Type Definitions                */
 /* ----------------------------------------- */
@@ -794,9 +794,24 @@ Number.prototype.signedString = function() {
 Number.prototype.between = function(a, b, inclusive=true) {
   let min = Math.min(a, b);
   let max = Math.max(a, b);
-  return inclusive ? ((this >= min) && (this <= max)) : ((this > min) && (this < max));
+  return inclusive ? (this >= min) && (this <= max) : (this > min) && (this < max);
 };
 
+/**
+ * Round a number to the nearest number which is a multiple of a given interval
+ * @param {number} interval     The interval to round the number to the nearest multiple of
+ * @returns {number}            The rounded number
+ *
+ * @example
+ * let n = 17.18;
+ * n.toNearest(5); // 15
+ * n.toNearest(10); // 20
+ * n.toNearest(0.25); // 17.25
+ */
+Number.prototype.toNearest = function(interval=1) {
+  const q = 1 / interval;
+  return Math.round(this  * q) / q;
+};
 
 /**
  * A faster numeric between check which avoids type coercion to the Number object
@@ -896,6 +911,38 @@ Array.prototype.findSplice = function(find, replace) {
   }
 };
 
+/* -------------------------------------------- */
+/* Date Methods                                 */
+/* -------------------------------------------- */
+
+/**
+ * Test whether a Date instance is valid.
+ * A valid date returns a number for its timestamp, and NaN otherwise.
+ * NaN is never equal to itself.
+ * @returns {boolean}
+ */
+Date.prototype.isValid = function() {
+  return this.getTime() === this.getTime();
+}
+
+/**
+ * Return a standard YYYY-MM-DD string for the Date instance.
+ * @returns {string}    The date in YYYY-MM-DD format
+ */
+Date.prototype.toDateInputString = function() {
+  const yyyy = this.getFullYear();
+  const mm = (this.getMonth() + 1).paddedString(2);
+  const dd = this.getDate().paddedString(2);
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+/**
+ * Return a standard H:M:S.Z string for the Date instance.
+ * @returns {string}    The time in H:M:S format
+ */
+Date.prototype.toTimeInputString = function() {
+  return this.toTimeString().split(" ")[0];
+}
 
 /* -------------------------------------------- */
 /* Object Methods                               */
@@ -949,22 +996,6 @@ function getType(token) {
   }
   return tof;
 }
-
-/* -------------------------------------------- */
-
-/**
- * A temporary shim to invert an object, flipping keys and values
- * @param {Object} obj    Some object where the values are unique
- * @return {Object}       An inverted object where the values of the original object are the keys of the new object
- */
-function invertObject(obj) {
-	return Object.entries(obj).reduce((inverted, entry) => {
-		let [k, v] = entry;
-		inverted[v] = k;
-		return inverted;
-	}, {})
-}
-
 
 /* -------------------------------------------- */
 
@@ -1083,6 +1114,22 @@ function expandObject(obj, _d=0) {
 function isObjectEmpty(obj) {
   if ( getType(obj) !== "Object" ) throw new Error("The provided data is not an object!");
   return Object.keys(obj).length === 0;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Invert an object by assigning its values as keys and its keys as values.
+ * @param {object} obj    The original object to invert
+ * @returns {object}      The inverted object with keys and values swapped
+ */
+function invertObject(obj) {
+  const inverted = {};
+  for ( let [k, v] of Object.entries(obj) ) {
+    if ( v in inverted ) throw new Error("The values of the provided object must be unique in order to invert it.");
+    inverted[v] = k;
+  }
+  return inverted;
 }
 
 /* -------------------------------------------- */
@@ -1541,11 +1588,11 @@ function colorStringToHex(color) {
 /* -------------------------------------------- */
 
 /**
- * Return whether or not a version (v1) is more advanced than some other version (v0)
- * Supports numeric or string version numbers
- * @param {Number|String} v0
- * @param {Number|String} v1
- * @return {Boolean}
+ * Return whether or not a target version (v1) is more advanced than some other reference version (v0).
+ * Supports either numeric or string version comparison with version parts separated by periods.
+ * @param {number|string} v1    The target version
+ * @param {number|string} v0    The reference version
+ * @return {boolean}            Is v1 a more advanced version than v0?
  */
 function isNewerVersion(v1, v0) {
 
@@ -1614,7 +1661,29 @@ function benchmark(func, iterations) {
 
 
 /* -------------------------------------------- */
+/*  URL Routing                                 */
+/* -------------------------------------------- */
 
+/**
+ * Get the URL route for a certain path which includes a path prefix, if one is set
+ * @param {string} path       The Foundry VTT URL path
+ * @param {string|null} [prefix]   A path prefix to apply
+ * @returns {string}          The absolute URL path
+ */
+function getRoute(path, {prefix=null}={}) {
+  if ( !prefix ) {
+    try {
+      if ( ROUTE_PREFIX ) prefix = ROUTE_PREFIX;
+    } catch(err) {}
+  }
+  path = path.replace(/(^[\/]+)|([\/]+$)/g, ""); // Strip leading and trailing slashes
+  let paths = [""]
+  if ( prefix ) paths.push(prefix);
+  paths = paths.concat([path.replace(/(^\/)|(\/$)/g, "")]);
+  return paths.join("/");
+}
+
+/* -------------------------------------------- */
 
 
 try {
@@ -1627,6 +1696,7 @@ try {
     flattenObject,
     encodeURL,
     expandObject,
+    getRoute,
     invertObject,
     isObjectEmpty,
     mergeObject,
@@ -2505,7 +2575,12 @@ class ImageHelper {
     transform.translate(tx, ty);
 
     // Create and render a texture with the desired dimensions
-    const texture = PIXI.RenderTexture.create(width, height, PIXI.SCALE_MODES.LINEAR, 2);
+    const texture = PIXI.RenderTexture.create({
+      width: width,
+      height: height,
+      scaleMode: PIXI.SCALE_MODES.LINEAR,
+      resolution: 2
+    });
     canvas.app.renderer.render(object, texture, undefined, transform);
     return texture;
   }
@@ -2613,8 +2688,11 @@ class KeyboardManager {
    */
   getKey(event) {
 
-    // Spacebar gets a code because its key is misleading
+    // Space bar gets a code because its key is misleading
     if ( event.code === "Space" ) return event.code;
+
+    // Digit keys are coerced to their number
+    if ( /^Digit/.test(event.code) ) return event.code[5];
 
     // Enforce that numpad keys are differentiated from digits
     if ( (event.location === 3) && ((event.code in this.moveKeys) || (event.code in this.zoomKeys)) ) {
@@ -2989,24 +3067,23 @@ class KeyboardManager {
   _handleCanvasPan() {
 
     // Determine movement offsets
-    const directions = this._moveKeys;
     let dx = 0;
     let dy = 0;
-    if (directions.has("left")) dx -= 1;
-    if (directions.has("up")) dy -= 1;
-    if (directions.has("right")) dx += 1;
-    if (directions.has("down")) dy += 1;
+    if (this._moveKeys.has("left")) dx -= 1;
+    if (this._moveKeys.has("up")) dy -= 1;
+    if (this._moveKeys.has("right")) dx += 1;
+    if (this._moveKeys.has("down")) dy += 1;
+
+    // Clear the pending set
+    this._moveKeys.clear();
 
     // Pan by the grid size
     const s = canvas.dimensions.size;
-    canvas.animatePan({
+    return canvas.animatePan({
       x: canvas.stage.pivot.x + (dx * s),
       y: canvas.stage.pivot.y + (dy * s),
       duration: 100
     });
-
-    // Clear the pending set
-    this._moveKeys.clear();
   }
 
   /* -------------------------------------------- */
@@ -3019,8 +3096,8 @@ class KeyboardManager {
    * @private
    */
   _onDigit(event, up, modifiers) {
-    if ( modifiers.hasFocus || up ) return;
-    const num = parseInt(event.key);
+    if ( modifiers.hasFocus || up || modifiers.isCtrl || modifiers.isShift ) return;
+    const num = parseInt(modifiers.key);
     if ( modifiers.isAlt ) ui.hotbar.changePage(num);
     else {
       const slot = ui.hotbar.macros.find(m => m.key === num);
@@ -3055,7 +3132,7 @@ class KeyboardManager {
    * @private
    */
   _onKeyC(event, up, modifiers) {
-    if ( up || modifiers.hasFocus ) return;
+    if ( up || event.repeat || modifiers.hasFocus ) return;
 
     // Case 1 - attempt a copy operation on the PlaceablesLayer
     if ( modifiers.isCtrl ) {
@@ -3090,8 +3167,7 @@ class KeyboardManager {
    * @private
    */
   _onKeyV(event, up, modifiers ) {
-    if ( !game.user.isGM ) return;
-    if ( !canvas.ready || up || modifiers.hasFocus || !modifiers.isCtrl ) return;
+    if ( up || event.repeat || !game.user.isGM || !canvas.ready || modifiers.hasFocus || !modifiers.isCtrl ) return;
     let layer = canvas.activeLayer;
     if ( layer instanceof PlaceablesLayer ) {
       let pos = canvas.app.renderer.plugins.interaction.mouse.getLocalPosition(canvas.tokens);
@@ -3109,14 +3185,12 @@ class KeyboardManager {
    * @private
    */
   _onKeyZ(event, up, modifiers) {
-    if ( modifiers.hasFocus || !canvas.ready ) return;
+    if ( up || event.repeat || modifiers.hasFocus || !canvas.ready ) return;
 
-    // Ensure we are on a Placeables layer
+    // Undo history for a PlaceablesLayer
     const layer = canvas.activeLayer;
-    if ( !layer instanceof PlaceablesLayer ) return;
-
-    // Undo history for the Layer
-    if ( up && modifiers.isCtrl && layer.history.length ) {
+    if ( !(layer instanceof PlaceablesLayer) ) return;
+    if ( modifiers.isCtrl && layer.history.length ) {
       layer.undoHistory();
     }
   }
@@ -3488,7 +3562,7 @@ class SetupConfiguration {
    * @return {string}
    */
   static get setupURL() {
-    return ROUTE_PREFIX ? `/${ROUTE_PREFIX}/setup` : "/setup";
+    return getRoute("setup");
   }
 
   /* -------------------------------------------- */
@@ -3659,7 +3733,8 @@ class SetupConfiguration {
     const response = await fetch(this.setupURL, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+      redirect: "manual"
     });
     if ( response.status >= 400 ) {
       throw new Error(`The request was rejected by the server or failed.`);
@@ -4567,7 +4642,7 @@ class Application {
     }
 
     // Set the outer frame z-index
-    if ( Object.keys(ui.windows).length === 0 ) _maxZ = 100;
+    if ( Object.keys(ui.windows).length === 0 ) _maxZ = 100 - 1;
     html.css({zIndex: Math.min(++_maxZ, 9999)});
 
     // Return the outer frame
@@ -4646,7 +4721,7 @@ class Application {
       }
     ];
     for ( let cls of this.constructor._getInheritanceChain() ) {
-      Hooks.call(`get${this.constructor.name}HeaderButtons`, this, buttons);
+      Hooks.call(`get${cls.name}HeaderButtons`, this, buttons);
     }
     return buttons;
   }
@@ -4750,10 +4825,10 @@ class Application {
    * Bring the application to the top of the rendering stack
    */
   bringToTop() {
-    const app = this.element[0];
-    const z = document.defaultView.getComputedStyle(app).zIndex;
+    const element = this.element[0];
+    const z = document.defaultView.getComputedStyle(element).zIndex;
     if ( z < _maxZ ) {
-      app.style.zIndex = Math.min(++_maxZ, 99999);
+      element.style.zIndex = Math.min(++_maxZ, 99999);
     }
   }
 
@@ -4764,9 +4839,9 @@ class Application {
    * This function returns a Promise which resolves once the window closing animation concludes
    * @return {Promise<void>}    A Promise which resolves once the application is closed
    */
-  async close(options) {
+  async close(options={}) {
     const states = Application.RENDER_STATES;
-    if ( ![states.RENDERED, states.ERROR].includes(this._state) ) return;
+    if ( !options.force && ![states.RENDERED, states.ERROR].includes(this._state) ) return;
     this._state = states.CLOSING;
 
     // Get the element
@@ -4918,7 +4993,7 @@ class Application {
 
     // Update Left
     if ( (pop && !el.style.left) || Number.isFinite(left) ) {
-      const maxLeft = Math.max(window.innerWidth - el.offsetWidth, 0);
+      const maxLeft = Math.max(window.innerWidth - p.width, 0);
       if ( !Number.isFinite(left) ) left = (window.innerWidth - el.offsetWidth) / 2;
       p.left = Math.clamped(left, 0, maxLeft);
       el.style.left = p.left+"px";
@@ -4926,7 +5001,7 @@ class Application {
 
     // Update Top
     if ( (pop && !el.style.top) || Number.isFinite(top) ) {
-      const maxTop = Math.max(window.innerHeight - el.offsetHeight, 0);
+      const maxTop = Math.max(window.innerHeight - p.height, 0);
       if ( !Number.isFinite(top) ) top = (window.innerHeight - el.offsetHeight) / 2;
       p.top = Math.clamped(top, 0, maxTop);
       el.style.top = p.top+"px";
@@ -5018,8 +5093,8 @@ class FormApplication extends Application {
 
     /**
      * Keep track of any mce editors which may be active as part of this form
-     * The values of this Array are inner-objects with references to the MCE editor and other metadata
-     * @type {Object}
+     * The values of this object are inner-objects with references to the MCE editor and other metadata
+     * @type {Object<string, object>}
      */
     this.editors = {};
   }
@@ -5162,14 +5237,17 @@ class FormApplication extends Application {
    */
   async _onSubmit(event, {updateData=null, preventClose=false, preventRender=false}={}) {
     event.preventDefault();
+
+    // Prevent double submission
     const states = this.constructor.RENDER_STATES;
     if ( (this._state === states.NONE) || !this.options.editable || this._submitting ) return false;
     this._submitting = true;
 
-    // Flag if the application is staged to close to prevent callback renders
+    // Handle the form state prior to submission
+    let closeForm = this.options.closeOnSubmit && !preventClose;
     const priorState = this._state;
-    if ( this.options.closeOnSubmit ) this._state = states.CLOSING;
-    if ( preventRender && (this._state !== states.CLOSING )) this._state = states.RENDERING;
+    if ( preventRender ) this._state = states.RENDERING;
+    if ( closeForm ) this._state = states.CLOSING;
 
     // Trigger the object update
     const formData = this._getSubmitData(updateData);
@@ -5177,13 +5255,13 @@ class FormApplication extends Application {
       await this._updateObject(event, formData);
     } catch(err) {
       console.error(err);
-      preventClose = true;
+      closeForm = false;
     }
 
-    // Restore flags and (optionally) close
+    // Restore flags and optionally close the form
     this._submitting = false;
-    this._state = priorState;
-    if ( this.options.closeOnSubmit && !preventClose ) this.close({submit: false});
+    if ( preventRender ) this._state = priorState;
+    if ( closeForm ) await this.close({submit: false, force: true});
     return formData;
   }
 
@@ -5410,12 +5488,11 @@ class FormApplication extends Application {
   /** @override */
   async close(options={}) {
     const states = Application.RENDER_STATES;
-    if ( ![states.RENDERED, states.ERROR].includes(this._state) ) return;
-    this._state = states.CLOSING;
+    if ( !options.force && ![states.RENDERED, states.ERROR].includes(this._state) ) return;
 
-    // Optionally trigger a save
-    const submit = options.hasOwnProperty("submit") ? options.submit : this.options.submitOnClose;
-    if ( submit ) this.submit({preventClose: true});
+    // Trigger saving of the form
+    const submit = options.submit ?? this.options.submitOnClose;
+    if ( submit ) await this.submit({preventClose: true, preventRender: true});
 
     // Close any open FilePicker instances
     for ( let fp of this.filepickers ) {
@@ -5430,7 +5507,6 @@ class FormApplication extends Application {
     this.editors = {};
 
     // Close the application itself
-    this._state = states.RENDERED;
     return super.close(options);
   }
 
@@ -5874,14 +5950,14 @@ _templateCache = {};
 
 /**
  * Get a template from the server by fetch request and caching the retrieved result
- * @param {string} path         The web-accessible HTML template URL
- * @returns {Promise<string>}	  A Promise which resolves to the compiled template or null
+ * @param {string} path           The web-accessible HTML template URL
+ * @returns {Promise<Function>}	  A Promise which resolves to the compiled Handlebars template
  */
 async function getTemplate(path) {
 	if ( !_templateCache.hasOwnProperty(path) ) {
-    await new Promise(resolve => {
+    await new Promise((resolve, reject) => {
     	game.socket.emit('template', path, resp => {
-    	  if ( resp.error ) return console.error(resp.error);
+    	  if ( resp.error ) return reject(new Error(resp.error));
 	      const compiled = Handlebars.compile(resp.html);
 	      Handlebars.registerPartial(path, compiled);
 	      _templateCache[path] = compiled;
@@ -6281,7 +6357,7 @@ class Game {
       socket = await this.connect(sessionId);
     } else if ( view !== "join" ) {
       console.error(`No client session ID available, redirecting to login`);
-      window.location.href = ROUTE_PREFIX ? `/${ROUTE_PREFIX}/join` : "/join";
+      window.location.href = getRoute("join");
     }
 
     // Obtain necessary world data
@@ -6303,10 +6379,9 @@ class Game {
    * @return {Promise<object>}  A promise which resolves to the connected socket, if successful
    */
   static async connect(sessionId) {
-    const socketPath = ROUTE_PREFIX ? `/${ROUTE_PREFIX}/socket.io` : "/socket.io";
     return new Promise((resolve, reject) => {
       const socket = io.connect({
-        path: socketPath,
+        path: getRoute("socket.io"),
         transports: ["websocket"],    // Require websocket transport instead of XHR polling
         upgrade: false,               // Prevent "upgrading" to websocket since it is enforced
         reconnection: true,           // Automatically reconnect
@@ -6422,23 +6497,27 @@ class Game {
     // Validate required resolution
     const MIN_WIDTH = 1024;
     const MIN_HEIGHT = 700;
-    if ( ui.notifications && (window.innerHeight < MIN_HEIGHT || window.innerWidth < MIN_WIDTH) ) {
-      ui.notifications.error(game.i18n.format("ERROR.LowResolution", {
-        width: window.innerWidth,
-        reqWidth: MIN_WIDTH,
-        height: window.innerHeight,
-        reqHeight: MIN_HEIGHT
-      }), {permanent: true});
+    if ( window.innerHeight < MIN_HEIGHT || window.innerWidth < MIN_WIDTH ) {
+      if ( ui.notifications && !game.data.options.debug ) {
+        ui.notifications.error(game.i18n.format("ERROR.LowResolution", {
+          width: window.innerWidth,
+          reqWidth: MIN_WIDTH,
+          height: window.innerHeight,
+          reqHeight: MIN_HEIGHT
+        }), {permanent: true});
+      }
     }
 
     // Unsupported Chromium version
     const MIN_CHROMIUM_VERSION = 80;
     const chromium = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
     if ( chromium && (parseInt(chromium[2]) < MIN_CHROMIUM_VERSION) ) {
-      ui.notifications.error(game.i18n.format("ERROR.ChromiumVersion", {
-        version: chromium[2],
-        minimum: MIN_CHROMIUM_VERSION
-      }), {permanent: true});
+      if ( ui.notifications ) {
+        ui.notifications.error(game.i18n.format("ERROR.ChromiumVersion", {
+          version: chromium[2],
+          minimum: MIN_CHROMIUM_VERSION
+        }), {permanent: true});
+      }
     }
   }
 
@@ -6450,7 +6529,7 @@ class Game {
    */
   async shutDown() {
     const resp = await SetupConfiguration.post({shutdown: true});
-    if ( resp.status === 200  && resp.redirected ) window.location.href = resp.url;
+    if ( resp.status < 400 ) setTimeout(() => window.location.href = getRoute("setup"), 1000);
   }
 
   /* -------------------------------------------- */
@@ -6977,7 +7056,7 @@ class Game {
    */
   logOut() {
     if ( this.socket ) this.socket.disconnect();
-    window.location.href = ROUTE_PREFIX ? `/${ROUTE_PREFIX}/join` : "/join";
+    window.location.href = getRoute("join");
   }
 
   /* -------------------------------------------- */
@@ -7017,7 +7096,7 @@ class Game {
     // Reconnect failed
     socket.on('reconnect_failed', () => {
       ui.notifications.error("Server connection lost.");
-      window.location.href = ROUTE_PREFIX+"/no";
+      window.location.href = getRoute("no");
     });
 
     // Reconnect succeeded
@@ -7035,7 +7114,7 @@ class Game {
       ui.notifications.info("The game world is shutting down and you will be returned to the server homepage.", {
         permanent: true
       });
-      setTimeout(() => window.location.href = ROUTE_PREFIX+"/", 2000);
+      setTimeout(() => getRoute("/"), 1000);
     });
   }
 
@@ -7217,7 +7296,7 @@ class Game {
   async _initializeGameView() {
 
     // Require a valid user cookie and EULA acceptance
-    if ( !SIGNED_EULA ) window.location.href = ROUTE_PREFIX+"/license";
+    if ( !SIGNED_EULA ) window.location.href = getRoute("license");
     if (!this.userId) {
       console.error("Invalid user session provided - returning to login screen.");
       this.logOut();
@@ -7256,7 +7335,7 @@ class Game {
    * @private
    */
   async _initializeSetupView() {
-    if ( !SIGNED_EULA ) window.location.href = ROUTE_PREFIX+"/license";
+    if ( !SIGNED_EULA ) window.location.href = getRoute("license");
     ui.notifications = new Notifications().render(true);
     if ( document.body.classList.contains("auth") ) return;
     ui.setup = new SetupConfigurationForm(game.data).render(true);
@@ -7270,7 +7349,7 @@ class Game {
    */
   async _initializeStreamView() {
     canvas = {ready: false};
-    if ( !SIGNED_EULA ) window.location.href = ROUTE_PREFIX+"/license";
+    if ( !SIGNED_EULA ) window.location.href = getRoute("license");
     this.initializeEntities();
     ui.chat = new ChatLog({stream: true}).render(true);
     Entity.activateSocketListeners(this.socket);
@@ -7283,7 +7362,7 @@ class Game {
    * @private
    */
   async _initializePlayersView() {
-    if ( !SIGNED_EULA ) window.location.href = ROUTE_PREFIX+"/license";
+    if ( !SIGNED_EULA ) window.location.href = getRoute("license");
     this.users = new Users(this.data.users);
     this.players = new UserManagement(this.users);
     this.players.render(true);
@@ -7299,18 +7378,17 @@ class Game {
    * @private
    */
   async _initializeJoinView() {
-    if ( !SIGNED_EULA ) window.location.href = ROUTE_PREFIX+"/license";
+    if ( !SIGNED_EULA ) window.location.href = getRoute("license");
     ui.notifications = new Notifications().render(true);
 
     // Populate the next session time
-    const nextTime = document.getElementById("nextDatetime").value;
-    if ( nextTime ) {
-      const date = new Date(nextTime);
-      document.getElementById("next-date").value = date.toISOString().slice(0, 10);
-      document.getElementById("next-time").value = date.toTimeString().split(" ")[0];
+    const nextDate = new Date(document.getElementById("nextDatetime")?.value);
+    if ( nextDate.isValid() && document.getElementById("next-date") ) {
+      document.getElementById("next-date").value = nextDate.toDateInputString();
+      document.getElementById("next-time").value = nextDate.toTimeInputString();
       const fmt = new Intl.DateTimeFormat(undefined, {timeZoneName: "short"});
       const tz = fmt.formatToParts().find(p => p.type === "timeZoneName");
-      if ( tz ) document.getElementById("next-tz").innerText = ` (${tz.value})`;
+      if (tz) document.getElementById("next-tz").innerText = ` (${tz.value})`;
     }
 
     // Handle the join form submission
@@ -7347,7 +7425,6 @@ class Game {
     }
   }
 }
-
 
 /* -------------------------------------------- */
 
@@ -7462,7 +7539,7 @@ class Roll {
     let dataRgx = new RegExp(/@([a-z.0-9_\-]+)/gi);
     return formula.replace(dataRgx, (match, term) => {
       let value = getProperty(data, term);
-      if ( value !== undefined ) return String(value).trim();
+      if ( (value ?? null) !== null ) return String(value).trim();
       if ( warn ) ui.notifications.warn(game.i18n.format("DICE.WarnMissingData", {match}));
       if ( missing !== undefined ) return String(missing);
       else return match;
@@ -7760,11 +7837,7 @@ class Roll {
     terms = this._splitPooledTerms(terms);
 
     // Step 4 - expand remaining arithmetic terms
-    terms = terms.reduce((terms, term, i, array) => {
-      if ( typeof term !== "string" ) return terms.concat([term]);
-      if ( array[i-1] instanceof Roll || array[i+1] instanceof Roll ) return terms.concat([term]);
-      return terms.concat(this._splitDiceTerms(term));
-    }, []);
+    terms = this._splitDiceTerms(terms);
 
     // Step 5 - clean and de-dupe terms
     terms = this.constructor.cleanTerms(terms);
@@ -7789,21 +7862,55 @@ class Roll {
    * Identify and split a formula into separate terms by arithmetic terms
    * @private
    */
-  _splitDiceTerms(formula) {
+  _splitDiceTerms(terms) {
+
+    // Split on arithmetic terms and operators
     const operators = this.constructor.ARITHMETIC.concat(["(", ")"]);
     const arith = new RegExp(operators.map(o => "\\"+o).join("|"), "g");
-    const split = formula.replace(arith, ";$&;");
-    const terms = split.split(";").reduce((arr, term) => {
-      term = term.trim();
-      if ( term === "" ) return arr;
-      if ( this.constructor.ARITHMETIC.includes(term) ) arr.push(term);
-      else if ( Number.isNumeric(term) ) arr.push(Number(term));
-      else {
-        const die = DiceTerm.fromExpression(term);
-        arr.push(die || term);
+
+    // Expand remaining string terms by splitting on arithmetic operators
+    terms = terms.reduce((arr, term) => {
+      if ( typeof term === "string" ) {
+        const split = term.replace(arith, ";$&;").split(";");
+        for ( let s of split ) {
+          s = s.trim();
+          if ( s !== "" ) arr.push(s);
+        }
       }
+      else arr.push(term);
       return arr;
     }, []);
+
+    // Iterate over all terms, identifying numeric and dice terms
+    terms = terms.reduce((arr, term, i, terms) => {
+
+      // Preserve existing object types
+      if ( getType(term) === "Object" ) {
+        arr.push(term);
+        return arr;
+      }
+
+      // Handle arithmetic terms
+      if ( this.constructor.ARITHMETIC.includes(term) ) {
+        if ( !arr.length && (term !== "-") ) return arr; // Ignore leading arithmetic except negatives
+        else if ( i === (terms.length - 1) ) return arr; // Ignore trailing arithmetic
+        arr.push(term);
+        return arr;
+      }
+
+      // Handle numeric terms
+      if ( Number.isNumeric(term) ) {
+        arr.push(Number(term));
+        return arr;
+      }
+
+      // Identify Dice terms
+      const die = DiceTerm.fromExpression(term);
+      arr.push(die || term);
+      return arr;
+    }, []);
+
+    // Return the set of final terms
     return terms;
   }
 
@@ -8014,10 +8121,11 @@ class Roll {
    * Transform a Roll instance into a ChatMessage, displaying the roll result.
    * This function can either create the ChatMessage directly, or return the data object that will be used to create.
    *
-   * @param {Object} messageData          The data object to use when creating the message
-   * @param {string|null} [rollMode=null] The template roll mode to use for the message from CONFIG.Dice.rollModes
-   * @param {boolean} [create=true]       Whether to automatically create the chat message, or only return the prepared
-   *                                      chatData object.
+   * @param {object} messageData          The data object to use when creating the message
+   * @param {options} [options]           Additional options which modify the created message.
+   * @param {string|null} [options.rollMode]  The template roll mode to use for the message from CONFIG.Dice.rollModes
+   * @param {boolean} [options.create=true]   Whether to automatically create the chat message, or only return the
+   *                                          prepared chatData object.
    * @return {Promise|Object}             A promise which resolves to the created ChatMessage entity, if create is true
    *                                      or the Object of prepared chatData otherwise.
    */
@@ -8035,11 +8143,11 @@ class Roll {
     }, messageData);
     messageData.roll = this;
 
-    // Prepare message options
-    const messageOptions = {rollMode};
+    // Apply message options
+    if ( rollMode ) ChatMessage.applyRollMode(messageData, rollMode);
 
     // Either create the message or just return the chat data
-    return create ? CONFIG.ChatMessage.entityClass.create(messageData, messageOptions) : messageData;
+    return create ? CONFIG.ChatMessage.entityClass.create(messageData) : messageData;
   }
 
   /* -------------------------------------------- */
@@ -8392,7 +8500,7 @@ class DiceTerm {
   roll({minimize=false, maximize=false}={}) {
     const rand = CONFIG.Dice.randomUniform();
     let result = Math.ceil(rand * this.faces);
-    if ( minimize ) result = 1;
+    if ( minimize ) result = Math.min(1, this.faces);
     if ( maximize ) result = this.faces;
     const roll = {result, active: true};
     this.results.push(roll);
@@ -8407,7 +8515,7 @@ class DiceTerm {
    * @return {string}           The result label
    */
   static getResultLabel(result) {
-    return result;
+    return String(result);
   }
 
   /* -------------------------------------------- */
@@ -8484,6 +8592,7 @@ class DiceTerm {
 
     // First mark results on the wrong side of the cut as discarded
     results.forEach(r => {
+      if ( !r.active ) return;  // Skip results which have already been discarded
       let discard = this.compareResult(r.result, comp, cut);
       if ( discard ) {
         r.discarded = true;
@@ -9887,24 +9996,15 @@ class Canvas {
   /* -------------------------------------------- */
 
   /**
-   * Create the layers of the game Canvas
+   * Create the layers of the game Canvas.
    * @param {PIXI.Container} stage    The primary canvas stage
    * @private
    */
   _createLayers(stage) {
-    this.background = stage.addChild(new BackgroundLayer());
-    this.tiles = stage.addChild(new TilesLayer());
-    this.drawings = stage.addChild(new DrawingsLayer());
-    this.grid = stage.addChild(new GridLayer());
-    this.templates = stage.addChild(new TemplateLayer());
-    this.walls = stage.addChild(new WallsLayer());
-    this.notes = stage.addChild(new NotesLayer());
-    this.tokens = stage.addChild(new TokenLayer());
-    this.lighting = stage.addChild(new LightingLayer());
-    this.sight = stage.addChild(new SightLayer());
-    this.sounds = stage.addChild(new SoundsLayer());
-    this.effects = stage.addChild(new EffectsLayer());
-    this.controls = stage.addChild(new ControlsLayer());
+    for ( let [k, v] of Object.entries(this.constructor.layers) ) {
+      const layer = new v();
+      this[k] = this.stage.addChild(layer);
+    }
   }
 
   /* -------------------------------------------- */
@@ -9912,11 +10012,36 @@ class Canvas {
   /* -------------------------------------------- */
 
   /**
+   * A mapping of named CanvasLayers.
+   * This mapping is defined in the order that layers must be drawn.
+   * @type {Object<string, CanvasLayer>}
+   */
+  static get layers() {
+    return {
+      background: BackgroundLayer,  // 0
+      tiles: TilesLayer,            // 10
+      drawings: DrawingsLayer,      // 20
+      grid: GridLayer,              // 30
+      walls: WallsLayer,            // 40
+      templates: TemplateLayer,     // 50
+      notes: NotesLayer,            // 60
+      tokens: TokenLayer,           // 100
+      lighting: LightingLayer,      // 200
+      sounds: SoundsLayer,          // 200
+      sight: SightLayer,            // 210
+      effects: EffectsLayer,        // 300
+      controls: ControlsLayer       // 400
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * An Array of all CanvasLayer instances which are active on the Canvas board
    * @type {CanvasLayer[]}
    */
   get layers() {
-    return this.stage.children.filter(l => l instanceof CanvasLayer);
+    return Object.keys(this.constructor.layers).map(k => this[k]);
   }
 
   /* -------------------------------------------- */
@@ -9926,7 +10051,10 @@ class Canvas {
    * @type {CanvasLayer}
    */
   get activeLayer() {
-    return this.layers.find(l => l._active);
+    for ( let k of Object.keys(this.constructor.layers) ) {
+      if ( this[k]._active ) return this[k];
+    }
+    return null;
   }
 
   /* -------------------------------------------- */
@@ -9940,7 +10068,6 @@ class Canvas {
   async tearDown() {
     this.stage.visible = false;
     const layer = this.activeLayer;
-    const layers = this.layers;
 
     // Track current data which should be restored on draw
     this._reload = {
@@ -9951,7 +10078,7 @@ class Canvas {
     };
 
     // Perform layer-specific tear-down actions
-    for ( let l of layers.reverse() ) {
+    for ( let l of this.layers.reverse() ) {
       await l.tearDown();
     }
   }
@@ -9971,18 +10098,19 @@ class Canvas {
     if ( wasReady ) await this.tearDown();
 
     // Confirm there is an active scene
-    if ( scene === null ) {
-      canvas.app.view.style.display = "none";
+    this.scene = scene;
+    this.id = scene?.id || null;
+    if ( this.scene === null ) {
       console.log(`${vtt} | Skipping game canvas - no active scene.`);
-      return;
+      canvas.app.view.style.display = "none";
+      ui.controls.render()
+      return this;
     }
     else if ( !(scene instanceof Scene) ) {
       throw new Error("You must provide a Scene entity to draw the VTT canvas.")
     }
 
     // Configure Scene to draw
-    this.id = scene._id;
-    this.scene = scene;
     this.dimensions = this.constructor.getDimensions(scene.data);
     canvas.app.view.style.display = "block";
     document.documentElement.style.setProperty("--gridSize", this.dimensions.size+"px");
@@ -10003,6 +10131,7 @@ class Canvas {
     this.stage.position.set(window.innerWidth/2, window.innerHeight/2);
     this.stage.hitArea = new PIXI.Rectangle(0, 0, this.dimensions.width, this.dimensions.height);
     this.stage.interactive = true;
+    this.stage.sortableChildren = true;
 
     // Scene background color
     this.backgroundColor = scene.data.backgroundColor ? colorStringToHex(scene.data.backgroundColor) : 0x666666;
@@ -10108,18 +10237,22 @@ class Canvas {
     // Clear sources
     this.lighting.sources.clear();
     this.sight.sources.clear();
-    // this.sounds.sources.clear(); // TODO
 
-    // Assign variables
-    this.lighting.globalLight = this.scene.data.globalLight;
+    // Initialize data
+    this.lighting.darknessLevel = this.scene.data.darkness;
 
     // Update sources
     this.tokens.placeables.forEach(token => token.updateSource({defer: true}));
     this.lighting.placeables.forEach(light => light.updateSource({defer: true}));
-    // this.sounds.placeables.forEach(sound => sound.updateSource()); // TODO
 
     // Refresh layer displays
-    this.lighting.refresh(this.scene.data.darkness);
+    this.refreshPerceptionLayers();
+  }
+
+  /* -------------------------------------------- */
+
+  refreshPerceptionLayers() {
+    this.lighting.refresh();
     this.sight.refresh();
     // this.sounds.refresh(); // TODO
   }
@@ -10837,8 +10970,35 @@ class CanvasLayer extends PIXI.Container {
   /* -------------------------------------------- */
 
   /**
+   * Customize behaviors of this CanvasLayer by modifying some behaviors at a class level.
+   * @static
+   * @type {Object}
+   * @property {number} zIndex            The zIndex sorting of this layer relative to other layers
+   * @property {boolean} sortActiveTop    Should this layer be sorted to the top when it is active?
+   */
+  static get layerOptions() {
+    return {
+      zIndex: 0,
+      sortActiveTop: false
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return a reference to the active instance of this canvas layer
+   * @static
+   * @type {CanvasLayer}
+   */
+  static get instance() {
+    return canvas.stage.children.find(l => l.constructor.name === this.name);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The canonical name of the CanvasLayer
-   * @return {string}
+   * @type {string}
    */
   get name() {
     return this.constructor.name;
@@ -10870,7 +11030,8 @@ class CanvasLayer extends PIXI.Container {
     const d = canvas.dimensions;
     this.width = d.width;
     this.height = d.height;
-    this.hitArea = new PIXI.Rectangle(0, 0, d.width, d.height);
+    this.hitArea = d.rect;
+    this.zIndex = this.constructor.layerOptions.zIndex;
     return this;
   }
 
@@ -10879,28 +11040,44 @@ class CanvasLayer extends PIXI.Container {
   /* -------------------------------------------- */
 
   /**
-   * Activate the CanvasLayer, deactivating other layers and marking this layer's children as interactive
+   * Activate the CanvasLayer, deactivating other layers and marking this layer's children as interactive.
+   * @return {CanvasLayer}    The layer instance, now activated
    */
   activate() {
     if ( this._active ) return;
+    const options = this.constructor.layerOptions;
     this._active = true;
+
+    // Deactivate other layers
+    let maxZ = 0;
     for ( let l of canvas.layers ) {
-      if ( (l !== this) && l._active ) l.deactivate();
+      if ( l === this ) continue;
+      if ( l._active ) l.deactivate();
+      if ( l.zIndex > maxZ ) maxZ = l.zIndex;
     }
+
+    // Set interactivity for the active layer
+    this.zIndex = options.sortActiveTop ? maxZ + 1 : options.zIndex;
     this.interactive = false;
     this.interactiveChildren = true;
+
+    // Activate the control palette for the layer
     if ( ui.controls ) ui.controls.initialize({layer: this.constructor.name});
+    return this;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Deactivate the CanvasLayer, removing interactivity from its children
+   * Deactivate the CanvasLayer, removing interactivity from its children.
+   * @return {CanvasLayer}    The layer instance, now inactive
    */
   deactivate() {
+    const options = this.constructor.layerOptions;
     this._active = false;
     this.interactive = false;
     this.interactiveChildren = false;
+    this.zIndex = options.zIndex;
   }
 }
 /**
@@ -11365,7 +11542,7 @@ class PlaceableObject extends PIXI.Container {
    * @private
    */
   _onDelete() {
-    this.release();
+    this.release({trigger: false});
     const layer = this.layer;
     if ( layer._hover === this ) layer._hover = null;
     if ( layer.quadtree ) layer.quadtree.remove(this);
@@ -11437,7 +11614,7 @@ class PlaceableObject extends PIXI.Container {
 
     // Fire an on-release Hook
     Hooks.callAll("control"+this.constructor.name, this, this._controlled);
-    canvas.triggerPendingOperations();
+    if ( options.trigger !== false ) canvas.triggerPendingOperations();
     return true;
   }
 
@@ -11841,18 +12018,19 @@ class PlaceablesLayer extends CanvasLayer {
   /* -------------------------------------------- */
 
   /**
-   * Customize behaviors of this PlaceablesLayer by modifying some behaviors at a class level
-   * @static
-   * @type {Object}
-   *
+   * @inheritDoc
    * @property {boolean} canDragCreate        Does this layer support a mouse-drag workflow to create new objects?
+   * @property {boolean} canDelete            Can objects be deleted from this layer?
    * @property {boolean} controllableObjects  Can placeable objects in this layer be controlled?
    * @property {boolean} rotatableObjects     Can placeable objects in this layer be rotated?
    * @property {boolean} snapToGrid           Do objects in this layer snap to the grid
    * @property {number} gridPrecision         At what numeric grid precision do objects snap?
+   * @property {PlaceableObject} objectClass  The class used to represent an object on this layer.
+   * @property {boolean} quadtree             Does this layer use a quadtree to track object positions?
+   * @property {FormApplication} sheetClass   The FormApplication class used to configure objects on this layer.
    */
   static get layerOptions() {
-    return {
+    return mergeObject(super.layerOptions, {
       canDragCreate: game.user.isGM,
       canDelete: game.user.isGM,
       controllableObjects: false,
@@ -11862,18 +12040,7 @@ class PlaceablesLayer extends CanvasLayer {
       objectClass: null,
       quadtree: false,
       sheetClass: null
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return a reference to the active instance of this canvas layer
-   * @static
-   * @type {PlaceablesLayer}
-   */
-  static get instance() {
-    return canvas.stage.children.find(l => l.constructor.name === this.name);
+    });
   }
 
   /* -------------------------------------------- */
@@ -12015,6 +12182,7 @@ class PlaceablesLayer extends CanvasLayer {
     super.activate();
     this.objects.visible = true;
     this.placeables.forEach(l => l.refresh());
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -12026,6 +12194,7 @@ class PlaceablesLayer extends CanvasLayer {
     this.releaseAll();
     this.placeables.forEach(l => l.refresh());
     if ( this.preview ) this.preview.removeChildren();
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -12251,6 +12420,33 @@ class PlaceablesLayer extends CanvasLayer {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Update all objects in this layer with a provided transformation.
+   * Conditionally filter to only apply to objects which match a certain condition.
+   * @param {Function|object} transformation    An object of data or function to apply to all matched objects
+   * @param {Function|null}  condition          A function which tests whether to target each object
+   * @param {object} [options]                  Additional options passed to Entity.update
+   * @return {Promise<Data[]>}                  An array of updated data once the operation is complete
+   */
+  async updateAll(transformation, condition=null, options={}) {
+    const hasTransformer = transformation instanceof Function;
+    if ( !hasTransformer && (getType(transformation) !== "Object") ) {
+      throw new Error("You must provide a data object or transformation function");
+    }
+    const hasCondition = condition instanceof Function;
+    const updates = this.placeables.reduce((arr, obj) => {
+      if ( hasCondition && !condition(obj) ) return arr;
+      const update = hasTransformer ? transformation(obj) : duplicate(transformation);
+      update._id = obj.id;
+      arr.push(update);
+      return arr;
+    },[]);
+    return this.updateMany(updates, options);
+  }
+
+  /* -------------------------------------------- */
+
 
   /**
    * A helper method to prompt for deletion of all PlaceableObject instances within the Scene
@@ -12915,10 +13111,10 @@ class Dialog extends Application {
   /* -------------------------------------------- */
 
   /** @override */
-  close() {
+  async close(options) {
     if ( this.data.close ) this.data.close(this.options.jQuery ? this.element : this.element[0]);
-    super.close();
     $(document).off('keydown.chooseDefault');
+    return super.close(options);
   }
 
   /* -------------------------------------------- */
@@ -13068,7 +13264,7 @@ class Draggable {
   activateListeners() {
 
     // Float to top
-    this.handlers["click"] = ["mousedown", this._onClickFloatTop.bind(this), {capture: true, passive: true}];
+    this.handlers["click"] = ["mousedown", ev => this.app.bringToTop(), {capture: true, passive: true}];
     this.element.addEventListener(...this.handlers.click);
 
     // Drag handlers
@@ -13091,20 +13287,6 @@ class Draggable {
     // Attach the click handler and CSS class
     handle.addEventListener(...this.handlers.resizeDown);
     this.handle.classList.add("resizable");
-  }
-
-  /* ----------------------------------------- */
-
-  /**
-   * Handle left-mouse down events to float the window to the top of the rendering stack
-   * @param {MouseEvent} event      The mousedown event on the application element
-   * @private
-   */
-  _onClickFloatTop(event) {
-    let z = Number(window.document.defaultView.getComputedStyle(this.element).zIndex);
-    if ( z <= _maxZ ) {
-      this.element.style.zIndex = Math.min(++_maxZ, 9999);
-    }
   }
 
   /* ----------------------------------------- */
@@ -13142,7 +13324,9 @@ class Draggable {
     // Update application position
     this.app.setPosition({
       left: this.position.left + (event.clientX - this._initial.x),
-      top: this.position.top + (event.clientY - this._initial.y)
+      top: this.position.top + (event.clientY - this._initial.y),
+      width: this.app._minimized ? this.element.offsetWidth : this.position.width,
+      height: this.app._minimized ? this.element.offsetHeight : this.position.height
     });
   }
 
@@ -13382,52 +13566,20 @@ class TextEditor {
    * @param {string} content          Initial HTML or text content to populate the editor with
    * @return {tinyMCE.Editor}         The editor instance.
    */
-  static async create(options, content) {
-    let defaultOptions = {
-      branding: false,
-      menubar: false,
-      statusbar: false,
-      plugins: CONFIG.TinyMCE.plugins,
-      toolbar: CONFIG.TinyMCE.toolbar,
-      content_css: CONFIG.TinyMCE.css.map(c => ROUTE_PREFIX ? `/${ROUTE_PREFIX}${c}` : c).join(","),
-      save_enablewhendirty: true,
-      table_default_styles: {},
-
-      // Style Dropdown Formats
-      style_formats: [
-        {
-          title: "Custom",
-          items: [
-            {
-              title: "Secret",
-              block: 'section',
-              classes: 'secret',
-              wrapper: true
-            }
-          ]
-        }
-      ],
-      style_formats_merge: true,
-
-      // Bind callback events
-      init_instance_callback: editor => {
-        const window = editor.getWin();
-
-        // Set initial content
-        if ( content ) editor.setContent(content);
-
-        // Prevent window zooming
-        window.addEventListener("wheel", event => {
-          if ( event.ctrlKey ) event.preventDefault();
-        }, {passive: false});
-
-        // Handle dropped Entity data
-        window.addEventListener("drop", ev => this._onDropEditorData(ev, editor))
-      }
-    };
-
-    const mceConfig = mergeObject(defaultOptions, options);
+  static async create(options={}, content="") {
+    const mceConfig = mergeObject(CONFIG.TinyMCE, options, {inplace: false});
     mceConfig.target = options.target;
+    if ( mceConfig.content_css instanceof Array ) {
+      mceConfig.content_css = mceConfig.content_css.map(c => getRoute(c)).join(",");
+    }
+    mceConfig.init_instance_callback = editor => {
+      const window = editor.getWin();
+      if ( content ) editor.setContent(content);
+      window.addEventListener("wheel", event => {
+        if ( event.ctrlKey ) event.preventDefault();
+      }, {passive: false});
+      window.addEventListener("drop", ev => this._onDropEditorData(ev, editor))
+    };
     const editors = await tinyMCE.init(mceConfig);
     return editors[0];
   }
@@ -13513,6 +13665,7 @@ class TextEditor {
     const div = document.createElement("div");
     div.innerHTML = content;
     div.innerText = this.truncateText(div.innerText, {maxLength: length});
+    return div.innerHTML;
   }
 
   /* -------------------------------------------- */
@@ -13525,7 +13678,7 @@ class TextEditor {
    * @param {string|null} [suffix]  A suffix string to append to denote that the text was truncated.
    * @return {*}
    */
-  static truncateText(text, {maxLength=50, splitWords=true, suffix="&mldr;"}={}) {
+  static truncateText(text, {maxLength=50, splitWords=true, suffix="…"}={}) {
     if ( text.length <= maxLength ) return text;
 
     // Split the string (on words if desired)
@@ -14044,13 +14197,13 @@ class FilePicker extends Application {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-	    template: "templates/apps/filepicker.html",
-      classes: ["filepicker"],
-      width: 520,
-      tabs: [{navSelector: ".tabs"}],
-      dragDrop: [{dragSelector: ".file", dropSelector: ".filepicker-body"}],
-      tileSize: false,
-      filters: [{inputSelector: 'input[name="filter"]', contentSelector: ".filepicker-body"}]
+        template: "templates/apps/filepicker.html",
+        classes: ["filepicker"],
+        width: 520,
+        tabs: [{navSelector: ".tabs"}],
+        dragDrop: [{dragSelector: ".file", dropSelector: ".filepicker-body"}],
+        tileSize: false,
+        filters: [{inputSelector: 'input[name="filter"]', contentSelector: ".filepicker-body"}]
     });
   }
 
@@ -14210,7 +14363,7 @@ class FilePicker extends Application {
    * @return {string}
    */
   static get uploadURL() {
-    return ROUTE_PREFIX ? `/${ROUTE_PREFIX}/upload` : '/upload';
+    return getRoute("upload");
   }
 
   /* -------------------------------------------- */
@@ -15011,11 +15164,10 @@ class FormDataExtended extends FormData {
 
     // Process editable HTML fields
     const editableFields = form.querySelectorAll('[data-edit]');
-    const path = [window.location.origin, ROUTE_PREFIX].filterJoin("/") + "/";
     for ( let el of editableFields ) {
       const name = el.dataset.edit;
       if ( this.has(name) || el.getAttribute("disabled") || (name in this.editors) ) continue;
-      if (el.tagName === "IMG") this.set(name, el.src.replace(path, ""));
+      if (el.tagName === "IMG") this.set(name, el.getAttribute("src"));
       else this.set(name, el.innerHTML.trim());
       this.dtypes[name] = el.dataset.dtype ?? "String";
     }
@@ -15036,7 +15188,13 @@ class FormDataExtended extends FormData {
       else if ( (dtype === "String") && !v ) v = "";
       else {
         if ( v === "" ) v = null;
-        if ( (v !== null) && ( window[dtype] instanceof Function ) ) v = window[dtype](v);
+        if ( (v !== null) && ( window[dtype] instanceof Function ) ) {
+          try {
+            v = window[dtype](v);
+          } catch(err) {
+            console.warn(`The form field ${k} was not able to be cast to the requested data type ${dtype}`);
+          }
+        }
       }
       data[k] = v;
     }
@@ -15647,11 +15805,11 @@ class SidebarTab extends Application {
 	/* -------------------------------------------- */
 
   /** @override */
-	async close() {
+	async close(options) {
 	  if ( this.popOut ) {
 	    const base = this._original;
 	    base._popout = null;
-	    return super.close();
+	    return super.close(options);
     }
     return false;
   }
@@ -16694,21 +16852,28 @@ class ActorSheet extends BaseEntitySheet {
 
   /** @override */
   _onDragStart(event) {
-
-    // Skip entity links, since they should be handled differently
+    const li = event.currentTarget;
     if ( event.target.classList.contains("entity-link") ) return;
 
-    // Create drag data for an owned item
-    const li = event.currentTarget;
-    const item = this.actor.getOwnedItem(li.dataset.itemId);
+    // Create drag data
     const dragData = {
-      type: "Item",
       actorId: this.actor.id,
-      data: item.data
+      sceneId: this.actor.isToken ? canvas.scene?.id : null,
+      tokenId: this.actor.isToken ? this.actor.token.id : null
     };
-    if (this.actor.isToken) {
-      dragData.sceneId = canvas.scene.id;
-      dragData.tokenId = this.actor.token.id;
+
+    // Owned Items
+    if ( li.dataset.itemId ) {
+      const item = this.actor.items.get(li.dataset.itemId);
+      dragData.type = "Item";
+      dragData.data = item.data;
+    }
+
+    // Active Effect
+    if ( li.dataset.effectId ) {
+      const effect = this.actor.effects.get(li.dataset.effectId);
+      dragData.type = "ActiveEffect";
+      dragData.data = effect.data;
     }
 
     // Set data transfer
@@ -16735,11 +16900,47 @@ class ActorSheet extends BaseEntitySheet {
 
     // Handle different data types
     switch ( data.type ) {
-      case "Item":
-        return this._onDropItem(event, data);
+      case "ActiveEffect":
+        return this._onDropActiveEffect(event, data);
       case "Actor":
         return this._onDropActor(event, data);
+      case "Item":
+        return this._onDropItem(event, data);
+      case "Folder":
+        return this._onDropFolder(event, data);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle the dropping of ActiveEffect data onto an Actor Sheet
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
+   * @return {Promise<Object>}    A data object which describes the result of the drop
+   * @private
+   */
+  async _onDropActiveEffect(event, data) {
+    const actor = this.actor;
+    if ( !actor.owner ) return;
+    let sameActor = (data.actorId === actor._id) || (actor.isToken && (data.tokenId === actor.token.id));
+    if ( sameActor ) return;
+    const effect = await ActiveEffect.fromDropData(data);
+    if ( !effect ) return;
+    return this.actor.createEmbeddedEntity("ActiveEffect", effect.data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping of an Actor data onto another Actor sheet
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
+   * @return {Promise<Object>}    A data object which describes the result of the drop
+   * @private
+   */
+  async _onDropActor(event, data) {
+    if ( !this.actor.owner ) return false;
   }
 
   /* -------------------------------------------- */
@@ -16748,7 +16949,7 @@ class ActorSheet extends BaseEntitySheet {
    * Handle dropping of an item reference or item data onto an Actor Sheet
    * @param {DragEvent} event     The concluding DragEvent which contains drop data
    * @param {Object} data         The data transfer extracted from the event
-   * @return {Object}             A data object which describes the result of the drop
+   * @return {Promise<Object>}    A data object which describes the result of the drop
    * @private
    */
   async _onDropItem(event, data) {
@@ -16763,6 +16964,24 @@ class ActorSheet extends BaseEntitySheet {
 
     // Create the owned item
     return this._onDropItemCreate(itemData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping of a Folder on an Actor Sheet.
+   * Currently supports dropping a Folder of Items to create all items as owned items.
+   * @param {DragEvent} event     The concluding DragEvent which contains drop data
+   * @param {Object} data         The data transfer extracted from the event
+   * @return {Promise<Object>}    A data object which describes the result of the drop
+   * @private
+   */
+  async _onDropFolder(event, data) {
+    if ( !this.actor.owner ) return false;
+    if ( data.entity !== "Item" ) return;
+    const folder = game.folders.get(data.id);
+    if ( !folder ) return;
+    return this._onDropItemCreate(folder.entities.map(e => e.data));
   }
 
   /* -------------------------------------------- */
@@ -16815,19 +17034,6 @@ class ActorSheet extends BaseEntitySheet {
 
     // Perform the update
     return this.actor.updateEmbeddedEntity("OwnedItem", updateData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle dropping of an Actor data onto another Actor sheet
-   * @param {DragEvent} event     The concluding DragEvent which contains drop data
-   * @param {Object} data         The data transfer extracted from the event
-   * @return {Object}             A data object which describes the result of the drop
-   * @private
-   */
-  async _onDropActor(event, data) {
-    if ( !this.actor.owner ) return false;
   }
 }
 /**
@@ -17001,7 +17207,7 @@ class ActiveEffectConfig extends FormApplication {
     const last = changes.lastElementChild;
     const idx = last ? last.dataset.index+1 : 0;
     const change = $(`
-    <li class="effect-change" data-index="${idx}">
+    <li class="effect-change flexrow" data-index="${idx}">
         <input type="text" name="changes.${idx}.key" value=""/>
         <input type="number" name="changes.${idx}.mode" value="2"/>
         <input type="text" name="changes.${idx}.value" value=""/>
@@ -17031,11 +17237,17 @@ class FolderConfig extends FormApplication {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      id: "folder-edit",
-      classes: ["sheet"],
+      classes: ["sheet", "folder-edit"],
       template: "templates/sidebar/folder-edit.html",
       width: 360
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get id() {
+    return this.object.id ? `folder-edit-${this.object.id}` : "folder-create";
   }
 
   /* -------------------------------------------- */
@@ -17392,10 +17604,7 @@ class ImagePopout extends FormApplication {
 
   /** @override */
   get title() {
-    if ( this._related && this._related["hasPerm"] ) {
-      return this._related.hasPerm(game.user, "LIMITED") ? super.title : "";
-    }
-    return super.title;
+    return this.isTitleVisible() ? super.title : "";
   }
 
   /* -------------------------------------------- */
@@ -17404,8 +17613,22 @@ class ImagePopout extends FormApplication {
   async getData(options) {
     const data = super.getData();
     await this.getRelatedObject();
+    data.showTitle = this.isTitleVisible();
     data.image = this.object;
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether the title of the image popout should be visible to the user
+   * @returns {boolean}
+   */
+  isTitleVisible() {
+    if ( this._related && this._related["hasPerm"] ) {
+      return this._related.hasPerm(game.user, "LIMITED");
+    }
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -20089,7 +20312,7 @@ class Hotbar extends Application {
       id: "hotbar",
       template: "templates/hud/hotbar.html",
       popOut: false,
-      dragDrop: [{ dragSelector: ".macro", dropSelector: "#macro-list" }]
+      dragDrop: [{ dragSelector: ".macro-icon", dropSelector: "#macro-list" }]
     });
   }
 
@@ -22059,6 +22282,12 @@ class DrawingConfig extends FormApplication {
 
     // Configure the default Drawing settings
     if ( this.options.configureDefault ) {
+      await Drawing.create(mergeObject(formData, {
+        type: DRAWING_TYPES.RECTANGLE,
+        author: game.user._id,
+        x: 1000,
+        y: 1000
+      }), {temporary: true}); // This is to ensure the default data is valid
       return game.settings.set("core", DrawingsLayer.DEFAULT_CONFIG_SETTING, formData);
     }
 
@@ -22073,8 +22302,8 @@ class DrawingConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-  close() {
-    super.close();
+  async close(options) {
+    await super.close(options);
     if ( this.preview ) {
       this.preview.removeChildren();
       this.preview = null;
@@ -22192,7 +22421,8 @@ class LightConfig extends FormApplication {
       options: this.options,
       submitText: game.i18n.localize(this.options.preview ? "LIGHT.Create" : "LIGHT.Update"),
       lightTypes: lightTypes,
-      lightAnimations: animationTypes
+      lightAnimations: animationTypes,
+      colorIntensity: Math.sqrt(this.object.data.tintAlpha).toNearest(0.05)
     }
   }
 
@@ -22207,7 +22437,7 @@ class LightConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-  close(options) {
+  async close(options) {
     this._resetObject(true);
     return super.close(options);
   }
@@ -22220,12 +22450,20 @@ class LightConfig extends FormApplication {
    */
   _onPreviewChange(event) {
     const input = event.currentTarget;
-    const fd = new FormDataExtended(this.form);
     if ( !this._originalData ) this._originalData = duplicate(this.object.data);
-    this.object.data = mergeObject(this.object.data, fd.toObject(), {inplace: false});
+    this.object.data = mergeObject(this.object.data, this._getSubmitData(), {inplace: false});
     if ( input.dataset.edit ) this.object.data[input.dataset.edit] = input.value;
     this.object.updateSource();
     this.object.refresh();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getSubmitData(updateData) {
+    const data = super._getSubmitData(updateData);
+    data.tintAlpha = Math.pow(data.tintAlpha, 2).toNearest(0.01);
+    return data;
   }
 
   /* -------------------------------------------- */
@@ -22276,7 +22514,7 @@ class NoteConfig extends FormApplication {
   getData(options) {
     const entry = game.journal.get(this.object.data.entryId) || {};
     return {
-      entryIcons: CONFIG.JournalEntry.noteIcons,
+      entryIcons: invertObject(CONFIG.JournalEntry.noteIcons),
       entryId: entry._id,
       entryName: entry.name,
       entries: game.journal.entities,
@@ -22287,7 +22525,7 @@ class NoteConfig extends FormApplication {
       object: duplicate(this.object.data),
       options: this.options,
       textAnchors: Object.entries(CONST.TEXT_ANCHOR_POINTS).reduce((obj, e) => {
-        obj[e[1]] = e[0].titleCase();
+        obj[e[1]] = game.i18n.localize(`JOURNAL.Anchor${e[0].titleCase()}`);
         return obj;
       }, {})
     }
@@ -22362,8 +22600,8 @@ class AmbientSoundConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-  close() {
-    super.close();
+  async close(options) {
+    await super.close(options);
     if ( this.preview ) {
       this.preview.removeChildren();
       this.preview = null;
@@ -22577,6 +22815,7 @@ class TokenConfig extends FormApplication {
         obj[e[0]] = game.i18n.localize(e[1].label);
         return obj;
       }, {"": game.i18n.localize("None")}),
+      lightAlpha: Math.sqrt(this.object.data.lightAlpha).toNearest(0.05),
       isGM: game.user.isGM
     };
   }
@@ -22668,11 +22907,20 @@ class TokenConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-	activateListeners(html) {
-	  super.activateListeners(html);
+  activateListeners(html) {
+    super.activateListeners(html);
     html.find(".bar-attribute").change(this._onBarChange.bind(this));
     html.find(".alternate-images").change(ev => ev.target.form.img.value = ev.target.value);
     html.find('button.assign-token').click(this._onAssignToken.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getSubmitData(updateData = {}) {
+    const data = super._getSubmitData(updateData);
+    data.lightAlpha = Math.pow(data.lightAlpha, 2).toNearest(0.01);
+    return data;
   }
 
   /* -------------------------------------------- */
@@ -22769,6 +23017,15 @@ class TokenConfig extends FormApplication {
  * @type {BasePlaceableHUD}
  */
 class TokenHUD extends BasePlaceableHUD {
+
+  /**
+   * Track whether the status effects control palette is currently expanded or hidden
+   * @type {boolean}
+   * @private
+   */
+  _statusEffects = false;
+
+  /* -------------------------------------------- */
 
   /** @override */
   static get defaultOptions() {
@@ -22891,13 +23148,16 @@ class TokenHUD extends BasePlaceableHUD {
   activateListeners(html) {
     super.activateListeners(html);
 
+    // Set the initial state of effect selection
+    this._toggleStatusEffects(this._statusEffects);
+
     // Attribute Bars
     html.find(".attribute input").click(this._onAttributeClick).change(this._onAttributeUpdate.bind(this));
 
     // Token Control Icons
     html.find(".config").click(this._onTokenConfig.bind(this));
     html.find(".combat").click(this._onToggleCombat.bind(this));
-    html.find(".effects > img").click(this._onTokenEffects.bind(this));
+    html.find(".effects > img").click(this._onClickStatusEffects.bind(this));
     html.find(".target").click(this._onToggleTarget.bind(this));
 
     // Status Effects Controls
@@ -22977,16 +23237,27 @@ class TokenHUD extends BasePlaceableHUD {
   /* -------------------------------------------- */
 
   /**
-   * Assign Token status effects
+   * Handle left-click events to toggle the displayed state of the status effect selection palette
+   * @param {MouseEvent }event
    * @private
    */
-  _onTokenEffects(event) {
+  _onClickStatusEffects(event) {
     event.preventDefault();
-    this._statusEffects = !this._statusEffects;
-    let btn = $(event.currentTarget.parentElement);
-    let fx = btn.find(".status-effects");
-    btn.toggleClass("active");
-    fx.toggleClass("active");
+    this._toggleStatusEffects(!this._statusEffects);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Assign css selectors for the active state of the status effects selection palette
+   * @private
+   */
+  _toggleStatusEffects(active) {
+    this._statusEffects = active;
+    const button = this.element.find(".control-icon.effects")[0];
+    button.classList.toggle("active", active);
+    const palette = button.querySelector(".status-effects");
+    palette.classList.toggle("active", active);
   }
 
   /* -------------------------------------------- */
@@ -23135,7 +23406,7 @@ class EULA extends Application {
    * @return {string}
    */
   get licenseURL() {
-    return ROUTE_PREFIX ? `/${ROUTE_PREFIX}/license` : "/license";
+    return getRoute("license");
   }
 
   /* -------------------------------------------- */
@@ -23392,7 +23663,7 @@ class InstallPackage extends Application {
 
     // Install from manifest field
     if (button.dataset.action === "install-url") {
-      manifest = button.form.manifestURL.value;
+      manifest = button.form.manifestURL.value.trim();
     }
 
     // Install from package listing
@@ -24249,7 +24520,7 @@ class UserManagement extends FormApplication {
       ui.notifications.error(err);
     }).then(() => {
       ui.notifications.info(game.i18n.localize("USERS.UpdateSuccess"));
-      return setTimeout(() => window.location.href = "../game", 1000);
+      return setTimeout(() => window.location.href = getRoute("game"), 1000);
     })
   }
 
@@ -24379,18 +24650,17 @@ class WorldConfig extends FormApplication {
   getData(options) {
     const ac = PACKAGE_AVAILABILITY_CODES;
     const systems = game.data.systems.filter(s => {
-      if ( this.object.data && ( this.object.data.system === s ) ) return true;
+      if ( this.object.data && ( this.object.data.system === s.id ) ) return true;
       return ![ac.REQUIRES_DEPENDENCY, ac.REQUIRES_CORE].includes( s.data.availability );
     });
-    const next = this.object?.data?.nextSession;
-    const date = new Date(next);
+    const nextDate = new Date(this.object?.data?.nextSession);
     return {
       world: this.object,
       systems: systems,
       isCreate: this.options.create,
       submitText: this.options.create ? "Create World" : "Update World",
-      nextDate: next ? date.toISOString().slice(0, 10) : "",
-      nextTime: next ? date.toTimeString().split(" ")[0] : ""
+      nextDate: nextDate.isValid() ? nextDate.toDateInputString() : "",
+      nextTime: nextDate.isValid() ? nextDate.toTimeInputString() : ""
     };
   }
 
@@ -24705,12 +24975,11 @@ class InvitationLinks extends Application {
 }
 
 /**
- * The Module Management Application
- *
+ * The Module Management Application.
  * This application provides a view of which modules are available to be used and allows for configuration of the
  * set of modules which are active within the World.
  *
- * @extends {FormApplication}
+ * @implements {FormApplication}
  */
 class ModuleManagement extends FormApplication {
   constructor(...args) {
@@ -24778,7 +25047,7 @@ class ModuleManagement extends FormApplication {
       mod.unavailable = m.unavailable;
       mod.dependencies = mod.dependencies ? mod.dependencies.map(d => d.name) : null;
       return arr.concat([mod]);
-    }, []);
+    }, []).sort((a, b) => a.title.localeCompare(b.title));
 
     // Filters
     const filters = ["all", "active", "inactive"].map(f => {
@@ -25023,9 +25292,9 @@ class PermissionConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @override */
-  _onSubmit(event) {
+  async _onSubmit(event, options) {
     event.target.querySelectorAll("input[disabled]").forEach(i => i.disabled = false);
-    super._onSubmit(event);
+    return super._onSubmit(event, options);
   }
 
   /* -------------------------------------------- */
@@ -25099,7 +25368,7 @@ class ActorDirectory extends SidebarDirectory {
     let actor = null;
     if ( li.dataset.entityId ) {
       actor = game.actors.get(li.dataset.entityId);
-      if ( !actor?.owner ) return false;
+      if ( !actor || !actor.visible ) return false;
     }
 
     // Parent directory drag start handling
@@ -26051,6 +26320,14 @@ class CombatTracker extends SidebarTab {
     const turns = [];
     for ( let [i, t] of combat.turns.entries() ) {
       if ( !t.visible ) continue;
+
+      // Thumbnail image for video tokens
+      if ( VideoHelper.hasVideoExtension(t.img) ) {
+        if ( t.thumb ) t.img = t.thumb;
+        else t.img = t.thumb = await game.video.createThumbnail(t.img, {width: 100, height: 100});
+      }
+
+      // Copy the turn data
       const c = duplicate(t);
       if ( !hasDecimals && !Number.isInteger(c.initiative) ) hasDecimals = true;
 
@@ -26171,12 +26448,11 @@ class CombatTracker extends SidebarTab {
    */
   async _onCombatCycle(event) {
     event.preventDefault();
-    let btn = event.currentTarget,
-        combatId = btn.getAttribute("data-combat-id");
-    if ( !combatId ) return;
-    const combat = game.combats.get(combatId);
+    const btn = event.currentTarget;
+    const combat = game.combats.get(btn.dataset.combatId);
+    if ( !combat ) return;
     await combat.activate();
-    this.initialize(combat);
+    this.initialize({combat});
   }
 
   /* -------------------------------------------- */
@@ -27448,7 +27724,7 @@ class Settings extends SidebarTab {
         }).render(true);
         break;
       case "wiki":
-        new FrameViewer("https://foundry-vtt-community.github.io/", {
+        new FrameViewer("https://foundryvtt.wiki/", {
           title: "Foundry VTT Community Wiki"
         }).render(true);
         break;
@@ -27496,7 +27772,7 @@ class FrameViewer extends Application {
 	/* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  async getData(options) {
     return {
       src: this.url
     };
@@ -27505,9 +27781,9 @@ class FrameViewer extends Application {
   /* -------------------------------------------- */
 
   /** @override */
-  close() {
+  async close(options) {
     this.element.find("#docs").remove();
-    super.close();
+    return super.close(options);
   }
 }
 
@@ -27736,6 +28012,32 @@ class EntityCollection extends Collection {
     data.permissions = {[game.user._id]: ENTITY_PERMISSIONS.OWNER};
     return data;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update all objects in this EntityCollection with a provided transformation.
+   * Conditionally filter to only apply to Entities which match a certain condition.
+   * @param {Function|object} transformation    An object of data or function to apply to all matched objects
+   * @param {Function|null}  condition          A function which tests whether to target each object
+   * @param {object} [options]                  Additional options passed to Entity.update
+   * @return {Promise<Data[]>}                  An array of updated data once the operation is complete
+   */
+  async updateAll(transformation, condition=null, options={}) {
+    const hasTransformer = transformation instanceof Function;
+    if ( !hasTransformer && (getType(transformation) !== "Object") ) {
+      throw new Error("You must provide a data object or transformation function");
+    }
+    const hasCondition = condition instanceof Function;
+    const updates = this.reduce((arr, obj) => {
+      if ( hasCondition && !condition(obj) ) return arr;
+      const update = hasTransformer ? transformation(obj) : duplicate(transformation);
+      update._id = obj.id;
+      arr.push(update);
+      return arr;
+    },[]);
+    return this.object.update(updates, options);
+  }
 }
 
 /**
@@ -27893,8 +28195,8 @@ class Compendium extends Application {
   /* -------------------------------------------- */
 
   /** @override */
-  async close() {
-    await super.close();
+  async close(options) {
+    await super.close(options);
     let li = $(`.compendium-pack[data-pack="${this.collection}"]`);
     li.attr("data-open", "0");
     li.find("i.folder").removeClass("fa-folder-open").addClass("fa-folder");
@@ -28581,7 +28883,7 @@ class Entity {
     try {
       this.prepareData();
     } catch(err) {
-      console.error(`Failed to initialize data for ${this.constructor.name} ${this.id}:`);
+      err.message = `Failed to initialize data for ${this.constructor.name} ${this.id} (${this.name}): ${err.message}}`;
       console.error(err);
     }
   }
@@ -28889,6 +29191,19 @@ class Entity {
 	/* -------------------------------------------- */
 	/*  Permission Controls                         */
 	/* -------------------------------------------- */
+
+  /**
+   * Return an array of User entities who have a certain permission level or greater to the Entity.
+   * @param {string|number} permission    The permission level or level name to test
+   * @param {boolean} exact               Tests for an exact permission level match, by default this method tests for
+   *                                      an equal or greater permission level
+   * @returns {User[]}                    An array of User entities who match the permission level
+   */
+  getUsers(permission, exact=false) {
+    return game.users.filter(u => this.hasPerm(u, permission, exact));
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Test whether a provided User a specific permission level (or greater) over the Entity instance
@@ -30047,7 +30362,7 @@ class Entity {
 
     // Collect data
     const types = game.system.entityTypes[this.entity];
-    const folders = game.folders.filter(f => f.data.type === this.entity);
+    const folders = game.folders.filter(f => (f.data.type === this.entity) && f.displayed);
     const label = game.i18n.localize(this.config.label);
     const title = game.i18n.format("ENTITY.Create", {entity: label});
 
@@ -30336,16 +30651,22 @@ class Actor extends Entity {
     for ( let i of items ) {
       let item = null;
 
-      // Update existing items
-      if ( prior && prior.has(i._id ) ) {
-        item = prior.get(i._id);
-        item.data = i;
-        item.prepareData();
+      // Prepare item data
+      try {
+        if (prior && prior.has(i._id)) {
+          item = prior.get(i._id);
+          item.data = i;
+          item.prepareData();
+        }
+        else item = Item.createOwned(i, this);
+        c.set(i._id, item);
       }
 
-      // Construct new items
-      else item = Item.createOwned(i, this);
-      c.set(i._id, item);
+      // Handle preparation failures gracefully
+      catch(err) {
+        err.message = `Owned Item preparation failed for ${item.id} (${item.name}) in Actor ${this.id} (${this.name})`;
+        console.error(err);
+      }
     }
     return c;
   }
@@ -30363,13 +30684,22 @@ class Actor extends Entity {
     const c = new Collection();
     for ( let e of effects ) {
       let effect = null;
-      if ( prior && prior.has(e._id) ) {
-        effect = prior.get(e._id);
-        effect.data = e;
-        effect.prepareData();
+
+      // Prepare effect data
+      try {
+        if (prior && prior.has(e._id)) {
+          effect = prior.get(e._id);
+          effect.data = e;
+          effect.prepareData();
+        } else effect = ActiveEffect.create(e, this);
+        c.set(e._id, effect);
       }
-      else effect = ActiveEffect.create(e, this);
-      c.set(e._id, effect);
+
+      // Handle preparation failures gracefully
+      catch (err) {
+        err.message = `Active Effect preparation failed for ${effect.id} in Actor ${this.id} (${this.name})`;
+        console.error(err);
+      }
     }
     return c;
   }
@@ -30534,6 +30864,54 @@ class Actor extends Entity {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Roll initiative for all Combatants in the currently active Combat encounter which are associated with this Actor.
+   * If viewing a full Actor entity, all Tokens which map to that actor will be targeted for initiative rolls.
+   * If viewing a synthetic Token actor, only that particular Token will be targeted for an initiative roll.
+   *
+   * @param {object} options                Configuration for how initiative for this Actor is rolled.
+   * @param {boolean} [options.createCombatants]      Create new Combatant entries for Tokens associated with this actor.
+   * @param {boolean} [options.rerollInitiative]      Re-roll the initiative for this Actor if it has already been rolled.
+   * @param {object} [options.initiativeOptions]      Additional options passed to the Combat#rollInitiative method.
+   * @return {Promise<Combat|null>}         A promise which resolves to the Combat entity once rolls are complete.
+   */
+  async rollInitiative({createCombatants=false, rerollInitiative=false, initiativeOptions={}}={}) {
+
+    // Obtain (or create) a combat encounter
+    let combat = game.combat;
+    if ( !combat ) {
+      if ( game.user.isGM && canvas.scene ) {
+        combat = await game.combats.object.create({scene: canvas.scene._id, active: true});
+      }
+      else {
+        ui.notifications.warn(game.i18n.localize("COMBAT.NoneActive"));
+        return null;
+      }
+    }
+
+    // Create new combatants
+    if ( createCombatants ) {
+      const tokens = this.isToken ? [this.token] : this.getActiveTokens();
+      const createData = tokens.reduce((arr, t) => {
+        if ( t.inCombat ) return arr;
+        arr.push({tokenId: t.id, hidden: t.data.hidden});
+        return arr;
+      }, []);
+      await combat.createEmbeddedEntity("Combatant", createData);
+    }
+
+    // Iterate over combatants to roll for
+    const combatantIds = combat.combatants.reduce((arr, c) => {
+      if ( (c.actor.id !== this.id) || (this.isToken && (c.tokenId !== this.token.id)) ) return arr;
+      if ( c.initiative && !rerollInitiative ) return arr;
+      arr.push(c._id);
+      return arr;
+    }, []);
+    return combatantIds.length ? combat.rollInitiative(combatantIds, initiativeOptions) : combat;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Listeners and Handlers
   /* -------------------------------------------- */
 
@@ -30603,7 +30981,7 @@ class Actor extends Entity {
   /** @override */
   async createEmbeddedEntity(embeddedName, data, options={}) {
     const created = await super.createEmbeddedEntity(embeddedName, data, options);
-    if ( embeddedName === "OwnedItem" ) await this._createItemActiveEffects(created, options);
+    if ( created && (embeddedName === "OwnedItem") ) await this._createItemActiveEffects(created, options);
     return created;
   }
 
@@ -30626,10 +31004,13 @@ class Actor extends Entity {
       if ( !item.effects?.length ) continue;
       for ( let e of item.effects ) {
         if ( !e.transfer ) continue;
-        e = mergeObject(e, {
-          origin: `Actor.${this.id}.OwnedItem.${item._id}`,
-          "duration.startTime": game.time.worldTime
-        }, {inplace: false});
+        e = duplicate(e);
+        e.origin = `Actor.${this.id}.OwnedItem.${item._id}`;
+        e.duration.startTime = game.time.worldTime;
+        if ( game.combat ) {
+          e.duration.startRound = game.combat.round;
+          e.duration.startTurn = game.combat.turn;
+        }
         transferred.push(e);
       }
     }
@@ -30704,7 +31085,7 @@ class Actor extends Entity {
       this.getActiveTokens().forEach(t => {
         t.drawEffects();
         if ( t.inCombat ) ui.combat.render();
-        if ( t.hasActiveHUD ) canvas.tokens.hud.refreshStatusIcons();
+        if ( t.hasActiveHUD ) canvas.tokens.hud.render();
       });
     }
   }
@@ -30802,9 +31183,10 @@ class Actor extends Entity {
 class ActorTokenHelpers {
 
   /** @override */
-  async update(data, options = {}) {
+  async update(data, options={}) {
     const token = this.token;
-    const changed = diffObject(this.data, expandObject(data));
+    data = expandObject(data);
+    const changed = ( options.diff !== false ) ? diffObject(this.data, data) : data;
     if ( isObjectEmpty(changed ) ) return this;
     return token.update({actorData: changed}, options);
   }
@@ -30970,7 +31352,7 @@ class Combat extends Entity {
      * @type {{round: number|null, turn: number|null, tokenId: string|null}}
      * @private
      */
-    this.current = {
+    this.current = this.current || {
       round: null,
       turn: null,
       tokenId: null
@@ -30981,7 +31363,7 @@ class Combat extends Entity {
      * @type {{round: number|null, turn: number|null, tokenId: string|null}}
      * @private
      */
-    this.previous = {
+    this.previous = this.previous || {
       round: null,
       turn: null,
       tokenId: null
@@ -31036,8 +31418,14 @@ class Combat extends Entity {
     const scene = game.scenes.get(this.data.scene);
     const players = game.users.players;
     const settings = game.settings.get("core", Combat.CONFIG_SETTING);
+
+    // Determine the turn order and the current turn
     const turns = combatants.map(c => this._prepareCombatant(c, scene, players, settings)).sort(this._sortCombatants);
     this.data.turn = Math.clamped(this.data.turn, 0, turns.length-1);
+
+	  // Update state tracking
+    let c = turns[this.data.turn];
+    this.current = {round: this.data.round, turn: this.data.turn, tokenId: c ? c.tokenId : null};
     return this.turns = turns;
   }
 
@@ -31062,9 +31450,6 @@ class Combat extends Entity {
 
     // Combatant thumbnail image
     c.img = c.img ?? c.token?.img ?? c.actor?.img ?? CONST.DEFAULT_TOKEN;
-    if ( VideoHelper.hasVideoExtension(c.img) ) {
-      game.video.createThumbnail(c.img, {width: 100, height: 100}).then(thumb => c.img = thumb);
-    }
 
     // Set state information
     c.initiative = Number.isNumeric(c.initiative) ? Number(c.initiative) : null;
@@ -31207,10 +31592,10 @@ class Combat extends Entity {
     if ( skip ) {
       for ( let [i, t] of this.turns.entries() ) {
         if ( i <= turn ) continue;
-        if ( !t.defeated ) {
-          next = i;
-          break;
-        }
+        if ( t.defeated ) continue;
+        if ( t.actor?.effects.find(e => e.getFlag("core", "statusId") === CONFIG.Combat.defeatedStatusId ) ) continue;
+        next = i;
+        break;
       }
     }
     else next = turn + 1;
@@ -31249,7 +31634,10 @@ class Combat extends Entity {
   async nextRound() {
     let turn = 0;
     if ( this.settings.skipDefeated ) {
-      turn = this.turns.findIndex(t => !t.defeated);
+      turn = this.turns.findIndex(t => {
+        return !(t.defeated ||
+        t.actor?.effects.find(e => e.getFlag("core", "statusId") === CONFIG.Combat.defeatedStatusId ));
+      });
       if (turn === -1) {
         ui.notifications.warn(game.i18n.localize("COMBAT.NoneRemaining"));
         turn = 0;
@@ -31381,8 +31769,10 @@ class Combat extends Entity {
         flavor: `${c.token.name} rolls for Initiative!`,
         flags: {"core.initiativeRoll": true}
       }, messageOptions);
-      const chatData = roll.toMessage(messageData, {rollMode, create:false});
-      if ( i > 0 ) chatData.sound = null;   // Only play 1 sound for the whole set
+      const chatData = roll.toMessage(messageData, {create:false, rollMode});
+
+      // Play 1 sound for the whole rolled set
+      if ( i > 0 ) chatData.sound = null;
       messages.push(chatData);
 
       // Return the Roll and the chat data
@@ -31501,11 +31891,7 @@ class Combat extends Entity {
   /** @override */
 	_onUpdate(data, ...args) {
 	  super._onUpdate(data, ...args);
-
-	  // Update state tracking
     this.previous = this.current;
-    let c = this.combatant;
-    this.current = {round: this.data.round, turn: this.data.turn, tokenId: c ? c.tokenId : null};
 
 	  // If the Combat was set as active, initialize the sidebar
     if ( (data.active === true) && ( this.data.scene === game.scenes.viewed._id ) ) {
@@ -31704,8 +32090,7 @@ class Folder extends Entity {
     const entities = this.entities;
     ui.notifications.info(`Exporting ${entities.length} ${this.type} entities to Compendium ${pack.collection}.`);
     for ( let e of this.entities ) {
-      const data = duplicate(e.data);
-      delete data._id;
+      const data = await e.toCompendium();
       let existing = updateByName ? index.find(i => i.name === e.name) : index.find(i => i._id === e.id);
       if ( existing ) data._id = existing._id;
       if ( data._id ) await pack.updateEntity(data);
@@ -31729,7 +32114,7 @@ class Folder extends Entity {
     // Get eligible pack destinations
     const packs = game.packs.filter(p => (p.entity === this.type) && !p.locked);
     if ( !packs.length ) {
-      return ui.notifications.warning(game.i18n.format("FOLDER.ExportWarningNone", {type: this.type}));
+      return ui.notifications.warn(game.i18n.format("FOLDER.ExportWarningNone", {type: this.type}));
     }
 
     // Render the HTML form
@@ -31861,7 +32246,7 @@ class Items extends EntityCollection {
 /**
  * The Item entity.
  * This base Item refers primarily to items which are not currently owned.
- * @type {Entity}
+ * @implements {Entity}
  */
 class Item extends Entity {
 
@@ -32436,8 +32821,7 @@ class Messages extends EntityCollection {
 
 /**
  * The Chat Message class is a type of :class:`Entity` which represents individual messages in the chat log.
- *
- * @type {Entity}
+ * @extends {Entity}
  */
 class ChatMessage extends Entity {
   constructor(...args) {
@@ -32643,8 +33027,11 @@ class ChatMessage extends Entity {
   /*  Socket Listeners and Handlers
   /* -------------------------------------------- */
 
-  /** @override */
-  static async create(data, options) {
+  /**
+   * @inheritdoc
+   * @see {@link Entity.create}
+   */
+  static async create(data, options={}) {
     data = data instanceof Array ? data : [data];
     data = data.map(d => this._preprocessCreateData(d, options));
     return super.create(data, options);
@@ -32679,9 +33066,7 @@ class ChatMessage extends Entity {
     if ( data.roll ) {
       data.roll =  (data.roll instanceof Roll) ? JSON.stringify(data.roll) : data.roll;
       rollMode = rollMode || data.rollMode || game.settings.get("core", "rollMode");
-      if ( ["gmroll", "blindroll"].includes(rollMode) ) data.whisper = ChatMessage.getWhisperRecipients("GM");
-      if ( rollMode === "blindroll" ) data.blind = true;
-      if ( rollMode === "selfroll" ) data.whisper = [game.user.id];
+      if ( rollMode ) ChatMessage.applyRollMode(data, rollMode);
     }
 
     // Enrich message content
@@ -32695,18 +33080,10 @@ class ChatMessage extends Entity {
 
   /* -------------------------------------------- */
 
-  /**
-   * Specific actions that should occur be when the ChatMessage is first created
-   * @private
-   */
+  /** @override */
 	_onCreate(data, options, userId) {
 	  super._onCreate(data, options, userId);
-
-	  // Chat log notification
-	  let notify = this.data.user._id !== game.user._id;
-	  ui.chat.postOne(this, notify);
-
-	  // Speech bubbles
+	  ui.chat.postOne(this, true);
     if ( options.chatBubble && canvas.ready ) {
       this.collection.sayBubble(this);
     }
@@ -32768,6 +33145,21 @@ class ChatMessage extends Entity {
 
     // Format logged result
     return `[${time}] ${this.alias}\n${content.filterJoin("\n")}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Transform a provided object of ChatMessage data by applying a certain rollMode to the data object.
+   * @param {object} chatData     The object of ChatMessage data prior to applying a rollMode preference
+   * @param {string} rollMode     The rollMode preference to apply to this message data
+   * @returns {object}            The modified ChatMessage data with rollMode preferences applied
+   */
+  static applyRollMode(chatData, rollMode) {
+    if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData.whisper = ChatMessage.getWhisperRecipients("GM");
+    else if ( rollMode === "selfroll" ) chatData.whisper = [game.user.id];
+    if ( rollMode === "blindroll" ) chatData.blind = true;
+    return chatData;
   }
 
   /* -------------------------------------------- */
@@ -33504,6 +33896,17 @@ class Scene extends Entity {
 	/* -------------------------------------------- */
 
   /** @override */
+  prepareData() {
+    super.prepareData();
+    this.data.shiftX = Math.round(this.data.shiftX);
+    this.data.shiftY = Math.round(this.data.shiftY);
+    this.data.size = Math.round(this.data.size);
+    return this.data;
+  }
+
+	/* -------------------------------------------- */
+
+  /** @override */
 	prepareEmbeddedEntities() {}
 
 	/* -------------------------------------------- */
@@ -33607,6 +34010,16 @@ class Scene extends Entity {
     createData["active"] = false;
     createData["navigation"] = false;
     return super.clone(createData, options);
+  }
+
+	/* -------------------------------------------- */
+
+  /** @override */
+  static async create(data, options={}) {
+    if ( (getType(data) === "Object") && !canvas.scene && (data.active ?? true)) {
+      data.active = true; // Automatically set the first Scene as active
+    }
+    return super.create(data, options);
   }
 
 	/* -------------------------------------------- */
@@ -33939,7 +34352,7 @@ class RollTables extends EntityCollection {
 
 /**
  * The RollTable entity which implements randomized rollable tables
- * @type {Entity}
+ * @implements {Entity}
  */
 class RollTable extends Entity {
 
@@ -34092,8 +34505,8 @@ class RollTable extends Entity {
     const pool = new DicePool({rolls}).evaluate();
 
     // Construct a "synthetic" roll object using the pool - this is a bit hacky
-    roll = Roll.create(`{${pool.dice.map(d => d.formula).join(",")}}`);
-    roll.terms = [pool];
+    roll = Roll.create(pool.formula).evaluate();
+    roll.terms = [pool]
     roll._dice = pool.dice;
     roll.results = [pool.total];
     roll._total = pool.total;
@@ -34450,7 +34863,7 @@ class Users extends EntityCollection {
  * The User entity
  * Each player who connects to a Foundry Virtual Tabletop session is a User. 
  * Users represent human beings (or possibly programmatic players) and are the cornerstone of identity in Foundry VTT.
- * @type {Entity}
+ * @implements {Entity}
  * 
  * @param {Object} data           The source data for the User entity, usually retrieved from the database.
  * @param {string} data._id       The Entity ID, automatically generated by the Database when a new User is created.
@@ -34676,19 +35089,14 @@ class User extends Entity {
     slot = slot ? parseInt(slot) : Array.fromRange(50).find(i => !(i in hotbar));
     if ( !slot ) throw new Error("No available Hotbar slot exists");
     if ( slot < 1 || slot > 50 ) throw new Error("Invalid Hotbar slot requested");
+    if ( macro && (hotbar[slot] === macro.id) ) return this;
 
     // Update the hotbar data
     const update = duplicate(hotbar);
     if ( macro ) update[slot] = macro.id;
-    else {
-      delete update[slot];
-      update[`-=${slot}`] = null;
-    }
-    if ( fromSlot && (fromSlot in hotbar) ) {
-      delete update[fromSlot];
-      update[`-=${fromSlot}`] = null;
-    }
-    return this.update({hotbar: update});
+    else delete update[slot];
+    if ( fromSlot && (fromSlot in hotbar) ) delete update[fromSlot];
+    return this.update({hotbar: update}, {diff: false, recursive: false, noHook: true});
   };
 
 	/* -------------------------------------------- */
@@ -34794,6 +35202,14 @@ class User extends Entity {
       }
     }
   }
+
+	/* -------------------------------------------- */
+
+  /** @override */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if ( this.id === game.user.id ) return game.logOut();
+  }
 }
 
 
@@ -34874,6 +35290,7 @@ Users.permissions = CONST.USER_PERMISSIONS;
  * @property {string} label           The label which describes this effect
  * @property {ActiveEffectDuration} duration    The duration of the effect
  * @property {ActiveEffectChange[]} changes     The changes applied by this effect
+ * @property {boolean} [disabled]     Is this effect currently disabled?
  * @property {string} [icon]          An image icon path for this effect
  * @property {string} [tint]          A hex color string to tint the effect icon
  * @property {string} [origin]        The UUID of an Entity or EmbeddedEntity which was the source of this effect
@@ -34903,6 +35320,10 @@ class ActiveEffect extends EmbeddedEntity {
 
   /* -------------------------------------------- */
 
+  /**
+   * Report the active effect duration
+   *
+   */
   get duration() {
     const d = this.data.duration;
 
@@ -34921,17 +35342,40 @@ class ActiveEffect extends EmbeddedEntity {
 
     // Turn-based duration
     else if ( d.rounds || d.turns ) {
-      const c = game.combat || {round: 0, turn: 0};
-      const start = (d.startRound || 0) + ((d.startTurn || 0) / 100);
-      const duration = (d.rounds || 0) + ((d.turns || 0) / 100);
-      const current = c.round + (c.turn / 100);
-      const elapsed = current - start;
-      const remaining = duration - elapsed;
+      const c = game.combat || {round: 0, turn: 0, nTurns: 0};
+      const duration = (c.rounds || 0) + ((c.turns || 0) / 100);
+      const elapsedRounds = Math.max(c.round - (d.startRound || 0), 0);
+      const elapsedTurns = c.turn - (d.startTurn || 0);
+
+      // Compute the number of remaining turns and rounds
+      let remainingRounds = (d.rounds || 0) - elapsedRounds;
+
+      // Compute remaining turns
+      let remainingTurns = 0;
+      if ( d.turns > 0 ) {
+        remainingTurns = (d.turns || 0) - elapsedTurns;
+        if ( remainingTurns < 0 ) {
+          remainingRounds += 1;
+          remainingTurns += c.nTurns;
+        } else if ( remainingTurns > c.nTurns ) {
+          remainingRounds += Math.floor(remainingRounds / c.nTurns);
+          remainingTurns %= c.nTurns;
+        }
+      }
+
+      // Total remaining duration
+      if ( remainingRounds < 0 ) {
+        remainingRounds = 0;
+        remainingTurns = 0;
+      }
+      const remaining = remainingRounds + (remainingTurns / 100);
 
       // Remaining label
-      const rounds = Math.floor(remaining);
-      const turns = Math.floor((remaining - rounds) * 100);
-      const label = [rounds ? `${rounds} Rounds` : null, `${turns} Turns`].filterJoin(", ");
+      const label = [
+        remainingRounds > 0 ? `${remainingRounds} Rounds` : null,
+        remainingTurns > 0 ? `${remainingTurns} Turns` : null,
+        (remainingRounds + remainingTurns) === 0 ? "None" : null
+      ].filterJoin(", ");
       return {
         type: "turns",
         duration: duration,
@@ -34956,7 +35400,7 @@ class ActiveEffect extends EmbeddedEntity {
    * @type {boolean}
    */
   get isTemporary() {
-    const duration = this.data.duration.seconds ?? this.data.duration.rounds ?? this.data.duration.turns ?? 0;
+    const duration = this.data.duration.seconds ?? (this.data.duration.rounds || this.data.duration.turns) ?? 0;
     return (duration > 0) || this.getFlag("core", "statusId");
   }
 
@@ -34981,7 +35425,7 @@ class ActiveEffect extends EmbeddedEntity {
     if ( this._sourceName ) return this._sourceName;
     if ( !this.data.origin ) return this._sourceName = game.i18n.localize("None");
     const source = await fromUuid(this.data.origin);
-    return this._sourceName = source.name;
+    return this._sourceName = source?.name ?? "Unknown";
   }
 
   /* -------------------------------------------- */
@@ -35029,6 +35473,13 @@ class ActiveEffect extends EmbeddedEntity {
 
   /**
    * Apply an ActiveEffect that uses an ADD application mode.
+   * The way that effects are added depends on the data type of the current value.
+   *
+   * If the current value is null, the change value is assigned directly.
+   * If the current type is a string, the change value is concatenated.
+   * If the current type is a number, the change value is cast to numeric and added.
+   * If the current type is an array, the change value is appended to the existing array if it matches in type.
+   *
    * @param {Actor} actor                 The Actor to whom this effect should be applied
    * @param {ActiveEffectChange} change   The change data being applied
    * @return {*}                          The resulting applied value
@@ -35039,8 +35490,21 @@ class ActiveEffect extends EmbeddedEntity {
     const current = getProperty(actor.data, key) || null;
     const ct = getType(current);
     let update = null;
-    if ( ct === "null" ) update = value;
-    else if ( ct === getType(value) ) update = current + value;
+
+    // Handle different types of the current data
+    switch ( ct ) {
+      case "null":
+        update = value;
+        break;
+      case "string":
+        update = current + String(value);
+        break;
+      case "number":
+        if ( Number.isNumeric(value) ) update = current + Number(value);
+        break;
+      case "Array":
+        if ( !current.length || (getType(value) === getType(current[0])) ) update = current.concat([value]);
+    }
     if ( update !== null ) setProperty(actor.data, key, update);
     return update;
   }
@@ -35152,6 +35616,18 @@ class ActiveEffect extends EmbeddedEntity {
    */
   static create(...args) {
     return new CONFIG.ActiveEffect.entityClass(...args);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A helper function to handle obtaining dropped ActiveEffect data from a dropped data transfer event.
+   * @param {object} data     The data object extracted from a DataTransfer event
+   * @return {ActiveEffect}   The ActiveEffect instance which contains the dropped effect data
+   */
+  static async fromDropData(data) {
+    if ( !data.data ) return null;
+    return this.create(data.data);
   }
 }
 
@@ -35400,8 +35876,9 @@ class TextureLoader {
     toLoad = toLoad.concat(Object.values(CONFIG.controlIcons)).concat(CONFIG.statusEffects.map(e => e.icon ?? e));
 
     // Load files
-    const sceneName = scene.data.navName || scene.data.name;
-    return this.loader.load(toLoad, {message: `Loading ${sceneName}`});
+    const showName = scene.active || scene.visible;
+    const loadName = showName ? scene.data.navName || scene.data.name : "...";
+    return this.loader.load(toLoad, {message: game.i18n.format("SCENES.Loading", {name: loadName})});
   }
 
   /* -------------------------------------------- */
@@ -36290,7 +36767,7 @@ class Quadtree {
    */
   clear() {
     this.objects = [];
-    for ( let n of nodes ) {
+    for ( let n of this.nodes ) {
       n.clear();
     }
     this.nodes = [];
@@ -36791,6 +37268,18 @@ class PointSource {
      * @type {number|null}
      */
     this._animateSeed = null;
+
+    /**
+     * A flag for whether to re-initialize illumination shader uniforms the next time the light is rendered.
+     * @type {boolean}
+     */
+    this._resetIlluminationUniforms = true;
+
+    /**
+     * A flag for whether to re-initialize coloration shader uniforms the next time the light is rendered.
+     * @type {boolean}
+     */
+    this._resetColorationUniforms = true;
   }
 
   /* -------------------------------------------- */
@@ -36823,54 +37312,52 @@ class PointSource {
   /**
    * Initialize the source with provided object data.
    *
-   * @param {number} x          The x-coordinate of the source location
-   * @param {number} y          The y-coordinate of the source location
-   * @param {number} [z]        An optional z-index sorting for the source
-   * @param {number} dim        The allowed radius of dim vision or illumination
-   * @param {number} bright     The allowed radius of bright vision or illumination
-   * @param {number} angle      The angle of emission for this point source
-   * @param {number} rotation   The angle of rotation for this point source
-   * @param {string} color      A tint color for the emitted light, if any
-   * @param {number} alpha      An opacity for the emitted light, if any
-   * @param {number} darknessThreshold  A level of darkness beyond which this light is active
-   * @param {string} type       The source type from SOURCE_TYPES
-   * @param {object} animation  An animation configuration for the source
-   * @param {number} seed       An integer seed to synchronize (or de-synchronize) animations
+   * @param {object} data       Input data which configures the source.
+   * @param {number} data.x          The x-coordinate of the source location
+   * @param {number} data.y          The y-coordinate of the source location
+   * @param {number} [data.z]        An optional z-index sorting for the source
+   * @param {number} data.dim        The allowed radius of dim vision or illumination
+   * @param {number} data.bright     The allowed radius of bright vision or illumination
+   * @param {number} data.angle      The angle of emission for this point source
+   * @param {number} data.rotation   The angle of rotation for this point source
+   * @param {number} data.color      A tint color for the emitted light, if any
+   * @param {number} data.alpha      An opacity for the emitted light, if any
+   * @param {number} data.darknessThreshold  A level of darkness beyond which this light is active
+   * @param {string} data.type       The source type from SOURCE_TYPES
+   * @param {object} data.animation  An animation configuration for the source
+   * @param {number} data.seed       An integer seed to synchronize (or de-synchronize) animations
    *
    * @return {PointSource}      A reference to the initialized source
    */
-  initialize({x, y, z, dim, bright, angle, rotation, color, alpha, darknessThreshold, type,
-               animation, seed}={}) {
+  initialize(data={}) {
 
-    // Initialize new shaders
-    const at = animation?.type || null;
-    if ( at !== this.animation?.type ) this._initializeShaders(at);
-    this._animateSeed = seed ?? this._animateSeed ?? Math.floor(Math.random() * 100000);
+    // Clean input data
+    data.animation = data.animation || {type: null};
+    data.angle = data.angle ?? 360;
+    data.alpha = data.alpha ?? 0.5;
+    data.bright = data.bright ?? 0;
+    data.color = typeof data.color === "string" ? colorStringToHex(data.color) : (data.color ?? null);
+    data.darknessThreshold = data.darknessThreshold ?? 0;
+    data.dim = data.dim ?? 0;
+    data.rotation = data.rotation ?? 0;
+    data.type = data.type ?? SOURCE_TYPES.LOCAL;
+    data.x = data.x ?? 0;
+    data.y = data.y ?? 0;
+    data.z = data.z ?? null;
 
-    // Store data
-    this.x = x;
-    this.y = y;
-    this.z = z ?? null;
-    this.angle = angle ?? 360;
-    this.rotation = rotation ?? 0;
-    this.alpha = alpha ?? 0.5;
-    this.color = color ? colorStringToHex(color) : null;
+    // Identify changes and assign cleaned data
+    const changes = diffObject(this, data);
+    mergeObject(this, data);
+
+    // Derived data attributes
     this.colorRGB = hexToRGB(this.color);
-    this.darknessThreshold = darknessThreshold ?? 0;
-    this.animation = animation ? duplicate(animation) : {type: null};
-    this.type = type ?? SOURCE_TYPES.LOCAL;
+    this.radius = Math.max(Math.abs(this.dim), Math.abs(this.bright));
+    this.ratio = Math.clamped(Math.abs(this.bright) / this.radius, 0, 1);
+    this.darkness = Math.min(this.dim, this.bright) < 0;
+    this.limited = this.angle !== 360;
+    this._animateSeed = data.seed ?? this._animateSeed ?? Math.floor(Math.random() * 100000);
 
-    // Record flags
-    this.darkness = Math.min(dim, bright) < 0;
-    this.limited = (angle !== 360);
-
-    // Define radii
-    this.dim = Math.abs(dim) ?? 0;
-    this.bright = Math.abs(bright) ?? 0;
-    this.radius = Math.max(this.dim, this.bright);
-    this.ratio = Math.clamped(this.bright / this.dim, 0, 1);
-
-    // Compute polygons
+    // Always update polygons for the source as the environment may have changed
     const {fov, los} = SightLayer.computeSight({x: this.x, y: this.y}, this.radius, {
       angle: this.angle,
       rotation: this.rotation,
@@ -36879,7 +37366,64 @@ class PointSource {
     this.fov = fov;
     this.los = los;
 
-    // Configure the blend mode and sorting
+    // Update shaders if the animation type changed
+    const updateShaders = "animation" in changes;
+    if ( updateShaders ) this._initializeShaders(this.animation?.type);
+
+    // Initialize uniforms if the appearance of the light changed
+    const uniformAttrs = ["dim", "bright", "color", "alpha", "animation"];
+    if ( uniformAttrs.some(k => k in changes) ) {
+      this._resetColorationUniforms = true;
+      this._resetIlluminationUniforms = true;
+    }
+
+    // Initialize blend modes and sorting
+    this._initializeBlending();
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initialize the shaders used for this animation.
+   * Reset the current shader values back to defaults.
+   * Swap to a different Shader instance if necessary.
+   * @private
+   */
+  _initializeShaders() {
+    const anim = CONFIG.Canvas.lightAnimations[this.animation.type] || {};
+
+    // Initialize illumination shader
+    const iCls = anim.illuminationShader || StandardIlluminationShader;
+    const is = this.illumination.shader;
+    if ( is?.constructor.name !== iCls.name ) {
+      const shader = iCls.create();
+      shader.container = this.illumination;
+      this.illumination.shader = shader;
+      if ( is ) is.destroy();
+    }
+
+    // Initialize coloration shader
+    const cCls = anim.colorationShader || StandardColorationShader;
+    const cs = this.coloration.shader;
+    if ( cs?.constructor.name !== cCls.name ) {
+      const shader = cCls.create();
+      shader.container = this.coloration;
+      this.coloration.shader = shader;
+      if ( cs ) cs.destroy();
+    }
+
+    // Dispatch a hook which allows for modules to apply fine-grained customization to the source
+    Hooks.callAll("initializePointSourceShaders", this, this.animation.type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Initialize the blend mode and vertical sorting of this source relative to others in the container.
+   * @private
+   */
+  _initializeBlending() {
     if ( this.darkness ) {
       this.illumination.light.blendMode = PIXI.BLEND_MODES.MIN_COLOR;
       this.illumination.zIndex = this.z ?? 10;
@@ -36891,45 +37435,6 @@ class PointSource {
       this.coloration.light.blendMode = PIXI.BLEND_MODES.SCREEN;
       this.coloration.zIndex = this.z ?? 0;
     }
-    return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Initialize the shaders used for this animation.
-   * Reset the current shader values back to defaults.
-   * Swap to a different Shader instance if necessary.
-   * @param {string} animation      The animation name
-   * @private
-   */
-  _initializeShaders(animation) {
-    const anim = CONFIG.Canvas.lightAnimations[animation] || {};
-
-    // Initialize illumination shader
-    const iCls = anim.illuminationShader || StandardIlluminationShader;
-    const is = this.illumination.shader;
-    if ( is?.constructor.name === iCls.name ) is.reset();
-    else {
-      const shader = iCls.create();
-      shader.container = this.illumination;
-      this.illumination.shader = shader;
-      if ( is ) is.destroy();
-    }
-
-    // Initialize coloration shader
-    const cCls = anim.colorationShader || StandardColorationShader;
-    const cs = this.coloration.shader;
-    if ( cs?.constructor.name === cCls.name ) cs.reset();
-    else {
-      const shader = cCls.create();
-      shader.container = this.coloration;
-      this.coloration.shader = shader;
-      if ( cs ) cs.destroy();
-    }
-
-    // Dispatch a hook which allows for modules to apply fine-grained customization to the source
-    Hooks.callAll("initializePointSourceShaders", this, animation);
   }
 
   /* -------------------------------------------- */
@@ -36940,32 +37445,16 @@ class PointSource {
    * Draw the display of this source for the darkness/light container of the SightLayer.
    * @return {PIXI.Container}       The rendered light container
    */
-  drawLight(channels) {
-    channels = channels || canvas.lighting.channels;
-    const c = this.illumination;
-    const l = c.light;
-
-    // Define common radius and dimensions
-    l.position.set(this.x, this.y);
-    l.width = l.height = this.radius * 2;
-    c.uniforms.ratio = this.ratio;
-
-    // Draw darkness sources
-    if ( this.darkness ) {
-      c.uniforms.colorDim = channels.dark.rgb;
-      c.uniforms.colorBright = channels.black.rgb;
+  drawLight() {
+    if ( this._resetIlluminationUniforms ) {
+      const channels = canvas.lighting.channels;
+      const iu = this.illumination.shader.uniforms;
+      iu.ratio = this.ratio;
+      iu.colorDim = this.darkness ? channels.dark.rgb : channels.dim.rgb;
+      iu.colorBright = this.darkness ? channels.black.rgb : channels.bright.rgb;
+      this._resetIlluminationUniforms = false;
     }
-
-    // Draw light sources
-    else {
-      c.uniforms.colorDim = channels.dim.rgb;
-      c.uniforms.colorBright = channels.bright.rgb;
-    }
-
-    // Draw the masking FOV polygon
-    c.fov.clear();
-    if ( this.radius > 0 ) c.fov.beginFill(0xFFFFFF, 1.0).drawPolygon(this.fov).endFill();
-    return c;
+    return this._drawContainer(this.illumination);
   }
 
   /* -------------------------------------------- */
@@ -36977,19 +37466,26 @@ class PointSource {
   drawColor() {
     const hasColor = this.color && (this.alpha > 0);
     if ( !hasColor && !this.darkness ) return null;
-    const c = this.coloration;
-    const l = c.light;
+    if ( this._resetColorationUniforms ) {
+      const cu = this.coloration.shader.uniforms;
+      cu.darkness = this.darkness;
+      cu.alpha = this.alpha;
+      cu.color = this.colorRGB;
+      this._resetColorationUniforms = false;
+    }
+    return this._drawContainer(this.coloration);
+  }
 
-    // Define common radius and dimensions
-    l.position.set(this.x, this.y);
-    l.width = l.height = this.radius * 2;
+  /* -------------------------------------------- */
 
-    // Apply color uniforms
-    c.uniforms.darkness = this.darkness;
-    c.uniforms.alpha = this.alpha;
-    c.uniforms.color = this.colorRGB;
-
-    // Draw the masking FOV polygon
+  /**
+   * A common helper function for updating the display of a source container.
+   * Assign the container position, dimensions, and polygons.
+   * @private
+   */
+  _drawContainer(c) {
+    c.light.position.set(this.x, this.y);
+    c.light.width = c.light.height = this.radius * 2;
     c.fov.clear();
     if ( this.radius > 0 ) c.fov.beginFill(0xFFFFFF, 1.0).drawPolygon(this.fov).endFill();
     return c;
@@ -37169,17 +37665,6 @@ class BackgroundLayer extends CanvasLayer {
     this.img = null;
   }
 
-  /**
-   * Customize behaviors of this PlaceablesLayer by modifying some behaviors at a class level
-   * @return {Object}
-   */
-  static get layerOptions() {
-    return {
-      canDragCreate: false,
-      snapToGrid: false
-    }
-  }
-
   /* -------------------------------------------- */
   /*  Properties and Attributes
   /* -------------------------------------------- */
@@ -37296,20 +37781,18 @@ class BackgroundLayer extends CanvasLayer {
  * @type {PlaceablesLayer}
  */
 class DrawingsLayer extends PlaceablesLayer {
-  /**
-   * Customize behaviors of this PlaceablesLayer by modifying some behaviors at a class level
-   * @return {Object}
-   */
+
+  /** @override */
   static get layerOptions() {
-    return {
+    return mergeObject(super.layerOptions, {
       canDragCreate: true,
       canDelete: true,
       controllableObjects: true,
       rotatableObjects: true,
-      snapToGrid: true,
       objectClass: Drawing,
-      sheetClass: DrawingConfig
-    }
+      sheetClass: DrawingConfig,
+      zIndex: 20
+    });
   }
 
   /* -------------------------------------------- */
@@ -37563,59 +38046,66 @@ DrawingsLayer.DEFAULT_CONFIG_SETTING = "defaultDrawingConfig";
  * @type {CanvasLayer}
  */
 class EffectsLayer extends CanvasLayer {
-	constructor() {
-		super();
+  constructor() {
+    super();
 
-		/**
-		 * The weather overlay container
-		 * @type {PIXI.Container}
-		 */
-		this.weather = null;
+    /**
+     * The weather overlay container
+     * @type {PIXI.Container}
+     */
+    this.weather = null;
 
-		/**
-		 * The currently active weather effect
-		 * @type {SpecialEffect}
-		 */
-		this.weatherEffect = null;
+    /**
+     * The currently active weather effect
+     * @type {SpecialEffect}
+     */
+    this.weatherEffect = null;
 
-		/**
-		 * Track any active emitters within this Scene
-		 * @type {Object[]}
-		 */
-		this.emitters = [];
-	}
+    /**
+     * Track any active emitters within this Scene
+     * @type {Object[]}
+     */
+    this.emitters = [];
+  }
 
-	/* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-	/** @override */
-	tearDown() {
-		if ( this.weatherEffect ) this.weatherEffect.stop();
-		this.weather = this.weatherEffect = null;
-		return super.tearDown();
-	}
+  /** @override */
+  static get layerOptions() {
+    return mergeObject(super.layerOptions, { zIndex: 300 });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tearDown() {
+    if ( this.weatherEffect ) this.weatherEffect.stop();
+    this.weather = this.weatherEffect = null;
+    return super.tearDown();
+  }
 
 
-	/* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-	/** @override */
-	async draw() {
-		this.drawWeather();
-	}
+  /** @override */
+  async draw() {
+    this.drawWeather();
+  }
 
-	/* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-	drawWeather() {
-		if ( this.weatherEffect )	this.weatherEffect.stop();
-		if ( !this.weather ) this.weather = this.addChild(new PIXI.Container());
+  drawWeather() {
+    if ( this.weatherEffect )	this.weatherEffect.stop();
+    if ( !this.weather ) this.weather = this.addChild(new PIXI.Container());
 
-		// Get the requested weather effect
-		const effect = CONFIG.weatherEffects[canvas.scene.data.weather];
-		if ( !effect ) return;
+    // Get the requested weather effect
+    const effect = CONFIG.weatherEffects[canvas.scene.data.weather];
+    if ( !effect ) return;
 
-		// Create the effect and begin playback
-		this.weatherEffect = new effect(this.weather);
-		this.weatherEffect.play();
-	}
+    // Create the effect and begin playback
+    this.weatherEffect = new effect(this.weather);
+    this.weatherEffect.play();
+  }
 }
 
 /**
@@ -37702,7 +38192,8 @@ class LightingLayer extends PlaceablesLayer {
       rotatableObjects: true,
       objectClass: AmbientLight,
       quadtree: true,
-      sheetClass: LightConfig
+      sheetClass: LightConfig,
+      zIndex: 200
     });
   }
 
@@ -37765,7 +38256,8 @@ class LightingLayer extends PlaceablesLayer {
     await super.draw();
 
     // Draw the background
-    this.illumination.background.clear().beginFill(0xFFFFFF, 1.0).drawShape(canvas.dimensions.sceneRect).endFill();
+    const bgRect = canvas.dimensions.sceneRect.clone().pad(this._blurDistance * 2);
+    this.illumination.background.clear().beginFill(0xFFFFFF, 1.0).drawShape(bgRect).endFill();
 
     // Mask the containers by the outer rectangle, keep extra padding
     this.msk = this.addChild(new PIXI.Graphics());
@@ -37792,7 +38284,6 @@ class LightingLayer extends PlaceablesLayer {
       new PIXI.filters.AlphaFilter(1.0);
     c.filter.blendMode = PIXI.BLEND_MODES.ADD;
     c.filters = [c.filter];
-    c.filterArea = canvas.app.renderer.screen;
     c.sortableChildren = true;
     return c;
   }
@@ -37823,25 +38314,32 @@ class LightingLayer extends PlaceablesLayer {
   /* -------------------------------------------- */
 
   /**
+   * Does this scene currently benefit from global illumination?
+   * @returns {boolean}
+   */
+  hasGlobalIllumination() {
+    const sd = canvas.scene.data;
+    return sd.globalLight && (!sd.globalLightThreshold || (this.darknessLevel <= sd.globalLightThreshold));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Refresh the active display of the LightingLayer.
    * Update the scene background color, light sources, and darkness sources
    * @param darkness
    */
   refresh(darkness) {
-    darkness = darkness ?? canvas.lighting.darknessLevel;
+    this.darknessLevel = darkness = darkness ?? canvas.lighting.darknessLevel;
     this.channels = this._configureChannels(darkness);
     let refreshVision = false;
 
-    // Toggle global illumination
-    const sd = canvas.scene.data;
-    if ( sd.globalLight && (sd.globalLightThreshold !== null) ) {
-      const globalLight = darkness <= sd.globalLightThreshold;
-      const changed = globalLight !== this.globalLight;
+    // Track global illumination
+    const globalLight = this.hasGlobalIllumination();
+    if ( globalLight !== this.globalLight ) {
       this.globalLight = globalLight;
-      if ( changed ) {
-        canvas.tokens.controlled.forEach(t => t.updateSource({defer: true}));
-        refreshVision = true;
-      }
+      canvas.tokens.controlled.forEach(t => t.updateSource({defer: true}));
+      refreshVision = true;
     }
 
     // Clear currently rendered sources
@@ -37866,14 +38364,13 @@ class LightingLayer extends PlaceablesLayer {
         if ( !source.active ) continue;
 
         // Draw the light update
-        const sc = source.drawLight(this.channels);
+        const sc = source.drawLight();
         ilm.lights.addChild(sc);
         const color = source.drawColor();
         if ( color ) col.addChild(color);
         if ( source.animation?.type ) this._animatedSources.push(source);
       }
     }
-    this.darknessLevel = darkness;
 
     // Refresh vision if necessary
     if ( refreshVision ) canvas.sight.refresh();
@@ -38034,7 +38531,7 @@ class LightingLayer extends PlaceablesLayer {
 
 /**
  * The Notes Layer Container
- * @extends {PlaceablesLayer}
+ * @implements {PlaceablesLayer}
  */
 class NotesLayer extends PlaceablesLayer {
 
@@ -38043,7 +38540,9 @@ class NotesLayer extends PlaceablesLayer {
     return mergeObject(super.layerOptions, {
       canDragCreate: false,
       objectClass: Note,
-      sheetClass: NoteConfig
+      sheetClass: NoteConfig,
+      sortActiveTop: true,
+      zIndex: 60
     });
   }
 
@@ -38057,6 +38556,7 @@ class NotesLayer extends PlaceablesLayer {
     if ( this.objects ) {
       this.placeables.forEach(p => p.controlIcon.visible = true);
     }
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -38070,6 +38570,7 @@ class NotesLayer extends PlaceablesLayer {
       this.placeables.forEach(p => p.controlIcon.visible = isToggled);
     }
     this.interactiveChildren = isToggled;
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -38218,6 +38719,13 @@ class SightLayer extends CanvasLayer {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get layerOptions() {
+    return mergeObject(super.layerOptions, { zIndex: 210 });
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Does the currently viewed Scene support Token field of vision?
    * @type {boolean}
@@ -38357,7 +38865,7 @@ class SightLayer extends CanvasLayer {
     // Unexplored area is obscured by darkness. We need a larger rectangle so that the blur filter doesn't clip
     fog.unexplored = fog.addChild(new PIXI.Graphics());
     const r = canvas.dimensions.sceneRect.clone().pad(this._blurDistance+2);
-    fog.unexplored.beginFill(CONFIG.Canvas.unexploredColor, 1.0).drawShape(r).endFill();
+    fog.unexplored.beginFill(0xFFFFFF, 1.0).drawShape(r).endFill();
 
     // Explored area is a sub-container
     fog.explored = fog.addChild(new PIXI.Container());
@@ -38469,6 +38977,7 @@ class SightLayer extends CanvasLayer {
     if ( this._fogUpdated ) this.debounceSaveFog();
 
     // Show or hide the fog
+    this.fog.unexplored.tint = CONFIG.Canvas.unexploredColor;
     this.visible = this.sources.size || !game.user.isGM;
     canvas.lighting.illumination.lights.mask = this.visible ? this.los : null;
     canvas.lighting.coloration.mask = this.visible ? this.los : null;
@@ -38532,7 +39041,6 @@ class SightLayer extends CanvasLayer {
     const tex = PIXI.RenderTexture.create({
       width: d.sceneWidth,
       height: d.sceneHeight,
-      scale: 1,
       resolution: this._fogResolution
     });
     const transform = new PIXI.Matrix(1, 0, 0, 1, -d.paddingX, -d.paddingY);
@@ -38957,15 +39465,15 @@ class SightLayer extends CanvasLayer {
   /**
    * Test whether a point on the Canvas is visible based on the current vision and LOS polygons
    *
-   * @param {Object|PIXI.Point} point   The point in space to test. This can be an Object with x and y coordinates or
-   *                                    a Point object.
-   * @param {number} tolerance          A numeric radial offset which allows for a non-exact match. For example, if
-   *                                    tolerance is 2 then the test will pass if the point is within 2px of a vision
-   *                                    polygon.
+   * @param {Point} point           The point in space to test, an object with coordiantes x and y.
+   * @param {number} tolerance      A numeric radial offset which allows for a non-exact match. For example, if
+   *                                tolerance is 2 then the test will pass if the point is within 2px of a vision
+   *                                polygon.
+   * @param {PIXI.DisplayObject} [object]   An optional reference to the object whose visibility is being tested
    *
-   * @return {boolean}                  Whether the point is currently visible.
+   * @return {boolean}              Whether the point is currently visible.
    */
-  testVisibility(point, {tolerance=2}={}) {
+  testVisibility(point, {tolerance=2, object=null}={}) {
 
     // If there are no vision sources - visibility is GM only
     if ( !this.sources.size ) return game.user.isGM;
@@ -39120,7 +39628,8 @@ class SoundsLayer extends PlaceablesLayer {
   static get layerOptions() {
     return mergeObject(super.layerOptions, {
       objectClass: AmbientSound,
-      sheetClass: AmbientSoundConfig
+      sheetClass: AmbientSoundConfig,
+      zIndex: 200
     });
   }
 
@@ -39152,7 +39661,7 @@ class SoundsLayer extends PlaceablesLayer {
   /**
    * Update all AmbientSound effects in the layer by toggling their playback status
    */
-  update() {
+  update(playOptions={}) {
     if ( !this._initialized ) return;
 
     // Get the tokens against which to check hearing
@@ -39198,7 +39707,7 @@ class SoundsLayer extends PlaceablesLayer {
 
     // Play each sound
     Object.values(audible).forEach(a => {
-      a.sound.play(a.audible, a.volume);
+      a.sound.play(a.audible, a.volume, playOptions);
     });
   }
 
@@ -39278,16 +39787,15 @@ class TemplateLayer extends PlaceablesLayer {
 
   /** @override */
   static get layerOptions() {
-    return {
+    return mergeObject(super.layerOptions, {
       canDragCreate: true,
       canDelete: true,
-      controllableObjects: false,
       rotatableObjects: true,
-      snapToGrid: true,
-      gridPrecision: 2,
       objectClass: MeasuredTemplate,
-      sheetClass: MeasuredTemplateConfig
-    }
+      sheetClass: MeasuredTemplateConfig,
+      sortActiveTop: true,
+      zIndex: 50
+    });
   }
 
   /* -------------------------------------------- */
@@ -39307,10 +39815,7 @@ class TemplateLayer extends PlaceablesLayer {
         }
       });
     }
-
-    // Sort to front
-    canvas.stage.removeChild(this);
-    canvas.stage.addChild(this);
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -39329,11 +39834,7 @@ class TemplateLayer extends PlaceablesLayer {
         }
       });
     }
-
-    // Restore original sort
-    canvas.stage.removeChild(this);
-    const grid = canvas.stage.children.indexOf(canvas.grid);
-    canvas.stage.addChildAt(this, grid);
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -39444,6 +39945,7 @@ class TilesLayer extends PlaceablesLayer {
   /** @override */
   static get layerOptions() {
     return mergeObject(super.layerOptions, {
+      zIndex: 10,
       controllableObjects: true,
       objectClass: Tile,
       rotatableObjects: true,
@@ -39593,7 +40095,8 @@ class TokenLayer extends PlaceablesLayer {
       rotatableObjects: true,
       gridPrecision: 1,
       objectClass: Token,
-      sheetClass: TokenConfig
+      sheetClass: TokenConfig,
+      zIndex: 100
     });
   }
 
@@ -39869,6 +40372,9 @@ class TokenLayer extends PlaceablesLayer {
 
     // Acquire dropped data and import the actor
     let actor = await Actor.fromDropData(data);
+    if ( !actor.owner ) {
+      return ui.notifications.warn(`You do not have permission to create a new Token for the ${actor.name} Actor.`);
+    }
     if ( actor.compendium ) actor = await Actor.create(actor.data);
 
     // Prepare the Token data
@@ -39950,7 +40456,9 @@ class WallsLayer extends PlaceablesLayer {
       controllableObjects: true,
       objectClass: Wall,
       quadtree: true,
-      sheetClass: WallConfig
+      sheetClass: WallConfig,
+      sortActiveTop: true,
+      zIndex: 40
     });
   }
 
@@ -39959,7 +40467,7 @@ class WallsLayer extends PlaceablesLayer {
   /**
    * An Array of Wall instances in the current Scene which currently block Token vision.
    * This array includes doors regardless of their current door state.
-   * @type {Array.<Wall>}
+   * @type {Wall[]}
    */
   get blockVision() {
     return this.objects.children.filter(w => w.data.sense !== CONST.WALL_SENSE_TYPES.NONE);
@@ -39970,7 +40478,7 @@ class WallsLayer extends PlaceablesLayer {
   /**
    * An Array of Wall instances in the current Scene which block Token movement.
    * This array includes doors regardless of their current door state.
-   * @type {Array.<Wall>}
+   * @type {Wall[]}
    */
   get blockMovement() {
     return this.objects.children.filter(w => w.data.move !== CONST.WALL_MOVEMENT_TYPES.NONE);
@@ -39980,7 +40488,7 @@ class WallsLayer extends PlaceablesLayer {
 
   /**
    * An Array of Wall instances in the current Scene which act as Doors.
-   * @type {Array.<Wall>}
+   * @type {Wall[]}
    */
   get doors() {
     return this.objects.children.filter(w => w.data.door > CONST.WALL_DOOR_TYPES.NONE);
@@ -40027,6 +40535,7 @@ class WallsLayer extends PlaceablesLayer {
     canvas.sight.initialize().then(() => {
       canvas.sounds.initialize();
     });
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -40493,7 +41002,7 @@ class WallsLayer extends PlaceablesLayer {
     // Return the collision result
     if ( isAny ) return false;
     if ( isClosest ) {
-      const closest = this._getClosestCollision(Object.values(collisions));
+      const closest = this.getClosestCollision(Object.values(collisions));
       return closest || null;
     }
     return Object.values(collisions);
@@ -40607,14 +41116,14 @@ class Drawing extends PlaceableObject {
    * @type {boolean}
    */
   get isTiled() {
-    return [CONST.DRAWING_FILL_TYPES.PATTERN, CONST.DRAWING_FILL_TYPES.CONTOUR].includes(this.data.fillType);
+    return this.data.fillType === CONST.DRAWING_FILL_TYPES.PATTERN;
   }
 
   /* -------------------------------------------- */
 
   /**
    * A Boolean flag for whether or not the Drawing is a Polygon type (either linear or freehand)
-   * @return {boolean}
+   * @type {boolean}
    */
   get isPolygon() {
     return [CONST.DRAWING_TYPES.POLYGON, CONST.DRAWING_TYPES.FREEHAND].includes(this.data.type);
@@ -41589,15 +42098,15 @@ class AmbientLight extends PlaceableObject {
 
   /** @override */
   async draw() {
-    this.clear();
-    this.updateSource({defer: true});
 
-    // Draw interface indicators for the ambient light
+    // Draw containers
+    this.clear();
     this.field = this.addChild(new PIXI.Graphics());
     this.controlIcon = this.addChild(this._drawControlIcon());
-    this.refresh();
 
-    // Add control interactivity if the placeable has an ID
+    // Initial rendering
+    this.updateSource({defer: true});
+    this.refresh();
     if ( this.id ) this.activateListeners();
     return this;
   }
@@ -41691,7 +42200,10 @@ class AmbientLight extends PlaceableObject {
     else this.layer.sources.delete(this.sourceId);
 
     // Refresh the layer, unless we are deferring that update
-    if ( !defer ) this.layer.refresh();
+    if ( !defer ) {
+      this.layer.refresh();
+      canvas.sight.refresh();
+    }
   }
 
   /* -------------------------------------------- */
@@ -42084,8 +42596,9 @@ class AmbientSound extends PlaceableObject {
    * Toggle playback of the sound depending on whether or not it is audible
    * @param {boolean} isAudible   Is the sound audible?
    * @param {number} volume       The target playback volume
+   * @param {boolean} fade        Whether to fade the volume from its previous level
    */
-  play(isAudible, volume) {
+  play(isAudible, volume, {fade=true}={}) {
     let howl = this.howl;
     let cv = howl.volume(null, this.howlId);
     volume = (volume || this.data.volume) * game.settings.get("core", "globalAmbientVolume");
@@ -42105,7 +42618,8 @@ class AmbientSound extends PlaceableObject {
     // Begin playback and set volume
     howl.off('fade');
     this.howlId = this.howlId ? howl.play(this.howlId) : howl.play();
-    howl.fade(cv, volume, 500, this.howlId);
+    if ( fade ) howl.fade(cv, volume, 500, this.howlId);
+    else howl.volume(volume, this.howlId);
     return this.howlId;
   }
 
@@ -42126,18 +42640,15 @@ class AmbientSound extends PlaceableObject {
 
   /** @override */
   async draw() {
+
+    // Draw containers
     this.clear();
-
-    // Draw the displayed field of effect
     this.field = this.drawField();
-
-    // Draw the control icon
     this.controlIcon = this.addChild(this._drawControlIcon());
 
-    // Refresh the current display
+    // Initial rendering
+    // this.updateSource({defer: true});
     this.refresh();
-
-    // Add control interactivity if the placeable has an ID
     if ( this.id ) this.activateListeners();
     return this;
   }
@@ -42252,7 +42763,6 @@ class AmbientSound extends PlaceableObject {
     super._onUpdate(data, ...args);
     const changed = new Set(Object.keys(data));
     if ( changed.has("path") ) this.howl = this._createHowl();
-    this.draw();
     canvas.addPendingOperation(`SoundsLayer.initialize`, canvas.sounds.initialize, canvas.sounds);
   }
 
@@ -43147,6 +43657,9 @@ class Token extends PlaceableObject {
   constructor(...args) {
     super(...args);
 
+    // Clean initial data
+    this._cleanData();
+
     /**
      * A Ray which represents the Token's current movement path
      * @type {Ray}
@@ -43212,6 +43725,19 @@ class Token extends PlaceableObject {
   /** @override */
   static get embeddedName() {
     return "Token";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply initial sanitizations to the provided input data to ensure that a Token has valid required attributes.
+   * @private
+   */
+  _cleanData() {
+    this.data.x = Math.max(Math.round(this.data.x || 0), 0);
+    this.data.y = Math.max(Math.round(this.data.y || 0), 0);
+    this.data.width = Math.max((this.data.width || 1).toNearest(0.5), 0.5);
+    this.data.height = Math.max((this.data.height || 1).toNearest(0.5), 0.5);
   }
 
   /* -------------------------------------------- */
@@ -43334,7 +43860,7 @@ class Token extends PlaceableObject {
     if (!canvas.sight.tokenVision) return true;
     if ( this._controlled ) return true;
     const tolerance = Math.min(this.w, this.h) / 4;
-    return canvas.sight.testVisibility(this.center, {tolerance});
+    return canvas.sight.testVisibility(this.center, {tolerance, object: this});
   }
 
   /* -------------------------------------------- */
@@ -43356,7 +43882,7 @@ class Token extends PlaceableObject {
    * @type {boolean}
    */
   get emitsLight() {
-    return ["dimLight", "brightLight"].some(a => this.data[a] !== 0);
+    return ["dimLight", "brightLight"].some(a => this.data[a] || false);
   }
 
   /* -------------------------------------------- */
@@ -43419,11 +43945,11 @@ class Token extends PlaceableObject {
     const origin = this.getSightOrigin();
     const sourceId = this.sourceId;
     const d = canvas.dimensions;
-    const maxR = canvas.lighting.globalLight ? Math.max(d.sceneWidth, d.sceneHeight) : null;
+    const maxR = canvas.lighting.globalLight ? Math.hypot(d.sceneWidth, d.sceneHeight) : null;
 
     // Update light source
-    const isLightSource = this.emitsLight && !this.data.hidden && !deleted;
-    if ( isLightSource ) {
+    const isLightSource = this.emitsLight && !this.data.hidden;
+    if ( isLightSource && !deleted ) {
       const bright = this.getLightRadius(this.data.brightLight);
       const dim = this.getLightRadius(this.data.dimLight);
       this.light.initialize({
@@ -43443,11 +43969,14 @@ class Token extends PlaceableObject {
         this.light.drawColor();
       }
     }
-    else canvas.lighting.sources.delete(sourceId);
+    else {
+      canvas.lighting.sources.delete(sourceId);
+      if ( isLightSource && !defer ) canvas.lighting.refresh();
+    }
 
     // Update vision source
-    const isVisionSource = this._isVisionSource() && !deleted;
-    if ( isVisionSource ) {
+    const isVisionSource = this._isVisionSource();
+    if ( isVisionSource && !deleted ) {
       let dim =  maxR ?? this.getLightRadius(this.data.dimSight);
       const bright = this.getLightRadius(this.data.brightSight);
       if ((dim === 0) && (bright === 0)) dim = d.size * 0.6;
@@ -43465,7 +43994,10 @@ class Token extends PlaceableObject {
         canvas.sight.refresh({noUpdateFog});
       }
     }
-    else canvas.sight.sources.delete(sourceId);
+    else {
+      canvas.sight.sources.delete(sourceId);
+      if ( isVisionSource && !defer ) canvas.sight.refresh();
+    }
   }
 
   /* -------------------------------------------- */
@@ -43874,6 +44406,7 @@ class Token extends PlaceableObject {
 
       // Draw actor effects first
       for ( let f of actorEffects ) {
+        if ( !f.data.icon ) continue;
         const tint = f.data.tint ? colorStringToHex(f.data.tint) : null;
         if ( f.getFlag("core", "overlay") ) {
           overlay = {src: f.data.icon, tint};
@@ -44002,7 +44535,7 @@ class Token extends PlaceableObject {
     this.data.x = this.x;
     this.data.y = this.y;
 
-    // Animate vision
+    // Animate token vision
     if ( vision && anim.length ) {
       const dist = Math.hypot(anim[0].done, anim[1]?.done || 0);
       const n = Math.floor(dist / canvas.dimensions.size);
@@ -44011,10 +44544,8 @@ class Token extends PlaceableObject {
       if (updateFog) anim[0].dist = n;
     }
 
-    // Animate the light source position only
-    else if ( this.light.radius ) {
-      anim.forEach(a => this.light.coloration[a.attribute] += a.d);
-    }
+    // Animate the evolution of local audio effects
+    canvas.sounds.update({fade: false});
   }
 
   /* -------------------------------------------- */
@@ -44407,11 +44938,7 @@ class Token extends PlaceableObject {
 
     // Handle direct Token updates
     const fullRedraw = ["img", "name", "width", "height", "tint"].some(r => changed.has(r));
-    const visibilityChange = changed.has("hidden");
     const positionChange = ["x", "y"].some(c => changed.has(c));
-    const perspectiveChange = changed.has("rotation") && this.hasLimitedVisionAngle;
-    const visionChange = ["brightLight", "brightSight", "dimLight", "dimSight", "lightAlpha", "lightAngle",
-      "lightColor", "sightAngle", "vision", "lightAnimation"].some(k => changed.has(k));
 
     // Change in Token appearance
     if ( fullRedraw ) {
@@ -44429,7 +44956,8 @@ class Token extends PlaceableObject {
       this.refresh();
     }
 
-    // Changes to Token visibility trigger downstream impacts
+    // Handle changes to the visibility state of the token
+    const visibilityChange = changed.has("hidden");
     if ( visibilityChange ) {
       if ( !game.user.isGM ) {
         if ( this._controlled && data.hidden ) this.release();
@@ -44438,15 +44966,20 @@ class Token extends PlaceableObject {
       this.visible = this.isVisible;
     }
 
-    // Process perspective changes
-    const updatePerspective = (visibilityChange || positionChange || perspectiveChange || visionChange) &&
-      (this.data.vision || this.emitsLight);
-    if ( updatePerspective ) {
+    // Determine whether the token's perspective has changed
+    const rotationChange = changed.has("rotation") && this.hasLimitedVisionAngle;
+    let perspectiveChange = changed.has("vision") ||
+      ((this.data.vision || this.emitsLight) && (visibilityChange || positionChange || rotationChange)) ||
+      (this.data.vision && ["dimSight", "brightSight", "sightAngle"].some(k => changed.has(k))) ||
+      ["dimLight", "brightLight", "lightAlpha", "lightAngle", "lightColor", "lightAnimation"].some(k => changed.has(k));
+    if ( perspectiveChange ) {
       const animating = positionChange && (options.animate !== false);
       if ( !animating ) {
         this.updateSource({defer: true});
-        canvas.addPendingOperation("SightLayer.refresh", canvas.sight.refresh, canvas.sight);
         canvas.addPendingOperation("LightingLayer.refresh", canvas.lighting.refresh, canvas.lighting);
+        canvas.addPendingOperation("SightLayer.refresh", canvas.sight.refresh, canvas.sight, [{
+          forceUpdateFog: this.hasLimitedVisionAngle
+        }]);
       }
       canvas.sounds.refresh();
     }
@@ -44475,11 +45008,13 @@ class Token extends PlaceableObject {
 
     // Process changes to perception
     if ( this.emitsLight || ( this.observer && this.data.vision ) ) {
-      this.updateSource({deleted: true});
+      this.updateSource({deleted: true, defer: true});
+      canvas.addPendingOperation(`Canvas.initializeSources`, canvas.initializeSources, canvas);
     }
 
-      // Remove audible sound
+    // Remove audible sound
     if ( this.observer ) {
+      // TODO - this should be folded into canvas.initializeSources
       canvas.addPendingOperation(`SoundsLayer.initialize`, canvas.sounds.initialize, canvas.sounds);
     }
 
@@ -44520,6 +45055,7 @@ class Token extends PlaceableObject {
     // Update tracked Combat resources
     if ( this.inCombat ) {
       if ( updateEffects || hasProperty(updateData?.data, game.combats.settings.resource) ) {
+        canvas.addPendingOperation(`Combat.setupTurns`, game.combat.setupTurns, game.combat);
         canvas.addPendingOperation(`CombatTracker.render`, ui.combat.render, ui.combat);
       }
     }
@@ -44550,6 +45086,7 @@ class Token extends PlaceableObject {
 
     // Update tracked Combat resources
     if ( this.inCombat && updateData.data && hasProperty(updateData.data, game.combats.settings.resource) ) {
+      game.combat.setupTurns();
       ui.combat.render();
     }
 
@@ -44795,7 +45332,10 @@ let _token = null;
  * A Wall is an implementation of PlaceableObject which represents a physical or visual barrier within the Scene.
  * Walls are used to restrict Token movement or visibility as well as to define the areas of effect for ambient lights
  * and sounds.
- * @extends {PlaceableObject}
+ *
+ * @implements {PlaceableObject}
+ * @see {@link WallsLayer}
+ * @see {@link WallConfig}
  *
  * @example
  * Wall.create({
@@ -44806,9 +45346,6 @@ let _token = null;
  *  door: CONST.WALL_DOOR_TYPES.DOOR,
  *  ds: CONST.WALL_DOOR_STATES.CLOSED
  * });
- *
- * @see {@link WallsLayer}
- * @see {@link WallConfig}
  */
 class Wall extends PlaceableObject {
   constructor(...args) {
@@ -44945,7 +45482,7 @@ class Wall extends PlaceableObject {
     if ( !d ) return;
 
     // Create the icon
-    const icon = new PIXI.Sprite.from("icons/svg/wall-direction.svg");
+    const icon = PIXI.Sprite.from("icons/svg/wall-direction.svg");
     icon.width = icon.height = 32;
 
     // Rotate the icon
@@ -45204,10 +45741,7 @@ class Wall extends PlaceableObject {
   _onCreate(...args) {
     super._onCreate(...args);
     this.layer._cloneType = duplicate(this.data);
-
-    // Update the display of walls if the Walls layer is inactive, or if the Wall has a door
-    const hasDoor = this.data.door !== CONST.WALL_DOOR_TYPES.NONE;
-    if ( !this.layer._active || (this.data.door > 0) ) return this._onModifyWall(hasDoor);
+    return this._onModifyWall(this.data.door !== CONST.WALL_DOOR_TYPES.NONE);
   }
 
   /* -------------------------------------------- */
@@ -45249,8 +45783,8 @@ class Wall extends PlaceableObject {
       canvas.addPendingOperation("WallsLayer.highlightControlledSegments", this.layer.highlightControlledSegments, this.layer);
     }
 
-    // Update the display of walls if the Walls layer is inactive, or if the Wall has a door
-    if ( !this.layer._active || (this.data.door > 0) ) return this._onModifyWall(false);
+    // Refresh the display
+    return this._onModifyWall(false);
   }
 
   /* -------------------------------------------- */
@@ -45507,8 +46041,8 @@ class AbstractBaseShader extends PIXI.Shader {
    * @return {AbstractBaseShader}
    */
   static create(defaultUniforms) {
-    const program = new PIXI.Program.from(this.vertexShader, this.fragmentShader);
-    const uniforms = mergeObject(this.defaultUniforms, defaultUniforms, { inplace: false });
+    const program = PIXI.Program.from(this.vertexShader, this.fragmentShader);
+    const uniforms = mergeObject(this.defaultUniforms, defaultUniforms, { inplace: false, insertKeys: false });
     return new this(program, uniforms);
   }
 
@@ -46770,7 +47304,7 @@ class DoorControl extends PIXI.Container {
   get isVisible() {
     const [x, y] = this.wall.midpoint;
     const point = new PIXI.Point(x, y);
-    return canvas.sight.testVisibility(point, {tolerance: 2});
+    return canvas.sight.testVisibility(point, {tolerance: 2, object: this});
   }
 
   /* -------------------------------------------- */
@@ -46907,6 +47441,13 @@ class ControlsLayer extends CanvasLayer {
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static get layerOptions() {
+    return mergeObject(super.layerOptions, { zIndex: 400 });
+  }
+
+  /* -------------------------------------------- */
   /*  Properties and Public Methods               */
   /* -------------------------------------------- */
 
@@ -47024,6 +47565,7 @@ class ControlsLayer extends CanvasLayer {
   /** @override */
   deactivate() {
     super.deactivate();
+    this.visible = true;
     this.interactiveChildren = true;
   }
 
@@ -47179,9 +47721,6 @@ class Ruler extends PIXI.Container {
      * @type {number}
      */
     this._state = Ruler.STATES.INACTIVE;
-
-    // Create a grid HighlightLayer for this Ruler
-    canvas.grid.addHighlightLayer(this.name);
   }
 
   /* -------------------------------------------- */
@@ -47232,7 +47771,7 @@ class Ruler extends PIXI.Container {
     }
 
     // Clear the grid highlight layer
-    const hlt = canvas.grid.highlightLayers[this.name];
+    const hlt = canvas.grid.highlightLayers[this.name] || canvas.grid.addHighlightLayer(this.name);
     hlt.clear();
 
     // Draw measured path
@@ -47388,13 +47927,10 @@ class Ruler extends PIXI.Container {
    */
   _getMovementToken() {
     let [x0, y0] = Object.values(this.waypoints[0]);
-    const tokens = new Set(canvas.tokens.controlled);
-    if ( !tokens.size && game.user.character ) {
-      const charTokens = game.user.character.getActiveTokens();
-      if ( charTokens.length ) tokens.add(...charTokens);
-    }
-    if ( !tokens.size ) return null;
-    return Array.from(tokens).find(t => {
+    let tokens = canvas.tokens.controlled;
+    if ( !tokens.length && game.user.character ) tokens = game.user.character.getActiveTokens();
+    if ( !tokens.length ) return null;
+    return tokens.find(t => {
       let pos = new PIXI.Rectangle(t.x - 1, t.y - 1, t.w + 2, t.h + 2);
       return pos.contains(x0, y0);
     });
@@ -48636,6 +49172,15 @@ class GridLayer extends CanvasLayer {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static get layerOptions() {
+    return mergeObject(super.layerOptions, {
+      zIndex: 30
+    });
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The grid type rendered in this Scene
    * @type {string}
@@ -48698,6 +49243,7 @@ class GridLayer extends CanvasLayer {
     else grid = new HexagonalGrid(gridOptions);
 
     // Draw the highlight layer
+    this.highlightLayers = {};
     this.highlight = this.addChild(new PIXI.Container());
 
     // Draw the grid
@@ -49884,14 +50430,13 @@ class EasyRTCClient extends AVClient {
       // Configure custom server
       let host = url;
       let credential = {username, password};
-      let socketPath = "/easyrtc";
+      let socketPath = getRoute("easyrtc");
 
       // Fall-back to default server
       const isCustom = ( type === "custom" ) && ( url !== '' );
       if ( !isCustom ) {
         host = window.location.origin;
         credential = {sessionId: game.sessionId };
-        if ( ROUTE_PREFIX ) socketPath = `/${ROUTE_PREFIX}`+socketPath;
       }
 
       // Configure EasyRTC socket and credentials
@@ -50616,7 +51161,7 @@ class EasyRTCClient extends AVClient {
  *
  * @type {Object}
  */
-const CONFIG = {
+const CONFIG = window.CONFIG = {
 
   /**
    * Configure debugging flags to display additional information
@@ -51172,11 +51717,31 @@ const CONFIG = {
 
   /**
    * Default configuration options for TinyMCE editors
+   * @type {object}
    */
   TinyMCE: {
-    css: ["/css/mce.css"],
+    branding: false,
+    menubar: false,
+    statusbar: false,
+    content_css: ["/css/mce.css"],
     plugins: "lists image table hr code save link",
-    toolbar: "styleselect bullist numlist image table hr link removeformat code save"
+    toolbar: "styleselect bullist numlist image table hr link removeformat code save",
+    save_enablewhendirty: true,
+    table_default_styles: {},
+    style_formats: [
+      {
+        title: "Custom",
+        items: [
+          {
+            title: "Secret",
+            block: 'section',
+            classes: 'secret',
+            wrapper: true
+          }
+        ]
+      }
+    ],
+    style_formats_merge: true,
   },
 
   /**
@@ -51229,12 +51794,42 @@ const CONFIG = {
   }
 };
 
+/**
+ * This object records the major version number of each component feature of Foundry Virtual Tabletop.
+ * This can be referenced by modules and systems to provide conditional logic for when different handling may be needed.
+ * When a component feature receives a major new revision, the number of its feature version is incremented.
+ * @type {Object<string, number>}
+ */
+const FEATURES = window.FEATURES = {
+  ACTIVE_EFFECTS: 1,
+  ACTORS: 2,
+  AUDIO_VIDEO: 2,
+  CHAT: 2,
+  COMBAT: 2,
+  COMPENDIUM: 2,
+  DICE: 2,
+  DRAWINGS: 2,
+  ENTITIES: 4,
+  GRID: 2,
+  ITEMS: 2,
+  JOURNAL: 1,
+  LIGHTING: 2,
+  LOCALIZATION: 2,
+  MACROS: 1,
+  NOTES: 1,
+  PLAYLISTS: 1,
+  ROLL_TABLES: 1,
+  SETTINGS: 2,
+  SOUND: 1,
+  TEMPLATES: 1,
+  TILES: 2,
+  TOKENS: 3,
+  WALLS: 2
+}
+
 // Default Entity sheet registrations
 Actors.registerSheet("core", ActorSheet, {label: "Default Actor Sheet"});
 Items.registerSheet("core", ItemSheet, {label: "Default Item Sheet"});
-
-// "Export" the CONFIG by adding it to the window global
-window.CONFIG = CONFIG;
 
 // Window Exports
 window.CONST = CONST;

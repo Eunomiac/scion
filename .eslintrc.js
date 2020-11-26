@@ -71,8 +71,8 @@ module.exports = {
                 ArrayExpression: "first",
                 ObjectExpression: "first",
                 ImportDeclaration: "first",
-                flatTernaryExpressions: true
-                // "ignoreComments": false
+                flatTernaryExpressions: true,
+                ignoreComments: true
             }
         ],
         "linebreak-style": ["warn", "windows"],

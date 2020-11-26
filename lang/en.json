@@ -47,9 +47,12 @@
             "concept": "Concept",
             "path": "Path",
             "paths": "Paths",
+            "origin": "Origin",
             "originPath": "Origin Path",
+            "role": "Role",
             "rolePath": "Role Path",
             "pantheonPath": "Pantheon Path",
+            "society": "Society",
             "societyPath": "Society Path",
             "calling": "Calling",
             "callings": "Callings",
@@ -64,8 +67,13 @@
             "deed": "Deed",
             "deeds": "Deeds",
             "shortTerm": "Short-Term",
+            "shortTermDeed": "Short-Term Deed",
+            "shortTermDeeds": "Short-Term Deeds",
             "longTerm": "Long-Term",
-            "band": "Band"                   
+            "longTermDeed": "Long-Term Deed",
+            "longTermDeeds": "Long-Term Deeds",
+            "band": "Band",
+            "bandDeed": "Band Deed"
         },
         "headings": {
             "main": {
