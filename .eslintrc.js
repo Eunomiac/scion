@@ -49,6 +49,7 @@ module.exports = {
         eqeqeq: ["warn", "always"],
         "function-paren-newline": "warn",
         "import/extensions": 0,
+        "import/no-named-as-default-member": 0,
         indent: [
             "warn",
             4,
@@ -167,6 +168,7 @@ module.exports = {
         Macro: "readonly",
         Roll: "readonly",
         duplicate: "readonly",
+        getProperty: "readonly",
         loadTemplates: "readonly",
         mergeObject: "readonly",
         ui: "readonly"

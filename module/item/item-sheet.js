@@ -1,9 +1,6 @@
-/**
- * Extend the basic ItemSheet with some very simple modifications
- * @extends {ItemSheet}
- */
+import {_, U} from "../data/utils.js";
+
 export class ScionItemSheet extends ItemSheet {
-    /** @override */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "item"],
@@ -12,8 +9,10 @@ export class ScionItemSheet extends ItemSheet {
             tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
         });
     }
+    /* get template() {
+        return `systems/scion/templates/item/${this.object.data.type}-sheet.hbs`;
+    } */
 
-    /** @override */
     get template() {
         const path = "systems/scion/templates/item";
         // Return a single sheet for all item types.
@@ -54,5 +53,22 @@ export class ScionItemSheet extends ItemSheet {
         //    return;
 
     // Roll handlers, click handlers, etc. would go here.
+    }
+}
+
+export class ScionPathSheet extends ScionItemSheet {
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["scion", "sheet", "item", "path"],
+            width: 520,
+            height: 480,
+            tabs: [
+                {
+                    navSelector: ".sheet-tabs",
+                    contentSelector: ".sheet-body",
+                    initial: "pathGen"
+                }
+            ]
+        });
     }
 }

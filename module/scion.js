@@ -1,12 +1,9 @@
 // #region Import Modules
-// import _, {map} from "./external/underscore/underscore-esm-min";
-import {scionSystemData, itemCategories, handlebarTemplates, signatureChars} from "./data/constants.js";
-import * as U from "./data/utils.js";
+import {_, U, C, SCION, itemCategories, handlebarTemplates, signatureChars} from "./data/utils.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
 import {ScionItem} from "./item/item.js";
 import {ScionItemSheet} from "./item/item-sheet.js";
-// import {preloadHandlebarsTemplates} from "./templates.js";
 import "./external/gl-matrix-min.js";
 // #endregion
 
@@ -14,7 +11,6 @@ import "./external/gl-matrix-min.js";
 Hooks.once("init", async () => {
     console.clear();
     console.log("INITIALIZING SCION.JS ...");
-    CONFIG.scion = scionSystemData;
 
     game.scion = {
         ScionActor,
@@ -25,9 +21,17 @@ Hooks.once("init", async () => {
         }
     };
 
+    // Register System-Specific Constants
+    CONFIG.scion = SCION;
+
+    // Debug
+    // CONFIG.debug.hooks = true;
+
     // Define custom Entity classes
     CONFIG.Actor.entityClass = ScionActor;
     CONFIG.Item.entityClass = ScionItem;
+
+    U.LOG(CONFIG, "[CONFIG]", "CONFIG", {style: "info"});
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
@@ -35,8 +39,11 @@ Hooks.once("init", async () => {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("scion", ScionItemSheet, {makeDefault: true});
 
+    U.LOG(U.FlattenNestedValues(handlebarTemplates), "[Handlebar Templates]", "CONFIG", {style: "info"});
     // Preload Handlebars Template Partials
-    (async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates).map((x) => (typeof x === "function" ? x() : x))))();
+    (
+        async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates).map((x) => (typeof x === "function" ? x() : x)))
+    )();
 
     // #region Handlebar Helpers
     Handlebars.registerHelper("display", (...args) => {
@@ -83,10 +90,11 @@ Hooks.once("ready", async () => {
         CONFIG.scion.ATTRIBUTES.approaches,
         (v, k) => U.Loc(`scion.game.${k}`)
     );
-
     // If any signature characters are missing, create them
     const sigChars = new Set();
-    const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
+    // const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
+    const charNames = ActorDirectory.collection.map((x) => x.name);
+    console.log(charNames);
     Object.keys(signatureChars).forEach((sigName) => {
         if (!charNames.includes(sigName))
             sigChars.add(sigName);

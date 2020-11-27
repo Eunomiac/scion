@@ -1,7 +1,5 @@
-/**
- * Extend the basic Item with some very simple modifications.
- * @extends {Item}
- */
+import {_, U} from "../data/utils.js";
+
 export class ScionItem extends Item {
     prepareData() {
         super.prepareData();

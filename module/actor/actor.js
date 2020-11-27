@@ -1,9 +1,5 @@
-import * as _ from "../external/underscore/underscore-esm-min.js";
-import * as U from "../data/utils.js";
-/**
- * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
- * @extends {Actor}
- */
+import {_, U} from "../data/utils.js";
+
 export class ScionActor extends Actor {
     prepareData() {
         super.prepareData();
@@ -32,7 +28,7 @@ export class ScionActor extends Actor {
                 };
         });
         if (Object.keys(pathData).length)
-            this.createEmbeddedEntity("OwnedItem", Object.values(pathData)).then(() => U.LOG(this.paths, "[Paths]", "prepareCharacterData"));
+            this.createOwnedItem(Object.values(pathData)).then(() => U.LOG(this.paths, "[Paths]", "prepareCharacterData"));
         // #endregion
     }
 

@@ -1,12 +1,5 @@
-import * as _ from "../external/underscore/underscore-esm-min.js";
-import * as U from "../data/utils.js";
-import {handlebarTemplates, itemCategories} from "../data/constants.js";
+import {_, U, itemCategories, handlebarTemplates} from "../data/utils.js";
 import "../external/dragula.min.js";
-import {Dust} from "../external/dust.js";
-/**
- * Extend the basic ActorSheet with some very simple modifications
- * @extends {ActorSheet}
- */
 
 export class ScionActorSheet extends ActorSheet {
     static get defaultOptions() {
@@ -103,7 +96,7 @@ export class ScionActorSheet extends ActorSheet {
             data[itemCategory] = itemsArray.filter((item) => itemTypes.includes(item.type));
         // #endregion
 
-        U.LOG(data, "[Sheet Context]", "getData", {style: "data", isGrouping: `[ActorSheet] ${this.actor.name}`});
+        U.LOG(data, "[Sheet Context]", "getData", {style: "data", isTracing: true, isGrouping: `[ActorSheet] ${this.actor.name}`});
         U.LOG(actorData, "[Actor.Data]", "getData", {style: "data"});
         return data;
     }
@@ -189,11 +182,10 @@ export class ScionActorSheet extends ActorSheet {
             event.preventDefault();
             const element = event.currentTarget;
             const dataSet = element.dataset;
-            const item = this.actor.items.get(dataSet.pathid);
-            U.LOG(dataSet, "[Data Set]", "openItem", {style: "data", isGrouping: `[Open Owned Item]`, groupStyle: "info"});
+            const item = this.actor.getOwnedItem(dataSet.pathid);
+            U.LOG(dataSet, "[Element.DataSet]", "openItem", {style: "data", isGrouping: `[Open Owned Item: ${item.name}]`, groupStyle: "info"});
             U.LOG(this.actor.items, "[Actor.Items]", "openItem", {style: "data", isUngrouping: false});
-            U.LOG(item, "[Item]", "openItem", {style: "data", isUngrouping: false});
-            U.LOG(item.sheet.render, "[Item.Render]", "openItem", {style: "data"});
+            U.LOG(item, "[Item]", "openItem", {style: "data"});
             item.sheet.render(true, {
                 left: 100,
                 top: 100,
