@@ -1,10 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
-        <img class="sheet-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
         <div class="header-fields">
-                <div class="itemName text title {{#if data.isEditable.title}}edit editable{{/if}}" data-path="actor.name"></div>
-                
-                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+                <div class="itemName text title {{#if data.isEditable.title}}contentEditable{{/if}}" data-path="item.name"></div>
         </div>
     </header>
 
@@ -16,7 +13,6 @@
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
             {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}

@@ -1,0 +1,36 @@
+/* #region FLEX LAYOUTS */
+.flex {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    align-items: safe flex-start;
+    justify-content: space-between;
+    align-content: safe flex-start;
+
+    &.flexContainer { height: 100%; }
+    &.spaceCenter { justify-content: center; }
+    &.column { flex-flow: column nowrap; }
+
+    div { width: 100%; } // Divs assumed to take up whole row.
+    span { display: inline-block; margin: auto 0; flex: 1 0 auto; } // Use spans for inline labels, etc.
+    
+    > *:not(.heading1) { flex: 0 1 auto; margin: 0.15rem 0.25rem; } // initialize all contained items as default.
+
+    .flexRow { flex-flow: row nowrap; align-items: center; } // For one-line spacing.
+    .flexLabel { flex: 1 0 auto; } // Can grow, can't shrink.
+    .flexStatic { flex: 0 0 auto; }  // Can't grow or shrink.
+    .contentEditable { flex: 0 1 auto; } // Editable elements have max flexibility.
+}    
+/* #endregion */
+
+/* #region GRID LAYOUTS */
+.grid {    
+    display: grid;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    grid-gap: 0;
+}
+/* #endregion */

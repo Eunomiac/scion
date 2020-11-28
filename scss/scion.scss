@@ -23,9 +23,11 @@ body.vtt.game.system-scion {
     box-shadow: none;
     background: none;
 
-    @import 'comps/base'; // Base Styles: HTML Elements, Headers
-    @import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
-    @import 'comps/tabs'; // Navigation Tabs
+    &:not(.test) {
+      @import 'comps/base'; // Base Styles: HTML Elements, Headers
+      @import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
+      @import 'comps/tabs'; // Navigation Tabs
+    }
     
     header.window-header { @import 'window/header'; }
     section.window-content {
@@ -38,7 +40,7 @@ body.vtt.game.system-scion {
     div.window-resizable-handle { display: none; }
     
     /* #region SHEET ACTORS */
-    &.actor {
+    &:not(.test).actor {
 
       .main {
         @import 'scionActor/main';
@@ -63,11 +65,14 @@ body.vtt.game.system-scion {
     /* #endregion */ 
 
     /* #region ITEM SHEETS */ 
-    &.item {
+    &:not(.test).item {
       @import 'scionItem/main';
       @import 'scionItem/types';
     }
     /* #endregion */
+  }
+  div.sheet.scion.test {
+    @import 'scionTEST';
   }
   /* #endregion */
 }

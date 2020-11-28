@@ -10,36 +10,8 @@ import {Dust} from "../external/dust.js";
 
 export class ScionActorSheet extends ActorSheet {
     static get defaultOptions() {
-        /*  super.defaultOptions = {
-                baseApplication: "ActorSheet",
-                classes: ["sheet"],
-                template: "templates/sheets/actor-sheet.html",
-                id: "",
-                title: "",
-                top: null,
-                left: null,
-                height: 720,
-                width: 800,
-                editable: true,
-                minimizable: true,
-                popOut: true,
-                resizable: true,
-                submitOnChange: true,
-                submitOnClose: true,
-                closeOnSubmit: false,
-                tabs: [],
-                filters: [],
-                scrollY: [],
-                dragDrop: [
-                    {
-                        dragSelector: ".item-list .item",
-                        dropSelector: null
-                    }
-                ],
-                viewPermission: 1
-            }; */
         return mergeObject(super.defaultOptions, {
-            classes: ["scion", "sheet", "actor"],
+            classes: game.scion.debug.isTesting ? ["scion", "sheet", "actor", "test"] : ["scion", "sheet", "actor"],
             width: 750,
             height: 750,
             tabs: [
@@ -190,15 +162,9 @@ export class ScionActorSheet extends ActorSheet {
             const element = event.currentTarget;
             const dataSet = element.dataset;
             const item = this.actor.items.get(dataSet.pathid);
-            U.LOG(dataSet, "[Data Set]", "openItem", {style: "data", isGrouping: `[Open Owned Item]`, groupStyle: "info"});
-            U.LOG(this.actor.items, "[Actor.Items]", "openItem", {style: "data", isUngrouping: false});
-            U.LOG(item, "[Item]", "openItem", {style: "data", isUngrouping: false});
-            U.LOG(item.sheet.render, "[Item.Render]", "openItem", {style: "data"});
-            item.sheet.render(true, {
-                left: 100,
-                top: 100,
-                log: true
-            });
+            U.LOG(dataSet, "[Data Set]", "openItem", {style: "data", isGrouping: "[Open Owned Item]", groupStyle: "info"});
+            U.LOG(item, "[Item]", "openItem", {style: "data"});
+            item.sheet.render(true);
         };
         html.find(".clickable.item-open").each((i, element) => {
             element.addEventListener("click", _onOpenOwnedItem.bind(this));
@@ -222,7 +188,7 @@ export class ScionActorSheet extends ActorSheet {
                 mirrorContainer: html.find(".sortStorer")[0]
             }
         );
-        drake.on("drop", () => {
+        drake.on("drop", void (() => {
             console.log({["@@ DRAKE DROP @@"]: this});
             const prioritiesContainer = html.find("#prioritySort")[0];
             const children = Array.from(prioritiesContainer.children).map((x) => ["mental", "physical", "social"].find((xx) => Array.from(x.classList).includes(xx)));
@@ -232,7 +198,7 @@ export class ScionActorSheet extends ActorSheet {
             });
             console.log(updateData);
             this.actor.update(updateData);
-        });
+        }));
         // #endregion
     }
 }

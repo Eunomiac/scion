@@ -1,0 +1,235 @@
+
+& {
+    --bgColorMatte: #{$c-white};
+    --bgImage: url("../images/actor-sheet/backgrounds/Generic.png");
+
+    // Body Text
+    --fontColorBody: #{$c-black};
+    --fontFamilyBody: "#{$fontFamilyBodyDefault}";
+    --fontSizeBody: 1rem;
+    --fontWeightBody: bold;
+
+    // Title
+    --fontColorTitle: #{$c-black};
+    --bgColorTitle: transparent;
+    --fontFamilyTitle: "#{$fontFamilyTitleDefault}";
+    --fontStyleTitle: normal;
+    --fontVariantTitle: normal;
+    --fontWeightTitle: normal;
+    --textTransformTitle: none;
+    --fontSizeTitle: 2.5rem;
+    --paddingTitle: 0;
+    --lineHeightTitle: var(--fontSizeTitle);
+    --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+    --fontScaleTitle: 1;
+
+
+    // SurTitle
+    --fontColorSurTitle: var(--fontColorTitle);
+    --bgColorSurTitle: var(--bgColorTitle);
+    --fontFamilySurTitle: var(--fontFamilyBody);
+    --fontStyleSurTitle: normal;
+    --fontVariantSurTitle: normal;
+    --fontWeightSurTitle: normal;
+    --textTransformSurTitle: none;
+    --fontSizeSurTitle: 1.5rem;
+    --paddingSurTitle: 0;
+    --lineHeightSurTitle: var(--fontSizeSurTitle);
+    --textShadowSurTitle: var(--textShadowTitle);
+    --fontScaleSurTitle: 1;
+
+    // SubTitle
+    --fontColorSubTitle: var(--fontColorTitle);
+    --bgColorSubTitle: var(--bgColorTitle);
+    --fontFamilySubTitle: "#{$fontFamilyTitleDefault}";
+    --fontStyleSubTitle: normal;
+    --fontVariantSubTitle: normal;
+    --fontWeightSubTitle: bold;
+    --textTransformSubTitle: none;
+    --fontSizeSubTitle: 1rem;
+    --paddingSubTitle: 0;
+    --lineHeightSubTitle: var(--fontSizeSubTitle);
+    --textShadowSubTitle: var(--textShadowTitle);
+    --fontScaleSubTitle: 1;
+
+    // Heading 1
+    --fontColorHeading1: var(--fontColorTitle);
+    --bgColorHeading1: transparent;
+    --fontFamilyHeading1: var(--fontFamilyTitle);
+    --fontStyleHeading1: normal;
+    --fontVariantHeading1: small-caps;
+    --fontWeightHeading1: normal;
+    --textTransformHeading1: none;
+    --fontSizeHeading1: 1.5rem;
+    --paddingHeading1: 0;
+    --lineHeightHeading1: var(--fontSizeHeading1);
+    --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
+    --fontScaleHeading1: 1;
+    --borderBottomHeading1: 2px solid var(--fontColorHeading1);
+
+    // Heading 2
+    --fontColorHeading2: var(--fontColorSubTitle);
+    --bgColorHeading2: transparent;
+    --fontFamilyHeading2: var(--fontFamilyBody);
+    --fontStyleHeading2: normal;
+    --fontVariantHeading2: normal;
+    --fontWeightHeading2: bold;
+    --textTransformHeading2: none;
+    --fontSizeHeading2: 1.25rem;
+    --paddingHeading2: 0;
+    --lineHeightHeading2: var(--fontSizeHeading2);
+    --textShadowHeading2: none;
+    --borderBottomHeading2: none;
+
+    // Heading 3
+    --fontColorHeading3: var(--fontColorSubTitle);
+    --bgColorHeading3: transparent;
+    --fontFamilyHeading3: var(--fontFamilyBody);
+    --fontStyleHeading3: normal;
+    --fontVariantHeading3: normal;
+    --fontWeightHeading3: bold;
+    --textTransformHeading3: none;
+    --fontSizeHeading3: 1rem;
+    --paddingHeading3: 0;
+    --lineHeightHeading3: var(--fontSizeHeading3);
+    --textShadowHeading3: none;
+    --borderBottomHeading3: none;
+
+    @include scaled-colors(#aaaaaa);
+}
+
+.aesir {
+    --fontFamilyTitle: "Amarante";
+}
+
+// .deva { }
+
+// .kami { }
+
+.loa {
+    --bgImage: url("../images/actor-sheet/backgrounds/Loa.png");
+    --fontFamilyTitle: "Finger Paint";
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
+    --fontSizeTitle: 2rem;
+}
+
+// .manitou { }
+
+.netjer {
+    $matteColor: #f6f0e2;
+    $headingColor1: #554a39;
+    $headingColor2: #6e4a28;
+    $accentColor: #834107;
+    $bodyColor: #2d2d2f;
+
+    --fontColorBody: #{$bodyColor};
+    --fontFamilyBody: "Gothic Ultra";
+
+    --bgImage: url("../images/actor-sheet/backgrounds/Netjer.png");
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
+    --bgColorMatte: #{$matteColor};
+
+
+    --fontColorTitle: #{$headingColor1};
+    --fontFamilyTitle: "Zanzabar";
+
+    --fontColorSubTitle: #{$headingColor2};
+    --fontFamilySubTitle: "Carolingia";
+    --fontSizeSubTitle: 1.75rem;
+    --lineHeightSubTitle: 1.65rem;
+    --fontWeightSubTitle: normal;
+    --fontScaleSubTitle: 0.75;
+
+    --fontColorSurTitle: #{$headingColor1};
+    --fontWeightSurTitle: bold;
+
+    --fontColorHeading1: var(--fontColorSubTitle);
+    --borderBottomHeading1: 1px solid var(--fontColorHeading);
+
+    @include scaled-colors($accentColor);
+}
+
+// .shen { }
+
+.teotl {
+    --fontFamilyTitle: "Pirata One";
+ }
+
+.theoi {
+    $matteColor: #ffffff;
+    $headingColor1: #000fb8;
+    $headingColor2: #4757ff; 
+    $accentColor: #8e52ff;
+    $bodyColor: #000538;
+
+    --bgImage: url("../images/actor-sheet/backgrounds/Theoi.png");
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
+
+
+    --bgColorMatte: #{$matteColor};
+      
+    --fontColorTitle: #{$headingColor1};
+    --fontFamilyTitle: "Poiret One";
+    --fontWeightTitle: bold;
+    --fontColorHeading1: var(--fontColorTitle);
+    --fontFamilyHeading1: var(--fontFamilyTitle);
+    --fontWeightHeading1: bold;
+    --fontVariantHeading1: small-caps;
+    --borderBottomHeading1: 2px solid var(--fontColorTitle);
+
+    --fontColorSubTitle: #{$headingColor2};
+    --fontFamilySubTitle: "Elektra";
+    --fontSizeSubTitle: 1.2rem;
+    --fontWeightSubTitle: normal;
+
+    --fontColorSurTitle: #{$headingColor2};
+    --fontFamilySurTitle: "Poiret One";
+    --fontWeightSurTitle: bold;
+    --fontVariantSurTitle: small-caps;
+
+    --fontColorBody: #{$bodyColor};
+    --fontFamilyBody: "Poiret One";
+    
+    @include scaled-colors($accentColor);
+}
+
+.tuathaDeDanann {
+    $matteColor: #efffd1;
+    $headingColor1: #296f17;
+    $headingColor2: #19430e;
+    $accentColor: #25951f;
+    $bodyColor: #1a211d;
+
+    --bgImage: url("../images/actor-sheet/backgrounds/Tuatha.png");
+    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
+    --bgColorMatte: #{$matteColor};
+    
+    --fontColorTitle: #{$headingColor1};
+    --fontFamilyTitle: "Berkshire Swash";
+    --fontColorHeading1: var(--fontColorTitle);
+    --fontFamilyHeading1: var(--fontFamilyTitle);
+    --borderBottomHeading1: 2px solid var(--fontColorTitle);
+    --fontVariantHeading1: normal;
+    --fontSizeTitle: 2.5rem;
+
+    --fontColorSubTitle: #{$headingColor2};
+    --fontFamilySubTitle: "Della Respira";
+    --fontStyleSubTitle: italic;
+
+    --fontColorSurTitle: #{$headingColor1};
+    --fontWeightSurTitle: bold;
+
+    --fontColorBody: #{$bodyColor};
+    
+    @include scaled-colors($accentColor);
+}
+
+// .nemetondevos { }
+
+.orisha {
+    --bgImage: url("../images/actor-sheet/backgrounds/Orisha.png");
+    --fontFamilyTitle: "Finger Paint";
+    --fontSizeTitle: 2rem;
+}
+
+// .yazata { }

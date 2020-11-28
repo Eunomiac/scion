@@ -1,0 +1,26 @@
+/* #region ACTOR SHEETS */ 
+&.actor {
+  .main {
+    @import 'test/scionActor/main';
+    .sheet-body {
+      grid-area: body;
+      pointer-events: all;
+      .tab[data-tab].active { height: 100%; }
+
+      .tab .chargen { @import "test/scionActor/chargen/actor-chargen"; }
+      .tab .front { @import "test/scionActor/front/actor-front"; }
+
+      /* #region Owned Item Partials */
+      .path-block { @import "test/scionActor/ownedItems/path-block"; }
+      /* #endregion */
+    }
+  }
+  @import 'scionActor/pantheons';
+}
+
+/* #region ITEM SHEETS */ 
+&.item {
+  @import 'test/scionItem/main';
+  @import 'test/scionItem/types';
+}
+/* #endregion */

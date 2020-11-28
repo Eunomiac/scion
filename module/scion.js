@@ -1,12 +1,11 @@
 // #region Import Modules
-// import _, {map} from "./external/underscore/underscore-esm-min";
-import {scionSystemData, itemCategories, handlebarTemplates, signatureChars} from "./data/constants.js";
+import _ from "./external/underscore/underscore-esm-min.js";
+import {scionSystemData as SCION, itemCategories as ITEMCATS, handlebarTemplates, signatureChars} from "./data/constants.js";
 import * as U from "./data/utils.js";
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
 import {ScionItem} from "./item/item.js";
 import {ScionItemSheet} from "./item/item-sheet.js";
-// import {preloadHandlebarsTemplates} from "./templates.js";
 import "./external/gl-matrix-min.js";
 // #endregion
 
@@ -14,13 +13,14 @@ import "./external/gl-matrix-min.js";
 Hooks.once("init", async () => {
     console.clear();
     console.log("INITIALIZING SCION.JS ...");
-    CONFIG.scion = scionSystemData;
+    CONFIG.scion = SCION;
 
     game.scion = {
         ScionActor,
         ScionItem,
         debug: {
             isDebugging: true,
+            isTesting: false,
             watchList: []
         }
     };
@@ -74,7 +74,7 @@ Hooks.once("init", async () => {
 // #endregion
 
 // #region Hook: Ready
-Hooks.once("ready", async () => {
+Hooks.once("ready", void (async () => {
     // Make Localized Dictionaries for Handlebar Select Options
     CONFIG.scion.tierList = U.MakeDict(CONFIG.scion.TIERS);
     CONFIG.scion.pantheonList = U.MakeDict(CONFIG.scion.PANTHEONS);
@@ -91,7 +91,6 @@ Hooks.once("ready", async () => {
         if (!charNames.includes(sigName))
             sigChars.add(sigName);
     });
-    // ActorDirectory.collection.forEach((data) => { sigChars.delete(data.name) });
     sigChars.forEach((sigName) => {
         const actorData = signatureChars[sigName];
         U.LOG(actorData, "Sig Char Creation", "hookReady");
@@ -101,5 +100,5 @@ Hooks.once("ready", async () => {
             data: actorData
         });
     });
-});
+}));
 // #endregion
