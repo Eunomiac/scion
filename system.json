@@ -12,7 +12,8 @@
     "module/scion.js"
   ],
   "styles": [
-    "css/scion.css"
+    "css/scion.css",
+    "css/scionTEST.css"
   ],
   "packs": [],
   "languages": [

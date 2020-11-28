@@ -1,3 +1,7 @@
+/* ***********************************************************
+   ********************** TEST STYLES ************************
+   *********************************************************** */
+
 /* #region IMPORT */
 @use "sass:string";
 
@@ -23,27 +27,52 @@ body.vtt.game.system-scion {
     box-shadow: none;
     background: none;
 
-    &:not(.test) {
-      @import 'comps/base'; // Base Styles: HTML Elements, Headers
-      @import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
-      @import 'comps/tabs'; // Navigation Tabs
-    }
+    @import 'test/comps/base'; // Base Styles: HTML Elements, Headers
+    @import 'test/comps/layoutBlocks'; // Grid & Flex Layout Plans
+    @import 'test/comps/tabs'; // Navigation Tabs
     
     header.window-header { @import 'window/header'; }
     section.window-content {
       @import 'window/content';
 
       form.editable {
-        @import 'window/form';
+        @import 'window/form'; 
       }
     }
     div.window-resizable-handle { display: none; }
-    
+
+    /* #region ACTOR SHEETS */ 
+    &.actor {
+      .main {
+        @import 'test/scionActor/main';
+        .sheet-body {
+          grid-area: body;
+          pointer-events: all;
+          .tab[data-tab].active { height: 100%; }
+
+          .tab .chargen { @import "test/scionActor/chargen/actor-chargen"; }
+          .tab .front { @import "test/scionActor/front/actor-front"; }
+
+          /* #region Owned Item Partials */
+          .path-block { @import "test/scionActor/ownedItems/path-block"; }
+          /* #endregion */
+        }
+      }
+      @import 'scionActor/pantheons';
+    }
+
+    /* #region ITEM SHEETS */ 
+    &.item {
+      @import 'test/scionItem/main';
+      @import 'test/scionItem/types';
+    }
+    /* #endregion */
+
     /* #region SHEET ACTORS */
-    &:not(.test).actor {
+    &.actor {
 
       .main {
-        @import 'scionActor/main';
+        @import 'scionActor/main'; 
 
         .sheet-body {
           grid-area: body;
@@ -65,14 +94,12 @@ body.vtt.game.system-scion {
     /* #endregion */ 
 
     /* #region ITEM SHEETS */ 
-    &:not(.test).item {
+    &.item {
       @import 'scionItem/main';
       @import 'scionItem/types';
     }
     /* #endregion */
-  }
-  div.sheet.scion.test {
-    @import 'scionTEST';
+  }    
   }
   /* #endregion */
 }
