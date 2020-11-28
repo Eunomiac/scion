@@ -1,0 +1,54 @@
+/* #region FLEX LAYOUTS */
+.flex {
+    &:not(.tab), &.active {
+        display: flex;
+    }
+    flex-flow: row wrap;
+    align-items: safe flex-start;
+    justify-content: space-between;
+    align-content: safe flex-start;
+
+    > * { flex: 1 1 auto; } // Default flex for contained elements.
+
+    // nav.flexRow { flex: 1 0 auto; } // Horizontal nav tabs should fill entire row.
+
+    &.spaceCenter { justify-content: center; }
+    &.flexColumn, .flexColumn {
+        flex-basis: 100%;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        div { flex: 1 1 auto; }
+        nav { flex: 0 0 auto; }
+    }
+    &.flexRow, .flexRow {
+        flex-basis: 100%;
+        flex-shrink: 0;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        margin: 5px 0;
+        label { flex-grow: 0; }
+        nav { margin: 10px 0 0 0; }
+        
+        // > * { flex: 1 0 auto; }
+        // div { flex: 1 0 100%; }
+        // nav { flex: 1 0 100%; }
+    }
+
+    span { display: inline-block; margin: auto 0; flex: 1 0 auto; } // Use spans for inline labels, etc.
+    
+    .flexLabel { flex: 1 0 auto; } // Can grow, can't shrink.
+    .flexStatic { flex: 0 0 auto; }  // Can't grow or shrink.
+}    
+/* #endregion */
+
+/* #region GRID LAYOUTS */
+.grid {    
+    display: grid;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    grid-gap: 0;
+}
+/* #endregion */

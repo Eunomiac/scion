@@ -1,19 +1,30 @@
+$isShowingTestBorders: false;
+$isShowingPadding: false;
+$isShowingBGShade: true;
+
 & {
     height: 100%;
     width: 100%;
-    padding: 18px 60px 38px 45px;
-    background-image: var(--bgImage);
+    padding: 40px 60px 40px 40px;
+    @if $isShowingPadding {
+        background-image: url("../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png");
+    } @else {
+        background-image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
+    }
     background-size: 100%;
     background-repeat: no-repeat;
     background-color: white;
     opacity: 1;        
 
-    grid: ". . ." 16px
-        "header header header" 96px
-        "body body body" 450px
-        "footer footer footer" 96px
-        / 14% 1fr 14%;
-    row-gap: 5px;
+    grid: ". header ." 75px
+        "body body body" 500px
+        ". footer ." 75px
+        / 75px 500px 75px;
+
+    @include box-shadow(8px, lime, true, $isShowingTestBorders); @include bg-shade(lime, $isShowingBGShade);
+    > * { @include box-shadow(6px, blue, true, $isShowingTestBorders); @include bg-shade(blue, $isShowingBGShade);
+        > * { @include box-shadow(4px, red, true, $isShowingTestBorders); @include bg-shade(red, $isShowingBGShade); }
+    }
 
     .menuRosette {
         $menuOpenSize: 200px;
@@ -189,18 +200,17 @@
     }
     .header {
         grid-area: header;
-        grid: ". divineTitle ." 24px
-            ". charName ." 48px
-            "patronage patronage patronage" 24px
-            / 12% 1fr 12%;
-
+        flex-flow: column nowrap;
+        
         div { pointer-events: all; }
 
-        .divineTitle { grid-area: divineTitle; line-height: 24px; }
-        .charName { grid-area: charName; line-height: 48px; }
-        .patronage { grid-area: patronage; line-height: 24px; }
+        .divineTitle { flex-grow: 1; }
+        .charName { flex-grow: 2; }
     }
-    .footer {grid-area: footer; }
+    .footer {
+        grid-area: footer;
+        flex-flow: column nowrap;
+    }
 }
 
 /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:

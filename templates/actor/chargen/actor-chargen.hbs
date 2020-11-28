@@ -1,35 +1,33 @@
 {{!-- Sheet Tab Navigation --}}
-<div class="chargen flex flexContainer">
-    <nav class="chargen-tabs tabs" data-group="chargen">
-        <a class="item" data-tab="step-one">{{localize "scion.headings.chargen.stepOneTab"}}</a>
-        <a class="item" data-tab="step-two">{{localize "scion.headings.chargen.stepTwoTab"}}</a>
-        <a class="item" data-tab="step-three">{{localize "scion.headings.chargen.stepThreeTab"}}</a>
-        <a class="item" data-tab="step-four">{{localize "scion.headings.chargen.stepFourTab"}}</a>
-        <a class="item" data-tab="step-five">{{localize "scion.headings.chargen.stepFiveTab"}}</a>
-        <a class="item" data-tab="step-six">{{localize "scion.headings.chargen.stepSixTab"}}</a>
-        <a class="item" data-tab="step-seven">{{localize "scion.headings.chargen.stepSevenTab"}}</a>
-    </nav>
-    <section class="chargen-body">
-        <div class="tab" data-group="chargen" data-tab="step-one">            
-            {{> (blocks.chargen.step-one.template) }}
-        </div>
-        <div class="tab" data-group="chargen" data-tab="step-two">
-            {{> (blocks.chargen.step-two.template) }}
-        </div>
-        <div class="tab" data-group="chargen" data-tab="step-three">
-            {{> (blocks.chargen.step-three.template) }}
-        </div>
-        <div class="tab" data-group="chargen" data-tab="step-four">
-            {{> (blocks.chargen.step-four.template) }}
-        </div>
-        <div class="tab" data-group="chargen" data-tab="step-five">
-            {{> (blocks.chargen.step-five.template) }}
-        </div>
-        <div class="tab" data-group="chargen" data-tab="step-six">
-            {{> (blocks.chargen.step-six.template) }}
-        </div>
-        <div class="tab" data-group="chargen" data-tab="step-seven">
-            {{> (blocks.chargen.step-seven.template) }}
-        </div>
-    </section>
-</div>
+<nav class="chargen-tabs tabs flexRow padded" data-group="chargen">
+    <a class="item" data-tab="step-one">{{localize "scion.headings.chargen.stepOneTab"}}</a>
+    <a class="item" data-tab="step-two">{{localize "scion.headings.chargen.stepTwoTab"}}</a>
+    <a class="item" data-tab="step-three">{{localize "scion.headings.chargen.stepThreeTab"}}</a>
+    <a class="item" data-tab="step-four">{{localize "scion.headings.chargen.stepFourTab"}}</a>
+    <a class="item" data-tab="step-five">{{localize "scion.headings.chargen.stepFiveTab"}}</a>
+    <a class="item" data-tab="step-six">{{localize "scion.headings.chargen.stepSixTab"}}</a>
+    <a class="item" data-tab="step-seven">{{localize "scion.headings.chargen.stepSevenTab"}}</a>
+</nav>
+<section class="chargen-body">
+    <div class="tab" data-group="chargen" data-tab="step-one">            
+        {{> (blocks.chargen.step-one.template) }}
+    </div>
+    <div class="tab" data-group="chargen" data-tab="step-two">
+        {{> (blocks.chargen.step-two.template) }}
+    </div>
+    <div class="tab" data-group="chargen" data-tab="step-three">
+        {{> (blocks.chargen.step-three.template) }}
+    </div>
+    <div class="tab" data-group="chargen" data-tab="step-four">
+        {{> (blocks.chargen.step-four.template) }}
+    </div>
+    <div class="tab" data-group="chargen" data-tab="step-five">
+        {{> (blocks.chargen.step-five.template) }}
+    </div>
+    <div class="tab" data-group="chargen" data-tab="step-six">
+        {{> (blocks.chargen.step-six.template) }}
+    </div>
+    <div class="tab" data-group="chargen" data-tab="step-seven">
+        {{> (blocks.chargen.step-seven.template) }}
+    </div>
+</section>

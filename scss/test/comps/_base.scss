@@ -1,0 +1,257 @@
+/* #region Element Default Styles */
+* {
+    color: var(--fontColorBody);
+    font-family: var(--fontFamilyBody);
+    font-size: var(--fontSizeBody);
+    font-weight: var(--fontWeightBody);
+}
+
+textarea,
+input[type="text"],
+select {
+    // height: 100%;
+    // width: 100%;
+    margin: 0px;
+    padding: 0px;
+    box-shadow: none;
+    border: none;
+    outline: none;
+
+    &:invalid {
+        @include disabledText;
+    }
+}
+/* #endregion */
+
+/* #region Editable Input Fields */
+.contentEditable {
+    text-indent: 5px;
+    box-shadow: none;
+    outline: none;
+
+    &.insetFrame {
+        min-height: 27px;
+        color: var(--fontColorBody);
+        font-family: var(--fontFamilyBody);
+        font-size: var(--fontSizeBody);
+        font-weight: bold;
+        border-radius: 1rem;
+        background-color: rgba(0,0,0,0.2);
+        border: inset 3px var(--scale6);
+    }
+}
+
+/* #endregion */
+
+/* #region Single-Purpose Classes */
+.readonly {
+    pointer-events: none;
+    resize: none;
+    overflow: hidden;
+}
+
+.hidden {
+    @include hide;
+}
+
+.text {
+    color: var(--fontColorBody);
+    font-family: var(--fontFamilyBody);
+    font-size: var(--fontSizeBody);
+    font-weight: var(--fontWeightBody);
+}
+
+.padded {
+    padding: $defaultPadding;
+}
+
+.placeholder {
+    @include disabledText;
+}
+
+.half { width: 50%; }
+.quarter { width: 25%; }
+.fifth { width: 20%; }
+
+.alignLeft { text-align: left !important; text-align-last: left !important;}
+.alignCenter { text-align: center !important; text-align-last: center !important;}
+.alignRight { text-align: right !important; text-align-last: right !important;}
+
+.strong { 
+    font-weight: bolder;
+    text-shadow: 0.5px 0.5px 1px black;
+    text-transform: uppercase;
+}
+/* #endregion */
+
+/* #region Dot Trackers */
+.dotline {
+    grid-area: dotline;
+    display: grid;
+    grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
+    grid-template-rows: 1rem;
+    align-content: center;
+    justify-content: center;
+
+    &.labelledDotLine {
+        width: 100%;
+        grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+    } 
+
+    &.largeDots {
+        grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+        grid-template-rows: 1.25rem;
+        column-gap: 0.5rem;
+    }
+
+    &.labelledDotLine.largeDots {
+        grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+    }
+    
+    .dot {
+        margin: 7% 7% 0 0;
+        border-radius: 50%;
+        box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4), inset -1px -1px 1px white;
+
+        &.full {
+            background: radial-gradient(#444, #0a0a0a);
+            border: solid 2px black;
+            box-shadow: 1px 1px 2px black;
+        }
+
+        &.unspent {
+            background: radial-gradient(#900, #5a0000);
+            border: solid 2px #5a0000;
+            box-shadow: 1px 1px 2px black;
+        }
+        
+        &.virtueCenter {
+            &::after {
+                content: "";
+                height: 150%;
+                width: 150%;
+                background-image: var(--virtueDarkImg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100%;
+            }
+
+            &.virtueFull::after {
+                background-image: var(--virtueGlowImg);
+            }
+        }
+    }
+}
+/* #endregion */
+
+.title {
+    width: calc(100% / var(--fontScaleTitle));
+    padding: var(--paddingTitle);
+    color: var(--fontColorTitle);
+    background-color: var(--bgColorTitle);
+    font: {
+        family: var(--fontFamilyTitle);
+        style: var(--fontStyleTitle);
+        variant: var(--fontVariantTitle);
+        weight: var(--fontWeightTitle);
+        size: var(--fontSizeTitle);
+    }
+    line-height: var(--lineHeightTitle);
+    text: {
+        transform: var(--textTransformTitle);
+        shadow: var(--textShadowTitle);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleTitle));
+    transform-origin: 0% 0%;
+    line-height: var(--lineHeightTitle);
+    border: none;
+}
+
+.surTitle {
+    width: calc(100% / var(--fontScaleSurTitle));
+    padding: var(--paddingSurTitle);
+    color: var(--fontColorSurTitle);
+    background-color: var(--bgColorSurTitle);
+    font: {
+        family: var(--fontFamilySurTitle);
+        style: var(--fontStyleSurTitle);
+        variant: var(--fontVariantSurTitle);
+        weight: var(--fontWeightSurTitle);
+        size: var(--fontSizeSurTitle);
+    }
+    line-height: var(--lineHeightSurTitle);
+    text: {
+        transform: var(--textTransformSurTitle);
+        shadow: var(--textShadowSurTitle);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleSurTitle));
+    transform-origin: 0% 0%;
+    border: none;
+}
+
+.subTitle {    
+    width: calc(100% / var(--fontScaleSubTitle));
+    padding: var(--paddingSubTitle);
+    color: var(--fontColorSubTitle);
+    background-color: var(--bgColorSubTitle);
+    font: {
+        family: var(--fontFamilySubTitle);
+        style: var(--fontStyleSubTitle);
+        variant: var(--fontVariantSubTitle);
+        weight: var(--fontWeightSubTitle);
+        size: var(--fontSizeSubTitle);
+    }
+    line-height: var(--lineHeightSubTitle);
+    text: {
+        transform: var(--textTransformSubTitle);
+        shadow: var(--textShadowSubTitle);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleSubTitle));
+    transform-origin: 0% 0%;
+    border: none;
+}
+
+h1 {   
+    width: 100%;
+    margin: 0;
+    color: var(--fontColorHeading1);
+    background-color: var(--bgColorHeading1);
+    font-family: var(--fontFamilyHeading1);
+    font-style: var(--fontStyleHeading1);
+    font-variant: var(--fontVariantHeading1);
+    font-weight: var(--fontWeightHeading1);
+    text-transform: var(--textTransformHeading1);
+    font-size: var(--fontSizeHeading1);
+    text-shadow: var(--textShadowHeading1);
+    border-bottom: var(--borderBottomHeading1);
+}
+
+h2 {
+    color: var(--fontColorHeading2);
+    background-color: var(--bgColorHeading2);
+    font-family: var(--fontFamilyHeading2);
+    font-style: var(--fontStyleHeading2);
+    font-variant: var(--fontVariantHeading2);
+    font-weight: var(--fontWeightHeading2);
+    text-transform: var(--textTransformHeading2);
+    font-size: var(--fontSizeHeading2);
+    padding: var(--paddingHeading2);
+    text-shadow: var(--textShadowHeading2);
+    border-bottom: var(--borderBottomHeading2);
+}
+
+h3 { }
+label { margin-right: 0.5rem; }
+
+.path {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    background-color: rgba(0,0,0,0.2);
+    box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
+    font-size: 2rem;
+    color: black;
+}

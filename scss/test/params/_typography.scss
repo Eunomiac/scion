@@ -1,0 +1,58 @@
+@function importGoogleFonts($fontMap) {
+    $googleFontURL: "https://fonts.googleapis.com/css2?";
+    @each $font, $weights in $fontMap {
+        $fontDef: "family=" + $font + ":wght@";
+        @each $weight in $weights {
+            $fontDef: $fontDef + $weight + ";";
+        }
+        $googleFontURL: $googleFontURL + str-slice($fontDef, 1, -2) + "&";
+    }
+    $googleFontURL: $googleFontURL + "display=swap";
+
+    @return $googleFontURL;
+}
+
+@function getFonts() {
+    $fontString: "";
+    @each $font, $weights in $fontMap {
+        $fontString: $fontString + "|" + $font;
+    }
+    @return $fontString;
+}
+
+@import url(importGoogleFonts((
+    "Berkshire+Swash": (400),
+    "Della+Respira": (400),
+    "Overlock+SC": (400),
+    "Marcellus+SC": (400),
+    "Amarante": (400),
+    "Finger+Paint": (400),
+    "Grenze+Gotisch": (400),
+    "Pirata+One": (400),
+    "Poiret+One": (400),
+    "Righteous": (400),
+    "Reem+Kufi": (400),
+    "Yatra+One":  (400),
+    "Julius+Sans+One": (400)
+)));
+
+// Netjer Fonts
+@font-face { font-family: "Bootle"; src: url(../fonts/netjer/bootle.ttf); }
+@font-face { font-family: "Carolingia"; src: url(../fonts/netjer/carolingia.ttf); }
+@font-face { font-family: "Gothic Ultra"; src: url(../fonts/netjer/gothic_ultra_ot.otf); }
+@font-face { font-family: "Zanzabar"; src: url(../fonts/netjer/Zanzabar.otf); }
+
+// Teotl Fonts
+@font-face { font-family: "Goodfish"; src: url(../fonts/teotl/goodfish.ttf); }
+@font-face { font-family: "Kirsty"; src: url(../fonts/teotl/Kirsty.ttf); }
+@font-face { font-family: "Kirsty"; font-weight: bold; src: url(../fonts/teotl/KirstyBold.ttf); }
+@font-face { font-family: "Kirsty"; font-style: italic; src: url(../fonts/teotl/KirstyItalic.ttf); }
+@font-face { font-family: "Kirsty"; font-weight: bold; font-style: italic; src: url(../fonts/teotl/KirstyBoldItalic.ttf); }
+@font-face { font-family: "Voga"; src: url(../fonts/teotl/Voga-Medium.otf); }
+
+
+@font-face { font-family: "Elektra"; src: url(../fonts/Elektra.ttf); }
+@font-face { font-family: "Khaleefa"; src: url(../fonts/Khaleefa.otf); }
+@font-face { font-family: "Oh Mighty Isis"; src: url(../fonts/OhMightyIsisExpanded.ttf); }
+@font-face { font-family: "Sherwood"; src: url(../fonts/Sherwood.ttf); }
+@font-face { font-family: "Stonehenge"; src: url(../fonts/Stonehenge.ttf); }

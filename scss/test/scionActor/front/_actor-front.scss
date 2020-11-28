@@ -1,0 +1,65 @@
+& {
+    grid: "attributes paths"  17rem
+        "virtues paths" calc(3.25rem + 2 * 3px)
+        / 1fr 2fr;
+    column-gap: 0.5rem;
+    .attributes {
+        grid-area: attributes;
+
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        .dotGrabBin {
+            flex-wrap: wrap;
+            height: auto;
+            justify-content: flex-end;
+        }
+
+        .attrBlock {                            
+            margin: 0.5rem 0;
+            flex-flow: column nowrap;
+
+            .attrRow {
+                .label {
+                    font-size: 1rem;
+                }
+            }
+        }
+        .primary {
+            order: 1;
+        }
+        .secondary {
+            order: 2;
+        }
+        .tertiary {
+            order: 3;
+        }
+    }
+    .paths {
+        grid-area: paths;
+        grid: "heading" 1.5rem
+            "originpath" 5rem
+            "rolepath" 5rem
+            "pantheonpath" 5rem;
+        .heading { grid-area: heading; }
+        .originpath { grid-area: originpath; }
+        .rolepath { grid-area: rolepath; }
+        .pantheonpath { grid-area: pantheonpath }                        
+    }
+    .virtues {
+        border-radius: 1rem;
+        grid-area: virtues;
+        grid: "leftvirtue leftvirtue leftvirtue" 1rem
+            ". dotline ." 1.25rem
+            "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
+        background-color: var(--scaleFade5);
+        border: 3px outset var(--scale5);
+        box-sizing: content-box;
+        margin-left: -0.35rem;
+        height: calc(100% - 2 * 3px);
+        .leftvirtue { grid-area: leftvirtue; margin-left: 0.5rem; line-height: 1rem; }
+        .dotline { grid-area: dotline; }
+        .rightvirtue { grid-area: rightvirtue; margin-right: 0.5rem; line-height: 1rem; }
+    }
+}    

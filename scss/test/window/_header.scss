@@ -1,0 +1,36 @@
+& {
+    height: 2rem;
+    width: 80px;
+    margin: -1.5rem 0 -0.5rem 550px;
+    display: block;
+    flex: none;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+    border: none;
+    h4.window-title { display: none; }
+    a.header-button {
+        display: none;
+
+        &.close {
+            display: inline;
+            pointer-events: all;
+            height: 1rem;
+            color: white;
+
+            i { display: none; }
+        }
+    }
+    &::after {
+        content: "";
+        height: 26px;
+        width: 500px;
+        left: -450px;
+
+        display: block;
+        position: relative;           
+
+        cursor: move;
+        pointer-events: all;
+    }
+}

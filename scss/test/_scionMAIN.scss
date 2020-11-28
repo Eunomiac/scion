@@ -1,0 +1,76 @@
+/* #region IMPORT */
+@use "sass:string";
+
+/* #region Global Variables & Configuration */
+@import 'params/variables'; // Variables
+@import 'params/typography'; // Fonts & Font Styling
+@import 'params/colors'; // Color Definitions
+/* #endregion */
+
+/* #region Components: Layouts, Mixins, Modules & Fundamentals */
+@import 'comps/mixins'; // Mixins
+@import 'comps/dragula'; // Dragula Drag & Drop Components
+/* #endregion */
+
+
+body.vtt.game.system-scion {
+  @import 'canvas/canvas'; // Top-Level Canvas Styles
+
+  /* #region SHEET STYLES */
+  div.sheet.scion {
+    pointer-events: none;
+    border: none;
+    box-shadow: none;
+    background: none;
+
+    @import 'comps/base'; // Base Styles: HTML Elements, Headers
+    @import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
+    @import 'comps/tabs'; // Navigation Tabs
+    
+    header.window-header { @import 'window/header'; }
+    section.window-content {
+      @import 'window/content';
+
+      form.editable {
+        @import 'window/form';
+      }
+    }
+    div.window-resizable-handle { display: none; }
+    
+    /* #region SHEET ACTORS */
+    &.actor {
+
+      .main {
+        @import 'scionActor/main';
+
+        .sheet-body {
+          grid-area: body;
+          pointer-events: all;
+
+          .tab[data-tab].active { height: 100%; }
+
+          .tab .chargen { @import "scionActor/chargen/actor-chargen"; }
+          .tab .front { @import "scionActor/front/actor-front"; }
+
+          /* #region Owned Item Partials */
+          .path-block { @import "scionActor/ownedItems/path-block"; }
+          /* #endregion */
+        }
+      }
+
+      @import 'scionActor/pantheons';
+    }
+    /* #endregion */ 
+
+    /* #region ITEM SHEETS */ 
+    &.item {
+      @import 'scionItem/main';
+      @import 'scionItem/types';
+    }
+    /* #endregion */
+  }
+  /* #endregion */
+}
+/* #endregion */
+
+

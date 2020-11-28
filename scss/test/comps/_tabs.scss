@@ -1,0 +1,26 @@
+nav.tabs {
+    border: none;
+    pointer-events: all;
+    position: relative;
+    z-index: 10;
+
+    .item {
+        margin: 0 0.25rem;
+        font-weight: bold;
+        font-size: 0.75rem;
+        text-shadow: none;
+        color: var(--scale9);
+        background-color: var(--scale4);
+        box-shadow: 0px 0px 2px var(--scale2), 0px 0px 2px var(--scale2), 0px 0px 6px var(--scale2);
+        border-radius: 2rem;
+
+        &:hover {
+            background-color: var(--scale9);
+            color: var(--scale4);
+        }
+        &.active {
+            background-color: var(--scale7); 
+            color: var(--scale2);
+        }
+    }
+}

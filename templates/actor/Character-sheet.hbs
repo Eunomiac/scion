@@ -47,20 +47,20 @@
     </nav>
 
     {{!-- Sheet Header --}}
-    <div class="header grid">
+    <section class="header flex">
         <div class="divineTitle surTitle">{{~data.divineTitle~}}</div>
         <div class="charName title contentEditable" data-path="actor.name"></div>
-        <div class="patronage subTitle">{{~data.patronageLine~}}</div>
-    </div>
+    </section>
         
-    <section class="sheet-body">
+    <section class="sheet-body flex">
+        <div class="patronage subTitle">&nbsp;{{~data.patronageLine~}}&nbsp;</div>
         {{!-- Chargen Tab --}}
-        <div class="tab" data-group="primary" data-tab="chargen">
+        <section class="tab flex" data-group="primary" data-tab="chargen">
             {{> (blocks.chargen.template) }}
-        </div>
+        </section>
 
         {{!-- Front Tab --}}
-        <div class="tab" data-group="primary" data-tab="front">
+        <section class="tab" data-group="primary" data-tab="front">
             <div class="front grid">
                 <div class="attributes flex">
                     <div class="heading1">{{localize "scion.game.attributes"}}</div>
@@ -111,30 +111,36 @@
                     {{/if}}
                 </div>
             </div>
-        </div>
+        </section>
         {{!-- Divine Genesis Tab --}}
-        <div class="tab" data-group="primary" data-tab="genesis">
+        <section class="tab" data-group="primary" data-tab="genesis">
             <div class="genesis grid">
                 <div class="genesis text">Genesis</div>
                 <div class="paths text">Paths</div>
                 <div class="virtues text">Virtues</div>
             </div>
-        </div>
+        </section>
         {{!-- Details Tab --}}
-        <div class="tab" data-group="primary" data-tab="details">
+        <section class="tab" data-group="primary" data-tab="details">
             <div class="details grid">
                 <div class="attributes text">Attributes</div>
                 <div class="paths text">Paths</div>
                 <div class="virtues text">Virtues</div>
             </div>
-        </div>
+        </section>
         {{!-- Experience Tab --}}
-        <div class="tab" data-group="primary" data-tab="experience">
+        <section class="tab" data-group="primary" data-tab="experience">
             <div class="experience grid">
                 <div class="attributes text">Attributes</div>
                 <div class="paths text">Paths</div>
                 <div class="virtues text">Virtues</div>
             </div>
-        </div>
+        </section>
     </section>
+
+    <div class="footer grid">
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+    </div>
 </form>
