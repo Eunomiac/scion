@@ -1,15 +1,17 @@
-<div class="path-block">
+
+<h2 class="clickable item-open" data-pathID="{{id}}">{{name}}: &quot;{{data.data.concept}}&quot;</h2>
+<div class="flex path-block">
     {{log this}}
-    <div class="heading2 clickable item-open" data-pathID="{{id}}">{{name}}</div>
-    <div class="flexRow path-skills">
+    <div class="flex fullFlex flexColumn alignCenter path-subBlock path-skills">
+        {{!-- <h3 class="alignCenter">{{localize "scion.paths.skills"}}</h3> --}}
          {{#each data.data.skills as | skill |}}
-            <div>{{localize (concat "scion.skills." skill)}}</div>
+            <div class="alignCenter">{{localize (concat "scion.skills." skill)}}</div>
         {{/each}}
     </div>
-    <div class="flexRow path-connections">
-        <div>Group</div>
-        <div>Contact</div>
-        <div>Access</div>
+    <div class="flex fullFlex flexColumn alignCenter path-subBlock path-conditions">
+        {{!-- <h3 class="alignCenter">{{localize "scion.paths.condition"}}</h3> --}}
+        <div class="inline text alignLeft">
+            <span class="inline strong text">{{data.data.condition.title}}:</span>{{data.data.condition.description}}
+        </div>
     </div>
-    <div class="path-conditions"></div>
 </div>

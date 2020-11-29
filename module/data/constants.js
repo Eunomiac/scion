@@ -16,7 +16,7 @@ export const scionSystemData = {
             pantheonPurview: "wyrd",
             virtues: ["fatalism", "audacity"],
             scentTheDivine: "scion.scentTheDivine.aesir",
-            religion: "scion.religions.laukr",
+            religion: "scion.religions.aesir",
             members: ["baldr", "bragi", "freya", "freyr", "frigg", "heimdall", "hel", "loki", "njörðr", "odin", "sif", "skaði", "thor", "tyr"],
             bookRef: "scion.books.hero",
             bookPage: 46
@@ -28,7 +28,7 @@ export const scionSystemData = {
             pantheonPurview: "yoga",
             virtues: ["conscience", "duty"],
             scentTheDivine: "scion.scentTheDivine.deva",
-            religion: "scion.religions.hinduism",
+            religion: "scion.religions.deva",
             members: ["agni", "durga", "ganesha", "indra", "kali", "karttikeya", "lakshmi", "parvati", "sarasvati", "shiva", "surya", "varuna", "vishnu", "vishvakarman", "yamaraja"],
             bookRef: "scion.books.hero",
             bookPage: 58
@@ -40,7 +40,7 @@ export const scionSystemData = {
             pantheonPurview: "yaoyorozuNoKamigami",
             virtues: ["sincerety", "rightAction"],
             scentTheDivine: "scion.scentTheDivine.kami",
-            religion: "scion.religions.shinto",
+            religion: "scion.religions.kami",
             members: ["amaNoUzume", "amaterasu", "benzaiten", "bishamon", "ebisu", "fukurokuju", "hachiman", "hotei", "inari", "kisshōten", "ōkuninushi", "omoikane", "sarutahiko", "susanoO", "takemikazuchi", "tsukiyomi"],
             bookRef: "scion.books.hero",
             bookPage: 70
@@ -52,7 +52,7 @@ export const scionSystemData = {
             pantheonPurview: "cheval",
             virtues: ["tradition", "innovation"],
             scentTheDivine: "scion.scentTheDivine.loa",
-            religion: "scion.religions.vodou",
+            religion: "scion.religions.loa",
             members: ["baronCimetière", "baronLaCroix", "baronSamedi", "damballa", "ezili", "kalfu", "lasyren", "ogou", "papaLegba"],
             bookRef: "scion.books.hero",
             bookPage: 32
@@ -64,7 +64,7 @@ export const scionSystemData = {
             pantheonPurview: "dodaem",
             virtues: ["pride", "dream"],
             scentTheDivine: "scion.scentTheDivine.manitou",
-            religion: "scion.religions.midewiwin",
+            religion: "scion.religions.manitou",
             members: ["biboonike", "cheebyAubOozoo", "geezhigoQuae", "ioskeha", "maudjeeKawiss", "muzzuKumikQuae", "nana", "pukawiss", "tawiscara", "winonah"],
             bookRef: "scion.books.hero",
             bookPage: 82
@@ -76,7 +76,7 @@ export const scionSystemData = {
             pantheonPurview: "heku",
             virtues: ["balance", "justice"],
             scentTheDivine: "scion.scentTheDivine.netjer",
-            religion: "scion.religions.kemeticism",
+            religion: "scion.religions.netjer",
             members: ["anubis", "atum", "bastet", "hathor", "horus", "isis", "osiris", "ptah", "ra", "set", "sobek", "thoth", "upuaut"],
             bookRef: "scion.books.hero",
             bookPage: 94
@@ -88,6 +88,7 @@ export const scionSystemData = {
             pantheonPurview: "tianming",
             virtues: ["yin", "yang"],
             scentTheDivine: "scion.scentTheDivine.shen",
+            religion: "scion.religions.shen",
             members: ["changE", "confucius", "doumu", "erlang", "fuxi", "guanYu", "guanshiyinPusa", "huangdi", "laozi", "nuwā", "princeNezha", "sunWukong", "yandiShennongshi"],
             bookRef: "scion.books.hero",
             bookPage: 118
@@ -99,6 +100,7 @@ export const scionSystemData = {
             pantheonPurview: "nextlahualli",
             virtues: ["hunger", "sacrifice"],
             scentTheDivine: "scion.scentTheDivine.teotl",
+            religion: "scion.religions.teotl",
             members: ["chalchihuitlicue", "chantico", "chicoAndCenteo", "huehuecoyotl", "huītzilōpōchtli", "ītzpāpālōtl", "mictecacihuatl", "quetzalcoatl", "tezcatlipoca", "tlāloc", "xīpeTotēc", "xochipilli", "xochiquetzal", "xolotl"],
             bookRef: "scion.books.hero",
             bookPage: 130
@@ -110,6 +112,7 @@ export const scionSystemData = {
             pantheonPurview: "metamorphosis",
             virtues: ["egotism", "kinship"],
             scentTheDivine: "scion.scentTheDivine.theoi",
+            religion: "scion.religions.theoi",
             members: ["aphrodite", "apollo", "ares", "artemis", "athena", "demeter", "dionysus", "epona", "hades", "hecate", "hephaestus", "hera", "hermes", "hestia", "persephone", "poseidon", "zeus"],
             bookRef: "scion.books.hero",
             bookPage: 142
@@ -121,6 +124,7 @@ export const scionSystemData = {
             pantheonPurview: "geasa",
             virtues: ["honor", "prowess"],
             scentTheDivine: "scion.scentTheDivine.tuathaDeDanann",
+            religion: "scion.religions.tuathaDeDanann",
             members: ["aengus", "brigid", "dianCécht", "donn", "ériu", "goibniu", "lugh", "macLir", "midir", "nuada", "ogma", "theDagda", "morrigan"],
             bookRef: "scion.books.hero",
             bookPage: 154
@@ -132,7 +136,7 @@ export const scionSystemData = {
             pantheonPurview: "nemeton",
             virtues: ["memory", "purgation"],
             scentTheDivine: "scion.scentTheDivine.nemetondevos",
-            religion: "scion.religions.none",
+            religion: "scion.religions.nemetondevos",
             members: ["andarta", "belenos", "cernunnos", "esos", "gobannos", "nantosuelta", "nehalAndNodens", "sulis", "taranis"],
             bookRef: "scion.books.motw",
             bookPage: 38
@@ -156,10 +160,22 @@ export const scionSystemData = {
             pantheonPurview: "asha",
             virtues: ["honesty", "freeWill"],
             scentTheDivine: "scion.scentTheDivine.yazata",
-            religion: "scion.religions.zoroastrianism",
+            religion: "scion.religions.yazata",
             members: ["anahita", "ashi", "atar", "haoma", "hvareKhshaeta", "mangha", "mithra", "rashnu", "sraosha", "tishtrya", "vanant", "vataVayu", "verethragna", "zam", "zarathustra"],
             bookRef: "scion.books.motw",
             bookPage: 50
+        },
+        teros: {
+            label: "scion.pantheons.teros",
+            description: "scion.pantheonDescriptions.teros",
+            assetSkills: ["science", "technology"],
+            pantheonPurview: "demiurgy",
+            virtues: ["nostalgia", "vision"],
+            scentTheDivine: "scion.scentTheDivine.teros",
+            religion: "scion.religions.teros",
+            members: ["aeva", "ytar", "amnis", "badaris", "kuros", "demosia", "hesbon", "skaft", "versak"],
+            bookRef: "scion.books.motw",
+            bookPage: 80
         }
     },
     GODS: {
@@ -1728,6 +1744,87 @@ export const scionSystemData = {
             bookPage: 50,
             callings: ["healer", "leader", "sage"],
             purviews: ["artistry:Poetry", "journeys", "order"]
+        },
+        aeva: {
+            label: "scion.gods.aeva",
+            pantheon: "teros",
+            mantle: "scion.mantles.aeva",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["creator", "guardian", "liminal"],
+            purviews: ["artistry:Music", "death", "fertility", "forge", "health", "order", "passion:Dread", "stars"]
+        },
+        ytar: {
+            label: "scion.gods.ytar",
+            pantheon: "teros",
+            mantle: "scion.mantles.ytar",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["creator", "trickster", "sage"],
+            purviews: ["chaos", "darkness", "deception", "epicStrength", "forge", "journeys", "passion:Joy", "stars"]
+        },
+        amnis: {
+            label: "scion.gods.amnis",
+            pantheon: "teros",
+            mantle: "scion.mantles.amnis",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["creator", "leader", "healer"],
+            purviews: ["fertility", "forge", "health", "journeys", "order", "prosperity", "water"]
+        },
+        badaris: {
+            label: "scion.gods.badaris",
+            pantheon: "teros",
+            mantle: "scion.mantles.badaris",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["creator", "liminal", "sage"],
+            purviews: ["artistry:Travelogues", "beasts:Marine Life", "epicStamina", "forge", "journeys", "passion:Wanderlust", "water"]
+        },
+        kuros: {
+            label: "scion.gods.kuros",
+            pantheon: "teros",
+            mantle: "scion.mantles.kuros",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["liminal", "lover", "sage"],
+            purviews: ["beauty", "epicDexterity", "journeys", "order", "passion:Love", "sky", "stars"]
+        },
+        demosia: {
+            label: "scion.gods.demosia",
+            pantheon: "teros",
+            mantle: "scion.mantles.demosia",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["guardian", "judge", "trickster"],
+            purviews: ["beasts:Nocturnal Animals", "darkness", "deception", "frost", "moon"]
+        },
+        hesbon: {
+            label: "scion.gods.hesbon",
+            pantheon: "teros",
+            mantle: "scion.mantles.hesbon",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["guardian", "hunter", "liminal"],
+            purviews: ["beasts:Predators", "chaos", "earth", "epicDexterity", "epicStrength", "fertility", "fortune", "passion:Fury", "wild"]
+        },
+        skaft: {
+            label: "scion.gods.skaft",
+            pantheon: "teros",
+            mantle: "scion.mantles.skaft",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["creator", "guardian", "sage"],
+            purviews: ["artistry:All", "earth", "epicStamina", "fire", "forge", "passion:Curiosity", "prosperity"]
+        },
+        versak: {
+            label: "scion.gods.versak",
+            pantheon: "teros",
+            mantle: "scion.mantles.versak",
+            bookRef: "scion.books.motw",
+            bookPage: 80,
+            callings: ["guardian", "judge", "liminal"],
+            purviews: ["beauty", "death", "fire", "order", "passion:Pride", "sky", "sun"]
         }
     },
     GENESES: {
@@ -1962,6 +2059,32 @@ export const signatureChars = {
                 survival: {value: 1},
                 integrity: {value: 1}
             }
+        },
+        pathData: {
+            origin: {
+                title: "Carefree Wanderer with Luck on His Side",
+                skills: ["empathy", "persuasion", "subterfuge"],
+                condition: {
+                    title: "Interesting Times",
+                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
+                }
+            },
+            role: {
+                title: "No Heaven Frontman",
+                skills: ["athletics", "culture", "persuasion"],
+                condition: {
+                    title: "Tone Deaf",
+                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
+                }
+            },
+            pantheon: {
+                title: "Scion of Aengus, Step-Scion of the Morrigan",
+                skills: ["closeCombat", "culture", "subterfuge"],
+                condition: {
+                    title: "Murder of Crows",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
+                }
+            }
         }
     },
     "Horace Farrow": {
@@ -1999,6 +2122,32 @@ export const signatureChars = {
                 occult: {value: 1},
                 subterfuge: {value: 1},
                 survival: {value: 2}
+            }
+        },
+        pathData: {
+            origin: {
+                title: "Carefree Wanderer with Luck on His Side",
+                skills: ["empathy", "persuasion", "subterfuge"],
+                condition: {
+                    title: "Interesting Times",
+                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
+                }
+            },
+            role: {
+                title: "No Heaven Frontman",
+                skills: ["athletics", "culture", "persuasion"],
+                condition: {
+                    title: "Tone Deaf",
+                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
+                }
+            },
+            pantheon: {
+                title: "Scion of Aengus, Step-Scion of the Morrigan",
+                skills: ["closeCombat", "culture", "subterfuge"],
+                condition: {
+                    title: "Murder of Crows",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
+                }
             }
         }
     },
@@ -2039,6 +2188,32 @@ export const signatureChars = {
                 science: {value: 2},
                 subterfuge: {value: 1}
             }
+        },
+        pathData: {
+            origin: {
+                title: "Carefree Wanderer with Luck on His Side",
+                skills: ["empathy", "persuasion", "subterfuge"],
+                condition: {
+                    title: "Interesting Times",
+                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
+                }
+            },
+            role: {
+                title: "No Heaven Frontman",
+                skills: ["athletics", "culture", "persuasion"],
+                condition: {
+                    title: "Tone Deaf",
+                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
+                }
+            },
+            pantheon: {
+                title: "Scion of Aengus, Step-Scion of the Morrigan",
+                skills: ["closeCombat", "culture", "subterfuge"],
+                condition: {
+                    title: "Murder of Crows",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
+                }
+            }
         }
     },
     "Adonis Rhodes": {
@@ -2076,6 +2251,32 @@ export const signatureChars = {
                 subterfuge: {value: 2},
                 survival: {value: 2}
             }
+        },
+        pathData: {
+            origin: {
+                title: "Carefree Wanderer with Luck on His Side",
+                skills: ["empathy", "persuasion", "subterfuge"],
+                condition: {
+                    title: "Interesting Times",
+                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
+                }
+            },
+            role: {
+                title: "No Heaven Frontman",
+                skills: ["athletics", "culture", "persuasion"],
+                condition: {
+                    title: "Tone Deaf",
+                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
+                }
+            },
+            pantheon: {
+                title: "Scion of Aengus, Step-Scion of the Morrigan",
+                skills: ["closeCombat", "culture", "subterfuge"],
+                condition: {
+                    title: "Murder of Crows",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
+                }
+            }
         }
     },
     "Erik Donner": {
@@ -2112,6 +2313,32 @@ export const signatureChars = {
                 occult: {value: 1},
                 pilot: {value: 4, specialty: "Cars"},
                 survival: {value: 3, specialty: "Camping"}
+            }
+        },
+        pathData: {
+            origin: {
+                title: "Carefree Wanderer with Luck on His Side",
+                skills: ["empathy", "persuasion", "subterfuge"],
+                condition: {
+                    title: "Interesting Times",
+                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
+                }
+            },
+            role: {
+                title: "No Heaven Frontman",
+                skills: ["athletics", "culture", "persuasion"],
+                condition: {
+                    title: "Tone Deaf",
+                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
+                }
+            },
+            pantheon: {
+                title: "Scion of Aengus, Step-Scion of the Morrigan",
+                skills: ["closeCombat", "culture", "subterfuge"],
+                condition: {
+                    title: "Murder of Crows",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
+                }
             }
         }
     }

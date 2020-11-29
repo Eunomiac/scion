@@ -21,9 +21,8 @@
     --textTransformTitle: none;
     --textShadowTitle: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
     --paddingTitle: 0;
-    --lineHeightTitle: 100%;
+    --lineHeightTitle: normal;
     --fontScaleTitle: 1;
-
 
     // SurTitle
     --fontColorSurTitle: var(--fontColorTitle);
@@ -47,7 +46,7 @@
     --fontVariantSubTitle: normal;
     --fontWeightSubTitle: bold;
     --textTransformSubTitle: none;
-    --fontSizeSubTitle: 1rem;
+    --fontSizeSubTitle: 16px;
     --paddingSubTitle: 0;
     --lineHeightSubTitle: var(--fontSizeSubTitle);
     --textShadowSubTitle: var(--textShadowTitle);

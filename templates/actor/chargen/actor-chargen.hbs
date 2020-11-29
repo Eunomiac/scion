@@ -1,5 +1,5 @@
 {{!-- Sheet Tab Navigation --}}
-<nav class="chargen-tabs tabs flexRow padded" data-group="chargen">
+<nav class="chargen-tabs tabs padded" data-group="chargen">
     <a class="item" data-tab="step-one">{{localize "scion.headings.chargen.stepOneTab"}}</a>
     <a class="item" data-tab="step-two">{{localize "scion.headings.chargen.stepTwoTab"}}</a>
     <a class="item" data-tab="step-three">{{localize "scion.headings.chargen.stepThreeTab"}}</a>
@@ -8,7 +8,7 @@
     <a class="item" data-tab="step-six">{{localize "scion.headings.chargen.stepSixTab"}}</a>
     <a class="item" data-tab="step-seven">{{localize "scion.headings.chargen.stepSevenTab"}}</a>
 </nav>
-<section class="chargen-body">
+<section class="flex flexColumn chargen-body">
     <div class="tab" data-group="chargen" data-tab="step-one">            
         {{> (blocks.chargen.step-one.template) }}
     </div>

@@ -61,6 +61,13 @@ select {
     font-weight: var(--fontWeightBody);
 }
 
+.inline { 
+    display: inline-block !important;
+    &.text {
+        padding-right: $defaultPadding;
+    } 
+}
+
 .padded {
     padding: $defaultPadding;
 }
@@ -74,7 +81,7 @@ select {
 .fifth { width: 20%; }
 
 .alignLeft { text-align: left !important; text-align-last: left !important;}
-.alignCenter { text-align: center !important; text-align-last: center !important;}
+.alignCenter { text-align: center !important; text-align-last: center !important; justify-content: center; }
 .alignRight { text-align: right !important; text-align-last: right !important;}
 
 .strong { 
@@ -217,6 +224,7 @@ select {
 h1 {   
     width: 100%;
     margin: 0;
+    display: block;
     color: var(--fontColorHeading1);
     background-color: var(--bgColorHeading1);
     font-family: var(--fontFamilyHeading1);
@@ -230,6 +238,9 @@ h1 {
 }
 
 h2 {
+    width: 100%;
+    margin: 0;
+    display: block;
     color: var(--fontColorHeading2);
     background-color: var(--bgColorHeading2);
     font-family: var(--fontFamilyHeading2);
@@ -243,15 +254,10 @@ h2 {
     border-bottom: var(--borderBottomHeading2);
 }
 
-h3 { }
-label { margin-right: 0.5rem; }
-
-.path {
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    background-color: rgba(0,0,0,0.2);
-    box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
-    font-size: 2rem;
-    color: black;
+h3 { 
+    width: 100%;
+    margin: 0;
 }
+
+label { 
+    margin: 0 0.25rem; }

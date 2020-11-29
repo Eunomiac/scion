@@ -47,21 +47,20 @@
     </nav>
 
     {{!-- Sheet Header --}}
-    <section class="header flex">
+    <section class="header grid">
         <div class="divineTitle surTitle">{{~data.divineTitle~}}</div>
         <div class="charName title contentEditable" data-path="actor.name"></div>
+        <div class="patronage subTitle">&nbsp;{{~data.patronageLine~}}&nbsp;</div>
     </section>
         
-    <section class="sheet-body flex">
-        <div class="patronage subTitle">&nbsp;{{~data.patronageLine~}}&nbsp;</div>
+    <section class="sheet-body grid">
         {{!-- Chargen Tab --}}
-        <section class="tab flex" data-group="primary" data-tab="chargen">
+        <section class="tab flex flexColumn" data-group="primary" data-tab="chargen">
             {{> (blocks.chargen.template) }}
         </section>
-
         {{!-- Front Tab --}}
         <section class="tab" data-group="primary" data-tab="front">
-            <div class="front grid">
+            <div class="front-body grid">
                 <div class="attributes flex">
                     <div class="heading1">{{localize "scion.game.attributes"}}</div>
                     {{#if data.attributes.unspentDots.general}}
@@ -139,8 +138,8 @@
     </section>
 
     <div class="footer grid">
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
+        <div class="subTitle">&nbsp;</div>
+        <div class="title">&nbsp;</div>
+        <div class="surTitle">&nbsp;</div>
     </div>
 </form>

@@ -20,19 +20,22 @@ export class ScionActor extends Actor {
         const pathData = {};
         // Find the first Path Item of each type, if it exists;
         // ... if it doesn't exist, add its creation data to pathData
-        ["originPath", "rolePath", "pantheonPath"].forEach((pathType) => {
+
+        ["origin", "role", "pantheon"].forEach((pathType) => {
             if (!ownedItems.find((xx) => xx.data.type === pathType))
                 pathData[pathType] = {
-                    name: U.Loc(`scion.game.${pathType}`),
+                    name: U.Loc(`scion.paths.${pathType}`),
                     type: "path",
                     data: {
                         type: pathType,
-                        skills: _.sample(Object.keys(CONFIG.scion.SKILLS), 3)
+                        concept: this.data.data.pathData[pathType].title,
+                        skills: this.data.data.pathData[pathType].skills,
+                        condition: this.data.data.pathData[pathType].condition
                     }
                 };
         });
         if (Object.keys(pathData).length)
-            this.createEmbeddedEntity("OwnedItem", Object.values(pathData)).then(() => U.LOG(this.paths, "[Paths]", "prepareCharacterData"));
+            this.createEmbeddedEntity("OwnedItem", Object.values(pathData));
         // #endregion
     }
 

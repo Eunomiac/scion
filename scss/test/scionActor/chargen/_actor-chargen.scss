@@ -1,8 +1,14 @@
 & {
     .chargenTwo {
-        align-items: stretch;
-        align-content: stretch;
         
-        
+        h2 {            
+            // margin: -7px 0 0 -7px;
+            // width: calc(100% + 20px);
+            background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
+            text-indent: 10px;
+            color: var(--scale10);
+            border-bottom: 2px inset var(--scale3);
+            border-bottom-left-radius: 15px;
+        }  
     }
 }

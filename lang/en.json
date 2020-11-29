@@ -47,13 +47,6 @@
             "concept": "Concept",
             "path": "Path",
             "paths": "Paths",
-            "origin": "Origin",
-            "originPath": "Origin Path",
-            "role": "Role",
-            "rolePath": "Role Path",
-            "pantheonPath": "Pantheon Path",
-            "society": "Society",
-            "societyPath": "Society Path",
             "calling": "Calling",
             "callings": "Callings",
             "knack": "Knack",
@@ -150,7 +143,8 @@
             "apu": "Apu",
             "atua": "Atua",
             "bogovi": "Bogovi",
-            "tengri": "Tengri"
+            "tengri": "Tengri",
+            "teros": "Teros"
         },
         "scentTheDivine": {
             "aesir": "burning amber, with a snap of electricity",
@@ -170,7 +164,8 @@
             "apu": "llama wool, thin mountain air; the whistling whir of a sling",
             "atua": "the salt of the sea; lots of different foods cooking at once",
             "bogovi": "rich, loamy earth; the rustling of dried, cracked leaves in autumn",
-            "tengri": "horseflesh and sweat, incense; throat singing"
+            "tengri": "horseflesh and sweat, incense; throat singing",
+            "teros": "the sound of crashing waves, the scent of ozone, and the inescapable feeling that change looms on the horizon"
         },
         "pantheonDescriptions": {
             "aesir": "the Norse Gods",
@@ -190,7 +185,8 @@
             "apu": "the Incan Pantheon",
             "atua": "the Polynesian Gods",
             "bogovi": "the Slavic Gods",
-            "tengri": "the Mongolian Gods"
+            "tengri": "the Mongolian Gods",
+            "teros": "the Gods of Atlantis"
         },
         "religions": {
             "aesir": "Laukr",
@@ -206,6 +202,7 @@
             "nemetondevos": "none",
             "orisha": "Candomblé, Lukumi, the Shango Cult, and more",
             "yazata": "Zoroastrianism",
+            "teros": "Everyday Life in Atlantis",
             "anunna": " ",
             "apu": " ",
             "atua": " ",
@@ -386,7 +383,16 @@
             "vataVayu": "Vata–Vayu",
             "verethragna": "Verethragna",
             "zam": "Zam",
-            "zarathustra": "Zarathustra"
+            "zarathustra": "Zarathustra",
+            "aeva": "Aeva",
+            "ytar": "Ytar",
+            "amnis": "Amnis",
+            "badaris": "Badaris",
+            "kuros": "Kuros",
+            "demosia": "Demosia",
+            "hesbon": "Hesbon",
+            "skaft": "Skaft",
+            "versak": "Versak"
         },
         "mantles": {
             "baldr": "God of Love, Beauty, and Peace",
@@ -556,7 +562,16 @@
             "vataVayu": "Who Is the Wind",
             "verethragna": "Who Smites All Resistance",
             "zam": "Who Is the Earth",
-            "zarathustra": "Ashavan and Founder of Mazdayasna"
+            "zarathustra": "Ashavan and Founder of Mazdayasna",
+            "aeva": "God of Time and Death",
+            "ytar": "God of Space and Void",
+            "amnis": "Mother of Rivers and Destroyer of Want",
+            "badaris": "Father of Oceans and Divine Shipwright",
+            "kuros": "Messenger on the Winged Throne",
+            "demosia": "Queen of the Night and Keeper of Secrets",
+            "hesbon": "Who Brings the Towers Down",
+            "skaft": "the Greatest Inventor",
+            "versak": "the Judge of All Evil"
         },
         "geneses": {
             "born": "Born",
@@ -567,6 +582,22 @@
             "incarnationLine": "{divinePatronName}{divinePatronMantle} Incarnate",
             "chosen": "Chosen",
             "chosenLine": "Chosen of {divinePatronName}{divinePatronMantle}"
+        },
+        "paths": {
+            "origin": "Origin",
+            "originPath": "Origin Path",
+            "role": "Role",
+            "rolePath": "Role Path",
+            "pantheon": "Pantheon",
+            "pantheonPath": "Pantheon Path",
+            "society": "Society",
+            "societyPath": "Society Path",
+            "skills": "Path Skills",
+            "connections": "Path Connections",
+            "group": "Group",
+            "contact": "Contact",
+            "access": "Access",
+            "condition": "Path Condition"
         },
         "attributes": {
             "none": "",
@@ -619,6 +650,7 @@
             "justice": "Justice",
             "kinship": "Kinship",
             "memory": "Memory",
+            "nostalgia": "Nostalgia",
             "pride": "Pride",
             "prowess": "Prowess",
             "purgation": "Purgation",
@@ -628,11 +660,12 @@
             "sincerety": "Sincerety",
             "syncretism": "Syncretism",
             "tradition": "Tradition",
+            "vision": "Vision",
             "wayward": "Wayward",
             "wonder": "Wonder",
             "yang": "Yang",
             "yin": "Yin"
-         },
+        },
         "callings": {
             "creator": "Creator",
             "guardian": "Guardian",
@@ -691,6 +724,7 @@
             "wild": "Wild",
             "asha": "Asha",
             "cheval": "Cheval",
+            "demiurgy": "Demiurgy",
             "dodaem": "Dodaem",
             "dvoeverie": "Dvoeverie",
             "geasa": "Geasa",

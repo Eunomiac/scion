@@ -24,7 +24,6 @@ Hooks.once("init", async () => {
             watchList: []
         }
     };
-
     // Define custom Entity classes
     CONFIG.Actor.entityClass = ScionActor;
     CONFIG.Item.entityClass = ScionItem;

@@ -1,32 +1,40 @@
 $isShowingTestBorders: false;
 $isShowingPadding: false;
-$isShowingBGShade: true;
+$isShowingBGShade: false;
+$isTestingPantheon: "Tuatha";
 
 & {
     height: 100%;
     width: 100%;
-    padding: 40px 60px 40px 40px;
+    padding: 40px 60px 60px 40px;
+
+    background-color: white;
     @if $isShowingPadding {
         background-image: url("../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png");
+    } @else if $isTestingPantheon {
+        background-image: url("../images/actor-sheet/backgrounds/#{$isTestingPantheon}.png");
+        background-color: transparent;
     } @else {
         background-image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
     }
     background-size: 100%;
     background-repeat: no-repeat;
-    background-color: white;
     opacity: 1;        
 
-    grid: ". header ." 75px
-        "body body body" 500px
-        ". footer ." 75px
-        / 75px 500px 75px;
+    grid: "menu" 0px
+          "header" 90px
+          "body" 470px
+          "footer" 90px;
 
-    @include box-shadow(8px, lime, true, $isShowingTestBorders); @include bg-shade(lime, $isShowingBGShade);
-    > * { @include box-shadow(6px, blue, true, $isShowingTestBorders); @include bg-shade(blue, $isShowingBGShade);
-        > * { @include box-shadow(4px, red, true, $isShowingTestBorders); @include bg-shade(red, $isShowingBGShade); }
+    @include box-shadow(2px, lime, true, $isShowingTestBorders); @include bg-shade(lime, $isShowingBGShade);
+    > * { @include box-shadow(6px, orange, true, $isShowingTestBorders); @include bg-shade(orange, $isShowingBGShade);
+        > * { @include box-shadow(4px, cyan, true, $isShowingTestBorders); @include bg-shade(cyan, $isShowingBGShade); 
+            > * { @include box-shadow(2px, red, true, $isShowingTestBorders); @include bg-shade(red, $isShowingBGShade); }
+        }
     }
 
     .menuRosette {
+        grid-area: menu;
         $menuOpenSize: 200px;
         $menuButtonCircleSize: $menuOpenSize * 1.25;
         $menuButtonFullSize: 120px;
@@ -59,7 +67,7 @@ $isShowingBGShade: true;
         position: relative;
         background-repeat: no-repeat;
         left: $menuOpenSize * (-3/8);
-        top: $menuOpenSize * (-1/4);
+        top: $menuOpenSize * (-3/8);
         border-radius: 50%;
         background-position: center;
         pointer-events: all;
@@ -200,16 +208,31 @@ $isShowingBGShade: true;
     }
     .header {
         grid-area: header;
-        flex-flow: column nowrap;
+        grid: ". surTitle ." 24px
+              ". title ." 50px
+              "subTitle subTitle subTitle" 16px
+              / 90px 470px 90px;
         
         div { pointer-events: all; }
 
-        .divineTitle { flex-grow: 1; }
-        .charName { flex-grow: 2; }
+        .divineTitle { grid-area: surTitle; }
+        .charName { grid-area: title; }
+        .patronage { grid-area: subTitle; }
     }
+
+    .sheet-body {grid-area: body; }
+    
     .footer {
         grid-area: footer;
-        flex-flow: column nowrap;
+        grid: "subTitle subTitle subTitle" 15px
+              ". title ." 50px
+              ". surTitle ." 25px
+              / 90px 470px 90px;
+
+        .subTitle { grid-area: subTitle; }
+        .title { grid-area: title; }
+        .surTitle {grid-area: surTitle; }
+
     }
 }
 

@@ -1,5 +1,33 @@
 & {
-    height: calc((100% - 2rem)/3);
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    .flex.path-subBlock {
+        border-radius: 12.5px;
+        margin: 3px;
+
+        align-content: start;
+        align-self: start;
+
+        > div {
+            border-radius: 12.5px;
+            margin: 1px;
+        }
+
+        &.path-skills { 
+            flex-grow: 0.5; 
+            > div {
+                background-color: var(--scaleFadeMoreGrey8);
+                border: 2px outset var(--scaleGrey5);
+            }
+        }
+
+        &.path-conditions { 
+            flex-grow: 1.7;
+        }
+    }
+
+    /* height: calc((100% - 2rem)/3);
     border: inset 3px var(--scale6);
     background-color: var(--scaleFade1);
     box-sizing: border-box;
@@ -15,5 +43,6 @@
         color: var(--scale10);
         border-bottom: 2px inset var(--scale3);
         border-bottom-left-radius: 15px;
-    }
+    } */
 }
+

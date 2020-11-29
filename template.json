@@ -292,7 +292,7 @@
             "connections": [],
             "conditionID": "", 
             "timesInvoked": 0,
-            "conditions": [],
+            "condition": {},
             "obligation": "",
             "effect": "",
             "enabledKnacks": {
