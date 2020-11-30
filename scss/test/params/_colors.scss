@@ -1,23 +1,20 @@
-$c-white: rgb(255, 255, 255);
-$c-grey: scale-color($c-white, $lightness: -50%);
-$c-black: #000;
-
+$c-white: rgba(255, 255, 255, 1);
+$c-grey: rgba(128, 128, 128, 1);
+$c-black: rgba(0, 0, 0, 1);
+$c-yellow: rgba(255, 255, 0, 1);
 
 @mixin scaled-colors ($baseColor, $name: "", $isGreyscale: false) {
     @for $i from 0 through 10 {
       $thisScale: 10% * ($i * 2 - 10);
       $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);
-      @if $isGreyscale {
-        $thisColor: scale-color($baseColor, $lightness: $thisScale);
-      }
+      @if $isGreyscale { $thisColor: scale-color($baseColor, $lightness: $thisScale); }
       $thisHalfColor: scale-color($thisColor, $alpha: -50%);
       $thisQuarterColor: scale-color($thisColor, $alpha: -75%);
+
       --scale#{$name}#{$i}: #{$thisColor};
       --scaleFade#{$name}#{$i}: #{$thisHalfColor};
       --scaleFadeMore#{$name}#{$i}: #{$thisQuarterColor};
     }
 }
 
-* {
-    @include scaled-colors($c-grey, "Grey", true);
-} 
+* {  @include scaled-colors($c-grey, "Grey", true); } 

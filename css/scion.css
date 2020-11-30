@@ -2,7 +2,7 @@
 /* ***************** TESTING **************************** */
 /* ****************************************************** */
 /* #region IMPORT */
-@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&family=Voltaire:wght@400&display=swap");
 @use "sass:string";
 /* #region Global Variables & Configuration */
 @font-face {
@@ -340,6 +340,7 @@ body.vtt.game.system-scion div.sheet.scion {
   /* #endregion */
   /* #region Dot Trackers */
   /* #endregion */
+  /* h3 { } */
   /* #region FLEX LAYOUTS */
   /* #endregion */
   /* #region GRID LAYOUTS */
@@ -353,7 +354,7 @@ body.vtt.game.system-scion div.sheet.scion {
 body.vtt.game.system-scion div.sheet.scion * {
   color: var(--fontColorBody);
   font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
+  font-size: 0;
   font-weight: var(--fontWeightBody);
 }
 
@@ -371,12 +372,12 @@ body.vtt.game.system-scion div.sheet.scion select {
 body.vtt.game.system-scion div.sheet.scion textarea:invalid,
 body.vtt.game.system-scion div.sheet.scion input[type="text"]:invalid,
 body.vtt.game.system-scion div.sheet.scion select:invalid {
-  font-style: italic;
   color: var(--scaleGrey5);
-  text-shadow: -0.5px -0.5px 0px #000, 0.5px 0.5px 0px var(--scaleFadeWhite10);
+  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px var(--scaleFadeGrey10);
   font-family: "Della Respira";
   font-size: 0.75rem;
   font-weight: normal;
+  font-style: italic;
 }
 
 body.vtt.game.system-scion div.sheet.scion .contentEditable {
@@ -409,9 +410,10 @@ body.vtt.game.system-scion div.sheet.scion .hidden {
 
 body.vtt.game.system-scion div.sheet.scion .text {
   color: var(--fontColorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: var(--fontWeightBody);
+}
+
+body.vtt.game.system-scion div.sheet.scion .text font {
+  size: var(--fontSizeBody);
 }
 
 body.vtt.game.system-scion div.sheet.scion .inline {
@@ -427,12 +429,12 @@ body.vtt.game.system-scion div.sheet.scion .padded {
 }
 
 body.vtt.game.system-scion div.sheet.scion .placeholder {
-  font-style: italic;
   color: var(--scaleGrey5);
-  text-shadow: -0.5px -0.5px 0px #000, 0.5px 0.5px 0px var(--scaleFadeWhite10);
+  text-shadow: -0.5px -0.5px 0px black, 0.5px 0.5px 0px var(--scaleFadeGrey10);
   font-family: "Della Respira";
   font-size: 0.75rem;
   font-weight: normal;
+  font-style: italic;
 }
 
 body.vtt.game.system-scion div.sheet.scion .half {
@@ -457,9 +459,9 @@ body.vtt.game.system-scion div.sheet.scion .alignCenter {
   text-align: center !important;
   -moz-text-align-last: center !important;
   text-align-last: center !important;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion .alignRight {
@@ -470,20 +472,15 @@ body.vtt.game.system-scion div.sheet.scion .alignRight {
 
 body.vtt.game.system-scion div.sheet.scion .strong {
   font-weight: bolder;
-  text-shadow: 0.5px 0.5px 1px black;
   text-transform: uppercase;
+  text-shadow: 0.5px 0.5px 1px black;
 }
 
 body.vtt.game.system-scion div.sheet.scion .dotline {
-  grid-area: dotline;
   display: grid;
+  grid-area: dotline;
   grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
   grid-template-rows: 1rem;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
 }
 
 body.vtt.game.system-scion div.sheet.scion .dotline.labelledDotLine {
@@ -560,7 +557,6 @@ body.vtt.game.system-scion div.sheet.scion .title {
   -webkit-transform-origin: 0% 0%;
   -ms-transform-origin: 0% 0%;
   transform-origin: 0% 0%;
-  line-height: var(--lineHeightTitle);
   border: none;
 }
 
@@ -610,42 +606,44 @@ body.vtt.game.system-scion div.sheet.scion .subTitle {
   border: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion h1 {
+body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion h3 {
   width: 100%;
   margin: 0;
+}
+
+body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2 {
   display: block;
+}
+
+body.vtt.game.system-scion div.sheet.scion h1 {
   color: var(--fontColorHeading1);
   background-color: var(--bgColorHeading1);
+  padding: var(--paddingHeading1);
   font-family: var(--fontFamilyHeading1);
   font-style: var(--fontStyleHeading1);
   font-variant: var(--fontVariantHeading1);
   font-weight: var(--fontWeightHeading1);
-  text-transform: var(--textTransformHeading1);
   font-size: var(--fontSizeHeading1);
+  text-transform: var(--textTransformHeading1);
   text-shadow: var(--textShadowHeading1);
   border-bottom: var(--borderBottomHeading1);
 }
 
 body.vtt.game.system-scion div.sheet.scion h2 {
-  width: 100%;
-  margin: 0;
-  display: block;
   color: var(--fontColorHeading2);
-  background-color: var(--bgColorHeading2);
+  background-image: -webkit-gradient(linear, right top, left top, from(var(--scale3)), to(var(--scale7)));
+  background-image: -o-linear-gradient(right, var(--scale3), var(--scale7));
+  background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
+  padding: var(--paddingHeading2);
   font-family: var(--fontFamilyHeading2);
   font-style: var(--fontStyleHeading2);
   font-variant: var(--fontVariantHeading2);
   font-weight: var(--fontWeightHeading2);
-  text-transform: var(--textTransformHeading2);
   font-size: var(--fontSizeHeading2);
-  padding: var(--paddingHeading2);
+  text-transform: var(--textTransformHeading2);
   text-shadow: var(--textShadowHeading2);
+  text-indent: 10px;
   border-bottom: var(--borderBottomHeading2);
-}
-
-body.vtt.game.system-scion div.sheet.scion h3 {
-  width: 100%;
-  margin: 0;
 }
 
 body.vtt.game.system-scion div.sheet.scion label {
@@ -660,10 +658,6 @@ body.vtt.game.system-scion div.sheet.scion .flex {
   -webkit-box-direction: normal;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
-}
-
-body.vtt.game.system-scion div.sheet.scion .flex.tab:not(.active) {
-  display: none;
 }
 
 body.vtt.game.system-scion div.sheet.scion .flex.flexColumn {
@@ -712,12 +706,6 @@ body.vtt.game.system-scion div.sheet.scion .flex.flexRow > .contentEditable {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 100%;
   flex: 1 1 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .flex.spaceCenter {
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
 }
 
 body.vtt.game.system-scion div.sheet.scion .flex > * {
@@ -772,9 +760,9 @@ body.vtt.game.system-scion div.sheet.scion nav.tabs .item {
   text-shadow: none;
   color: var(--scale9);
   background-color: var(--scale4);
-  -webkit-box-shadow: 0px 0px 2px var(--scale2), 0px 0px 2px var(--scale2), 0px 0px 6px var(--scale2);
-  box-shadow: 0px 0px 2px var(--scale2), 0px 0px 2px var(--scale2), 0px 0px 6px var(--scale2);
   border-radius: 2rem;
+  -webkit-box-shadow: 0px 0px 4px var(--scale2), 0px 0px 4px var(--scale2), 0px 0px 4px var(--scale2);
+  box-shadow: 0px 0px 4px var(--scale2), 0px 0px 4px var(--scale2), 0px 0px 4px var(--scale2);
 }
 
 body.vtt.game.system-scion div.sheet.scion nav.tabs .item:hover {
@@ -785,6 +773,10 @@ body.vtt.game.system-scion div.sheet.scion nav.tabs .item:hover {
 body.vtt.game.system-scion div.sheet.scion nav.tabs .item.active {
   background-color: var(--scale7);
   color: var(--scale2);
+}
+
+body.vtt.game.system-scion div.sheet.scion .window-content form.main section.sheet-body .tab:not(.active) {
+  display: none !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion header.window-header {
@@ -857,46 +849,28 @@ body.vtt.game.system-scion div.sheet.scion.actor .main {
   height: 100%;
   width: 100%;
   padding: 40px 60px 60px 40px;
-  background-color: white;
-  background-image: url("../images/actor-sheet/backgrounds/Tuatha.png");
   background-color: transparent;
+  background-image: url("../images/actor-sheet/backgrounds/Tuatha.png");
   background-size: 100%;
   background-repeat: no-repeat;
   opacity: 1;
   grid: "menu" 0px "header" 90px "body" 470px "footer" 90px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main > * {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main > * > * {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main > * > * > * {
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette {
   grid-area: menu;
-  background-image: var(--menuRosetteImg);
-  background-size: 50%;
+  content: "";
   display: block;
   width: 200px;
   height: 200px;
-  content: "";
   position: relative;
-  background-repeat: no-repeat;
   left: -75px;
   top: -75px;
-  border-radius: 50%;
+  background-image: var(--bgImageMenu);
+  background-size: 50%;
+  background-repeat: no-repeat;
   background-position: center;
+  border-radius: 50%;
   pointer-events: all;
   border: none;
   -webkit-transition: 0.5s;
@@ -919,20 +893,20 @@ body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette:hover div.ci
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette .menuText {
-  position: relative;
   display: block !important;
   height: auto !important;
   width: 200px !important;
-  margin-left: -50px !important;
+  position: relative;
   margin-top: -20px;
-  font-family: Voltaire;
-  text-transform: uppercase;
-  color: #ffff00;
+  margin-left: -50px !important;
+  color: var(--fontColorMenu);
+  font-family: var(--fontFamilyMenu);
   font-weight: bold;
   text-align: center;
-  text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
-  opacity: 0;
+  text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
+  text-transform: uppercase;
   letter-spacing: 10px;
+  opacity: 0;
   -webkit-transform: scale(2);
   -ms-transform: scale(2);
   transform: scale(2);
@@ -1198,16 +1172,6 @@ body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body {
   /* #endregion */
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .chargen-body .chargenTwo h2 {
-  background-image: -webkit-gradient(linear, right top, left top, from(var(--scale3)), to(var(--scale7)));
-  background-image: -o-linear-gradient(right, var(--scale3), var(--scale7));
-  background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
-  text-indent: 10px;
-  color: var(--scale10);
-  border-bottom: 2px inset var(--scale3);
-  border-bottom-left-radius: 15px;
-}
-
 body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body {
   grid: "attributes paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
   -webkit-column-gap: 0.5rem;
@@ -1376,14 +1340,49 @@ body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block .
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor {
+  --scale0: black;
+  --scaleFade0: rgba(0, 0, 0, 0.5);
+  --scaleFadeMore0: rgba(0, 0, 0, 0.25);
+  --scale1: #1a1a1a;
+  --scaleFade1: rgba(26, 26, 26, 0.5);
+  --scaleFadeMore1: rgba(26, 26, 26, 0.25);
+  --scale2: #333333;
+  --scaleFade2: rgba(51, 51, 51, 0.5);
+  --scaleFadeMore2: rgba(51, 51, 51, 0.25);
+  --scale3: #4d4d4d;
+  --scaleFade3: rgba(77, 77, 77, 0.5);
+  --scaleFadeMore3: rgba(77, 77, 77, 0.25);
+  --scale4: #666666;
+  --scaleFade4: rgba(102, 102, 102, 0.5);
+  --scaleFadeMore4: rgba(102, 102, 102, 0.25);
+  --scale5: gray;
+  --scaleFade5: rgba(128, 128, 128, 0.5);
+  --scaleFadeMore5: rgba(128, 128, 128, 0.25);
+  --scale6: #ae8585;
+  --scaleFade6: rgba(174, 133, 133, 0.5);
+  --scaleFadeMore6: rgba(174, 133, 133, 0.25);
+  --scale7: #d19494;
+  --scaleFade7: rgba(209, 148, 148, 0.5);
+  --scaleFadeMore7: rgba(209, 148, 148, 0.25);
+  --scale8: #ebaeae;
+  --scaleFade8: rgba(235, 174, 174, 0.5);
+  --scaleFadeMore8: rgba(235, 174, 174, 0.25);
+  --scale9: #fad1d1;
+  --scaleFade9: rgba(250, 209, 209, 0.5);
+  --scaleFadeMore9: rgba(250, 209, 209, 0.25);
+  --scale10: white;
+  --scaleFade10: rgba(255, 255, 255, 0.5);
+  --scaleFadeMore10: rgba(255, 255, 255, 0.25);
   --bgColorMatte: white;
   --bgImage: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
-  --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
-  --fontColorBody: #000;
+  --fontColorBody: black;
   --fontFamilyBody: "Overlock SC";
   --fontSizeBody: 1rem;
   --fontWeightBody: bold;
-  --fontColorTitle: #000;
+  --bgImageMenu: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
+  --fontColorMenu: yellow;
+  --fontFamilyMenu: "Voltaire";
+  --fontColorTitle: black;
   --bgColorTitle: transparent;
   --fontFamilyTitle: "Marcellus SC";
   --fontStyleTitle: normal;
@@ -1443,7 +1442,7 @@ body.vtt.game.system-scion div.sheet.scion.actor {
   --paddingHeading2: 0;
   --lineHeightHeading2: var(--fontSizeHeading2);
   --textShadowHeading2: none;
-  --borderBottomHeading2: none;
+  --borderBottomHeading2: 2px inset var(--scale3);
   --fontColorHeading3: var(--fontColorSubTitle);
   --bgColorHeading3: transparent;
   --fontFamilyHeading3: var(--fontFamilyBody);
@@ -1456,39 +1455,6 @@ body.vtt.game.system-scion div.sheet.scion.actor {
   --lineHeightHeading3: var(--fontSizeHeading3);
   --textShadowHeading3: none;
   --borderBottomHeading3: none;
-  --scale0: black;
-  --scaleFade0: rgba(0, 0, 0, 0.5);
-  --scaleFadeMore0: rgba(0, 0, 0, 0.25);
-  --scale1: #222222;
-  --scaleFade1: rgba(34, 34, 34, 0.5);
-  --scaleFadeMore1: rgba(34, 34, 34, 0.25);
-  --scale2: #444444;
-  --scaleFade2: rgba(68, 68, 68, 0.5);
-  --scaleFadeMore2: rgba(68, 68, 68, 0.25);
-  --scale3: #666666;
-  --scaleFade3: rgba(102, 102, 102, 0.5);
-  --scaleFadeMore3: rgba(102, 102, 102, 0.25);
-  --scale4: #888888;
-  --scaleFade4: rgba(136, 136, 136, 0.5);
-  --scaleFadeMore4: rgba(136, 136, 136, 0.25);
-  --scale5: #aaaaaa;
-  --scaleFade5: rgba(170, 170, 170, 0.5);
-  --scaleFadeMore5: rgba(170, 170, 170, 0.25);
-  --scale6: #c9adad;
-  --scaleFade6: rgba(201, 173, 173, 0.5);
-  --scaleFadeMore6: rgba(201, 173, 173, 0.25);
-  --scale7: #e0b8b8;
-  --scaleFade7: rgba(224, 184, 184, 0.5);
-  --scaleFadeMore7: rgba(224, 184, 184, 0.25);
-  --scale8: #f1c9c9;
-  --scaleFade8: rgba(241, 201, 201, 0.5);
-  --scaleFadeMore8: rgba(241, 201, 201, 0.25);
-  --scale9: #fce0e0;
-  --scaleFade9: rgba(252, 224, 224, 0.5);
-  --scaleFadeMore9: rgba(252, 224, 224, 0.25);
-  --scale10: white;
-  --scaleFade10: rgba(255, 255, 255, 0.5);
-  --scaleFadeMore10: rgba(255, 255, 255, 0.25);
 }
 
 body.vtt.game.system-scion div.sheet.scion.item {

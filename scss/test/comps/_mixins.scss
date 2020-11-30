@@ -18,12 +18,14 @@
 }
 
 @mixin disabledText {
-  font-style: italic;
   color: var(--scaleGrey5);
-  text-shadow: -0.5px -0.5px 0px $c-black, 0.5px 0.5px 0px var(--scaleFadeWhite10);
-  font-family: "Della Respira";
-  font-size: 0.75rem;
-  font-weight: normal;
+  text-shadow: -0.5px -0.5px 0px $c-black, 0.5px 0.5px 0px var(--scaleFadeGrey10);
+  font: {
+    family: "Della Respira";
+    size: 0.75rem;
+    weight: normal;
+    style: italic;
+  }
 }
 
 @mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {
@@ -61,24 +63,16 @@
   }
 }
 
-@mixin box-shadow($size: 5px, $color: $c-black, $isInset: false, $isShowing: true) {
-  @if $isShowing {
+@mixin box-shadow($size: 5px, $color: $c-black, $isInset: false) {
     $shadowPart: 0px 0px $size $color;
-    @if $isInset {
-      $shadowPart: inset $shadowPart;
-    }
+    @if $isInset { $shadowPart: inset $shadowPart; }
     $shadowFull: ();
     @for $i from 1 through 3 {
       $shadowFull: append($shadowFull, $shadowPart, $separator: comma); 
     }
     box-shadow: $shadowFull;
-  } @else {
-    box-shadow: none;
-  }
 }
 
-@mixin bg-shade($color: $c-black, $isShowing: true) {
-  @if $isShowing {
+@mixin bg-shade($color: $c-black) {
     background-color: scale-color($color, $alpha: -80%);
-  }
 }

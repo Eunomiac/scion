@@ -26,6 +26,7 @@ body.vtt.game.system-scion {
     border: none;
     box-shadow: none;
     background: none;
+    margin: 0;
 
     @import 'test/comps/base'; // Base Styles: HTML Elements, Headers
     @import 'test/comps/layoutBlocks'; // Grid & Flex Layout Plans
@@ -48,13 +49,12 @@ body.vtt.game.system-scion {
         @import 'test/scionActor/main';
 
         .sheet-body {
-          grid-area: body;
           pointer-events: all;
 
-          .tab[data-tab].active { height: 100%; }
+          // .tab[data-tab].active { height: 100%; }
 
-          .tab .chargen { @import "test/scionActor/chargen/actor-chargen"; }
-          .tab .front { @import "test/scionActor/front/actor-front"; }
+          // .tab .chargen-body { @import "test/scionActor/chargen/actor-chargen"; }
+          .tab .front-body { @import "test/scionActor/front/actor-front"; }
 
           /* #region Owned Item Partials */
           .path-block { @import "test/scionActor/ownedItems/path-block"; }

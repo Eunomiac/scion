@@ -1,8 +1,8 @@
-<section class="flex flexColumn fullSize chargenTwo padded">
+<div class="flex flexColumn fullSize chargenTwo padded">
     <h1>{{localize "scion.headings.chargen.stepTwo"}}</h1>
     {{#each paths as |path id|}}
         {{#with ../blocks as | blocks |}}
         {{> (blocks.ownedItems.path.template) path}}
         {{/with}}
     {{/each}}
-</section>
+</div>

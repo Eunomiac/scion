@@ -8,17 +8,29 @@ $isTestingPantheon: "Tuatha";
     width: 100%;
     padding: 40px 60px 60px 40px;
 
-    background-color: white;
     @if $isShowingPadding {
-        background-image: url("../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png");
+        background: {
+            color: white;
+            image: url("../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png");
+            size: 100%;
+            repeat: no-repeat;
+        }
     } @else if $isTestingPantheon {
-        background-image: url("../images/actor-sheet/backgrounds/#{$isTestingPantheon}.png");
-        background-color: transparent;
+        background: {
+            color: transparent;
+            image: url("../images/actor-sheet/backgrounds/#{$isTestingPantheon}.png");
+            size: 100%;
+            repeat: no-repeat;
+        }
     } @else {
-        background-image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
+        background: {
+            color: white;
+            image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
+            size: 100%;
+            repeat: no-repeat;
+        }
     }
-    background-size: 100%;
-    background-repeat: no-repeat;
+
     opacity: 1;        
 
     grid: "menu" 0px
@@ -26,12 +38,26 @@ $isTestingPantheon: "Tuatha";
           "body" 470px
           "footer" 90px;
 
-    @include box-shadow(2px, lime, true, $isShowingTestBorders); @include bg-shade(lime, $isShowingBGShade);
-    > * { @include box-shadow(6px, orange, true, $isShowingTestBorders); @include bg-shade(orange, $isShowingBGShade);
-        > * { @include box-shadow(4px, cyan, true, $isShowingTestBorders); @include bg-shade(cyan, $isShowingBGShade); 
-            > * { @include box-shadow(2px, red, true, $isShowingTestBorders); @include bg-shade(red, $isShowingBGShade); }
+    @if $isShowingTestBorders {
+        @include box-shadow(2px, lime, true);
+        > * { @include box-shadow(6px, orange, true);
+            > * { @include box-shadow(4px, cyan, true);
+                > * { @include box-shadow(2px, red, true); }
+            }
         }
     }
+
+    
+    @if $isShowingBGShade {
+        @include bg-shade(lime);
+        > * { @include bg-shade(orange);
+            > * { @include bg-shade(cyan); 
+                > * { @include bg-shade(red); }
+            }
+        }
+    }
+
+
 
     .menuRosette {
         grid-area: menu;
@@ -58,25 +84,25 @@ $isTestingPantheon: "Tuatha";
         
         $menuButtonSize: $menuButtonFullSize + $menuButtonMargin;
 
-        background-image: var(--menuRosetteImg);
-        background-size: 50%;
+        content: "";
         display: block;
         width: $menuOpenSize;
         height: $menuOpenSize;
-        content: "";
         position: relative;
-        background-repeat: no-repeat;
         left: $menuOpenSize * (-3/8);
         top: $menuOpenSize * (-3/8);
+
+        background: {
+            image: var(--bgImageMenu);
+            size: 50%;
+            repeat: no-repeat;
+            position: center;
+        }
+
         border-radius: 50%;
-        background-position: center;
         pointer-events: all;
         border: none;
         transition: 0.5s;
-
-        & > div {
-            // pointer-events: none;
-        }
 
         &:hover {
             background-size: 100%;
@@ -88,21 +114,28 @@ $isTestingPantheon: "Tuatha";
             }
         }
         .menuText {
-            position: relative;
             display: block !important;
             height: auto !important;
             width: $menuButtonSize * 2 !important;
-            margin-left: $menuButtonSize / -2 !important;
-            margin-top: -20px;
-            font-family: Voltaire;
-            text-transform: uppercase;
-            color: #ffff00;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000,
-            1px 1px 2px #000;
-            opacity: 0;
+            position: relative;
+            margin: {
+                top: -20px;
+                left: $menuButtonSize / -2 !important;
+            }
+            
+            color: var(--fontColorMenu);
+            font: {
+                family: var(--fontFamilyMenu);
+                weight: bold;
+            }
+            text: {
+                align: center;
+                shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
+                transform: uppercase;
+            }
             letter-spacing: 10px;
+
+            opacity: 0;
             transform: scale(2);
             transition: 0.25s !important;
             pointer-events: none;
@@ -130,8 +163,10 @@ $isTestingPantheon: "Tuatha";
                     display: inline-block;
                     width: 100%;
                     height: 100%;
-                    background-size: 100%;
-                    background-position: center;
+                    background: {
+                        size: 100%;
+                        position: center;
+                    }
                     transition: 0.5s;
                 }
                 .menuButton {
@@ -139,9 +174,11 @@ $isTestingPantheon: "Tuatha";
                     position: relative;
                     height: 100%;
                     width: 100%;
-                    background-image: $menuButtonBG;
-                    background-size: $menuButtonSize;
-                    background-position: center;
+                    background: {
+                        image: $menuButtonBG;
+                        size: $menuButtonSize;
+                        position: center;
+                    }
                     transition: 0.5s;
         
                     @keyframes slowBob {

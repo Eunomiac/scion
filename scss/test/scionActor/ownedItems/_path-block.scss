@@ -6,8 +6,7 @@
         border-radius: 12.5px;
         margin: 3px;
 
-        align-content: start;
-        align-self: start;
+        align: { content: start; self: start; }
 
         > div {
             border-radius: 12.5px;

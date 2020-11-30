@@ -1,25 +1,23 @@
 /* #region Element Default Styles */
 * {
     color: var(--fontColorBody);
-    font-family: var(--fontFamilyBody);
-    font-size: var(--fontSizeBody);
-    font-weight: var(--fontWeightBody);
+    font: {
+        family: var(--fontFamilyBody);
+        size: 0;
+        weight: var(--fontWeightBody);
+    }
 }
 
 textarea,
 input[type="text"],
 select {
-    // height: 100%;
-    // width: 100%;
     margin: 0px;
     padding: 0px;
     box-shadow: none;
     border: none;
     outline: none;
 
-    &:invalid {
-        @include disabledText;
-    }
+    &:invalid { @include disabledText; }
 }
 /* #endregion */
 
@@ -32,9 +30,11 @@ select {
     &.insetFrame {
         min-height: 27px;
         color: var(--fontColorBody);
-        font-family: var(--fontFamilyBody);
-        font-size: var(--fontSizeBody);
-        font-weight: bold;
+        font: {
+            family: var(--fontFamilyBody);
+            size: var(--fontSizeBody);
+            weight: bold;
+        }
         border-radius: 1rem;
         background-color: rgba(0,0,0,0.2);
         border: inset 3px var(--scale6);
@@ -50,55 +50,44 @@ select {
     overflow: hidden;
 }
 
-.hidden {
-    @include hide;
-}
+.hidden { @include hide; }
 
 .text {
     color: var(--fontColorBody);
-    font-family: var(--fontFamilyBody);
-    font-size: var(--fontSizeBody);
-    font-weight: var(--fontWeightBody);
+    font { size: var(--fontSizeBody); }
 }
 
 .inline { 
     display: inline-block !important;
-    &.text {
-        padding-right: $defaultPadding;
-    } 
+
+    &.text { padding-right: $defaultPadding; } 
 }
 
-.padded {
-    padding: $defaultPadding;
-}
+.padded { padding: $defaultPadding; }
 
-.placeholder {
-    @include disabledText;
-}
+.placeholder { @include disabledText; }
 
 .half { width: 50%; }
 .quarter { width: 25%; }
 .fifth { width: 20%; }
 
 .alignLeft { text-align: left !important; text-align-last: left !important;}
-.alignCenter { text-align: center !important; text-align-last: center !important; justify-content: center; }
+.alignCenter { text-align: center !important; text-align-last: center !important; justify-content: center !important; }
 .alignRight { text-align: right !important; text-align-last: right !important;}
 
 .strong { 
-    font-weight: bolder;
-    text-shadow: 0.5px 0.5px 1px black;
-    text-transform: uppercase;
+    font: { weight: bolder; }
+    text: { transform: uppercase; shadow: 0.5px 0.5px 1px black; }
 }
 /* #endregion */
 
 /* #region Dot Trackers */
 .dotline {
-    grid-area: dotline;
     display: grid;
-    grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
-    grid-template-rows: 1rem;
-    align-content: center;
-    justify-content: center;
+    grid: {
+        area: dotline;
+        template: { columns: 1rem 1rem 1rem 1rem 1rem; rows: 1rem; }
+    }
 
     &.labelledDotLine {
         width: 100%;
@@ -111,7 +100,7 @@ select {
         column-gap: 0.5rem;
     }
 
-    &.labelledDotLine.largeDots {
+    &.labelledDotLine.largeDots { 
         grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
     }
     
@@ -137,10 +126,12 @@ select {
                 content: "";
                 height: 150%;
                 width: 150%;
-                background-image: var(--virtueDarkImg);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: 100%;
+                background: {
+                    image: var(--virtueDarkImg);
+                    repeat: no-repeat;
+                    position: center;
+                    size: 100%;
+                }
             }
 
             &.virtueFull::after {
@@ -171,7 +162,6 @@ select {
     }
     transform: scaleX(var(--fontScaleTitle));
     transform-origin: 0% 0%;
-    line-height: var(--lineHeightTitle);
     border: none;
 }
 
@@ -221,43 +211,47 @@ select {
     border: none;
 }
 
-h1 {   
-    width: 100%;
-    margin: 0;
-    display: block;
+h1, h2, h3 { width: 100%; margin: 0; }
+
+h1, h2 { display: block; }
+
+h1 {
     color: var(--fontColorHeading1);
     background-color: var(--bgColorHeading1);
-    font-family: var(--fontFamilyHeading1);
-    font-style: var(--fontStyleHeading1);
-    font-variant: var(--fontVariantHeading1);
-    font-weight: var(--fontWeightHeading1);
-    text-transform: var(--textTransformHeading1);
-    font-size: var(--fontSizeHeading1);
-    text-shadow: var(--textShadowHeading1);
+    padding: var(--paddingHeading1);
+    font: {
+        family: var(--fontFamilyHeading1);
+        style: var(--fontStyleHeading1);
+        variant: var(--fontVariantHeading1);
+        weight: var(--fontWeightHeading1);
+        size: var(--fontSizeHeading1);
+    }
+    text: {
+        transform: var(--textTransformHeading1);
+        shadow: var(--textShadowHeading1);
+    }
     border-bottom: var(--borderBottomHeading1);
 }
 
 h2 {
-    width: 100%;
-    margin: 0;
-    display: block;
     color: var(--fontColorHeading2);
-    background-color: var(--bgColorHeading2);
-    font-family: var(--fontFamilyHeading2);
-    font-style: var(--fontStyleHeading2);
-    font-variant: var(--fontVariantHeading2);
-    font-weight: var(--fontWeightHeading2);
-    text-transform: var(--textTransformHeading2);
-    font-size: var(--fontSizeHeading2);
+    background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
     padding: var(--paddingHeading2);
-    text-shadow: var(--textShadowHeading2);
+    font: {
+        family: var(--fontFamilyHeading2);
+        style: var(--fontStyleHeading2);
+        variant: var(--fontVariantHeading2);
+        weight: var(--fontWeightHeading2);
+        size: var(--fontSizeHeading2);
+    }
+    text: {
+        transform: var(--textTransformHeading2);
+        shadow: var(--textShadowHeading2);
+        indent: 10px;
+    }
     border-bottom: var(--borderBottomHeading2);
 }
 
-h3 { 
-    width: 100%;
-    margin: 0;
-}
+/* h3 { } */
 
-label { 
-    margin: 0 0.25rem; }
+label { margin: 0 0.25rem; }

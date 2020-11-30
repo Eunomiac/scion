@@ -221,7 +221,7 @@
 
     --fontColorBody: #{$bodyColor};
     
-    @include scaled-colors($accentColor);
+    @include scaled-colors($accentColor); 
 }
 
 // .nemetondevos { }

@@ -1,16 +1,14 @@
 /* #region FLEX LAYOUTS */
 .flex {
     display: flex;
-    &.tab:not(.active) { display: none; }
-    flex-flow: row wrap;
-
-    
+    flex-flow: row wrap;    
     
     &.flexColumn {
         flex-flow: column nowrap;
         flex-basis: 100%;
         &.fullSize { height: 100%; }
     }
+    
     &.flexRow {
         flex-flow: row nowrap;
         align-items: baseline;
@@ -21,7 +19,6 @@
         > label { flex: 0 0 auto; }
         > .contentEditable { flex: 1 1 100%; }
     }
-    &.spaceCenter { justify-content: center; }
 
     > * { 
         flex: auto; // Default flex for contained elements.
