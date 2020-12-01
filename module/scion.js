@@ -1,11 +1,10 @@
 // #region Import Modules
 // import _, {map} from "./external/underscore/underscore-esm-min";
-import {scionSystemData, itemCategories, handlebarTemplates, signatureChars} from "./data/constants.js";
-import * as U from "./data/utils.js";
-import {ScionActor} from "./actor/actor.js";
-import {ScionActorSheet} from "./actor/actor-sheet.js";
-import {ScionItem} from "./item/item.js";
-import {ScionItemSheet} from "./item/item-sheet.js";
+import {_, U, SCION, handlebarTemplates, SIG_CHARS} from "./modules.js";
+import {ScionActor, MajorActor, MinorActor, GroupActor} from "./actor/actor.js";
+import {MajorActorSheet, MinorActorSheet, GroupActorSheet} from "./actor/actor-sheet.js";
+import {ScionItem, Path} from "./item/item.js";
+import {PathSheet} from "./item/item-sheet.js";
 // import {preloadHandlebarsTemplates} from "./templates.js";
 import "./external/gl-matrix-min.js";
 // #endregion
@@ -14,11 +13,10 @@ import "./external/gl-matrix-min.js";
 Hooks.once("init", async () => {
     console.clear();
     console.log("INITIALIZING SCION.JS ...");
-    CONFIG.scion = scionSystemData;
+    CONFIG.scion = SCION;
 
+    // Scion namespace within game object
     game.scion = {
-        ScionActor,
-        ScionItem,
         debug: {
             isDebugging: true,
             watchList: []
@@ -27,13 +25,41 @@ Hooks.once("init", async () => {
     // Define custom Entity classes
     CONFIG.Actor.entityClass = ScionActor;
     CONFIG.Item.entityClass = ScionItem;
+    CONFIG.Path = Object.assign({}, CONFIG.Item, {entityClass: Path});
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("scion", ScionActorSheet, {makeDefault: true});
-    Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("scion", ScionItemSheet, {makeDefault: true});
 
+    [MajorActorSheet, MinorActorSheet, GroupActorSheet, PathSheet].forEach((cls) => cls.RegisterDefault());
+    
+    /* MajorActorSheet.RegisterDefault();
+
+    Actors.registerSheet("scion", MajorActorSheet, {
+        types: ["major"],
+        makeDefault: true,
+        label: "scion.sheets.major"
+    });
+    Actors.registerSheet("scion", MinorActorSheet, {
+        types: ["minor"],
+        makeDefault: true,
+        label: "scion.sheets.minor"
+    });
+    Actors.registerSheet("scion", GroupActorSheet, {
+        types: ["group"],
+        makeDefault: true,
+        label: "scion.sheets.group"
+    });
+    Items.unregisterSheet("core", ItemSheet);
+    PathSheet.RegisterDefault(); */
+
+
+    /* Items.registerSheet("scion", PathSheet, {
+        types: ["path"],
+        makeDefault: true,
+        label: "scion.sheets.path"
+    }); */
+
+    U.LOG(CONFIG, "CONFIG", "CONFIG", {style: "data"});
     // Preload Handlebars Template Partials
     (async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates).map((x) => (typeof x === "function" ? x() : x))))();
 
@@ -86,19 +112,20 @@ Hooks.once("ready", async () => {
     // If any signature characters are missing, create them
     const sigChars = new Set();
     const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
-    Object.keys(signatureChars).forEach((sigName) => {
+    Object.keys(SIG_CHARS).forEach((sigName) => {
         if (!charNames.includes(sigName))
             sigChars.add(sigName);
     });
     // ActorDirectory.collection.forEach((data) => { sigChars.delete(data.name) });
     sigChars.forEach((sigName) => {
-        const actorData = signatureChars[sigName];
-        U.LOG(actorData, "Sig Char Creation", "hookReady");
-        Actor.create({
+        const actorData = SIG_CHARS[sigName];
+        U.LOG(actorData, "Data", "hookReady", {style: "info", isGrouping: `Creating Major Actor '${sigName}'`, groupStyle: "data"});
+        const thisActor = MajorActor.create({
             name: sigName,
-            type: "character",
+            type: "major",
             data: actorData
         });
+        U.LOG(thisActor, "Instance", "hookReady");
     });
 });
 // #endregion

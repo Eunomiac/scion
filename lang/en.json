@@ -1,7 +1,8 @@
 {
     "ACTOR": {
-        "TypeCharacter": "Player Character",
-        "TypeSgc": "Storyguide Character"
+        "TypeMajor": "Full Character",
+        "TypeMinor": "Minor Character",
+        "TypeGroup": "Group of Characters"
     },
     "ITEM": {
         "TypePath": "Path",
@@ -67,6 +68,14 @@
             "longTermDeeds": "Long-Term Deeds",
             "band": "Band",
             "bandDeed": "Band Deed"
+        },
+        "sheets": {
+            "actor": "Character Sheet",
+            "item": "Item Sheet",
+            "major": "Full Character Sheet",
+            "minor": "Short Character Sheet",
+            "group": "Character Group Sheet",
+            "path": "Path Sheet"
         },
         "headings": {
             "main": {

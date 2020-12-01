@@ -1,6 +1,6 @@
 {
     "Actor": {
-        "types": ["character", "sgc"],
+        "types": ["major", "minor", "group"],
         "templates": {
             "PC": {
                 "playerName": ""
@@ -244,32 +244,26 @@
                 }
             }
         },
-        "character": {
+        "major": {
             "templates": ["PC", "BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
         },
-        "sgc": {
+        "minor": {
             "templates": ["BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
+        },
+        "group": {
+            "templates": ["BIO"]
         }
     },
     "Item": {
         "types": [
             "path",
-            "connectionGroup",
-            "connectionContact",
-            "connectionAccess",
+            "connection",
             "condition",
+            "covenant", "cult", "follower", "creature", "guide", "relic",
             "calling",
-            "legendaryTitle",
-            "fatebinding",
-            "knack",
-            "purview",
-            "boon",
-            "covenant",
-            "cult",
-            "follower",
-            "creature",
-            "guide",
-            "relic"
+            "title",
+            "knack", "boon", "innate",
+            "purview"
         ],
         "templates": {
             "CONNECTION": {

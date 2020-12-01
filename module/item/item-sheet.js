@@ -1,9 +1,6 @@
-/**
- * Extend the basic ItemSheet with some very simple modifications
- * @extends {ItemSheet}
- */
+import {_, U, MIX, ItemMixins as MIXINS} from "../modules.js";
+
 export class ScionItemSheet extends ItemSheet {
-    /** @override */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "item"],
@@ -12,29 +9,29 @@ export class ScionItemSheet extends ItemSheet {
             tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
         });
     }
-
-    /** @override */
-    get template() {
-        const path = "systems/scion/templates/item";
-        // Return a single sheet for all item types.
-        // return `${path}/item-sheet.html`;
-
-        // Alternatively, you could use the following return statement to do a
-        // unique item sheet by type, like `weapon-sheet.html`.
-        return `${path}/item-${this.item.data.type}-sheet.hbs`;
+    static RegisterDefault() {
+        Items.registerSheet("scion", this, {
+            types: this.types,
+            makeDefault: true,
+            label: `scion.sheets.${this?.sheetLabel ?? this.types[0]}`
+        });
+        console.log(`Item Sheet Registered | Registered ${this.name}`);
     }
 
-    /* -------------------------------------------- */
+    constructor(...args) {
+        super(...args);
+        this._templateRootPath = "systems/scion/templates/item";
+        this._templateSubPath = null;
+        this._templateFilename = "item-sheet.hbs";
+    }
 
-    /** @override */
+    get template() { return _.compact([this._templateRootPath, this._templateSubPath, this._templateFilename]).join("/") }
+
     getData() {
         const data = super.getData();
         return data;
     }
 
-    /* -------------------------------------------- */
-
-    /** @override */
     setPosition(options = {}) {
         const position = super.setPosition(options);
         const sheetBody = this.element.find(".sheet-body");
@@ -43,16 +40,33 @@ export class ScionItemSheet extends ItemSheet {
         return position;
     }
 
-    /* -------------------------------------------- */
-
-    /** @override */
     activateListeners(html) {
         super.activateListeners(html);
+    }
+}
+export class PathSheet extends ScionItemSheet {
 
-        // Everything below here is only needed if the sheet is editable
-        // if (!this.options.editable)
-        //    return;
+    static get types() { return ["path"] }
 
-    // Roll handlers, click handlers, etc. would go here.
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["scion", "sheet", "item", "path"],
+            width: 500,
+            height: 500
+        });
+    }
+
+    constructor(...args) {
+        super(...args);
+        this._templateFilename = "item-path-sheet.hbs";
+    }
+
+    getData() {
+        const data = super.getData();
+        /* data.title ??= "";
+        data.isEditable = {
+            title: true
+        };
+        return data; */
     }
 }

@@ -1,0 +1,145 @@
+<form class="{{cssClass}} {{actor.type}} {{data.pantheon}} grid main" autocomplete="off">
+
+    {{!-- Radial Menu Tab Navigation --}}
+    <nav class="sheet-tabs menuRosette" data-group="primary">
+        <div class="circleMenuContainer">
+          <div class="menuButtonContainer">
+            <div class="menuButton">
+              <div class="menuIconDark iconSettings">
+                <a class="item menuIconGlow" data-tab="details"></a>
+              </div>
+              <div class="menuText">{{localize "scion.headings.main.detailsTab"}}</div>
+            </div>
+          </div>
+          <div class="menuButtonContainer">
+            <div class="menuButton">
+              <div class="menuIconDark iconMain">
+                  <a class="item menuIconGlow" data-tab="front"></a>
+              </div>
+              <div class="menuText">{{localize "scion.headings.main.frontTab"}}</div>
+            </div>
+          </div>
+          <div class="menuButtonContainer">
+            <div class="menuButton">
+              <div class="menuIconDark iconHeritage">
+                <a class="item menuIconGlow" data-tab="heritage"></a>
+              </div>
+              <div class="menuText">{{localize "scion.headings.main.heritageTab"}}</div>
+            </div>
+          </div>
+          <div class="menuButtonContainer">
+            <div class="menuButton">
+              <div class="menuIconDark iconExperience">
+                <a class="item menuIconGlow" data-tab="experience"></a>
+              </div>
+              <div class="menuText">{{localize "scion.headings.main.experienceTab"}}</div>
+            </div>
+          </div>
+          <div class="menuButtonContainer">
+            <div class="menuButton">
+              <div class="menuIconDark iconChargen">
+                <a class="item menuIconGlow" data-tab="chargen"></a>
+              </div>
+              <div class="menuText">{{localize "scion.headings.main.chargenTab"}}</div>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    {{!-- Sheet Header --}}
+    <section class="header grid">
+        <div class="divineTitle surTitle">{{~data.divineTitle~}}</div>
+        <div class="charName title contentEditable" data-path="actor.name"></div>
+        <div class="patronage subTitle">&nbsp;{{~data.patronageLine~}}&nbsp;</div>
+    </section>
+        
+    <section class="sheet-body grid">
+        {{!-- Chargen Tab --}}
+        <section class="tab flex flexColumn" data-group="primary" data-tab="chargen">
+            {{> (blocks.chargen.template) }}
+        </section>
+        {{!-- Front Tab --}}
+        <section class="tab" data-group="primary" data-tab="front">
+            <div class="front-body grid">
+                <div class="attributes flex">
+                    <h1>{{localize "scion.game.attributes"}}</h1>
+                    {{#if data.attributes.unspentDots.general}}
+                        <div class="dotGrabBin dotDropBin flex">
+                            {{#for data.attributes.unspentDots.general}}
+                                <span class="dot unspent" data-dottype="primary|secondary|tertiary" data-trait="data.attributes.unspentDots.general"></span>
+                            {{/for}}
+                        </div>
+                    {{/if}}
+                    {{#each data.attributes.priorities as |arena priority|}}
+                        <div class="attrBlock {{arena}} flex">
+                            {{#if data.attributes.unspentDots.[arena]}}
+                                <div class="dotGrabBin dotDropBin flex"> 
+                                    {{#for data.attributes.unspentDots.[arena]}}
+                                        <span class="dot unspent" data-dottype="{{arena}}" data-trait="data.attributes.unspentDots.{{arena}}"></span>
+                                    {{/for}}
+                                </div>
+                            {{/if}}
+                            {{#each (lookup ../config.ATTRIBUTES.arenas arena) as |attribute|}}
+                                <div class="attrRow dotDropBin dotline labelledDotLine" data-dottype="{{arena}}" data-trait="{{attribute}}">
+                                    <div class="label">{{localize (concat "scion.attributes." attribute)}}</div>
+                                    {{#for 5}}
+                                        <span class="dot click {{dotstate attribute @index}}" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
+                                    {{/for}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="paths flex">
+                    <h1>{{localize "scion.game.paths"}}</h1>
+                    <div class="originpath"></div>
+                    <div class="rolepath"></div>
+                    <div class="pantheonpath"></div>
+                </div>
+                <div class="virtues grid">
+                    {{#if data.pantheon}}
+                    {{#with (lookup config.PANTHEONS data.pantheon) as | pantheon |}}
+                    <div class="leftvirtue strong text">{{localize (concat "scion.virtues." pantheon.virtues.[0])}}</div>
+                    <div class="dotline largeDots">
+                        {{#for 5}}
+                            <span class="dot {{#if (eq (lookup ../data.virtue [value]) @index)}}virtueFull{{/if}} {{#if (eq @index 3)}}virtueCenter{{/if}}" data-trait="virtue" data-val="{{@index}}"></span>
+                        {{/for}}
+                    </div>
+                    <div class="rightvirtue strong text alignRight">{{localize (concat "scion.virtues." pantheon.virtues.[1])}}</div>
+                    {{/with}}
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+        {{!-- Divine Genesis Tab --}}
+        <section class="tab" data-group="primary" data-tab="genesis">
+            <div class="genesis grid">
+                <div class="genesis text">Genesis</div>
+                <div class="paths text">Paths</div>
+                <div class="virtues text">Virtues</div>
+            </div>
+        </section>
+        {{!-- Details Tab --}}
+        <section class="tab" data-group="primary" data-tab="details">
+            <div class="details grid">
+                <div class="attributes text">Attributes</div>
+                <div class="paths text">Paths</div>
+                <div class="virtues text">Virtues</div>
+            </div>
+        </section>
+        {{!-- Experience Tab --}}
+        <section class="tab" data-group="primary" data-tab="experience">
+            <div class="experience grid">
+                <div class="attributes text">Attributes</div>
+                <div class="paths text">Paths</div>
+                <div class="virtues text">Virtues</div>
+            </div>
+        </section>
+    </section>
+
+    <div class="footer grid">
+        <div class="subTitle">&nbsp;</div>
+        <div class="title">&nbsp;</div>
+        <div class="surTitle">&nbsp;</div>
+    </div>
+</form>

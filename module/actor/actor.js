@@ -1,5 +1,5 @@
-import * as _ from "../external/underscore/underscore-esm-min.js";
-import * as U from "../data/utils.js";
+import {_, U, MIX, MIXINS} from "../modules.js";
+console.log(U, MIX, MIXINS);
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -7,10 +7,17 @@ import * as U from "../data/utils.js";
 export class ScionActor extends Actor {
     prepareData() {
         super.prepareData();
-        if (this.data.type === "character")
-            this._prepareCharacterData();
+        this._prepareCharacterData?.();
         U.LOG(this.data.data, "[.Data]", "prepareData", {style: "data", isGrouping: `[Actor] ${this.name}`});
+        U.LOG(this, "[THIS]", "prepareData", {style: "data", isUngrouping: false});
         U.LOG(this.data.items, "[.Items]", "prepareData", {style: "data"});
+    }
+}
+
+export class MajorActor extends ScionActor {
+    static create(...args) {
+        U.LOG(this._prepareCharacterData, "[._prepareCharacterData]", "prepareData", {style: "data", isUngrouping: false});
+        super.create(...args);
     }
 
     _prepareCharacterData() {
@@ -34,8 +41,9 @@ export class ScionActor extends Actor {
                     }
                 };
         });
+        U.LOG(pathData, "Paths to Create", "paths", {style: "data"});
         if (Object.keys(pathData).length)
-            this.createEmbeddedEntity("OwnedItem", Object.values(pathData));
+            this.createOwnedItem(Object.values(pathData));
         // #endregion
     }
 
@@ -46,4 +54,12 @@ export class ScionActor extends Actor {
             (pathType) => Array.from(this.items).find((item) => item.data.data.type === pathType)
         );
     }
+}
+
+export class MinorActor extends ScionActor {
+
+}
+
+export class GroupActor extends ScionActor {
+
 }

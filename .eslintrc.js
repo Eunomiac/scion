@@ -2,27 +2,29 @@ module.exports = {
     parser: "babel-eslint",
     env: {
         es6: true,
+        es2020: true,
         browser: true,
         commonjs: true,
-        jest: true
+        jest: true,
+        jquery: true
     },
     extends: [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "eslint-config-prettier",
-        "airbnb",
+        // "plugin:react/recommended",
+        // "eslint-config-prettier",
+        // "airbnb",
         // "prettier",
         // "plugin:prettier/recommended",
         // "prettier/@typescript-eslint",
-        "prettier/babel",
-        "prettier/flowtype",
-        "prettier/react",
-        "prettier/standard",
-        "prettier/unicorn",
-        "prettier/vue"
+        // "prettier/babel",
+        // "prettier/flowtype",
+        // "prettier/react",
+        // "prettier/standard",
+        // "prettier/unicorn",
+        // "prettier/vue"
     ],
     parserOptions: {
-        ecmaVersion: 2017,
+        ecmaVersion: 2020,
         sourceType: "module",
         allowImportExportEverywhere: false,
         codeFrame: false,
@@ -34,9 +36,12 @@ module.exports = {
     rules: {
         "accessor-pairs": ["warn"],
         "array-callback-return": "warn",
+        /*
         "babel/no-unused-expressions": 1,
         // "babel/object-curly-spacing": 1,
-        // "babel/quotes": 1,
+        "babel/no-invalid-this": "off",
+        "babel/quotes": ["warn", "double", {avoidEscape: true, allowTemplateLiterals: false}],
+        */
         "block-scoped-var": "warn",
         "class-methods-use-this": 0,
         "consistent-return": ["warn", {treatUndefinedAsUnspecified: true}],
@@ -45,7 +50,7 @@ module.exports = {
         "default-case": "warn",
         // "dot-location": ["warn", "object"],
         "doctype-first": 0,
-        "dot-notation": ["warn", {allowKeywords: false}],
+        // "dot-notation": ["warn", {allowKeywords: false}],
         eqeqeq: ["warn", "always"],
         "function-paren-newline": "warn",
         "import/extensions": 0,
@@ -95,7 +100,6 @@ module.exports = {
         "no-implicit-globals": "warn",
         "no-implied-eval": "warn",
         "no-invalid-this": "off",
-        "babel/no-invalid-this": "off",
         "no-iterator": "warn",
         "no-labels": "warn",
         "no-lone-blocks": "warn",
@@ -131,7 +135,7 @@ module.exports = {
         "one-var": ["warn", {var: "always", let: "consecutive", const: "never"}],
         "one-var-declaration-per-line": 0,
         "operator-linebreak": ["warn", "before"],
-        "padded-blocks": "warn",
+        "padded-blocks": 0,
         "prefer-arrow-callback": "warn",
         "prefer-const": ["warn", {destructuring: "all"}],
         "import/prefer-default-export": 0,
@@ -140,7 +144,6 @@ module.exports = {
         // "prettier/prettier": 0,
         // "prettier/prettier": "warn",
         quotes: ["warn", "double"],
-        "babel/quotes": ["warn", "double", {avoidEscape: true, allowTemplateLiterals: false}],
         radix: 0,
         semi: ["warn", "always", {omitLastInOneLineBlock: true}]
     },
@@ -171,5 +174,5 @@ module.exports = {
         mergeObject: "readonly",
         ui: "readonly"
     },
-    plugins: ["babel"] // plugins: ["babel", "prettier"]
+    plugins: [] // ["babel"] // plugins: ["babel", "prettier"]
 };

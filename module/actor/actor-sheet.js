@@ -1,14 +1,11 @@
-import * as _ from "../external/underscore/underscore-esm-min.js";
-import * as U from "../data/utils.js";
-import {handlebarTemplates, itemCategories} from "../data/constants.js";
-import "../external/dragula.min.js";
-import {Dust} from "../external/dust.js";
+import {_, U, handlebarTemplates, itemCategories, DRAG, DUST} from "../modules.js";
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
 
 export class ScionActorSheet extends ActorSheet {
+    static get types() { return ["actor"] }
     static get defaultOptions() {
         /*  super.defaultOptions = {
                 baseApplication: "ActorSheet",
@@ -46,16 +43,20 @@ export class ScionActorSheet extends ActorSheet {
                 {
                     navSelector: ".sheet-tabs",
                     contentSelector: ".sheet-body",
-                    initial: "chargen"
-                },
-                {
-                    navSelector: ".chargen-tabs",
-                    contentSelector: ".chargen-body",
-                    initial: "step-one"
+                    initial: "front"
                 }
             ]
         });
     }
+    static RegisterDefault() {
+        Actors.registerSheet("scion", this, {
+            types: this.types,
+            makeDefault: true,
+            label: `scion.sheets.${this?.sheetLabel ?? this.types[0]}`
+        });
+        console.log(`Actor Sheet Registered | Registered ${this.name}`);
+    }
+
     get template() {
         return `systems/scion/templates/actor/${this.object.data.type}-sheet.hbs`;
     }
@@ -190,7 +191,7 @@ export class ScionActorSheet extends ActorSheet {
             const element = event.currentTarget;
             const dataSet = element.dataset;
             const item = this.actor.items.get(dataSet.pathid);
-            U.LOG(dataSet, "[Data Set]", "openItem", {style: "data", isGrouping: `[Open Owned Item]`, groupStyle: "info"});
+            U.LOG(dataSet, "[Data Set]", "openItem", {style: "data", isGrouping: "[Open Owned Item]", groupStyle: "info"});
             U.LOG(this.actor.items, "[Actor.Items]", "openItem", {style: "data", isUngrouping: false});
             U.LOG(item, "[Item]", "openItem", {style: "data", isUngrouping: false});
             U.LOG(item.sheet.render, "[Item.Render]", "openItem", {style: "data"});
@@ -236,6 +237,58 @@ export class ScionActorSheet extends ActorSheet {
         // #endregion
     }
 }
+
+export class MajorActorSheet extends ScionActorSheet {
+    static get types() { return ["major"] }
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["scion", "sheet", "actor", "major"],
+            tabs: [
+                {
+                    navSelector: ".sheet-tabs",
+                    contentSelector: ".sheet-body",
+                    initial: "chargen"
+                },
+                {
+                    navSelector: ".chargen-tabs",
+                    contentSelector: ".chargen-body",
+                    initial: "step-one"
+                }
+            ]
+        });
+    }
+    get template() {
+        return "systems/scion/templates/actor/actor-major-sheet.hbs";
+    }
+}
+export class MinorActorSheet extends ScionActorSheet {
+    static get types() { return ["minor"] }
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["scion", "sheet", "actor", "minor"],
+            height: 500,
+            tabs: []
+        });
+    }
+    get template() {
+        return "systems/scion/templates/actor/actor-minor-sheet.hbs";
+    }
+}
+export class GroupActorSheet extends ScionActorSheet {
+    static get types() { return ["group"] }
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            classes: ["scion", "sheet", "actor", "group"],
+            height: 400,
+            tabs: []
+        });
+    }
+    get template() {
+        return "systems/scion/templates/actor/actor-group-sheet.hbs";
+    }
+}
+
+
 /*     _onDotClick(event) {
         event.preventDefault();
         console.log("~~ _onDotClick(event) ~~  event =");
