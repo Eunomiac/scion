@@ -1,33 +1,24 @@
 & {
     height: 100%;
     width: 100%;
-    padding: 18px 60px 38px 45px;
-    background-image: url("../images/actor-sheet/backgrounds/Generic.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    opacity: 1;        
+    background: {
+        color: #f6f0e2;
+    }
+    border: 25px outset #554a39;
+    border-radius: 50px;
+    opacity: 1; 
+    overflow: hidden;       
 
-    grid: ". . ." 16px
-        "header header header" 96px
-        "body body body" 450px
-        "footer footer footer" 96px
+    grid: "header header header" 70px
+        "body body body" 1fr
         / 14% 1fr 14%;
     row-gap: 5px;
 
     .header {
         grid-area: header;
-        grid: ". divineTitle ." 24px
-            ". charName ." 48px
-            "patronage patronage patronage" 24px
-            / 12% 1fr 12%;
-
         div { pointer-events: all; }
-
-        .divineTitle { grid-area: divineTitle; line-height: 24px; }
-        .charName { grid-area: charName; line-height: 48px; }
-        .patronage { grid-area: patronage; line-height: 24px; }
     }
-    .footer {grid-area: footer; }
+    .sheet-body { grid-area: body; }
 }
 
 /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:

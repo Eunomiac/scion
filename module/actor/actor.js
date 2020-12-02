@@ -1,5 +1,5 @@
-import * as _ from "../external/underscore/underscore-esm-min.js";
-import * as U from "../data/utils.js";
+import {_, U} from "../modules.js";
+
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -7,13 +7,15 @@ import * as U from "../data/utils.js";
 export class ScionActor extends Actor {
     prepareData() {
         super.prepareData();
-        if (this.data.type === "character")
-            this._prepareCharacterData();
-        U.LOG(this.data.data, "[.Data]", "prepareData", {style: "data", isGrouping: `[Actor] ${this.name}`});
-        U.LOG(this.data.items, "[.Items]", "prepareData", {style: "data"});
+        if (this.data.type === "major")
+            this._prepareMajorCharData();
+        U.GLOG({
+            ".Data": this.data.data,
+            ".Items": this.data.items
+        }, this.name, "Actor");
     }
 
-    _prepareCharacterData() {
+    _prepareMajorCharData() {
         const ownedItems = Array.from(this.data.items);
 
         // #region PREPARE PATH ITEMS
@@ -28,9 +30,9 @@ export class ScionActor extends Actor {
                     type: "path",
                     data: {
                         type: pathType,
-                        concept: this.data.data.pathData[pathType].title,
-                        skills: this.data.data.pathData[pathType].skills,
-                        condition: this.data.data.pathData[pathType].condition
+                        title: this.data.data.pathData?.[pathType].title,
+                        skills: this.data.data.pathData?.[pathType].skills,
+                        condition: this.data.data.pathData?.[pathType].condition
                     }
                 };
         });

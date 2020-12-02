@@ -117,24 +117,34 @@ export const FlattenNestedValues = (obj, flatVals = []) => {
 // #region DEBUG & ERROR: Console Logging
 const groupStyles = {
     data: "color: black; background-color: white; font-family: Oswald; font-size: 16px; padding: 0px 5px;",
-    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 14px; padding: 0px 5px;"
+    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 14px; padding: 0px 5px;",
+    log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 12px; padding: 2px;"
 };
 const logStyles = {
     data: "color: black; background-color: white; font-family: Oswald; font-size: 14px; padding: 0px 5px;",
-    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 12px; padding: 0px 5px;"
+    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 12px; padding: 0px 5px;",
+    log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 10px; padding: 2px;"
 };
 
-export const LOG = (output, title, tag, options = {}) => {
-    options = Object.assign({style: "info", isLoud: false, isClearing: false, isGrouping: false, groupStyle: undefined, isUngrouping: true}, options);
-    if (game.scion.debug.isDebugging || options.isLoud || game.scion.debug.watchList.includes(tag)) {
-        if (options.isClearing)
+export const LOG = (output, title, tag, {style="info", groupStyle="data", isLoud=false, isClearing=false, isGrouping=false, isUngrouping=true} = {}) => {
+    if (game.scion.debug.isDebugging || isLoud || game.scion.debug.watchList.includes(tag)) {
+        if (isClearing)
             console.clear();
-        if (options.isGrouping)
-            console.groupCollapsed(`%c ${options.isGrouping} `, groupStyles[options.style]);
-        console.log(`%c ${title} `, logStyles[options.style], output);
-        if (options.isUngrouping && !options.isGrouping)
+        if (isGrouping)
+            console.groupCollapsed(`%c ${isGrouping} `, groupStyles[groupStyle]);
+        console.log(`%c ${title} `, logStyles[style], output);
+        if (isUngrouping && !isGrouping)
             console.groupEnd();
     }
+};
+export const GLOG = (outputs, groupTitle, tag, {style="info", groupStyle="data", isLoud=false, isClearing=false} = {}) => {
+    Object.entries(outputs).forEach(([lineTitle, lineOutput], i) => {
+        if (i === 0)
+            LOG(lineOutput, lineTitle, tag, {style, groupStyle, isLoud, isClearing, isGrouping: `${tag ? `[${tag}] ` : ""} ${groupTitle}`});
+        else
+            LOG(lineOutput, lineTitle, tag, {style, isLoud, isUngrouping: false});
+    });
+    console.groupEnd();
 };
 export const DB = (data, tag, options = {isLoud: false}) => {
     if (game.scion.debug.isDebugging || options.isLoud || game.scion.debug.watchList.includes(tag)) {

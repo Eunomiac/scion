@@ -15,6 +15,7 @@
     --bgImageMenu: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
     --fontColorMenu: #{$c-yellow};
     --fontFamilyMenu: "Voltaire";
+    --fontSizeMenu: 16px;
 
     // Title
     --fontColorTitle: #{$c-black};
@@ -66,9 +67,10 @@
     --fontVariantHeading1: small-caps;
     --fontWeightHeading1: normal;
     --textTransformHeading1: none;
-    --fontSizeHeading1: 1.5rem;
+    --fontSizeHeading1: 24px;
     --paddingHeading1: 0;
     --lineHeightHeading1: var(--fontSizeHeading1);
+    --maxHeightHeading1: 32px;
     --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
     --fontScaleHeading1: 1;
     --borderBottomHeading1: 2px solid var(--fontColorHeading1);
@@ -81,9 +83,10 @@
     --fontVariantHeading2: normal;
     --fontWeightHeading2: bold;
     --textTransformHeading2: none;
-    --fontSizeHeading2: 1.25rem;
+    --fontSizeHeading2: 20px;
     --paddingHeading2: 0;
     --lineHeightHeading2: var(--fontSizeHeading2);
+    --maxHeightHeading2: 26px;
     --textShadowHeading2: none;
     --borderBottomHeading2: 2px inset var(--scale3);
 
@@ -97,6 +100,7 @@
     --textTransformHeading3: none;
     --fontSizeHeading3: 1rem;
     --paddingHeading3: 0;
+    --maxHeightHeading3: ;
     --lineHeightHeading3: var(--fontSizeHeading3);
     --textShadowHeading3: none;
     --borderBottomHeading3: none;

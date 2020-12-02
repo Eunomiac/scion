@@ -1,10 +1,6 @@
-import * as GeneralMixins from "./mixins/generalMixins.js";
-// import * as ActorMixins from "./mixins/actorMixins.js";
-// import * as ItemMixins from "./mixins/itemMixins.js";
-
 // #region AGGREGATING EXTERNAL MODULES
 export * as _ from "./external/underscore/underscore-esm-min.js";
-export * as DRAG from "./external/dragula.min.js";
+// export * as DRAG from "./external/dragula.min.js";
 export {Dust as DUST} from "./external/dust.js";
 // #endregion
 
@@ -21,6 +17,9 @@ export {
 // #endregion
 
 // #region AGGREGATING MIXINS
+import * as GeneralMixins from "./mixins/generalMixins.js";
+import * as ActorMixins from "./mixins/actorMixins.js";
+import * as ItemMixins from "./mixins/itemMixins.js";
 
 const allMixins = Object.assign({}, GeneralMixins, ActorMixins, ItemMixins);
 const actorMixins = Object.assign({}, GeneralMixins, ActorMixins);

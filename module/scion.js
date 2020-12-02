@@ -1,12 +1,16 @@
 // #region Import Modules
-// import _, {map} from "./external/underscore/underscore-esm-min";
-import {scionSystemData, itemCategories, handlebarTemplates, signatureChars} from "./data/constants.js";
-import * as U from "./data/utils.js";
+import {_, U, SCION, handlebarTemplates, SIG_CHARS} from "./modules.js";
+
 import {ScionActor} from "./actor/actor.js";
 import {ScionActorSheet} from "./actor/actor-sheet.js";
+import {MajorActorSheet} from "./actor/actor-major-sheet.js";
+import {MinorActorSheet} from "./actor/actor-minor-sheet.js";
+import {GroupActorSheet} from "./actor/actor-group-sheet.js";
+
 import {ScionItem} from "./item/item.js";
 import {ScionItemSheet} from "./item/item-sheet.js";
-// import {preloadHandlebarsTemplates} from "./templates.js";
+import {PathItemSheet} from "./item/item-path-sheet.js";
+
 import "./external/gl-matrix-min.js";
 // #endregion
 
@@ -14,7 +18,7 @@ import "./external/gl-matrix-min.js";
 Hooks.once("init", async () => {
     console.clear();
     console.log("INITIALIZING SCION.JS ...");
-    CONFIG.scion = scionSystemData;
+    CONFIG.scion = SCION;
 
     game.scion = {
         ScionActor,
@@ -30,9 +34,14 @@ Hooks.once("init", async () => {
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("scion", ScionActorSheet, {makeDefault: true});
+    // ScionActorSheet.RegisterSheet("actor", ["actor"]);
+    MajorActorSheet.RegisterSheet("major", ["major"]);
+    MinorActorSheet.RegisterSheet("minor", ["minor"]);
+    GroupActorSheet.RegisterSheet("group", ["group"]);
+
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("scion", ScionItemSheet, {makeDefault: true});
+    // ScionItemSheet.RegisterSheet("item", ["item"]);
+    PathItemSheet.RegisterSheet("path", ["path"]);
 
     // Preload Handlebars Template Partials
     (async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates).map((x) => (typeof x === "function" ? x() : x))))();
@@ -86,17 +95,17 @@ Hooks.once("ready", async () => {
     // If any signature characters are missing, create them
     const sigChars = new Set();
     const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
-    Object.keys(signatureChars).forEach((sigName) => {
+    Object.keys(SIG_CHARS).forEach((sigName) => {
         if (!charNames.includes(sigName))
             sigChars.add(sigName);
     });
     // ActorDirectory.collection.forEach((data) => { sigChars.delete(data.name) });
     sigChars.forEach((sigName) => {
-        const actorData = signatureChars[sigName];
-        U.LOG(actorData, "Sig Char Creation", "hookReady");
+        const actorData = SIG_CHARS[sigName];
+        U.LOG(actorData, `Creating Signature Character: ${sigName}`, "hookReady", {style: "data"});
         Actor.create({
             name: sigName,
-            type: "character",
+            type: "major",
             data: actorData
         });
     });

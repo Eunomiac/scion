@@ -1,7 +1,8 @@
 {
     "ACTOR": {
-        "TypeCharacter": "Player Character",
-        "TypeSgc": "Storyguide Character"
+        "TypeMajor": "Character",
+        "TypeMinor": "Minor Character",
+        "TypeGroup": "Group of Characters"
     },
     "ITEM": {
         "TypePath": "Path",
@@ -68,6 +69,14 @@
             "band": "Band",
             "bandDeed": "Band Deed"
         },
+        "sheets": {
+            "itemSheet": "Item Sheet",
+            "actorSheet": "Actor Sheet",
+            "majorSheet": "Character Sheet",
+            "minorSheet": "Minor Character Sheet",
+            "groupSheet": "Character Group Sheet",
+            "pathSheet": "Path Sheet"
+        },
         "headings": {
             "main": {
                 "chargenTab": "Chargen",
@@ -103,6 +112,12 @@
                 "stepSix": "Step Six: Purviews",
                 "stepSevenTab": "Conclusion",
                 "stepSeven": "Step Seven: Finishing Touches"
+            },
+            "path": {
+                "titlePrompt": "Give your Path a title.",
+                "pathSkills": "Path Skills",
+                "pathConnections": "Path Connections",
+                "pathCondition": "Path Condition"
             }
         },
         "books": {
@@ -586,12 +601,16 @@
         "paths": {
             "origin": "Origin",
             "originPath": "Origin Path",
+            "OriginPath": "Origin Path",
             "role": "Role",
             "rolePath": "Role Path",
+            "RolePath": "Role Path",
             "pantheon": "Pantheon",
             "pantheonPath": "Pantheon Path",
+            "PantheonPath": "Pantheon Path",
             "society": "Society",
             "societyPath": "Society Path",
+            "SocietyPath": "Society Path",
             "skills": "Path Skills",
             "connections": "Path Connections",
             "group": "Group",

@@ -1,31 +1,38 @@
 & {
-    height: 2rem;
-    width: 80px;
-    margin: -1.5rem 0 -0.5rem 550px;
+    height: 40px;
+    width: 100%;
+    margin: 0 0 -40px 0;
     display: block;
     flex: none;
     position: relative;
     z-index: 2;
     overflow: visible;
     border: none;
+    pointer-events: none;
+
     h4.window-title { display: none; }
     a.header-button {
         display: none;
 
         &.close {
-            display: inline;
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            display: block;
             pointer-events: all;
-            height: 1rem;
+            font-size: var(--fontSizeBody);
             color: white;
+            line-height: 50px;
 
             i { display: none; }
         }
     }
-    &::after {
+    &::before {
         content: "";
-        height: 26px;
-        width: 500px;
-        left: -450px;
+        height: 100%;
+        width: 100%;
 
         display: block;
         position: relative;           

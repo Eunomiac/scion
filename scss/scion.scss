@@ -33,25 +33,42 @@ body.vtt.game.system-scion {
     @import 'test/comps/tabs'; // Navigation Tabs
     
     header.window-header { @import 'test/window/header'; }
+    
     section.window-content {
       @import 'test/window/content';
 
       form.editable {
         @import 'test/window/form';
+        pointer-events: all;
+
+        &.main {
+          .sheet-body {
+          }
+        }
       }
     }
     div.window-resizable-handle { display: none; }
+
+    @import 'test/scionActor/pantheons';
     
-    /* #region SHEET ACTORS */
+    /* #region ACTOR SHEETS */
+
+    // #region STYLES FOR ALL ACTOR SHEETS
     &.actor {
+    }
+    // #endregion
+    // #region MAJOR ACTOR SHEETS
+    &.actor.major {
+
+      header.window-header { // Adjustment to make room for radial menu
+        width: 480px;
+        margin-left: 140px;
+      }
 
       .main {
         @import 'test/scionActor/main';
 
         .sheet-body {
-          pointer-events: all;
-
-          // .tab[data-tab].active { height: 100%; }
 
           // .tab .chargen-body { @import "test/scionActor/chargen/actor-chargen"; }
           .tab .front-body { @import "test/scionActor/front/actor-front"; }
@@ -61,14 +78,15 @@ body.vtt.game.system-scion {
           /* #endregion */
         }
       }
-
-      @import 'test/scionActor/pantheons';
     }
+    // #endregion
     /* #endregion */ 
 
     /* #region ITEM SHEETS */ 
     &.item {
-      @import 'test/scionItem/main';
+      .main {
+        @import 'test/scionItem/main';
+      }
       @import 'test/scionItem/types';
     }
     /* #endregion */

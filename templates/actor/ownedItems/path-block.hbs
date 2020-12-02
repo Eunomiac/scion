@@ -1,16 +1,18 @@
 
-<h2 class="clickable item-open" data-pathID="{{id}}">{{name}}: &quot;{{data.data.concept}}&quot;</h2>
+<h2 class="clickable item-open" data-pathID="{{id}}">{{name}}: {{#if data.data.title}}&quot;{{data.data.title}}&quot;{{/if}}</h2>
 <div class="flex path-block">
     <div class="flex fullFlex flexColumn alignCenter path-subBlock path-skills">
         {{!-- <h3 class="alignCenter">{{localize "scion.paths.skills"}}</h3> --}}
          {{#each data.data.skills as | skill |}}
-            <div class="alignCenter">{{localize (concat "scion.skills." skill)}}</div>
+            <div class="text alignCenter">{{localize (concat "scion.skills." skill)}}</div>
         {{/each}}
     </div>
     <div class="flex fullFlex flexColumn alignCenter path-subBlock path-conditions">
         {{!-- <h3 class="alignCenter">{{localize "scion.paths.condition"}}</h3> --}}
         <div class="inline text alignLeft">
+            {{#if data.data.condition.title}}
             <span class="inline strong text">{{data.data.condition.title}}:</span>{{data.data.condition.description}}
+            {{/if}}
         </div>
     </div>
 </div>

@@ -1,3 +1,6 @@
+// import {_, U, DUST, handlebarTemplates, itemCategories} from "./modules.js";
+// import "../external/dragula.min.js";
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}

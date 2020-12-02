@@ -1,30 +1,38 @@
-<form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img class="sheet-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <div class="header-fields">
-                <div class="itemName text title {{#if data.isEditable.title}}edit editable{{/if}}" data-path="actor.name"></div>
-                
-                <input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+<form class="{{cssClass}} grid main" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <section class="header">
+        <h1 class="title alignCenter">{{localize (concat "scion.paths." item.name "Path")}}</h1>
+        <div class="h2 contentEditable quote alignCenter" data-path="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
+    </section>
+        
+    <section class="sheet-body flex fullSize flexColumn">
+        <h2>{{localize "scion.paths.skills"}}</h2>
+        <div class="pathSkills flex fullFlex flexRow">
+        {{#if data.skills.[2]}}
+            {{#each data.skills as | skill |}}
+                <div class="text alignCenter">{{localize (concat "scion.skills." skill)}}</div>
+            {{/each}}
+        {{else}}
+            <h3>Path Skill Selection</h3>
+        {{/if}}
         </div>
-    </header>
-
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">Description</a>
-        <a class="item" data-tab="attributes">Attributes</a>
-    </nav>
-
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-
-        {{!-- Description Tab --}}
-        <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+            <h2>{{localize "scion.paths.connections"}}</h2>
+        <div class="pathConnections flex fullFlex">
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
+            <div class="connection text">Connection</div>
         </div>
-
-        {{!-- Attributes Tab --}}
-        <div class="tab attributes" data-group="primary" data-tab="attributes">
-            {{!-- As you add new fields, add them in here! --}}
+        <h2>{{localize "scion.paths.condition"}}</h2>
+        <div class="pathCondition">
+            <h3>Path Condition Link Here</h3>
         </div>
     </section>
+    
 </form>

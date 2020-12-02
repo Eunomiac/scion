@@ -340,12 +340,11 @@ body.vtt.game.system-scion div.sheet.scion {
   /* #endregion */
   /* #region Dot Trackers */
   /* #endregion */
-  /* h3 { } */
   /* #region FLEX LAYOUTS */
   /* #endregion */
   /* #region GRID LAYOUTS */
   /* #endregion */
-  /* #region SHEET ACTORS */
+  /* #region ACTOR SHEETS */
   /* #endregion */
   /* #region ITEM SHEETS */
   /* #endregion */
@@ -380,6 +379,67 @@ body.vtt.game.system-scion div.sheet.scion select:invalid {
   font-style: italic;
 }
 
+body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sheet.scion .h1, body.vtt.game.system-scion div.sheet.scion .h2, body.vtt.game.system-scion div.sheet.scion .h3 {
+  width: 100%;
+  margin: 0;
+}
+
+body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion .h1, body.vtt.game.system-scion div.sheet.scion .h2 {
+  display: block;
+}
+
+body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion .h1 {
+  color: var(--fontColorHeading1);
+  background-color: var(--bgColorHeading1);
+  padding: var(--paddingHeading1);
+  max-height: calc(var(--fontSizeHeading1) + var(--paddingHeading1) + 6px);
+  font-family: var(--fontFamilyHeading1);
+  font-style: var(--fontStyleHeading1);
+  font-variant: var(--fontVariantHeading1);
+  font-weight: var(--fontWeightHeading1);
+  font-size: var(--fontSizeHeading1);
+  text-transform: var(--textTransformHeading1);
+  text-shadow: var(--textShadowHeading1);
+  border-bottom: var(--borderBottomHeading1);
+}
+
+body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion .h2 {
+  color: var(--fontColorHeading2);
+  background-image: -webkit-gradient(linear, right top, left top, from(var(--scale3)), to(var(--scale7)));
+  background-image: -o-linear-gradient(right, var(--scale3), var(--scale7));
+  background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
+  padding: var(--paddingHeading2);
+  max-height: var(--maxHeightHeading2);
+  font-family: var(--fontFamilyHeading2);
+  font-style: var(--fontStyleHeading2);
+  font-variant: var(--fontVariantHeading2);
+  font-weight: var(--fontWeightHeading2);
+  font-size: var(--fontSizeHeading2);
+  text-transform: var(--textTransformHeading2);
+  text-shadow: var(--textShadowHeading2);
+  text-indent: 10px;
+  border-bottom: var(--borderBottomHeading2);
+}
+
+body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sheet.scion .h3 {
+  color: var(--fontColorHeading3);
+  background-color: transparent;
+  max-height: calc(var(--fontSizeHeading3) + 4px);
+  font-family: var(--fontFamilyHeading3);
+  font-style: var(--fontStyleHeading3);
+  font-variant: var(--fontVariantHeading3);
+  font-weight: var(--fontWeightHeading3);
+  font-size: var(--fontSizeHeading3);
+  text-transform: var(--textTransformHeading3);
+  text-shadow: var(--textShadowHeading3);
+  border-bottom: var(--borderBottomHeading3);
+}
+
+body.vtt.game.system-scion div.sheet.scion label {
+  font-size: var(--fontSizeBody);
+  margin: 0 0.25rem;
+}
+
 body.vtt.game.system-scion div.sheet.scion .contentEditable {
   text-indent: 5px;
   -webkit-box-shadow: none;
@@ -410,10 +470,7 @@ body.vtt.game.system-scion div.sheet.scion .hidden {
 
 body.vtt.game.system-scion div.sheet.scion .text {
   color: var(--fontColorBody);
-}
-
-body.vtt.game.system-scion div.sheet.scion .text font {
-  size: var(--fontSizeBody);
+  font-size: var(--fontSizeBody);
 }
 
 body.vtt.game.system-scion div.sheet.scion .inline {
@@ -606,50 +663,6 @@ body.vtt.game.system-scion div.sheet.scion .subTitle {
   border: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion h3 {
-  width: 100%;
-  margin: 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2 {
-  display: block;
-}
-
-body.vtt.game.system-scion div.sheet.scion h1 {
-  color: var(--fontColorHeading1);
-  background-color: var(--bgColorHeading1);
-  padding: var(--paddingHeading1);
-  font-family: var(--fontFamilyHeading1);
-  font-style: var(--fontStyleHeading1);
-  font-variant: var(--fontVariantHeading1);
-  font-weight: var(--fontWeightHeading1);
-  font-size: var(--fontSizeHeading1);
-  text-transform: var(--textTransformHeading1);
-  text-shadow: var(--textShadowHeading1);
-  border-bottom: var(--borderBottomHeading1);
-}
-
-body.vtt.game.system-scion div.sheet.scion h2 {
-  color: var(--fontColorHeading2);
-  background-image: -webkit-gradient(linear, right top, left top, from(var(--scale3)), to(var(--scale7)));
-  background-image: -o-linear-gradient(right, var(--scale3), var(--scale7));
-  background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
-  padding: var(--paddingHeading2);
-  font-family: var(--fontFamilyHeading2);
-  font-style: var(--fontStyleHeading2);
-  font-variant: var(--fontVariantHeading2);
-  font-weight: var(--fontWeightHeading2);
-  font-size: var(--fontSizeHeading2);
-  text-transform: var(--textTransformHeading2);
-  text-shadow: var(--textShadowHeading2);
-  text-indent: 10px;
-  border-bottom: var(--borderBottomHeading2);
-}
-
-body.vtt.game.system-scion div.sheet.scion label {
-  margin: 0 0.25rem;
-}
-
 body.vtt.game.system-scion div.sheet.scion .flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -720,14 +733,14 @@ body.vtt.game.system-scion div.sheet.scion .flex > * h1, body.vtt.game.system-sc
   flex: 0 0 auto;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > * .fullSize {
+body.vtt.game.system-scion div.sheet.scion .flex > *.fullSize {
   -ms-flex-preferred-size: 100%;
   flex-basis: 100%;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > * .fullFlex {
+body.vtt.game.system-scion div.sheet.scion .flex > *.fullFlex {
   -ms-flex-preferred-size: 0%;
   flex-basis: 0%;
 }
@@ -775,14 +788,14 @@ body.vtt.game.system-scion div.sheet.scion nav.tabs .item.active {
   color: var(--scale2);
 }
 
-body.vtt.game.system-scion div.sheet.scion .window-content form.main section.sheet-body .tab:not(.active) {
+body.vtt.game.system-scion div.sheet.scion .window-content form.main section .tab:not(.active) {
   display: none !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion header.window-header {
-  height: 2rem;
-  width: 80px;
-  margin: -1.5rem 0 -0.5rem 550px;
+  height: 40px;
+  width: 100%;
+  margin: 0 0 -40px 0;
   display: block;
   -webkit-box-flex: 0;
   -ms-flex: none;
@@ -791,6 +804,7 @@ body.vtt.game.system-scion div.sheet.scion header.window-header {
   z-index: 2;
   overflow: visible;
   border: none;
+  pointer-events: none;
 }
 
 body.vtt.game.system-scion div.sheet.scion header.window-header h4.window-title {
@@ -802,21 +816,26 @@ body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button 
 }
 
 body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close {
-  display: inline;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  display: block;
   pointer-events: all;
-  height: 1rem;
+  font-size: var(--fontSizeBody);
   color: white;
+  line-height: 50px;
 }
 
 body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close i {
   display: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion header.window-header::after {
+body.vtt.game.system-scion div.sheet.scion header.window-header::before {
   content: "";
-  height: 26px;
-  width: 500px;
-  left: -450px;
+  height: 100%;
+  width: 100%;
   display: block;
   position: relative;
   cursor: move;
@@ -832,514 +851,15 @@ body.vtt.game.system-scion div.sheet.scion section.window-content {
   z-index: 1;
 }
 
+body.vtt.game.system-scion div.sheet.scion section.window-content form.editable {
+  pointer-events: all;
+}
+
 body.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
   display: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor .main {
-  /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
-
-    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
-        // The added "disappear" class contains either an animation or a transition, which starts immediately.
-        //    When the animation/transition is finished, the callback function removes the element.
-*/
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main {
-  height: 100%;
-  width: 100%;
-  padding: 40px 60px 60px 40px;
-  background-color: transparent;
-  background-image: url("../images/actor-sheet/backgrounds/Tuatha.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  opacity: 1;
-  grid: "menu" 0px "header" 90px "body" 470px "footer" 90px;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette {
-  grid-area: menu;
-  content: "";
-  display: block;
-  width: 200px;
-  height: 200px;
-  position: relative;
-  left: -75px;
-  top: -75px;
-  background-image: var(--bgImageMenu);
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 50%;
-  pointer-events: all;
-  border: none;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette:hover {
-  background-size: 100%;
-  -webkit-transform: translate(-20px, -20px);
-  -ms-transform: translate(-20px, -20px);
-  transform: translate(-20px, -20px);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette:hover div.circleMenuContainer {
-  -webkit-transform: scale(1) rotate(0deg);
-  -ms-transform: scale(1) rotate(0deg);
-  transform: scale(1) rotate(0deg);
-  opacity: 1;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette .menuText {
-  display: block !important;
-  height: auto !important;
-  width: 200px !important;
-  position: relative;
-  margin-top: -20px;
-  margin-left: -50px !important;
-  color: var(--fontColorMenu);
-  font-family: var(--fontFamilyMenu);
-  font-weight: bold;
-  text-align: center;
-  text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
-  text-transform: uppercase;
-  letter-spacing: 10px;
-  opacity: 0;
-  -webkit-transform: scale(2);
-  -ms-transform: scale(2);
-  transform: scale(2);
-  -webkit-transition: 0.25s !important;
-  -o-transition: 0.25s !important;
-  transition: 0.25s !important;
-  pointer-events: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer {
-  position: relative;
-  width: 250px;
-  height: 250px;
-  top: -25px;
-  left: -25px;
-  padding: 0;
-  border-radius: 50%;
-  list-style: none;
-  -webkit-transform: scale(0.2) rotate(-125deg) translate(0);
-  -ms-transform: scale(0.2) rotate(-125deg) translate(0);
-  transform: scale(0.2) rotate(-125deg) translate(0);
-  opacity: 0;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > * {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 100px;
-  margin: -50px;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(1) {
-  -webkit-transform: rotate(135deg) translate(125px) rotate(-135deg);
-  -ms-transform: rotate(135deg) translate(125px) rotate(-135deg);
-  transform: rotate(135deg) translate(125px) rotate(-135deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(2) {
-  -webkit-transform: rotate(180deg) translate(125px) rotate(-180deg);
-  -ms-transform: rotate(180deg) translate(125px) rotate(-180deg);
-  transform: rotate(180deg) translate(125px) rotate(-180deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(3) {
-  -webkit-transform: rotate(225deg) translate(125px) rotate(-225deg);
-  -ms-transform: rotate(225deg) translate(125px) rotate(-225deg);
-  transform: rotate(225deg) translate(125px) rotate(-225deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(4) {
-  -webkit-transform: rotate(270deg) translate(125px) rotate(-270deg);
-  -ms-transform: rotate(270deg) translate(125px) rotate(-270deg);
-  transform: rotate(270deg) translate(125px) rotate(-270deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(5) {
-  -webkit-transform: rotate(315deg) translate(125px) rotate(-315deg);
-  -ms-transform: rotate(315deg) translate(125px) rotate(-315deg);
-  transform: rotate(315deg) translate(125px) rotate(-315deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(6) {
-  -webkit-transform: rotate(360deg) translate(125px) rotate(-360deg);
-  -ms-transform: rotate(360deg) translate(125px) rotate(-360deg);
-  transform: rotate(360deg) translate(125px) rotate(-360deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(7) {
-  -webkit-transform: rotate(405deg) translate(125px) rotate(-405deg);
-  -ms-transform: rotate(405deg) translate(125px) rotate(-405deg);
-  transform: rotate(405deg) translate(125px) rotate(-405deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer > *:nth-of-type(8) {
-  -webkit-transform: rotate(450deg) translate(125px) rotate(-450deg);
-  -ms-transform: rotate(450deg) translate(125px) rotate(-450deg);
-  transform: rotate(450deg) translate(125px) rotate(-450deg);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(1) > .menuButton {
-  -webkit-animation-delay: 0.2s;
-  animation-delay: 0.2s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(2) > .menuButton {
-  -webkit-animation-delay: 0.4s;
-  animation-delay: 0.4s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(3) > .menuButton {
-  -webkit-animation-delay: 0.6s;
-  animation-delay: 0.6s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(4) > .menuButton {
-  -webkit-animation-delay: 0.8s;
-  animation-delay: 0.8s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(5) > .menuButton {
-  -webkit-animation-delay: 1s;
-  animation-delay: 1s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer div, body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer a {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  background-size: 100%;
-  background-position: center;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton {
-  display: inline-block;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  background-image: url("../images/actor-sheet/menu/StoneButtonBG.png");
-  background-size: 100px;
-  background-position: center;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-  -webkit-animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
-  animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
-}
-
-@-webkit-keyframes slowBob {
-  from {
-    top: 0px;
-  }
-  to {
-    top: 10px;
-  }
-}
-
-@keyframes slowBob {
-  from {
-    top: 0px;
-  }
-  to {
-    top: 10px;
-  }
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconMain {
-  background-image: url("../images/actor-sheet/menu/DarkIconMain.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconMain .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayMain.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconChargen {
-  background-image: url("../images/actor-sheet/menu/DarkIconChargen.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconChargen .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayChargen.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconSettings {
-  background-image: url("../images/actor-sheet/menu/DarkIconSettings.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconSettings .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlaySettings.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconExperience {
-  background-image: url("../images/actor-sheet/menu/DarkIconExperience.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconExperience .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayExperience.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconHeritage {
-  background-image: url("../images/actor-sheet/menu/DarkIconHeritage.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconHeritage .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayHeritage.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark:hover + .menuText {
-  letter-spacing: normal;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-  opacity: 1;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark .menuIconGlow {
-  opacity: 0;
-  vertical-align: bottom;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark .menuIconGlow:hover {
-  opacity: 1;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .header {
-  grid-area: header;
-  grid: ". surTitle ." 24px ". title ." 50px "subTitle subTitle subTitle" 16px / 90px 470px 90px;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .header div {
-  pointer-events: all;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .header .divineTitle {
-  grid-area: surTitle;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .header .charName {
-  grid-area: title;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .header .patronage {
-  grid-area: subTitle;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body {
-  grid-area: body;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .footer {
-  grid-area: footer;
-  grid: "subTitle subTitle subTitle" 15px ". title ." 50px ". surTitle ." 25px / 90px 470px 90px;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .footer .subTitle {
-  grid-area: subTitle;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .footer .title {
-  grid-area: title;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .footer .surTitle {
-  grid-area: surTitle;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body {
-  pointer-events: all;
-  /* #region Owned Item Partials */
-  /* #endregion */
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body {
-  grid: "attributes paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
-  -webkit-column-gap: 0.5rem;
-  -moz-column-gap: 0.5rem;
-  column-gap: 0.5rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .attributes {
-  grid-area: attributes;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .attributes .dotGrabBin {
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  height: auto;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .attributes .attrBlock {
-  margin: 0.5rem 0;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .attributes .attrBlock .attrRow .label {
-  font-size: 1rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .attributes .primary {
-  -webkit-box-ordinal-group: 2;
-  -ms-flex-order: 1;
-  order: 1;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .attributes .secondary {
-  -webkit-box-ordinal-group: 3;
-  -ms-flex-order: 2;
-  order: 2;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .attributes .tertiary {
-  -webkit-box-ordinal-group: 4;
-  -ms-flex-order: 3;
-  order: 3;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .paths {
-  grid-area: paths;
-  grid: "heading" 1.5rem "originpath" 5rem "rolepath" 5rem "pantheonpath" 5rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .paths .heading {
-  grid-area: heading;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .paths .originpath {
-  grid-area: originpath;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .paths .rolepath {
-  grid-area: rolepath;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .paths .pantheonpath {
-  grid-area: pantheonpath;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .virtues {
-  border-radius: 1rem;
-  grid-area: virtues;
-  grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
-  background-color: var(--scaleFade5);
-  border: 3px outset var(--scale5);
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-  margin-left: -0.35rem;
-  height: calc(100% - 2 * 3px);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .virtues .leftvirtue {
-  grid-area: leftvirtue;
-  margin-left: 0.5rem;
-  line-height: 1rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .virtues .dotline {
-  grid-area: dotline;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .tab .front-body .virtues .rightvirtue {
-  grid-area: rightvirtue;
-  margin-right: 0.5rem;
-  line-height: 1rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  /* height: calc((100% - 2rem)/3);
-    border: inset 3px var(--scale6);
-    background-color: var(--scaleFade1);
-    box-sizing: border-box;
-    padding: 5px;
-    overflow: hidden;
-    border-radius: 15px;
-
-    .heading2:first-child {
-        margin: -7px 0 0 -7px;
-        width: calc(100% + 20px);
-        background-image: linear-gradient(270deg, var(--scale3), var(--scale7));
-        text-indent: 10px;
-        color: var(--scale10);
-        border-bottom: 2px inset var(--scale3);
-        border-bottom-left-radius: 15px;
-    } */
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block .flex.path-subBlock {
-  border-radius: 12.5px;
-  margin: 3px;
-  -ms-flex-line-pack: start;
-  align-content: start;
-  -ms-flex-item-align: start;
-  align-self: start;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block .flex.path-subBlock > div {
-  border-radius: 12.5px;
-  margin: 1px;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block .flex.path-subBlock.path-skills {
-  -webkit-box-flex: 0.5;
-  -ms-flex-positive: 0.5;
-  flex-grow: 0.5;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block .flex.path-subBlock.path-skills > div {
-  background-color: var(--scaleFadeMoreGrey8);
-  border: 2px outset var(--scaleGrey5);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .main .sheet-body .path-block .flex.path-subBlock.path-conditions {
-  -webkit-box-flex: 1.7;
-  -ms-flex-positive: 1.7;
-  flex-grow: 1.7;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor {
+body.vtt.game.system-scion div.sheet.scion {
   --scale0: black;
   --scaleFade0: rgba(0, 0, 0, 0.5);
   --scaleFadeMore0: rgba(0, 0, 0, 0.25);
@@ -1382,6 +902,7 @@ body.vtt.game.system-scion div.sheet.scion.actor {
   --bgImageMenu: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
   --fontColorMenu: yellow;
   --fontFamilyMenu: "Voltaire";
+  --fontSizeMenu: 16px;
   --fontColorTitle: black;
   --bgColorTitle: transparent;
   --fontFamilyTitle: "Marcellus SC";
@@ -1425,9 +946,10 @@ body.vtt.game.system-scion div.sheet.scion.actor {
   --fontVariantHeading1: small-caps;
   --fontWeightHeading1: normal;
   --textTransformHeading1: none;
-  --fontSizeHeading1: 1.5rem;
+  --fontSizeHeading1: 24px;
   --paddingHeading1: 0;
   --lineHeightHeading1: var(--fontSizeHeading1);
+  --maxHeightHeading1: 32px;
   --textShadowHeading1: -1px -1px 0px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255, 255, 255, 0.5);
   --fontScaleHeading1: 1;
   --borderBottomHeading1: 2px solid var(--fontColorHeading1);
@@ -1438,9 +960,10 @@ body.vtt.game.system-scion div.sheet.scion.actor {
   --fontVariantHeading2: normal;
   --fontWeightHeading2: bold;
   --textTransformHeading2: none;
-  --fontSizeHeading2: 1.25rem;
+  --fontSizeHeading2: 20px;
   --paddingHeading2: 0;
   --lineHeightHeading2: var(--fontSizeHeading2);
+  --maxHeightHeading2: 26px;
   --textShadowHeading2: none;
   --borderBottomHeading2: 2px inset var(--scale3);
   --fontColorHeading3: var(--fontColorSubTitle);
@@ -1452,12 +975,18 @@ body.vtt.game.system-scion div.sheet.scion.actor {
   --textTransformHeading3: none;
   --fontSizeHeading3: 1rem;
   --paddingHeading3: 0;
+  --maxHeightHeading3: ;
   --lineHeightHeading3: var(--fontSizeHeading3);
   --textShadowHeading3: none;
   --borderBottomHeading3: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item {
+body.vtt.game.system-scion div.sheet.scion.actor.major header.window-header {
+  width: 480px;
+  margin-left: 140px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main {
   /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
 
     $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
@@ -1466,44 +995,514 @@ body.vtt.game.system-scion div.sheet.scion.item {
 */
 }
 
-body.vtt.game.system-scion div.sheet.scion.item {
+body.vtt.game.system-scion div.sheet.scion.actor.major .main {
   height: 100%;
   width: 100%;
-  padding: 18px 60px 38px 45px;
-  background-image: url("../images/actor-sheet/backgrounds/Generic.png");
+  padding: 40px 60px 60px 40px;
+  background-color: transparent;
+  background-image: url("../images/actor-sheet/backgrounds/Tuatha.png");
   background-size: 100%;
   background-repeat: no-repeat;
   opacity: 1;
-  grid: ". . ." 16px "header header header" 96px "body body body" 450px "footer footer footer" 96px / 14% 1fr 14%;
-  row-gap: 5px;
+  grid: "menu" 0px "header" 90px "body" 470px "footer" 90px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .header {
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette {
+  grid-area: menu;
+  content: "";
+  display: block;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  left: -75px;
+  top: -75px;
+  background-image: var(--bgImageMenu);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  pointer-events: all;
+  border: none;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette:hover {
+  background-size: 100%;
+  -webkit-transform: translate(-20px, -20px);
+  -ms-transform: translate(-20px, -20px);
+  transform: translate(-20px, -20px);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette:hover div.circleMenuContainer {
+  -webkit-transform: scale(1) rotate(0deg);
+  -ms-transform: scale(1) rotate(0deg);
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette .menuText {
+  display: block !important;
+  height: auto !important;
+  width: 200px !important;
+  position: relative;
+  margin-top: -20px;
+  margin-left: -50px !important;
+  color: var(--fontColorMenu);
+  font-family: var(--fontFamilyMenu);
+  font-size: var(--fontSizeMenu);
+  font-weight: bold;
+  text-align: center;
+  text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  opacity: 0;
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+  -webkit-transition: 0.25s !important;
+  -o-transition: 0.25s !important;
+  transition: 0.25s !important;
+  pointer-events: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  top: -25px;
+  left: -25px;
+  padding: 0;
+  border-radius: 50%;
+  list-style: none;
+  -webkit-transform: scale(0.2) rotate(-125deg) translate(0);
+  -ms-transform: scale(0.2) rotate(-125deg) translate(0);
+  transform: scale(0.2) rotate(-125deg) translate(0);
+  opacity: 0;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > * {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(1) {
+  -webkit-transform: rotate(135deg) translate(125px) rotate(-135deg);
+  -ms-transform: rotate(135deg) translate(125px) rotate(-135deg);
+  transform: rotate(135deg) translate(125px) rotate(-135deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(2) {
+  -webkit-transform: rotate(180deg) translate(125px) rotate(-180deg);
+  -ms-transform: rotate(180deg) translate(125px) rotate(-180deg);
+  transform: rotate(180deg) translate(125px) rotate(-180deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(3) {
+  -webkit-transform: rotate(225deg) translate(125px) rotate(-225deg);
+  -ms-transform: rotate(225deg) translate(125px) rotate(-225deg);
+  transform: rotate(225deg) translate(125px) rotate(-225deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(4) {
+  -webkit-transform: rotate(270deg) translate(125px) rotate(-270deg);
+  -ms-transform: rotate(270deg) translate(125px) rotate(-270deg);
+  transform: rotate(270deg) translate(125px) rotate(-270deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(5) {
+  -webkit-transform: rotate(315deg) translate(125px) rotate(-315deg);
+  -ms-transform: rotate(315deg) translate(125px) rotate(-315deg);
+  transform: rotate(315deg) translate(125px) rotate(-315deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(6) {
+  -webkit-transform: rotate(360deg) translate(125px) rotate(-360deg);
+  -ms-transform: rotate(360deg) translate(125px) rotate(-360deg);
+  transform: rotate(360deg) translate(125px) rotate(-360deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(7) {
+  -webkit-transform: rotate(405deg) translate(125px) rotate(-405deg);
+  -ms-transform: rotate(405deg) translate(125px) rotate(-405deg);
+  transform: rotate(405deg) translate(125px) rotate(-405deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(8) {
+  -webkit-transform: rotate(450deg) translate(125px) rotate(-450deg);
+  -ms-transform: rotate(450deg) translate(125px) rotate(-450deg);
+  transform: rotate(450deg) translate(125px) rotate(-450deg);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(1) > .menuButton {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(2) > .menuButton {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(3) > .menuButton {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(4) > .menuButton {
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(5) > .menuButton {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer div, body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-position: center;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-image: url("../images/actor-sheet/menu/StoneButtonBG.png");
+  background-size: 100px;
+  background-position: center;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
+  animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
+}
+
+@-webkit-keyframes slowBob {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 10px;
+  }
+}
+
+@keyframes slowBob {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 10px;
+  }
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconMain {
+  background-image: url("../images/actor-sheet/menu/DarkIconMain.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconMain .menuIconGlow {
+  background-image: url("../images/actor-sheet/menu/GlowOverlayMain.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconChargen {
+  background-image: url("../images/actor-sheet/menu/DarkIconChargen.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconChargen .menuIconGlow {
+  background-image: url("../images/actor-sheet/menu/GlowOverlayChargen.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconSettings {
+  background-image: url("../images/actor-sheet/menu/DarkIconSettings.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconSettings .menuIconGlow {
+  background-image: url("../images/actor-sheet/menu/GlowOverlaySettings.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconExperience {
+  background-image: url("../images/actor-sheet/menu/DarkIconExperience.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconExperience .menuIconGlow {
+  background-image: url("../images/actor-sheet/menu/GlowOverlayExperience.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconHeritage {
+  background-image: url("../images/actor-sheet/menu/DarkIconHeritage.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconHeritage .menuIconGlow {
+  background-image: url("../images/actor-sheet/menu/GlowOverlayHeritage.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark:hover + .menuText {
+  letter-spacing: normal;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark .menuIconGlow {
+  opacity: 0;
+  vertical-align: bottom;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark .menuIconGlow:hover {
+  opacity: 1;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .header {
   grid-area: header;
-  grid: ". divineTitle ." 24px ". charName ." 48px "patronage patronage patronage" 24px / 12% 1fr 12%;
+  grid: ". surTitle ." 24px ". title ." 50px "subTitle subTitle subTitle" 16px / 90px 470px 90px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .header div {
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .header div {
   pointer-events: all;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .header .divineTitle {
-  grid-area: divineTitle;
-  line-height: 24px;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .header .divineTitle {
+  grid-area: surTitle;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .header .charName {
-  grid-area: charName;
-  line-height: 48px;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .header .charName {
+  grid-area: title;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .header .patronage {
-  grid-area: patronage;
-  line-height: 24px;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .header .patronage {
+  grid-area: subTitle;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .footer {
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body {
+  grid-area: body;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer {
   grid-area: footer;
+  grid: "subTitle subTitle subTitle" 15px ". title ." 50px ". surTitle ." 25px / 90px 470px 90px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .subTitle {
+  grid-area: subTitle;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .title {
+  grid-area: title;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .surTitle {
+  grid-area: surTitle;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body {
+  /* #region Owned Item Partials */
+  /* #endregion */
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body {
+  grid: "attributes paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
+  -webkit-column-gap: 0.5rem;
+  -moz-column-gap: 0.5rem;
+  column-gap: 0.5rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes {
+  grid-area: attributes;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .dotGrabBin {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: auto;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .attrBlock {
+  margin: 0.5rem 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .attrBlock .attrRow .label {
+  font-size: 1rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .primary {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .secondary {
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 2;
+  order: 2;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .tertiary {
+  -webkit-box-ordinal-group: 4;
+  -ms-flex-order: 3;
+  order: 3;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths {
+  grid-area: paths;
+  grid: "heading" 1.5rem "originpath" 5rem "rolepath" 5rem "pantheonpath" 5rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .heading {
+  grid-area: heading;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .originpath {
+  grid-area: originpath;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .rolepath {
+  grid-area: rolepath;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .pantheonpath {
+  grid-area: pantheonpath;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues {
+  border-radius: 1rem;
+  grid-area: virtues;
+  grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
+  background-color: var(--scaleFade5);
+  border: 3px outset var(--scale5);
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin-left: -0.35rem;
+  height: calc(100% - 2 * 3px);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues .leftvirtue {
+  grid-area: leftvirtue;
+  margin-left: 0.5rem;
+  line-height: 1rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues .dotline {
+  grid-area: dotline;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues .rightvirtue {
+  grid-area: rightvirtue;
+  margin-right: 0.5rem;
+  line-height: 1rem;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock {
+  border-radius: 12.5px;
+  margin: 3px;
+  -ms-flex-line-pack: start;
+  align-content: start;
+  -ms-flex-item-align: start;
+  align-self: start;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock > div {
+  border-radius: 12.5px;
+  margin: 1px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock.path-skills {
+  -webkit-box-flex: 0.5;
+  -ms-flex-positive: 0.5;
+  flex-grow: 0.5;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock.path-skills > div {
+  background-color: var(--scaleFadeMoreGrey8);
+  border: 2px outset var(--scaleGrey5);
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock.path-conditions {
+  -webkit-box-flex: 1.7;
+  -ms-flex-positive: 1.7;
+  flex-grow: 1.7;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item .main {
+  /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+
+    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+        // The added "disappear" class contains either an animation or a transition, which starts immediately.
+        //    When the animation/transition is finished, the callback function removes the element.
+*/
+}
+
+body.vtt.game.system-scion div.sheet.scion.item .main {
+  height: 100%;
+  width: 100%;
+  background-color: #f6f0e2;
+  border: 25px outset #554a39;
+  border-radius: 50px;
+  opacity: 1;
+  overflow: hidden;
+  grid: "header header header" 70px "body body body" 1fr / 14% 1fr 14%;
+  row-gap: 5px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item .main .header {
+  grid-area: header;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item .main .header div {
+  pointer-events: all;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item .main .sheet-body {
+  grid-area: body;
 }
 
 /* #endregion */

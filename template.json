@@ -1,6 +1,6 @@
 {
     "Actor": {
-        "types": ["character", "sgc"],
+        "types": ["major", "minor", "group"],
         "templates": {
             "PC": {
                 "playerName": ""
@@ -244,11 +244,14 @@
                 }
             }
         },
-        "character": {
+        "major": {
             "templates": ["PC", "BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
         },
-        "sgc": {
-            "templates": ["BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
+        "minor": {
+            "templates": ["BIO", "DIVINITY", "STORYPATH"]
+        },
+        "group": {
+            "templates": ["BIO"]
         }
     },
     "Item": {
@@ -287,7 +290,7 @@
         },
         "path": {
             "type": "",
-            "concept": "",
+            "title": "",
             "skills": [],
             "connections": [],
             "conditionID": "", 

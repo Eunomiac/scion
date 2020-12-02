@@ -1,8 +1,9 @@
+import {_, U, MIX, ItemMixins as MIXINS} from "../modules.js";
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class ScionItemSheet extends ItemSheet {
+export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs) {
     /** @override */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -13,15 +14,15 @@ export class ScionItemSheet extends ItemSheet {
         });
     }
 
-    /** @override */
-    get template() {
-        const path = "systems/scion/templates/item";
-        // Return a single sheet for all item types.
-        // return `${path}/item-sheet.html`;
+    static RegisterSheet(label = "item", types = [], makeDefault = true) {
+        label = `scion.sheets.${label}Sheet`;
+        Items.registerSheet("scion", this, {makeDefault, types, label});
+        console.log("Sheet Registered", this, types);
+        console.log(this.defaultOptions);
+    }
 
-        // Alternatively, you could use the following return statement to do a
-        // unique item sheet by type, like `weapon-sheet.html`.
-        return `${path}/item-${this.item.data.type}-sheet.hbs`;
+    get template() {
+        return `systems/scion/templates/item/item-${this.object.data.type}-sheet.hbs`;
     }
 
     /* -------------------------------------------- */
