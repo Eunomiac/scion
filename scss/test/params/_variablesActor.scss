@@ -1,0 +1,192 @@
+.aesir {
+    // --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    // --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        title: "Amarante",
+        h1: "Amarante"
+    ));
+}
+  
+  /* .deva {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+  } */
+  
+  /* .kami {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+  } */
+  
+  .loa {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Loa.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
+
+    @include set-typography((
+        title: "Finger Paint",
+        h1: "Finger Paint"
+    ));        
+    --fontSizeTitle: 2rem;
+  }
+  
+  /* .manitou {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+  } */
+  
+  .netjer {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Netjer.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
+    
+    @include set-typography((
+        title: "Zanzabar",
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+
+    --fontSizeHeading3: 1.75rem;
+    --lineHeightHeading3: 1.65rem;
+    --fontWeightHeading3: normal;
+    --fontScaleHeading3: 0.75;
+  
+    --fontWeightHeading3: bold;
+  
+    --borderBottomHeading1: 1px solid var(--fontColorHeading1);
+  }
+  
+  /* .shen {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+  } */
+  
+  .teotl {      
+    // --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    // --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        title: "Pirata One",
+        h1: "Pirata One"
+    ));
+  }
+  
+  .theoi {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Theoi.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
+    
+    @include set-typography((
+        title: "Poiret One",
+        body: "Poiret One",
+        h1: "Poiret One",
+        h2: "Elektra",
+        h3: "Poiret One"
+    ));
+
+    @include text-shadow((6 0 0 0 $c-black), --textShadowBody);
+    @include text-shadow((9 0 0 1px $c-black), --textShadowStrongText);
+    --fontWeightStrongText: normal;
+
+    --fontWeightTitle: bold;
+    --fontWeightHeading1: bold;
+    --fontVariantHeading1: small-caps;
+  
+    --fontSizeHeading3: 1.2rem;
+    --fontWeightHeading3: normal;
+  
+    --fontWeightHeading3: bold;
+    --fontVariantHeading3: small-caps;  
+  }
+  
+  .tuathaDeDanann {      
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Tuatha.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
+        
+    @include set-typography((
+        title: "Berkshire Swash",
+        h1: "Berkshire Swash",
+        h2: "Della Respira"
+    ));
+
+    --fontVariantHeading1: normal;
+    --fontSizeTitle: 2.5rem;
+  
+    --fontStyleHeading3: italic;
+  
+    --fontWeightHeading3: bold;
+  }
+  
+  /* .nemetondevos {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+  } */
+  
+  .orisha {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Orisha.png");
+    // --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+
+    @include set-typography((
+        title: "Finger Paint",
+        h1: "Finger Paint"
+    ));
+    --fontSizeTitle: 2rem;
+  }
+  
+  /* .yazata {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+  } */
+
+   /* .teros {
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    
+    @include set-typography((
+        body: "Gothic Ultra",
+        h1: "Zanzabar",
+        h2: "Carolingia",
+        h3: "Gothic Ultra"
+    ));
+  } */

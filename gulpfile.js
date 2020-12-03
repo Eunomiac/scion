@@ -1,5 +1,5 @@
 const gulp = require("gulp");
-const prefix = require("gulp-autoprefixer");
+// const prefix = require("gulp-autoprefixer");
 const sourcemaps = require("gulp-sourcemaps");
 const sass = require("gulp-sass");
 
@@ -20,13 +20,11 @@ function compileScss() {
         outputStyle: "expanded"
     };
     return gulp.src(SYSTEM_SCSS)
-        .pipe(
-            sass(options)
-                .on("error", handleError)
-        )
-        .pipe(prefix({
+        .pipe(sass(options)
+            .on("error", handleError))
+        /* .pipe(prefix({
             cascade: false
-        }))
+        })) */
         .pipe(gulp.dest("./css"));
 }
 const css = gulp.series(compileScss);

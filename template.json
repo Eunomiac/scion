@@ -2,13 +2,13 @@
     "Actor": {
         "types": ["major", "minor", "group"],
         "templates": {
-            "PC": {
-                "playerName": ""
-            },
-            "BIO": {
+            "BASE": {
                 "concept": "",
                 "description": "",
                 "imageURL": ""
+            },
+            "PC": {
+                "playerName": ""
             },
             "DIVINITY": {
                 "pantheon": "",
@@ -245,13 +245,13 @@
             }
         },
         "major": {
-            "templates": ["PC", "BIO", "DIVINITY", "STORYPATH", "FULLTRAITS"]
+            "templates": ["BASE", "PC", "DIVINITY", "STORYPATH", "FULLTRAITS"]
         },
         "minor": {
-            "templates": ["BIO", "DIVINITY", "STORYPATH"]
+            "templates": ["BASE", "DIVINITY", "STORYPATH"]
         },
         "group": {
-            "templates": ["BIO"]
+            "templates": ["BASE"]
         }
     },
     "Item": {
@@ -275,6 +275,12 @@
             "relic"
         ],
         "templates": {
+            "BASE": {
+                "title": "",
+                "type": "",
+                "description": "",
+                "details": ""
+            },
             "CONNECTION": {
                 "description": "",
                 "details": "",
@@ -289,13 +295,11 @@
             }
         },
         "path": {
-            "type": "",
-            "title": "",
+            "templates": ["BASE"],
             "skills": [],
             "connections": [],
             "conditionID": "", 
             "timesInvoked": 0,
-            "condition": {},
             "obligation": "",
             "effect": "",
             "enabledKnacks": {
@@ -304,10 +308,10 @@
             }
         },
         "connectionGroup": {
-            "templates": ["CONNECTION"]
+            "templates": ["BASE", "CONNECTION"]
         },
         "connectionContact": {
-            "templates": ["CONNECTION", "DOTLINE"],
+            "templates": ["BASE", "CONNECTION", "DOTLINE"],
             "relationship": "",
             "actorID": "",
             "points": {
@@ -322,10 +326,10 @@
             "dotline.min": 1
         },
         "connectionAccess": {
-            "templates": ["CONNECTION"]
+            "templates": ["BASE", "CONNECTION"]
         },
         "condition": {
-            "description": "",
+            "templates": ["BASE"],
             "effect": {
                 "description": "",
                 "API": []
@@ -334,7 +338,7 @@
             "resolution": ""
         },
         "calling": { 
-            "templates": ["DOTLINE"],
+            "templates": ["BASE", "DOTLINE"],
             "dotline.min": 1,
             "keywords": [],
             "usedKeywords": [],
@@ -342,37 +346,37 @@
             "failureDeed": false
         },
         "legendaryTitle": {
-
+            "templates": ["BASE"]
         },
         "fatebinding": {
-            "templates": ["DOTLINE"]
+            "templates": ["BASE", "DOTLINE"]
         },
         "knack": {
-
+            "templates": ["BASE"]
         },
         "purview": {
-
+            "templates": ["BASE"]
         },
         "boon": {
-
+            "templates": ["BASE"]
         },
         "covenant": {
-            "templates": ["DOTLINE"]
+            "templates": ["BASE", "DOTLINE"]
         },
         "cult": {
-            "templates": ["DOTLINE"]
+            "templates": ["BASE", "DOTLINE"]
         },
         "follower": {
-            "templates": ["DOTLINE"]
+            "templates": ["BASE", "DOTLINE"]
         },
         "creature": {
-            "templates": ["DOTLINE"]
+            "templates": ["BASE", "DOTLINE"]
         },
         "guide": {
-            "templates": ["DOTLINE"]
+            "templates": ["BASE", "DOTLINE"]
         },
         "relic": {
-            "templates": ["DOTLINE"]
+            "templates": ["BASE", "DOTLINE"]
         }
     }
 }

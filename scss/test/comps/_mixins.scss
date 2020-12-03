@@ -1,5 +1,18 @@
-@use "sass:list";
 
+// #region @FUNCTIONS
+@function sliceList($list, $start, $end: null) {
+  @if ($end == null) {
+    $end: length($list);
+  }
+  $newList: ();
+  @for $i from $start through $end {
+    $newList: join($newList, nth($list, $i));
+  }
+  @return $newList;
+}
+// #endregion
+
+// #region @MIXINS
 @mixin element-invisible {
   position: absolute;
 
@@ -18,14 +31,12 @@
 }
 
 @mixin disabledText {
-  color: var(--scaleGrey5);
-  text-shadow: -0.5px -0.5px 0px $c-black, 0.5px 0.5px 0px var(--scaleFadeGrey10);
+  color: var(--grey3);
   font: {
     family: "Della Respira";
-    size: 0.75rem;
-    weight: normal;
     style: italic;
   }
+  text-shadow: none;
 }
 
 @mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {
@@ -63,8 +74,34 @@
   }
 }
 
-@mixin box-shadow($size: 5px, $color: $c-black, $isInset: false) {
-    $shadowPart: 0px 0px $size $color;
+@mixin text-shadow($shadows: (3 0 0 0 $c-black), $propertyName: text-shadow) {
+  @if (length(nth($shadows, 1)) == 1) {
+    $shadows: join([$shadows], (), $separator: comma);
+  }
+  $fullShadow: ();
+  @each $shadow in $shadows {
+    $numRepeats: 1;
+    @if (length($shadow) == 5) {
+      $numRepeats: nth($shadow, 1);
+      $shadow: sliceList($shadow, 2);
+    }
+    @if (length($shadow) > 0) {
+      @for $i from 1 through $numRepeats {
+        $fullShadow: append($fullShadow, $shadow, $separator: comma);
+      }
+    }
+  }
+  #{$propertyName}: $fullShadow;
+}
+
+@mixin embossed-text($distance: 1px, $blur: 0px, $colorBright: var(--greyFade10), $colorDark: var(--greyFade0), $propertyName: text-shadow) {
+  $shadowBright: #{$distance * -1} #{$distance * -1} #{$blur} #{$colorBright};
+  $shadowDark: #{$distance} #{$distance} #{$blur} #{$colorDark};
+  #{$propertyName}: join(#{$shadowBright}, #{$shadowDark}, $separator: comma);
+}
+
+@mixin box-shadow($distance: 0px, $size: 5px, $color: $c-black, $isInset: false) {
+    $shadowPart: $distance $distance $size $color;
     @if $isInset { $shadowPart: inset $shadowPart; }
     $shadowFull: ();
     @for $i from 1 through 3 {
@@ -76,3 +113,42 @@
 @mixin bg-shade($color: $c-black) {
     background-color: scale-color($color, $alpha: -80%);
 }
+
+@mixin set-colors() {
+  @include scaled-colors($accentColor);
+
+  --bgMatte: #{$matteColor}; 
+  --shadowColorBright: #{scale-color($highlightColor, $alpha: -50%)};
+  --shadowColorDark: #{scale-color($shadowColor, $alpha: -50%)};
+
+  --fontColorTitle: #{$titleColor};
+  --bgTitle: #{$titleBG};
+
+  --fontColorBody: #{$bodyColor};  
+  
+  --fontColorHeading1: #{$headingColor1};
+  --bgHeading1: #{$headingBG1};
+  
+  --fontColorHeading2: #{$headingColor2};
+  --bgHeading2: #{$headingBG2};
+
+  --fontColorHeading3: #{$headingColor3};
+  --bgHeading3: #{$headingBG3};
+}
+
+@mixin set-typography($fontMap: ()) {
+  $defaultFontMap: (body: $fontFamilyBody, title: $fontFamilyTitle, h1: $fontFamilyHeading1, h2: $fontFamilyHeading2, h3: $fontFamilyHeading3);
+  $mergedFontMap: map-merge($defaultFontMap, $fontMap);
+  
+  $fontBody: map-get($mergedFontMap, body);
+  $fontTitle: map-get($mergedFontMap, title);
+  $fontHeading1: map-get($mergedFontMap, h1);
+  $fontHeading2: map-get($mergedFontMap, h2);
+  $fontHeading3: map-get($mergedFontMap, h3);
+  --fontFamilyTitle: "#{$fontTitle}";
+  --fontFamilyBody: "#{$fontBody}";
+  --fontFamilyHeading1: "#{$fontHeading1}";
+  --fontFamilyHeading2: "#{$fontHeading2}";
+  --fontFamilyHeading3: "#{$fontHeading3}";
+}
+// #endregion

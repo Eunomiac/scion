@@ -1,5 +1,89 @@
-$fontFamilyTitleDefault: "Marcellus SC";
-$fontFamilyBodyDefault: "Overlock SC";
-
-
 $defaultPadding: 5px;
+
+& {
+    // Colors    
+    @include scaled-colors($c-grey, "grey", true);
+    @include scaled-colors($accentColor);
+    --bgMatte: #{$c-white};
+    --shadowColorBright: #{scale-color($highlightColor, $alpha: -50%)};
+    --shadowColorDark: #{scale-color($shadowColor, $alpha: -50%)};
+
+    // Sheet Backgrounds
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Generic.png");
+    --bgItemSheet: var(--bgMatte);
+
+    // Radial Menu Rosette
+    --fontColorMenu: #{$c-gold};
+    --fontFamilyMenu: "#{$fontFamilyRadialMenu}";
+    --fontSizeMenu: 24px;
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteGeneric.png");
+
+    // Body Text
+    --fontColorBody: #{$bodyColor};
+    --fontFamilyBody: "#{$fontFamilyBody}";
+    --fontSizeBody: 16px;
+    --fontWeightBody: normal;
+    @include text-shadow((3 0 0 0 $c-black), --textShadowBody);
+    @include text-shadow((3 0 0 1px $c-black), --textShadowStrongText);
+    --fontWeightStrongText: bold;
+
+    // Title
+    --fontColorTitle: #{$headingColor1};
+    --bgTitle: transparent;
+    --fontFamilyTitle: "#{$fontFamilyTitle}";
+    --fontStyleTitle: normal;
+    --fontVariantTitle: normal;
+    --fontWeightTitle: normal;
+    --fontSizeTitle: 36px;
+    --textTransformTitle: none;
+    @include embossed-text(1px, 1px, $c-white, $c-black, --textShadowTitle);
+    --paddingTitle: 0;
+    --lineHeightTitle: normal;
+    --fontScaleTitle: 1;
+
+    // <h1>
+    --fontColorHeading1: #{$headingColor1};
+    --bgHeading1: #{$headingBG1};
+    --fontFamilyHeading1: "#{$fontFamilyHeading1}";
+    --fontStyleHeading1: normal;
+    --fontVariantHeading1: small-caps;
+    --fontWeightHeading1: normal;
+    --textTransformHeading1: none;
+    --fontSizeHeading1: 24px;
+    --paddingHeading1: 0;												  
+    --maxHeightHeading1: 32px;
+    --lineHeightHeading1: var(--maxHeightHeading1);
+    @include embossed-text(1px, 0px, var(--shadowColorBright), var(--shadowColorDark), --textShadowHeading1);
+    --fontScaleHeading1: 1;
+    --borderBottomHeading1: 2px solid var(--fontColorHeading1);
+
+    // <h2>
+    --fontColorHeading2: #{$headingColor2};
+    --bgHeading2: #{$headingBG2};
+    --fontFamilyHeading2: "#{$fontFamilyHeading2}";
+    --fontStyleHeading2: normal;
+    --fontVariantHeading2: normal;
+    --fontWeightHeading2: bold;
+    --textTransformHeading2: none;
+    --fontSizeHeading2: 20px;												  
+    --maxHeightHeading2: 26px;
+    --lineHeightHeading2: var(--maxHeightHeading2);
+    --textShadowHeading2: none;
+    --borderBottomHeading2: 2px inset var(--scale3);
+
+    // <h3>
+    --fontColorHeading3: #{$headingColor3};
+    --bgHeading3: #{$headingBG3};
+    --fontFamilyHeading3: "#{$fontFamilyHeading3}";
+    --fontStyleHeading3: normal;
+    --fontVariantHeading3: normal;
+    --fontWeightHeading3: bold;
+    --textTransformHeading3: none;
+    --fontSizeHeading3: 16px;
+    --paddingHeading3: 0;
+    --maxHeightHeading3: 16px;
+    --lineHeightHeading3: var(--maxHeightHeading3);
+    --textShadowHeading3: none;
+    --borderBottomHeading3: none;
+
+}

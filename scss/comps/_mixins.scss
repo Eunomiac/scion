@@ -17,8 +17,8 @@
 
 @mixin disabledText {
   font-style: italic;
-  color: var(--scaleGrey5);
-  text-shadow: -0.5px -0.5px 0px $c-black, 0.5px 0.5px 0px var(--scaleFadeWhite10);
+  color: var(--grey5);
+  text-shadow: -0.5px -0.5px 0px $c-black, 0.5px 0.5px 0px var(--whiteFade10);
   font-family: "Della Respira";
   font-size: 0.75rem;
   font-weight: normal;

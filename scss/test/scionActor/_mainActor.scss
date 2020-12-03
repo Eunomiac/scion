@@ -1,7 +1,7 @@
 $isShowingTestBorders: false;
 $isShowingPadding: false;
 $isShowingBGShade: false;
-$isTestingPantheon: "Tuatha";
+$isTestingPantheon: true;
 
 & {
     height: 100%;
@@ -18,7 +18,7 @@ $isTestingPantheon: "Tuatha";
     } @else if $isTestingPantheon {
         background: {
             color: transparent;
-            image: url("../images/actor-sheet/backgrounds/#{$isTestingPantheon}.png");
+            image: var(--bgActorSheet);
             size: 100%;
             repeat: no-repeat;
         }
@@ -93,7 +93,7 @@ $isTestingPantheon: "Tuatha";
         top: $menuOpenSize * (-3/8);
 
         background: {
-            image: var(--bgImageMenu);
+            image: var(--menuImage);
             size: 50%;
             repeat: no-repeat;
             position: center;
@@ -274,9 +274,8 @@ $isTestingPantheon: "Tuatha";
     }
 }
 
-/* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
-
-    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
-        // The added "disappear" class contains either an animation or a transition, which starts immediately.
-        //    When the animation/transition is finished, the callback function removes the element.
-*/
+// HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+//
+//    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+//        // The added "disappear" class contains either an animation or a transition, which starts immediately.
+//        //    When the animation/transition is finished, the callback function removes the element.

@@ -1,0 +1,23 @@
+& {
+    height: 100%;
+    width: 100%;
+    background: var(--bgItemSheet);
+    border: 15px outset #554a39;
+    border-radius: 50px;
+    opacity: 1; 
+    overflow: hidden;       
+    box-sizing: border-box;
+    
+    .header {
+        div { pointer-events: all; }
+    }
+    h1, h2 {
+        text-indent: 15px;
+    }
+}
+
+// HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+//
+//    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+//        // The added "disappear" class contains either an animation or a transition, which starts immediately.
+//        //    When the animation/transition is finished, the callback function removes the element.

@@ -80,7 +80,7 @@ select {
 
 .strong { 
     font-weight: bolder;
-    text-shadow: 0.5px 0.5px 1px black;
+    @include text-shadow((2 0 0 1px black));
     text-transform: uppercase;
 }
 /* #endregion */
@@ -147,7 +147,7 @@ select {
 
 .title {
     color: var(--fontColorTitle);
-    background-color: var(--bgColorTitle);
+    background-color: var(--bgTitle);
     font: {
         family: var(--fontFamilyTitle);
         style: var(--fontStyleTitle);
@@ -169,39 +169,39 @@ select {
 }
 
 .surTitle {
-    color: var(--fontColorSurTitle);
-    background-color: var(--bgColorSurTitle);
-    font-family: var(--fontFamilySurTitle);
-    font-style: var(--fontStyleSurTitle);
-    font-variant: var(--fontVariantSurTitle);
-    font-weight: var(--fontWeightSurTitle);
-    text-transform: var(--textTransformSurTitle);
-    font-size: var(--fontSizeSurTitle);
-    padding: var(--paddingSurTitle);
-    line-height: var(--lineHeightSurTitle); line-height: normal;
-    text-shadow: var(--textShadowSurTitle);
+    color: var(--fontColorHeading3);
+    background-color: var(--bgHeading3);
+    font-family: var(--fontFamilyHeading3);
+    font-style: var(--fontStyleHeading3);
+    font-variant: var(--fontVariantHeading3);
+    font-weight: var(--fontWeightHeading3);
+    text-transform: var(--textTransformHeading3);
+    font-size: var(--fontSizeHeading3);
+    padding: var(--paddingHeading3);
+    line-height: var(--lineHeightHeading3); line-height: normal;
+    text-shadow: var(--textShadowHeading3);
     transform-origin: 0% 0%;
-    transform: scaleX(var(--fontScaleSurTitle));
-    width: calc(100% / var(--fontScaleSurTitle));
+    transform: scaleX(var(--fontScaleHeading3));
+    width: calc(100% / var(--fontScaleHeading3));
     text-align: center;
     border: none;
 }
 
 .subTitle {    
-    color: var(--fontColorSubTitle);
-    background-color: var(--bgColorSubTitle);
-    font-family: var(--fontFamilySubTitle);
-    font-style: var(--fontStyleSubTitle);
-    font-variant: var(--fontVariantSubTitle);
-    font-weight: var(--fontWeightSubTitle);
-    text-transform: var(--textTransformSubTitle);
-    font-size: var(--fontSizeSubTitle);
-    padding: var(--paddingSubTitle);
-    line-height: var(--lineHeightSubTitle); line-height: normal;
-    text-shadow: var(--textShadowSubTitle);
+    color: var(--fontColorHeading3);
+    background-color: var(--bgHeading3);
+    font-family: var(--fontFamilyHeading3);
+    font-style: var(--fontStyleHeading3);
+    font-variant: var(--fontVariantHeading3);
+    font-weight: var(--fontWeightHeading3);
+    text-transform: var(--textTransformHeading3);
+    font-size: var(--fontSizeHeading3);
+    padding: var(--paddingHeading3);
+    line-height: var(--lineHeightHeading3); line-height: normal;
+    text-shadow: var(--textShadowHeading3);
     transform-origin: 0% 0%;
-    transform: scaleX(var(--fontScaleSubTitle));
-    width: calc(100% / var(--fontScaleSubTitle));
+    transform: scaleX(var(--fontScaleHeading3));
+    width: calc(100% / var(--fontScaleHeading3));
     text-align: center;
     border: none;
 }
@@ -209,7 +209,7 @@ select {
 .heading1 {   
     width: 100%;
     color: var(--fontColorHeading1);
-    background-color: var(--bgColorHeading1);
+    background-color: var(--bgHeading1);
     font-family: var(--fontFamilyHeading1);
     font-style: var(--fontStyleHeading1);
     font-variant: var(--fontVariantHeading1);
@@ -228,7 +228,7 @@ select {
 
 .heading2 {
     color: var(--fontColorHeading2);
-    background-color: var(--bgColorHeading2);
+    background-color: var(--bgHeading2);
     font-family: var(--fontFamilyHeading2);
     font-style: var(--fontStyleHeading2);
     font-variant: var(--fontVariantHeading2);

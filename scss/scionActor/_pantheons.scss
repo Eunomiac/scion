@@ -1,7 +1,7 @@
 
 & {
-    --bgColorMatte: #{$c-white};
-    --bgImage: url("../images/actor-sheet/backgrounds/Generic.png");
+    --bgMatte: #{$c-white};
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Generic.png");
 
     // Body Text
     --fontColorBody: #{$c-black};
@@ -11,7 +11,7 @@
 
     // Title
     --fontColorTitle: #{$c-black};
-    --bgColorTitle: transparent;
+    --bgTitle: transparent;
     --fontFamilyTitle: "#{$fontFamilyTitleDefault}";
     --fontStyleTitle: normal;
     --fontVariantTitle: normal;
@@ -24,37 +24,37 @@
     --fontScaleTitle: 1;
 
 
-    // SurTitle
-    --fontColorSurTitle: var(--fontColorTitle);
-    --bgColorSurTitle: var(--bgColorTitle);
-    --fontFamilySurTitle: var(--fontFamilyBody);
-    --fontStyleSurTitle: normal;
-    --fontVariantSurTitle: normal;
-    --fontWeightSurTitle: normal;
-    --textTransformSurTitle: none;
-    --fontSizeSurTitle: 1.5rem;
-    --paddingSurTitle: 0;
-    --lineHeightSurTitle: var(--fontSizeSurTitle);
-    --textShadowSurTitle: var(--textShadowTitle);
-    --fontScaleSurTitle: 1;
+    // Heading3
+    --fontColorHeading3: var(--fontColorTitle);
+    --bgHeading3: var(--bgTitle);
+    --fontFamilyHeading3: var(--fontFamilyBody);
+    --fontStyleHeading3: normal;
+    --fontVariantHeading3: normal;
+    --fontWeightHeading3: normal;
+    --textTransformHeading3: none;
+    --fontSizeHeading3: 1.5rem;
+    --paddingHeading3: 0;
+    --lineHeightHeading3: var(--fontSizeHeading3);
+    --textShadowHeading3: var(--textShadowTitle);
+    --fontScaleHeading3: 1;
 
-    // SubTitle
-    --fontColorSubTitle: var(--fontColorTitle);
-    --bgColorSubTitle: var(--bgColorTitle);
-    --fontFamilySubTitle: "#{$fontFamilyTitleDefault}";
-    --fontStyleSubTitle: normal;
-    --fontVariantSubTitle: normal;
-    --fontWeightSubTitle: bold;
-    --textTransformSubTitle: none;
-    --fontSizeSubTitle: 1rem;
-    --paddingSubTitle: 0;
-    --lineHeightSubTitle: var(--fontSizeSubTitle);
-    --textShadowSubTitle: var(--textShadowTitle);
-    --fontScaleSubTitle: 1;
+    // Heading3
+    --fontColorHeading3: var(--fontColorTitle);
+    --bgHeading3: var(--bgTitle);
+    --fontFamilyHeading3: "#{$fontFamilyTitleDefault}";
+    --fontStyleHeading3: normal;
+    --fontVariantHeading3: normal;
+    --fontWeightHeading3: bold;
+    --textTransformHeading3: none;
+    --fontSizeHeading3: 1rem;
+    --paddingHeading3: 0;
+    --lineHeightHeading3: var(--fontSizeHeading3);
+    --textShadowHeading3: var(--textShadowTitle);
+    --fontScaleHeading3: 1;
 
     // Heading 1
     --fontColorHeading1: var(--fontColorTitle);
-    --bgColorHeading1: transparent;
+    --bgHeading1: transparent;
     --fontFamilyHeading1: var(--fontFamilyTitle);
     --fontStyleHeading1: normal;
     --fontVariantHeading1: small-caps;
@@ -68,8 +68,8 @@
     --borderBottomHeading1: 2px solid var(--fontColorHeading1);
 
     // Heading 2
-    --fontColorHeading2: var(--fontColorSubTitle);
-    --bgColorHeading2: transparent;
+    --fontColorHeading2: var(--fontColorHeading3);
+    --bgHeading2: transparent;
     --fontFamilyHeading2: var(--fontFamilyBody);
     --fontStyleHeading2: normal;
     --fontVariantHeading2: normal;
@@ -82,8 +82,8 @@
     --borderBottomHeading2: none;
 
     // Heading 3
-    --fontColorHeading3: var(--fontColorSubTitle);
-    --bgColorHeading3: transparent;
+    --fontColorHeading3: var(--fontColorHeading3);
+    --bgHeading3: transparent;
     --fontFamilyHeading3: var(--fontFamilyBody);
     --fontStyleHeading3: normal;
     --fontVariantHeading3: normal;
@@ -107,9 +107,9 @@
 // .kami { }
 
 .loa {
-    --bgImage: url("../images/actor-sheet/backgrounds/Loa.png");
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Loa.png");
     --fontFamilyTitle: "Finger Paint";
-    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
     --fontSizeTitle: 2rem;
 }
 
@@ -125,25 +125,25 @@
     --fontColorBody: #{$bodyColor};
     --fontFamilyBody: "Gothic Ultra";
 
-    --bgImage: url("../images/actor-sheet/backgrounds/Netjer.png");
-    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
-    --bgColorMatte: #{$matteColor};
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Netjer.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
+    --bgMatte: #{$matteColor};
 
 
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Zanzabar";
 
-    --fontColorSubTitle: #{$headingColor2};
-    --fontFamilySubTitle: "Carolingia";
-    --fontSizeSubTitle: 1.75rem;
-    --lineHeightSubTitle: 1.65rem;
-    --fontWeightSubTitle: normal;
-    --fontScaleSubTitle: 0.75;
+    --fontColorHeading3: #{$headingColor2};
+    --fontFamilyHeading3: "Carolingia";
+    --fontSizeHeading3: 1.75rem;
+    --lineHeightHeading3: 1.65rem;
+    --fontWeightHeading3: normal;
+    --fontScaleHeading3: 0.75;
 
-    --fontColorSurTitle: #{$headingColor1};
-    --fontWeightSurTitle: bold;
+    --fontColorHeading3: #{$headingColor1};
+    --fontWeightHeading3: bold;
 
-    --fontColorHeading1: var(--fontColorSubTitle);
+    --fontColorHeading1: var(--fontColorHeading3);
     --borderBottomHeading1: 1px solid var(--fontColorHeading);
 
     @include scaled-colors($accentColor);
@@ -162,11 +162,11 @@
     $accentColor: #8e52ff;
     $bodyColor: #000538;
 
-    --bgImage: url("../images/actor-sheet/backgrounds/Theoi.png");
-    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Theoi.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
 
 
-    --bgColorMatte: #{$matteColor};
+    --bgMatte: #{$matteColor};
       
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Poiret One";
@@ -177,15 +177,15 @@
     --fontVariantHeading1: small-caps;
     --borderBottomHeading1: 2px solid var(--fontColorTitle);
 
-    --fontColorSubTitle: #{$headingColor2};
-    --fontFamilySubTitle: "Elektra";
-    --fontSizeSubTitle: 1.2rem;
-    --fontWeightSubTitle: normal;
+    --fontColorHeading3: #{$headingColor2};
+    --fontFamilyHeading3: "Elektra";
+    --fontSizeHeading3: 1.2rem;
+    --fontWeightHeading3: normal;
 
-    --fontColorSurTitle: #{$headingColor2};
-    --fontFamilySurTitle: "Poiret One";
-    --fontWeightSurTitle: bold;
-    --fontVariantSurTitle: small-caps;
+    --fontColorHeading3: #{$headingColor2};
+    --fontFamilyHeading3: "Poiret One";
+    --fontWeightHeading3: bold;
+    --fontVariantHeading3: small-caps;
 
     --fontColorBody: #{$bodyColor};
     --fontFamilyBody: "Poiret One";
@@ -200,9 +200,9 @@
     $accentColor: #25951f;
     $bodyColor: #1a211d;
 
-    --bgImage: url("../images/actor-sheet/backgrounds/Tuatha.png");
-    --menuRosetteImg: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
-    --bgColorMatte: #{$matteColor};
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Tuatha.png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
+    --bgMatte: #{$matteColor};
     
     --fontColorTitle: #{$headingColor1};
     --fontFamilyTitle: "Berkshire Swash";
@@ -212,12 +212,12 @@
     --fontVariantHeading1: normal;
     --fontSizeTitle: 2.5rem;
 
-    --fontColorSubTitle: #{$headingColor2};
-    --fontFamilySubTitle: "Della Respira";
-    --fontStyleSubTitle: italic;
+    --fontColorHeading3: #{$headingColor2};
+    --fontFamilyHeading3: "Della Respira";
+    --fontStyleHeading3: italic;
 
-    --fontColorSurTitle: #{$headingColor1};
-    --fontWeightSurTitle: bold;
+    --fontColorHeading3: #{$headingColor1};
+    --fontWeightHeading3: bold;
 
     --fontColorBody: #{$bodyColor};
     
@@ -227,7 +227,7 @@
 // .nemetondevos { }
 
 .orisha {
-    --bgImage: url("../images/actor-sheet/backgrounds/Orisha.png");
+    --bgActorSheet: url("../images/actor-sheet/backgrounds/Orisha.png");
     --fontFamilyTitle: "Finger Paint";
     --fontSizeTitle: 2rem;
 }

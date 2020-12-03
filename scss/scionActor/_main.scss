@@ -2,7 +2,7 @@
     height: 100%;
     width: 100%;
     padding: 18px 60px 38px 45px;
-    background-image: var(--bgImage);
+    background-image: var(--bgActorSheet);
     background-size: 100%;
     background-repeat: no-repeat;
     background-color: white;
@@ -39,7 +39,7 @@
         
         $menuButtonSize: $menuButtonFullSize + $menuButtonMargin;
 
-        background-image: var(--bgImageMenu);
+        background-image: var(--menuImage);
         background-size: 50%;
         display: block;
         width: $menuOpenSize;
@@ -203,9 +203,9 @@
     .footer {grid-area: footer; }
 }
 
-/* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
 
-    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
-        // The added "disappear" class contains either an animation or a transition, which starts immediately.
-        //    When the animation/transition is finished, the callback function removes the element.
-*/
+// HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+//
+//    $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+//        // The added "disappear" class contains either an animation or a transition, which starts immediately.
+//        //    When the animation/transition is finished, the callback function removes the element.

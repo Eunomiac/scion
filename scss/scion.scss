@@ -3,24 +3,23 @@
 /* ****************************************************** */
 
 /* #region IMPORT */
-@use "sass:string";
+// @use "sass:string";
 
-/* #region Global Variables & Configuration */
-@import 'test/params/variables'; // Variables
 @import 'test/params/typography'; // Fonts & Font Styling
-@import 'test/params/colors'; // Color Definitions
-/* #endregion */
-
-/* #region Components: Layouts, Mixins, Modules & Fundamentals */
-@import 'test/comps/mixins'; // Mixins
 @import 'test/comps/dragula'; // Dragula Drag & Drop Components
-/* #endregion */
 
+body.vtt.game.system-scion {  
+  // #region Global Variables & Configuration 
+  @import 'test/params/colors'; // Color Definitions & Scaling
+  @import 'test/comps/mixins'; // Mixins
+  @import 'test/params/variables'; // Variables
+  // #endregion 
 
-body.vtt.game.system-scion {
+  // #region Components: Layouts, Mixins, Modules & Fundamentals 
+  // #endregion 
   @import 'test/canvas/canvas'; // Top-Level Canvas Styles
 
-  /* #region SHEET STYLES */
+  // #region SHEET STYLES 
   div.sheet.scion {
     pointer-events: none;
     border: none;
@@ -48,13 +47,13 @@ body.vtt.game.system-scion {
       }
     }
     div.window-resizable-handle { display: none; }
-
-    @import 'test/scionActor/pantheons';
     
-    /* #region ACTOR SHEETS */
+    // #region ACTOR SHEETS 
 
     // #region STYLES FOR ALL ACTOR SHEETS
     &.actor {
+      @import 'test/params/colorsActor';
+      @import 'test/params/variablesActor';
     }
     // #endregion
     // #region MAJOR ACTOR SHEETS
@@ -66,33 +65,36 @@ body.vtt.game.system-scion {
       }
 
       .main {
-        @import 'test/scionActor/main';
+        @import 'test/scionActor/mainActor';
+        
 
         .sheet-body {
 
           // .tab .chargen-body { @import "test/scionActor/chargen/actor-chargen"; }
           .tab .front-body { @import "test/scionActor/front/actor-front"; }
 
-          /* #region Owned Item Partials */
+          // #region Owned Item Partials 
           .path-block { @import "test/scionActor/ownedItems/path-block"; }
-          /* #endregion */
+          // #endregion 
         }
       }
     }
     // #endregion
-    /* #endregion */ 
+    // #endregion 
 
-    /* #region ITEM SHEETS */ 
+    // #region ITEM SHEETS
     &.item {
+      @import 'test/params/colorsItem';
+      @import 'test/params/variablesItem';
       .main {
-        @import 'test/scionItem/main';
+        @import 'test/scionItem/mainItem';
       }
       @import 'test/scionItem/types';
     }
-    /* #endregion */
+    // #endregion 
   }
-  /* #endregion */
+  // #endregion 
 }
-/* #endregion */
+// #endregion 
 
 
