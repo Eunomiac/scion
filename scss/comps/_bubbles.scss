@@ -1,0 +1,118 @@
+@mixin bubble($bubbleSize: 6, $bubbleHeight: 24px, $bubbleMargin: 4px) {
+    $sizeRatio: $bubbleHeight / 100px; // Raw Image Height = 100px.
+    $paddingLookup: (
+       2: 12px,
+       3: 12px,
+       4: 14px,
+       5: 14px,
+       6: 16px,
+       8: 16px,
+       10: 16px
+    );
+    $indentLookup: (
+       2: 112px,
+       3: 212px,
+       4: 292px,
+       5: 392px,
+       6: 446px,
+       8: 646px,
+       10: 846px
+    );
+    
+    $bubbleWidth: $bubbleSize * (100px * $sizeRatio);
+    $vertPad: 12px * $sizeRatio;
+    $horizPad: map-get($paddingLookup, $bubbleSize) * $sizeRatio;
+    $vertMarginTitle: $bubbleHeight * 0.05;
+    
+    $innerHeight: $bubbleHeight - (2 * $vertPad);
+    $innerWidth: $bubbleWidth - (2 * $horizPad);
+    
+    $middleWidth: map-get($indentLookup, $bubbleSize) * $sizeRatio;
+    $topIndent: ($innerWidth - $middleWidth) / 2;
+    $bgImage: url("../images/bubbles/Bubble1x#{$bubbleSize}.png");
+    
+    height: $innerHeight;
+    width: $innerWidth;
+    padding: $vertPad $horizPad;
+    margin: $bubbleMargin;
+    
+    background: {
+       image: $bgImage;
+       size: 100% 100%;
+       repeat: no-repeat;
+       origin: border-box;
+    }
+    text-align: center;
+    box-sizing: content-box;
+    filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5)); 
+    
+    .bubbleWrap::before {
+       content: "";
+       width: $topIndent;
+       height: $innerHeight;
+       float: left;
+       shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
+     }    
+     
+     &::before {
+       content: "";
+       width: $topIndent;
+       height: $innerHeight;
+       float: right;
+       shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
+     }
+    
+    span, p {
+       display: block;
+       font: {
+          family: var(--fontFamilyBubbleBody);
+          size: var(--fontSizeBubbleBody);
+          weight: var(--fontWeightBubbleBody)
+       }
+       text: {
+          transform: var(--textTransformBubbleBody);
+          shadow: var(--textShadowBubbleBody);
+          align: center;
+          align-last: center;
+       }
+    }
+    p { line-height: var(--lineHeightBubbleBody); }
+    .bubbleTitle {
+       display: block;
+       line-height: var(--lineHeightBubbleTitle);
+       font: {
+          family: var(--fontFamilyBubbleTitle);
+          size: var(--fontSizeBubbleTitle);
+          weight: var(--fontWeightBubbleTitle);
+       }
+       text: {
+          transform: var(--textTransformBubbleTitle);
+          shadow: var(--textShadowBubbleTitle);
+          align: center;
+          align-last: center;
+       }
+       // margin-bottom: $vertMarginTitle;
+    }
+ }
+
+
+.bubble {
+         
+   p {margin: 0;}
+
+   &.skill { 
+      @include bubble(6, 22px, 2px);
+      span { font-size: 16px; line-height: 18px; font-family: Voltaire; text-transform: uppercase; }
+   }
+
+   &.condition { 
+      @include bubble(6, 75px, 4px);
+      justify-content: start;
+   }
+
+   &.connection {
+      &.group, &.access { @include bubble(5, 40px); }         
+      &.contact { @include bubble(6, 40px); }
+   }
+
+}

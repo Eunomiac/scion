@@ -20,7 +20,7 @@
     @return $fontString;
 }
 
-@import url(importGoogleFonts(( 
+@import url(importGoogleFonts((
     "Berkshire+Swash": (400),
     "Della+Respira": (400),
     "Overlock+SC": (400),
@@ -33,8 +33,17 @@
     "Righteous": (400),
     "Reem+Kufi": (400),
     "Yatra+One":  (400),
-    "Julius+Sans+One": (400)
+    "Julius+Sans+One": (400),
+    "Voltaire": (400)
 )));
+
+// General Fonts
+$fontFamilyBody: "Overlock SC";
+$fontFamilyTitle: "Marcellus SC";
+$fontFamilyHeading1: "Marcellus SC";
+$fontFamilyHeading2: "Overlock SC";
+$fontFamilyHeading3: "Overlock SC";
+$fontFamilyRadialMenu: "Voltaire";
 
 // Netjer Fonts
 @font-face { font-family: "Bootle"; src: url(../fonts/netjer/bootle.ttf); }

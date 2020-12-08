@@ -1,7 +1,7 @@
+$isShowingBoxFrame: false;
 $isShowingTestBorders: false;
 $isShowingPadding: false;
 $isShowingBGShade: false;
-$isTestingPantheon: true;
 
 & {
     height: 100%;
@@ -15,17 +15,17 @@ $isTestingPantheon: true;
             size: 100%;
             repeat: no-repeat;
         }
-    } @else if $isTestingPantheon {
+    } @else if $isShowingBoxFrame {        
         background: {
-            color: transparent;
-            image: var(--bgActorSheet);
+            color: white;
+            image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
             size: 100%;
             repeat: no-repeat;
         }
     } @else {
         background: {
-            color: white;
-            image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
+            color: transparent;
+            image: var(--bgActorSheet);
             size: 100%;
             repeat: no-repeat;
         }
@@ -56,8 +56,6 @@ $isTestingPantheon: true;
             }
         }
     }
-
-
 
     .menuRosette {
         grid-area: menu;

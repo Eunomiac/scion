@@ -1,26 +1,88 @@
 /* #region FLEX LAYOUTS */
-.flex {
-    display: flex;
-    width: 100%;
-    flex-flow: row wrap;
-    align-items: safe flex-start;
-    justify-content: space-between;
-    align-content: safe flex-start;
-
-    &.flexContainer { height: 100%; }
-    &.spaceCenter { justify-content: center; }
-    &.column { flex-flow: column nowrap; }
-
-    div { width: 100%; } // Divs assumed to take up whole row.
-    span { display: inline-block; margin: auto 0; flex: 1 0 auto; } // Use spans for inline labels, etc.
+// .flex {
+//     display: flex;
+//     flex-flow: row wrap;    
     
-    > *:not(.heading1) { flex: 0 1 auto; margin: 0.15rem 0.25rem; } // initialize all contained items as default.
+//     &.flexColumn {
+//         flex-flow: column nowrap;
+//         flex-basis: 100%;
+//         &.fullSize { height: 100%; }
+//     }
+    
+//     &.flexRow {
+//         flex-flow: row nowrap;
+//         align-items: baseline;
+//         margin: 5px 0;
+//         flex-basis: 100%;
+//         &.fullSize { width: 100%; }
+//         > nav { flex-grow: 0; }
+//         > label { flex: 0 0 auto; }
+//         > .contentEditable { flex: 1 1 100%; }
+//     }
 
-    .flexRow { flex-flow: row nowrap; align-items: center; } // For one-line spacing.
-    .flexLabel { flex: 1 0 auto; } // Can grow, can't shrink.
-    .flexStatic { flex: 0 0 auto; }  // Can't grow or shrink.
-    .contentEditable { flex: 0 1 auto; } // Editable elements have max flexibility.
-}    
+//     > * { 
+//         flex: auto; // Default flex for contained elements.
+//         h1, h2, h3, label { flex: 0 0 auto; }
+//         &.fullSize { flex-basis: 100%; flex-shrink: 0; }
+//         &.fullFlex { flex-basis: 0%; }
+//      }
+// }    
+
+.flex {
+   display: flex;
+   flex: {
+      direction: row;
+      wrap: wrap;
+   }
+   align: {
+      content: space-around;
+      items: flex-start;
+   }
+   justify-content: flex-start;
+   
+   &.flexColumn {
+      flex: {
+         direction: column;
+         wrap: nowrap;
+      }
+      /* 
+        flex-flow: column nowrap;
+        flex-basis: 100%;
+        &.fullSize { height: 100%; }
+     */
+    }
+   
+    &.flexRow {
+       flex: {
+          direction: row;
+          wrap: nowrap;
+       }
+       /* 
+         flex-flow: row nowrap;
+         align-items: baseline;
+         margin: 5px 0;
+         flex-basis: 100%;
+         &.fullSize { width: 100%; }
+         > nav { flex-grow: 0; }
+         > label { flex: 0 0 auto; }
+         > .contentEditable { flex: 1 1 100%; }
+      */
+    }
+    
+    
+    // Default flex for contained elements: 0 1 auto
+ 
+    > nav { flex-grow: 0; }
+    > h1, .h1, h2, .h2, h3, .h3 { flex-grow: 0; }
+    > label { flex-grow: 0; }
+    > .contentEditable { flex-shrink: 1; flex-basis: 100%; }
+    
+    > * {
+        &h1 { flex-basis: 100%; }
+        &.fullSize { flex-basis: 100%; flex-shrink: 0; }
+        &.fullFlex { flex-basis: 0%; }
+     }
+ }
 /* #endregion */
 
 /* #region GRID LAYOUTS */

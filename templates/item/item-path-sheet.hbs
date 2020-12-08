@@ -1,37 +1,67 @@
-<form class="{{cssClass}} grid main" autocomplete="off">
+<form class="{{cssClass}} flex flexColumn fullSize main" autocomplete="off">
 
     {{!-- Sheet Header --}}
-    <section class="header">
-        <h1 class="title alignCenter">{{localize (concat "scion.paths." item.name "Path")}}</h1>
+    <section class="header fullWidth">
+        <h1 class="title alignCenter">{{localize (concat "scion.paths." data.type "Path")}}</h1>
         <div class="h2 contentEditable quote alignCenter" data-path="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
     </section>
         
-    <section class="sheet-body flex fullSize flexColumn">
-        <h2>{{localize "scion.paths.skills"}}</h2>
-        <div class="pathSkills flex fullFlex flexRow">
+    <section class="sheet-body flex flexColumn spaceBetween">
+        <div class="pathSkills alignCenter flex fullWidth flexRow">
         {{#if data.skills.[2]}}
             {{#each data.skills as | skill |}}
-                <div class="text alignCenter">{{localize (concat "scion.skills." skill)}}</div>
+                <div class="bubble skill">
+                    <div class="bubbleWrap">
+                        <span>{{localize (concat "scion.skills." skill)}}</span>
+                    </div>
+                </div>
             {{/each}}
         {{else}}
             <h3>Path Skill Selection</h3>
         {{/if}}
         </div>
-            <h2>{{localize "scion.paths.connections"}}</h2>
-        <div class="pathConnections flex fullFlex">
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
-            <div class="connection text">Connection</div>
+        <div class="pathConnections alignCenter flex fullFlex">
+            <h2 class="gold">{{localize "scion.paths.connections"}}</h2>
+            <div class="bubble connection group dots">
+                    <div class="bubbleWrap">
+                <span class="bubbleTitle">Group</span>
+                <span>Adoring Fans</span>
+            </div>
+            </div>
+            <div class="bubble connection group dots">
+                    <div class="bubbleWrap">
+                <span class="bubbleTitle">Group</span>
+                <span>Obsessed Goths</span>
+            </div>
+            </div>
+            <div class="bubble connection access dots">
+                    <div class="bubbleWrap">
+                <span class="bubbleTitle">Access</span>
+                <span>Accompaniment</span>
+            </div>
+            </div>
+            <div class="bubble connection access dots">
+                    <div class="bubbleWrap">
+                <span class="bubbleTitle">Access</span>
+                <span>Age Is No Obstacle</span>
+            </div>
+            </div>
+            <div class="bubble connection contact dots">
+                    <div class="bubbleWrap">
+                <span class="bubbleTitle">Contact</span>
+                <span>Mikaela Whitechapel-Diaz</span>
+            </div>
+            </div>
         </div>
-        <h2>{{localize "scion.paths.condition"}}</h2>
-        <div class="pathCondition">
-            <h3>Path Condition Link Here</h3>
+        
+        <div class="pathCondition alignCenter flex fullFlex">
+            <h2 class="gold">{{localize "scion.paths.condition"}}</h2>
+            <div class="bubble condition">
+                    <div class="bubbleWrap">
+                <span class="bubbleTitle">Murder of Crows</span>
+                <p>Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan.</p>
+            </div>
+            </div>
         </div>
     </section>
     

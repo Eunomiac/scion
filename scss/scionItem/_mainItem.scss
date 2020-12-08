@@ -1,0 +1,81 @@
+& {
+    /* --fontFamilyBubbleBody: var(--fontFamilyBody);
+    --fontSizeBubbleBody: 10px;
+    --fontWeightBubbleBody: normal;
+    --fontFamilyBubbleTitle: var(--fontFamilyBody);
+    --fontSizeBubbleTitle: 20px;
+    --fontWeightBubbleTitle: bold;
+    --textTransformBubbleTitle: uppercase;
+    --bubbleHeight: 22px; */
+    
+    height: 100%;
+    width: 100%;
+    padding: 20px 20px 60px 20px;
+    background: {
+       image: var(--bgItemSheet);
+       size: 100% 100%;
+       position: center;
+       repeat: no-repeat;
+    }
+    &::after {
+       content: "";
+       position: absolute;
+       pointer-events: none;
+       top: 0;
+       left: 0;
+       height: 100%;
+       width: 100%;
+       background: {
+          image: var(--bgItemOverlay);
+          size: 100% 100%;
+          position: center;
+          repeat: no-repeat;
+       }      
+    }
+    opacity: 1;
+    overflow: hidden;
+    filter: drop-shadow(50px 50px 20px black);
+    row-gap: 5px;
+    box-sizing: border-box;
+    
+    h1, .h1, h2, .h2 { 
+       width: 103%;
+       margin: 5px 0;
+       margin-left: -2%;
+
+    }
+    h1, .h1 { 
+       border: none;
+    }
+    h2, .h2 { 
+        color: black;
+       background: var(--greyFullFade10);
+       border: {
+          bottom: 2px solid black;
+          top: 2px solid white;
+       }
+       box-sizing: content-box;
+       @include embossed-text(1px, 0px, var(--shadowColorBright), var(--shadowColorDark));
+    }
+    
+    
+    .header {
+       grid-area: header;
+       div { pointer-events: all; }
+    }
+    .sheet-body {
+       grid-area: body;
+       
+    }
+    h1, h2 {
+       text-indent: 15px;
+    }
+ }
+ 
+ /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+ 
+     $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+         // The added "disappear" class contains either an animation or a transition, which starts immediately.
+         //    When the animation/transition is finished, the callback function removes the element.
+ */
+ 

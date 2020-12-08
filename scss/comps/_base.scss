@@ -1,30 +1,101 @@
 /* #region Element Default Styles */
 * {
     color: var(--fontColorBody);
-    font-family: var(--fontFamilyBody);
-    font-size: var(--fontSizeBody);
-    font-weight: var(--fontWeightBody);
+    font: {
+        family: var(--fontFamilyBody);
+        size: var(--fontSizeBody);
+        weight: var(--fontWeightBody);
+    }
+    text-shadow: var(--textShadowBody);
+    line-height: var(--lineHeightBody);
 }
 
-section {
-    height: 100%;
-    width: 100%;
+section,
+div:not(.contentEditable) { // font-size: 0; 
 }
 
 textarea,
 input[type="text"],
 select {
-    height: 100%;
-    width: 100%;
     margin: 0px;
     padding: 0px;
     box-shadow: none;
     border: none;
     outline: none;
 
-    &:invalid {
-        @include disabledText;
+    &:invalid { @include disabledText; }
+}
+
+h1, h2, h3, .h1, .h2, .h3 { width: 100%; margin: 0; }
+
+h1, h2, .h1, .h2 { display: block; }
+
+h1, .h1 {
+    color: var(--fontColorHeading1);
+    background: var(--bgHeading1);
+    padding: var(--paddingHeading1);
+    max-height: var(--maxHeightHeading1);
+    line-height: var(--lineHeightHeading1);
+    // &.title { max-height: calc(var(--maxHeightHeading1) * 1.4); }
+    font: {
+        family: var(--fontFamilyHeading1);
+        style: var(--fontStyleHeading1);
+        variant: var(--fontVariantHeading1);
+        weight: var(--fontWeightHeading1);
+        size: var(--fontSizeHeading1);
     }
+    text: {
+        transform: var(--textTransformHeading1);
+        shadow: var(--textShadowHeading1);
+    }
+    border-bottom: var(--borderBottomHeading1);
+}
+
+h2, .h2 {
+    // color: var(--fontColorHeading2);
+    color: var(--bgMatte);
+    background: var(--bgHeading2); 
+    padding: var(--paddingHeading2);
+    max-height: var(--maxHeightHeading2);
+    line-height: var(--lineHeightHeading2);
+    font: {
+        family: var(--fontFamilyHeading2);
+        style: var(--fontStyleHeading2);
+        variant: var(--fontVariantHeading2);
+        weight: var(--fontWeightHeading2);
+        size: var(--fontSizeHeading2);
+    }
+    text: {
+        transform: var(--textTransformHeading2);
+        shadow: var(--textShadowHeading2);
+        indent: 10px;
+    }
+    border-bottom: var(--borderBottomHeading2);
+}
+
+h3, .h3 {
+    color: var(--fontColorHeading3);
+    background: var(--bgHeading3);
+    padding: var(--paddingHeading3);
+    max-height: var(--maxHeightHeading3);
+    line-height: var(--lineHeightHeading3);
+    font: {
+        family: var(--fontFamilyHeading3);
+        style: var(--fontStyleHeading3);
+        variant: var(--fontVariantHeading3);
+        weight: var(--fontWeightHeading3);
+        size: var(--fontSizeHeading3);
+    }
+    text: {
+        transform: var(--textTransformHeading3);
+        shadow: var(--textShadowHeading3);
+    }
+    border-bottom: var(--borderBottomHeading3);
+}
+
+label { 
+    font-size: var(--fontSizeBody);
+    margin: 0 0.25rem; 
 }
 /* #endregion */
 
@@ -36,12 +107,9 @@ select {
 
     &.insetFrame {
         min-height: 27px;
-        color: var(--fontColorBody);
-        font-family: var(--fontFamilyBody);
-        font-size: var(--fontSizeBody);
         font-weight: bold;
         border-radius: 1rem;
-        background-color: rgba(0,0,0,0.2);
+        background: rgba(0,0,0,0.2);
         border: inset 3px var(--scale6);
     }
 }
@@ -55,44 +123,127 @@ select {
     overflow: hidden;
 }
 
-.hidden {
-    @include hide;
+.insetFrame {
+    color: var(--fontColorBody);
+    font: {
+       family: var(--fontFamilyBody);
+       size: var(--fontSizeBody);
+       weight: var(--fontWeightBody);
+    }
+    border-radius: 1rem;
+    background: var(--scaleFullFade2);
+    border: inset 3px var(--scale6);
+ }
+
+.outsetFrame {
+    color: var(--fontColorBody);
+    font: {
+        family: var(--fontFamilyBody);
+        size: var(--fontSizeBody);
+    }
+    border-radius: 1rem;
+    background: var(--greyFullFade10);
+    border: outset 3px var(--scale6);
 }
+
+.hidden { @include hide; }
 
 .text {
     color: var(--fontColorBody);
-    font-family: var(--fontFamilyBody);
-    font-size: var(--fontSizeBody);
-    font-weight: var(--fontWeightBody);
+    font: { size: var(--fontSizeBody); }
 }
 
-.placeholder {
-    @include disabledText;
+.inline { 
+    display: inline-block !important;
+
+    &.text { padding-right: $defaultPadding; } 
 }
+
+.fullWidth { width: 100%; }
+.fullHeight { height: 100%; }
+
+.padded { padding: $defaultPadding; }
+.padVert { padding: $defaultPadding 0; }
+
+.spaceBetween {
+    > div, section, h1, .h1, h2, .h2, h3, .h3 {
+        margin: 2px 0;
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.placeholder { @include disabledText; }
 
 .half { width: 50%; }
 .quarter { width: 25%; }
 .fifth { width: 20%; }
 
 .alignLeft { text-align: left !important; text-align-last: left !important;}
-.alignCenter { text-align: center !important; text-align-last: center !important;}
+.alignCenter { text-align: center !important; text-align-last: center !important; justify-content: center !important; text-indent: 0 !important; }
 .alignRight { text-align: right !important; text-align-last: right !important;}
 
 .strong { 
-    font-weight: bolder;
-    @include text-shadow((2 0 0 1px black));
-    text-transform: uppercase;
+    font-weight: var(--fontWeightStrongText);
+    text: {
+        transform: uppercase;
+        shadow: var(--textShadowStrongText);
+    }
+}
+
+.blur {
+    filter: blur(3px) opacity(0.75);
+    transform-origin: 0% 0%;
+    transform: scale(75%);
 }
 /* #endregion */
 
+/* #region Popouts */
+.popout {
+    position: absolute;
+    left: 105%;
+    top: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+    border: 4px outset #554a39;
+    border-radius: 10px;
+    box-sizing: border-box;
+    
+    &.skills {
+       width: 260px;
+       height: 220px;
+       > div {
+          height: 90%;
+       }
+       .bubble {              
+          height: 16px;
+          min-height: 16px;
+          width: 100px;
+          min-width: 100px;
+          padding: 0 5px;
+          font-size: 16px;
+          margin: 0 3px;
+          border-radius: 20px;
+          flex: 0 0 auto;
+          text-align: center;
+          text-align-last: center;
+       }
+    }  
+ }
+ /* #endregion */ 
+
 /* #region Dot Trackers */
 .dotline {
-    grid-area: dotline;
     display: grid;
-    grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
-    grid-template-rows: 1rem;
-    align-content: center;
-    justify-content: center;
+    grid: {
+        area: dotline;
+        template: { columns: 1rem 1rem 1rem 1rem 1rem; rows: 1rem; }
+    }
 
     &.labelledDotLine {
         width: 100%;
@@ -105,7 +256,7 @@ select {
         column-gap: 0.5rem;
     }
 
-    &.labelledDotLine.largeDots {
+    &.labelledDotLine.largeDots { 
         grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
     }
     
@@ -131,10 +282,12 @@ select {
                 content: "";
                 height: 150%;
                 width: 150%;
-                background-image: var(--virtueDarkImg);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: 100%;
+                background: {
+                    image: var(--virtueDarkImg);
+                    repeat: no-repeat;
+                    position: center;
+                    size: 100%;
+                }
             }
 
             &.virtueFull::after {
@@ -146,8 +299,11 @@ select {
 /* #endregion */
 
 .title {
+    width: calc(100% / var(--fontScaleTitle));
+    max-height: var(--maxHeightTitle);
+    padding: var(--paddingTitle);
     color: var(--fontColorTitle);
-    background-color: var(--bgTitle);
+    background: var(--bgTitle);
     font: {
         family: var(--fontFamilyTitle);
         style: var(--fontStyleTitle);
@@ -155,6 +311,7 @@ select {
         weight: var(--fontWeightTitle);
         size: var(--fontSizeTitle);
     }
+    line-height: var(--lineHeightTitle);
     text: {
         transform: var(--textTransformTitle);
         shadow: var(--textShadowTitle);
@@ -162,94 +319,51 @@ select {
     }
     transform: scaleX(var(--fontScaleTitle));
     transform-origin: 0% 0%;
-    padding: var(--paddingTitle);
-    line-height: var(--lineHeightTitle); line-height: normal;
-    width: calc(100% / var(--fontScaleTitle));
     border: none;
 }
 
 .surTitle {
-    color: var(--fontColorHeading3);
-    background-color: var(--bgHeading3);
-    font-family: var(--fontFamilyHeading3);
-    font-style: var(--fontStyleHeading3);
-    font-variant: var(--fontVariantHeading3);
-    font-weight: var(--fontWeightHeading3);
-    text-transform: var(--textTransformHeading3);
-    font-size: var(--fontSizeHeading3);
-    padding: var(--paddingHeading3);
-    line-height: var(--lineHeightHeading3); line-height: normal;
-    text-shadow: var(--textShadowHeading3);
+    width: calc(100% / var(--fontScaleHeading2));
+    padding: var(--paddingHeading2);
+    color: var(--fontColorHeading2);
+    background: transparent;
+    font: {
+        family: var(--fontFamilyHeading2);
+        style: var(--fontStyleHeading2);
+        variant: var(--fontVariantHeading2);
+        weight: var(--fontWeightHeading2);
+        size: var(--fontSizeHeading2);
+    }
+    line-height: var(--lineHeightHeading2);
+    text: {
+        transform: var(--textTransformHeading2);
+        shadow: var(--textShadowHeading2);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleHeading2));
     transform-origin: 0% 0%;
-    transform: scaleX(var(--fontScaleHeading3));
-    width: calc(100% / var(--fontScaleHeading3));
-    text-align: center;
     border: none;
 }
 
 .subTitle {    
-    color: var(--fontColorHeading3);
-    background-color: var(--bgHeading3);
-    font-family: var(--fontFamilyHeading3);
-    font-style: var(--fontStyleHeading3);
-    font-variant: var(--fontVariantHeading3);
-    font-weight: var(--fontWeightHeading3);
-    text-transform: var(--textTransformHeading3);
-    font-size: var(--fontSizeHeading3);
-    padding: var(--paddingHeading3);
-    line-height: var(--lineHeightHeading3); line-height: normal;
-    text-shadow: var(--textShadowHeading3);
-    transform-origin: 0% 0%;
-    transform: scaleX(var(--fontScaleHeading3));
     width: calc(100% / var(--fontScaleHeading3));
-    text-align: center;
-    border: none;
-}
-
-.heading1 {   
-    width: 100%;
-    color: var(--fontColorHeading1);
-    background-color: var(--bgHeading1);
-    font-family: var(--fontFamilyHeading1);
-    font-style: var(--fontStyleHeading1);
-    font-variant: var(--fontVariantHeading1);
-    font-weight: var(--fontWeightHeading1);
-    text-transform: var(--textTransformHeading1);
-    font-size: var(--fontSizeHeading1);
-    padding: var(--paddingHeading1);
-    line-height: var(--lineHeightHeading1); line-height: normal;
-    text-shadow: var(--textShadowHeading1);
-    border-bottom: var(--borderBottomHeading1);
+    padding: var(--paddingHeading3);
+    color: var(--fontColorHeading3);
+    background: var(--bgHeading3);
+    font: {
+        family: var(--fontFamilyHeading3);
+        style: var(--fontStyleHeading3);
+        variant: var(--fontVariantHeading3);
+        weight: var(--fontWeightHeading3);
+        size: var(--fontSizeHeading3);
+    }
+    line-height: var(--lineHeightHeading3);
+    text: {
+        transform: var(--textTransformHeading3);
+        shadow: var(--textShadowHeading3);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleHeading3));
     transform-origin: 0% 0%;
-    transform: scaleX(var(--fontScaleHeading1));
-    width: calc(100% / var(--fontScaleHeading1));
-    margin: 0px;
-}
-
-.heading2 {
-    color: var(--fontColorHeading2);
-    background-color: var(--bgHeading2);
-    font-family: var(--fontFamilyHeading2);
-    font-style: var(--fontStyleHeading2);
-    font-variant: var(--fontVariantHeading2);
-    font-weight: var(--fontWeightHeading2);
-    text-transform: var(--textTransformHeading2);
-    font-size: var(--fontSizeHeading2);
-    padding: var(--paddingHeading2);
-    line-height: var(--lineHeightHeading2); line-height: normal;
-    text-shadow: var(--textShadowHeading2);
-    border-bottom: var(--borderBottomHeading2);
-}
-
-.heading3 { }
-span.heading3 { margin-right: 0.5rem; }
-
-.path {
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    background-color: rgba(0,0,0,0.2);
-    box-shadow: inset 2px 2px 2px black, -2px -2px 2px white;
-    font-size: 2rem;
-    color: black;
+    border: none;
 }
