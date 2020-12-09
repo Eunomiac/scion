@@ -1,28 +1,12 @@
 & {
-    flex-flow: row wrap;
-    justify-content: space-between;
-
-    .flex.path-subBlock {
-        border-radius: 12.5px;
+    *[class*="subBlock"] {
         margin: 3px;
 
         align: { content: start; self: start; }
 
-        > div {
-            border-radius: 12.5px;
-            margin: 1px;
-        }
-
-        &.path-skills { 
-            flex-grow: 0.5; 
-            > div {
-                background-color: var(--greyFullFade8);
-                border: 2px outset var(--grey5);
-            }
-        }
-
-        &.path-conditions { 
-            flex-grow: 1.7;
+        > span { 
+            margin: 1px; //1px 1px 3px var(--grey3)
+            &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--grey3), false, 1); }            
         }
     }
 }

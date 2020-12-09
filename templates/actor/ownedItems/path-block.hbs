@@ -1,13 +1,25 @@
 
 <h2 class="clickable item-open" data-pathID="{{id}}">{{name}}: {{#if data.data.title}}&quot;{{data.data.title}}&quot;{{/if}}</h2>
-<div class="flex path-block">
-    <div class="flex fullFlex flexColumn alignCenter path-subBlock path-skills">
+<div class="path-block flex-row-max">
+    <div class="path-subBlock-skills flex-col-stretch alignCenter ">
         {{!-- <h3 class="alignCenter">{{localize "scion.paths.skills"}}</h3> --}}
-         {{#each data.data.skills as | skill |}}
-            <div class="text alignCenter">{{localize (concat "scion.skills." skill)}}</div>
-        {{/each}}
+        {{#if data.data.skills.[0]}}
+            <span class="skill noFlex">{{localize (concat "scion.skills." data.data.skills.[0])}}</span>
+        {{else}}
+            <span class="skill empty noFlex">&nbsp;</span>
+        {{/if}}
+        {{#if data.data.skills.[1]}}
+            <span class="skill noFlex">{{localize (concat "scion.skills." data.data.skills.[1])}}</span>
+        {{else}}
+            <span class="skill empty noFlex">&nbsp;</span>
+        {{/if}}
+        {{#if data.data.skills.[2]}}
+            <span class="skill noFlex">{{localize (concat "scion.skills." data.data.skills.[2])}}</span>
+        {{else}}
+            <span class="skill empty noFlex">&nbsp;</span>
+        {{/if}}
     </div>
-    <div class="flex fullFlex flexColumn alignCenter path-subBlock path-conditions">
+    <div class="path-subBlock-conditions flex-col alignCenter ">
         {{!-- <h3 class="alignCenter">{{localize "scion.paths.condition"}}</h3> --}}
         <div class="inline text alignLeft">
             {{#if data.data.condition.title}}

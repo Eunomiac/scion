@@ -411,6 +411,8 @@ body.vtt.game.system-scion div.sheet.scion {
   /* #endregion */
   /* #region Single-Purpose Classes */
   /* #endregion */
+  /* #region System-Specific Styles */
+  /* #endregion */
   /* #region Popouts */
   /* #endregion */
   /* #region Dot Trackers */
@@ -623,7 +625,6 @@ body.vtt.game.system-scion div.sheet.scion .alignLeft {
 body.vtt.game.system-scion div.sheet.scion .alignCenter {
   text-align: center !important;
   text-align-last: center !important;
-  justify-content: center !important;
   text-indent: 0 !important;
 }
 
@@ -642,6 +643,23 @@ body.vtt.game.system-scion div.sheet.scion .blur {
   filter: blur(3px) opacity(0.75);
   transform-origin: 0% 0%;
   transform: scale(75%);
+}
+
+body.vtt.game.system-scion div.sheet.scion .skill {
+  width: 120px;
+  background-image: url("../images/textures/stoneWhite.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border: 4px outset var(--grey10);
+  box-shadow: 2px 2px 5px var(--grey3), 2px 2px 5px var(--grey3), 2px 2px 5px var(--grey3);
+}
+
+body.vtt.game.system-scion div.sheet.scion .skill.empty {
+  background-image: url("../images/textures/stoneGrey.jpg");
+  border: 4px inset var(--grey5);
+  box-shadow: inset 2px 2px 4px var(--grey5), inset 2px 2px 4px var(--grey5), inset 2px 2px 4px var(--grey5);
+  opacity: 0.75;
+  filter: blur(0.5px);
 }
 
 body.vtt.game.system-scion div.sheet.scion .popout {
@@ -791,68 +809,71 @@ body.vtt.game.system-scion div.sheet.scion .subTitle {
   border: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex {
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: space-around;
+  align-content: flex-start;
   align-items: flex-start;
   justify-content: flex-start;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex.flexColumn {
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] {
   flex-direction: column;
   flex-wrap: nowrap;
-  /* 
-        flex-flow: column nowrap;
-        flex-basis: 100%;
-        &.fullSize { height: 100%; }
-     */
+  align-items: center;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex.flexRow {
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"][class*="max"] {
+  height: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] > h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] .h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] .h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] h3, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] .h3 {
+  flex: 0 0 auto;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] > label {
+  flex: 0 0 auto;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] > .contentEditable {
+  flex: 1 0 auto;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] {
   flex-direction: row;
   flex-wrap: nowrap;
-  /* 
-         flex-flow: row nowrap;
-         align-items: baseline;
-         margin: 5px 0;
-         flex-basis: 100%;
-         &.fullSize { width: 100%; }
-         > nav { flex-grow: 0; }
-         > label { flex: 0 0 auto; }
-         > .contentEditable { flex: 1 1 100%; }
-      */
+  align-items: baseline;
+  justify-content: space-evenly;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > nav {
-  flex-grow: 0;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"][class*="max"] {
+  width: 100%;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > h1, body.vtt.game.system-scion div.sheet.scion .flex .h1, body.vtt.game.system-scion div.sheet.scion .flex h2, body.vtt.game.system-scion div.sheet.scion .flex .h2, body.vtt.game.system-scion div.sheet.scion .flex h3, body.vtt.game.system-scion div.sheet.scion .flex .h3 {
-  flex-grow: 0;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] .h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] .h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] h3, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] .h3 {
+  flex: 0 0 100%;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > label {
-  flex-grow: 0;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > label {
+  flex: 0 0 auto;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > .contentEditable {
-  flex-shrink: 1;
-  flex-basis: 100%;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > .contentEditable {
+  flex: 1 1 auto;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > *h1 {
-  flex-basis: 100%;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > *[class*="noFlex"] {
+  flex: 0 0 auto;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > *.fullSize {
-  flex-basis: 100%;
-  flex-shrink: 0;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="stretch"] {
+  align-items: stretch;
 }
 
-body.vtt.game.system-scion div.sheet.scion .flex > *.fullFlex {
-  flex-basis: 0%;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="center"] {
+  align-items: center;
+  justify-content: center;
 }
 
 body.vtt.game.system-scion div.sheet.scion .grid {
@@ -2008,34 +2029,18 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .f
   line-height: 1rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block {
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock {
-  border-radius: 12.5px;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] {
   margin: 3px;
   align-content: start;
   align-self: start;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock > div {
-  border-radius: 12.5px;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] > span {
   margin: 1px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock.path-skills {
-  flex-grow: 0.5;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock.path-skills > div {
-  background-color: var(--greyFullFade8);
-  border: 2px outset var(--grey5);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block .flex.path-subBlock.path-conditions {
-  flex-grow: 1.7;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] > span.skill:not(.empty) {
+  box-shadow: 1px 1px 3px var(--grey3);
 }
 
 body.vtt.game.system-scion div.sheet.scion.item .main {

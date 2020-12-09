@@ -41,6 +41,20 @@ export const ActorLink = (superClass) => class extends superClass {
             super.prepareData();
     }
 };
+export const PopoutControl = (superClass) => class extends superClass {
+    popout(popOutSheet, {left: leftSpacing = 50, right: rightSpacing = -75} = {}) {
+        const {left: mainLeft, top: mainTop, width: mainWidth} = this.entity.sheet.position;
+        const {width: popWidth} = popOutSheet.position;
+        const popOutPos = Object.assign({}, popOutSheet.position);
+        if (innerWidth - (mainLeft + mainWidth) > (popWidth + rightSpacing))
+            popOutPos.left = mainLeft + mainWidth + rightSpacing;
+        else
+            popOutPos.left = mainLeft - popWidth - leftSpacing;
+        popOutPos.top = mainTop;
+        popOutSheet.position = popOutPos;
+        popOutSheet.render(true);
+    }
+};
 export const EditableDivs = (superClass) => class extends superClass {
     activateListeners(html) {
         super.activateListeners(html);

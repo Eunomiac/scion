@@ -3,7 +3,7 @@ import {_, U, MIX, ItemMixins as MIXINS} from "../modules.js";
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs) {
+export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl) {
     /** @override */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -35,14 +35,6 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs) {
 
     /* -------------------------------------------- */
 
-    /** @override */
-    setPosition(options = {}) {
-        const position = super.setPosition(options);
-        const sheetBody = this.element.find(".sheet-body");
-        const bodyHeight = position.height - 192;
-        sheetBody.css("height", bodyHeight);
-        return position;
-    }
 
     /* -------------------------------------------- */
 

@@ -137,7 +137,7 @@ export const LOG = (output, title, tag, {style="info", groupStyle="data", isLoud
             console.groupEnd();
     }
 };
-export const GLOG = (outputs, groupTitle, tag, {style="info", groupStyle="data", isLoud=false, isClearing=false} = {}) => {
+export const GLOG = (outputs = {title: Object}, groupTitle, tag, {style="info", groupStyle="data", isLoud=false, isClearing=false} = {}) => {
     Object.entries(outputs).forEach(([lineTitle, lineOutput], i) => {
         if (i === 0)
             LOG(lineOutput, lineTitle, tag, {style, groupStyle, isLoud, isClearing, isGrouping: `${tag ? `[${tag}] ` : ""} ${groupTitle}`});

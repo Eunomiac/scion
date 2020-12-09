@@ -1,5 +1,6 @@
 import {_, U} from "../modules.js";
 import {ScionItemSheet} from "./item-sheet.js";
+import "../external/dragula.min.js";
 
 export class PathItemSheet extends ScionItemSheet {
     static get defaultOptions() {
@@ -7,13 +8,7 @@ export class PathItemSheet extends ScionItemSheet {
             classes: [...super.defaultOptions.classes, "path"],
             width: 500,
             height: 500,
-            tabs: [
-                {
-                    navSelector: ".sheet-tabs",
-                    contentSelector: ".sheet-body",
-                    initial: "front"
-                }
-            ]
+            tabs: []
         });
     }
 
@@ -27,5 +22,15 @@ export class PathItemSheet extends ScionItemSheet {
         }, this.item.name, "PathItemSheet");
 
         return data;
+    }
+
+    activateListeners() {
+        super.activateListeners();
+
+        // #region DRAGULA: PATH SKILLS
+        const skillDrake = dragula()
+
+
+        // #endregion
     }
 }

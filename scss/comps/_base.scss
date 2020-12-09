@@ -184,7 +184,7 @@ label {
 .fifth { width: 20%; }
 
 .alignLeft { text-align: left !important; text-align-last: left !important;}
-.alignCenter { text-align: center !important; text-align-last: center !important; justify-content: center !important; text-indent: 0 !important; }
+.alignCenter { text-align: center !important; text-align-last: center !important; text-indent: 0 !important; }
 .alignRight { text-align: right !important; text-align-last: right !important;}
 
 .strong { 
@@ -200,6 +200,27 @@ label {
     transform-origin: 0% 0%;
     transform: scale(75%);
 }
+/* #endregion */
+
+/* #region System-Specific Styles */
+.skill {
+    width: 120px;
+    background: {
+        image: url("../images/textures/stoneWhite.jpg");
+        size: 100%;
+        repeat: no-repeat;
+    }
+    border: 4px outset var(--grey10);    
+    @include box-shadow(2px, 5px, var(--grey3));
+    &.empty {
+        background-image: url("../images/textures/stoneGrey.jpg");
+        border: 4px inset var(--grey5);
+        @include box-shadow(2px, 4px, var(--grey5), true);
+        opacity: 0.75;
+        filter: blur(0.5px);
+    }
+}
+
 /* #endregion */
 
 /* #region Popouts */

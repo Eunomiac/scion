@@ -100,11 +100,11 @@
   #{$propertyName}: join(#{$shadowBright}, #{$shadowDark}, $separator: comma);
 }
 
-@mixin box-shadow($distance: 0px, $size: 5px, $color: $c-black, $isInset: false) {
+@mixin box-shadow($distance: 0px, $size: 5px, $color: $c-black, $isInset: false, $repeats: 3) {
     $shadowPart: $distance $distance $size $color;
     @if $isInset { $shadowPart: inset $shadowPart; }
     $shadowFull: ();
-    @for $i from 1 through 3 {
+    @for $i from 1 through $repeats {
       $shadowFull: append($shadowFull, $shadowPart, $separator: comma); 
     }
     box-shadow: $shadowFull;

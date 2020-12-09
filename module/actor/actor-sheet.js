@@ -5,7 +5,7 @@ import "../external/gl-matrix-min.js";
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs) {
+export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl) {
     static get defaultOptions() {
         /*  super.defaultOptions = {
                 baseApplication: "ActorSheet",
@@ -70,11 +70,7 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs) {
                     "Actor.Items": this.actor.items,
                     item
                 }, item.name, "Open Owned Item", {groupStyle: "info"});
-                item.sheet.render(true, {
-                    left: 100,
-                    top: 100,
-                    log: true
-                });
+                this.popout(item.sheet);
             };
             html.find(".clickable.item-open").each((i, element) => {
                 element.addEventListener("click", _onOpenOwnedItem.bind(this));

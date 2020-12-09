@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flex flexColumn fullSize main" autocomplete="off">
+<form class="{{cssClass}} flex-col-max main" autocomplete="off">
 
     {{!-- Sheet Header --}}
     <section class="header fullWidth">
@@ -6,32 +6,36 @@
         <div class="h2 contentEditable quote alignCenter" data-path="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
     </section>
         
-    <section class="sheet-body flex flexColumn spaceBetween">
-        <div class="pathSkills alignCenter flex fullWidth flexRow">
-        {{#if data.skills.[2]}}
-            {{#each data.skills as | skill |}}
-                <div class="bubble skill">
-                    <div class="bubbleWrap">
-                        <span>{{localize (concat "scion.skills." skill)}}</span>
-                    </div>
-                </div>
-            {{/each}}
+    <section class="sheet-body flex-col spaceBetween">
+        <div class="pathSkills flex-row-max alignCenter">
+        {{#if data.skills.[0]}}
+            <span class="skill noFlex">{{localize (concat "scion.skills." data.skills.[0])}}</span>
         {{else}}
-            <h3>Path Skill Selection</h3>
+            <span class="skill empty noFlex">&nbsp;</span>
+        {{/if}}
+        {{#if data.skills.[1]}}
+            <span class="skill noFlex">{{localize (concat "scion.skills." data.skills.[1])}}</span>
+        {{else}}
+            <span class="skill empty noFlex">&nbsp;</span>
+        {{/if}}
+        {{#if data.skills.[2]}}
+            <span class="skill noFlex">{{localize (concat "scion.skills." data.skills.[2])}}</span>
+        {{else}}
+            <span class="skill empty noFlex">&nbsp;</span>
         {{/if}}
         </div>
-        <div class="pathConnections alignCenter flex fullFlex">
+        <div class="pathConnections flex-full-center alignCenter">
             <h2 class="gold">{{localize "scion.paths.connections"}}</h2>
             <div class="bubble connection group dots">
                     <div class="bubbleWrap">
-                <span class="bubbleTitle">Group</span>
-                <span>Adoring Fans</span>
+                <span>Group</span>
+                <span class="bubbleTitle">Adoring Fans</span>
             </div>
             </div>
             <div class="bubble connection group dots">
                     <div class="bubbleWrap">
-                <span class="bubbleTitle">Group</span>
-                <span>Obsessed Goths</span>
+                <span class="bubbleTitle">Obsessed Goths</span>
+                <span>Group</span>
             </div>
             </div>
             <div class="bubble connection access dots">
@@ -54,7 +58,7 @@
             </div>
         </div>
         
-        <div class="pathCondition alignCenter flex fullFlex">
+        <div class="pathCondition flex-full alignCenter">
             <h2 class="gold">{{localize "scion.paths.condition"}}</h2>
             <div class="bubble condition">
                     <div class="bubbleWrap">

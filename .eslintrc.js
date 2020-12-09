@@ -1,4 +1,5 @@
 module.exports = {
+    // #region BASIC SETTINGS
     parser: "babel-eslint",
     env: {
         es6: true,
@@ -8,6 +9,7 @@ module.exports = {
         jest: true,
         jquery: true
     },
+    plugins: [], // ["babel"] // plugins: ["babel", "prettier"]
     extends: [
         "eslint:recommended"
         // "plugin:react/recommended",
@@ -33,6 +35,9 @@ module.exports = {
             impliedStrict: true
         }
     },
+    // #endregion
+    // #region LINTING RULES
+    reportUnusedDisableDirectives: true,
     rules: {
         "accessor-pairs": ["warn"],
         "array-callback-return": "warn",
@@ -147,10 +152,13 @@ module.exports = {
         radix: 0,
         semi: ["warn", "always", {omitLastInOneLineBlock: true}]
     },
-    reportUnusedDisableDirectives: true,
+    // #endregion
+    // #region GLOBALS
     globals: {
         $: "readonly",
         dragula: "readonly",
+        innerHeight: "readonly",
+        innerWidth: "readonly",
         PIXI: "readonly",
         CONFIG: "readonly",
         DEFAULT_TOKEN: "readonly",
@@ -169,6 +177,7 @@ module.exports = {
         ItemSheet: "readonly",
         Macro: "readonly",
         Roll: "readonly",
+        Sidebar: "readonly",
         duplicate: "readonly",
         hasProperty: "readonly",
         getProperty: "readonly",
@@ -178,6 +187,6 @@ module.exports = {
         loadTemplates: "readonly",
         mergeObject: "readonly",
         ui: "readonly"
-    },
-    plugins: [] // ["babel"] // plugins: ["babel", "prettier"]
+    }
+    // #endregion
 };
