@@ -1,6 +1,7 @@
-import {_, U, itemCategories} from "../modules.js";
+import {_, U, SCION, itemCategories} from "../modules.js";
 import {ScionActorSheet} from "./actor-sheet.js";
 import "../external/dragula.min.js";
+import {THROW} from "../data/utils.js";
 
 export class MajorActorSheet extends ScionActorSheet {
     static get defaultOptions() {
@@ -60,29 +61,61 @@ export class MajorActorSheet extends ScionActorSheet {
         // #endregion
 
         // #region OWNED ITEM SORTING
-        const itemsArray = Array.from(this.actor.items);
+        data.items = {};
         for (const [itemCategory, itemTypes] of Object.entries(itemCategories))
-            data[itemCategory] = itemsArray.filter((item) => itemTypes.includes(item.type));
+            data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type));
+        // #endregion
+
+        // #region PATH PRIORITIES & SKILLS
+        const pathItems = [];
+        for (const pathType of actorData.pathPriorities)
+            pathItems.push(data.items.paths.find((item) => item.data.data.type === pathType));
+        data.items.paths = pathItems;
+
+        data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS, () => 0);
+        Object.values(data.items.paths).forEach((pathItem) => {
+            pathItem.data.data.skills.forEach((skill) => {
+                data.pathSkillsCount[skill]++;
+            });
+        });
+        // #endregion
+
+        // #region Skills
+        data.skillVals = U.KeyMapObj(
+            _.omit(this.actor.data.data.skills.list, ((data) => data.value === 0)),
+            (v) => v.value
+        );
         // #endregion
 
         U.GLOG({
-            "Sheet Context": data,
-            "Actor.Data": actorData
-        }, this.actor.name, "MajorActorSheet");
+            "this MajorActorSheet": this,
+            "... .getData() [Sheet Context]": data,
+            "... ... .data": data.data
+        }, this.actor.name, "MajorActorSheet: getData()", {groupStyle: "l2"});
         return data;
     }
 
     activateListeners(html) {
         super.activateListeners(html);
         if (this.options.editable) {
+            html.find("#pantheonSelect").change((event) => {
+                event.preventDefault();
+                this.actor.updatePantheon(event.target.value);
+            });
+
             // #region DRAGULA: DRAG & DROP
 
-            /* FOR SORTING ON A GRID
-                1) Assign each grid a number, moving in an s-formation so all cells move on a track.
-                2) Be able to get closest grid of dragged element (that's where mirror snaps to)
-                3) Figure out which grids have to move to make room
-                4) Animate all moving cells
-            */
+            // SORTING PATH PRIORITIES
+            const pathContainer = html.find("#pathContainer")[0];
+            const pathDragger = dragula({containers: [pathContainer]});
+
+            pathDragger.on("drop", async () => {
+                await this.actor.update({
+                    "data.pathPriorities": Array.from(pathContainer.children)
+                        .map((element) => this.entity.items.get(element.dataset.itemid).data.data.type)
+                });
+                this.actor.updateSkills();
+            });
 
 
             const priorityContainer = html.find("#prioritySort")[0];

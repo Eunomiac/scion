@@ -14,9 +14,10 @@ $defaultPadding: 5px;
     --bgItemOverlay: url("../images/item-sheet/backgrounds/ItemOverlay.png");
 
     // Radial Menu Rosette
-    --fontColorMenu: #{$c-gold};
+    --glowColorMenu: #{$c-white};
     --fontFamilyMenu: "#{$fontFamilyRadialMenu}";
     --fontSizeMenu: 24px;
+    --hueRotatePurview: #{$hueRotatePurview};
     --menuImage: url("../images/actor-sheet/menu/MenuRosetteGeneric.png");
 
     // Body Text

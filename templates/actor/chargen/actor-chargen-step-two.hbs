@@ -1,8 +1,10 @@
 <div class="chargenTwo flex-col-max padded">
     <h1>{{localize "scion.headings.chargen.stepTwo"}}</h1>
-    {{#each paths as |path id|}}
+    <div id="pathContainer" class="width100">
+    {{#each items.paths as |path id|}}
         {{#with ../blocks as | blocks |}}
         {{> (blocks.ownedItems.path.template) path}}
         {{/with}}
     {{/each}}
+    </div>
 </div>

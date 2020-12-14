@@ -35,6 +35,8 @@
   .loa {
     --bgActorSheet: url("../images/actor-sheet/backgrounds/Loa.png");
     --menuImage: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
+    --glowColorMenu: #dd0000;
+    --hueRotatePurview: 225deg;
 
     @include set-typography((
         title: "Finger Paint",
@@ -58,6 +60,8 @@
   .netjer {
     --bgActorSheet: url("../images/actor-sheet/backgrounds/Netjer.png");
     --menuImage: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
+    --glowColorMenu: #ffdd00;
+    --hueRotatePurview: 245deg;
     
     @include set-typography((
         title: "Zanzabar",
@@ -102,6 +106,8 @@
   .theoi {
     --bgActorSheet: url("../images/actor-sheet/backgrounds/Theoi.png");
     --menuImage: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
+    --glowColorMenu: #00ffff;
+    --hueRotatePurview: 100deg;
     
     @include set-typography((
         title: "Poiret One",
@@ -129,6 +135,8 @@
   .tuathaDeDanann {      
     --bgActorSheet: url("../images/actor-sheet/backgrounds/Tuatha.png");
     --menuImage: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
+    --glowColorMenu: #00ff00;
+    --hueRotatePurview: 330deg;
         
     @include set-typography((
         title: "Berkshire Swash",
@@ -158,7 +166,9 @@
   
   .orisha {
     --bgActorSheet: url("../images/actor-sheet/backgrounds/Orisha.png");
-    // --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
+    --menuImage: url("../images/actor-sheet/menu/MenuRosetteOrisha.png");
+    --hueRotatePurview: 250deg;
+    --glowColorMenu: #ffdd99;
 
     @include set-typography((
         title: "Finger Paint",

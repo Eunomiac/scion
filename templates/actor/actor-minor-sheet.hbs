@@ -49,7 +49,7 @@
     {{!-- Sheet Header --}}
     <section class="header grid">
         <div class="divineTitle surTitle">{{~data.divineTitle~}}</div>
-        <div class="charName title contentEditable" data-path="actor.name"></div>
+        <div class="charName title contentEditable" data-field="name"></div>
         <div class="patronage subTitle">&nbsp;{{~data.patronageLine~}}&nbsp;</div>
     </section>
         
@@ -83,7 +83,7 @@
                                 <div class="attrRow dotDropBin dotline labelledDotLine" data-dottype="{{arena}}" data-trait="{{attribute}}">
                                     <div class="label">{{localize (concat "scion.attributes." attribute)}}</div>
                                     {{#for 5}}
-                                        <span class="dot click {{dotstate attribute @index}}" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
+                                        <span class="dot click" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
                                     {{/for}}
                                 </div>
                             {{/each}}

@@ -10,10 +10,6 @@
     line-height: var(--lineHeightBody);
 }
 
-section,
-div:not(.contentEditable) { // font-size: 0; 
-}
-
 textarea,
 input[type="text"],
 select {
@@ -95,7 +91,8 @@ h3, .h3 {
 
 label { 
     font-size: var(--fontSizeBody);
-    margin: 0 0.25rem; 
+    margin: 0 0.25rem;
+    min-height: 23px;
 }
 /* #endregion */
 
@@ -106,7 +103,7 @@ label {
     outline: none;
 
     &.insetFrame {
-        min-height: 27px;
+        min-height: 28px;
         font-weight: bold;
         border-radius: 1rem;
         background: rgba(0,0,0,0.2);
@@ -146,7 +143,7 @@ label {
     border: outset 3px var(--scale6);
 }
 
-.hidden { @include hide; }
+.hidden { display: none !important; }
 
 .text {
     color: var(--fontColorBody);
@@ -158,9 +155,6 @@ label {
 
     &.text { padding-right: $defaultPadding; } 
 }
-
-.fullWidth { width: 100%; }
-.fullHeight { height: 100%; }
 
 .padded { padding: $defaultPadding; }
 .padVert { padding: $defaultPadding 0; }
@@ -179,13 +173,14 @@ label {
 
 .placeholder { @include disabledText; }
 
-.half { width: 50%; }
-.quarter { width: 25%; }
-.fifth { width: 20%; }
+.greyText { color: var(--grey5); }
 
-.alignLeft { text-align: left !important; text-align-last: left !important;}
-.alignCenter { text-align: center !important; text-align-last: center !important; text-indent: 0 !important; }
-.alignRight { text-align: right !important; text-align-last: right !important;}
+.noBG { background: none !important; }
+.noBorder { border: none !important; }
+
+.alignLeft { text-align: left !important; text-align-last: left !important; margin-right: auto; }
+.alignCenter { text-align: center !important; text-align-last: center !important; text-indent: 0 !important; margin-left: auto; margin-right: auto; }
+.alignRight { text-align: right !important; text-align-last: right !important; margin-left: auto; }
 
 .strong { 
     font-weight: var(--fontWeightStrongText);
@@ -202,9 +197,25 @@ label {
 }
 /* #endregion */
 
+/* #region GRADIATED CLASSES */
+@for $i from 1 through 10 {
+    .width#{$i * 10} { width: $i * 10%; }
+    .height#{$i * 10} { height: $i * 10%; }
+}
+.width25 { width: 25%; }
+.height25 { height: 25%; }
+.width75 { width: 75%; }
+.height75 { width: 75%; }
+.widthAuto {width: auto; }
+.heightAuto {height: auto; }
+
+/* #endregion */
+
 /* #region System-Specific Styles */
 .skill {
     width: 120px;
+    text-align: center;
+    text-align-last: center;
     background: {
         image: url("../images/textures/stoneWhite.jpg");
         size: 100%;
@@ -221,78 +232,68 @@ label {
     }
 }
 
+
 /* #endregion */
 
 /* #region Popouts */
 .popout {
     position: absolute;
-    left: 105%;
-    top: 0;
-    border-radius: 10px;
     overflow: hidden;
-    padding: 0;
-    border: 4px outset #554a39;
-    border-radius: 10px;
-    box-sizing: border-box;
-    
-    &.skills {
-       width: 260px;
-       height: 220px;
-       > div {
-          height: 90%;
-       }
-       .bubble {              
-          height: 16px;
-          min-height: 16px;
-          width: 100px;
-          min-width: 100px;
-          padding: 0 5px;
-          font-size: 16px;
-          margin: 0 3px;
-          border-radius: 20px;
-          flex: 0 0 auto;
-          text-align: center;
-          text-align-last: center;
-       }
+    z-index: 10;
+        
+    &#skillList {
+        width: 150px;
+        height: 462px;
+        left: 94%;
+        top: 0;
+
+        // @include bg-stoneTablet();
+        border: 10px outset var(--grey6);
+        background: {
+            image: url("../images/textures/stoneGrey.jpg");
+        }
+        box-sizing: content-box;
+        border-radius: 40px;
+
+        filter: drop-shadow(0px 0px 6px black);
+        > div { padding: 15px; }
     }  
- }
+}
  /* #endregion */ 
 
 /* #region Dot Trackers */
-.dotline {
+
+*[class*="dotline"] {
     display: grid;
     grid: {
         area: dotline;
         template: { columns: 1rem 1rem 1rem 1rem 1rem; rows: 1rem; }
     }
-
-    &.labelledDotLine {
+    &[class*="labelled"] {
         width: 100%;
         grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
-    } 
-
-    &.largeDots {
+    }
+    &[class*="bigDots"] {
         grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
         grid-template-rows: 1.25rem;
         column-gap: 0.5rem;
-    }
-
-    &.labelledDotLine.largeDots { 
-        grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+        &[class*="labelled"] { 
+            grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+        }
     }
     
-    .dot {
+    *[class|="dot"] {
         margin: 7% 7% 0 0;
         border-radius: 50%;
         box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4), inset -1px -1px 1px white;
 
-        &.full {
+        &[class*="-full"] {
             background: radial-gradient(#444, #0a0a0a);
             border: solid 2px black;
             box-shadow: 1px 1px 2px black;
         }
 
-        &.unspent {
+        &[class*="-unspent"] {
             background: radial-gradient(#900, #5a0000);
             border: solid 2px #5a0000;
             box-shadow: 1px 1px 2px black;

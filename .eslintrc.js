@@ -180,6 +180,7 @@ module.exports = {
         Sidebar: "readonly",
         duplicate: "readonly",
         hasProperty: "readonly",
+        isObjectEmpty: "readonly",
         getProperty: "readonly",
         setProperty: "readonly",
         expandObject: "readonly",

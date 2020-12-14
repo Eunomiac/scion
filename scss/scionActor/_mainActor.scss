@@ -66,6 +66,12 @@ $isShowingBGShade: false;
         $numButtons: 5;
         $numButtonsMod: 5;
         
+        $iconMain: url("../images/actor-sheet/menu/IconMain.png");
+        $iconChargen: url("../images/actor-sheet/menu/IconChargen.png");
+        $iconExperience: url("../images/actor-sheet/menu/IconExperience.png");
+        $iconSettings: url("../images/actor-sheet/menu/IconSettings.png");
+        $iconHeritage: url("../images/actor-sheet/menu/IconHeritage.png");
+
         $menuButtonBG: url("../images/actor-sheet/menu/StoneButtonBG.png");
         $darkIconMain: url("../images/actor-sheet/menu/DarkIconMain.png");
         $glowOverlayMain: url("../images/actor-sheet/menu/GlowOverlayMain.png");
@@ -121,7 +127,7 @@ $isShowingBGShade: false;
                 left: $menuButtonSize / -2 !important;
             }
             
-            color: var(--fontColorMenu);
+            color: var(--glowColorMenu);
             font: {
                 family: var(--fontFamilyMenu);
                 size: var(--fontSizeMenu);
@@ -188,36 +194,29 @@ $isShowingBGShade: false;
 
                     &:hover { transform: scale(1.2); }
         
-                    .menuIconDark {
+                    .menuIcon {
                         &.iconMain {
-                            background-image: $darkIconMain;
-                            .menuIconGlow { background-image: $glowOverlayMain; }
+                            background-image: $iconMain;
                         }
                         &.iconChargen {
-                            background-image: $darkIconChargen;
-                            .menuIconGlow { background-image: $glowOverlayChargen; }
+                            background-image: $iconChargen;
                         }
                         &.iconSettings {
-                            background-image: $darkIconSettings;
-                            .menuIconGlow { background-image: $glowOverlaySettings; }
+                            background-image: $iconSettings;
                         }
                         &.iconExperience {
-                            background-image: $darkIconExperience;
-                            .menuIconGlow { background-image: $glowOverlayExperience; }
+                            background-image: $iconExperience;
                         }
                         &.iconHeritage {
-                            background-image: $darkIconHeritage;
-                            .menuIconGlow { background-image: $glowOverlayHeritage; }
+                            background-image: $iconHeritage;
                         }
+                        
+                        &:hover { filter: drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu)); }
+
                         &:hover + .menuText {
                             letter-spacing: normal;
                             transform: scale(1);
                             opacity: 1;
-                        }
-                        .menuIconGlow {
-                            opacity: 0;
-                            vertical-align: bottom;
-                            &:hover { opacity: 1; }
                         }
                     }
                 }

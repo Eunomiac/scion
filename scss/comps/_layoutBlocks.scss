@@ -62,11 +62,15 @@
        > h1, .h1, h2, .h2, h3, .h3 { flex: 0 0 100%; }
        > label { flex: 0 0 auto; }
        > .contentEditable { flex: 1 1 auto; }
-       > *[class*="noFlex"] { flex: 0 0 auto; }
     }
 
-    &[class*="stretch"] { align-items: stretch; }
-    &[class*="center"] { align-items: center; justify-content: center; }  
+    > *[class*="noFlex"] { flex: 0 0 auto !important; }
+    > *[class*="fullFlex"] { flex: 1 1 auto !important; }
+    &[class*="wrap"] { flex-wrap: wrap !important; }
+    &[class*="nowrap"] { flex-wrap: nowrap !important; }
+    &[class*="stretch"] { align-items: stretch !important; }
+    &[class*="center"] { align-items: center !important; justify-content: center !important; }
+    &[class*="start"] { justify-content: flex-start !important; }
     
     // Default flex for contained elements: 0 1 auto
  

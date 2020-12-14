@@ -1,42 +1,5 @@
 import {baseConstants as C} from "./constants.js";
 
-// #region ACTOR DATA: Parsing Paths, Getting Values, Updating Data
-const getEntityData = (dataObj) => {
-    dataObj = dataObj || this;
-    for (let i = 0; i < 6; i++) {
-        const checkKeys = ["actor", "data", "object"].filter((x) => x in dataObj);
-        if (checkKeys.length)
-            dataObj = dataObj[checkKeys.shift()];
-        else
-            break;
-    }
-    return dataObj;
-};
-
-const tracePathString = (dataObj, path, isGettingRef = false) => {
-    if (!(dataObj instanceof Actor && path.startsWith("actor"))) {
-        dataObj = getEntityData(dataObj);
-        path = path.replace(/^((actor\.)|(data\.)|(object\.))+/u, "");
-    } else {
-        path = path.replace(/^actor\./u, "");
-    }
-    const pathRefs = path.split(".");
-    if (pathRefs.length && isGettingRef)
-        pathRefs.pop();
-    while (pathRefs.length && typeof dataObj === "object")
-        dataObj = dataObj[pathRefs.shift()];
-    return pathRefs.length ? false : dataObj;
-};
-
-export const DigActor = (dataObj, pathStr, subPropsToCheck = ["value"]) => {
-    // Given Actor, ActorSheet or actor.data[.data], will follow path string and return value.
-    dataObj = tracePathString(dataObj, pathStr);
-    if (typeof dataObj === "object" && subPropsToCheck.find((x) => x in dataObj))
-        return dataObj[subPropsToCheck.find((x) => x in dataObj)];
-    return dataObj;
-};
-// #endregion
-
 // #region STRING FUNCTIONS: Capitalization, Parsing, Localization
 export const UCase = (str) => `${str}`.toUpperCase();
 export const LCase = (str) => `${str}`.toLowerCase();
@@ -46,14 +9,13 @@ export const TCase = (str) => `${str}`.split(/\s/)
     .join(" ")
     .replace(/\s+/gu, " ")
     .trim();
-export const Loc = (locRef, replaceDict) => {
-    let returnStr = game.i18n.localize(locRef);
-    if (returnStr && returnStr !== locRef) {
-        if (replaceDict)
-            for (const [ref, val] of Object.entries(replaceDict))
-                returnStr = returnStr.replace(new RegExp(`\\\{${ref}\\\}`, "gu"), val);
+export const Loc = (locRef, formatDict = {}) => {
+    for (const [key, val] of Object.entries(formatDict))
+        if (val.startsWith("scion."))
+            formatDict[key] = Loc(val);
+    const returnStr = game.i18n.format(locRef, formatDict);
+    if (returnStr && returnStr !== locRef)
         return returnStr.trim();
-    }
     console.error("Could not localize locRef:", locRef);
     return "";
 };
@@ -118,15 +80,23 @@ export const FlattenNestedValues = (obj, flatVals = []) => {
 const groupStyles = {
     data: "color: black; background-color: white; font-family: Oswald; font-size: 16px; padding: 0px 5px;",
     info: "color: black; background-color: grey; font-family: Voltaire; font-size: 14px; padding: 0px 5px;",
-    log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 12px; padding: 2px;"
+    log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 12px; padding: 2px;",
+    l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; padding: 0 5px;",
+    l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; padding: 0 5px;",
+    l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 12px; padding: 0 2px;",
+    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; padding: 0 2px;"
 };
 const logStyles = {
     data: "color: black; background-color: white; font-family: Oswald; font-size: 14px; padding: 0px 5px;",
     info: "color: black; background-color: grey; font-family: Voltaire; font-size: 12px; padding: 0px 5px;",
-    log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 10px; padding: 2px;"
+    log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 10px; padding: 2px;",
+    l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; padding: 0 5px;",
+    l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; padding: 0 5px;",
+    l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 12px; padding: 0 2px;",
+    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; padding: 0 2px;"
 };
 
-export const LOG = (output, title, tag, {style="info", groupStyle="data", isLoud=false, isClearing=false, isGrouping=false, isUngrouping=true} = {}) => {
+export const LOG = (output, title, tag, {style="log", groupStyle="data", isLoud=false, isClearing=false, isGrouping=false, isUngrouping=true} = {}) => {
     if (game.scion.debug.isDebugging || isLoud || game.scion.debug.watchList.includes(tag)) {
         if (isClearing)
             console.clear();
@@ -137,7 +107,7 @@ export const LOG = (output, title, tag, {style="info", groupStyle="data", isLoud
             console.groupEnd();
     }
 };
-export const GLOG = (outputs = {title: Object}, groupTitle, tag, {style="info", groupStyle="data", isLoud=false, isClearing=false} = {}) => {
+export const GLOG = (outputs = {title: Object}, groupTitle, tag, {style="log", groupStyle="data", isLoud=false, isClearing=false} = {}) => {
     Object.entries(outputs).forEach(([lineTitle, lineOutput], i) => {
         if (i === 0)
             LOG(lineOutput, lineTitle, tag, {style, groupStyle, isLoud, isClearing, isGrouping: `${tag ? `[${tag}] ` : ""} ${groupTitle}`});

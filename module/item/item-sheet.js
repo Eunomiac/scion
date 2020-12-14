@@ -1,4 +1,4 @@
-import {_, U, MIX, ItemMixins as MIXINS} from "../modules.js";
+import {_, U, handlebarTemplates, MIX, ItemMixins as MIXINS} from "../modules.js";
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -30,6 +30,8 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
     /** @override */
     getData() {
         const data = super.getData();
+        data.blocks = handlebarTemplates;
+        data.openPopouts = data.openPopouts || {};
         return data;
     }
 
@@ -38,8 +40,7 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
 
     /* -------------------------------------------- */
 
-    /** @override */
-    activateListeners(html) {
+    /* activateListeners(html) {
         super.activateListeners(html);
 
         // Everything below here is only needed if the sheet is editable
@@ -47,5 +48,5 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
         //    return;
 
     // Roll handlers, click handlers, etc. would go here.
-    }
+    } */
 }

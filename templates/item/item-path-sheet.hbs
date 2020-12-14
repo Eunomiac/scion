@@ -1,28 +1,20 @@
 <form class="{{cssClass}} flex-col-max main" autocomplete="off">
 
     {{!-- Sheet Header --}}
-    <section class="header fullWidth">
+    <section class="header width100">
         <h1 class="title alignCenter">{{localize (concat "scion.paths." data.type "Path")}}</h1>
-        <div class="h2 contentEditable quote alignCenter" data-path="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
+        <div class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
     </section>
         
     <section class="sheet-body flex-col spaceBetween">
-        <div class="pathSkills flex-row-max alignCenter">
-        {{#if data.skills.[0]}}
-            <span class="skill noFlex">{{localize (concat "scion.skills." data.skills.[0])}}</span>
-        {{else}}
-            <span class="skill empty noFlex">&nbsp;</span>
-        {{/if}}
-        {{#if data.skills.[1]}}
-            <span class="skill noFlex">{{localize (concat "scion.skills." data.skills.[1])}}</span>
-        {{else}}
-            <span class="skill empty noFlex">&nbsp;</span>
-        {{/if}}
-        {{#if data.skills.[2]}}
-            <span class="skill noFlex">{{localize (concat "scion.skills." data.skills.[2])}}</span>
-        {{else}}
-            <span class="skill empty noFlex">&nbsp;</span>
-        {{/if}}
+        <div class="clickable openPopout pathSkills skillDrop flex-row-max-start" data-htmlID="skillList">
+            {{#each data.skills as |skill|}}
+            {{#if skill}}
+            <span class="clickable openPopout skill noFlex
+            {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} invalid{{/if}}{{/if}}" data-skill="{{skill}}">{{localize (concat "scion.skills." skill)}}</span>
+            {{/if}}
+            {{/each}}
+            {{> (blocks.skillList.template) }}
         </div>
         <div class="pathConnections flex-full-center alignCenter">
             <h2 class="gold">{{localize "scion.paths.connections"}}</h2>

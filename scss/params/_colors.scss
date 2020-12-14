@@ -17,6 +17,7 @@ $accentColor: $c-gold;
 $bodyColor: $c-black;
 $highlightColor: $c-white;
 $shadowColor: $c-black;
+$hueRotatePurview: 0deg;
 
 @mixin scaled-colors ($baseColor, $name: "scale", $isGreyscale: false) {
     @for $i from 0 through 10 {

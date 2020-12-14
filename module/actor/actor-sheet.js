@@ -54,28 +54,11 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, M
         return data;
     }
 
-    activateListeners(html) {
+    /* activateListeners(html) {
         super.activateListeners(html);
 
         if (this.options.editable) {
 
-            // #region OWNED ITEM POP-OUTS
-            const _onOpenOwnedItem = (event) => {
-                event.preventDefault();
-                const element = event.currentTarget;
-                const dataSet = element.dataset;
-                const item = this.actor.items.get(dataSet.pathid);
-                U.GLOG({
-                    "Element.DataSet": dataSet,
-                    "Actor.Items": this.actor.items,
-                    item
-                }, item.name, "Open Owned Item", {groupStyle: "info"});
-                this.popout(item.sheet);
-            };
-            html.find(".clickable.item-open").each((i, element) => {
-                element.addEventListener("click", _onOpenOwnedItem.bind(this));
-            });
-            // #endregion
         }
-    }
+    } */
 }

@@ -1,6 +1,5 @@
 // #region AGGREGATING EXTERNAL MODULES
 export * as _ from "./external/underscore/underscore-esm-min.js";
-// export * as DRAG from "./external/dragula.min.js";
 export {Dust as DUST} from "./external/dust.js";
 // #endregion
 
@@ -12,23 +11,17 @@ export {
     scionSystemData as SCION,
     handlebarTemplates,
     itemCategories,
-    signatureChars as SIG_CHARS
+    popoutData,
+    signatureChars
 } from "./data/constants.js"; // Constants & System Data
 // #endregion
 
 // #region AGGREGATING MIXINS
-import * as GeneralMixins from "./mixins/generalMixins.js";
-import * as ActorMixins from "./mixins/actorMixins.js";
-import * as ItemMixins from "./mixins/itemMixins.js";
+import * as generalMixins from "./mixins/generalMixins.js";
+import * as actorMixins from "./mixins/actorMixins.js";
+import * as itemMixins from "./mixins/itemMixins.js";
 
-const allMixins = Object.assign({}, GeneralMixins, ActorMixins, ItemMixins);
-const actorMixins = Object.assign({}, GeneralMixins, ActorMixins);
-const itemMixins = Object.assign({}, GeneralMixins, ItemMixins);
-
-export {
-    allMixins as MIXINS,
-    GeneralMixins,
-    actorMixins as ActorMixins,
-    itemMixins as ItemMixins
-};
+export const MIXINS = Object.assign({}, generalMixins, actorMixins, itemMixins);
+export const ActorMixins = Object.assign({}, generalMixins, actorMixins);
+export const ItemMixins = Object.assign({}, generalMixins, itemMixins);
 // #endregion

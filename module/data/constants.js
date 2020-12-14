@@ -2011,7 +2011,8 @@ export const handlebarTemplates = {
     },
     ownedItems: {
         path: {template: () => "systems/scion/templates/actor/ownedItems/path-block.hbs"}
-    }
+    },
+    skillList: {template: () => "systems/scion/templates/item/popouts/skilllist-block.hbs"}
 };
 export const itemCategories = {
     paths: ["path"],
@@ -2020,6 +2021,9 @@ export const itemCategories = {
     purviews: ["purview"],
     boons: ["boon"],
     birthrights: ["relic", "follower", "creature", "guide", "cult", "covenant"]
+};
+export const popoutData = {
+    path: {leftSpacing: -500, rightSpacing: -500}
 };
 export const signatureChars = {
     "Rhys Callaghan": {
@@ -2063,7 +2067,7 @@ export const signatureChars = {
         pathData: {
             origin: {
                 title: "Carefree Wanderer with Luck on His Side",
-                skills: ["empathy", undefined, undefined],
+                skills: ["empathy"],
                 condition: {
                     title: "Interesting Times",
                     description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
@@ -2079,7 +2083,7 @@ export const signatureChars = {
             },
             pantheon: {
                 title: "Scion of Aengus, Step-Scion of the Morrigan",
-                skills: [undefined, undefined, "closeCombat"],
+                skills: ["closeCombat"],
                 condition: {
                     title: "Murder of Crows",
                     description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."

@@ -180,9 +180,10 @@ body.vtt.game.system-scion {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/GenericActor.png");
   --bgItemSheet: url("../images/item-sheet/backgrounds/GenericItem.png");
   --bgItemOverlay: url("../images/item-sheet/backgrounds/ItemOverlay.png");
-  --fontColorMenu: #ffc400;
+  --glowColorMenu: white;
   --fontFamilyMenu: "Voltaire";
   --fontSizeMenu: 24px;
+  --hueRotatePurview: 0deg;
   --menuImage: url("../images/actor-sheet/menu/MenuRosetteGeneric.png");
   --fontColorBody: black;
   --fontFamilyBody: "Overlock SC";
@@ -411,6 +412,8 @@ body.vtt.game.system-scion div.sheet.scion {
   /* #endregion */
   /* #region Single-Purpose Classes */
   /* #endregion */
+  /* #region GRADIATED CLASSES */
+  /* #endregion */
   /* #region System-Specific Styles */
   /* #endregion */
   /* #region Popouts */
@@ -512,6 +515,7 @@ body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sh
 body.vtt.game.system-scion div.sheet.scion label {
   font-size: var(--fontSizeBody);
   margin: 0 0.25rem;
+  min-height: 23px;
 }
 
 body.vtt.game.system-scion div.sheet.scion .contentEditable {
@@ -521,7 +525,7 @@ body.vtt.game.system-scion div.sheet.scion .contentEditable {
 }
 
 body.vtt.game.system-scion div.sheet.scion .contentEditable.insetFrame {
-  min-height: 27px;
+  min-height: 28px;
   font-weight: bold;
   border-radius: 1rem;
   background: rgba(0, 0, 0, 0.2);
@@ -554,7 +558,7 @@ body.vtt.game.system-scion div.sheet.scion .outsetFrame {
 }
 
 body.vtt.game.system-scion div.sheet.scion .hidden {
-  display: none;
+  display: none !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion .text {
@@ -568,14 +572,6 @@ body.vtt.game.system-scion div.sheet.scion .inline {
 
 body.vtt.game.system-scion div.sheet.scion .inline.text {
   padding-right: 5px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .fullWidth {
-  width: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .fullHeight {
-  height: 100%;
 }
 
 body.vtt.game.system-scion div.sheet.scion .padded {
@@ -605,32 +601,36 @@ body.vtt.game.system-scion div.sheet.scion .placeholder {
   text-shadow: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion .half {
-  width: 50%;
+body.vtt.game.system-scion div.sheet.scion .greyText {
+  color: var(--grey5);
 }
 
-body.vtt.game.system-scion div.sheet.scion .quarter {
-  width: 25%;
+body.vtt.game.system-scion div.sheet.scion .noBG {
+  background: none !important;
 }
 
-body.vtt.game.system-scion div.sheet.scion .fifth {
-  width: 20%;
+body.vtt.game.system-scion div.sheet.scion .noBorder {
+  border: none !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion .alignLeft {
   text-align: left !important;
   text-align-last: left !important;
+  margin-right: auto;
 }
 
 body.vtt.game.system-scion div.sheet.scion .alignCenter {
   text-align: center !important;
   text-align-last: center !important;
   text-indent: 0 !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body.vtt.game.system-scion div.sheet.scion .alignRight {
   text-align: right !important;
   text-align-last: right !important;
+  margin-left: auto;
 }
 
 body.vtt.game.system-scion div.sheet.scion .strong {
@@ -645,8 +645,114 @@ body.vtt.game.system-scion div.sheet.scion .blur {
   transform: scale(75%);
 }
 
+body.vtt.game.system-scion div.sheet.scion .width10 {
+  width: 10%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height10 {
+  height: 10%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width20 {
+  width: 20%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height20 {
+  height: 20%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width30 {
+  width: 30%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height30 {
+  height: 30%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width40 {
+  width: 40%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height40 {
+  height: 40%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width50 {
+  width: 50%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height50 {
+  height: 50%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width60 {
+  width: 60%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height60 {
+  height: 60%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width70 {
+  width: 70%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height70 {
+  height: 70%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width80 {
+  width: 80%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height80 {
+  height: 80%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width90 {
+  width: 90%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height90 {
+  height: 90%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width100 {
+  width: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height100 {
+  height: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width25 {
+  width: 25%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height25 {
+  height: 25%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .width75 {
+  width: 75%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .height75 {
+  width: 75%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .widthAuto {
+  width: auto;
+}
+
+body.vtt.game.system-scion div.sheet.scion .heightAuto {
+  height: auto;
+}
+
 body.vtt.game.system-scion div.sheet.scion .skill {
   width: 120px;
+  text-align: center;
+  text-align-last: center;
   background-image: url("../images/textures/stoneWhite.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -664,80 +770,67 @@ body.vtt.game.system-scion div.sheet.scion .skill.empty {
 
 body.vtt.game.system-scion div.sheet.scion .popout {
   position: absolute;
-  left: 105%;
-  top: 0;
-  border-radius: 10px;
   overflow: hidden;
-  padding: 0;
-  border: 4px outset #554a39;
-  border-radius: 10px;
-  box-sizing: border-box;
+  z-index: 10;
 }
 
-body.vtt.game.system-scion div.sheet.scion .popout.skills {
-  width: 260px;
-  height: 220px;
+body.vtt.game.system-scion div.sheet.scion .popout#skillList {
+  width: 150px;
+  height: 462px;
+  left: 94%;
+  top: 0;
+  border: 10px outset var(--grey6);
+  background-image: url("../images/textures/stoneGrey.jpg");
+  box-sizing: content-box;
+  border-radius: 40px;
+  filter: drop-shadow(0px 0px 6px black);
 }
 
-body.vtt.game.system-scion div.sheet.scion .popout.skills > div {
-  height: 90%;
+body.vtt.game.system-scion div.sheet.scion .popout#skillList > div {
+  padding: 15px;
 }
 
-body.vtt.game.system-scion div.sheet.scion .popout.skills .bubble {
-  height: 16px;
-  min-height: 16px;
-  width: 100px;
-  min-width: 100px;
-  padding: 0 5px;
-  font-size: 16px;
-  margin: 0 3px;
-  border-radius: 20px;
-  flex: 0 0 auto;
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .dotline {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] {
   display: grid;
   grid-area: dotline;
   grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
   grid-template-rows: 1rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline.labelledDotLine {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"][class*="labelled"] {
   width: 100%;
   grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline.largeDots {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"][class*="bigDots"] {
   grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
   grid-template-rows: 1.25rem;
   column-gap: 0.5rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline.labelledDotLine.largeDots {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"][class*="bigDots"][class*="labelled"] {
   grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline .dot {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"] {
   margin: 7% 7% 0 0;
   border-radius: 50%;
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline .dot.full {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"][class*="-full"] {
   background: radial-gradient(#444, #0a0a0a);
   border: solid 2px black;
   box-shadow: 1px 1px 2px black;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline .dot.unspent {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"][class*="-unspent"] {
   background: radial-gradient(#900, #5a0000);
   border: solid 2px #5a0000;
   box-shadow: 1px 1px 2px black;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline .dot.virtueCenter::after {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"].virtueCenter::after {
   content: "";
   height: 150%;
   width: 150%;
@@ -747,7 +840,7 @@ body.vtt.game.system-scion div.sheet.scion .dotline .dot.virtueCenter::after {
   background-size: 100%;
 }
 
-body.vtt.game.system-scion div.sheet.scion .dotline .dot.virtueCenter.virtueFull::after {
+body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"].virtueCenter.virtueFull::after {
   background-image: var(--virtueGlowImg);
 }
 
@@ -863,17 +956,33 @@ body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > .con
   flex: 1 1 auto;
 }
 
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > *[class*="noFlex"] {
-  flex: 0 0 auto;
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"] > *[class*="noFlex"] {
+  flex: 0 0 auto !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"] > *[class*="fullFlex"] {
+  flex: 1 1 auto !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="wrap"] {
+  flex-wrap: wrap !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="nowrap"] {
+  flex-wrap: nowrap !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="stretch"] {
-  align-items: stretch;
+  align-items: stretch !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="center"] {
-  align-items: center;
-  justify-content: center;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="start"] {
+  justify-content: flex-start !important;
 }
 
 body.vtt.game.system-scion div.sheet.scion .grid {
@@ -918,6 +1027,10 @@ body.vtt.game.system-scion div.sheet.scion nav.tabs .item.active {
 
 body.vtt.game.system-scion div.sheet.scion .window-content form.main section .tab:not(.active) {
   display: none !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion .window-content form.main section .tab {
+  width: 100%;
 }
 
 body.vtt.game.system-scion div.sheet.scion .bubble p {
@@ -1215,6 +1328,7 @@ body.vtt.game.system-scion div.sheet.scion section.window-content {
   overflow: visible;
   position: relative;
   z-index: 1;
+  max-height: 100%;
 }
 
 body.vtt.game.system-scion div.sheet.scion section.window-content form.editable {
@@ -1592,6 +1706,8 @@ body.vtt.game.system-scion div.sheet.scion.actor .aesir {
 body.vtt.game.system-scion div.sheet.scion.actor .loa {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/Loa.png");
   --menuImage: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
+  --glowColorMenu: #dd0000;
+  --hueRotatePurview: 225deg;
   --fontFamilyTitle: "Finger Paint";
   --fontFamilyBody: "Overlock SC";
   --fontFamilyHeading1: "Finger Paint";
@@ -1603,6 +1719,8 @@ body.vtt.game.system-scion div.sheet.scion.actor .loa {
 body.vtt.game.system-scion div.sheet.scion.actor .netjer {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/Netjer.png");
   --menuImage: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
+  --glowColorMenu: #ffdd00;
+  --hueRotatePurview: 245deg;
   --fontFamilyTitle: "Zanzabar";
   --fontFamilyBody: "Gothic Ultra";
   --fontFamilyHeading1: "Zanzabar";
@@ -1627,6 +1745,8 @@ body.vtt.game.system-scion div.sheet.scion.actor .teotl {
 body.vtt.game.system-scion div.sheet.scion.actor .theoi {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/Theoi.png");
   --menuImage: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
+  --glowColorMenu: #00ffff;
+  --hueRotatePurview: 100deg;
   --fontFamilyTitle: "Poiret One";
   --fontFamilyBody: "Poiret One";
   --fontFamilyHeading1: "Poiret One";
@@ -1647,6 +1767,8 @@ body.vtt.game.system-scion div.sheet.scion.actor .theoi {
 body.vtt.game.system-scion div.sheet.scion.actor .tuathaDeDanann {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/Tuatha.png");
   --menuImage: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
+  --glowColorMenu: #00ff00;
+  --hueRotatePurview: 330deg;
   --fontFamilyTitle: "Berkshire Swash";
   --fontFamilyBody: "Overlock SC";
   --fontFamilyHeading1: "Berkshire Swash";
@@ -1660,6 +1782,9 @@ body.vtt.game.system-scion div.sheet.scion.actor .tuathaDeDanann {
 
 body.vtt.game.system-scion div.sheet.scion.actor .orisha {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/Orisha.png");
+  --menuImage: url("../images/actor-sheet/menu/MenuRosetteOrisha.png");
+  --hueRotatePurview: 250deg;
+  --glowColorMenu: #ffdd99;
   --fontFamilyTitle: "Finger Paint";
   --fontFamilyBody: "Overlock SC";
   --fontFamilyHeading1: "Finger Paint";
@@ -1721,7 +1846,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette .menuT
   position: relative;
   margin-top: -20px;
   margin-left: -50px !important;
-  color: var(--fontColorMenu);
+  color: var(--glowColorMenu);
   font-family: var(--fontFamilyMenu);
   font-size: var(--fontSizeMenu);
   font-weight: bold;
@@ -1845,58 +1970,33 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.ci
   transform: scale(1.2);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconMain {
-  background-image: url("../images/actor-sheet/menu/DarkIconMain.png");
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconMain {
+  background-image: url("../images/actor-sheet/menu/IconMain.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconMain .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayMain.png");
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconChargen {
+  background-image: url("../images/actor-sheet/menu/IconChargen.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconChargen {
-  background-image: url("../images/actor-sheet/menu/DarkIconChargen.png");
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconSettings {
+  background-image: url("../images/actor-sheet/menu/IconSettings.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconChargen .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayChargen.png");
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconExperience {
+  background-image: url("../images/actor-sheet/menu/IconExperience.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconSettings {
-  background-image: url("../images/actor-sheet/menu/DarkIconSettings.png");
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconHeritage {
+  background-image: url("../images/actor-sheet/menu/IconHeritage.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconSettings .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlaySettings.png");
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover {
+  filter: drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu));
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconExperience {
-  background-image: url("../images/actor-sheet/menu/DarkIconExperience.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconExperience .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayExperience.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconHeritage {
-  background-image: url("../images/actor-sheet/menu/DarkIconHeritage.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark.iconHeritage .menuIconGlow {
-  background-image: url("../images/actor-sheet/menu/GlowOverlayHeritage.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark:hover + .menuText {
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover + .menuText {
   letter-spacing: normal;
   transform: scale(1);
-  opacity: 1;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark .menuIconGlow {
-  opacity: 0;
-  vertical-align: bottom;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIconDark .menuIconGlow:hover {
   opacity: 1;
 }
 
@@ -1942,43 +2042,34 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .surTitle {
   grid-area: surTitle;
 }
 
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .chargen-body .deed {
+  min-width: 50%;
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .chargen-body [class*="flex"][class*="row"] {
+  align-items: flex-end;
+}
+
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body {
-  grid: "attributes paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
+  grid: "skills paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
   column-gap: 0.5rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes {
-  grid-area: attributes;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .skills {
+  grid-area: skills;
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: center;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .dotGrabBin {
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .skills .dotGrabBin {
   flex-wrap: wrap;
   height: auto;
   justify-content: flex-end;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .attrBlock {
-  margin: 0.5rem 0;
-  flex-flow: column nowrap;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .attrBlock .attrRow .label {
-  font-size: 1rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .primary {
-  order: 1;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .secondary {
-  order: 2;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .attributes .tertiary {
-  order: 3;
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .skills .dotDropBin {
+  margin-bottom: 5px;
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths {
@@ -2029,6 +2120,46 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .f
   line-height: 1rem;
 }
 
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"] {
+  display: inline-block;
+  height: 100px;
+  width: 80px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: hue-rotate(var(--hueRotatePurview));
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="sun"] {
+  background-image: url("../images/purviews/sun.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="passion"] {
+  background-image: url("../images/purviews/passion.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="geasa"] {
+  background-image: url("../images/purviews/geasa.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="beauty"] {
+  background-image: url("../images/purviews/beauty.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="fortune"] {
+  background-image: url("../images/purviews/fortune.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"] span.text {
+  display: block;
+  margin-top: 110%;
+  text-align: center;
+  font-family: Oswald;
+  text-transform: uppercase;
+  margin-top: 95px;
+  font-size: 12px;
+}
+
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] {
   margin: 3px;
   align-content: start;
@@ -2069,7 +2200,6 @@ body.vtt.game.system-scion div.sheet.scion.item .main {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
-  overflow: hidden;
   filter: drop-shadow(50px 50px 20px black);
   row-gap: 5px;
   box-sizing: border-box;
@@ -2122,4 +2252,18 @@ body.vtt.game.system-scion div.sheet.scion.item .main .sheet-body {
 
 body.vtt.game.system-scion div.sheet.scion.item .main h1, body.vtt.game.system-scion div.sheet.scion.item .main h2 {
   text-indent: 15px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills {
+  min-height: 28px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill {
+  margin: 0 calc((100% - 3 * 120px) / 6);
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill.invalid {
+  background-image: url("../images/textures/stoneGrey.jpg");
+  border-color: var(--grey6);
+  color: var(--grey3);
 }

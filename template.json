@@ -27,6 +27,7 @@
                     "max": 5,
                     "modifier": []
                 },
+                "pathPriorities": ["origin", "role", "pantheon"],
                 "purviews": {
                     "fromBirthrights": 0,                   
                     "pantheon": "",
@@ -40,9 +41,6 @@
                 "callings": {},
                 "knacks": {},
                 "finishingBonusOn": ""
-            },
-            "STORYPATH": {
-                "paths": []
             },
             "FULLTRAITS": {
                 "attributes": {
@@ -133,6 +131,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "athletics": {
@@ -140,6 +139,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "closeCombat": {
@@ -147,6 +147,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "culture": {
@@ -154,6 +155,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "empathy": {
@@ -161,6 +163,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "firearms": {
@@ -168,6 +171,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "integrity": {
@@ -175,6 +179,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "leadership": {
@@ -182,6 +187,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "medicine": {
@@ -189,6 +195,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "occult": {
@@ -196,6 +203,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "persuasion": {
@@ -203,6 +211,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "pilot": {
@@ -210,6 +219,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "science": {
@@ -217,6 +227,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "subterfuge": {
@@ -224,6 +235,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "survival": {
@@ -231,6 +243,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         },
                         "technology": {
@@ -238,6 +251,7 @@
                             "value": 0,
                             "max": 5,
                             "modifier": [],
+                            "purchased": 0,
                             "specialty": ""
                         }
                     }
@@ -245,10 +259,10 @@
             }
         },
         "major": {
-            "templates": ["BASE", "PC", "DIVINITY", "STORYPATH", "FULLTRAITS"]
+            "templates": ["BASE", "PC", "DIVINITY", "FULLTRAITS"]
         },
         "minor": {
-            "templates": ["BASE", "DIVINITY", "STORYPATH"]
+            "templates": ["BASE", "DIVINITY"]
         },
         "group": {
             "templates": ["BASE"]
@@ -257,6 +271,7 @@
     "Item": {
         "types": [
             "path",
+            "skillslist",
             "connectionGroup",
             "connectionContact",
             "connectionAccess",

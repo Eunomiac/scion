@@ -1,10 +1,10 @@
 & {
-    grid: "attributes paths"  17rem
+    grid: "skills paths"  17rem
         "virtues paths" calc(3.25rem + 2 * 3px)
         / 1fr 2fr;
     column-gap: 0.5rem;
-    .attributes {
-        grid-area: attributes;
+    .skills {
+        grid-area: skills;
 
         flex-flow: column nowrap;
         justify-content: space-between;
@@ -16,25 +16,10 @@
             justify-content: flex-end;
         }
 
-        .attrBlock {                            
-            margin: 0.5rem 0;
-            flex-flow: column nowrap;
+        .dotDropBin {
+            margin-bottom: 5px;
+        }
 
-            .attrRow {
-                .label {
-                    font-size: 1rem;
-                }
-            }
-        }
-        .primary {
-            order: 1;
-        }
-        .secondary {
-            order: 2;
-        }
-        .tertiary {
-            order: 3;
-        }
     }
     .paths {
         grid-area: paths;

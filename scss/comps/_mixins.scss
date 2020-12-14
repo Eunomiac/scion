@@ -26,10 +26,6 @@
   overflow: hidden;
 }
 
-@mixin hide {
-  display: none;
-}
-
 @mixin disabledText {
   color: var(--grey3);
   font: {
@@ -112,6 +108,31 @@
 
 @mixin bg-shade($color: $c-black) {
     background-color: scale-color($color, $alpha: -80%);
+}
+
+@mixin bg-stoneTablet() {
+  
+  background: {
+    image: var(--bgItemSheet);
+    size: 100% 100%;
+    position: center;
+    repeat: no-repeat;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: {
+        image: var(--bgItemOverlay);
+        size: 100% 100%;
+        position: center;
+        repeat: no-repeat;
+    }      
+  }
 }
 
 @mixin set-colors() {

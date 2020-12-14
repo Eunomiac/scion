@@ -102,6 +102,7 @@
                 "stepTwoTab": "Paths",
                 "stepTwo": "Step Two: Paths",
                 "stepTwoA": "What Paths Do You Walk?",
+                "pathTitlePlaceholder": "Click here to create your {pathType} Path!",
                 "stepThreeTab": "Traits",
                 "stepThree": "Step Three: Skills & Attributes",
                 "stepFourTab": "Callings",

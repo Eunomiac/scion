@@ -5,40 +5,40 @@
         <div class="circleMenuContainer">
           <div class="menuButtonContainer">
             <div class="menuButton">
-              <div class="menuIconDark iconSettings">
-                <a class="item menuIconGlow" data-tab="details"></a>
+              <div class="menuIcon iconSettings">
+                <a class="item" data-tab="details"></a>
               </div>
               <div class="menuText">{{localize "scion.headings.main.detailsTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
             <div class="menuButton">
-              <div class="menuIconDark iconMain">
-                  <a class="item menuIconGlow" data-tab="front"></a>
+              <div class="menuIcon iconMain">
+                  <a class="item" data-tab="front"></a>
               </div>
               <div class="menuText">{{localize "scion.headings.main.frontTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
             <div class="menuButton">
-              <div class="menuIconDark iconHeritage">
-                <a class="item menuIconGlow" data-tab="heritage"></a>
+              <div class="menuIcon iconHeritage">
+                <a class="item" data-tab="heritage"></a>
               </div>
               <div class="menuText">{{localize "scion.headings.main.heritageTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
             <div class="menuButton">
-              <div class="menuIconDark iconExperience">
-                <a class="item menuIconGlow" data-tab="experience"></a>
+              <div class="menuIcon iconExperience">
+                <a class="item" data-tab="experience"></a>
               </div>
               <div class="menuText">{{localize "scion.headings.main.experienceTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
             <div class="menuButton">
-              <div class="menuIconDark iconChargen">
-                <a class="item menuIconGlow" data-tab="chargen"></a>
+              <div class="menuIcon iconChargen">
+                <a class="item" data-tab="chargen"></a>
               </div>
               <div class="menuText">{{localize "scion.headings.main.chargenTab"}}</div>
             </div>
@@ -49,7 +49,7 @@
     {{!-- Sheet Header --}}
     <section class="header grid">
         <div class="divineTitle surTitle">{{~data.divineTitle~}}</div>
-        <div class="charName title contentEditable" data-path="actor.name"></div>
+        <div class="charName title contentEditable" data-field="name"></div>
         <div class="patronage subTitle">&nbsp;{{~data.patronageLine~}}&nbsp;</div>
     </section>
         
@@ -61,16 +61,30 @@
         {{!-- Front Tab --}}
         <section class="tab" data-group="primary" data-tab="front">
             <div class="front-body grid">
-                <div class="attributes flex">
-                    <h1>{{localize "scion.game.attributes"}}</h1>
-                    {{#if data.attributes.unspentDots.general}}
+                <div class="skills flex-col-start">
+                    <h1>{{localize "scion.game.skills"}}</h1>
+                    {{#if data.skills.unspentDots}}
                         <div class="dotGrabBin dotDropBin flex">
-                            {{#for data.attributes.unspentDots.general}}
-                                <span class="dot unspent" data-dottype="primary|secondary|tertiary" data-trait="data.attributes.unspentDots.general"></span>
+                            {{#for data.skills.unspentDots}}
+                                <span class="dot-unspent" data-dottype="skill" data-trait="data.skills.unspentDots"></span>
                             {{/for}}
                         </div>
                     {{/if}}
-                    {{#each data.attributes.priorities as |arena priority|}}
+                    {{#each skillVals as |value skill|}}
+                        <div class="dotDropBin dotline-labelled" data-dottype="skill" data-trait="data.skills.list.{{skill}}">
+                            <div class="label">{{loc (concat "scion.skills." skill)}}</div>
+                            {{#for 5}}
+                                <span class="dot{{#if (gte value @index)}}-full{{/if}} click" data-dottype="skill" data-trait="data.skills.list.{{skill}}" data-val="{{add @index 1}}"></span>
+                            {{/for}}
+                        </div>
+                    {{/each}}
+                </div>
+
+
+
+
+
+                    {{!-- {{#each data.attributes.priorities as |arena priority|}}
                         <div class="attrBlock {{arena}} flex">
                             {{#if data.attributes.unspentDots.[arena]}}
                                 <div class="dotGrabBin dotDropBin flex"> 
@@ -83,18 +97,18 @@
                                 <div class="attrRow dotDropBin dotline labelledDotLine" data-dottype="{{arena}}" data-trait="{{attribute}}">
                                     <div class="label">{{localize (concat "scion.attributes." attribute)}}</div>
                                     {{#for 5}}
-                                        <span class="dot click {{dotstate attribute @index}}" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
+                                        <span class="dot click" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
                                     {{/for}}
                                 </div>
                             {{/each}}
                         </div>
-                    {{/each}}
-                </div>
+                    {{/each}} --}}
                 <div class="paths flex">
                     <h1>{{localize "scion.game.paths"}}</h1>
-                    <div class="originpath"></div>
-                    <div class="rolepath"></div>
-                    <div class="pantheonpath"></div>
+                    <div class="purview-geasa"></div>
+                    <div class="purview-passion"></div>
+                    <div class="purview-beauty"></div>
+                    <div class="purview-fortune"><span class="text">(Happenstance)</span></div>
                 </div>
                 <div class="virtues grid">
                     {{#if data.pantheon}}
