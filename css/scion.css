@@ -1,6 +1,3 @@
-/* ****************************************************** */
-/* ***************** TESTING **************************** */
-/* ****************************************************** */
 /* #region IMPORT */
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&family=Voltaire:wght@400&display=swap");
 @font-face {
@@ -102,302 +99,705 @@
 }
 
 body.vtt.game.system-scion {
-  /* #region @FUNCTIONS */
-  /* #endregion */
   /* #region @MIXINS */
 }
 
 body.vtt.game.system-scion {
-  --grey0: black;
-  --greyFade0: rgba(0, 0, 0, 0.5);
-  --greyFullFade0: rgba(0, 0, 0, 0.25);
-  --grey1: #1a1a1a;
-  --greyFade1: rgba(26, 26, 26, 0.5);
-  --greyFullFade1: rgba(26, 26, 26, 0.25);
-  --grey2: #333333;
-  --greyFade2: rgba(51, 51, 51, 0.5);
-  --greyFullFade2: rgba(51, 51, 51, 0.25);
-  --grey3: #4d4d4d;
-  --greyFade3: rgba(77, 77, 77, 0.5);
-  --greyFullFade3: rgba(77, 77, 77, 0.25);
-  --grey4: #666666;
-  --greyFade4: rgba(102, 102, 102, 0.5);
-  --greyFullFade4: rgba(102, 102, 102, 0.25);
-  --grey5: gray;
-  --greyFade5: rgba(128, 128, 128, 0.5);
-  --greyFullFade5: rgba(128, 128, 128, 0.25);
-  --grey6: #999999;
-  --greyFade6: rgba(153, 153, 153, 0.5);
-  --greyFullFade6: rgba(153, 153, 153, 0.25);
-  --grey7: #b3b3b3;
-  --greyFade7: rgba(179, 179, 179, 0.5);
-  --greyFullFade7: rgba(179, 179, 179, 0.25);
-  --grey8: #cccccc;
-  --greyFade8: rgba(204, 204, 204, 0.5);
-  --greyFullFade8: rgba(204, 204, 204, 0.25);
-  --grey9: #e6e6e6;
-  --greyFade9: rgba(230, 230, 230, 0.5);
-  --greyFullFade9: rgba(230, 230, 230, 0.25);
-  --grey10: white;
-  --greyFade10: rgba(255, 255, 255, 0.5);
-  --greyFullFade10: rgba(255, 255, 255, 0.25);
-  --scale0: black;
-  --scaleFade0: rgba(0, 0, 0, 0.5);
-  --scaleFullFade0: rgba(0, 0, 0, 0.25);
-  --scale1: #1f1c14;
-  --scaleFade1: rgba(31, 28, 20, 0.5);
-  --scaleFullFade1: rgba(31, 28, 20, 0.25);
-  --scale2: #473e1f;
-  --scaleFade2: rgba(71, 62, 31, 0.5);
-  --scaleFullFade2: rgba(71, 62, 31, 0.25);
-  --scale3: #7a651f;
-  --scaleFade3: rgba(122, 101, 31, 0.5);
-  --scaleFullFade3: rgba(122, 101, 31, 0.25);
-  --scale4: #b89214;
-  --scaleFade4: rgba(184, 146, 20, 0.5);
-  --scaleFullFade4: rgba(184, 146, 20, 0.25);
-  --scale5: #ffc400;
-  --scaleFade5: rgba(255, 196, 0, 0.5);
-  --scaleFullFade5: rgba(255, 196, 0, 0.25);
-  --scale6: #ffd033;
-  --scaleFade6: rgba(255, 208, 51, 0.5);
-  --scaleFullFade6: rgba(255, 208, 51, 0.25);
-  --scale7: #ffdc66;
-  --scaleFade7: rgba(255, 220, 102, 0.5);
-  --scaleFullFade7: rgba(255, 220, 102, 0.25);
-  --scale8: #ffe799;
-  --scaleFade8: rgba(255, 231, 153, 0.5);
-  --scaleFullFade8: rgba(255, 231, 153, 0.25);
-  --scale9: #fff3cc;
-  --scaleFade9: rgba(255, 243, 204, 0.5);
-  --scaleFullFade9: rgba(255, 243, 204, 0.25);
-  --scale10: white;
-  --scaleFade10: rgba(255, 255, 255, 0.5);
-  --scaleFullFade10: rgba(255, 255, 255, 0.25);
-  --bgMatte: white;
-  --shadowColorBright: rgba(255, 255, 255, 0.5);
-  --shadowColorDark: rgba(0, 0, 0, 0.5);
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/GenericActor.png");
-  --bgItemSheet: url("../images/item-sheet/backgrounds/GenericItem.png");
-  --bgItemOverlay: url("../images/item-sheet/backgrounds/ItemOverlay.png");
-  --glowColorMenu: white;
-  --fontFamilyMenu: "Voltaire";
-  --fontSizeMenu: 24px;
-  --hueRotatePurview: 0deg;
-  --menuImage: url("../images/actor-sheet/menu/MenuRosetteGeneric.png");
-  --fontColorBody: black;
-  --fontFamilyBody: "Overlock SC";
-  --fontSizeBody: 16px;
-  --fontWeightBody: normal;
-  --textShadowBody: 0 0 0 black, 0 0 0 black, 0 0 0 black;
-  --textShadowStrongText: 0 0 1px black, 0 0 1px black, 0 0 1px black;
-  --fontWeightStrongText: bold;
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
-  --fontSizeBubbleBody: 12px;
-  --lineHeightBubbleBody: 12px;
-  --fontWeightBubbleBody: normal;
-  --textTransformBubbleBody: none;
-  --textShadowBubbleBody: 0 0 1px black, 0 0 1px black;
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontSizeBubbleTitle: 16px;
-  --lineHeightBubbleTitle: 14px;
-  --fontWeightBubbleTitle: bold;
-  --textTransformBubbleTitle: uppercase;
-  --textShadowBubbleTitle: 0 0 1px black, 0 0 1px black;
-  --fontColorTitle: black;
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-generic.png");
+  --bgItemSheet: url("../images/item-sheet/backgrounds/bgItem-generic.png");
+  --bgItemOverlay: url("../images/item-sheet/backgrounds/overlayItem-generic.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-generic.png");
+  --black: black;
+  --blackFade10: rgba(0, 0, 0, 0.9);
+  --blackFade20: rgba(0, 0, 0, 0.8);
+  --blackFade30: rgba(0, 0, 0, 0.7);
+  --blackFade40: rgba(0, 0, 0, 0.6);
+  --blackFade50: rgba(0, 0, 0, 0.5);
+  --blackFade60: rgba(0, 0, 0, 0.4);
+  --blackFade70: rgba(0, 0, 0, 0.3);
+  --blackFade80: rgba(0, 0, 0, 0.2);
+  --blackFade90: rgba(0, 0, 0, 0.1);
+  --blackFade25: rgba(0, 0, 0, 0.75);
+  --blackFade75: rgba(0, 0, 0, 0.25);
+  --white: white;
+  --whiteFade10: rgba(255, 255, 255, 0.9);
+  --whiteFade20: rgba(255, 255, 255, 0.8);
+  --whiteFade30: rgba(255, 255, 255, 0.7);
+  --whiteFade40: rgba(255, 255, 255, 0.6);
+  --whiteFade50: rgba(255, 255, 255, 0.5);
+  --whiteFade60: rgba(255, 255, 255, 0.4);
+  --whiteFade70: rgba(255, 255, 255, 0.3);
+  --whiteFade80: rgba(255, 255, 255, 0.2);
+  --whiteFade90: rgba(255, 255, 255, 0.1);
+  --whiteFade25: rgba(255, 255, 255, 0.75);
+  --whiteFade75: rgba(255, 255, 255, 0.25);
+  --greyDown4: #1a1a1a;
+  --greyDown4Fade50: rgba(26, 26, 26, 0.5);
+  --greyDown4Fade75: rgba(26, 26, 26, 0.25);
+  --greyDown3: #333333;
+  --greyDown3Fade50: rgba(51, 51, 51, 0.5);
+  --greyDown3Fade75: rgba(51, 51, 51, 0.25);
+  --greyDown2: #4d4d4d;
+  --greyDown2Fade50: rgba(77, 77, 77, 0.5);
+  --greyDown2Fade75: rgba(77, 77, 77, 0.25);
+  --greyDown1: #666666;
+  --greyDown1Fade50: rgba(102, 102, 102, 0.5);
+  --greyDown1Fade75: rgba(102, 102, 102, 0.25);
+  --grey: gray;
+  --greyFade50: rgba(128, 128, 128, 0.5);
+  --greyFade75: rgba(128, 128, 128, 0.25);
+  --greyUp1: #999999;
+  --greyUp1Fade50: rgba(153, 153, 153, 0.5);
+  --greyUp1Fade75: rgba(153, 153, 153, 0.25);
+  --greyUp2: #b3b3b3;
+  --greyUp2Fade50: rgba(179, 179, 179, 0.5);
+  --greyUp2Fade75: rgba(179, 179, 179, 0.25);
+  --greyUp3: #cccccc;
+  --greyUp3Fade50: rgba(204, 204, 204, 0.5);
+  --greyUp3Fade75: rgba(204, 204, 204, 0.25);
+  --greyUp4: #e6e6e6;
+  --greyUp4Fade50: rgba(230, 230, 230, 0.5);
+  --greyUp4Fade75: rgba(230, 230, 230, 0.25);
+  --accentDown4: #1f1c14;
+  --accentDown4Fade50: rgba(31, 28, 20, 0.5);
+  --accentDown4Fade75: rgba(31, 28, 20, 0.25);
+  --accentDown3: #473e1f;
+  --accentDown3Fade50: rgba(71, 62, 31, 0.5);
+  --accentDown3Fade75: rgba(71, 62, 31, 0.25);
+  --accentDown2: #7a651f;
+  --accentDown2Fade50: rgba(122, 101, 31, 0.5);
+  --accentDown2Fade75: rgba(122, 101, 31, 0.25);
+  --accentDown1: #b89214;
+  --accentDown1Fade50: rgba(184, 146, 20, 0.5);
+  --accentDown1Fade75: rgba(184, 146, 20, 0.25);
+  --accent: #ffc400;
+  --accentFade50: rgba(255, 196, 0, 0.5);
+  --accentFade75: rgba(255, 196, 0, 0.25);
+  --accentUp1: #ffd033;
+  --accentUp1Fade50: rgba(255, 208, 51, 0.5);
+  --accentUp1Fade75: rgba(255, 208, 51, 0.25);
+  --accentUp2: #ffdc66;
+  --accentUp2Fade50: rgba(255, 220, 102, 0.5);
+  --accentUp2Fade75: rgba(255, 220, 102, 0.25);
+  --accentUp3: #ffe799;
+  --accentUp3Fade50: rgba(255, 231, 153, 0.5);
+  --accentUp3Fade75: rgba(255, 231, 153, 0.25);
+  --accentUp4: #fff3cc;
+  --accentUp4Fade50: rgba(255, 243, 204, 0.5);
+  --accentUp4Fade75: rgba(255, 243, 204, 0.25);
+  --colorTitle: black;
+  --colorH1: black;
+  --colorH2: black;
+  --colorH3: black;
+  --coloraccent: #ffc400;
+  --colorBody: black;
+  --colorStrong: var(--colorBody);
+  --colorWeak: gray;
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: var(--accent);
+  --colorPurviewRotate: 0deg;
   --bgTitle: transparent;
+  --bgH1: transparent;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --bgH3: transparent;
   --fontFamilyTitle: "Marcellus SC";
+  --fontSizeTitle: 36px;
+  --lineHeightTitle: 44px;
+  --maxHeightTitle: none;
+  --paddingTitle: 0px;
   --fontStyleTitle: normal;
   --fontVariantTitle: normal;
   --fontWeightTitle: normal;
-  --fontSizeTitle: 36px;
-  --maxHeightTitle: 40px;
   --textTransformTitle: none;
+  --textIndentTitle: 0px;
   --textShadowTitle: -1px -1px 1px white, 1px 1px 1px black;
-  --paddingTitle: 0;
-  --lineHeightTitle: normal;
-  --fontScaleTitle: 1;
-  --fontColorHeading1: black;
-  --bgHeading1: transparent;
-  --fontFamilyHeading1: "Marcellus SC";
-  --fontStyleHeading1: normal;
-  --fontVariantHeading1: small-caps;
-  --fontWeightHeading1: normal;
-  --textTransformHeading1: none;
-  --fontSizeHeading1: 24px;
-  --paddingHeading1: 0;
-  --maxHeightHeading1: 32px;
-  --lineHeightHeading1: var(--maxHeightHeading1);
-  --textShadowHeading1: -1px -1px 0px var(--shadowColorBright), 1px 1px 0px var(--shadowColorDark);
-  --fontScaleHeading1: 1;
-  --borderBottomHeading1: 2px solid var(--fontColorHeading1);
-  --fontColorHeading2: black;
-  --bgHeading2: linear-gradient(270deg, var(--scale3), var(--scale7));
-  --fontFamilyHeading2: "Overlock SC";
-  --fontStyleHeading2: normal;
-  --fontVariantHeading2: normal;
-  --fontWeightHeading2: bold;
-  --textTransformHeading2: none;
-  --fontSizeHeading2: 20px;
-  --maxHeightHeading2: 26px;
-  --lineHeightHeading2: var(--fontSizeHeading2);
-  --textShadowHeading2: none;
-  --borderBottomHeading2: 2px inset var(--scale3);
-  --fontColorHeading3: black;
-  --bgHeading3: transparent;
-  --fontFamilyHeading3: "Overlock SC";
-  --fontStyleHeading3: normal;
-  --fontVariantHeading3: normal;
-  --fontWeightHeading3: bold;
-  --textTransformHeading3: none;
-  --fontSizeHeading3: 16px;
-  --paddingHeading3: 0;
-  --maxHeightHeading3: 16px;
-  --lineHeightHeading3: var(--maxHeightHeading3);
-  --textShadowHeading3: none;
-  --borderBottomHeading3: none;
+  --borderTitle: none;
+  --fontFamilyH1: "Marcellus SC";
+  --fontSizeH1: 24px;
+  --lineHeightH1: 32px;
+  --maxHeightH1: 32px;
+  --paddingH1: 0px;
+  --fontStyleH1: normal;
+  --fontVariantH1: small-caps;
+  --fontWeightH1: normal;
+  --textTransformH1: none;
+  --textIndentH1: 0px;
+  --textShadowH1: -1px -1px 1px white, 1px 1px 1px black;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Overlock SC";
+  --fontSizeH2: 20px;
+  --lineHeightH2: 26px;
+  --maxHeightH2: 26px;
+  --paddingH2: 0px;
+  --fontStyleH2: normal;
+  --fontVariantH2: normal;
+  --fontWeightH2: bold;
+  --textTransformH2: none;
+  --textIndentH2: 10px;
+  --textShadowH2: none;
+  --borderH2: none;
+  --fontFamilyH3: "Overlock SC";
+  --fontSizeH3: 16px;
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --paddingH3: 0px;
+  --fontStyleH3: normal;
+  --fontVariantH3: normal;
+  --fontWeightH3: bold;
+  --textTransformH3: none;
+  --textIndentH3: 0px;
+  --textShadowH3: none;
+  --borderH3: none;
+  --fontFamilyBody: "Overlock SC";
+  --fontSizeBody: 16px;
+  --lineHeightBody: var(--fontSizeBody);
+  --fontStyleBody: normal;
+  --fontVariantBody: normal;
+  --fontWeightBody: normal;
+  --textTransformBody: none;
+  --textShadowBody: 0 0 0px black;
+  --fontStyleStrong: normal;
+  --fontVariantStrong: var(--fontVariantBody);
+  --fontWeightStrong: bold;
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  --fontStyleWeak: italic;
+  --fontVariantWeak: var(--fontVariantBody);
+  --fontWeightWeak: normal;
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontSizeBubbleTitle: 16px;
+  --lineHeightBubbleTitle: 14px;
+  --maxHeightBubbleTitle: 16px;
+  --fontStyleBubbleTitle: normal;
+  --fontVariantBubbleTitle: normal;
+  --fontWeightBubbleTitle: bold;
+  --textTransformBubbleTitle: uppercase;
+  --textIndentBubbleTitle: 0px;
+  --textShadowBubbleTitle: 0 0 1px black, 0 0 1px black;
+  --borderBubbleTitle: none;
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --fontSizeBubbleBody: 12px;
+  --lineHeightBubbleBody: 12px;
+  --fontStyleBubbleBody: normal;
+  --fontVariantBubbleBody: normal;
+  --fontWeightBubbleBody: normal;
+  --textTransformBubbleBody: none;
+  --textIndentBubbleBody: 0px;
+  --textShadowBubbleBody: 0 0 1px black, 0 0 1px black;
+  --fontFamilyMenu: "Voltaire";
+  --fontSizeMenu: 24px;
+  --lineHeightMenu: 24px;
+  --maxHeightMenu: 24px;
+  --fontStyleMenu: normal;
+  --fontVariantMenu: normal;
+  --fontWeightMenu: normal;
+  --textTransformMenu: uppercase;
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --borderMenu: none;
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --paddingInput: 0px;
+  --fontStyleInput: normal;
+  --fontVariantInput: normal;
+  --fontWeightInput: bold;
+  --textTransformInput: none;
+  --textIndentInput: 5px;
+  --textShadowInput: var(--textShadowBody);
+  --borderInput: none;
+  --fontFamilyPlaceholder: "Della Respira";
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontStylePlaceholder: italic;
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --fontWeightPlaceholder: normal;
+  --textTransformPlaceholder: none;
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #logo {
-  display: none;
+body.vtt.game.system-scion .aesir {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-aesir.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-aesir.png");
+  --colorStrong: var(--colorBody);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: var(--accent);
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Amarante";
+  --fontFamilyH1: "Amarante";
+  --borderH1: 2px solid var(--colorH1);
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #navigation {
-  left: 0px;
-  top: 0px;
+body.vtt.game.system-scion .deva {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-deva.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-deva.png");
 }
 
-body.vtt.game.system-scion #navigation #nav-toggle {
-  height: 20px;
+body.vtt.game.system-scion .kami {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-kami.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-kami.png");
 }
 
-body.vtt.game.system-scion #navigation .nav-item {
-  margin: 0 4px 0 0;
-  line-height: 1.4rem;
+body.vtt.game.system-scion .loa {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-loa.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-loa.png");
+  --colorStrong: var(--colorBody);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #dd0000;
+  --colorPurviewRotate: 225deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Finger Paint";
+  --fontSizeTitle: 2rem;
+  --fontFamilyH1: "Finger Paint";
+  --borderH1: 2px solid var(--colorH1);
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #navigation #scene-list li {
-  height: 20px;
+body.vtt.game.system-scion .manitou {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-manitou.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-manitou.png");
 }
 
-body.vtt.game.system-scion #navigation #scene-list li .scene-players {
-  display: none;
+body.vtt.game.system-scion .netjer {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-netjer.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-netjer.png");
+  --accentDown4: #100f0b;
+  --accentDown4Fade50: rgba(16, 15, 11, 0.5);
+  --accentDown4Fade75: rgba(16, 15, 11, 0.25);
+  --accentDown3: #262212;
+  --accentDown3Fade50: rgba(38, 34, 18, 0.5);
+  --accentDown3Fade75: rgba(38, 34, 18, 0.25);
+  --accentDown2: #403713;
+  --accentDown2Fade50: rgba(64, 55, 19, 0.5);
+  --accentDown2Fade75: rgba(64, 55, 19, 0.25);
+  --accentDown1: #5f4f10;
+  --accentDown1Fade50: rgba(95, 79, 16, 0.5);
+  --accentDown1Fade75: rgba(95, 79, 16, 0.25);
+  --accent: #836a07;
+  --accentFade50: rgba(131, 106, 7, 0.5);
+  --accentFade75: rgba(131, 106, 7, 0.25);
+  --accentUp1: #cca409;
+  --accentUp1Fade50: rgba(204, 164, 9, 0.5);
+  --accentUp1Fade75: rgba(204, 164, 9, 0.25);
+  --accentUp2: #f8ce27;
+  --accentUp2Fade50: rgba(248, 206, 39, 0.5);
+  --accentUp2Fade75: rgba(248, 206, 39, 0.25);
+  --accentUp3: #fcdf6d;
+  --accentUp3Fade50: rgba(252, 223, 109, 0.5);
+  --accentUp3Fade75: rgba(252, 223, 109, 0.25);
+  --accentUp4: #fef0b5;
+  --accentUp4Fade50: rgba(254, 240, 181, 0.5);
+  --accentUp4Fade75: rgba(254, 240, 181, 0.25);
+  --colorTitle: #554a39;
+  --colorH1: #554a39;
+  --colorH2: #6e4a28;
+  --colorH3: #412b17;
+  --coloraccent: #836a07;
+  --colorStrong: var(--colorBody);
+  --colorHighlight: #f6f0e2;
+  --colorShadow: #2d2d2f;
+  --colorMenuGlow: #ffdd00;
+  --colorPurviewRotate: 245deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --borderH1: 2px solid var(--colorH1);
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontFamilyPlaceholder: var(--fontFamilyInput);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #controls {
-  top: 30px;
-  left: 0;
-  padding: 0;
+body.vtt.game.system-scion .shen {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-shen.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-shen.png");
 }
 
-body.vtt.game.system-scion #controls .scene-control {
-  height: 20px;
-  width: 25px;
-  font-size: 20px;
-  line-height: normal;
+body.vtt.game.system-scion .teotl {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teotl.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-teotl.png");
+  --accentDown4: #201b28;
+  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
+  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
+  --accentDown3: #3b285e;
+  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
+  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
+  --accentDown2: #5328a2;
+  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
+  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
+  --accentDown1: #6927e7;
+  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
+  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
+  --accent: #8e52ff;
+  --accentFade50: rgba(142, 82, 255, 0.5);
+  --accentFade75: rgba(142, 82, 255, 0.25);
+  --accentUp1: #a575ff;
+  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
+  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
+  --accentUp2: #bb97ff;
+  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
+  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
+  --accentUp3: #d2baff;
+  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
+  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
+  --accentUp4: #e8dcff;
+  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
+  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
+  --colorTitle: #000fb8;
+  --colorH1: #000fb8;
+  --colorH2: #4757ff;
+  --colorH3: #000b85;
+  --coloraccent: #8e52ff;
+  --colorStrong: var(--colorBody);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #00ffff;
+  --colorPurviewRotate: 100deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Poiret One";
+  --fontWeightTitle: bold;
+  --fontFamilyH1: "Poiret One";
+  --fontWeightH1: bold;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Elektra";
+  --fontFamilyH3: "Poiret One";
+  --fontSizeH3: 20px;
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --fontVariantH3: small-caps;
+  --fontWeightH3: normal;
+  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
+  --fontFamilyBody: "Poiret One";
+  --lineHeightBody: var(--fontSizeBody);
+  --textShadowBody: 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black;
+  --fontVariantStrong: var(--fontVariantBody);
+  --fontWeightStrong: normal;
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Basic Controls"] li[title="Measure Distance"] {
-  display: none;
+body.vtt.game.system-scion .theoi {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-theoi.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-theoi.png");
+  --accentDown4: #201b28;
+  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
+  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
+  --accentDown3: #3b285e;
+  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
+  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
+  --accentDown2: #5328a2;
+  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
+  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
+  --accentDown1: #6927e7;
+  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
+  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
+  --accent: #8e52ff;
+  --accentFade50: rgba(142, 82, 255, 0.5);
+  --accentFade75: rgba(142, 82, 255, 0.25);
+  --accentUp1: #a575ff;
+  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
+  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
+  --accentUp2: #bb97ff;
+  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
+  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
+  --accentUp3: #d2baff;
+  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
+  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
+  --accentUp4: #e8dcff;
+  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
+  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
+  --colorTitle: #000fb8;
+  --colorH1: #000fb8;
+  --colorH2: #4757ff;
+  --colorH3: #000b85;
+  --coloraccent: #8e52ff;
+  --colorStrong: var(--colorBody);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #00ffff;
+  --colorPurviewRotate: 100deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Poiret One";
+  --fontWeightTitle: bold;
+  --fontFamilyH1: "Poiret One";
+  --fontWeightH1: bold;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Elektra";
+  --fontFamilyH3: "Poiret One";
+  --fontSizeH3: 20px;
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --fontVariantH3: small-caps;
+  --fontWeightH3: normal;
+  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
+  --fontFamilyBody: "Poiret One";
+  --lineHeightBody: var(--fontSizeBody);
+  --textShadowBody: 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black;
+  --fontVariantStrong: var(--fontVariantBody);
+  --fontWeightStrong: normal;
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Measurement Controls"] {
-  display: none;
+body.vtt.game.system-scion .tuathaDeDanann {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-tuathaDeDanann.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-tuathaDeDanann.png");
+  --accentDown4: #101410;
+  --accentDown4Fade50: rgba(16, 20, 16, 0.5);
+  --accentDown4Fade75: rgba(16, 20, 16, 0.25);
+  --accentDown3: #1c2d1b;
+  --accentDown3Fade50: rgba(28, 45, 27, 0.5);
+  --accentDown3Fade75: rgba(28, 45, 27, 0.25);
+  --accentDown2: #234b21;
+  --accentDown2Fade50: rgba(35, 75, 33, 0.5);
+  --accentDown2Fade75: rgba(35, 75, 33, 0.25);
+  --accentDown1: #266e22;
+  --accentDown1Fade50: rgba(38, 110, 34, 0.5);
+  --accentDown1Fade75: rgba(38, 110, 34, 0.25);
+  --accent: #25951f;
+  --accentFade50: rgba(37, 149, 31, 0.5);
+  --accentFade75: rgba(37, 149, 31, 0.25);
+  --accentUp1: #2bd422;
+  --accentUp1Fade50: rgba(43, 212, 34, 0.5);
+  --accentUp1Fade75: rgba(43, 212, 34, 0.25);
+  --accentUp2: #55eb4d;
+  --accentUp2Fade50: rgba(85, 235, 77, 0.5);
+  --accentUp2Fade75: rgba(85, 235, 77, 0.25);
+  --accentUp3: #8af684;
+  --accentUp3Fade50: rgba(138, 246, 132, 0.5);
+  --accentUp3Fade75: rgba(138, 246, 132, 0.25);
+  --accentUp4: #c2fdbf;
+  --accentUp4Fade50: rgba(194, 253, 191, 0.5);
+  --accentUp4Fade75: rgba(194, 253, 191, 0.25);
+  --colorTitle: #296f17;
+  --colorH1: #296f17;
+  --colorH2: #0d3005;
+  --colorH3: #19430e;
+  --coloraccent: #25951f;
+  --colorStrong: var(--colorBody);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #00ff00;
+  --colorPurviewRotate: 330deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Berkshire Swash";
+  --fontSizeTitle: 40px;
+  --fontFamilyH1: "Berkshire Swash";
+  --fontVariantH1: normal;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Della Respira";
+  --fontFamilyH3: "Della Respira";
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --fontStyleH3: italic;
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Tile Controls"] li[title=""] {
-  display: none;
+body.vtt.game.system-scion .nemetondevos {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-nemetondevos.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-nemetondevos.png");
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Rectangle"] {
-  display: none;
+body.vtt.game.system-scion .orisha {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-orisha.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-orisha.png");
+  --accentDown4: #201b28;
+  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
+  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
+  --accentDown3: #3b285e;
+  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
+  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
+  --accentDown2: #5328a2;
+  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
+  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
+  --accentDown1: #6927e7;
+  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
+  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
+  --accent: #8e52ff;
+  --accentFade50: rgba(142, 82, 255, 0.5);
+  --accentFade75: rgba(142, 82, 255, 0.25);
+  --accentUp1: #a575ff;
+  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
+  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
+  --accentUp2: #bb97ff;
+  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
+  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
+  --accentUp3: #d2baff;
+  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
+  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
+  --accentUp4: #e8dcff;
+  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
+  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
+  --colorTitle: #000fb8;
+  --colorH1: #000fb8;
+  --colorH2: #4757ff;
+  --colorH3: #000b85;
+  --coloraccent: #8e52ff;
+  --colorStrong: var(--colorBody);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #00ffff;
+  --colorPurviewRotate: 100deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Poiret One";
+  --fontWeightTitle: bold;
+  --fontFamilyH1: "Poiret One";
+  --fontWeightH1: bold;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Elektra";
+  --fontFamilyH3: "Poiret One";
+  --fontSizeH3: 20px;
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --fontVariantH3: small-caps;
+  --fontWeightH3: normal;
+  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
+  --fontFamilyBody: "Poiret One";
+  --lineHeightBody: var(--fontSizeBody);
+  --textShadowBody: 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black;
+  --fontVariantStrong: var(--fontVariantBody);
+  --fontWeightStrong: normal;
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: var(--textShadowBody);
+  --fontFamilyBubbleTitle: var(--fontFamilyBody);
+  --fontFamilyBubbleBody: var(--fontFamilyBody);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Ellipse"] {
-  display: none;
+body.vtt.game.system-scion .yazata {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-yazata.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-yazata.png");
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Polygon"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Freehand"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Clear Drawings"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Wall Controls"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Reset Fog of War"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Clear Lights"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Ambient Sound Controls"] li[title="Clear Sounds"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Journal Notes"] li[title="Clear Notes"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control .control-tools {
-  height: 25px;
-  top: -25px;
-  left: 35px;
-  position: relative;
-  margin: 0 0 -25px;
-}
-
-body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool {
-  display: inline-block;
-  height: 25px;
-  font-size: 20px;
-  line-height: normal;
-  margin: 0 3px;
-}
-
-body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool i {
-  width: 25px;
-}
-
-body.vtt.game.system-scion #controls .scene-control.active .control-tools {
-  display: flex;
-}
-
-body.vtt.game.system-scion #sidebar {
-  transform: scale(0.75);
-  transform-origin: 100% 0%;
-  height: calc(99vh / 0.75);
-  max-height: calc(99vh / 0.75);
-}
-
-body.vtt.game.system-scion #sidebar #chat-log {
-  max-height: calc(100vh / 0.75);
-}
-
-body.vtt.game.system-scion #sidebar #chat-controls {
-  width: calc(100% * 0.75);
-  flex: 0 0 calc(28px / 0.75);
-  top: -55px;
-  position: relative;
-  transform: scale(calc(1/0.75));
-  transform-origin: 0% 100%;
-}
-
-body.vtt.game.system-scion #sidebar #chat-form {
-  width: calc(100% * 0.75);
-  flex: 0.1 0 calc(100px * 0.75);
-  transform: scale(calc(1 / 0.75));
-  transform-origin: 0% 100%;
+body.vtt.game.system-scion .teros {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teros.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-teros.png");
 }
 
 body.vtt.game.system-scion div.sheet.scion {
@@ -407,8 +807,6 @@ body.vtt.game.system-scion div.sheet.scion {
   background: none;
   margin: 0;
   /* #region Element Default Styles */
-  /* #endregion */
-  /* #region Editable Input Fields */
   /* #endregion */
   /* #region Single-Purpose Classes */
   /* #endregion */
@@ -427,31 +825,54 @@ body.vtt.game.system-scion div.sheet.scion {
 }
 
 body.vtt.game.system-scion div.sheet.scion * {
-  color: var(--fontColorBody);
+  color: var(--colorBody);
   font-family: var(--fontFamilyBody);
   font-size: var(--fontSizeBody);
   font-weight: var(--fontWeightBody);
+  font-style: var(--fontStyleBody);
+  font-variant: var(--fontVariantBody);
+  text-transform: var(--textTransformBody);
   text-shadow: var(--textShadowBody);
   line-height: var(--lineHeightBody);
 }
 
 body.vtt.game.system-scion div.sheet.scion textarea,
 body.vtt.game.system-scion div.sheet.scion input[type="text"],
-body.vtt.game.system-scion div.sheet.scion select {
-  margin: 0px;
-  padding: 0px;
+body.vtt.game.system-scion div.sheet.scion select,
+body.vtt.game.system-scion div.sheet.scion .contentEditable {
+  margin: 0 4px;
+  padding: var(--paddingInput);
+  line-height: var(--lineHeightInput);
+  max-height: var(--maxHeightInput);
+  min-height: var(--maxHeightInput);
+  font-family: var(--fontFamilyInput);
+  font-size: var(--fontSizeInput);
+  font-style: var(--fontStyleInput);
+  font-variant: var(--fontVariantInput);
+  font-weight: var(--fontWeightInput);
+  text-transform: var(--textTransformInput);
+  text-indent: var(--textIndentInput);
+  text-shadow: var(--textShadowInput);
   box-shadow: none;
-  border: none;
+  border: var(--borderInput);
+  box-sizing: content-box;
   outline: none;
 }
 
 body.vtt.game.system-scion div.sheet.scion textarea:invalid,
 body.vtt.game.system-scion div.sheet.scion input[type="text"]:invalid,
-body.vtt.game.system-scion div.sheet.scion select:invalid {
-  color: var(--grey3);
-  font-family: "Della Respira";
-  font-style: italic;
-  text-shadow: none;
+body.vtt.game.system-scion div.sheet.scion select:invalid,
+body.vtt.game.system-scion div.sheet.scion .contentEditable:invalid {
+  color: var(--colorPlaceholder);
+  font-family: var(--fontFamilyPlaceholder);
+  font-size: var(--fontSizePlaceholder);
+  font-style: var(--fontStylePlaceholder);
+  font-variant: var(--fontVariantPlaceholder);
+  font-weight: var(--fontWeightPlaceholder);
+  line-height: var(--lineHeightPlaceholder);
+  text-transform: var(--textTransformPlaceholder);
+  text-indent: var(--textIndentPlaceholder);
+  text-shadow: var(--textShadowPlaceholder);
 }
 
 body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sheet.scion .h1, body.vtt.game.system-scion div.sheet.scion .h2, body.vtt.game.system-scion div.sheet.scion .h3 {
@@ -464,72 +885,62 @@ body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sh
 }
 
 body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion .h1 {
-  color: var(--fontColorHeading1);
-  background: var(--bgHeading1);
-  padding: var(--paddingHeading1);
-  max-height: var(--maxHeightHeading1);
-  line-height: var(--lineHeightHeading1);
-  font-family: var(--fontFamilyHeading1);
-  font-style: var(--fontStyleHeading1);
-  font-variant: var(--fontVariantHeading1);
-  font-weight: var(--fontWeightHeading1);
-  font-size: var(--fontSizeHeading1);
-  text-transform: var(--textTransformHeading1);
-  text-shadow: var(--textShadowHeading1);
-  border-bottom: var(--borderBottomHeading1);
+  color: var(--colorH1);
+  background: var(--bgH1);
+  padding: var(--paddingH1);
+  max-height: var(--maxHeightH1);
+  min-height: var(--maxHeightH1);
+  line-height: var(--lineHeightH1);
+  font-family: var(--fontFamilyH1);
+  font-style: var(--fontStyleH1);
+  font-variant: var(--fontVariantH1);
+  font-weight: var(--fontWeightH1);
+  font-size: var(--fontSizeH1);
+  text-transform: var(--textTransformH1);
+  text-shadow: var(--textShadowH1);
+  text-indent: var(--textIndentH1);
+  border-bottom: var(--borderH1);
 }
 
 body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion .h2 {
-  color: var(--bgMatte);
-  background: var(--bgHeading2);
-  padding: var(--paddingHeading2);
-  max-height: var(--maxHeightHeading2);
-  line-height: var(--lineHeightHeading2);
-  font-family: var(--fontFamilyHeading2);
-  font-style: var(--fontStyleHeading2);
-  font-variant: var(--fontVariantHeading2);
-  font-weight: var(--fontWeightHeading2);
-  font-size: var(--fontSizeHeading2);
-  text-transform: var(--textTransformHeading2);
-  text-shadow: var(--textShadowHeading2);
-  text-indent: 10px;
-  border-bottom: var(--borderBottomHeading2);
+  color: var(--colorH2);
+  background: var(--bgH2);
+  padding: var(--paddingH2);
+  max-height: var(--maxHeightH2);
+  min-height: var(--maxHeightH3);
+  line-height: var(--lineHeightH2);
+  font-family: var(--fontFamilyH2);
+  font-style: var(--fontStyleH2);
+  font-variant: var(--fontVariantH2);
+  font-weight: var(--fontWeightH2);
+  font-size: var(--fontSizeH2);
+  text-transform: var(--textTransformH2);
+  text-shadow: var(--textShadowH2);
+  text-indent: var(--textIndentH2);
+  border-bottom: var(--borderH2);
 }
 
 body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sheet.scion .h3 {
-  color: var(--fontColorHeading3);
-  background: var(--bgHeading3);
-  padding: var(--paddingHeading3);
-  max-height: var(--maxHeightHeading3);
-  line-height: var(--lineHeightHeading3);
-  font-family: var(--fontFamilyHeading3);
-  font-style: var(--fontStyleHeading3);
-  font-variant: var(--fontVariantHeading3);
-  font-weight: var(--fontWeightHeading3);
-  font-size: var(--fontSizeHeading3);
-  text-transform: var(--textTransformHeading3);
-  text-shadow: var(--textShadowHeading3);
-  border-bottom: var(--borderBottomHeading3);
+  color: var(--colorH3);
+  background: var(--bgH3);
+  padding: var(--paddingH3);
+  max-height: var(--maxHeightH3);
+  min-height: var(--maxHeightH3);
+  line-height: var(--lineHeightH3);
+  font-family: var(--fontFamilyH3);
+  font-style: var(--fontStyleH3);
+  font-variant: var(--fontVariantH3);
+  font-weight: var(--fontWeightH3);
+  font-size: var(--fontSizeH3);
+  text-transform: var(--textTransformH3);
+  text-shadow: var(--textShadowH3);
+  text-indent: var(--textIndentH3);
+  border-bottom: var(--borderH3);
 }
 
 body.vtt.game.system-scion div.sheet.scion label {
   font-size: var(--fontSizeBody);
-  margin: 0 0.25rem;
-  min-height: 23px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .contentEditable {
-  text-indent: 5px;
-  box-shadow: none;
-  outline: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion .contentEditable.insetFrame {
-  min-height: 28px;
-  font-weight: bold;
-  border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  border: inset 3px var(--scale6);
+  margin: 0 4px;
 }
 
 body.vtt.game.system-scion div.sheet.scion .readonly {
@@ -539,22 +950,22 @@ body.vtt.game.system-scion div.sheet.scion .readonly {
 }
 
 body.vtt.game.system-scion div.sheet.scion .insetFrame {
-  color: var(--fontColorBody);
+  color: var(--colorBody);
   font-family: var(--fontFamilyBody);
   font-size: var(--fontSizeBody);
   font-weight: var(--fontWeightBody);
   border-radius: 1rem;
-  background: var(--scaleFullFade2);
-  border: inset 3px var(--scale6);
+  background: var(--accentDown3Fade75);
+  border: inset 3px var(--accentUp1);
 }
 
 body.vtt.game.system-scion div.sheet.scion .outsetFrame {
-  color: var(--fontColorBody);
+  color: var(--colorBody);
   font-family: var(--fontFamilyBody);
   font-size: var(--fontSizeBody);
   border-radius: 1rem;
-  background: var(--greyFullFade10);
-  border: outset 3px var(--scale6);
+  background: var(--accentUp3Fade75);
+  border: outset 3px var(--accentUp1);
 }
 
 body.vtt.game.system-scion div.sheet.scion .hidden {
@@ -562,7 +973,7 @@ body.vtt.game.system-scion div.sheet.scion .hidden {
 }
 
 body.vtt.game.system-scion div.sheet.scion .text {
-  color: var(--fontColorBody);
+  color: var(--colorBody);
   font-size: var(--fontSizeBody);
 }
 
@@ -595,14 +1006,20 @@ body.vtt.game.system-scion div.sheet.scion .spaceBetween > div:last-child, body.
 }
 
 body.vtt.game.system-scion div.sheet.scion .placeholder {
-  color: var(--grey3);
-  font-family: "Della Respira";
-  font-style: italic;
-  text-shadow: none;
+  color: var(--colorPlaceholder);
+  font-family: var(--fontFamilyPlaceholder);
+  font-size: var(--fontSizePlaceholder);
+  font-style: var(--fontStylePlaceholder);
+  font-variant: var(--fontVariantPlaceholder);
+  font-weight: var(--fontWeightPlaceholder);
+  line-height: var(--lineHeightPlaceholder);
+  text-transform: var(--textTransformPlaceholder);
+  text-indent: var(--textIndentPlaceholder);
+  text-shadow: var(--textShadowPlaceholder);
 }
 
 body.vtt.game.system-scion div.sheet.scion .greyText {
-  color: var(--grey5);
+  color: var(--grey);
 }
 
 body.vtt.game.system-scion div.sheet.scion .noBG {
@@ -756,14 +1173,14 @@ body.vtt.game.system-scion div.sheet.scion .skill {
   background-image: url("../images/textures/stoneWhite.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
-  border: 4px outset var(--grey10);
-  box-shadow: 2px 2px 5px var(--grey3), 2px 2px 5px var(--grey3), 2px 2px 5px var(--grey3);
+  border: 4px outset var(--white);
+  box-shadow: 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2);
 }
 
 body.vtt.game.system-scion div.sheet.scion .skill.empty {
   background-image: url("../images/textures/stoneGrey.jpg");
-  border: 4px inset var(--grey5);
-  box-shadow: inset 2px 2px 4px var(--grey5), inset 2px 2px 4px var(--grey5), inset 2px 2px 4px var(--grey5);
+  border: 4px inset var(--grey);
+  box-shadow: inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey);
   opacity: 0.75;
   filter: blur(0.5px);
 }
@@ -779,7 +1196,7 @@ body.vtt.game.system-scion div.sheet.scion .popout#skillList {
   height: 462px;
   left: 94%;
   top: 0;
-  border: 10px outset var(--grey6);
+  border: 10px outset var(--greyUp1);
   background-image: url("../images/textures/stoneGrey.jpg");
   box-sizing: content-box;
   border-radius: 40px;
@@ -848,7 +1265,7 @@ body.vtt.game.system-scion div.sheet.scion .title {
   width: calc(100% / var(--fontScaleTitle));
   max-height: var(--maxHeightTitle);
   padding: var(--paddingTitle);
-  color: var(--fontColorTitle);
+  color: var(--colorTitle);
   background: var(--bgTitle);
   font-family: var(--fontFamilyTitle);
   font-style: var(--fontStyleTitle);
@@ -865,39 +1282,39 @@ body.vtt.game.system-scion div.sheet.scion .title {
 }
 
 body.vtt.game.system-scion div.sheet.scion .surTitle {
-  width: calc(100% / var(--fontScaleHeading2));
-  padding: var(--paddingHeading2);
-  color: var(--fontColorHeading2);
-  background: transparent;
-  font-family: var(--fontFamilyHeading2);
-  font-style: var(--fontStyleHeading2);
-  font-variant: var(--fontVariantHeading2);
-  font-weight: var(--fontWeightHeading2);
-  font-size: var(--fontSizeHeading2);
-  line-height: var(--lineHeightHeading2);
-  text-transform: var(--textTransformHeading2);
-  text-shadow: var(--textShadowHeading2);
+  width: calc(100% / var(--fontScaleH2));
+  padding: var(--paddingH2);
+  color: var(--colorH2);
+  background: var;
+  font-family: var(--fontFamilyH2);
+  font-style: var(--fontStyleH2);
+  font-variant: var(--fontVariantH2);
+  font-weight: var(--fontWeightH2);
+  font-size: var(--fontSizeH2);
+  line-height: var(--lineHeightH2);
+  text-transform: var(--textTransformH2);
+  text-shadow: var(--textShadowH2);
   text-align: center;
-  transform: scaleX(var(--fontScaleHeading2));
+  transform: scaleX(var(--fontScaleH2));
   transform-origin: 0% 0%;
   border: none;
 }
 
 body.vtt.game.system-scion div.sheet.scion .subTitle {
-  width: calc(100% / var(--fontScaleHeading3));
-  padding: var(--paddingHeading3);
-  color: var(--fontColorHeading3);
-  background: var(--bgHeading3);
-  font-family: var(--fontFamilyHeading3);
-  font-style: var(--fontStyleHeading3);
-  font-variant: var(--fontVariantHeading3);
-  font-weight: var(--fontWeightHeading3);
-  font-size: var(--fontSizeHeading3);
-  line-height: var(--lineHeightHeading3);
-  text-transform: var(--textTransformHeading3);
-  text-shadow: var(--textShadowHeading3);
+  width: calc(100% / var(--fontScaleH3));
+  padding: var(--paddingH3);
+  color: var(--colorH3);
+  background: var(--bgH3);
+  font-family: var(--fontFamilyH3);
+  font-style: var(--fontStyleH3);
+  font-variant: var(--fontVariantH3);
+  font-weight: var(--fontWeightH3);
+  font-size: var(--fontSizeH3);
+  line-height: var(--lineHeightH3);
+  text-transform: var(--textTransformH3);
+  text-shadow: var(--textShadowH3);
   text-align: center;
-  transform: scaleX(var(--fontScaleHeading3));
+  transform: scaleX(var(--fontScaleH3));
   transform-origin: 0% 0%;
   border: none;
 }
@@ -1009,20 +1426,20 @@ body.vtt.game.system-scion div.sheet.scion nav.tabs .item {
   font-weight: bold;
   font-size: 0.75rem;
   text-shadow: none;
-  color: var(--scale9);
-  background-color: var(--scale4);
+  color: var(--accentUp4);
+  background-color: var(--accentDown1);
   border-radius: 2rem;
-  box-shadow: 0px 0px 4px var(--scale2), 0px 0px 4px var(--scale2), 0px 0px 4px var(--scale2);
+  box-shadow: 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3);
 }
 
 body.vtt.game.system-scion div.sheet.scion nav.tabs .item:hover {
-  background-color: var(--scale9);
-  color: var(--scale4);
+  background-color: var(--accentUp4);
+  color: var(--accentDown1);
 }
 
 body.vtt.game.system-scion div.sheet.scion nav.tabs .item.active {
-  background-color: var(--scale7);
-  color: var(--scale2);
+  background-color: var(--accentUp2);
+  color: var(--accentDown3);
 }
 
 body.vtt.game.system-scion div.sheet.scion .window-content form.main section .tab:not(.active) {
@@ -1273,524 +1690,12 @@ body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact .bubbleTit
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.sheet.scion header.window-header {
-  height: 40px;
-  width: 100%;
-  margin: 0 0 -40px 0;
-  display: block;
-  flex: none;
-  position: relative;
-  z-index: 2;
-  overflow: visible;
-  border: none;
-  pointer-events: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header h4.window-title {
-  display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button {
-  display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close {
-  height: 40px;
-  width: 40px;
-  position: absolute;
-  top: -20px;
-  right: 20px;
-  display: block;
-  pointer-events: all;
-  font-size: var(--fontSizeBody);
-  color: white;
-  line-height: 50px;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close i {
-  display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header::before {
-  content: "";
-  height: 100%;
-  width: 100%;
-  display: block;
-  position: relative;
-  cursor: move;
-  pointer-events: all;
-}
-
-body.vtt.game.system-scion div.sheet.scion section.window-content {
-  padding: 0px;
-  background: transparent;
-  pointer-events: none;
-  overflow: visible;
-  position: relative;
-  z-index: 1;
-  max-height: 100%;
-}
-
 body.vtt.game.system-scion div.sheet.scion section.window-content form.editable {
   pointer-events: all;
 }
 
 body.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
   display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor {
-  /* .aesir {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: ;
-  $shadowColor: ;
-
-  @include set-colors();
-} */
-  /* .deva {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: ;
-  $shadowColor: ;
-
-  @include set-colors();
-} */
-  /* .kami {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: ;
-  $shadowColor: ;
-
-  @include set-colors();
-} */
-  /* .loa {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: ;
-  $shadowColor: ;
-
-  @include set-colors();
-} */
-  /* .manitou {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: ;
-  $shadowColor: ;
-
-  @include set-colors();
-} */
-  /* .shen {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: $matteColor;
-  $shadowColor: $bodyColor;
-
-  @include set-colors();
-} */
-  /* .teotl {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: $matteColor;
-  $shadowColor: $bodyColor;
-
-  @include set-colors();
-} */
-  /* .nemetondevos {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: $matteColor;
-  $shadowColor: $bodyColor;
-
-  @include set-colors();
-} */
-  /* .orisha {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: $matteColor;
-  $shadowColor: $bodyColor;
-
-  @include set-colors();
-} */
-  /* .yazata {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: $matteColor;
-  $shadowColor: $bodyColor;
-
-  @include set-colors();
-} */
-  /* .teros {
-  $matteColor: ;
-  $headingColor1: ;
-  $headingColor2: ;
-  $headingColor3: ;
-  $accentColor: ;
-  $bodyColor: ;
-  $highlightColor: $matteColor;
-  $shadowColor: $bodyColor;
-
-  @include set-colors();
-} */
-  /* .deva {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
-    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
-    
-    @include set-typography((
-        body: "Gothic Ultra",
-        h1: "Zanzabar",
-        h2: "Carolingia",
-        h3: "Gothic Ultra"
-    ));
-  } */
-  /* .kami {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
-    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
-    
-    @include set-typography((
-        body: "Gothic Ultra",
-        h1: "Zanzabar",
-        h2: "Carolingia",
-        h3: "Gothic Ultra"
-    ));
-  } */
-  /* .manitou {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
-    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
-    
-    @include set-typography((
-        body: "Gothic Ultra",
-        h1: "Zanzabar",
-        h2: "Carolingia",
-        h3: "Gothic Ultra"
-    ));
-  } */
-  /* .shen {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
-    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
-    
-    @include set-typography((
-        body: "Gothic Ultra",
-        h1: "Zanzabar",
-        h2: "Carolingia",
-        h3: "Gothic Ultra"
-    ));
-  } */
-  /* .nemetondevos {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
-    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
-    
-    @include set-typography((
-        body: "Gothic Ultra",
-        h1: "Zanzabar",
-        h2: "Carolingia",
-        h3: "Gothic Ultra"
-    ));
-  } */
-  /* .yazata {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
-    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
-    
-    @include set-typography((
-        body: "Gothic Ultra",
-        h1: "Zanzabar",
-        h2: "Carolingia",
-        h3: "Gothic Ultra"
-    ));
-  } */
-  /* .teros {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/  .png");
-    --menuImage: url("../images/actor-sheet/menu/MenuRosette  .png");
-    
-    @include set-typography((
-        body: "Gothic Ultra",
-        h1: "Zanzabar",
-        h2: "Carolingia",
-        h3: "Gothic Ultra"
-    ));
-  } */
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .netjer {
-  --scale0: black;
-  --scaleFade0: rgba(0, 0, 0, 0.5);
-  --scaleFullFade0: rgba(0, 0, 0, 0.25);
-  --scale1: #100e0b;
-  --scaleFade1: rgba(16, 14, 11, 0.5);
-  --scaleFullFade1: rgba(16, 14, 11, 0.25);
-  --scale2: #261b12;
-  --scaleFade2: rgba(38, 27, 18, 0.5);
-  --scaleFullFade2: rgba(38, 27, 18, 0.25);
-  --scale3: #402813;
-  --scaleFade3: rgba(64, 40, 19, 0.5);
-  --scaleFullFade3: rgba(64, 40, 19, 0.25);
-  --scale4: #5f3510;
-  --scaleFade4: rgba(95, 53, 16, 0.5);
-  --scaleFullFade4: rgba(95, 53, 16, 0.25);
-  --scale5: #834107;
-  --scaleFade5: rgba(131, 65, 7, 0.5);
-  --scaleFullFade5: rgba(131, 65, 7, 0.25);
-  --scale6: #cc6409;
-  --scaleFade6: rgba(204, 100, 9, 0.5);
-  --scaleFullFade6: rgba(204, 100, 9, 0.25);
-  --scale7: #f88927;
-  --scaleFade7: rgba(248, 137, 39, 0.5);
-  --scaleFullFade7: rgba(248, 137, 39, 0.25);
-  --scale8: #fcb06d;
-  --scaleFade8: rgba(252, 176, 109, 0.5);
-  --scaleFullFade8: rgba(252, 176, 109, 0.25);
-  --scale9: #fed7b5;
-  --scaleFade9: rgba(254, 215, 181, 0.5);
-  --scaleFullFade9: rgba(254, 215, 181, 0.25);
-  --scale10: white;
-  --scaleFade10: rgba(255, 255, 255, 0.5);
-  --scaleFullFade10: rgba(255, 255, 255, 0.25);
-  --bgMatte: #f6f0e2;
-  --shadowColorBright: rgba(246, 240, 226, 0.5);
-  --shadowColorDark: rgba(45, 45, 47, 0.5);
-  --fontColorTitle: #554a39;
-  --bgTitle: transparent;
-  --fontColorBody: #2d2d2f;
-  --fontColorHeading1: #554a39;
-  --bgHeading1: transparent;
-  --fontColorHeading2: #6e4a28;
-  --bgHeading2: linear-gradient(270deg, var(--scale3), var(--scale7));
-  --fontColorHeading3: #412b17;
-  --bgHeading3: transparent;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .theoi {
-  --scale0: black;
-  --scaleFade0: rgba(0, 0, 0, 0.5);
-  --scaleFullFade0: rgba(0, 0, 0, 0.25);
-  --scale1: #201b28;
-  --scaleFade1: rgba(32, 27, 40, 0.5);
-  --scaleFullFade1: rgba(32, 27, 40, 0.25);
-  --scale2: #3b285e;
-  --scaleFade2: rgba(59, 40, 94, 0.5);
-  --scaleFullFade2: rgba(59, 40, 94, 0.25);
-  --scale3: #5328a2;
-  --scaleFade3: rgba(83, 40, 162, 0.5);
-  --scaleFullFade3: rgba(83, 40, 162, 0.25);
-  --scale4: #6927e7;
-  --scaleFade4: rgba(105, 39, 231, 0.5);
-  --scaleFullFade4: rgba(105, 39, 231, 0.25);
-  --scale5: #8e52ff;
-  --scaleFade5: rgba(142, 82, 255, 0.5);
-  --scaleFullFade5: rgba(142, 82, 255, 0.25);
-  --scale6: #a575ff;
-  --scaleFade6: rgba(165, 117, 255, 0.5);
-  --scaleFullFade6: rgba(165, 117, 255, 0.25);
-  --scale7: #bb97ff;
-  --scaleFade7: rgba(187, 151, 255, 0.5);
-  --scaleFullFade7: rgba(187, 151, 255, 0.25);
-  --scale8: #d2baff;
-  --scaleFade8: rgba(210, 186, 255, 0.5);
-  --scaleFullFade8: rgba(210, 186, 255, 0.25);
-  --scale9: #e8dcff;
-  --scaleFade9: rgba(232, 220, 255, 0.5);
-  --scaleFullFade9: rgba(232, 220, 255, 0.25);
-  --scale10: white;
-  --scaleFade10: rgba(255, 255, 255, 0.5);
-  --scaleFullFade10: rgba(255, 255, 255, 0.25);
-  --bgMatte: #ffffff;
-  --shadowColorBright: rgba(255, 255, 255, 0.5);
-  --shadowColorDark: rgba(0, 5, 56, 0.5);
-  --fontColorTitle: #000fb8;
-  --bgTitle: transparent;
-  --fontColorBody: #000538;
-  --fontColorHeading1: #000fb8;
-  --bgHeading1: transparent;
-  --fontColorHeading2: #4757ff;
-  --bgHeading2: linear-gradient(270deg, var(--scale3), var(--scale7));
-  --fontColorHeading3: #000b85;
-  --bgHeading3: transparent;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .tuathaDeDanann {
-  --scale0: black;
-  --scaleFade0: rgba(0, 0, 0, 0.5);
-  --scaleFullFade0: rgba(0, 0, 0, 0.25);
-  --scale1: #101410;
-  --scaleFade1: rgba(16, 20, 16, 0.5);
-  --scaleFullFade1: rgba(16, 20, 16, 0.25);
-  --scale2: #1c2d1b;
-  --scaleFade2: rgba(28, 45, 27, 0.5);
-  --scaleFullFade2: rgba(28, 45, 27, 0.25);
-  --scale3: #234b21;
-  --scaleFade3: rgba(35, 75, 33, 0.5);
-  --scaleFullFade3: rgba(35, 75, 33, 0.25);
-  --scale4: #266e22;
-  --scaleFade4: rgba(38, 110, 34, 0.5);
-  --scaleFullFade4: rgba(38, 110, 34, 0.25);
-  --scale5: #25951f;
-  --scaleFade5: rgba(37, 149, 31, 0.5);
-  --scaleFullFade5: rgba(37, 149, 31, 0.25);
-  --scale6: #2bd422;
-  --scaleFade6: rgba(43, 212, 34, 0.5);
-  --scaleFullFade6: rgba(43, 212, 34, 0.25);
-  --scale7: #55eb4d;
-  --scaleFade7: rgba(85, 235, 77, 0.5);
-  --scaleFullFade7: rgba(85, 235, 77, 0.25);
-  --scale8: #8af684;
-  --scaleFade8: rgba(138, 246, 132, 0.5);
-  --scaleFullFade8: rgba(138, 246, 132, 0.25);
-  --scale9: #c2fdbf;
-  --scaleFade9: rgba(194, 253, 191, 0.5);
-  --scaleFullFade9: rgba(194, 253, 191, 0.25);
-  --scale10: white;
-  --scaleFade10: rgba(255, 255, 255, 0.5);
-  --scaleFullFade10: rgba(255, 255, 255, 0.25);
-  --bgMatte: #efffd1;
-  --shadowColorBright: rgba(239, 255, 209, 0.5);
-  --shadowColorDark: rgba(26, 33, 29, 0.5);
-  --fontColorTitle: #296f17;
-  --bgTitle: transparent;
-  --fontColorBody: #1a211d;
-  --fontColorHeading1: #296f17;
-  --bgHeading1: transparent;
-  --fontColorHeading2: #0d3005;
-  --bgHeading2: linear-gradient(270deg, var(--scale3), var(--scale7));
-  --fontColorHeading3: #19430e;
-  --bgHeading3: transparent;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .aesir {
-  --fontFamilyTitle: "Amarante";
-  --fontFamilyBody: "Overlock SC";
-  --fontFamilyHeading1: "Amarante";
-  --fontFamilyHeading2: "Overlock SC";
-  --fontFamilyHeading3: "Overlock SC";
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .loa {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/Loa.png");
-  --menuImage: url("../images/actor-sheet/menu/MenuRosetteLoa.png");
-  --glowColorMenu: #dd0000;
-  --hueRotatePurview: 225deg;
-  --fontFamilyTitle: "Finger Paint";
-  --fontFamilyBody: "Overlock SC";
-  --fontFamilyHeading1: "Finger Paint";
-  --fontFamilyHeading2: "Overlock SC";
-  --fontFamilyHeading3: "Overlock SC";
-  --fontSizeTitle: 2rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .netjer {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/Netjer.png");
-  --menuImage: url("../images/actor-sheet/menu/MenuRosetteNetjer.png");
-  --glowColorMenu: #ffdd00;
-  --hueRotatePurview: 245deg;
-  --fontFamilyTitle: "Zanzabar";
-  --fontFamilyBody: "Gothic Ultra";
-  --fontFamilyHeading1: "Zanzabar";
-  --fontFamilyHeading2: "Carolingia";
-  --fontFamilyHeading3: "Gothic Ultra";
-  --fontSizeHeading3: 1.75rem;
-  --lineHeightHeading3: 1.65rem;
-  --fontWeightHeading3: normal;
-  --fontScaleHeading3: 0.75;
-  --fontWeightHeading3: bold;
-  --borderBottomHeading1: 1px solid var(--fontColorHeading1);
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .teotl {
-  --fontFamilyTitle: "Pirata One";
-  --fontFamilyBody: "Overlock SC";
-  --fontFamilyHeading1: "Pirata One";
-  --fontFamilyHeading2: "Overlock SC";
-  --fontFamilyHeading3: "Overlock SC";
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .theoi {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/Theoi.png");
-  --menuImage: url("../images/actor-sheet/menu/MenuRosetteTheoi.png");
-  --glowColorMenu: #00ffff;
-  --hueRotatePurview: 100deg;
-  --fontFamilyTitle: "Poiret One";
-  --fontFamilyBody: "Poiret One";
-  --fontFamilyHeading1: "Poiret One";
-  --fontFamilyHeading2: "Elektra";
-  --fontFamilyHeading3: "Poiret One";
-  --textShadowBody: 0 0 0 black, 0 0 0 black, 0 0 0 black, 0 0 0 black, 0 0 0 black, 0 0 0 black;
-  --textShadowStrongText: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
-  --fontWeightStrongText: normal;
-  --fontWeightTitle: bold;
-  --fontWeightHeading1: bold;
-  --fontVariantHeading1: small-caps;
-  --fontSizeHeading3: 1.2rem;
-  --fontWeightHeading3: normal;
-  --fontWeightHeading3: bold;
-  --fontVariantHeading3: small-caps;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .tuathaDeDanann {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/Tuatha.png");
-  --menuImage: url("../images/actor-sheet/menu/MenuRosetteTuatha.png");
-  --glowColorMenu: #00ff00;
-  --hueRotatePurview: 330deg;
-  --fontFamilyTitle: "Berkshire Swash";
-  --fontFamilyBody: "Overlock SC";
-  --fontFamilyHeading1: "Berkshire Swash";
-  --fontFamilyHeading2: "Della Respira";
-  --fontFamilyHeading3: "Overlock SC";
-  --fontVariantHeading1: normal;
-  --fontSizeTitle: 2.5rem;
-  --fontStyleHeading3: italic;
-  --fontWeightHeading3: bold;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor .orisha {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/Orisha.png");
-  --menuImage: url("../images/actor-sheet/menu/MenuRosetteOrisha.png");
-  --hueRotatePurview: 250deg;
-  --glowColorMenu: #ffdd99;
-  --fontFamilyTitle: "Finger Paint";
-  --fontFamilyBody: "Overlock SC";
-  --fontFamilyHeading1: "Finger Paint";
-  --fontFamilyHeading2: "Overlock SC";
-  --fontFamilyHeading3: "Overlock SC";
-  --fontSizeTitle: 2rem;
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor.major header.window-header {
@@ -1846,7 +1751,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette .menuT
   position: relative;
   margin-top: -20px;
   margin-left: -50px !important;
-  color: var(--glowColorMenu);
+  color: var(--colorMenuGlow);
   font-family: var(--fontFamilyMenu);
   font-size: var(--fontSizeMenu);
   font-weight: bold;
@@ -1991,7 +1896,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.ci
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover {
-  filter: drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu));
+  filter: drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow));
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover + .menuText {
@@ -2046,10 +1951,6 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .c
   min-width: 50%;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .chargen-body [class*="flex"][class*="row"] {
-  align-items: flex-end;
-}
-
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body {
   grid: "skills paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
   column-gap: 0.5rem;
@@ -2097,8 +1998,8 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .f
   border-radius: 1rem;
   grid-area: virtues;
   grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
-  background-color: var(--scaleFade5);
-  border: 3px outset var(--scale5);
+  background-color: var(--accentFade50);
+  border: 3px outset var(--accent);
   box-sizing: content-box;
   margin-left: -0.35rem;
   height: calc(100% - 2 * 3px);
@@ -2127,7 +2028,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .f
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
-  filter: hue-rotate(var(--hueRotatePurview));
+  filter: hue-rotate(var(--colorPurviewRotate));
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="sun"] {
@@ -2171,7 +2072,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-b
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] > span.skill:not(.empty) {
-  box-shadow: 1px 1px 3px var(--grey3);
+  box-shadow: 1px 1px 3px var(--greyDown2);
 }
 
 body.vtt.game.system-scion div.sheet.scion.item .main {
@@ -2264,6 +2165,14 @@ body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkil
 
 body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill.invalid {
   background-image: url("../images/textures/stoneGrey.jpg");
-  border-color: var(--grey6);
-  color: var(--grey3);
+  border-color: var(--greyUp1);
+  border-style: inset;
+  color: var(--greyUp4);
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill.pantheon {
+  filter: invert(100%);
+  border-style: inset;
+  border-color: var(--greyUp3);
+  box-shadow: 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2);
 }

@@ -1,23 +1,20 @@
-/* ****************************************************** */
-/* ***************** TESTING **************************** */
-/* ****************************************************** */
-
 /* #region IMPORT */
-// @use "sass:string";
+@import 'comps/functions';
 
 @import 'params/typography'; // Fonts & Font Styling
 @import 'comps/dragula'; // Dragula Drag & Drop Components
 
 body.vtt.game.system-scion {  
   // #region Global Variables & Configuration 
+  $defaultPadding: 5px;
   @import 'params/colors'; // Color Definitions & Scaling
+  @import 'params/themes';
   @import 'comps/mixins'; // Mixins
-  @import 'params/variables'; // Variables
   // #endregion 
 
   // #region Components: Layouts, Mixins, Modules & Fundamentals 
   // #endregion 
-  @import 'window/canvas'; // Top-Level Canvas Styles
+  // @import 'window/canvas'; // Top-Level Canvas Styles
 
   // #region SHEET STYLES 
   div.sheet.scion {
@@ -30,33 +27,13 @@ body.vtt.game.system-scion {
     @import 'comps/base'; // Base Styles: HTML Elements, Headers
     @import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
     @import 'comps/tabs'; // Navigation Tabs
-    @import 'comps/bubbles'; // Clickable Summary Bubbles
+    @import 'comps/bubbles'; // Clickable Summary Bubbles    
     
-    header.window-header { @import 'window/header'; }
-    
-    section.window-content {
-      @import 'window/content';
-
-      form.editable {
-        @import 'window/form';
-        pointer-events: all;
-
-        &.main {
-          .sheet-body {
-          }
-        }
-      }
-    }
+    section.window-content form.editable { pointer-events: all; }
     div.window-resizable-handle { display: none; }
     
     // #region ACTOR SHEETS 
 
-    // #region STYLES FOR ALL ACTOR SHEETS
-    &.actor {
-      @import 'params/colorsActor';
-      @import 'params/variablesActor';
-    }
-    // #endregion
     // #region MAJOR ACTOR SHEETS
     &.actor.major {
 
@@ -66,11 +43,9 @@ body.vtt.game.system-scion {
       }
 
       .main {
-        @import 'scionActor/mainActor';
-        
+        @import 'scionActor/mainActor';        
 
         .sheet-body {
-
           .tab .chargen-body { @import "scionActor/chargen/actor-chargen"; }
           .tab .front-body { @import "scionActor/front/actor-front"; }
 
@@ -84,7 +59,7 @@ body.vtt.game.system-scion {
                     repeat: no-repeat;
                     position: center;
                 };
-                filter: hue-rotate(var(--hueRotatePurview));
+                filter: hue-rotate(var(--colorPurviewRotate));
                 &[class*="sun"] { background-image: url("../images/purviews/sun.png"); }
                 &[class*="passion"] { background-image: url("../images/purviews/passion.png"); }
                 &[class*="geasa"] { background-image: url("../images/purviews/geasa.png"); }
@@ -114,8 +89,6 @@ body.vtt.game.system-scion {
 
     // #region ITEM SHEETS
     &.item {
-      @import 'params/colorsItem';
-      @import 'params/variablesItem';
       .main {
         @import 'scionItem/mainItem';
       }

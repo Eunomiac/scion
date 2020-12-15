@@ -1,0 +1,68 @@
+@function sliceList($list, $start, $end: null) {
+    @if ($end == null) {
+      $end: length($list);
+    }
+    $newList: ();
+    @for $i from $start through $end {
+      $newList: join($newList, nth($list, $i));
+    }
+    @return $newList;
+}
+
+@function embossShadow($distance: 1px, $blur: 0px, $colorBright: var(--greyFade10), $colorDark: var(--greyFade0)) {
+    @return parseTextShadow((($distance * -1 $distance * -1 $blur $colorBright), ($distance $distance $blur $colorDark)));
+  // $shadowBright: #{$distance * -1} #{$distance * -1} #{$blur} #{$colorBright};
+  // $shadowDark: #{$distance} #{$distance} #{$blur} #{$colorDark};
+  // #{$propertyName}: join(#{$shadowBright}, #{$shadowDark}, $separator: comma);
+}
+
+@function parseTextShadow($shadows: (3 0 0 0 $c-black)) {
+    @if (length(nth($shadows, 1)) == 1) {
+      $shadows: join([$shadows], (), $separator: comma);
+    }
+    $fullShadow: ();
+    @each $shadow in $shadows {
+      $numRepeats: 1;
+      @if (length($shadow) == 5) {
+        $numRepeats: nth($shadow, 1);
+        $shadow: sliceList($shadow, 2);
+      }
+      @if (length($shadow) > 0) {
+        @for $i from 1 through $numRepeats {
+          $fullShadow: append($fullShadow, $shadow, $separator: comma);
+        }
+      }
+    }
+    // @debug "FULL SHADOW: #{$fullShadow}";
+    @return $fullShadow;
+}
+
+@function parseFilter($filter, $repeats: 1, $filterArgs...) {
+    $result: ();
+    @if $filter == "dropShadow" {
+        $filterString: "drop-shadow\(#{join((), $filterArgs, $separator: space)}\)";
+        @for $i from 1 through $repeats {
+            $result: append($result, "drop-shadow\(#{join((), $filterArgs, $separator: space)}\)", $separator: space);
+        }
+        // @debug "FILTER: #{$result}";
+        @return $result;
+    }
+}
+
+@function parseStyleList($styleList) {
+    $styleProp: str-slice(nth($styleList, 1), 1, str-index(nth($styleList, 1), "-") - 1);
+    $styleType: str-slice(nth($styleList, 1), str-index(nth($styleList, 1), "-") + 1);
+    $styleArgs: sliceList($styleList, 2);
+
+    @if $styleProp == "shadow" {
+        @if $styleType == "embossed" {
+            @return embossShadow($styleArgs...);
+        } @else if $styleType == "glow" {
+            @return parseTextShadow((nth($styleArgs, 1) 0 0 nth($styleArgs, 2) nth($styleArgs, 3)));
+        }
+    } @else if $styleProp == "filter" {
+        @return parseFilter($styleType, $styleArgs...);
+    } @else if $styleProp == "border" {
+        @return $styleArgs;
+    }
+}

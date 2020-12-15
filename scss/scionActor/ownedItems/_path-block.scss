@@ -5,8 +5,8 @@
         align: { content: start; self: start; }
 
         > span { 
-            margin: 1px; //1px 1px 3px var(--grey3)
-            &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--grey3), false, 1); }            
+            margin: 1px;
+            &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--greyDown2), false, 1); }            
         }
     }
 }

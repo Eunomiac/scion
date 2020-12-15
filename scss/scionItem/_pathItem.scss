@@ -6,8 +6,19 @@
                 margin: 0 calc((100% - 3 * 120px) / 6);
                 &.invalid {
                     background-image: url("../images/textures/stoneGrey.jpg");
-                    border-color: var(--grey6);
-                    color: var(--grey3);
+                    border: {
+                        color: var(--greyUp1);
+                        style: inset;
+                    }
+                    color: var(--greyUp4);
+                }
+                &.pantheon {
+                    filter: invert(100%);
+                    border: {
+                        style: inset;
+                        color: var(--greyUp3);
+                    }
+                    @include box-shadow(2px, 5px, var(--greyUp2));
                 }
             }
         }

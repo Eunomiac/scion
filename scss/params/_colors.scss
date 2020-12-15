@@ -4,31 +4,166 @@ $c-black: rgba(0, 0, 0, 1);
 $c-yellow: rgba(255, 255, 0, 1);
 $c-gold: rgba(255, 196, 0, 1);
 
-$matteColor: $c-white;
-$titleColor: $c-black;
-$titleBG: transparent;
-$headingColor1: $c-black;
-$headingBG1: transparent;
-$headingColor2: $c-black;
-$headingBG2: linear-gradient(270deg, var(--scale3), var(--scale7));
-$headingColor3: $c-black;
-$headingBG3: transparent;
-$accentColor: $c-gold;
-$bodyColor: $c-black;
-$highlightColor: $c-white;
-$shadowColor: $c-black;
-$hueRotatePurview: 0deg;
-
-@mixin scaled-colors ($baseColor, $name: "scale", $isGreyscale: false) {
-    @for $i from 0 through 10 {
-      $thisScale: 10% * ($i * 2 - 10);
-      $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);
-      @if $isGreyscale { $thisColor: scale-color($baseColor, $lightness: $thisScale); }
-      $thisHalfColor: scale-color($thisColor, $alpha: -50%);
-      $thisQuarterColor: scale-color($thisColor, $alpha: -75%);
-
-      --#{$name}#{$i}: #{$thisColor};
-      --#{$name}Fade#{$i}: #{$thisHalfColor};
-      --#{$name}FullFade#{$i}: #{$thisQuarterColor};
-    }
-}
+$defaultColors: (
+    "Title": $c-black,
+    "H1": $c-black,
+    "H2": $c-black,
+    "H3": $c-black,
+    "accent": $c-gold,
+    "Body": $c-black,
+    "Strong": var(--colorBody),
+    "Weak": $c-grey,
+    "Highlight": var(--whiteFade50),
+    "Shadow": var(--blackFade50),
+    "MenuGlow": var(--accent),
+    "PurviewRotate": 0deg
+  );
+$defaultBGs: (
+    "Title": transparent,
+    "H1": transparent,
+    "H2": linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2)),
+    "H3": transparent
+  );
+$defaultTypography: (
+    "Title": (
+      "fontFamily": 'Marcellus SC',
+      "fontSize": 36px,
+      "lineHeight": 44px,
+      "maxHeight": none,
+      "padding": 0px,
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": normal,
+      "textTransform": none,
+      "textIndent": 0px,
+      "textShadow": (shadow-embossed, 1px, 1px, $c-white, $c-black),
+      "border": none
+    ),
+    "H1": (
+      "fontFamily": 'Marcellus SC',
+      "fontSize": 24px,
+      "lineHeight": 32px,
+      "maxHeight": 32px,
+      "padding": 0px,
+      "fontStyle": normal,
+      "fontVariant": small-caps,
+      "fontWeight": normal,
+      "textTransform": none,
+      "textIndent": 0px,
+      "textShadow": (shadow-embossed, 1px, 1px, $c-white, $c-black),
+      "border": (border-bottom, 2px solid var(--colorH1))
+    ),
+    "H2": (
+      "fontFamily": 'Overlock SC',
+      "fontSize": 20px,
+      "lineHeight": 26px,
+      "maxHeight": 26px,
+      "padding": 0px,
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": bold,
+      "textTransform": none,
+      "textIndent": 10px,
+      "textShadow": none,
+      "border": none
+    ),
+    "H3": (
+      "fontFamily": 'Overlock SC',
+      "fontSize": 16px,
+      "lineHeight": var(--fontSizeH3),
+      "maxHeight": var(--fontSizeH3),
+      "padding": 0px,
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": bold,
+      "textTransform": none,
+      "textIndent": 0px,
+      "textShadow": none,
+      "border": none
+    ),
+    "Body": (
+      "fontFamily": 'Overlock SC',
+      "fontSize": 16px,
+      "lineHeight": var(--fontSizeBody),
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": normal,
+      "textTransform": none,
+      "textShadow": (shadow-glow, 1, 0px, $c-black)
+    ),
+    "Strong": (
+      "fontStyle": normal,
+      "fontVariant": var(--fontVariantBody),
+      "fontWeight": bold,
+      "textTransform": var(--textTransformBody),
+      "textShadow": (shadow-glow, 3, 1px, $c-black)
+    ),
+    "Weak": (
+      "fontStyle": italic,
+      "fontVariant": var(--fontVariantBody),
+      "fontWeight": normal,
+      "textTransform": var(--textTransformBody),
+      "textShadow": var(--textShadowBody)
+    ),
+    "BubbleTitle": (
+      "fontFamily": var(--fontFamilyBody),
+      "fontSize": 16px,
+      "lineHeight": 14px,
+      "maxHeight": 16px,
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": bold,
+      "textTransform": uppercase,
+      "textIndent": 0px,
+      "textShadow": (shadow-glow, 2, 1px, $c-black),
+      "border": none
+    ),
+    "BubbleBody": (
+      "fontFamily": var(--fontFamilyBody),
+      "fontSize": 12px,
+      "lineHeight": 12px,
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": normal,
+      "textTransform": none,
+      "textIndent": 0px,
+      "textShadow": (shadow-glow, 2, 1px, $c-black)
+    ),
+    "Menu": (
+      "fontFamily": 'Voltaire',
+      "fontSize": 24px,
+      "lineHeight": 24px,
+      "maxHeight": 24px,
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": normal,
+      "textTransform": uppercase,
+      "textShadow": (filter-dropShadow, 3, 0, 0, 8px, var(--colorMenuGlow)),
+      "border": none
+    ),
+    "Input": (
+      "fontFamily": var(--fontFamilyBody),
+      "fontSize": var(--fontSizeBody),
+      "lineHeight": calc(var(--lineHeightBody) * 1.2),
+      "maxHeight": calc(var(--lineHeightBody) * 1.2),
+      "padding": 0px,
+      "fontStyle": normal,
+      "fontVariant": normal,
+      "fontWeight": bold,
+      "textTransform": none,
+      "textIndent": 5px,
+      "textShadow": var(--textShadowBody),
+      "border": none
+    ),
+    "Placeholder": (
+      "fontFamily": "Della Respira",
+      "fontSize": var(--fontSizeInput),
+      "lineHeight": var(--lineHeightInput),
+      "fontStyle": italic,
+      "fontVariant": var(--fontVariantInput),
+      "fontWeight": normal,
+      "textTransform": none,
+      "textIndent": var(--textIndentInput),
+      "textShadow": var(--textShadowInput)
+    )
+);

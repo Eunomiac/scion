@@ -11,7 +11,7 @@
             {{#each data.skills as |skill|}}
             {{#if skill}}
             <span class="clickable openPopout skill noFlex
-            {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} invalid{{/if}}{{/if}}" data-skill="{{skill}}">{{localize (concat "scion.skills." skill)}}</span>
+            {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} pantheon{{/if}}{{/if}}" data-skill="{{skill}}">{{localize (concat "scion.skills." skill)}}</span>
             {{/if}}
             {{/each}}
             {{> (blocks.skillList.template) }}

@@ -127,7 +127,7 @@ $isShowingBGShade: false;
                 left: $menuButtonSize / -2 !important;
             }
             
-            color: var(--glowColorMenu);
+            color: var(--colorMenuGlow);
             font: {
                 family: var(--fontFamilyMenu);
                 size: var(--fontSizeMenu);
@@ -211,7 +211,7 @@ $isShowingBGShade: false;
                             background-image: $iconHeritage;
                         }
                         
-                        &:hover { filter: drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu)) drop-shadow(0 0 10px var(--glowColorMenu)); }
+                        &:hover { filter: drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)); }
 
                         &:hover + .menuText {
                             letter-spacing: normal;

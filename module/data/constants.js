@@ -1998,6 +1998,7 @@ export const scionSystemData = {
         }
     }
 };
+console.log(Object.keys(scionSystemData.PANTHEONS));
 export const handlebarTemplates = {
     chargen: {
         template: () => "systems/scion/templates/actor/chargen/actor-chargen.hbs",

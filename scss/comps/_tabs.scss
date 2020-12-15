@@ -10,18 +10,18 @@ nav.tabs {
         margin: 0 0.25rem;
         font: { weight: bold; size: 0.75rem; }
         text-shadow: none;
-        color: var(--scale9);
-        background-color: var(--scale4);
+        color: var(--accentUp4);
+        background-color: var(--accentDown1);
         border-radius: 2rem;
-        @include box-shadow($size: 4px, $color: var(--scale2));
+        @include box-shadow($size: 4px, $color: var(--accentDown3));
 
         &:hover {
-            background-color: var(--scale9);
-            color: var(--scale4);
+            background-color: var(--accentUp4);
+            color: var(--accentDown1);
         }
         &.active {
-            background-color: var(--scale7); 
-            color: var(--scale2);
+            background-color: var(--accentUp2); 
+            color: var(--accentDown3);
         }
     }
 }

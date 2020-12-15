@@ -1,25 +1,50 @@
 /* #region Element Default Styles */
 * {
-    color: var(--fontColorBody);
+    color: var(--colorBody);
     font: {
         family: var(--fontFamilyBody);
         size: var(--fontSizeBody);
         weight: var(--fontWeightBody);
+        style: var(--fontStyleBody);
+        variant: var(--fontVariantBody);
     }
-    text-shadow: var(--textShadowBody);
+    text: {
+        transform: var(--textTransformBody);
+        shadow: var(--textShadowBody);
+    }
     line-height: var(--lineHeightBody);
 }
 
 textarea,
 input[type="text"],
-select {
-    margin: 0px;
-    padding: 0px;
+select,
+.contentEditable {
+    margin: 0 4px;
+    padding: var(--paddingInput);
+    line-height: var(--lineHeightInput);
+    max-height: var(--maxHeightInput);
+    min-height: var(--maxHeightInput);
+    
+    font: {
+        family: var(--fontFamilyInput);
+        size: var(--fontSizeInput);
+        style: var(--fontStyleInput);
+        variant: var(--fontVariantInput);
+        weight: var(--fontWeightInput);
+    }
+    text: {
+        transform: var(--textTransformInput);
+        indent: var(--textIndentInput);
+        shadow: var(--textShadowInput);
+    }
+    
     box-shadow: none;
-    border: none;
+    border: var(--borderInput);
+    box-sizing: content-box;
     outline: none;
 
-    &:invalid { @include disabledText; }
+
+    &:invalid { @include placeholderText; }
 }
 
 h1, h2, h3, .h1, .h2, .h3 { width: 100%; margin: 0; }
@@ -27,90 +52,75 @@ h1, h2, h3, .h1, .h2, .h3 { width: 100%; margin: 0; }
 h1, h2, .h1, .h2 { display: block; }
 
 h1, .h1 {
-    color: var(--fontColorHeading1);
-    background: var(--bgHeading1);
-    padding: var(--paddingHeading1);
-    max-height: var(--maxHeightHeading1);
-    line-height: var(--lineHeightHeading1);
-    // &.title { max-height: calc(var(--maxHeightHeading1) * 1.4); }
+    color: var(--colorH1);
+    background: var(--bgH1);
+    padding: var(--paddingH1);
+    max-height: var(--maxHeightH1);
+    min-height: var(--maxHeightH1);
+    line-height: var(--lineHeightH1);
     font: {
-        family: var(--fontFamilyHeading1);
-        style: var(--fontStyleHeading1);
-        variant: var(--fontVariantHeading1);
-        weight: var(--fontWeightHeading1);
-        size: var(--fontSizeHeading1);
+        family: var(--fontFamilyH1);
+        style: var(--fontStyleH1);
+        variant: var(--fontVariantH1);
+        weight: var(--fontWeightH1);
+        size: var(--fontSizeH1);
     }
     text: {
-        transform: var(--textTransformHeading1);
-        shadow: var(--textShadowHeading1);
+        transform: var(--textTransformH1);
+        shadow: var(--textShadowH1);
+        indent: var(--textIndentH1);
     }
-    border-bottom: var(--borderBottomHeading1);
+    border-bottom: var(--borderH1);
 }
 
 h2, .h2 {
-    // color: var(--fontColorHeading2);
-    color: var(--bgMatte);
-    background: var(--bgHeading2); 
-    padding: var(--paddingHeading2);
-    max-height: var(--maxHeightHeading2);
-    line-height: var(--lineHeightHeading2);
+    color: var(--colorH2);
+    background: var(--bgH2);
+    padding: var(--paddingH2);
+    max-height: var(--maxHeightH2);
+    min-height: var(--maxHeightH3);
+    line-height: var(--lineHeightH2);
     font: {
-        family: var(--fontFamilyHeading2);
-        style: var(--fontStyleHeading2);
-        variant: var(--fontVariantHeading2);
-        weight: var(--fontWeightHeading2);
-        size: var(--fontSizeHeading2);
+        family: var(--fontFamilyH2);
+        style: var(--fontStyleH2);
+        variant: var(--fontVariantH2);
+        weight: var(--fontWeightH2);
+        size: var(--fontSizeH2);
     }
     text: {
-        transform: var(--textTransformHeading2);
-        shadow: var(--textShadowHeading2);
-        indent: 10px;
+        transform: var(--textTransformH2);
+        shadow: var(--textShadowH2);
+        indent: var(--textIndentH2);
     }
-    border-bottom: var(--borderBottomHeading2);
+    border-bottom: var(--borderH2);
 }
 
 h3, .h3 {
-    color: var(--fontColorHeading3);
-    background: var(--bgHeading3);
-    padding: var(--paddingHeading3);
-    max-height: var(--maxHeightHeading3);
-    line-height: var(--lineHeightHeading3);
+    color: var(--colorH3);
+    background: var(--bgH3);
+    padding: var(--paddingH3);
+    max-height: var(--maxHeightH3);
+    min-height: var(--maxHeightH3);
+    line-height: var(--lineHeightH3);
     font: {
-        family: var(--fontFamilyHeading3);
-        style: var(--fontStyleHeading3);
-        variant: var(--fontVariantHeading3);
-        weight: var(--fontWeightHeading3);
-        size: var(--fontSizeHeading3);
+        family: var(--fontFamilyH3);
+        style: var(--fontStyleH3);
+        variant: var(--fontVariantH3);
+        weight: var(--fontWeightH3);
+        size: var(--fontSizeH3);
     }
     text: {
-        transform: var(--textTransformHeading3);
-        shadow: var(--textShadowHeading3);
+        transform: var(--textTransformH3);
+        shadow: var(--textShadowH3);
+        indent: var(--textIndentH3);
     }
-    border-bottom: var(--borderBottomHeading3);
+    border-bottom: var(--borderH3);
 }
 
 label { 
     font-size: var(--fontSizeBody);
-    margin: 0 0.25rem;
-    min-height: 23px;
+    margin: 0 4px;
 }
-/* #endregion */
-
-/* #region Editable Input Fields */
-.contentEditable {
-    text-indent: 5px;
-    box-shadow: none;
-    outline: none;
-
-    &.insetFrame {
-        min-height: 28px;
-        font-weight: bold;
-        border-radius: 1rem;
-        background: rgba(0,0,0,0.2);
-        border: inset 3px var(--scale6);
-    }
-}
-
 /* #endregion */
 
 /* #region Single-Purpose Classes */
@@ -121,32 +131,32 @@ label {
 }
 
 .insetFrame {
-    color: var(--fontColorBody);
+    color: var(--colorBody);
     font: {
        family: var(--fontFamilyBody);
        size: var(--fontSizeBody);
        weight: var(--fontWeightBody);
     }
     border-radius: 1rem;
-    background: var(--scaleFullFade2);
-    border: inset 3px var(--scale6);
+    background: var(--accentDown3Fade75);
+    border: inset 3px var(--accentUp1);
  }
 
 .outsetFrame {
-    color: var(--fontColorBody);
+    color: var(--colorBody);
     font: {
         family: var(--fontFamilyBody);
         size: var(--fontSizeBody);
     }
     border-radius: 1rem;
-    background: var(--greyFullFade10);
-    border: outset 3px var(--scale6);
+    background: var(--accentUp3Fade75);
+    border: outset 3px var(--accentUp1);
 }
 
 .hidden { display: none !important; }
 
 .text {
-    color: var(--fontColorBody);
+    color: var(--colorBody);
     font: { size: var(--fontSizeBody); }
 }
 
@@ -171,9 +181,9 @@ label {
     }
 }
 
-.placeholder { @include disabledText; }
+.placeholder { @include placeholderText; }
 
-.greyText { color: var(--grey5); }
+.greyText { color: var(--grey); }
 
 .noBG { background: none !important; }
 .noBorder { border: none !important; }
@@ -221,12 +231,12 @@ label {
         size: 100%;
         repeat: no-repeat;
     }
-    border: 4px outset var(--grey10);    
-    @include box-shadow(2px, 5px, var(--grey3));
+    border: 4px outset var(--white);    
+    @include box-shadow(2px, 5px, var(--greyDown2));
     &.empty {
         background-image: url("../images/textures/stoneGrey.jpg");
-        border: 4px inset var(--grey5);
-        @include box-shadow(2px, 4px, var(--grey5), true);
+        border: 4px inset var(--grey);
+        @include box-shadow(2px, 4px, var(--grey), true);
         opacity: 0.75;
         filter: blur(0.5px);
     }
@@ -248,7 +258,7 @@ label {
         top: 0;
 
         // @include bg-stoneTablet();
-        border: 10px outset var(--grey6);
+        border: 10px outset var(--greyUp1);
         background: {
             image: url("../images/textures/stoneGrey.jpg");
         }
@@ -324,7 +334,7 @@ label {
     width: calc(100% / var(--fontScaleTitle));
     max-height: var(--maxHeightTitle);
     padding: var(--paddingTitle);
-    color: var(--fontColorTitle);
+    color: var(--colorTitle);
     background: var(--bgTitle);
     font: {
         family: var(--fontFamilyTitle);
@@ -345,47 +355,47 @@ label {
 }
 
 .surTitle {
-    width: calc(100% / var(--fontScaleHeading2));
-    padding: var(--paddingHeading2);
-    color: var(--fontColorHeading2);
-    background: transparent;
+    width: calc(100% / var(--fontScaleH2));
+    padding: var(--paddingH2);
+    color: var(--colorH2);
+    background: var;
     font: {
-        family: var(--fontFamilyHeading2);
-        style: var(--fontStyleHeading2);
-        variant: var(--fontVariantHeading2);
-        weight: var(--fontWeightHeading2);
-        size: var(--fontSizeHeading2);
+        family: var(--fontFamilyH2);
+        style: var(--fontStyleH2);
+        variant: var(--fontVariantH2);
+        weight: var(--fontWeightH2);
+        size: var(--fontSizeH2);
     }
-    line-height: var(--lineHeightHeading2);
+    line-height: var(--lineHeightH2);
     text: {
-        transform: var(--textTransformHeading2);
-        shadow: var(--textShadowHeading2);
+        transform: var(--textTransformH2);
+        shadow: var(--textShadowH2);
         align: center;
     }
-    transform: scaleX(var(--fontScaleHeading2));
+    transform: scaleX(var(--fontScaleH2));
     transform-origin: 0% 0%;
     border: none;
 }
 
 .subTitle {    
-    width: calc(100% / var(--fontScaleHeading3));
-    padding: var(--paddingHeading3);
-    color: var(--fontColorHeading3);
-    background: var(--bgHeading3);
+    width: calc(100% / var(--fontScaleH3));
+    padding: var(--paddingH3);
+    color: var(--colorH3);
+    background: var(--bgH3);
     font: {
-        family: var(--fontFamilyHeading3);
-        style: var(--fontStyleHeading3);
-        variant: var(--fontVariantHeading3);
-        weight: var(--fontWeightHeading3);
-        size: var(--fontSizeHeading3);
+        family: var(--fontFamilyH3);
+        style: var(--fontStyleH3);
+        variant: var(--fontVariantH3);
+        weight: var(--fontWeightH3);
+        size: var(--fontSizeH3);
     }
-    line-height: var(--lineHeightHeading3);
+    line-height: var(--lineHeightH3);
     text: {
-        transform: var(--textTransformHeading3);
-        shadow: var(--textShadowHeading3);
+        transform: var(--textTransformH3);
+        shadow: var(--textShadowH3);
         align: center;
     }
-    transform: scaleX(var(--fontScaleHeading3));
+    transform: scaleX(var(--fontScaleH3));
     transform-origin: 0% 0%;
     border: none;
 }

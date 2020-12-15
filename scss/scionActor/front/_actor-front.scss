@@ -38,8 +38,8 @@
         grid: "leftvirtue leftvirtue leftvirtue" 1rem
             ". dotline ." 1.25rem
             "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
-        background-color: var(--scaleFade5);
-        border: 3px outset var(--scale5);
+        background-color: var(--accentFade50);
+        border: 3px outset var(--accent);
         box-sizing: content-box;
         margin-left: -0.35rem;
         height: calc(100% - 2 * 3px);
