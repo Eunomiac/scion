@@ -12,9 +12,7 @@ body.vtt.game.system-scion {
   @import 'comps/mixins'; // Mixins
   // #endregion 
 
-  // #region Components: Layouts, Mixins, Modules & Fundamentals 
-  // #endregion 
-  // @import 'window/canvas'; // Top-Level Canvas Styles
+  @import 'window/canvas'; // Top-Level Canvas Styles
 
   // #region SHEET STYLES 
   div.sheet.scion {
@@ -27,9 +25,21 @@ body.vtt.game.system-scion {
     @import 'comps/base'; // Base Styles: HTML Elements, Headers
     @import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
     @import 'comps/tabs'; // Navigation Tabs
-    @import 'comps/bubbles'; // Clickable Summary Bubbles    
+    @import 'comps/bubbles'; // Clickable Summary Bubbles  
     
-    section.window-content form.editable { pointer-events: all; }
+    header.window-header { @import 'window/header'; }
+    
+    section.window-content {
+      padding: 0px;
+      background: transparent;
+      pointer-events: none;
+      overflow: visible;
+      position: relative;
+      z-index: 1;
+      max-height: 100%;
+    
+      form.editable { pointer-events: all; }
+    }
     div.window-resizable-handle { display: none; }
     
     // #region ACTOR SHEETS 

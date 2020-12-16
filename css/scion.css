@@ -800,6 +800,148 @@ body.vtt.game.system-scion .teros {
   --menuImage: url("../images/actor-sheet/menu/rosette-teros.png");
 }
 
+body.vtt.game.system-scion #logo {
+  display: none;
+}
+
+body.vtt.game.system-scion #navigation {
+  left: 0px;
+  top: 0px;
+}
+
+body.vtt.game.system-scion #navigation #nav-toggle {
+  height: 20px;
+}
+
+body.vtt.game.system-scion #navigation .nav-item {
+  margin: 0 4px 0 0;
+  line-height: 1.4rem;
+}
+
+body.vtt.game.system-scion #navigation #scene-list li {
+  height: 20px;
+}
+
+body.vtt.game.system-scion #navigation #scene-list li .scene-players {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls {
+  top: 30px;
+  left: 0;
+  padding: 0;
+}
+
+body.vtt.game.system-scion #controls .scene-control {
+  height: 20px;
+  width: 25px;
+  font-size: 20px;
+  line-height: normal;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Basic Controls"] li[title="Measure Distance"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Measurement Controls"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Tile Controls"] li[title=""] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Rectangle"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Ellipse"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Polygon"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Freehand"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Clear Drawings"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Wall Controls"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Reset Fog of War"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Clear Lights"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Ambient Sound Controls"] li[title="Clear Sounds"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Journal Notes"] li[title="Clear Notes"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools {
+  height: 25px;
+  top: -25px;
+  left: 35px;
+  position: relative;
+  margin: 0 0 -25px;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool {
+  display: inline-block;
+  height: 25px;
+  font-size: 20px;
+  line-height: normal;
+  margin: 0 3px;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool i {
+  width: 25px;
+}
+
+body.vtt.game.system-scion #controls .scene-control.active .control-tools {
+  display: flex;
+}
+
+body.vtt.game.system-scion #sidebar {
+  transform: scale(0.75);
+  transform-origin: 100% 0%;
+  height: calc(99vh / 0.75);
+  max-height: calc(99vh / 0.75);
+}
+
+body.vtt.game.system-scion #sidebar #chat-log {
+  max-height: calc(100vh / 0.75);
+}
+
+body.vtt.game.system-scion #sidebar #chat-controls {
+  width: calc(100% * 0.75);
+  flex: 0 0 calc(28px / 0.75);
+  top: -55px;
+  position: relative;
+  transform: scale(calc(1/0.75));
+  transform-origin: 0% 100%;
+}
+
+body.vtt.game.system-scion #sidebar #chat-form {
+  width: calc(100% * 0.75);
+  flex: 0.1 0 calc(100px * 0.75);
+  transform: scale(calc(1 / 0.75));
+  transform-origin: 0% 100%;
+}
+
 body.vtt.game.system-scion div.sheet.scion {
   pointer-events: none;
   border: none;
@@ -1688,6 +1830,64 @@ body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact .bubbleTit
   text-shadow: var(--textShadowBubbleTitle);
   text-align: center;
   text-align-last: center;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header {
+  height: 40px;
+  width: 100%;
+  margin: 0 0 -40px 0;
+  display: block;
+  flex: none;
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  border: none;
+  pointer-events: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header h4.window-title {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  display: block;
+  pointer-events: all;
+  font-size: var(--fontSizeBody);
+  color: white;
+  line-height: 50px;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close i {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+  cursor: move;
+  pointer-events: all;
+}
+
+body.vtt.game.system-scion div.sheet.scion section.window-content {
+  padding: 0px;
+  background: transparent;
+  pointer-events: none;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  max-height: 100%;
 }
 
 body.vtt.game.system-scion div.sheet.scion section.window-content form.editable {
