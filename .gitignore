@@ -9,3 +9,6 @@ scion.code-workspace
 # Node Modules
 node_modules/
 npm-debug.log
+
+# Auto-Generated Files
+css/scion.css
