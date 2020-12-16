@@ -49,35 +49,6 @@ body.vtt.game.system-scion {
           .tab .chargen-body { @import "scionActor/chargen/actor-chargen"; }
           .tab .front-body { @import "scionActor/front/actor-front"; }
 
-          .tab .front-body {           
-              [class|="purview"] {
-                display: inline-block;
-                height: 100px;
-                width: 80px;
-                background: {
-                    size: 100%;
-                    repeat: no-repeat;
-                    position: center;
-                };
-                filter: hue-rotate(var(--colorPurviewRotate));
-                &[class*="sun"] { background-image: url("../images/purviews/sun.png"); }
-                &[class*="passion"] { background-image: url("../images/purviews/passion.png"); }
-                &[class*="geasa"] { background-image: url("../images/purviews/geasa.png"); }
-                &[class*="beauty"] { background-image: url("../images/purviews/beauty.png"); }
-                &[class*="fortune"] { background-image: url("../images/purviews/fortune.png"); }
-
-                span.text {
-                  display: block;
-                  margin-top: 110%;
-                  text-align: center;
-                  font-family: Oswald;
-                  text-transform: uppercase;
-                  margin-top: 95px;
-                  font-size: 12px;
-              }
-            }
-        }
-
           // #region Owned Item Partials 
           .path-block { @import "scionActor/ownedItems/path-block"; }
           // #endregion 

@@ -83,7 +83,21 @@
   position: fixed !important;
   margin: 0 !important;
   z-index: 9999 !important;
-  opacity: 0.8;
+  opacity: 0;
+}
+
+.gu-mirror::before {
+  content: "";
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  display: block;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: radial-gradient(yellow, orange);
+  border: 2px solid yellow;
+  opacity: 1;
 }
 
 .gu-hide {
@@ -1690,6 +1704,46 @@ body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact .bubbleTit
   text-align-last: center;
 }
 
+body.vtt.game.system-scion div.sheet.scion [class|="purview"] {
+  display: inline-block;
+  height: 100px;
+  width: 80px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: hue-rotate(var(--colorPurviewRotate));
+}
+
+body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="sun"] {
+  background-image: url("../images/purviews/sun.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="passion"] {
+  background-image: url("../images/purviews/passion.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="geasa"] {
+  background-image: url("../images/purviews/geasa.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="beauty"] {
+  background-image: url("../images/purviews/beauty.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="fortune"] {
+  background-image: url("../images/purviews/fortune.png");
+}
+
+body.vtt.game.system-scion div.sheet.scion [class|="purview"] span.text {
+  display: block;
+  margin-top: 110%;
+  text-align: center;
+  font-family: Oswald;
+  text-transform: uppercase;
+  margin-top: 95px;
+  font-size: 12px;
+}
+
 body.vtt.game.system-scion div.sheet.scion section.window-content form.editable {
   pointer-events: all;
 }
@@ -2019,46 +2073,6 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .f
   grid-area: rightvirtue;
   margin-right: 0.5rem;
   line-height: 1rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"] {
-  display: inline-block;
-  height: 100px;
-  width: 80px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: hue-rotate(var(--colorPurviewRotate));
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="sun"] {
-  background-image: url("../images/purviews/sun.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="passion"] {
-  background-image: url("../images/purviews/passion.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="geasa"] {
-  background-image: url("../images/purviews/geasa.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="beauty"] {
-  background-image: url("../images/purviews/beauty.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="fortune"] {
-  background-image: url("../images/purviews/fortune.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"] span.text {
-  display: block;
-  margin-top: 110%;
-  text-align: center;
-  font-family: Oswald;
-  text-transform: uppercase;
-  margin-top: 95px;
-  font-size: 12px;
 }
 
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] {
