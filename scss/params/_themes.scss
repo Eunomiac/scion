@@ -40,75 +40,23 @@ $pantheonThemes: (
             "PurviewRotate": 245deg
         ),
         "BGs": (),
-        "typography": (  
+        "typography": (
             "Title": (
-                "fontFamily": 'Marcellus SC'
+                "fontFamily": 'Carolingia'
             ),
             "H1": (
-                "fontFamily": 'Marcellus SC'
+                "fontFamily": 'Khaleefa'
             ),
             "H2": (
-                "fontFamily": 'Overlock SC'
+                "fontFamily": 'Gothic Ultra'
             ),
             "H3": (
-                "fontFamily": 'Overlock SC'
-            ),
-            "Body": (
-                "fontFamily": 'Overlock SC'
-            ),
-            "Menu": (
-                "fontFamily": 'Voltaire'
-            ),
-            "Input": (
-                "fontFamily": var(--fontFamilyBody)
-            ),
-            "Placeholder": (
-                "fontFamily": var(--fontFamilyInput)
+                "fontFamily": 'Gothic Ultra'
             )
         )
     ),
     "shen": (),
-    "teotl": (
-        "colors": (
-            "Title": #000fb8,
-            "H1": #000fb8,
-            "H2": #4757ff,
-            "H3": #000b85,
-            "accent": #8e52ff,
-            "MenuGlow": #00ffff,
-            "PurviewRotate": 100deg
-        ),
-        "BGs": (),
-        "typography": (  
-            "Title": (
-                "fontFamily": 'Poiret One',
-                "fontWeight": bold
-            ),
-            "H1": (
-                "fontFamily": 'Poiret One',
-                "fontWeight": bold,
-                "fontVariant": small-caps
-            ),
-            "H2": (
-                "fontFamily": 'Elektra'
-            ),
-            "H3": (
-                "fontFamily": 'Poiret One',
-                "fontSize": 20px,
-                "fontVariant": small-caps,
-                "fontWeight": normal,
-                "textShadow": (shadow-glow, 5, 1px, var(--colorH2))
-            ),
-            "Body": (
-                "fontFamily": 'Poiret One',
-                "textShadow": (shadow-glow, 6, 0px, $c-black)
-            ),
-            "Strong": (
-                "fontWeight": normal,
-                "textShadow": (shadow-glow, 9, 1px, $c-black)
-            )
-        )
-    ),
+    "teotl": (),
     "theoi": (
         "colors": (
             "Title": #000fb8,
@@ -131,7 +79,7 @@ $pantheonThemes: (
                 "fontVariant": small-caps
             ),
             "H2": (
-                "fontFamily": 'Elektra'
+                "fontFamily": 'Stein Antik'
             ),
             "H3": (
                 "fontFamily": 'Poiret One',
@@ -147,6 +95,9 @@ $pantheonThemes: (
             "Strong": (
                 "fontWeight": normal,
                 "textShadow": (shadow-glow, 9, 1px, $c-black)
+            ),
+            "Placeholder": (
+                "textShadow": none
             )
         )
     ),   

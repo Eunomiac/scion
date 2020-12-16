@@ -614,7 +614,15 @@
             "group": "Group",
             "contact": "Contact",
             "access": "Access",
-            "condition": "Path Condition"
+            "condition": "Path Condition",
+            "tooltip": {
+                "title": "Creating Your {path} Path",
+                "content": {
+                    "origin": "Click on the heading to give your path a title.<br>Drag-and-drop your choice of three Path Skills from the menu on the right, representing how walking this Path has shaped you. Each Skill can be associated with a maximum of two Paths.<br>Describe in general terms the potential Connections you can draw upon by Invoking this Path during play.<br>Finally, define your Suspension Condition and your Revocation Condition.",
+                    "role": "Click on the heading to give your path a title.<br>Drag-and-drop your choice of three Path Skills from the menu on the right, representing how walking this Path has shaped you. Each Skill can be associated with a maximum of two Paths.<br>Describe in general terms the potential Connections you can draw upon by Invoking this Path during play.<br>Finally, define your Suspension Condition and your Revocation Condition.",
+                    "pantheon": "Click on the heading to give your path a title.<br>Two of your three Path Skills are defined by your Pantheon, and cannot be changed. Drag-and-drop your choice of a third Path Skill from the menu on the right, representing how walking this Path has shaped you. Each Skill can be associated with a maximum of two Paths.<br>Describe in general terms the potential Connections you can draw upon by Invoking this Path during play.<br>Finally, define your Suspension Condition and your Revocation Condition."
+                }
+            }
         },
         "attributes": {
             "none": "",

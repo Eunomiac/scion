@@ -1998,7 +1998,6 @@ export const scionSystemData = {
         }
     }
 };
-console.log(Object.keys(scionSystemData.PANTHEONS));
 export const handlebarTemplates = {
     chargen: {
         template: () => "systems/scion/templates/actor/chargen/actor-chargen.hbs",
@@ -2013,7 +2012,10 @@ export const handlebarTemplates = {
     ownedItems: {
         path: {template: () => "systems/scion/templates/actor/ownedItems/path-block.hbs"}
     },
-    skillList: {template: () => "systems/scion/templates/item/popouts/skilllist-block.hbs"}
+    skillList: {template: () => "systems/scion/templates/item/popouts/skilllist-block.hbs"},
+    tooltips: {
+        path: {template: () => "systems/scion/templates/item/popouts/path-tooltip-block.hbs"}
+    }
 };
 export const itemCategories = {
     paths: ["path"],
@@ -2054,15 +2056,15 @@ export const signatureChars = {
         },
         skills: {
             list: {
-                athletics: {value: 4, specialty: "Acrobatics"},
-                culture: {value: 5, specialty: "Music"},
-                closeCombat: {value: 1},
-                empathy: {value: 3, specialty: "Motives/Desires"},
-                subterfuge: {value: 3, specialty: "Insistence"},
-                leadership: {value: 1},
-                persuasion: {value: 5, specialty: "Individuals"},
-                survival: {value: 1},
-                integrity: {value: 1}
+                athletics: {value: 4, purchased: 3, specialty: "Acrobatics"},
+                culture: {value: 5, purchased: 3,  specialty: "Music"},
+                closeCombat: {value: 1, purchased: 0},
+                empathy: {value: 3, purchased: 1, specialty: "Motives/Desires"},
+                subterfuge: {value: 3, purchased: 1, specialty: "Insistence"},
+                leadership: {value: 1, purchased: 0},
+                persuasion: {value: 5, purchased: 3, specialty: "Individuals"},
+                survival: {value: 1, purchased: 0},
+                integrity: {value: 1, purchased: 0}
             }
         },
         pathData: {

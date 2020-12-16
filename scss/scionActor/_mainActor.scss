@@ -71,20 +71,6 @@ $isShowingBGShade: false;
         $iconExperience: url("../images/actor-sheet/menu/IconExperience.png");
         $iconSettings: url("../images/actor-sheet/menu/IconSettings.png");
         $iconHeritage: url("../images/actor-sheet/menu/IconHeritage.png");
-
-        $menuButtonBG: url("../images/actor-sheet/menu/StoneButtonBG.png");
-        $darkIconMain: url("../images/actor-sheet/menu/DarkIconMain.png");
-        $glowOverlayMain: url("../images/actor-sheet/menu/GlowOverlayMain.png");
-        $darkIconMain2: url("../images/actor-sheet/menu/DarkIconMain2.png");
-        $glowOverlayMain2: url("../images/actor-sheet/menu/GlowOverlayMain2.png");
-        $darkIconHeritage: url("../images/actor-sheet/menu/DarkIconHeritage.png");
-        $glowOverlayHeritage: url("../images/actor-sheet/menu/GlowOverlayHeritage.png");
-        $darkIconExperience: url("../images/actor-sheet/menu/DarkIconExperience.png");
-        $glowOverlayExperience: url("../images/actor-sheet/menu/GlowOverlayExperience.png");
-        $darkIconChargen: url("../images/actor-sheet/menu/DarkIconChargen.png");
-        $glowOverlayChargen: url("../images/actor-sheet/menu/GlowOverlayChargen.png");
-        $darkIconSettings: url("../images/actor-sheet/menu/DarkIconSettings.png");
-        $glowOverlaySettings: url("../images/actor-sheet/menu/GlowOverlaySettings.png");
         
         $menuButtonSize: $menuButtonFullSize + $menuButtonMargin;
 
@@ -179,11 +165,6 @@ $isShowingBGShade: false;
                     position: relative;
                     height: 100%;
                     width: 100%;
-                    background: {
-                        image: $menuButtonBG;
-                        size: $menuButtonSize;
-                        position: center;
-                    }
                     transition: 0.5s;
         
                     @keyframes slowBob {

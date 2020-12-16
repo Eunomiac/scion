@@ -179,6 +179,7 @@ module.exports = {
         Roll: "readonly",
         Sidebar: "readonly",
         duplicate: "readonly",
+        diffObject: "readonly",
         hasProperty: "readonly",
         isObjectEmpty: "readonly",
         getProperty: "readonly",

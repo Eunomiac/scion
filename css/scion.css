@@ -15,8 +15,8 @@
 }
 
 @font-face {
-  font-family: "Zanzabar";
-  src: url(../fonts/netjer/Zanzabar.otf);
+  font-family: "Khaleefa";
+  src: url(../fonts/netjer/Khaleefa.otf);
 }
 
 @font-face {
@@ -54,49 +54,15 @@
 }
 
 @font-face {
-  font-family: "Elektra";
-  src: url(../fonts/Elektra.ttf);
-}
-
-@font-face {
-  font-family: "Khaleefa";
-  src: url(../fonts/Khaleefa.otf);
-}
-
-@font-face {
-  font-family: "Oh Mighty Isis";
-  src: url(../fonts/OhMightyIsisExpanded.ttf);
-}
-
-@font-face {
-  font-family: "Sherwood";
-  src: url(../fonts/Sherwood.ttf);
-}
-
-@font-face {
-  font-family: "Stonehenge";
-  src: url(../fonts/Stonehenge.ttf);
+  font-family: "Stein Antik";
+  src: url(../fonts/theoi/SteinAntik-Bold.ttf);
 }
 
 .gu-mirror {
   position: fixed !important;
   margin: 0 !important;
   z-index: 9999 !important;
-  opacity: 0;
-}
-
-.gu-mirror::before {
-  content: "";
-  position: fixed !important;
-  margin: 0 !important;
-  z-index: 9999 !important;
-  display: block;
-  height: 20px;
-  width: 20px;
-  border-radius: 10px;
-  background: radial-gradient(yellow, orange);
-  border: 2px solid yellow;
-  opacity: 1;
+  opacity: 0.5;
 }
 
 .gu-hide {
@@ -108,7 +74,7 @@
 }
 
 .gu-transit {
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 body.vtt.game.system-scion {
@@ -463,97 +429,16 @@ body.vtt.game.system-scion .netjer {
   --colorMenuGlow: #ffdd00;
   --colorPurviewRotate: 245deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Carolingia";
+  --fontFamilyH1: "Khaleefa";
   --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Gothic Ultra";
+  --fontFamilyH3: "Gothic Ultra";
   --lineHeightH3: var(--fontSizeH3);
   --maxHeightH3: var(--fontSizeH3);
   --lineHeightBody: var(--fontSizeBody);
   --fontVariantStrong: var(--fontVariantBody);
   --textTransformStrong: var(--textTransformBody);
-  --fontVariantWeak: var(--fontVariantBody);
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --textShadowInput: var(--textShadowBody);
-  --fontFamilyPlaceholder: var(--fontFamilyInput);
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
-}
-
-body.vtt.game.system-scion .shen {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-shen.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-shen.png");
-}
-
-body.vtt.game.system-scion .teotl {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teotl.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-teotl.png");
-  --accentDown4: #201b28;
-  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
-  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
-  --accentDown3: #3b285e;
-  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
-  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
-  --accentDown2: #5328a2;
-  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
-  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
-  --accentDown1: #6927e7;
-  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
-  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
-  --accent: #8e52ff;
-  --accentFade50: rgba(142, 82, 255, 0.5);
-  --accentFade75: rgba(142, 82, 255, 0.25);
-  --accentUp1: #a575ff;
-  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
-  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
-  --accentUp2: #bb97ff;
-  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
-  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
-  --accentUp3: #d2baff;
-  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
-  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
-  --accentUp4: #e8dcff;
-  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
-  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
-  --colorTitle: #000fb8;
-  --colorH1: #000fb8;
-  --colorH2: #4757ff;
-  --colorH3: #000b85;
-  --coloraccent: #8e52ff;
-  --colorStrong: var(--colorBody);
-  --colorHighlight: var(--whiteFade50);
-  --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #00ffff;
-  --colorPurviewRotate: 100deg;
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Poiret One";
-  --fontWeightTitle: bold;
-  --fontFamilyH1: "Poiret One";
-  --fontWeightH1: bold;
-  --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Elektra";
-  --fontFamilyH3: "Poiret One";
-  --fontSizeH3: 20px;
-  --lineHeightH3: var(--fontSizeH3);
-  --maxHeightH3: var(--fontSizeH3);
-  --fontVariantH3: small-caps;
-  --fontWeightH3: normal;
-  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
-  --fontFamilyBody: "Poiret One";
-  --lineHeightBody: var(--fontSizeBody);
-  --textShadowBody: 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black;
-  --fontVariantStrong: var(--fontVariantBody);
-  --fontWeightStrong: normal;
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
@@ -570,6 +455,16 @@ body.vtt.game.system-scion .teotl {
   --fontVariantPlaceholder: var(--fontVariantInput);
   --textIndentPlaceholder: var(--textIndentInput);
   --textShadowPlaceholder: var(--textShadowInput);
+}
+
+body.vtt.game.system-scion .shen {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-shen.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-shen.png");
+}
+
+body.vtt.game.system-scion .teotl {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teotl.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-teotl.png");
 }
 
 body.vtt.game.system-scion .theoi {
@@ -618,7 +513,7 @@ body.vtt.game.system-scion .theoi {
   --fontFamilyH1: "Poiret One";
   --fontWeightH1: bold;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Elektra";
+  --fontFamilyH2: "Stein Antik";
   --fontFamilyH3: "Poiret One";
   --fontSizeH3: 20px;
   --lineHeightH3: var(--fontSizeH3);
@@ -648,7 +543,7 @@ body.vtt.game.system-scion .theoi {
   --lineHeightPlaceholder: var(--lineHeightInput);
   --fontVariantPlaceholder: var(--fontVariantInput);
   --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
+  --textShadowPlaceholder: none;
 }
 
 body.vtt.game.system-scion .tuathaDeDanann {
@@ -1350,6 +1245,70 @@ body.vtt.game.system-scion div.sheet.scion .skill.empty {
   filter: blur(0.5px);
 }
 
+body.vtt.game.system-scion div.sheet.scion .tooltip {
+  display: block;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-image: url("../images/ToolTipBall.png");
+  background-size: 100%;
+  z-index: 9999;
+  background-position: center;
+  right: 30px;
+}
+
+body.vtt.game.system-scion div.sheet.scion .tooltip > div {
+  min-width: 300px;
+  max-width: 400px;
+  top: 50%;
+  left: 100%;
+  transform: translate(0, -50%);
+  padding: 5px;
+  color: #444444;
+  background-color: white;
+  font-weight: normal;
+  font-size: 13px;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 99999999;
+  box-sizing: border-box;
+  border: 10px outset var(--greyUp3);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+body.vtt.game.system-scion div.sheet.scion .tooltip > div p {
+  font-family: "Della Respira";
+  font-size: 12px;
+}
+
+body.vtt.game.system-scion div.sheet.scion .tooltip > div i {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -25px;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+body.vtt.game.system-scion div.sheet.scion .tooltip > div i::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translate(50%, -50%) rotate(-45deg);
+  background-color: white;
+  border: 10px outset #DDD;
+}
+
+body.vtt.game.system-scion div.sheet.scion .tooltip:hover > div {
+  visibility: visible;
+  opacity: 1;
+}
+
 body.vtt.game.system-scion div.sheet.scion .popout {
   position: absolute;
   overflow: hidden;
@@ -1358,7 +1317,7 @@ body.vtt.game.system-scion div.sheet.scion .popout {
 
 body.vtt.game.system-scion div.sheet.scion .popout#skillList {
   width: 150px;
-  height: 462px;
+  height: 480px;
   left: 94%;
   top: 0;
   border: 10px outset var(--greyUp1);
@@ -2118,9 +2077,6 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.ci
   position: relative;
   height: 100%;
   width: 100%;
-  background-image: url("../images/actor-sheet/menu/StoneButtonBG.png");
-  background-size: 100px;
-  background-position: center;
   transition: 0.5s;
   animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
 }
@@ -2352,11 +2308,11 @@ body.vtt.game.system-scion div.sheet.scion.item .main h1, body.vtt.game.system-s
 
 body.vtt.game.system-scion div.sheet.scion.item .main h2, body.vtt.game.system-scion div.sheet.scion.item .main .h2 {
   color: black;
-  background: var(--greyFullFade10);
+  background: var(--whiteFade50);
   border-bottom: 2px solid black;
   border-top: 2px solid white;
   box-sizing: content-box;
-  text-shadow: -1px -1px 0px var(--shadowColorBright), 1px 1px 0px var(--shadowColorDark);
+  text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
 }
 
 body.vtt.game.system-scion div.sheet.scion.item .main .header {
@@ -2380,14 +2336,16 @@ body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkil
 }
 
 body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill {
-  margin: 0 calc((100% - 3 * 120px) / 6);
+  margin: 2px calc((100% - 3 * 120px) / 6);
 }
 
 body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill.invalid {
-  background-image: url("../images/textures/stoneGrey.jpg");
-  border-color: var(--greyUp1);
-  border-style: inset;
-  color: var(--greyUp4);
+  background: none;
+  border-color: transparent;
+  color: var(--greyDown3);
+  font-style: italic;
+  font-weight: bold;
+  box-shadow: none;
 }
 
 body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill.pantheon {

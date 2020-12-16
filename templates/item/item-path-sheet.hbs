@@ -1,21 +1,22 @@
 <form class="{{cssClass}} flex-col-max main" autocomplete="off">
-
+    <div class="tooltip">{{> (blocks.tooltips.path.template) tooltip}}</div>
     {{!-- Sheet Header --}}
     <section class="header width100">
         <h1 class="title alignCenter">{{localize (concat "scion.paths." data.type "Path")}}</h1>
         <div class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
+        
     </section>
         
     <section class="sheet-body flex-col spaceBetween">
-        <div class="clickable openPopout pathSkills skillDrop flex-row-max-start" data-htmlID="skillList">
+        <div class="pathSkills skillDrop flex-row-max-start" data-htmlID="skillList">
             {{#each data.skills as |skill|}}
             {{#if skill}}
-            <span class="clickable openPopout skill noFlex
+            <span class="skill noFlex
             {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} pantheon{{/if}}{{/if}}" data-skill="{{skill}}">{{localize (concat "scion.skills." skill)}}</span>
             {{/if}}
-            {{/each}}
-            {{> (blocks.skillList.template) }}
+            {{/each}}            
         </div>
+        {{> (blocks.skillList.template) }}
         <div class="pathConnections flex-full-center alignCenter">
             <h2 class="gold">{{localize "scion.paths.connections"}}</h2>
             <div class="bubble connection group dots">

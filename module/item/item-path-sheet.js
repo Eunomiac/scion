@@ -15,6 +15,10 @@ export class PathItemSheet extends ScionItemSheet {
     getData() {
         const data = super.getData();
         data.skills = SCION.SKILLS;
+        data.tooltip = {
+            title: U.Loc("scion.paths.tooltip.title", {path: `scion.paths.${this.item.data.data.type}`}),
+            content: U.Loc(`scion.paths.tooltip.content.${this.item.data.data.type}`)
+        };
 
         // data.skillslist = data.items.find((item) => item.data.type === "skillslist");
 
@@ -53,9 +57,11 @@ export class PathItemSheet extends ScionItemSheet {
 
         const skillSource = html.find("#pathSkillSource");
         const skillDrops = html.find(".skillDrop");
+        //const mirrorContainer = html.find("body")[0];
         const pathSkillDragger = dragula({
             containers: [...skillSource, ...skillDrops],
             moves: (element, source) => !element.classList.contains("invalid")
+                && !element.classList.contains("pantheon")
                 && (source.classList.contains("skillDrop")
                 || (_.compact(pathData.skills).length < 3
                     && !(pathData.skills.includes(element.dataset.skill)))),

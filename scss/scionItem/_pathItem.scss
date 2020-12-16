@@ -3,14 +3,14 @@
         .pathSkills {
             min-height: 28px;
             span.skill {
-                margin: 0 calc((100% - 3 * 120px) / 6);
+                margin: 2px calc((100% - 3 * 120px) / 6);
                 &.invalid {
-                    background-image: url("../images/textures/stoneGrey.jpg");
-                    border: {
-                        color: var(--greyUp1);
-                        style: inset;
-                    }
-                    color: var(--greyUp4);
+                    background: none;
+                    border-color: transparent;
+                    color: var(--greyDown3);
+                    font-style: italic;
+                    font-weight: bold;
+                    box-shadow: none;
                 }
                 &.pantheon {
                     filter: invert(100%);

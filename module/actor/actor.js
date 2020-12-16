@@ -59,31 +59,67 @@ export class ScionActor extends Actor {
             U.GLOG({onActor: this.data.data.pantheon, onEvent: pantheon}, `Pantheon Check ${this.name}`, "updatePantheon");
             pantheon = (pantheon && pantheon in SCION.PANTHEONS) ? pantheon : this.data.data.pantheon;
             const panthPath = this.paths.find((path) => path.data.data.type === "pantheon");
-            await panthPath.update({"data.skills": SCION.PANTHEONS[pantheon].assetSkills});
+            const currentSkills = panthPath.data.data.skills;
+            const newSkills = Object.assign([], panthPath.data.data.skills, SCION.PANTHEONS[pantheon].assetSkills);
+            await panthPath.update({"data.skills": newSkills});
             this.updateSkills();
         }
     }
 
     async updateSkills() {
-        const actorSkills = this.data.data.skills.list;
-        const pathSkills = U.KeyMapObj(_.indexBy(this.paths, (item) => item.data.data.type), (item) => item.data.data.skills);
-        const skillVals = U.KeyMapObj(SCION.SKILLS, (v, k) => actorSkills[k].purchased);
-        duplicate(this.data.data.pathPriorities).reverse().forEach((pathType, i) => {
-            pathSkills[pathType].forEach((skill) => {
-                skillVals[skill] += i + 1;
-            });
-        });
-        U.GLOG({actorSkills, pathSkills, skillVals, updateVals: U.KeyMapObj(
-            _.omit(skillVals, (v, k) => v === actorSkills[k].value),
-            (k) => `data.skills.list.${k}.value`,
-            (v, k) => Math.min(actorSkills[k].max, v)
-        )}, `Updating Actor Skills: ${this.name}`, "updateSkills()");
-        await this.update(U.KeyMapObj(
-            _.omit(skillVals, (v, k) => v === actorSkills[k].value),
-            (k) => `data.skills.list.${k}.value`,
-            (v, k) => Math.min(actorSkills[k].max, v)
-        ));
+        const derivedSkills = duplicate(this.derivedSkillVals);
+        const purchasedSkills = duplicate(this.purchasedSkillVals);
+        let spilloverDots = 0;
+        for (const [skill, value] of Object.entries(derivedSkills))
+            if (value > 5) {
+                spilloverDots += value - 5;
+                derivedSkills[skill] = 5;
+                purchasedSkills[skill] -= value - 5;
+            }
+        const updateVals = Object.assign(
+            U.KeyMapObj(
+                diffObject(this.realSkillVals, derivedSkills),
+                (k) => `data.skills.list.${k}.value`,
+                (v) => v
+            ),
+            U.KeyMapObj(
+                diffObject(this.purchasedSkillVals, purchasedSkills),
+                (k) => `data.skills.list.${k}.purchased`,
+                (v) => v
+            )
+        );
+        if (spilloverDots)
+            updateVals["data.skills.unspentDots"] = this.data.data.skills.unspentDots + spilloverDots;
+        U.GLOG({
+            actorSkills: this.skills,
+            actorSkillVals: this.realSkillVals,
+            pathSkills: this.pathSkills,
+            derivedSkillVals: this.derivedSkillVals,
+            spilloverDots,
+            updateVals
+        }, `Updating Actor Skills: ${this.name}`, "updateSkills()");
+        await this.update(updateVals);
     }
 
+    get skills() { return this.data.data.skills.list }
     get paths() { return this.items.filter((item) => item.type === "path") }
+    get pathPriorities() { return this.data.data.pathPriorities }
+    get pathSkills() { return U.KeyMapObj(_.indexBy(this.paths, (item) => item.data.data.type), (item) => item.data.data.skills) }
+    get pathSkillVals() {
+        const pathSkillVals = U.KeyMapObj(SCION.SKILLS, () => 0);
+        duplicate(this.pathPriorities).reverse().forEach((pathType, i) => {
+            this.pathSkills[pathType].forEach((skill) => {
+                pathSkillVals[skill] += i + 1;
+            });
+        });
+        return pathSkillVals;
+    }
+    get purchasedSkillVals() { return U.KeyMapObj(SCION.SKILLS, (v, k) => this.skills[k].purchased) }
+    get derivedSkillVals() {
+        const skillVals = {};
+        for (const skill of Object.keys(this.skills))
+            skillVals[skill] = this.pathSkillVals[skill] + this.purchasedSkillVals[skill];
+        return skillVals;
+    }
+    get realSkillVals() { return U.KeyMapObj(this.skills, (v) => v.value) }
 }

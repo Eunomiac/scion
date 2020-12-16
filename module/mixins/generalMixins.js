@@ -71,9 +71,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                         "PopOut": popout
                     }, `on CLICK: Open Popout ${dataSet.htmlid}`, "MIXIN: PopoutControl", {groupStyle: "l3"});
                     if (popout)
-                        if (popout.classList.contains("hidden")) // {
-                            // this.entity.data.openPopouts
-
+                        if (popout.classList.contains("hidden"))
                             popout.classList.remove("hidden");
                         else
                             popout.classList.add("hidden");
@@ -91,8 +89,28 @@ export const PopoutControl = (superClass) => class extends superClass {
                     this.popoutSheet(item.sheet, popoutData[item.type]);
                 }
             };
+            const _onPopin = (event) => {
+                // event.preventDefault();
+                const element = event.currentTarget;
+                const dataSet = element.dataset;
+                if ("htmlid" in dataSet) {
+                    const popout = html.find(`#${dataSet.htmlid}`)[0];
+                    U.GLOG({
+                        event,
+                        element,
+                        "... dataset": dataSet,
+                        "PopIn": popout
+                    }, `on BLUR: Close Popout ${dataSet.htmlid}`, "MIXIN: PopoutControl", {groupStyle: "l3"});
+                    if (popout && !popout.classList.contains("hidden"))
+                        popout.classList.add("hidden");
+                    else
+                        U.THROW(event, "Popout Element Not Found or already hidden!");
+                }
+            };
 
             html.find(".clickable.openPopout").click(_onPopout.bind(this));
+            html.find(".clickable.openTooltip").click(_onPopout.bind(this));
+            html.find(".clickable.openTooltip").blur(_onPopin.bind(this));
         }
     }
 };

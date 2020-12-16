@@ -246,6 +246,68 @@ label {
 /* #endregion */
 
 /* #region Popouts */
+
+.tooltip {
+    display: block;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background-image: url("../images/ToolTipBall.png");
+    background-size: 100%;
+    z-index: 9999;
+    background-position: center;
+    right: 30px;
+
+    > div {
+        min-width: 300px; 
+        max-width: 400px;
+        top: 50%;
+        left: 100%;
+        transform: translate(0, -50%);
+        padding: 5px;
+        color: #444444;
+        background-color: white;
+        font-weight: normal;
+        font-size: 13px;
+        border-radius: 8px;
+        position: absolute;
+        z-index: 99999999;
+        box-sizing: border-box;
+        border: 10px outset var(--greyUp3);
+        visibility: hidden; 
+        opacity: 0; 
+        transition: opacity 0.8s;
+        p {
+            font-family: "Della Respira";
+            font-size: 12px;
+        }
+        i {
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            margin-top: -25px;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            &::after {
+                content: '';
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                top: 50%;
+                transform: translate(50%, -50%) rotate(-45deg);
+                background-color: white;
+                border: 10px outset #DDD;
+            }
+        }
+    }
+    
+    &:hover > div { 
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
 .popout {
     position: absolute;
     overflow: hidden;
@@ -253,7 +315,7 @@ label {
         
     &#skillList {
         width: 150px;
-        height: 462px;
+        height: 480px;
         left: 94%;
         top: 0;
 
@@ -268,6 +330,8 @@ label {
         filter: drop-shadow(0px 0px 6px black);
         > div { padding: 15px; }
     }  
+
+    
 }
  /* #endregion */ 
 

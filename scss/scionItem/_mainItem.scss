@@ -39,13 +39,13 @@
     }
     h2, .h2 { 
         color: black;
-       background: var(--greyFullFade10);
+       background: var(--whiteFade50);
        border: {
           bottom: 2px solid black;
           top: 2px solid white;
        }
        box-sizing: content-box;
-       @include embossed-text(1px, 0px, var(--shadowColorBright), var(--shadowColorDark));
+       @include embossed-text(1px, 0px, var(--colorHighlight), var(--colorShadow));
     }
     
     

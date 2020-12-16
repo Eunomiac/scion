@@ -31,7 +31,7 @@ Hooks.once("init", async () => {
         },
         debug: {
             isDebugging: true,
-            isDebuggingDragula: false,
+            isDebuggingDragula: true,
             watchList: []
         }
     };
