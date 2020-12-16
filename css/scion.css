@@ -1,4 +1,3 @@
-/* #region IMPORT */
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash:wght@400&family=Della+Respira:wght@400&family=Overlock+SC:wght@400&family=Marcellus+SC:wght@400&family=Amarante:wght@400&family=Finger+Paint:wght@400&family=Grenze+Gotisch:wght@400&family=Pirata+One:wght@400&family=Poiret+One:wght@400&family=Righteous:wght@400&family=Reem+Kufi:wght@400&family=Yatra+One:wght@400&family=Julius+Sans+One:wght@400&family=Voltaire:wght@400&display=swap");
 @font-face {
   font-family: "Bootle";
@@ -113,7 +112,11 @@
 }
 
 body.vtt.game.system-scion {
+  /* #region Global Variables & Configuration */
   /* #region @MIXINS */
+  /* #endregion */
+  /* #region SHEET STYLES */
+  /* #endregion */
 }
 
 body.vtt.game.system-scion {
@@ -977,6 +980,12 @@ body.vtt.game.system-scion div.sheet.scion {
   /* #region FLEX LAYOUTS */
   /* #endregion */
   /* #region GRID LAYOUTS */
+  /* #endregion */
+  /* #region ACTOR SHEETS */
+  /* #region MAJOR ACTOR SHEETS */
+  /* #endregion */
+  /* #endregion */
+  /* #region ITEM SHEETS */
   /* #endregion */
 }
 
@@ -2201,6 +2210,11 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .surTitle {
   grid-area: surTitle;
 }
 
+body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body {
+  /* #region Owned Item Partials */
+  /* #endregion */
+}
+
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .chargen-body .deed {
   min-width: 50%;
 }
@@ -2275,46 +2289,6 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .f
   line-height: 1rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"] {
-  display: inline-block;
-  height: 100px;
-  width: 80px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: hue-rotate(var(--colorPurviewRotate));
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="sun"] {
-  background-image: url("../images/purviews/sun.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="passion"] {
-  background-image: url("../images/purviews/passion.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="geasa"] {
-  background-image: url("../images/purviews/geasa.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="beauty"] {
-  background-image: url("../images/purviews/beauty.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"][class*="fortune"] {
-  background-image: url("../images/purviews/fortune.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body [class|="purview"] span.text {
-  display: block;
-  margin-top: 110%;
-  text-align: center;
-  font-family: Oswald;
-  text-transform: uppercase;
-  margin-top: 95px;
-  font-size: 12px;
-}
-
 body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] {
   margin: 3px;
   align-content: start;
@@ -2339,14 +2313,6 @@ body.vtt.game.system-scion div.sheet.scion.item .main {
 }
 
 body.vtt.game.system-scion div.sheet.scion.item .main {
-  /* --fontFamilyBubbleBody: var(--fontFamilyBody);
-    --fontSizeBubbleBody: 10px;
-    --fontWeightBubbleBody: normal;
-    --fontFamilyBubbleTitle: var(--fontFamilyBody);
-    --fontSizeBubbleTitle: 20px;
-    --fontWeightBubbleTitle: bold;
-    --textTransformBubbleTitle: uppercase;
-    --bubbleHeight: 22px; */
   height: 100%;
   width: 100%;
   padding: 20px 20px 60px 20px;
