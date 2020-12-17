@@ -87,7 +87,7 @@ export class MajorActorSheet extends ScionActorSheet {
         );
         // #endregion
 
-        U.GLOG({
+        U.LOG({
             "this MajorActorSheet": this,
             "... .getData() [Sheet Context]": data,
             "... ... .data": data.data

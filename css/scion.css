@@ -20,6 +20,11 @@
 }
 
 @font-face {
+  font-family: "Zanzabar";
+  src: url(../fonts/netjer/Zanzabar.otf);
+}
+
+@font-face {
   font-family: "Goodfish";
   src: url(../fonts/teotl/goodfish.ttf);
 }
@@ -56,6 +61,36 @@
 @font-face {
   font-family: "Stein Antik";
   src: url(../fonts/theoi/SteinAntik-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Dacian Donarium";
+  src: url(../fonts/theoi/DacianDonarium.ttf);
+}
+
+@font-face {
+  font-family: "Roman Font 7";
+  src: url(../fonts/theoi/RomanFont7.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Diogenes";
+  src: url(../fonts/theoi/Diogenes.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Adonais";
+  src: url(../fonts/theoi/Adonais.ttf);
+}
+
+@font-face {
+  font-family: "Basileus";
+  src: url(../fonts/theoi/Basileus.ttf);
+}
+
+@font-face {
+  font-family: "CapitalisTypOasis";
+  src: url(../fonts/theoi/CapitalisTypOasis.ttf) format("truetype");
 }
 
 .gu-mirror {
@@ -421,7 +456,7 @@ body.vtt.game.system-scion .netjer {
   --colorTitle: #554a39;
   --colorH1: #554a39;
   --colorH2: #6e4a28;
-  --colorH3: #412b17;
+  --colorH3: #6e4a28;
   --coloraccent: #836a07;
   --colorStrong: var(--colorBody);
   --colorHighlight: #f6f0e2;
@@ -430,11 +465,20 @@ body.vtt.game.system-scion .netjer {
   --colorPurviewRotate: 245deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --fontFamilyTitle: "Carolingia";
-  --fontFamilyH1: "Khaleefa";
+  --fontSizeTitle: 40px;
+  --lineHeightTitle: 50px;
+  --fontVariantTitle: small-caps;
+  --fontWeightTitle: bold;
+  --fontFamilyH1: "Gothic Ultra";
+  --fontSizeH1: 32px;
+  --lineHeightH1: 36px;
+  --fontVariantH1: none;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Gothic Ultra";
-  --fontFamilyH3: "Gothic Ultra";
-  --lineHeightH3: var(--fontSizeH3);
+  --fontFamilyH2: "Carolingia";
+  --fontSizeH2: 24px;
+  --fontFamilyH3: "Carolingia";
+  --fontSizeH3: 20px;
+  --lineHeightH3: 16px;
   --maxHeightH3: var(--fontSizeH3);
   --lineHeightBody: var(--fontSizeBody);
   --fontVariantStrong: var(--fontVariantBody);
@@ -513,7 +557,7 @@ body.vtt.game.system-scion .theoi {
   --fontFamilyH1: "Poiret One";
   --fontWeightH1: bold;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Stein Antik";
+  --fontFamilyH2: "Roman Font 7";
   --fontFamilyH3: "Poiret One";
   --fontSizeH3: 20px;
   --lineHeightH3: var(--fontSizeH3);
@@ -967,7 +1011,7 @@ body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sh
   background: var(--bgH2);
   padding: var(--paddingH2);
   max-height: var(--maxHeightH2);
-  min-height: var(--maxHeightH3);
+  min-height: var(--maxHeightH2);
   line-height: var(--lineHeightH2);
   font-family: var(--fontFamilyH2);
   font-style: var(--fontStyleH2);

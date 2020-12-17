@@ -14,7 +14,7 @@ export class ScionItem extends Item {
         const actorData = this.actor ? this.actor.data : {};
         const data = itemData.data;
 
-        U.GLOG({
+        U.LOG({
             "this ScionItem": this,
             "... .data": this.data,
             "... ... .data": this.data.data,

@@ -64,7 +64,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                 const dataSet = element.dataset;
                 if ("htmlid" in dataSet) {
                     const popout = html.find(`#${dataSet.htmlid}`)[0];
-                    U.GLOG({
+                    U.LOG({
                         event,
                         element,
                         "... dataset": dataSet,
@@ -79,7 +79,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                         U.THROW(event, "Popout Element Not Found!");
                 } else if ("itemid" in dataSet) {
                     const item = this.entity.items.get(dataSet.itemid);
-                    U.GLOG({
+                    U.LOG({
                         event,
                         element,
                         "... dataset": dataSet,
@@ -95,7 +95,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                 const dataSet = element.dataset;
                 if ("htmlid" in dataSet) {
                     const popout = html.find(`#${dataSet.htmlid}`)[0];
-                    U.GLOG({
+                    U.LOG({
                         event,
                         element,
                         "... dataset": dataSet,
@@ -158,7 +158,7 @@ export const EditableDivs = (superClass) => class extends superClass {
                         entityVal[U.Int(dataSet.fieldindex)] = elementVal;
                     else
                         entityVal = elementVal;
-                    U.GLOG({
+                    U.LOG({
                         "this": this,
                         "...entity": this.entity,
                         "dataSet.field": dataSet.field,
@@ -204,7 +204,7 @@ export const EditableDivs = (superClass) => class extends superClass {
                         }, "Invalid Field");
                     } else {
                         entityVal = entityVal || "";
-                        U.GLOG({
+                        U.LOG({
                             "this": this,
                             "...entity": this.entity,
                             "dataSet.field": dataSet.field,

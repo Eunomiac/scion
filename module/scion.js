@@ -14,8 +14,8 @@ import "./external/gl-matrix-min.js";
 
 // #region Hook: Initialization
 Hooks.once("init", async () => {
+    CONFIG.isHoldingLogs = true;
     console.clear();
-    console.log("INITIALIZING SCION.JS ...");
     CONFIG.scion = SCION;
 
     game.scion = {
@@ -35,6 +35,9 @@ Hooks.once("init", async () => {
             watchList: []
         }
     };
+
+    U.LOG("INITIALIZING SCION.JS ...");
+
     // Define custom Entity classes
     CONFIG.Actor.entityClass = ScionActor;
     CONFIG.Item.entityClass = ScionItem;
@@ -83,6 +86,7 @@ Hooks.once("init", async () => {
 
 // #region Hook: Ready
 Hooks.once("ready", async () => {
+    U.ReleaseLogs();
     // Make Localized Dictionaries for Handlebar Select Options
     CONFIG.scion.tierList = U.MakeDict(CONFIG.scion.TIERS);
     CONFIG.scion.pantheonList = U.MakeDict(CONFIG.scion.PANTHEONS);
@@ -110,7 +114,7 @@ Hooks.once("ready", async () => {
         });
     });
 
-    U.GLOG({
+    U.LOG({
         CONFIG,
         "game": game,
         "... .scion": game.scion

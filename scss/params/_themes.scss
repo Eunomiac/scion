@@ -32,7 +32,7 @@ $pantheonThemes: (
             "Title": #554a39,
             "H1": #554a39,
             "H2": #6e4a28,
-            "H3": #412b17,
+            "H3": #6e4a28,
             "accent": #836a07,
             "Highlight": #f6f0e2,
             "Shadow": #2d2d2f,
@@ -42,16 +42,26 @@ $pantheonThemes: (
         "BGs": (),
         "typography": (
             "Title": (
-                "fontFamily": 'Carolingia'
+                "fontFamily": 'Carolingia',
+                "fontSize": 40px,
+                "fontVariant": small-caps,
+                "fontWeight": bold,
+                "lineHeight": 50px
             ),
             "H1": (
-                "fontFamily": 'Khaleefa'
+                "fontFamily": 'Gothic Ultra',
+                "fontSize": 32px,
+                "lineHeight": 36px,
+                "fontVariant": none
             ),
             "H2": (
-                "fontFamily": 'Gothic Ultra'
+                "fontFamily": 'Carolingia',
+                "fontSize": 24px
             ),
             "H3": (
-                "fontFamily": 'Gothic Ultra'
+                "fontFamily": 'Carolingia',
+                "fontSize": 20px,
+                "lineHeight": 16px
             )
         )
     ),
@@ -79,7 +89,7 @@ $pantheonThemes: (
                 "fontVariant": small-caps
             ),
             "H2": (
-                "fontFamily": 'Stein Antik'
+                "fontFamily": 'Roman Font 7'
             ),
             "H3": (
                 "fontFamily": 'Poiret One',

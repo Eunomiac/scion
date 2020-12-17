@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 // #region AGGREGATING EXTERNAL MODULES
 export * as _ from "./external/underscore/underscore-esm-min.js";
 export {Dust as DUST} from "./external/dust.js";

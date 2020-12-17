@@ -3,12 +3,11 @@
     {{!-- Sheet Header --}}
     <section class="header width100">
         <h1 class="title alignCenter">{{localize (concat "scion.paths." data.type "Path")}}</h1>
-        <div class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
-        
+        <div id="pathTitle" class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
     </section>
         
     <section class="sheet-body flex-col spaceBetween">
-        <div class="pathSkills skillDrop flex-row-max-start" data-htmlID="skillList">
+        <div id="pathSkills" class="pathSkills skillDrop flex-row-max-start" data-htmlID="skillList">
             {{#each data.skills as |skill|}}
             {{#if skill}}
             <span class="skill noFlex
@@ -18,39 +17,11 @@
         </div>
         {{> (blocks.skillList.template) }}
         <div class="pathConnections flex-full-center alignCenter">
-            <h2 class="gold">{{localize "scion.paths.connections"}}</h2>
-            <div class="bubble connection group dots">
-                    <div class="bubbleWrap">
-                <span>Group</span>
-                <span class="bubbleTitle">Adoring Fans</span>
+            <h2>{{localize "scion.paths.connections"}}</h2>
+            <div id="pathConnections">
+                {{{HTML.potentialConnections}}}
             </div>
-            </div>
-            <div class="bubble connection group dots">
-                    <div class="bubbleWrap">
-                <span class="bubbleTitle">Obsessed Goths</span>
-                <span>Group</span>
-            </div>
-            </div>
-            <div class="bubble connection access dots">
-                    <div class="bubbleWrap">
-                <span class="bubbleTitle">Access</span>
-                <span>Accompaniment</span>
-            </div>
-            </div>
-            <div class="bubble connection access dots">
-                    <div class="bubbleWrap">
-                <span class="bubbleTitle">Access</span>
-                <span>Age Is No Obstacle</span>
-            </div>
-            </div>
-            <div class="bubble connection contact dots">
-                    <div class="bubbleWrap">
-                <span class="bubbleTitle">Contact</span>
-                <span>Mikaela Whitechapel-Diaz</span>
-            </div>
-            </div>
-        </div>
-        
+        </div>        
         <div class="pathCondition flex-full alignCenter">
             <h2 class="gold">{{localize "scion.paths.condition"}}</h2>
             <div class="bubble condition">

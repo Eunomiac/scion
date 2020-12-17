@@ -178,6 +178,7 @@ module.exports = {
         Macro: "readonly",
         Roll: "readonly",
         Sidebar: "readonly",
+        TextEditor: "readonly",
         duplicate: "readonly",
         diffObject: "readonly",
         hasProperty: "readonly",

@@ -11,6 +11,19 @@
 			"runOptions": {
 				"runOn": "folderOpen"
 			}
+		},
+		{
+			"label": "JSHint Report",
+			"type": "shell",
+			"command": "jshint --c 'C:/Users/Ryan/Documents/Projects/!!!!CODING/.jshintrc' --exclude **/external/** --verbose --show-non-errors '${workspaceFolder}/module'",
+			"presentation": {  
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			}
 		}
 	]
 }

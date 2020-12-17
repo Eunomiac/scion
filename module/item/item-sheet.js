@@ -1,4 +1,4 @@
-import {_, U, handlebarTemplates, MIX, ItemMixins as MIXINS} from "../modules.js";
+import {U, handlebarTemplates, MIX, ItemMixins as MIXINS} from "../modules.js";
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -9,16 +9,15 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "item"],
             width: 520,
-            height: 480,
-            tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
+            height: 480
+            // tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
         });
     }
 
     static RegisterSheet(label = "item", types = [], makeDefault = true) {
         label = `scion.sheets.${label}Sheet`;
         Items.registerSheet("scion", this, {makeDefault, types, label});
-        console.log("Sheet Registered", this, types);
-        console.log(this.defaultOptions);
+        U.LOG({"Sheet Registered": this, types, defaultOptions: this.defaultOptions}, `${U.Loc(label)} Registered`, "ScionItemSheet");
     }
 
     get template() {

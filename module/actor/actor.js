@@ -9,7 +9,7 @@ export class ScionActor extends Actor {
         super.prepareData();
         if (this.data.type === "major")
             this._prepareMajorCharData();
-        U.GLOG({
+        U.LOG({
             "this ScionActor": this,
             "... .data": this.data,
             "... ... .data": this.data.data,
@@ -56,7 +56,7 @@ export class ScionActor extends Actor {
 
     async updatePantheon(pantheon) {
         if (pantheon === true || (pantheon && pantheon !== this.data.data.pantheon)) {
-            U.GLOG({onActor: this.data.data.pantheon, onEvent: pantheon}, `Pantheon Check ${this.name}`, "updatePantheon");
+            U.LOG({onActor: this.data.data.pantheon, onEvent: pantheon}, `Pantheon Check ${this.name}`, "updatePantheon");
             pantheon = (pantheon && pantheon in SCION.PANTHEONS) ? pantheon : this.data.data.pantheon;
             const panthPath = this.paths.find((path) => path.data.data.type === "pantheon");
             const currentSkills = panthPath.data.data.skills;
@@ -90,7 +90,7 @@ export class ScionActor extends Actor {
         );
         if (spilloverDots)
             updateVals["data.skills.unspentDots"] = this.data.data.skills.unspentDots + spilloverDots;
-        U.GLOG({
+        U.LOG({
             actorSkills: this.skills,
             actorSkillVals: this.realSkillVals,
             pathSkills: this.pathSkills,

@@ -25,11 +25,13 @@ export class PathItemSheet extends ScionItemSheet {
         const allPathSkills = this.actor.paths
             .map((path) => path.data.data.skills)
             .flat();
-
-        // data.path
         data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS, (label, skill) => allPathSkills.reduce((count, pathSkill) => (pathSkill === skill ? count + 1 : count), 0));
 
-        U.GLOG({
+        data.HTML = {
+            potentialConnections: TextEditor.enrichHTML("Let's test this out!")
+        };
+
+        U.LOG({
             "this PathItemSheet": this,
             "... .getData() [Sheet Context]": data,
             "... ... .data": data.data,
@@ -80,31 +82,31 @@ export class PathItemSheet extends ScionItemSheet {
 
         if (game.scion.debug.isDebuggingDragula) {
             pathSkillDragger.on("drag", (el, source) => {
-                U.GLOG({el, source}, "on DRAG", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el, source}, "on DRAG", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("dragend", (el) => {
-                U.GLOG({el}, "on DRAGEND", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el}, "on DRAGEND", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("drop", (el, target, source, sibling) => {
-                U.GLOG({el, target, source, sibling}, "on DROP", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el, target, source, sibling}, "on DROP", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("cancel", (el, container, source) => {
-                U.GLOG({el, container, source}, "on CANCEL", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el, container, source}, "on CANCEL", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("remove", (el, container, source) => {
-                U.GLOG({el, container, source}, "on REMOVE", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el, container, source}, "on REMOVE", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("shadow", (el, container, source) => {
-                U.GLOG({el, container, source}, "on SHADOW", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el, container, source}, "on SHADOW", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("over", (el, container, source) => {
-                U.GLOG({el, container, source}, "on OVER", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el, container, source}, "on OVER", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("out", (el, container, source) => {
-                U.GLOG({el, container, source}, "on OUT", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({el, container, source}, "on OUT", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
             pathSkillDragger.on("cloned", (clone, original, type) => {
-                U.GLOG({clone, original, type}, "on CLONED", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
+                U.LOG({clone, original, type}, "on CLONED", "PathItemSheet: DRAGULA", {groupStyle: "l4"});
             });
         }
 
