@@ -7,7 +7,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
         return mergeObject(super.defaultOptions, {
             classes: [...super.defaultOptions.classes, "path"],
             width: 500,
-            height: 550,
+            height: 470,
             tabs: []
         });
     }
@@ -49,12 +49,6 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
 
         const actorData = this.actor.data.data;
         const pathData = this.getData().data;
-
-        this.createRichEditor({
-            selector: ".pathConnectionsEditor",
-            placeholder: U.Loc("scion.heading.path.pathConnectionsPrompt", {path: `scion.path.${pathData.type}Path`}),
-            height: 100
-        });
 
         // #region DRAGULA: PATH SKILLS
         const addPathSkill = async (skillElement) => {

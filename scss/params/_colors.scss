@@ -106,30 +106,6 @@ $defaultTypography: (
       "textTransform": var(--textTransformBody),
       "textShadow": var(--textShadowBody)
     ),
-    "BubbleTitle": (
-      "fontFamily": var(--fontFamilyBody),
-      "fontSize": 16px,
-      "lineHeight": 14px,
-      "maxHeight": 16px,
-      "fontStyle": normal,
-      "fontVariant": normal,
-      "fontWeight": bold,
-      "textTransform": uppercase,
-      "textIndent": 0px,
-      "textShadow": (shadow-glow, 2, 1px, $c-black),
-      "border": none
-    ),
-    "BubbleBody": (
-      "fontFamily": var(--fontFamilyBody),
-      "fontSize": 12px,
-      "lineHeight": 12px,
-      "fontStyle": normal,
-      "fontVariant": normal,
-      "fontWeight": normal,
-      "textTransform": none,
-      "textIndent": 0px,
-      "textShadow": (shadow-glow, 2, 1px, $c-black)
-    ),
     "Menu": (
       "fontFamily": 'Voltaire',
       "fontSize": 24px,

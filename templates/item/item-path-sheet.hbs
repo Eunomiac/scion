@@ -18,9 +18,7 @@
         {{> (blocks.skillList.template) }}
         <div class="pathConnections width100 alignCenter">
             <h2>{{loc "scion.path.connections"}}</h2>
-            <div class="richEditContainer">
-                <div class="pathConnectionsEditor alignLeft height100" contenteditable="true" spellcheck="false"></div>
-            </div>
+            <div id="connectionDescription" class="connectionDescription insetFrame contentEditable alignLeft" data-field="data.connectionDescription" data-placeholder="{{loc "scion.heading.path.pathConnectionsPrompt" "path" (concat "scion.path." data.type "Path")}}">{{data.connectionDescription}}</div>
         </div>
         <div class="pathCondition flex-full alignCenter">
             <h2>{{loc "scion.path.conditions"}}</h2>

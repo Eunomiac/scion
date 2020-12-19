@@ -286,26 +286,6 @@ body.vtt.game.system-scion {
   --fontWeightWeak: normal;
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontSizeBubbleTitle: 16px;
-  --lineHeightBubbleTitle: 14px;
-  --maxHeightBubbleTitle: 16px;
-  --fontStyleBubbleTitle: normal;
-  --fontVariantBubbleTitle: normal;
-  --fontWeightBubbleTitle: bold;
-  --textTransformBubbleTitle: uppercase;
-  --textIndentBubbleTitle: 0px;
-  --textShadowBubbleTitle: 0 0 1px black, 0 0 1px black;
-  --borderBubbleTitle: none;
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
-  --fontSizeBubbleBody: 12px;
-  --lineHeightBubbleBody: 12px;
-  --fontStyleBubbleBody: normal;
-  --fontVariantBubbleBody: normal;
-  --fontWeightBubbleBody: normal;
-  --textTransformBubbleBody: none;
-  --textIndentBubbleBody: 0px;
-  --textShadowBubbleBody: 0 0 1px black, 0 0 1px black;
   --fontFamilyMenu: "Voltaire";
   --fontSizeMenu: 24px;
   --lineHeightMenu: 24px;
@@ -359,8 +339,6 @@ body.vtt.game.system-scion .aesir {
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -406,8 +384,6 @@ body.vtt.game.system-scion .loa {
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -490,8 +466,6 @@ body.vtt.game.system-scion .netjer {
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -580,8 +554,6 @@ body.vtt.game.system-scion .theoi {
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -653,8 +625,6 @@ body.vtt.game.system-scion .tuathaDeDanann {
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -738,8 +708,6 @@ body.vtt.game.system-scion .orisha {
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
-  --fontFamilyBubbleTitle: var(--fontFamilyBody);
-  --fontFamilyBubbleBody: var(--fontFamilyBody);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -1696,76 +1664,12 @@ body.vtt.game.system-scion div.sheet.scion .bubble p {
   margin: 0;
 }
 
-body.vtt.game.system-scion div.sheet.scion .bubble.skill {
-  height: 16.72px;
-  width: 124.96px;
-  padding: 2.64px 3.52px;
-  margin: 2px;
-  background-image: url("../images/bubbles/Bubble1x6.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
-  text-align: center;
-  box-sizing: content-box;
-  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.skill .bubbleWrap::before {
-  content: "";
-  width: 13.42px;
-  height: 16.72px;
-  float: left;
-  shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.skill::before {
-  content: "";
-  width: 13.42px;
-  height: 16.72px;
-  float: right;
-  shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.skill span, body.vtt.game.system-scion div.sheet.scion .bubble.skill p {
-  display: block;
-  font-family: var(--fontFamilyBubbleBody);
-  font-size: var(--fontSizeBubbleBody);
-  font-weight: var(--fontWeightBubbleBody);
-  text-transform: var(--textTransformBubbleBody);
-  text-shadow: var(--textShadowBubbleBody);
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.skill p {
-  line-height: var(--lineHeightBubbleBody);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.skill .bubbleTitle {
-  display: block;
-  line-height: var(--lineHeightBubbleTitle);
-  font-family: var(--fontFamilyBubbleTitle);
-  font-size: var(--fontSizeBubbleTitle);
-  font-weight: var(--fontWeightBubbleTitle);
-  text-transform: var(--textTransformBubbleTitle);
-  text-shadow: var(--textShadowBubbleTitle);
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.skill span {
-  font-size: 16px;
-  line-height: 18px;
-  font-family: Voltaire;
-  text-transform: uppercase;
-}
-
 body.vtt.game.system-scion div.sheet.scion .bubble.condition {
   height: 57px;
-  width: 426px;
-  padding: 9px 12px;
+  width: 207px;
+  padding: 9px 9px;
   margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x6.png");
+  background-image: url("../images/bubbles/Bubble1x3.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-origin: border-box;
@@ -1773,11 +1677,12 @@ body.vtt.game.system-scion div.sheet.scion .bubble.condition {
   box-sizing: content-box;
   filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
   justify-content: start;
+  margin: 4px 0;
 }
 
 body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap::before {
   content: "";
-  width: 45.75px;
+  width: 24px;
   height: 57px;
   float: left;
   shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
@@ -1785,7 +1690,7 @@ body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap::before
 
 body.vtt.game.system-scion div.sheet.scion .bubble.condition::before {
   content: "";
-  width: 45.75px;
+  width: 24px;
   height: 57px;
   float: right;
   shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
@@ -1793,29 +1698,44 @@ body.vtt.game.system-scion div.sheet.scion .bubble.condition::before {
 
 body.vtt.game.system-scion div.sheet.scion .bubble.condition span, body.vtt.game.system-scion div.sheet.scion .bubble.condition p {
   display: block;
-  font-family: var(--fontFamilyBubbleBody);
-  font-size: var(--fontSizeBubbleBody);
-  font-weight: var(--fontWeightBubbleBody);
-  text-transform: var(--textTransformBubbleBody);
-  text-shadow: var(--textShadowBubbleBody);
   text-align: center;
   text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition p {
-  line-height: var(--lineHeightBubbleBody);
 }
 
 body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleTitle {
   display: block;
-  line-height: var(--lineHeightBubbleTitle);
-  font-family: var(--fontFamilyBubbleTitle);
-  font-size: var(--fontSizeBubbleTitle);
-  font-weight: var(--fontWeightBubbleTitle);
-  text-transform: var(--textTransformBubbleTitle);
-  text-shadow: var(--textShadowBubbleTitle);
+  grid-area: title;
   text-align: center;
   text-align-last: center;
+}
+
+body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap {
+  height: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap .bubbleTitle {
+  height: 25%;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  color: black;
+  font-family: "Oswald";
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap .bubbleBody {
+  height: 75%;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  color: black;
+  font-family: "Overlock SC";
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 10px;
 }
 
 body.vtt.game.system-scion div.sheet.scion .bubble.connection.group, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access {
@@ -1850,27 +1770,13 @@ body.vtt.game.system-scion div.sheet.scion .bubble.connection.group::before, bod
 
 body.vtt.game.system-scion div.sheet.scion .bubble.connection.group span, body.vtt.game.system-scion div.sheet.scion .bubble.connection.group p, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access span, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access p {
   display: block;
-  font-family: var(--fontFamilyBubbleBody);
-  font-size: var(--fontSizeBubbleBody);
-  font-weight: var(--fontWeightBubbleBody);
-  text-transform: var(--textTransformBubbleBody);
-  text-shadow: var(--textShadowBubbleBody);
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.group p, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access p {
-  line-height: var(--lineHeightBubbleBody);
-}
-
 body.vtt.game.system-scion div.sheet.scion .bubble.connection.group .bubbleTitle, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access .bubbleTitle {
   display: block;
-  line-height: var(--lineHeightBubbleTitle);
-  font-family: var(--fontFamilyBubbleTitle);
-  font-size: var(--fontSizeBubbleTitle);
-  font-weight: var(--fontWeightBubbleTitle);
-  text-transform: var(--textTransformBubbleTitle);
-  text-shadow: var(--textShadowBubbleTitle);
+  grid-area: title;
   text-align: center;
   text-align-last: center;
 }
@@ -1907,27 +1813,13 @@ body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact::before {
 
 body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact span, body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact p {
   display: block;
-  font-family: var(--fontFamilyBubbleBody);
-  font-size: var(--fontSizeBubbleBody);
-  font-weight: var(--fontWeightBubbleBody);
-  text-transform: var(--textTransformBubbleBody);
-  text-shadow: var(--textShadowBubbleBody);
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact p {
-  line-height: var(--lineHeightBubbleBody);
-}
-
 body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact .bubbleTitle {
   display: block;
-  line-height: var(--lineHeightBubbleTitle);
-  font-family: var(--fontFamilyBubbleTitle);
-  font-size: var(--fontSizeBubbleTitle);
-  font-weight: var(--fontWeightBubbleTitle);
-  text-transform: var(--textTransformBubbleTitle);
-  text-shadow: var(--textShadowBubbleTitle);
+  grid-area: title;
   text-align: center;
   text-align-last: center;
 }
@@ -2449,6 +2341,14 @@ body.vtt.game.system-scion div.sheet.scion.item .main h1, body.vtt.game.system-s
   text-indent: 15px;
 }
 
+body.vtt.game.system-scion div.sheet.scion.item.path .main .h2.contentEditable.placeholder {
+  line-height: 24px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.path .main h3, body.vtt.game.system-scion div.sheet.scion.item.path .main .h3 {
+  text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
+}
+
 body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills {
   min-height: 28px;
 }
@@ -2473,7 +2373,59 @@ body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkil
   box-shadow: 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathConnections .richEditContainer {
-  height: 62px;
-  padding: 0 10px;
+body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathConnections .contentEditable {
+  height: 70px;
+  max-height: 70px;
+  font-size: 14px;
+  line-height: 18px;
+  text-indent: 0;
+  padding: 5px;
+  margin: 0 10px;
+  border-color: var(--grey);
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathCondition {
+  padding-left: 10px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.condition .main h1 {
+  font-size: 24px;
+  height: 24px;
+  line-height: 28px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.condition .main .h2.contentEditable.placeholder {
+  line-height: 24px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.condition .main h3 {
+  display: inline-block;
+  width: calc(100% - 30px);
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.condition .main input.toggleBox {
+  height: 30px;
+  width: 30px;
+  margin: -36px 0 0 24px;
+  float: left;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.condition .main div#conditionDescription, body.vtt.game.system-scion div.sheet.scion.item.condition .main div#conditionResolution {
+  height: 60px;
+  display: block;
+  max-height: 60px;
+  font-size: 14px;
+  line-height: 14px;
+  text-indent: 0;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  border-color: var(--grey);
+  margin: 0 5px 10px 5px;
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.condition .main div#conditionDescription {
+  height: 40px;
+  max-height: 40px;
 }

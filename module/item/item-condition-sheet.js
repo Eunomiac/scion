@@ -6,7 +6,7 @@ export class ConditionItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit
         return mergeObject(super.defaultOptions, {
             classes: [...super.defaultOptions.classes, "condition"],
             width: 400,
-            height: 400,
+            height: 310,
             tabs: []
         });
     }

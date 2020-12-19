@@ -313,6 +313,7 @@
             "templates": ["BASE"],
             "skills": [],
             "connections": [],
+            "connectionDescription": "",
             "conditions": {
                 "pathSuspension": null,
                 "pathRevocation": null

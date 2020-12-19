@@ -124,7 +124,9 @@
                 "conditionPrompt": "Click to Create!"
             },
             "condition": {
-                "titlePrompt": "Give this Condition a title."
+                "titlePrompt": "Give this Condition a title.",
+                "descriptionPrompt": "Briefly summarize the effect this Condition has on you.",
+                "resolutionPrompt": "Describe how this Condition can be resolved once it has taken effect."
             }
         },
         "book": {
@@ -628,9 +630,12 @@
         },
         "condition": {
             "pathSuspension": "Suspension",
+            "pathSuspensionCondition": "Suspension Condition",
             "pathRevocation": "Revocation",
+            "pathRevocationCondition": "Revocation Condition",
             "effect": "Condition Effect",
-            "resolution": "Resolved When ..."
+            "resolution": "Resolved When ...",
+            "persistent": "Persistent"
         },
         "attribute": {
             "none": "",
