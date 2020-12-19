@@ -27,8 +27,8 @@ body.vtt.game.system-scion {
     header.window-header { @import 'window/header'; }
     
     section.window-content {
-      padding: 0px;
-      background: transparent;
+      padding: 0px; 
+      background: transparent; 
       pointer-events: none;
       overflow: visible;
       position: relative;
@@ -68,6 +68,7 @@ body.vtt.game.system-scion {
     &.item {
       .main { @import 'scionItem/mainItem'; }
       &.path .main { @import 'scionItem/pathItem'; }
+      &.condition .main { @import 'scionItem/conditionItem'; }
     }
     /* #endregion */ 
   }

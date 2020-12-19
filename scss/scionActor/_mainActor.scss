@@ -176,21 +176,11 @@ $isShowingBGShade: false;
                     &:hover { transform: scale(1.2); }
         
                     .menuIcon {
-                        &.iconMain {
-                            background-image: $iconMain;
-                        }
-                        &.iconChargen {
-                            background-image: $iconChargen;
-                        }
-                        &.iconSettings {
-                            background-image: $iconSettings;
-                        }
-                        &.iconExperience {
-                            background-image: $iconExperience;
-                        }
-                        &.iconHeritage {
-                            background-image: $iconHeritage;
-                        }
+                        &.iconMain { background-image: $iconMain; }
+                        &.iconChargen { background-image: $iconChargen; }
+                        &.iconSettings { background-image: $iconSettings; }
+                        &.iconExperience { background-image: $iconExperience; }
+                        &.iconHeritage { background-image: $iconHeritage; }
                         
                         &:hover { filter: drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)); }
 

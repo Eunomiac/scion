@@ -121,6 +121,46 @@ label {
     font-size: var(--fontSizeBody);
     margin: 0 4px;
 }
+
+
+.richEditContainer {
+    display: block;
+    position: relative;
+    box-shadow: none;
+    padding: 0px;
+
+    *[contentEditable="true"] { outline: none !important; }
+    *[contentEditable="true"]:hover { outline: 1px solid #2276d2 !important; }
+    h1, h2, h3 { 
+       margin: 0;
+       padding: 0;
+       background: none;
+       border: none;
+    }
+    ul, ol { padding-left: 20px; }
+    ul { list-style: square outside; }
+    ol { list-style: upper-roman outside; }
+ 
+    [class*="Editor"] {
+       margin: 0;
+       padding: 0;
+       
+       &[data-mce-placeholder]::before { 
+           @include placeholderText;
+           text-indent: 0;
+           font-size: calc(var(--fontSizePlaceholder) * 0.9);
+           line-height: var(--fontSizePlaceholder);
+        }
+       p { margin: 0 0 3px 0; }
+       blockquote {
+          margin-left: 30px;
+          margin-right: 40px;
+          padding-left: 10px;
+          font-style: italic;
+          border-left: 3px double var(--accentUp3);
+       }
+    }
+ }
 /* #endregion */
 
 /* #region Single-Purpose Classes */

@@ -8,10 +8,34 @@ import {GroupActorSheet} from "./actor/actor-group-sheet.js";
 
 import {ScionItem} from "./item/item.js";
 import {PathItemSheet} from "./item/item-path-sheet.js";
+import {ConditionItemSheet} from "./item/item-condition-sheet.js";
 
 import "./external/gl-matrix-min.js";
 // #endregion
 
+const createSigChars = async (isDeletingOriginals = false) => {
+    if (isDeletingOriginals) {
+        for (const id of ActorDirectory.collection.keys())
+            await game.actors.get(id).delete();
+        for (const id of ItemDirectory.collection.keys())
+            await game.items.get(id).delete();
+    }
+    const sigChars = new Set();
+    const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
+    Object.keys(signatureChars).forEach((sigName) => {
+        if (!charNames.includes(sigName))
+            sigChars.add(sigName);
+    });
+    sigChars.forEach(async (sigName) => {
+        const actorData = signatureChars[sigName];
+        U.LOG(actorData, `Creating Signature Character: ${sigName}`, "hookReady", {style: "data"});
+        await Actor.create({
+            name: sigName,
+            type: "major",
+            data: actorData
+        });
+    });
+};
 // #region Hook: Initialization
 Hooks.once("init", async () => {
     CONFIG.isHoldingLogs = true;
@@ -27,13 +51,16 @@ Hooks.once("init", async () => {
             group: GroupActorSheet
         },
         itemSheets: {
-            path: PathItemSheet
+            path: PathItemSheet,
+            condition: ConditionItemSheet
         },
         debug: {
             isDebugging: true,
             isDebuggingDragula: true,
+            isFormattingGroup: false,
             watchList: []
-        }
+        },
+        createSigChars: createSigChars
     };
 
     U.LOG("INITIALIZING SCION.JS ...");
@@ -95,25 +122,7 @@ Hooks.once("ready", async () => {
         CONFIG.scion.ATTRIBUTES.approaches,
         (v, k) => U.Loc(`scion.game.${k}`)
     );
-
-    // If any signature characters are missing, create them
-    const sigChars = new Set();
-    const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
-    Object.keys(signatureChars).forEach((sigName) => {
-        if (!charNames.includes(sigName))
-            sigChars.add(sigName);
-    });
-    // ActorDirectory.collection.forEach((data) => { sigChars.delete(data.name) });
-    sigChars.forEach((sigName) => {
-        const actorData = signatureChars[sigName];
-        U.LOG(actorData, `Creating Signature Character: ${sigName}`, "hookReady", {style: "data"});
-        Actor.create({
-            name: sigName,
-            type: "major",
-            data: actorData
-        });
-    });
-
+    createSigChars();
     U.LOG({
         CONFIG,
         "game": game,

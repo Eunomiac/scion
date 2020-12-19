@@ -2,8 +2,8 @@
     <div class="tooltip">{{> (blocks.tooltips.path.template) tooltip}}</div>
     {{!-- Sheet Header --}}
     <section class="header width100">
-        <h1 class="title alignCenter">{{localize (concat "scion.paths." data.type "Path")}}</h1>
-        <div id="pathTitle" class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{localize "scion.headings.path.titlePrompt"}}"></div>
+        <h1 class="title alignCenter">{{loc (concat "scion.path." data.type "Path")}}</h1>
+        <div id="pathTitle" class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{loc "scion.heading.path.titlePrompt"}}"></div>
     </section>
         
     <section class="sheet-body flex-col spaceBetween">
@@ -11,25 +11,24 @@
             {{#each data.skills as |skill|}}
             {{#if skill}}
             <span class="skill noFlex
-            {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} pantheon{{/if}}{{/if}}" data-skill="{{skill}}">{{localize (concat "scion.skills." skill)}}</span>
+            {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} pantheon{{/if}}{{/if}}" data-skill="{{skill}}">{{loc (concat "scion.skill." skill)}}</span>
             {{/if}}
             {{/each}}            
         </div>
         {{> (blocks.skillList.template) }}
-        <div class="pathConnections flex-full-center alignCenter">
-            <h2>{{localize "scion.paths.connections"}}</h2>
-            <div id="pathConnections">
-                {{{HTML.potentialConnections}}}
+        <div class="pathConnections width100 alignCenter">
+            <h2>{{loc "scion.path.connections"}}</h2>
+            <div class="richEditContainer">
+                <div class="pathConnectionsEditor alignLeft height100" contenteditable="true" spellcheck="false"></div>
             </div>
-        </div>        
+        </div>
         <div class="pathCondition flex-full alignCenter">
-            <h2 class="gold">{{localize "scion.paths.condition"}}</h2>
-            <div class="bubble condition">
-                    <div class="bubbleWrap">
-                <span class="bubbleTitle">Murder of Crows</span>
-                <p>Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan.</p>
-            </div>
-            </div>
+            <h2>{{loc "scion.path.conditions"}}</h2>
+            {{#each conditions as |condition type|}}
+                {{#with ../blocks as | blocks |}}
+                {{> (blocks.embeds.pathCondition.template) condition}}
+                {{/with}}
+            {{/each}}
         </div>
     </section>
     

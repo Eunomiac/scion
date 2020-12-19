@@ -214,6 +214,7 @@ body.vtt.game.system-scion {
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
   --colorMenuGlow: var(--accent);
+  --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 0deg;
   --bgTitle: transparent;
   --bgH1: transparent;
@@ -345,6 +346,7 @@ body.vtt.game.system-scion .aesir {
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
   --colorMenuGlow: var(--accent);
+  --colorPlaceholder: var(--greyDown3);
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --fontFamilyTitle: "Amarante";
   --fontFamilyH1: "Amarante";
@@ -389,6 +391,7 @@ body.vtt.game.system-scion .loa {
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
   --colorMenuGlow: #dd0000;
+  --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 225deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --fontFamilyTitle: "Finger Paint";
@@ -462,6 +465,7 @@ body.vtt.game.system-scion .netjer {
   --colorHighlight: #f6f0e2;
   --colorShadow: #2d2d2f;
   --colorMenuGlow: #ffdd00;
+  --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 245deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --fontFamilyTitle: "Carolingia";
@@ -550,6 +554,7 @@ body.vtt.game.system-scion .theoi {
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
   --colorMenuGlow: #00ffff;
+  --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 100deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --fontFamilyTitle: "Poiret One";
@@ -629,6 +634,7 @@ body.vtt.game.system-scion .tuathaDeDanann {
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
   --colorMenuGlow: #00ff00;
+  --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 330deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --fontFamilyTitle: "Berkshire Swash";
@@ -706,6 +712,7 @@ body.vtt.game.system-scion .orisha {
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
   --colorMenuGlow: #00ffff;
+  --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 100deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --fontFamilyTitle: "Poiret One";
@@ -1045,6 +1052,73 @@ body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sh
 body.vtt.game.system-scion div.sheet.scion label {
   font-size: var(--fontSizeBody);
   margin: 0 4px;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer {
+  display: block;
+  position: relative;
+  box-shadow: none;
+  padding: 0px;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer *[contentEditable="true"] {
+  outline: none !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer *[contentEditable="true"]:hover {
+  outline: 1px solid #2276d2 !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer h1, body.vtt.game.system-scion div.sheet.scion .richEditContainer h2, body.vtt.game.system-scion div.sheet.scion .richEditContainer h3 {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer ul, body.vtt.game.system-scion div.sheet.scion .richEditContainer ol {
+  padding-left: 20px;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer ul {
+  list-style: square outside;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer ol {
+  list-style: upper-roman outside;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"] {
+  margin: 0;
+  padding: 0;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"][data-mce-placeholder]::before {
+  color: var(--colorPlaceholder);
+  font-family: var(--fontFamilyPlaceholder);
+  font-size: var(--fontSizePlaceholder);
+  font-style: var(--fontStylePlaceholder);
+  font-variant: var(--fontVariantPlaceholder);
+  font-weight: var(--fontWeightPlaceholder);
+  line-height: var(--lineHeightPlaceholder);
+  text-transform: var(--textTransformPlaceholder);
+  text-indent: var(--textIndentPlaceholder);
+  text-shadow: var(--textShadowPlaceholder);
+  text-indent: 0;
+  font-size: calc(var(--fontSizePlaceholder) * 0.9);
+  line-height: var(--fontSizePlaceholder);
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"] p {
+  margin: 0 0 3px 0;
+}
+
+body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"] blockquote {
+  margin-left: 30px;
+  margin-right: 40px;
+  padding-left: 10px;
+  font-style: italic;
+  border-left: 3px double var(--accentUp3);
 }
 
 body.vtt.game.system-scion div.sheet.scion .readonly {
@@ -2397,4 +2471,9 @@ body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkil
   border-style: inset;
   border-color: var(--greyUp3);
   box-shadow: 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2);
+}
+
+body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathConnections .richEditContainer {
+  height: 62px;
+  padding: 0 10px;
 }

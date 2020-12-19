@@ -5,6 +5,10 @@
 .idea/
 .vs/
 scion.code-workspace
+.vscode
+*.cpuprofile
+*.log
+
 
 # Node Modules
 node_modules/

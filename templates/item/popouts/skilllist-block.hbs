@@ -5,7 +5,7 @@
         <span class="skill noFlex 
             {{~#if (eq (lookup ../pathSkillsCount [skill]) 2)}} invalid
             {{~else}}{{#if (contains ../data/skills [skill])}} invalid{{/if~}}
-            {{~/if}}" data-skill="{{skill}}">{{localize label}}</span>
+            {{~/if}}" data-skill="{{skill}}">{{loc label}}</span>
         {{/each}}
     </div>
 </div>

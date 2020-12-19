@@ -5,53 +5,97 @@ import {_, U, SCION} from "../modules.js";
  * @extends {Actor}
  */
 export class ScionActor extends Actor {
+    get aData() { return this.data.data }
+    get ownedItems() { return this.data.items }
+
     prepareData() {
         super.prepareData();
         if (this.data.type === "major")
-            this._prepareMajorCharData();
-        U.LOG({
-            "this ScionActor": this,
-            "... .data": this.data,
-            "... ... .data": this.data.data,
-            "... ... .items": this.data.items
-        }, this.name, "ScionActor: prepareData()", {groupStyle: "l1"});
+            this._prepareMajorCharData().then(() => U.LOG({
+                "this ScionActor": this,
+                "... .data": this.data,
+                "... ... .data": this.aData,
+                "... ... .items": this.data.items
+            }, this.name, "ScionActor: prepareData()", {groupStyle: "l1"}));
     }
 
-    _prepareMajorCharData() {
-        const ownedItems = Array.from(this.data.items);
+    async _prepareMajorCharData() {
+        // const ownedItems = Array.from(this.data.items);
 
         // #region PREPARE BASE OWNED ITEMS
-        const itemCreationData = {};
+        const itemCreationData = [];
 
         // Find the first Path Item of each type, if it exists;
         // ... if it doesn't exist, add its creation data to pathData
         // ... if it does exist, increment data.pathSkillCount accordingly
 
         ["origin", "role", "pantheon"].forEach((pathType) => {
-            if (!ownedItems.find((xx) => xx.data.type === pathType))
-                itemCreationData[pathType] = {
-                    name: U.Loc(`scion.paths.${pathType}`),
-                    type: "path",
-                    data: {
-                        type: pathType,
-                        title: null,
-                        skills: [],
-                        condition: null
-                    }
-                };
+            if (!this.ownedItems.find((item) => item.data.type === pathType)) {
+                U.LOG(`Creating ${pathType} for ${this.name}`);
+                itemCreationData.push(...[
+                    {
+                        name: U.Loc(`scion.path.${pathType}`),
+                        type: "path",
+                        data: {
+                            type: pathType,
+                            title: null,
+                            skills: [],
+                            connections: [],
+                            conditions: {
+                                pathSuspension: null,
+                                pathRevocation: null
+                            }
+                        }
+                    },
+                    ...["pathSuspension", "pathRevocation"].map((conditionType) => (
+                        {
+                            name: U.Loc(`scion.condition.${conditionType}`),
+                            type: "condition",
+                            data: {
+                                type: conditionType,
+                                title: null,
+                                effects: [],
+                                isPersistent: true,
+                                resolution: "",
+                                linkedItem: pathType
+                            }
+                        }
+                    ))
+                ]);
+            }
         });
         delete this.data.data.pathData;
 
-        (async () => {
-            if (!isObjectEmpty(itemCreationData))
-                await this.createEmbeddedEntity("OwnedItem", Object.values(itemCreationData));
-            if (!this._wasPantheonUpdated) {
-                this.updatePantheon(true);
-                this._wasPantheonUpdated = true;
-            }
-        })();
+        if (itemCreationData.length) {
+            U.LOG({itemCreationData}, `Item Creation for ${this.name}`);
+            this.createEmbeddedEntity("OwnedItem", itemCreationData)
+                .then(this.updatePathConditionLinks.bind(this))
+                .then(() => (this.updatePantheon.bind(this))(true));
+        } else if (!this._wasPantheonUpdated) {
+            this.updatePantheon(true);
+        }
+
+        // (async () => {
+        // })();
 
         // #endregion
+    }
+
+    async updatePathConditionLinks() {
+        for (const pathType of ["origin", "role", "pantheon"]) {
+            const pathUpdateData = {};
+            const pathItem = this[`${pathType}Path`];
+            for (const conditionType of ["pathSuspension", "pathRevocation"]) {
+                const conditionItem = this.conditions.find((item) => item.iData.type === conditionType && item.iData.linkedItem === pathType);
+                if (conditionItem) {
+                    await conditionItem.update({"data.linkedItem": pathItem.id});
+                    pathUpdateData[`data.conditions.${conditionType}`] = conditionItem.id;
+                    U.LOG({pathUpdateData}, "UpdatING Path Data...", "updatePathConditionLinks");
+                }
+            }
+            await pathItem.update(pathUpdateData);
+            U.LOG({pathItem, pathUpdateData}, "UpdatED Path Data...", "updatePathConditionLinks");
+        }
     }
 
     async updatePantheon(pantheon) {
@@ -63,6 +107,7 @@ export class ScionActor extends Actor {
             const newSkills = Object.assign([], panthPath.data.data.skills, SCION.PANTHEONS[pantheon].assetSkills);
             await panthPath.update({"data.skills": newSkills});
             this.updateSkills();
+            this._wasPantheonUpdated = true;
         }
     }
 
@@ -103,6 +148,10 @@ export class ScionActor extends Actor {
 
     get skills() { return this.data.data.skills.list }
     get paths() { return this.items.filter((item) => item.type === "path") }
+    get conditions() { return this.items.filter((item) => item.type === "condition") }
+    get originPath() { return this.paths.find((item) => item.data.data.type === "origin") }
+    get rolePath() { return this.paths.find((item) => item.data.data.type === "role") }
+    get pantheonPath() { return this.paths.find((item) => item.data.data.type === "pantheon") }
     get pathPriorities() { return this.data.data.pathPriorities }
     get pathSkills() { return U.KeyMapObj(_.indexBy(this.paths, (item) => item.data.data.type), (item) => item.data.data.skills) }
     get pathSkillVals() {

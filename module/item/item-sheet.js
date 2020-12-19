@@ -4,7 +4,7 @@ import {U, handlebarTemplates, MIX, ItemMixins as MIXINS} from "../modules.js";
  * @extends {ItemSheet}
  */
 export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl) {
-    /** @override */
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "item"],
@@ -15,18 +15,19 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
     }
 
     static RegisterSheet(label = "item", types = [], makeDefault = true) {
-        label = `scion.sheets.${label}Sheet`;
-        Items.registerSheet("scion", this, {makeDefault, types, label});
-        U.LOG({"Sheet Registered": this, types, defaultOptions: this.defaultOptions}, `${U.Loc(label)} Registered`, "ScionItemSheet");
+        const locLabel = `scion.sheet.${label}Sheet`;
+        Items.registerSheet("scion", this, {makeDefault, types, label: locLabel});
+        U.LOG({"Sheet Registered": this.name, types, defaultOptions: this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionItemSheet");
     }
 
     get template() {
         return `systems/scion/templates/item/item-${this.object.data.type}-sheet.hbs`;
     }
 
-    /* -------------------------------------------- */
+    get iData() { return this.item.data.data }
+    get aData() { return this.actor?.aData }
+    get subtype() { return this.iData.type }
 
-    /** @override */
     getData() {
         const data = super.getData();
         data.blocks = handlebarTemplates;

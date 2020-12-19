@@ -37,7 +37,7 @@ export class MajorActorSheet extends ScionActorSheet {
         if (pantheon && patron && panthData[pantheon].members.includes(patron)) {
             if (genesis)
                 actorData.patronageLine = U.Loc(
-                    `scion.geneses.${genesis}Line`,
+                    `scion.genesis.${genesis}Line`,
                     {
                         divinePatronName: U.Loc(godData[patron].label),
                         divinePatronMantle: godData[patron].mantle ? `, ${U.Loc(godData[patron].mantle)}` : ""
@@ -55,7 +55,7 @@ export class MajorActorSheet extends ScionActorSheet {
         if (pantheon)
             actorData.charGen.patronList = U.MakeDict(
                 panthData[pantheon].members,
-                (v) => U.Loc(`scion.gods.${v}`),
+                (v) => U.Loc(`scion.pantheon.god.${v}`),
                 (k, v) => v
             );
         // #endregion

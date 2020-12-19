@@ -1,36 +1,36 @@
 <div class="flex chargenOne padded">
-    <h1>{{localize "scion.headings.chargen.stepOne"}}</h1>
+    <h1>{{loc "scion.heading.chargen.stepOne"}}</h1>
     <div class="flex-row-max padded">
-        <label>{{localize "scion.headings.chargen.stepOneA"}}</label>
+        <label>{{loc "scion.heading.chargen.stepOneA"}}</label>
         <select class="contentEditable insetFrame width20" name="data.genesis" required>
-            <option name="" value="" selected hidden disabled>{{localize "scion.headings.chargen.genesisPlaceholder"}}</option>
+            <option name="" value="" selected hidden disabled>{{loc "scion.heading.chargen.genesisPlaceholder"}}</option>
             {{selectOptions config.genesisList selected=data.genesis}}
         </select>
-        <label class="alignCenter">{{localize "scion.headings.chargen.stepOneAOfThe"}}</label>
+        <label class="alignCenter">{{loc "scion.heading.chargen.stepOneAOfThe"}}</label>
         <select id="pantheonSelect" class="contentEditable insetFrame width25" name="data.pantheon" required>
-            <option name="" value="" selected hidden disabled>{{localize "scion.headings.chargen.pantheonPlaceholder"}}</option>
+            <option name="" value="" selected hidden disabled>{{loc "scion.heading.chargen.pantheonPlaceholder"}}</option>
             {{selectOptions config.pantheonList selected=data.pantheon}}
         </select> 
     </div>
     {{#if data.charGen.patronList}}
     <div class="flex-row-max padded">
-        <label>{{localize "scion.headings.chargen.stepOneB"}}</label>
+        <label>{{loc "scion.heading.chargen.stepOneB"}}</label>
         <select class="contentEditable insetFrame" name="data.patron" required>
-            <option name="" value="" selected hidden disabled>{{localize "scion.headings.chargen.divinePatronPlaceholder"}}</option>
+            <option name="" value="" selected hidden disabled>{{loc "scion.heading.chargen.divinePatronPlaceholder"}}</option>
             {{selectOptions data.charGen.patronList selected=data.patron}}
         </select>
     </div>
     {{/if}}
     {{#if data.patron}}
     <div class="flex-row-max padded">
-        <label>{{localize "scion.headings.chargen.stepOneC"}}</label>
-        <div id="concept" class="contentEditable insetFrame" data-field="data.concept" data-placeholder="{{localize "scion.headings.chargen.conceptPlaceholder"}}"></div>
+        <label>{{loc "scion.heading.chargen.stepOneC"}}</label>
+        <div id="concept" class="contentEditable insetFrame" data-field="data.concept" data-placeholder="{{loc "scion.heading.chargen.conceptPlaceholder"}}"></div>
     </div>
         {{#if data.concept}}
-    <h2 class="alignCenter">{{localize "scion.headings.chargen.stepOneD"}}</h2>
+    <h2 class="alignCenter">{{loc "scion.heading.chargen.stepOneD"}}</h2>
     <div class="flex-row-max padded alignCenter">
-        <div id="shortTermDeed" class="contentEditable deed insetFrame" data-field="data.deeds.shortTerm" data-fieldindex="0" data-placeholder="{{localize "scion.headings.chargen.shortTermDeedPlaceholder"}}"></div>
-        <div id="longTermDeed" class="contentEditable deed insetFrame" data-field="data.deeds.longTerm" data-fieldindex="0" data-placeholder="{{localize "scion.headings.chargen.longTermDeedPlaceholder"}}"></div>
+        <div id="shortTermDeed" class="contentEditable deed insetFrame" data-field="data.deeds.shortTerm" data-fieldindex="0" data-placeholder="{{loc "scion.heading.chargen.shortTermDeedPlaceholder"}}"></div>
+        <div id="longTermDeed" class="contentEditable deed insetFrame" data-field="data.deeds.longTerm" data-fieldindex="0" data-placeholder="{{loc "scion.heading.chargen.longTermDeedPlaceholder"}}"></div>
     </div>
         {{/if}}
     {{/if}}

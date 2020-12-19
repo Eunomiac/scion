@@ -1,0 +1,16 @@
+<div class="clickable openPopout bubble condition" data-itemID="{{id}}">
+    <div class="bubbleWrap">
+        <span class="bubbleTitle">
+            {{~#if data.data.title~}}
+                {{data.data.title}}
+            {{~else~}}
+                {{loc "scion.heading.path.conditionPrompt"}}
+            {{~/if~}}
+        </span>
+        <p>
+            {{~#if data.data.effect~}}
+                {{data.data.effect}}
+            {{/if}}
+        </p>
+    </div>
+</div>

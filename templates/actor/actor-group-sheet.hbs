@@ -8,7 +8,7 @@
               <div class="menuIconDark iconSettings">
                 <a class="item menuIconGlow" data-tab="details"></a>
               </div>
-              <div class="menuText">{{localize "scion.headings.main.detailsTab"}}</div>
+              <div class="menuText">{{loc "scion.heading.main.detailsTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
@@ -16,7 +16,7 @@
               <div class="menuIconDark iconMain">
                   <a class="item menuIconGlow" data-tab="front"></a>
               </div>
-              <div class="menuText">{{localize "scion.headings.main.frontTab"}}</div>
+              <div class="menuText">{{loc "scion.heading.main.frontTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
@@ -24,7 +24,7 @@
               <div class="menuIconDark iconHeritage">
                 <a class="item menuIconGlow" data-tab="heritage"></a>
               </div>
-              <div class="menuText">{{localize "scion.headings.main.heritageTab"}}</div>
+              <div class="menuText">{{loc "scion.heading.main.heritageTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
@@ -32,7 +32,7 @@
               <div class="menuIconDark iconExperience">
                 <a class="item menuIconGlow" data-tab="experience"></a>
               </div>
-              <div class="menuText">{{localize "scion.headings.main.experienceTab"}}</div>
+              <div class="menuText">{{loc "scion.heading.main.experienceTab"}}</div>
             </div>
           </div>
           <div class="menuButtonContainer">
@@ -40,7 +40,7 @@
               <div class="menuIconDark iconChargen">
                 <a class="item menuIconGlow" data-tab="chargen"></a>
               </div>
-              <div class="menuText">{{localize "scion.headings.main.chargenTab"}}</div>
+              <div class="menuText">{{loc "scion.heading.main.chargenTab"}}</div>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
         <section class="tab" data-group="primary" data-tab="front">
             <div class="front-body grid">
                 <div class="attributes flex">
-                    <h1>{{localize "scion.game.attributes"}}</h1>
+                    <h1>{{loc "scion.game.attributes"}}</h1>
                     {{#if data.attributes.unspentDots.general}}
                         <div class="dotGrabBin dotDropBin flex">
                             {{#for data.attributes.unspentDots.general}}
@@ -81,7 +81,7 @@
                             {{/if}}
                             {{#each (lookup ../config.ATTRIBUTES.arenas arena) as |attribute|}}
                                 <div class="attrRow dotDropBin dotline labelledDotLine" data-dottype="{{arena}}" data-trait="{{attribute}}">
-                                    <div class="label">{{localize (concat "scion.attributes." attribute)}}</div>
+                                    <div class="label">{{loc (concat "scion.attribute." attribute)}}</div>
                                     {{#for 5}}
                                         <span class="dot click" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
                                     {{/for}}
@@ -91,7 +91,7 @@
                     {{/each}}
                 </div>
                 <div class="paths flex">
-                    <h1>{{localize "scion.game.paths"}}</h1>
+                    <h1>{{loc "scion.game.paths"}}</h1>
                     <div class="originpath"></div>
                     <div class="rolepath"></div>
                     <div class="pantheonpath"></div>
@@ -99,13 +99,13 @@
                 <div class="virtues grid">
                     {{#if data.pantheon}}
                     {{#with (lookup config.PANTHEONS data.pantheon) as | pantheon |}}
-                    <div class="leftvirtue strong text">{{localize (concat "scion.virtues." pantheon.virtues.[0])}}</div>
+                    <div class="leftvirtue strong text">{{loc (concat "scion.virtue." pantheon.virtues.[0])}}</div>
                     <div class="dotline largeDots">
                         {{#for 5}}
                             <span class="dot {{#if (eq (lookup ../data.virtue [value]) @index)}}virtueFull{{/if}} {{#if (eq @index 3)}}virtueCenter{{/if}}" data-trait="virtue" data-val="{{@index}}"></span>
                         {{/for}}
                     </div>
-                    <div class="rightvirtue strong text alignRight">{{localize (concat "scion.virtues." pantheon.virtues.[1])}}</div>
+                    <div class="rightvirtue strong text alignRight">{{loc (concat "scion.virtue." pantheon.virtues.[1])}}</div>
                     {{/with}}
                     {{/if}}
                 </div>

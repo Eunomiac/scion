@@ -313,7 +313,10 @@
             "templates": ["BASE"],
             "skills": [],
             "connections": [],
-            "conditionID": "", 
+            "conditions": {
+                "pathSuspension": null,
+                "pathRevocation": null
+            },
             "timesInvoked": 0,
             "obligation": "",
             "effect": "",
@@ -345,12 +348,10 @@
         },
         "condition": {
             "templates": ["BASE"],
-            "effect": {
-                "description": "",
-                "API": []
-            },
+            "effects": [],
             "isPersistent": false,
-            "resolution": ""
+            "resolution": "",
+            "linkedItem": false
         },
         "calling": { 
             "templates": ["BASE", "DOTLINE"],

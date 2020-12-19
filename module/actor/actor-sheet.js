@@ -40,7 +40,7 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, M
         });
     }
     static RegisterSheet(label = "actor", types = [], makeDefault = true) {
-        label = `scion.sheets.${label}Sheet`;
+        label = `scion.sheet.${label}Sheet`;
         Actors.registerSheet("scion", this, {makeDefault, types, label});
     }
 

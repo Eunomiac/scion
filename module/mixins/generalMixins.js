@@ -1,4 +1,5 @@
 // #region Import Modules
+import { THROW } from "../data/utils.js";
 import {_, U, popoutData} from "../modules.js";
 
 // #region MIXINS GUIDE
@@ -35,12 +36,6 @@ export const applyMixins = (superclass) => new MixinBuilder(superclass);
 /* #endregion */
 
 // #region BASIC MIXINS
-export const ActorLink = (superClass) => class extends superClass {
-    prepareData() {
-        if (super.prepareData)
-            super.prepareData();
-    }
-};
 export const PopoutControl = (superClass) => class extends superClass {
     popoutSheet(popOutSheet, {leftSpacing, rightSpacing} = {}) {
         const {left: mainLeft, top: mainTop, width: mainWidth} = this.entity.sheet.position;
@@ -78,12 +73,12 @@ export const PopoutControl = (superClass) => class extends superClass {
                     else
                         U.THROW(event, "Popout Element Not Found!");
                 } else if ("itemid" in dataSet) {
-                    const item = this.entity.items.get(dataSet.itemid);
+                    const item = this.actor.items.get(dataSet.itemid);
                     U.LOG({
                         event,
                         element,
                         "... dataset": dataSet,
-                        [`${U.TCase(this.type)}.Items`]: this.entity.items,
+                        [`${U.TCase(this.type)}.Items`]: this.actor.items,
                         item
                     }, `on CLICK: Open ItemSheet ${item.name}`, "MIXIN: PopoutControl", {groupStyle: "l3"});
                     this.popoutSheet(item.sheet, popoutData[item.type]);
@@ -226,6 +221,90 @@ export const EditableDivs = (superClass) => class extends superClass {
             });
             // #endregion
         }
+    }
+};
+/* jshint ignore:start */
+export const RichEdit = (superClass) => class extends superClass {
+    get _richEditDefaults() {
+        return {
+            menubar: false,
+            statusbar: false,
+            inline: true,
+            toolbar: false,
+
+            selector: "[class$=\"Editor\"]",
+            theme: "silver",
+
+            height: "100%",
+            width: "100%",
+
+            plugins: [
+                "autoresize",
+                "bbcode",
+                "charmap",
+                "emoticons",
+                "lists",
+                "advlist",
+                "paste",
+                "quickbars",
+                "template",
+                "help"
+            ],
+
+            placeholder: "",
+            quickbars_insert_toolbar: false,
+            quickbars_selection_toolbar: "bold italic underline h1 h2 h3 | fontselect fontsizeselect forecolor formatselect removeformat",
+            contextmenu: "undo redo | help",
+            paste_block_drop: false,
+            paste_data_images: false,
+            paste_as_text: true
+        };
+    }
+    get richEditDefaults() {
+        return mergeObject(
+            super.richEditDefaults ?? {},
+            this._richEditDefaults,
+            {insertKeys: true, insertValues: true, overwrite: true, recursive: true}
+        );
+    }
+    createRichEditor(configOptions = {}, initialHTML = "", isRecreating = false) {
+        if (!("selector" in configOptions))
+            return THROW({"ERROR": "You must provide a selector in configOptions.", configOptions});
+        this.richEditors = this.richEditors ?? {};
+        if (isRecreating || !this.richEditors[`_${configOptions.selector}`]) {
+            const richEditDefaults = duplicate(this.richEditDefaults);
+            if ("remPlugins" in configOptions)
+                richEditDefaults.plugins = richEditDefaults.filter((plugin) => !configOptions.remPlugins.includes(plugin));
+            const finalConfigOptions = mergeObject(
+                mergeObject(
+                    richEditDefaults,
+                    configOptions,
+                    {insertKeys: true, insertValues: true, overwrite: true, recursive: true}
+                ),
+                {"-=remPlugins": null}
+            );
+            finalConfigOptions.max_height = finalConfigOptions.max_height ?? finalConfigOptions.height;
+            finalConfigOptions.min_height = finalConfigOptions.min_height ?? finalConfigOptions.height;
+            finalConfigOptions.max_width = finalConfigOptions.max_width ?? finalConfigOptions.width;
+            finalConfigOptions.min_width = finalConfigOptions.min_width ?? finalConfigOptions.width;
+
+            (async () => {
+                this.richEditors[`_${configOptions.selector}`] = await TextEditor.create(finalConfigOptions, initialHTML);
+                U.LOG({
+                    richEditDefaults,
+                    configOptions,
+                    finalConfigOptions,
+                    richEditor: this.richEditors[`_${configOptions.selector}`]
+                }, "Rich Editor Creation", "createRichEditor()", {groupStyle: "l2"});
+            })();
+        } else {
+            U.LOG({
+                richEditor: this.richEditors[`_${configOptions.selector}`]
+            }, "Rich Editor Retrieved", "createRichEditor()", {groupStyle: "l2"});
+            // this.richEditors[`_${configOptions.selector}`].render();
+            this.richEditors[`_${configOptions.selector}`].editorManager.execCommand("mceAddEditor", false, this.richEditors[`_${configOptions.selector}`].id);
+        }
+        return this.richEditors[`_${configOptions.selector}`];
     }
 };
 // #endregion

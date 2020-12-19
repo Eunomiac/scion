@@ -1,13 +1,13 @@
-import {_, U, SCION} from "../modules.js";
+import {_, U, SCION, MIX, ItemMixins as MIXINS} from "../modules.js";
 import {ScionItemSheet} from "./item-sheet.js";
 import "../external/dragula.min.js";
 
-export class PathItemSheet extends ScionItemSheet {
+export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: [...super.defaultOptions.classes, "path"],
             width: 500,
-            height: 500,
+            height: 550,
             tabs: []
         });
     }
@@ -16,36 +16,45 @@ export class PathItemSheet extends ScionItemSheet {
         const data = super.getData();
         data.skills = SCION.SKILLS;
         data.tooltip = {
-            title: U.Loc("scion.paths.tooltip.title", {path: `scion.paths.${this.item.data.data.type}`}),
-            content: U.Loc(`scion.paths.tooltip.content.${this.item.data.data.type}`)
+            title: U.Loc("scion.path.tooltip.title", {path: `scion.path.${this.item.data.data.type}`}),
+            content: U.Loc(`scion.path.tooltip.content.${this.item.data.data.type}`)
         };
-
-        // data.skillslist = data.items.find((item) => item.data.type === "skillslist");
 
         const allPathSkills = this.actor.paths
             .map((path) => path.data.data.skills)
             .flat();
         data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS, (label, skill) => allPathSkills.reduce((count, pathSkill) => (pathSkill === skill ? count + 1 : count), 0));
 
-        data.HTML = {
-            potentialConnections: TextEditor.enrichHTML("Let's test this out!")
+        data.conditions = {
+            suspension: this.suspensionCondition,
+            revocation: this.revocationCondition
         };
-
         U.LOG({
             "this PathItemSheet": this,
             "... .getData() [Sheet Context]": data,
-            "... ... .data": data.data,
-            "... ... .pathSkillsCount": data.pathSkillsCount
+            "... .iData": data.data,
+            "... .actor": this.actor,
+            "... .aData": this.aData,
+            "... .conditions": data.conditions
         }, this.item.name, "PathItemSheet: getData()", {groupStyle: "l2"});
 
         return data;
     }
+
+    get suspensionCondition() { return this.item.getActorItems("condition").find((item) => item.subtype === "pathSuspension" && item.iData.linkedItem === this.item.id) }
+    get revocationCondition() { return this.item.getActorItems("condition").find((item) => item.subtype === "pathRevocation" && item.iData.linkedItem === this.item.id) }
 
     activateListeners(html) {
         super.activateListeners(html);
 
         const actorData = this.actor.data.data;
         const pathData = this.getData().data;
+
+        this.createRichEditor({
+            selector: ".pathConnectionsEditor",
+            placeholder: U.Loc("scion.heading.path.pathConnectionsPrompt", {path: `scion.path.${pathData.type}Path`}),
+            height: 100
+        });
 
         // #region DRAGULA: PATH SKILLS
         const addPathSkill = async (skillElement) => {
@@ -59,7 +68,6 @@ export class PathItemSheet extends ScionItemSheet {
 
         const skillSource = html.find("#pathSkillSource");
         const skillDrops = html.find(".skillDrop");
-        //const mirrorContainer = html.find("body")[0];
         const pathSkillDragger = dragula({
             containers: [...skillSource, ...skillDrops],
             moves: (element, source) => !element.classList.contains("invalid")

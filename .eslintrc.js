@@ -173,6 +173,7 @@ module.exports = {
         Handlebars: "readonly",
         Hooks: "readonly",
         Item: "readonly",
+        ItemDirectory: "readonly",
         Items: "readonly",
         ItemSheet: "readonly",
         Macro: "readonly",
