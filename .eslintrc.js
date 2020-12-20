@@ -170,6 +170,7 @@ module.exports = {
         ChatMessage: "readonly",
         Dialog: "readonly",
         DragDrop: "readonly",
+        Draggable: "readonly",
         Handlebars: "readonly",
         Hooks: "readonly",
         Item: "readonly",

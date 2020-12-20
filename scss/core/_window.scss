@@ -118,53 +118,58 @@
         background: none;
         margin: 0;
       
-        header.window-header {          
-            height: 40px;
-            width: 100%;
-            margin: 0 0 -40px 0;
-            display: block;
-            flex: none;
-            position: relative;
-            z-index: 2;
-            overflow: visible;
-            border: none;
-            pointer-events: none;
+        header.window-header {
+            height: 40px !important;
+            width: 100% !important;
+            margin: 0 0 -40px 0 !important;
+            display: block !important;
+            flex: none !important;
+            position: relative !important;
+            z-index: 2 !important;
+            overflow: visible !important;
+            border: none !important;
+            pointer-events: none !important;
 
-            h4.window-title { display: none; }
+            display: none !important;    
+
+            h4.window-title { display: none !important; }
 
             a.header-button {
-                display: none;
+                display: none !important;
 
                 &.close {
-                    height: 40px;
-                    width: 40px;
-                    position: absolute;
-                    top: -20px;
-                    right: 20px;
-                    display: block;
-                    pointer-events: all;
-                    font-size: var(--fontSizeBody);
-                    color: white;
-                    line-height: 50px;
+                    height: 40px !important;
+                    width: 40px !important;
+                    position: absolute !important;
+                    top: -20px !important;
+                    right: 20px !important;
+                    display: block !important;
+                    pointer-events: all !important;
+                    font-size: var(--fontSizeBody) !important;
+                    color: white !important;
+                    line-height: 50px !important;
 
-                    i { display: none; }
+                    i { display: none !important; }
                 }
             }
 
+
             &::before {
-                content: "";
-                height: 100%;
-                width: 100%;
+                content: "" !important;
+                height: 100% !important;
+                width: 100% !important;
 
-                display: block;
-                position: relative;           
+                display: block !important;
+                position: relative !important;           
 
-                cursor: move;
-                pointer-events: all;
+                cursor: move !important;
+                pointer-events: all !important;
 
                 @if $isTestingLayout {
                     background-color: rgba(0, 255, 0, 0.5);
                 }
+
+
             }
         }
       
@@ -177,9 +182,9 @@
             z-index: 1;
             max-height: 100%;
       
-            form.main { 
+            .main { 
                 pointer-events: all;
-                section .tab {
+                .tab {
                     width: 100%;
                     &:not(.active) { display: none !important; }
                 }           

@@ -6,6 +6,7 @@ export {Dust as DUST} from "./external/dust.js";
 
 // #region AGGREGATING INTERNAL MODULES
 export * as U from "./data/utils.js"; // Utilities
+export {Dragger} from "./data/dragger.js"; // Collapsible Draggable Subclass
 export {applyMixins as MIX} from "./mixins/generalMixins.js"; // Mixin-Enabled Class Factory
 export {
     baseConstants as C,

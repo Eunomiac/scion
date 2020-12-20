@@ -34,19 +34,11 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
         data.openPopouts = data.openPopouts || {};
         return data;
     }
-
-    /* -------------------------------------------- */
-
-
-    /* -------------------------------------------- */
-
-    /* activateListeners(html) {
+    activateListeners(html) {
         super.activateListeners(html);
-
-        // Everything below here is only needed if the sheet is editable
-        // if (!this.options.editable)
-        //    return;
-
-    // Roll handlers, click handlers, etc. would go here.
-    } */
+        if (this.options.editable) {
+            // Make Title draggable
+            new Draggable(this, html, html.find("h1.title")[0], false);
+        }
+    }
 }

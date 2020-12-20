@@ -1,4 +1,10 @@
 $isTestingLayout: true;
+$isShowing: (
+    "sheetFrame": false,
+    "sheetBorders": false,
+    "sheetPadding": false,
+    "sheetBGShade": false
+);
 
 @import 'core/functions';
 @import 'core/fontLoader';
@@ -23,7 +29,7 @@ body.vtt.game.system-scion {
 
             /* #region MAJOR ACTOR SHEETS */
             &.major {
-                form.editable.main {
+                form.editable {
                     @import 'sheets/actor/major/majorActor';
 
                     section.sheet-body {

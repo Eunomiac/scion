@@ -1,60 +1,6 @@
-$isShowingBoxFrame: false;
-$isShowingTestBorders: false;
-$isShowingPadding: false;
-$isShowingBGShade: false;
+
 
 & {
-    height: 100%;
-    width: 100%;
-    padding: 40px 60px 60px 40px;
-
-    @if $isShowingPadding {
-        background: {
-            color: white;
-            image: url("../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png");
-            size: 100%;
-            repeat: no-repeat;
-        }
-    } @else if $isShowingBoxFrame {        
-        background: {
-            color: white;
-            image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
-            size: 100%;
-            repeat: no-repeat;
-        }
-    } @else {
-        background: {
-            color: transparent;
-            image: var(--bgActorSheet);
-            size: 100%;
-            repeat: no-repeat;
-        }
-    }
-
-    opacity: 1;        
-
-    grid: "menu" 0px
-          "header" 90px
-          "body" 470px
-          "footer" 90px;
-
-    @if $isShowingTestBorders {
-        @include box-shadow(2px, lime, true);
-        > * { @include box-shadow(6px, orange, true);
-            > * { @include box-shadow(4px, cyan, true);
-                > * { @include box-shadow(2px, red, true); }
-            }
-        }
-    }    
-    @if $isShowingBGShade {
-        @include bg-shade(lime);
-        > * { @include bg-shade(orange);
-            > * { @include bg-shade(cyan); 
-                > * { @include bg-shade(red); }
-            }
-        }
-    }
-
     .menuRosette {
         grid-area: menu;
         $menuOpenSize: 200px;
@@ -76,9 +22,10 @@ $isShowingBGShade: false;
         display: block;
         width: $menuOpenSize;
         height: $menuOpenSize;
-        position: relative;
-        left: $menuOpenSize * (-3/8);
-        top: $menuOpenSize * (-3/8);
+        position: absolute;
+        left: -35px;
+        top: -40px;
+        z-index: 2;
 
         background: {
             image: var(--menuImage);
@@ -92,7 +39,7 @@ $isShowingBGShade: false;
         border: none;
         transition: 0.5s;
 
-        &:hover {
+        &:not(.collapsed):hover {
             background-size: 100%;
             transform: translate(-20px, -20px);
     
@@ -210,33 +157,105 @@ $isShowingBGShade: false;
 
 
     }
-    .header {
-        grid-area: header;
-        grid: ". surTitle ." 24px
-              ". title ." 50px
-              "subTitle subTitle subTitle" 16px
-              / 90px 470px 90px;
+    section#characterSheet {        
+        height: 100%;
+        width: 100%;
+        padding: 40px 60px 60px 40px;
+
+        transform-origin: 50px 50px;
+        transform: scale(1, 1) rotate3d(1, -1, 0, 0deg);
+        perspective: 100px;
+
+        transition: {
+            property: transform, perspective;
+            delay: 0s;
+            duration: 0.5s;
+            timing-function: ease;
+        }
+
+        &.collapsed {
+            transform: scale3d(0.5, 0.5, 0.5) rotate3d(1, -1, 0, -70deg);
+            transform: scale(0, 0) rotate3d(1, -1, 0, 90deg);
+            perspective: 1000px;
+        }
         
-        div { pointer-events: all; }
+        background: {
+            color: transparent;
+            image: var(--bgActorSheet); 
+            size: 100%;
+            repeat: no-repeat;
+        }
 
-        .divineTitle { grid-area: surTitle; }
-        .charName { grid-area: title; }
-        .patronage { grid-area: subTitle; }
-    }
+        @if $isTestingLayout {
+            @if map-get($isShowing, "sheetPadding") {
+                background: {
+                    color: white;
+                    image: url("../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png");
+                    size: 100%;
+                    repeat: no-repeat;
+                }
+            } @else if map-get($isShowing, "sheetFrame") {        
+                background: {
+                    color: white;
+                    image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
+                    size: 100%;
+                    repeat: no-repeat;
+                }
+            }
+            @if map-get($isShowing, "sheetBorders") {
+                @include box-shadow(2px, lime, true);
+                > * { @include box-shadow(6px, orange, true);
+                    > * { @include box-shadow(4px, cyan, true);
+                        > * { @include box-shadow(2px, red, true); }
+                    }
+                }
+            }    
+            @if map-get($isShowing, "sheetBGShade") {
+                @include bg-shade(lime);
+                > * { @include bg-shade(orange);
+                    > * { @include bg-shade(cyan); 
+                        > * { @include bg-shade(red); }
+                    }
+                }
+            }
+        }
 
-    .sheet-body {grid-area: body; }
-    
-    .footer {
-        grid-area: footer;
-        grid: "subTitle subTitle subTitle" 15px
-              ". title ." 50px
-              ". surTitle ." 25px
-              / 90px 470px 90px;
+        opacity: 1;        
 
-        .subTitle { grid-area: subTitle; }
-        .title { grid-area: title; }
-        .surTitle {grid-area: surTitle; }
+        grid: "header" 90px
+            "body" 470px
+            "footer" 90px;
 
+        .header {
+            grid-area: header;
+            grid: ". surTitle ." 24px
+                ". title ." 50px
+                "subTitle subTitle subTitle" 16px
+                / 90px 470px 90px;
+            
+            div { pointer-events: all; }
+
+            .divineTitle { grid-area: surTitle; }
+            .charName { grid-area: title; }
+            .patronage { grid-area: subTitle; }
+        }
+
+        .sheet-body {
+            grid-area: body;
+        }
+        
+        .footer {
+            grid-area: footer;
+            grid: "subTitle subTitle subTitle" 15px
+                ". title ." 50px
+                ". surTitle ." 25px
+                / 90px 470px 90px;
+
+            .subTitle { grid-area: subTitle; }
+            .title { grid-area: title; }
+            .surTitle {grid-area: surTitle; }
+
+        }
     }
 }
 

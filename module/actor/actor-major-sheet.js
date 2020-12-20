@@ -1,7 +1,8 @@
-import {_, U, SCION, itemCategories} from "../modules.js";
+import {_, U, SCION, itemCategories, Dragger} from "../modules.js";
 import {ScionActorSheet} from "./actor-sheet.js";
 import "../external/dragula.min.js";
 import {THROW} from "../data/utils.js";
+
 
 export class MajorActorSheet extends ScionActorSheet {
     static get defaultOptions() {
@@ -98,9 +99,26 @@ export class MajorActorSheet extends ScionActorSheet {
     activateListeners(html) {
         super.activateListeners(html);
         if (this.options.editable) {
+            const menuRosette = html.find("nav.menuRosette")[0];
+            const sheetContainer = document.getElementById(`actor-${this.actor.id}`);
+            const sheetElement = html.find("section#characterSheet")[0];
+
+            // Make Menu Rosette draggable
+            const menuDragger = new Dragger(this, html, menuRosette, [menuRosette, sheetContainer, sheetElement], {height: 100, width: 100});
+
+            // Update Pantheon Theme Data when Pantheon Changed
             html.find("#pantheonSelect").change((event) => {
                 event.preventDefault();
                 this.actor.updatePantheon(event.target.value);
+            });
+
+            // Double-Click on Menu Rosette to Collapse Sheet
+            html.find("nav.menuRosette").dblclick((event) => {
+                event.preventDefault();
+                if (menuDragger.isCollapsed)
+                    menuDragger.expand();
+                else
+                    menuDragger.collapse();
             });
 
             // #region DRAGULA: DRAG & DROP

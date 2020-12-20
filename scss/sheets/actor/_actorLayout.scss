@@ -1,6 +1,17 @@
 header.window-header { // Adjustment to make room for radial menu
-    width: 480px;
-    margin-left: 140px;
+    width: 480px !important;
+    margin-left: 140px !important;
+    
+    &.collapsed {
+        position: absolute !important;
+        height: 120px !important;
+        width: 100px !important;
+        left: -130px !important;
+        top: 0px !important;
+        padding: 0 !important;
+
+        a.header-button { display: none !important; }
+    }
 }
 
 nav.tabs {
