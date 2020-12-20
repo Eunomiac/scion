@@ -93,34 +93,281 @@
   src: url(../fonts/theoi/CapitalisTypOasis.ttf) format("truetype");
 }
 
-.gu-mirror {
+/* General-Purpose Mixins */
+/* #endregion */
+body.vtt.game.system-scion {
+  /* #region SHEET STYLES */
+  /* #endregion */
+}
+
+body.vtt.game.system-scion .gu-mirror {
   position: fixed !important;
   margin: 0 !important;
   z-index: 9999 !important;
   opacity: 0.5;
 }
 
-.gu-hide {
+body.vtt.game.system-scion .gu-hide {
   display: none !important;
 }
 
-.gu-unselectable {
+body.vtt.game.system-scion .gu-unselectable {
   user-select: none !important;
 }
 
-.gu-transit {
+body.vtt.game.system-scion .gu-transit {
   opacity: 0.5;
 }
 
 body.vtt.game.system-scion {
-  /* #region Global Variables & Configuration */
-  /* #region @MIXINS */
+  /* #region Sandbox-Level Overrides */
   /* #endregion */
-  /* #region SHEET STYLES */
+  /* #region Sheet Default Style Overrides */
   /* #endregion */
 }
 
-body.vtt.game.system-scion {
+body.vtt.game.system-scion #logo {
+  display: none;
+}
+
+body.vtt.game.system-scion #navigation {
+  left: 0px;
+  top: 0px;
+}
+
+body.vtt.game.system-scion #navigation #nav-toggle {
+  height: 20px;
+}
+
+body.vtt.game.system-scion #navigation .nav-item {
+  margin: 0 4px 0 0;
+  line-height: 1.4rem;
+}
+
+body.vtt.game.system-scion #navigation #scene-list li {
+  height: 20px;
+}
+
+body.vtt.game.system-scion #navigation #scene-list li .scene-players {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls {
+  top: 30px;
+  left: 0;
+  padding: 0;
+}
+
+body.vtt.game.system-scion #controls .scene-control {
+  height: 20px;
+  width: 25px;
+  font-size: 20px;
+  line-height: normal;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Basic Controls"] li[title="Measure Distance"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Measurement Controls"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Tile Controls"] li[title=""] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Rectangle"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Ellipse"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Polygon"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Freehand"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Clear Drawings"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Wall Controls"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Reset Fog of War"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Clear Lights"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Ambient Sound Controls"] li[title="Clear Sounds"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control[title="Journal Notes"] li[title="Clear Notes"] {
+  display: none;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools {
+  height: 25px;
+  top: -25px;
+  left: 35px;
+  position: relative;
+  margin: 0 0 -25px;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool {
+  display: inline-block;
+  height: 25px;
+  font-size: 20px;
+  line-height: normal;
+  margin: 0 3px;
+}
+
+body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool i {
+  width: 25px;
+}
+
+body.vtt.game.system-scion #controls .scene-control.active .control-tools {
+  display: flex;
+}
+
+body.vtt.game.system-scion #sidebar {
+  transform: scale(0.75);
+  transform-origin: 100% 0%;
+  height: calc(99vh / 0.75);
+  max-height: calc(99vh / 0.75);
+}
+
+body.vtt.game.system-scion #sidebar #chat-log {
+  max-height: calc(100vh / 0.75);
+}
+
+body.vtt.game.system-scion #sidebar #chat-controls {
+  width: calc(100% * 0.75);
+  flex: 0 0 calc(28px / 0.75);
+  top: -55px;
+  position: relative;
+  transform: scale(calc(1/0.75));
+  transform-origin: 0% 100%;
+}
+
+body.vtt.game.system-scion #sidebar #chat-form {
+  width: calc(100% * 0.75);
+  flex: 0.1 0 calc(100px * 0.75);
+  transform: scale(calc(1 / 0.75));
+  transform-origin: 0% 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion {
+  pointer-events: none;
+  border: none;
+  box-shadow: none;
+  background: none;
+  margin: 0;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header {
+  height: 40px;
+  width: 100%;
+  margin: 0 0 -40px 0;
+  display: block;
+  flex: none;
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  border: none;
+  pointer-events: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header h4.window-title {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  display: block;
+  pointer-events: all;
+  font-size: var(--fontSizeBody);
+  color: white;
+  line-height: 50px;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close i {
+  display: none;
+}
+
+body.vtt.game.system-scion div.sheet.scion header.window-header::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+  cursor: move;
+  pointer-events: all;
+  background-color: rgba(0, 255, 0, 0.5);
+}
+
+body.vtt.game.system-scion div.sheet.scion section.window-content {
+  padding: 0px;
+  background: transparent;
+  pointer-events: none;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  max-height: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion section.window-content form.main {
+  pointer-events: all;
+}
+
+body.vtt.game.system-scion div.sheet.scion section.window-content form.main section .tab {
+  width: 100%;
+}
+
+body.vtt.game.system-scion div.sheet.scion section.window-content form.main section .tab:not(.active) {
+  display: none !important;
+}
+
+body.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
+  display: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet {
+  /* #region Default/Generic Actor Sheet Theme */
+  /* #endregion */
+  /* #region Theme-Specific Mixins */
+  /* #endregion */
+  /* #region FLEX LAYOUTS */
+  /* #endregion */
+  /* #region GRID LAYOUTS */
+  /* #endregion */
+  /* #region Element Default Styles */
+  /* #region ACTOR SHEETS */
+  /* #endregion */
+  /* #region ITEM SHEETS */
+  /* #endregion */
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-generic.png");
   --bgItemSheet: url("../images/item-sheet/backgrounds/bgItem-generic.png");
   --bgItemOverlay: url("../images/item-sheet/backgrounds/overlayItem-generic.png");
@@ -319,7 +566,658 @@ body.vtt.game.system-scion {
   --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion .aesir {
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="max"] {
+  height: 100%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] > h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] h3, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] .h3 {
+  flex: 0 0 auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] > label {
+  flex: 0 0 auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] > .contentEditable {
+  flex: 1 0 auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: space-evenly;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"][class*="max"] {
+  width: 100%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] > h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] h3, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] .h3 {
+  flex: 0 0 100%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] > label {
+  flex: 0 0 auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] > .contentEditable {
+  flex: 1 1 auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] > *[class*="noFlex"] {
+  flex: 0 0 auto !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] > *[class*="fullFlex"] {
+  flex: 1 1 auto !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="wrap"] {
+  flex-wrap: wrap !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="nowrap"] {
+  flex-wrap: nowrap !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="stretch"] {
+  align-items: stretch !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="center"] {
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="start"] {
+  justify-content: flex-start !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet .grid {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  grid-gap: 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * {
+  color: var(--colorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: var(--fontWeightBody);
+  font-style: var(--fontStyleBody);
+  font-variant: var(--fontVariantBody);
+  text-transform: var(--textTransformBody);
+  text-shadow: var(--textShadowBody);
+  line-height: var(--lineHeightBody);
+  /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
+
+        $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
+            // The added "disappear" class contains either an animation or a transition, which starts immediately.
+            //    When the animation/transition is finished, the callback function removes the element.
+    */
+  /* #endregion */
+  /* #region Single-Purpose Classes */
+  /* #endregion */
+  /* #region GRADIATED CLASSES */
+  /* #endregion */
+  /* #region System-Specific Styles */
+  /* #endregion */
+  /* #region Popouts/Tooltips */
+  /* #endregion */
+  /* #region Dot Trackers */
+  /* #endregion */
+  /* #region Bubbles */
+  /* #endregion */
+  /* #region Purview Display */
+  /* #endregion */
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * textarea,
+body.vtt.game.system-scion div.app.window-app.scion.sheet * input[type="text"],
+body.vtt.game.system-scion div.app.window-app.scion.sheet * select,
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .contentEditable {
+  margin: 0 4px;
+  padding: var(--paddingInput);
+  line-height: var(--lineHeightInput);
+  max-height: var(--maxHeightInput);
+  min-height: var(--maxHeightInput);
+  font-family: var(--fontFamilyInput);
+  font-size: var(--fontSizeInput);
+  font-style: var(--fontStyleInput);
+  font-variant: var(--fontVariantInput);
+  font-weight: var(--fontWeightInput);
+  text-transform: var(--textTransformInput);
+  text-indent: var(--textIndentInput);
+  text-shadow: var(--textShadowInput);
+  box-shadow: none;
+  border: var(--borderInput);
+  box-sizing: content-box;
+  outline: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * textarea:invalid,
+body.vtt.game.system-scion div.app.window-app.scion.sheet * input[type="text"]:invalid,
+body.vtt.game.system-scion div.app.window-app.scion.sheet * select:invalid,
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .contentEditable:invalid {
+  color: var(--colorPlaceholder);
+  font-family: var(--fontFamilyPlaceholder);
+  font-size: var(--fontSizePlaceholder);
+  font-style: var(--fontStylePlaceholder);
+  font-variant: var(--fontVariantPlaceholder);
+  font-weight: var(--fontWeightPlaceholder);
+  line-height: var(--lineHeightPlaceholder);
+  text-transform: var(--textTransformPlaceholder);
+  text-indent: var(--textIndentPlaceholder);
+  text-shadow: var(--textShadowPlaceholder);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * h3, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h3 {
+  width: 100%;
+  margin: 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h2 {
+  display: block;
+  text-indent: 15px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h1 {
+  color: var(--colorH1);
+  background: var(--bgH1);
+  padding: var(--paddingH1);
+  max-height: var(--maxHeightH1);
+  min-height: var(--maxHeightH1);
+  line-height: var(--lineHeightH1);
+  font-family: var(--fontFamilyH1);
+  font-style: var(--fontStyleH1);
+  font-variant: var(--fontVariantH1);
+  font-weight: var(--fontWeightH1);
+  font-size: var(--fontSizeH1);
+  text-transform: var(--textTransformH1);
+  text-shadow: var(--textShadowH1);
+  text-indent: var(--textIndentH1);
+  border-bottom: var(--borderH1);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h2 {
+  color: var(--colorH2);
+  background: var(--bgH2);
+  padding: var(--paddingH2);
+  max-height: var(--maxHeightH2);
+  min-height: var(--maxHeightH2);
+  line-height: var(--lineHeightH2);
+  font-family: var(--fontFamilyH2);
+  font-style: var(--fontStyleH2);
+  font-variant: var(--fontVariantH2);
+  font-weight: var(--fontWeightH2);
+  font-size: var(--fontSizeH2);
+  text-transform: var(--textTransformH2);
+  text-shadow: var(--textShadowH2);
+  text-indent: var(--textIndentH2);
+  border-bottom: var(--borderH2);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * h3, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h3 {
+  color: var(--colorH3);
+  background: var(--bgH3);
+  padding: var(--paddingH3);
+  max-height: var(--maxHeightH3);
+  min-height: var(--maxHeightH3);
+  line-height: var(--lineHeightH3);
+  font-family: var(--fontFamilyH3);
+  font-style: var(--fontStyleH3);
+  font-variant: var(--fontVariantH3);
+  font-weight: var(--fontWeightH3);
+  font-size: var(--fontSizeH3);
+  text-transform: var(--textTransformH3);
+  text-shadow: var(--textShadowH3);
+  text-indent: var(--textIndentH3);
+  border-bottom: var(--borderH3);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * label {
+  font-size: var(--fontSizeBody);
+  margin: 0 4px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .readonly {
+  pointer-events: none;
+  resize: none;
+  overflow: hidden;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .insetFrame {
+  color: var(--colorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  font-weight: var(--fontWeightBody);
+  border-radius: 1rem;
+  background: var(--accentDown3Fade75);
+  border: inset 3px var(--accentUp1);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .outsetFrame {
+  color: var(--colorBody);
+  font-family: var(--fontFamilyBody);
+  font-size: var(--fontSizeBody);
+  border-radius: 1rem;
+  background: var(--accentUp3Fade75);
+  border: outset 3px var(--accentUp1);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .hidden {
+  display: none !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .text {
+  color: var(--colorBody);
+  font-size: var(--fontSizeBody);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .inline {
+  display: inline-block !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .inline.text {
+  padding-right: 5px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .padded {
+  padding: 5px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .padVert {
+  padding: 5px 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween > div, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween section, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h3, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h3 {
+  margin: 2px 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween > div:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween section:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h1:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h1:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h2:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h2:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h3:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h3:first-child {
+  margin-top: 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween > div:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween section:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h1:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h1:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h2:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h2:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween h3:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet * .spaceBetween .h3:last-child {
+  margin-bottom: 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .placeholder {
+  color: var(--colorPlaceholder);
+  font-family: var(--fontFamilyPlaceholder);
+  font-size: var(--fontSizePlaceholder);
+  font-style: var(--fontStylePlaceholder);
+  font-variant: var(--fontVariantPlaceholder);
+  font-weight: var(--fontWeightPlaceholder);
+  line-height: var(--lineHeightPlaceholder);
+  text-transform: var(--textTransformPlaceholder);
+  text-indent: var(--textIndentPlaceholder);
+  text-shadow: var(--textShadowPlaceholder);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .greyText {
+  color: var(--grey);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .noBG {
+  background: none !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .noBorder {
+  border: none !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .alignLeft {
+  text-align: left !important;
+  text-align-last: left !important;
+  margin-right: auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .alignCenter {
+  text-align: center !important;
+  text-align-last: center !important;
+  text-indent: 0 !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .alignRight {
+  text-align: right !important;
+  text-align-last: right !important;
+  margin-left: auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .strong {
+  font-weight: var(--fontWeightStrongText);
+  text-transform: uppercase;
+  text-shadow: var(--textShadowStrongText);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .blur {
+  filter: blur(3px) opacity(0.75);
+  transform-origin: 0% 0%;
+  transform: scale(75%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width10 {
+  width: 10%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height10 {
+  height: 10%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width20 {
+  width: 20%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height20 {
+  height: 20%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width30 {
+  width: 30%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height30 {
+  height: 30%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width40 {
+  width: 40%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height40 {
+  height: 40%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width50 {
+  width: 50%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height50 {
+  height: 50%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width60 {
+  width: 60%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height60 {
+  height: 60%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width70 {
+  width: 70%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height70 {
+  height: 70%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width80 {
+  width: 80%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height80 {
+  height: 80%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width90 {
+  width: 90%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height90 {
+  height: 90%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width100 {
+  width: 100%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height100 {
+  height: 100%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width25 {
+  width: 25%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height25 {
+  height: 25%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .width75 {
+  width: 75%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .height75 {
+  width: 75%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .widthAuto {
+  width: auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .heightAuto {
+  height: auto;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .skill {
+  width: 120px;
+  text-align: center;
+  text-align-last: center;
+  background-image: url("../images/textures/stoneWhite.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border: 4px outset var(--white);
+  box-shadow: 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .skill.empty {
+  background-image: url("../images/textures/stoneGrey.jpg");
+  border: 4px inset var(--grey);
+  box-shadow: inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey);
+  opacity: 0.75;
+  filter: blur(0.5px);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip {
+  display: block;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-image: url("../images/ToolTipBall.png");
+  background-size: 100%;
+  z-index: 9999;
+  background-position: center;
+  right: 30px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div {
+  min-width: 300px;
+  max-width: 400px;
+  top: 50%;
+  left: 100%;
+  transform: translate(0, -50%);
+  padding: 5px;
+  color: #444444;
+  background-color: white;
+  font-weight: normal;
+  font-size: 13px;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 99999999;
+  box-sizing: border-box;
+  border: 10px outset var(--greyUp3);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div p {
+  font-family: "Della Respira";
+  font-size: 12px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div i {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -25px;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div i::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translate(50%, -50%) rotate(-45deg);
+  background-color: white;
+  border: 10px outset #DDD;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip:hover > div {
+  visibility: visible;
+  opacity: 1;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout {
+  position: absolute;
+  overflow: hidden;
+  z-index: 10;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"] {
+  display: grid;
+  grid-area: dotline;
+  grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
+  grid-template-rows: 1rem;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"][class*="labelled"] {
+  width: 100%;
+  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"][class*="bigDots"] {
+  grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+  grid-template-rows: 1.25rem;
+  column-gap: 0.5rem;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"][class*="bigDots"][class*="labelled"] {
+  grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"] *[class|="dot"] {
+  margin: 7% 7% 0 0;
+  border-radius: 50%;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"] *[class|="dot"][class*="-full"] {
+  background: radial-gradient(#444, #0a0a0a);
+  border: solid 2px black;
+  box-shadow: 1px 1px 2px black;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"] *[class|="dot"][class*="-unspent"] {
+  background: radial-gradient(#900, #5a0000);
+  border: solid 2px #5a0000;
+  box-shadow: 1px 1px 2px black;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"] *[class|="dot"].virtueCenter::after {
+  content: "";
+  height: 150%;
+  width: 150%;
+  background-image: var(--virtueDarkImg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"] *[class|="dot"].virtueCenter.virtueFull::after {
+  background-image: var(--virtueGlowImg);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .bubble p {
+  margin: 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"] {
+  display: inline-block;
+  height: 100px;
+  width: 80px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: hue-rotate(var(--colorPurviewRotate));
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="sun"] {
+  background-image: url("../images/purviews/sun.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="passion"] {
+  background-image: url("../images/purviews/passion.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="geasa"] {
+  background-image: url("../images/purviews/geasa.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="beauty"] {
+  background-image: url("../images/purviews/beauty.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="fortune"] {
+  background-image: url("../images/purviews/fortune.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"] span.text {
+  display: block;
+  margin-top: 110%;
+  text-align: center;
+  font-family: Oswald;
+  text-transform: uppercase;
+  margin-top: 95px;
+  font-size: 12px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor {
+  /* #region Header Styles */
+  /* #endregion */
+  /* #region MAJOR ACTOR SHEETS */
+  /* #endregion */
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .aesir {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-aesir.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-aesir.png");
   --colorStrong: var(--colorBody);
@@ -352,17 +1250,17 @@ body.vtt.game.system-scion .aesir {
   --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion .deva {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .deva {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-deva.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-deva.png");
 }
 
-body.vtt.game.system-scion .kami {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .kami {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-kami.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-kami.png");
 }
 
-body.vtt.game.system-scion .loa {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .loa {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-loa.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-loa.png");
   --colorStrong: var(--colorBody);
@@ -397,12 +1295,12 @@ body.vtt.game.system-scion .loa {
   --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion .manitou {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .manitou {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-manitou.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-manitou.png");
 }
 
-body.vtt.game.system-scion .netjer {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .netjer {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-netjer.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-netjer.png");
   --accentDown4: #100f0b;
@@ -479,17 +1377,17 @@ body.vtt.game.system-scion .netjer {
   --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion .shen {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .shen {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-shen.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-shen.png");
 }
 
-body.vtt.game.system-scion .teotl {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .teotl {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teotl.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-teotl.png");
 }
 
-body.vtt.game.system-scion .theoi {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .theoi {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-theoi.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-theoi.png");
   --accentDown4: #201b28;
@@ -546,11 +1444,11 @@ body.vtt.game.system-scion .theoi {
   --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
   --fontFamilyBody: "Poiret One";
   --lineHeightBody: var(--fontSizeBody);
-  --textShadowBody: 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black;
+  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
   --fontVariantStrong: var(--fontVariantBody);
   --fontWeightStrong: normal;
   --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
@@ -567,7 +1465,7 @@ body.vtt.game.system-scion .theoi {
   --textShadowPlaceholder: none;
 }
 
-body.vtt.game.system-scion .tuathaDeDanann {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .tuathaDeDanann {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-tuathaDeDanann.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-tuathaDeDanann.png");
   --accentDown4: #101410;
@@ -638,12 +1536,12 @@ body.vtt.game.system-scion .tuathaDeDanann {
   --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion .nemetondevos {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .nemetondevos {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-nemetondevos.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-nemetondevos.png");
 }
 
-body.vtt.game.system-scion .orisha {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .orisha {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-orisha.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-orisha.png");
   --accentDown4: #201b28;
@@ -700,11 +1598,11 @@ body.vtt.game.system-scion .orisha {
   --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
   --fontFamilyBody: "Poiret One";
   --lineHeightBody: var(--fontSizeBody);
-  --textShadowBody: 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black, 0 0 0px black;
+  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
   --fontVariantStrong: var(--fontVariantBody);
   --fontWeightStrong: normal;
   --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+  --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
   --textShadowWeak: var(--textShadowBody);
@@ -721,757 +1619,52 @@ body.vtt.game.system-scion .orisha {
   --textShadowPlaceholder: var(--textShadowInput);
 }
 
-body.vtt.game.system-scion .yazata {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .yazata {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-yazata.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-yazata.png");
 }
 
-body.vtt.game.system-scion .teros {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .teros {
   --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teros.png");
   --menuImage: url("../images/actor-sheet/menu/rosette-teros.png");
 }
 
-body.vtt.game.system-scion #logo {
-  display: none;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor header.window-header {
+  width: 480px;
+  margin-left: 140px;
 }
 
-body.vtt.game.system-scion #navigation {
-  left: 0px;
-  top: 0px;
-}
-
-body.vtt.game.system-scion #navigation #nav-toggle {
-  height: 20px;
-}
-
-body.vtt.game.system-scion #navigation .nav-item {
-  margin: 0 4px 0 0;
-  line-height: 1.4rem;
-}
-
-body.vtt.game.system-scion #navigation #scene-list li {
-  height: 20px;
-}
-
-body.vtt.game.system-scion #navigation #scene-list li .scene-players {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls {
-  top: 30px;
-  left: 0;
-  padding: 0;
-}
-
-body.vtt.game.system-scion #controls .scene-control {
-  height: 20px;
-  width: 25px;
-  font-size: 20px;
-  line-height: normal;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Basic Controls"] li[title="Measure Distance"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Measurement Controls"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Tile Controls"] li[title=""] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Rectangle"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Ellipse"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Polygon"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Freehand"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Clear Drawings"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Wall Controls"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Reset Fog of War"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Clear Lights"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Ambient Sound Controls"] li[title="Clear Sounds"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control[title="Journal Notes"] li[title="Clear Notes"] {
-  display: none;
-}
-
-body.vtt.game.system-scion #controls .scene-control .control-tools {
-  height: 25px;
-  top: -25px;
-  left: 35px;
-  position: relative;
-  margin: 0 0 -25px;
-}
-
-body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool {
-  display: inline-block;
-  height: 25px;
-  font-size: 20px;
-  line-height: normal;
-  margin: 0 3px;
-}
-
-body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool i {
-  width: 25px;
-}
-
-body.vtt.game.system-scion #controls .scene-control.active .control-tools {
-  display: flex;
-}
-
-body.vtt.game.system-scion #sidebar {
-  transform: scale(0.75);
-  transform-origin: 100% 0%;
-  height: calc(99vh / 0.75);
-  max-height: calc(99vh / 0.75);
-}
-
-body.vtt.game.system-scion #sidebar #chat-log {
-  max-height: calc(100vh / 0.75);
-}
-
-body.vtt.game.system-scion #sidebar #chat-controls {
-  width: calc(100% * 0.75);
-  flex: 0 0 calc(28px / 0.75);
-  top: -55px;
-  position: relative;
-  transform: scale(calc(1/0.75));
-  transform-origin: 0% 100%;
-}
-
-body.vtt.game.system-scion #sidebar #chat-form {
-  width: calc(100% * 0.75);
-  flex: 0.1 0 calc(100px * 0.75);
-  transform: scale(calc(1 / 0.75));
-  transform-origin: 0% 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion {
-  pointer-events: none;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor nav.tabs {
   border: none;
-  box-shadow: none;
-  background: none;
-  margin: 0;
-  /* #region Element Default Styles */
-  /* #endregion */
-  /* #region Single-Purpose Classes */
-  /* #endregion */
-  /* #region GRADIATED CLASSES */
-  /* #endregion */
-  /* #region System-Specific Styles */
-  /* #endregion */
-  /* #region Popouts */
-  /* #endregion */
-  /* #region Dot Trackers */
-  /* #endregion */
-  /* #region FLEX LAYOUTS */
-  /* #endregion */
-  /* #region GRID LAYOUTS */
-  /* #endregion */
-  /* #region ACTOR SHEETS */
-  /* #region MAJOR ACTOR SHEETS */
-  /* #endregion */
-  /* #endregion */
-  /* #region ITEM SHEETS */
-  /* #endregion */
-}
-
-body.vtt.game.system-scion div.sheet.scion * {
-  color: var(--colorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: var(--fontWeightBody);
-  font-style: var(--fontStyleBody);
-  font-variant: var(--fontVariantBody);
-  text-transform: var(--textTransformBody);
-  text-shadow: var(--textShadowBody);
-  line-height: var(--lineHeightBody);
-}
-
-body.vtt.game.system-scion div.sheet.scion textarea,
-body.vtt.game.system-scion div.sheet.scion input[type="text"],
-body.vtt.game.system-scion div.sheet.scion select,
-body.vtt.game.system-scion div.sheet.scion .contentEditable {
-  margin: 0 4px;
-  padding: var(--paddingInput);
-  line-height: var(--lineHeightInput);
-  max-height: var(--maxHeightInput);
-  min-height: var(--maxHeightInput);
-  font-family: var(--fontFamilyInput);
-  font-size: var(--fontSizeInput);
-  font-style: var(--fontStyleInput);
-  font-variant: var(--fontVariantInput);
-  font-weight: var(--fontWeightInput);
-  text-transform: var(--textTransformInput);
-  text-indent: var(--textIndentInput);
-  text-shadow: var(--textShadowInput);
-  box-shadow: none;
-  border: var(--borderInput);
-  box-sizing: content-box;
-  outline: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion textarea:invalid,
-body.vtt.game.system-scion div.sheet.scion input[type="text"]:invalid,
-body.vtt.game.system-scion div.sheet.scion select:invalid,
-body.vtt.game.system-scion div.sheet.scion .contentEditable:invalid {
-  color: var(--colorPlaceholder);
-  font-family: var(--fontFamilyPlaceholder);
-  font-size: var(--fontSizePlaceholder);
-  font-style: var(--fontStylePlaceholder);
-  font-variant: var(--fontVariantPlaceholder);
-  font-weight: var(--fontWeightPlaceholder);
-  line-height: var(--lineHeightPlaceholder);
-  text-transform: var(--textTransformPlaceholder);
-  text-indent: var(--textIndentPlaceholder);
-  text-shadow: var(--textShadowPlaceholder);
-}
-
-body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sheet.scion .h1, body.vtt.game.system-scion div.sheet.scion .h2, body.vtt.game.system-scion div.sheet.scion .h3 {
-  width: 100%;
-  margin: 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion .h1, body.vtt.game.system-scion div.sheet.scion .h2 {
-  display: block;
-}
-
-body.vtt.game.system-scion div.sheet.scion h1, body.vtt.game.system-scion div.sheet.scion .h1 {
-  color: var(--colorH1);
-  background: var(--bgH1);
-  padding: var(--paddingH1);
-  max-height: var(--maxHeightH1);
-  min-height: var(--maxHeightH1);
-  line-height: var(--lineHeightH1);
-  font-family: var(--fontFamilyH1);
-  font-style: var(--fontStyleH1);
-  font-variant: var(--fontVariantH1);
-  font-weight: var(--fontWeightH1);
-  font-size: var(--fontSizeH1);
-  text-transform: var(--textTransformH1);
-  text-shadow: var(--textShadowH1);
-  text-indent: var(--textIndentH1);
-  border-bottom: var(--borderH1);
-}
-
-body.vtt.game.system-scion div.sheet.scion h2, body.vtt.game.system-scion div.sheet.scion .h2 {
-  color: var(--colorH2);
-  background: var(--bgH2);
-  padding: var(--paddingH2);
-  max-height: var(--maxHeightH2);
-  min-height: var(--maxHeightH2);
-  line-height: var(--lineHeightH2);
-  font-family: var(--fontFamilyH2);
-  font-style: var(--fontStyleH2);
-  font-variant: var(--fontVariantH2);
-  font-weight: var(--fontWeightH2);
-  font-size: var(--fontSizeH2);
-  text-transform: var(--textTransformH2);
-  text-shadow: var(--textShadowH2);
-  text-indent: var(--textIndentH2);
-  border-bottom: var(--borderH2);
-}
-
-body.vtt.game.system-scion div.sheet.scion h3, body.vtt.game.system-scion div.sheet.scion .h3 {
-  color: var(--colorH3);
-  background: var(--bgH3);
-  padding: var(--paddingH3);
-  max-height: var(--maxHeightH3);
-  min-height: var(--maxHeightH3);
-  line-height: var(--lineHeightH3);
-  font-family: var(--fontFamilyH3);
-  font-style: var(--fontStyleH3);
-  font-variant: var(--fontVariantH3);
-  font-weight: var(--fontWeightH3);
-  font-size: var(--fontSizeH3);
-  text-transform: var(--textTransformH3);
-  text-shadow: var(--textShadowH3);
-  text-indent: var(--textIndentH3);
-  border-bottom: var(--borderH3);
-}
-
-body.vtt.game.system-scion div.sheet.scion label {
-  font-size: var(--fontSizeBody);
-  margin: 0 4px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer {
-  display: block;
+  pointer-events: all;
   position: relative;
-  box-shadow: none;
-  padding: 0px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer *[contentEditable="true"] {
-  outline: none !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer *[contentEditable="true"]:hover {
-  outline: 1px solid #2276d2 !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer h1, body.vtt.game.system-scion div.sheet.scion .richEditContainer h2, body.vtt.game.system-scion div.sheet.scion .richEditContainer h3 {
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer ul, body.vtt.game.system-scion div.sheet.scion .richEditContainer ol {
-  padding-left: 20px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer ul {
-  list-style: square outside;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer ol {
-  list-style: upper-roman outside;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"] {
-  margin: 0;
-  padding: 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"][data-mce-placeholder]::before {
-  color: var(--colorPlaceholder);
-  font-family: var(--fontFamilyPlaceholder);
-  font-size: var(--fontSizePlaceholder);
-  font-style: var(--fontStylePlaceholder);
-  font-variant: var(--fontVariantPlaceholder);
-  font-weight: var(--fontWeightPlaceholder);
-  line-height: var(--lineHeightPlaceholder);
-  text-transform: var(--textTransformPlaceholder);
-  text-indent: var(--textIndentPlaceholder);
-  text-shadow: var(--textShadowPlaceholder);
-  text-indent: 0;
-  font-size: calc(var(--fontSizePlaceholder) * 0.9);
-  line-height: var(--fontSizePlaceholder);
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"] p {
-  margin: 0 0 3px 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .richEditContainer [class*="Editor"] blockquote {
-  margin-left: 30px;
-  margin-right: 40px;
-  padding-left: 10px;
-  font-style: italic;
-  border-left: 3px double var(--accentUp3);
-}
-
-body.vtt.game.system-scion div.sheet.scion .readonly {
-  pointer-events: none;
-  resize: none;
-  overflow: hidden;
-}
-
-body.vtt.game.system-scion div.sheet.scion .insetFrame {
-  color: var(--colorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  font-weight: var(--fontWeightBody);
-  border-radius: 1rem;
-  background: var(--accentDown3Fade75);
-  border: inset 3px var(--accentUp1);
-}
-
-body.vtt.game.system-scion div.sheet.scion .outsetFrame {
-  color: var(--colorBody);
-  font-family: var(--fontFamilyBody);
-  font-size: var(--fontSizeBody);
-  border-radius: 1rem;
-  background: var(--accentUp3Fade75);
-  border: outset 3px var(--accentUp1);
-}
-
-body.vtt.game.system-scion div.sheet.scion .hidden {
-  display: none !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .text {
-  color: var(--colorBody);
-  font-size: var(--fontSizeBody);
-}
-
-body.vtt.game.system-scion div.sheet.scion .inline {
-  display: inline-block !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .inline.text {
-  padding-right: 5px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .padded {
-  padding: 5px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .padVert {
-  padding: 5px 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .spaceBetween > div, body.vtt.game.system-scion div.sheet.scion .spaceBetween section, body.vtt.game.system-scion div.sheet.scion .spaceBetween h1, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h1, body.vtt.game.system-scion div.sheet.scion .spaceBetween h2, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h2, body.vtt.game.system-scion div.sheet.scion .spaceBetween h3, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h3 {
-  margin: 2px 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .spaceBetween > div:first-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween section:first-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween h1:first-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h1:first-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween h2:first-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h2:first-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween h3:first-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h3:first-child {
-  margin-top: 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .spaceBetween > div:last-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween section:last-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween h1:last-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h1:last-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween h2:last-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h2:last-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween h3:last-child, body.vtt.game.system-scion div.sheet.scion .spaceBetween .h3:last-child {
-  margin-bottom: 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .placeholder {
-  color: var(--colorPlaceholder);
-  font-family: var(--fontFamilyPlaceholder);
-  font-size: var(--fontSizePlaceholder);
-  font-style: var(--fontStylePlaceholder);
-  font-variant: var(--fontVariantPlaceholder);
-  font-weight: var(--fontWeightPlaceholder);
-  line-height: var(--lineHeightPlaceholder);
-  text-transform: var(--textTransformPlaceholder);
-  text-indent: var(--textIndentPlaceholder);
-  text-shadow: var(--textShadowPlaceholder);
-}
-
-body.vtt.game.system-scion div.sheet.scion .greyText {
-  color: var(--grey);
-}
-
-body.vtt.game.system-scion div.sheet.scion .noBG {
-  background: none !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .noBorder {
-  border: none !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .alignLeft {
-  text-align: left !important;
-  text-align-last: left !important;
-  margin-right: auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion .alignCenter {
-  text-align: center !important;
-  text-align-last: center !important;
-  text-indent: 0 !important;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion .alignRight {
-  text-align: right !important;
-  text-align-last: right !important;
-  margin-left: auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion .strong {
-  font-weight: var(--fontWeightStrongText);
-  text-transform: uppercase;
-  text-shadow: var(--textShadowStrongText);
-}
-
-body.vtt.game.system-scion div.sheet.scion .blur {
-  filter: blur(3px) opacity(0.75);
-  transform-origin: 0% 0%;
-  transform: scale(75%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .width10 {
-  width: 10%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height10 {
-  height: 10%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width20 {
-  width: 20%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height20 {
-  height: 20%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width30 {
-  width: 30%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height30 {
-  height: 30%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width40 {
-  width: 40%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height40 {
-  height: 40%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width50 {
-  width: 50%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height50 {
-  height: 50%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width60 {
-  width: 60%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height60 {
-  height: 60%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width70 {
-  width: 70%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height70 {
-  height: 70%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width80 {
-  width: 80%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height80 {
-  height: 80%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width90 {
-  width: 90%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height90 {
-  height: 90%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width100 {
-  width: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height100 {
-  height: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width25 {
-  width: 25%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height25 {
-  height: 25%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .width75 {
-  width: 75%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .height75 {
-  width: 75%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .widthAuto {
-  width: auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion .heightAuto {
-  height: auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion .skill {
-  width: 120px;
-  text-align: center;
-  text-align-last: center;
-  background-image: url("../images/textures/stoneWhite.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  border: 4px outset var(--white);
-  box-shadow: 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2);
-}
-
-body.vtt.game.system-scion div.sheet.scion .skill.empty {
-  background-image: url("../images/textures/stoneGrey.jpg");
-  border: 4px inset var(--grey);
-  box-shadow: inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey);
-  opacity: 0.75;
-  filter: blur(0.5px);
-}
-
-body.vtt.game.system-scion div.sheet.scion .tooltip {
-  display: block;
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  background-image: url("../images/ToolTipBall.png");
-  background-size: 100%;
-  z-index: 9999;
-  background-position: center;
-  right: 30px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .tooltip > div {
-  min-width: 300px;
-  max-width: 400px;
-  top: 50%;
-  left: 100%;
-  transform: translate(0, -50%);
-  padding: 5px;
-  color: #444444;
-  background-color: white;
-  font-weight: normal;
-  font-size: 13px;
-  border-radius: 8px;
-  position: absolute;
-  z-index: 99999999;
-  box-sizing: border-box;
-  border: 10px outset var(--greyUp3);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.8s;
-}
-
-body.vtt.game.system-scion div.sheet.scion .tooltip > div p {
-  font-family: "Della Respira";
-  font-size: 12px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .tooltip > div i {
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -25px;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-}
-
-body.vtt.game.system-scion div.sheet.scion .tooltip > div i::after {
-  content: '';
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 50%;
-  transform: translate(50%, -50%) rotate(-45deg);
-  background-color: white;
-  border: 10px outset #DDD;
-}
-
-body.vtt.game.system-scion div.sheet.scion .tooltip:hover > div {
-  visibility: visible;
-  opacity: 1;
-}
-
-body.vtt.game.system-scion div.sheet.scion .popout {
-  position: absolute;
-  overflow: hidden;
   z-index: 10;
+  flex-grow: 0;
+  margin-top: 10px;
 }
 
-body.vtt.game.system-scion div.sheet.scion .popout#skillList {
-  width: 150px;
-  height: 480px;
-  left: 94%;
-  top: 0;
-  border: 10px outset var(--greyUp1);
-  background-image: url("../images/textures/stoneGrey.jpg");
-  box-sizing: content-box;
-  border-radius: 40px;
-  filter: drop-shadow(0px 0px 6px black);
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor nav.tabs .item {
+  margin: 0 0.25rem;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-shadow: none;
+  color: var(--accentUp4);
+  background-color: var(--accentDown1);
+  border-radius: 2rem;
+  box-shadow: 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3);
 }
 
-body.vtt.game.system-scion div.sheet.scion .popout#skillList > div {
-  padding: 15px;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor nav.tabs .item:hover {
+  background-color: var(--accentUp4);
+  color: var(--accentDown1);
 }
 
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] {
-  display: grid;
-  grid-area: dotline;
-  grid-template-columns: 1rem 1rem 1rem 1rem 1rem;
-  grid-template-rows: 1rem;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor nav.tabs .item.active {
+  background-color: var(--accentUp2);
+  color: var(--accentDown3);
 }
 
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"][class*="labelled"] {
-  width: 100%;
-  grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"][class*="bigDots"] {
-  grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
-  grid-template-rows: 1.25rem;
-  column-gap: 0.5rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"][class*="bigDots"][class*="labelled"] {
-  grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"] {
-  margin: 7% 7% 0 0;
-  border-radius: 50%;
-  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.4), inset -1px -1px 1px white;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"][class*="-full"] {
-  background: radial-gradient(#444, #0a0a0a);
-  border: solid 2px black;
-  box-shadow: 1px 1px 2px black;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"][class*="-unspent"] {
-  background: radial-gradient(#900, #5a0000);
-  border: solid 2px #5a0000;
-  box-shadow: 1px 1px 2px black;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"].virtueCenter::after {
-  content: "";
-  height: 150%;
-  width: 150%;
-  background-image: var(--virtueDarkImg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="dotline"] *[class|="dot"].virtueCenter.virtueFull::after {
-  background-image: var(--virtueGlowImg);
-}
-
-body.vtt.game.system-scion div.sheet.scion .title {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .title {
   width: calc(100% / var(--fontScaleTitle));
   max-height: var(--maxHeightTitle);
   padding: var(--paddingTitle);
@@ -1491,7 +1684,7 @@ body.vtt.game.system-scion div.sheet.scion .title {
   border: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion .surTitle {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .surTitle {
   width: calc(100% / var(--fontScaleH2));
   padding: var(--paddingH2);
   color: var(--colorH2);
@@ -1510,7 +1703,7 @@ body.vtt.game.system-scion div.sheet.scion .surTitle {
   border: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion .subTitle {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .subTitle {
   width: calc(100% / var(--fontScaleH3));
   padding: var(--paddingH3);
   color: var(--colorH3);
@@ -1529,413 +1722,7 @@ body.vtt.game.system-scion div.sheet.scion .subTitle {
   border: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"] {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] {
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"][class*="max"] {
-  height: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] > h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] .h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] .h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] h3, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] .h3 {
-  flex: 0 0 auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] > label {
-  flex: 0 0 auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="col"] > .contentEditable {
-  flex: 1 0 auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: baseline;
-  justify-content: space-evenly;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"][class*="max"] {
-  width: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] .h1, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] .h2, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] h3, body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] .h3 {
-  flex: 0 0 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > label {
-  flex: 0 0 auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="row"] > .contentEditable {
-  flex: 1 1 auto;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"] > *[class*="noFlex"] {
-  flex: 0 0 auto !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"] > *[class*="fullFlex"] {
-  flex: 1 1 auto !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="wrap"] {
-  flex-wrap: wrap !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="nowrap"] {
-  flex-wrap: nowrap !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="stretch"] {
-  align-items: stretch !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="center"] {
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion *[class*="flex"][class*="start"] {
-  justify-content: flex-start !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .grid {
-  display: grid;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  grid-gap: 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion nav.tabs {
-  border: none;
-  pointer-events: all;
-  position: relative;
-  z-index: 10;
-  flex-grow: 0;
-  margin-top: 10px;
-}
-
-body.vtt.game.system-scion div.sheet.scion nav.tabs .item {
-  margin: 0 0.25rem;
-  font-weight: bold;
-  font-size: 0.75rem;
-  text-shadow: none;
-  color: var(--accentUp4);
-  background-color: var(--accentDown1);
-  border-radius: 2rem;
-  box-shadow: 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3);
-}
-
-body.vtt.game.system-scion div.sheet.scion nav.tabs .item:hover {
-  background-color: var(--accentUp4);
-  color: var(--accentDown1);
-}
-
-body.vtt.game.system-scion div.sheet.scion nav.tabs .item.active {
-  background-color: var(--accentUp2);
-  color: var(--accentDown3);
-}
-
-body.vtt.game.system-scion div.sheet.scion .window-content form.main section .tab:not(.active) {
-  display: none !important;
-}
-
-body.vtt.game.system-scion div.sheet.scion .window-content form.main section .tab {
-  width: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble p {
-  margin: 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition {
-  height: 57px;
-  width: 207px;
-  padding: 9px 9px;
-  margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x3.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
-  text-align: center;
-  box-sizing: content-box;
-  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
-  justify-content: start;
-  margin: 4px 0;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap::before {
-  content: "";
-  width: 24px;
-  height: 57px;
-  float: left;
-  shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition::before {
-  content: "";
-  width: 24px;
-  height: 57px;
-  float: right;
-  shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition span, body.vtt.game.system-scion div.sheet.scion .bubble.condition p {
-  display: block;
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleTitle {
-  display: block;
-  grid-area: title;
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap {
-  height: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap .bubbleTitle {
-  height: 25%;
-  margin: 0;
-  padding: 0;
-  flex: 0 0 auto;
-  color: black;
-  font-family: "Oswald";
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 14px;
-  text-transform: uppercase;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.condition .bubbleWrap .bubbleBody {
-  height: 75%;
-  margin: 0;
-  padding: 0;
-  flex: 0 0 auto;
-  color: black;
-  font-family: "Overlock SC";
-  font-size: 10px;
-  font-weight: normal;
-  line-height: 10px;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.group, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access {
-  height: 30.4px;
-  width: 188.8px;
-  padding: 4.8px 5.6px;
-  margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x5.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
-  text-align: center;
-  box-sizing: content-box;
-  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.group .bubbleWrap::before, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access .bubbleWrap::before {
-  content: "";
-  width: 16px;
-  height: 30.4px;
-  float: left;
-  shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.group::before, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access::before {
-  content: "";
-  width: 16px;
-  height: 30.4px;
-  float: right;
-  shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.group span, body.vtt.game.system-scion div.sheet.scion .bubble.connection.group p, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access span, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access p {
-  display: block;
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.group .bubbleTitle, body.vtt.game.system-scion div.sheet.scion .bubble.connection.access .bubbleTitle {
-  display: block;
-  grid-area: title;
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact {
-  height: 30.4px;
-  width: 227.2px;
-  padding: 4.8px 6.4px;
-  margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x6.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
-  text-align: center;
-  box-sizing: content-box;
-  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact .bubbleWrap::before {
-  content: "";
-  width: 24.4px;
-  height: 30.4px;
-  float: left;
-  shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact::before {
-  content: "";
-  width: 24.4px;
-  height: 30.4px;
-  float: right;
-  shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact span, body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact p {
-  display: block;
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion .bubble.connection.contact .bubbleTitle {
-  display: block;
-  grid-area: title;
-  text-align: center;
-  text-align-last: center;
-}
-
-body.vtt.game.system-scion div.sheet.scion [class|="purview"] {
-  display: inline-block;
-  height: 100px;
-  width: 80px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: hue-rotate(var(--colorPurviewRotate));
-}
-
-body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="sun"] {
-  background-image: url("../images/purviews/sun.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="passion"] {
-  background-image: url("../images/purviews/passion.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="geasa"] {
-  background-image: url("../images/purviews/geasa.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="beauty"] {
-  background-image: url("../images/purviews/beauty.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion [class|="purview"][class*="fortune"] {
-  background-image: url("../images/purviews/fortune.png");
-}
-
-body.vtt.game.system-scion div.sheet.scion [class|="purview"] span.text {
-  display: block;
-  margin-top: 110%;
-  text-align: center;
-  font-family: Oswald;
-  text-transform: uppercase;
-  margin-top: 95px;
-  font-size: 12px;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header {
-  height: 40px;
-  width: 100%;
-  margin: 0 0 -40px 0;
-  display: block;
-  flex: none;
-  position: relative;
-  z-index: 2;
-  overflow: visible;
-  border: none;
-  pointer-events: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header h4.window-title {
-  display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button {
-  display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close {
-  height: 40px;
-  width: 40px;
-  position: absolute;
-  top: -20px;
-  right: 20px;
-  display: block;
-  pointer-events: all;
-  font-size: var(--fontSizeBody);
-  color: white;
-  line-height: 50px;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header a.header-button.close i {
-  display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion header.window-header::before {
-  content: "";
-  height: 100%;
-  width: 100%;
-  display: block;
-  position: relative;
-  cursor: move;
-  pointer-events: all;
-}
-
-body.vtt.game.system-scion div.sheet.scion section.window-content {
-  padding: 0px;
-  background: transparent;
-  pointer-events: none;
-  overflow: visible;
-  position: relative;
-  z-index: 1;
-  max-height: 100%;
-}
-
-body.vtt.game.system-scion div.sheet.scion section.window-content form.editable {
-  pointer-events: all;
-}
-
-body.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
-  display: none;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major header.window-header {
-  width: 480px;
-  margin-left: 140px;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main {
   height: 100%;
   width: 100%;
   padding: 40px 60px 60px 40px;
@@ -1947,7 +1734,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main {
   grid: "menu" 0px "header" 90px "body" 470px "footer" 90px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette {
   grid-area: menu;
   content: "";
   display: block;
@@ -1966,17 +1753,17 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette {
   transition: 0.5s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette:hover {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette:hover {
   background-size: 100%;
   transform: translate(-20px, -20px);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette:hover div.circleMenuContainer {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette:hover div.circleMenuContainer {
   transform: scale(1) rotate(0deg);
   opacity: 1;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette .menuText {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette .menuText {
   display: block !important;
   height: auto !important;
   width: 200px !important;
@@ -1997,7 +1784,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette .menuT
   pointer-events: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer {
   position: relative;
   width: 250px;
   height: 250px;
@@ -2011,7 +1798,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.ci
   transition: 0.5s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > * {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > * {
   display: block;
   position: absolute;
   top: 50%;
@@ -2021,59 +1808,59 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.ci
   margin: -50px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(1) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(1) {
   transform: rotate(135deg) translate(125px) rotate(-135deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(2) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(2) {
   transform: rotate(180deg) translate(125px) rotate(-180deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(3) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(3) {
   transform: rotate(225deg) translate(125px) rotate(-225deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(4) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(4) {
   transform: rotate(270deg) translate(125px) rotate(-270deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(5) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(5) {
   transform: rotate(315deg) translate(125px) rotate(-315deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(6) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(6) {
   transform: rotate(360deg) translate(125px) rotate(-360deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(7) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(7) {
   transform: rotate(405deg) translate(125px) rotate(-405deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer > *:nth-of-type(8) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer > *:nth-of-type(8) {
   transform: rotate(450deg) translate(125px) rotate(-450deg);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(1) > .menuButton {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(1) > .menuButton {
   animation-delay: 0.2s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(2) > .menuButton {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(2) > .menuButton {
   animation-delay: 0.4s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(3) > .menuButton {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(3) > .menuButton {
   animation-delay: 0.6s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(4) > .menuButton {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(4) > .menuButton {
   animation-delay: 0.8s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(5) > .menuButton {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(5) > .menuButton {
   animation-delay: 1s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer div, body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer a {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer div, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer a {
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -2082,7 +1869,7 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.ci
   transition: 0.5s;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton {
   display: inline-block;
   position: relative;
   height: 100%;
@@ -2100,135 +1887,144 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.ci
   }
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton:hover {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton:hover {
   transform: scale(1.2);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconMain {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconMain {
   background-image: url("../images/actor-sheet/menu/IconMain.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconChargen {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconChargen {
   background-image: url("../images/actor-sheet/menu/IconChargen.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconSettings {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconSettings {
   background-image: url("../images/actor-sheet/menu/IconSettings.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconExperience {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconExperience {
   background-image: url("../images/actor-sheet/menu/IconExperience.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconHeritage {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconHeritage {
   background-image: url("../images/actor-sheet/menu/IconHeritage.png");
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover {
   filter: drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow));
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover + .menuText {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover + .menuText {
   letter-spacing: normal;
   transform: scale(1);
   opacity: 1;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .header {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .header {
   grid-area: header;
   grid: ". surTitle ." 24px ". title ." 50px "subTitle subTitle subTitle" 16px / 90px 470px 90px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .header div {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .header div {
   pointer-events: all;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .header .divineTitle {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .header .divineTitle {
   grid-area: surTitle;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .header .charName {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .header .charName {
   grid-area: title;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .header .patronage {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .header .patronage {
   grid-area: subTitle;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .sheet-body {
   grid-area: body;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .footer {
   grid-area: footer;
   grid: "subTitle subTitle subTitle" 15px ". title ." 50px ". surTitle ." 25px / 90px 470px 90px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .subTitle {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .footer .subTitle {
   grid-area: subTitle;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .title {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .footer .title {
   grid-area: title;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .footer .surTitle {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main .footer .surTitle {
   grid-area: surTitle;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body {
-  /* #region Owned Item Partials */
-  /* #endregion */
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.chargen-body div.path-block *[class*="subBlock"] {
+  margin: 3px;
+  align-content: start;
+  align-self: start;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .chargen-body .deed {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.chargen-body div.path-block *[class*="subBlock"] > span {
+  margin: 1px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.chargen-body div.path-block *[class*="subBlock"] > span.skill:not(.empty) {
+  box-shadow: 1px 1px 3px var(--greyDown2);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.chargen-body .deed {
   min-width: 50%;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body {
   grid: "skills paths" 17rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
   column-gap: 0.5rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .skills {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .skills {
   grid-area: skills;
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: center;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .skills .dotGrabBin {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .skills .dotGrabBin {
   flex-wrap: wrap;
   height: auto;
   justify-content: flex-end;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .skills .dotDropBin {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .skills .dotDropBin {
   margin-bottom: 5px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .paths {
   grid-area: paths;
   grid: "heading" 1.5rem "originpath" 5rem "rolepath" 5rem "pantheonpath" 5rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .heading {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .paths .heading {
   grid-area: heading;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .originpath {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .paths .originpath {
   grid-area: originpath;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .rolepath {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .paths .rolepath {
   grid-area: rolepath;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .paths .pantheonpath {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .paths .pantheonpath {
   grid-area: pantheonpath;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .virtues {
   border-radius: 1rem;
   grid-area: virtues;
   grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
@@ -2239,46 +2035,29 @@ body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .f
   height: calc(100% - 2 * 3px);
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues .leftvirtue {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .virtues .leftvirtue {
   grid-area: leftvirtue;
   margin-left: 0.5rem;
   line-height: 1rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues .dotline {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .virtues .dotline {
   grid-area: dotline;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .tab .front-body .virtues .rightvirtue {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable.main section.sheet-body section.front-body .virtues .rightvirtue {
   grid-area: rightvirtue;
   margin-right: 0.5rem;
   line-height: 1rem;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] {
-  margin: 3px;
-  align-content: start;
-  align-self: start;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item header.window-header {
+  height: 20px;
+  margin-top: -20px;
+  margin-bottom: -10px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] > span {
-  margin: 1px;
-}
-
-body.vtt.game.system-scion div.sheet.scion.actor.major .main .sheet-body .path-block *[class*="subBlock"] > span.skill:not(.empty) {
-  box-shadow: 1px 1px 3px var(--greyDown2);
-}
-
-body.vtt.game.system-scion div.sheet.scion.item .main {
-  /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
- 
-     $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
-         // The added "disappear" class contains either an animation or a transition, which starts immediately.
-         //    When the animation/transition is finished, the callback function removes the element.
- */
-}
-
-body.vtt.game.system-scion div.sheet.scion.item .main {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item {
   height: 100%;
   width: 100%;
   padding: 20px 20px 60px 20px;
@@ -2292,7 +2071,7 @@ body.vtt.game.system-scion div.sheet.scion.item .main {
   box-sizing: border-box;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item::after {
   content: "";
   position: absolute;
   pointer-events: none;
@@ -2304,19 +2083,20 @@ body.vtt.game.system-scion div.sheet.scion.item .main::after {
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 1;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main h1, body.vtt.game.system-scion div.sheet.scion.item .main .h1, body.vtt.game.system-scion div.sheet.scion.item .main h2, body.vtt.game.system-scion div.sheet.scion.item .main .h2 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item h1, body.vtt.game.system-scion div.app.window-app.scion.sheet.item .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet.item h2, body.vtt.game.system-scion div.app.window-app.scion.sheet.item .h2 {
   width: 103%;
   margin: 5px 0;
   margin-left: -2%;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main h1, body.vtt.game.system-scion div.sheet.scion.item .main .h1 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item h1, body.vtt.game.system-scion div.app.window-app.scion.sheet.item .h1 {
   border: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main h2, body.vtt.game.system-scion div.sheet.scion.item .main .h2 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item h2, body.vtt.game.system-scion div.app.window-app.scion.sheet.item .h2 {
   color: black;
   background: var(--whiteFade50);
   border-bottom: 2px solid black;
@@ -2325,39 +2105,205 @@ body.vtt.game.system-scion div.sheet.scion.item .main h2, body.vtt.game.system-s
   text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main .header {
-  grid-area: header;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .popout#skillList {
+  width: 150px;
+  height: 480px;
+  left: 94%;
+  top: 0;
+  border: 10px outset var(--greyUp1);
+  background-image: url("../images/textures/stoneGrey.jpg");
+  box-sizing: content-box;
+  border-radius: 40px;
+  filter: drop-shadow(0px 0px 6px black);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main .header div {
-  pointer-events: all;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .popout#skillList > div {
+  padding: 15px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main .sheet-body {
-  grid-area: body;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition {
+  height: 57px;
+  width: 207px;
+  padding: 9px 9px;
+  margin: 4px;
+  background-image: url("../images/bubbles/Bubble1x3.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  text-align: center;
+  box-sizing: content-box;
+  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
+  justify-content: start;
+  margin: 4px 0;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item .main h1, body.vtt.game.system-scion div.sheet.scion.item .main h2 {
-  text-indent: 15px;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition .bubbleWrap::before {
+  content: "";
+  width: 24px;
+  height: 57px;
+  float: left;
+  shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .h2.contentEditable.placeholder {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition::before {
+  content: "";
+  width: 24px;
+  height: 57px;
+  float: right;
+  shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition span, body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition p {
+  display: block;
+  text-align: center;
+  text-align-last: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition .bubbleTitle {
+  display: block;
+  grid-area: title;
+  text-align: center;
+  text-align-last: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition .bubbleWrap {
+  height: 100%;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition .bubbleWrap .bubbleTitle {
+  height: 25%;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  color: black;
+  font-family: "Oswald";
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 14px;
+  text-transform: uppercase;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.condition .bubbleWrap .bubbleBody {
+  height: 75%;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  color: black;
+  font-family: "Overlock SC";
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 10px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connnection.group,
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.access {
+  height: 30.4px;
+  width: 188.8px;
+  padding: 4.8px 5.6px;
+  margin: 4px;
+  background-image: url("../images/bubbles/Bubble1x5.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  text-align: center;
+  box-sizing: content-box;
+  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connnection.group .bubbleWrap::before,
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.access .bubbleWrap::before {
+  content: "";
+  width: 16px;
+  height: 30.4px;
+  float: left;
+  shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connnection.group::before,
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.access::before {
+  content: "";
+  width: 16px;
+  height: 30.4px;
+  float: right;
+  shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connnection.group span, body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connnection.group p,
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.access span,
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.access p {
+  display: block;
+  text-align: center;
+  text-align-last: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connnection.group .bubbleTitle,
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.access .bubbleTitle {
+  display: block;
+  grid-area: title;
+  text-align: center;
+  text-align-last: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.contact {
+  height: 30.4px;
+  width: 227.2px;
+  padding: 4.8px 6.4px;
+  margin: 4px;
+  background-image: url("../images/bubbles/Bubble1x6.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  text-align: center;
+  box-sizing: content-box;
+  filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.contact .bubbleWrap::before {
+  content: "";
+  width: 24.4px;
+  height: 30.4px;
+  float: left;
+  shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.contact::before {
+  content: "";
+  width: 24.4px;
+  height: 30.4px;
+  float: right;
+  shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.contact span, body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.contact p {
+  display: block;
+  text-align: center;
+  text-align-last: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item .bubble.connection.contact .bubbleTitle {
+  display: block;
+  grid-area: title;
+  text-align: center;
+  text-align-last: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .h2.contentEditable.placeholder {
   line-height: 24px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main h3, body.vtt.game.system-scion div.sheet.scion.item.path .main .h3 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main h3, body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .h3 {
   text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .sheet-body .pathSkills {
   min-height: 28px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .sheet-body .pathSkills span.skill {
   margin: 2px calc((100% - 3 * 120px) / 6);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill.invalid {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .sheet-body .pathSkills span.skill.invalid {
   background: none;
   border-color: transparent;
   color: var(--greyDown3);
@@ -2366,14 +2312,14 @@ body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkil
   box-shadow: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathSkills span.skill.pantheon {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .sheet-body .pathSkills span.skill.pantheon {
   filter: invert(100%);
   border-style: inset;
   border-color: var(--greyUp3);
   box-shadow: 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathConnections .contentEditable {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .sheet-body .pathConnections .contentEditable {
   height: 70px;
   max-height: 70px;
   font-size: 14px;
@@ -2385,33 +2331,33 @@ body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathConn
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.path .main .sheet-body .pathCondition {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .sheet-body .pathCondition {
   padding-left: 10px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.condition .main h1 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main h1 {
   font-size: 24px;
   height: 24px;
   line-height: 28px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.condition .main .h2.contentEditable.placeholder {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main .h2.contentEditable.placeholder {
   line-height: 24px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.condition .main h3 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main h3 {
   display: inline-block;
   width: calc(100% - 30px);
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.condition .main input.toggleBox {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main input.toggleBox {
   height: 30px;
   width: 30px;
   margin: -36px 0 0 24px;
   float: left;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.condition .main div#conditionDescription, body.vtt.game.system-scion div.sheet.scion.item.condition .main div#conditionResolution {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main div#conditionDescription, body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main div#conditionResolution {
   height: 60px;
   display: block;
   max-height: 60px;
@@ -2425,7 +2371,7 @@ body.vtt.game.system-scion div.sheet.scion.item.condition .main div#conditionDes
   margin: 0 5px 10px 5px;
 }
 
-body.vtt.game.system-scion div.sheet.scion.item.condition .main div#conditionDescription {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main div#conditionDescription {
   height: 40px;
   max-height: 40px;
 }

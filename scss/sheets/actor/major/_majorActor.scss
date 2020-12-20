@@ -45,9 +45,7 @@ $isShowingBGShade: false;
                 > * { @include box-shadow(2px, red, true); }
             }
         }
-    }
-
-    
+    }    
     @if $isShowingBGShade {
         @include bg-shade(lime);
         > * { @include bg-shade(orange);

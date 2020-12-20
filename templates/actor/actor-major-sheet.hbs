@@ -60,7 +60,7 @@
         </section>
         {{!-- Front Tab --}}
         <section class="tab" data-group="primary" data-tab="front">
-            <div class="front-body grid">
+            <section class="front-body grid">
                 <div class="skills flex-col-start">
                     <h1>{{loc "scion.game.skills"}}</h1>
                     {{#if data.skills.unspentDots}}
@@ -79,11 +79,6 @@
                         </div>
                     {{/each}}
                 </div>
-
-
-
-
-
                     {{!-- {{#each data.attributes.priorities as |arena priority|}}
                         <div class="attrBlock {{arena}} flex">
                             {{#if data.attributes.unspentDots.[arena]}}
@@ -123,7 +118,7 @@
                     {{/with}}
                     {{/if}}
                 </div>
-            </div>
+            </section>
         </section>
         {{!-- Divine Genesis Tab --}}
         <section class="tab" data-group="primary" data-tab="genesis">

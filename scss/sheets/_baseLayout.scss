@@ -1,0 +1,59 @@
+/* #region FLEX LAYOUTS */
+*[class*="flex"] {
+    display: flex;
+    flex: {
+        direction: row;
+        wrap: wrap;
+    }
+    align: {
+        content: flex-start;
+        items: flex-start;
+    }
+    justify-content: flex-start;
+
+    &[class*="col"] {
+        flex: {
+            direction: column;
+            wrap: nowrap;
+        }
+        align-items: center;
+        &[class*="max"] { height: 100%; }
+        > h1, .h1, h2, .h2, h3, .h3 { flex: 0 0 auto; }
+        > label { flex: 0 0 auto; }
+        > .contentEditable { flex: 1 0 auto; }
+    }
+
+    &[class*="row"] {
+        flex: {
+            direction: row;
+            wrap: nowrap;
+        }
+        align-items: baseline;
+        justify-content: space-evenly;
+        &[class*="max"] { width: 100%; }
+        > h1, .h1, h2, .h2, h3, .h3 { flex: 0 0 100%; }
+        > label { flex: 0 0 auto; }
+        > .contentEditable { flex: 1 1 auto; }
+    }
+
+    > *[class*="noFlex"] { flex: 0 0 auto !important; }
+    > *[class*="fullFlex"] { flex: 1 1 auto !important; }
+    &[class*="wrap"] { flex-wrap: wrap !important; }
+    &[class*="nowrap"] { flex-wrap: nowrap !important; }
+    &[class*="stretch"] { align-items: stretch !important; }
+    &[class*="center"] { align-items: center !important; justify-content: center !important; }
+    &[class*="start"] { justify-content: flex-start !important; }
+}
+ /* #endregion */
+ 
+ /* #region GRID LAYOUTS */
+ .grid {    
+     display: grid;
+     height: 100%;
+     width: 100%;
+     margin: 0;
+     padding: 0;
+     border: none;
+     grid-gap: 0;
+ }
+ /* #endregion */

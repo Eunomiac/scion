@@ -1,76 +1,54 @@
-@import 'comps/functions'; // Core SASS Functions
-@import 'params/fontLoader'; // Font Loading
-@import 'comps/dragula'; // Dragula Drag & Drop Components
+$isTestingLayout: true;
+
+@import 'core/functions';
+@import 'core/fontLoader';
+@import 'core/mixins';
 
 body.vtt.game.system-scion {  
-  /* #region Global Variables & Configuration */
-  $defaultPadding: 5px;
-  @import 'params/colors'; // Basic Color Definitions & Scaling
-  @import 'params/themes'; // Pantheon-Specific Theming
-  @import 'comps/mixins'; // Mixins
-  @import 'window/canvas'; // Top-Level Canvas Styles
-  /* #endregion */
+    $defaultPadding: 5px;
+    @import 'core/dragula';
+    @import 'core/window';
 
-  /* #region SHEET STYLES */
-  div.sheet.scion {
-    pointer-events: none;
-    border: none;
-    box-shadow: none;
-    background: none;
-    margin: 0;
+    /* #region SHEET STYLES */
+    div.app.window-app.scion.sheet {  
+        @import 'sheets/baseTheme';   
+        @import 'sheets/baseLayout';
+        @import 'sheets/baseFormat'; 
 
-    @import 'comps/base'; // Base Styles: HTML Elements, Headers
-    @import 'comps/layoutBlocks'; // Grid & Flex Layout Plans
-    @import 'comps/tabs'; // Navigation Tabs
-    @import 'comps/bubbles'; // Clickable Summary Bubbles  
-    
-    header.window-header { @import 'window/header'; }
-    
-    section.window-content {
-      padding: 0px; 
-      background: transparent; 
-      pointer-events: none;
-      overflow: visible;
-      position: relative;
-      z-index: 1;
-      max-height: 100%;
-    
-      form.editable { pointer-events: all; }
-    }
-    div.window-resizable-handle { display: none; }
-    
-    /* #region ACTOR SHEETS */
-    /* #region MAJOR ACTOR SHEETS */
-    &.actor.major {
+        /* #region ACTOR SHEETS */
+        &.actor {
+            @import 'sheets/actor/actorThemes';      
+            @import 'sheets/actor/actorLayout';
+            @import 'sheets/actor/actorFormat';
 
-      header.window-header { // Adjustment to make room for radial menu
-        width: 480px;
-        margin-left: 140px;
-      }
+            /* #region MAJOR ACTOR SHEETS */
+            &.major {
+                form.editable.main {
+                    @import 'sheets/actor/major/majorActor';
 
-      .main {
-        @import 'scionActor/mainActor';        
-
-        .sheet-body {
-          .tab .chargen-body { @import "scionActor/chargen/actor-chargen"; }
-          .tab .front-body { @import "scionActor/front/actor-front"; }
-
-          /* #region Owned Item Partials */
-          .path-block { @import "scionActor/ownedItems/path-block"; }
-          /* #endregion */
+                    section.sheet-body {
+                        section.chargen-body { @import "sheets/actor/major/majorActor-chargen"; }
+                        section.front-body { @import "sheets/actor/major/majorActor-front"; }
+                    }
+                }
+            }
+            /* #endregion */
         }
-      }
-    }
-    /* #endregion */
-    /* #endregion */ 
+        /* #endregion */ 
 
-    /* #region ITEM SHEETS */
-    &.item {
-      .main { @import 'scionItem/mainItem'; }
-      &.path .main { @import 'scionItem/pathItem'; }
-      &.condition .main { @import 'scionItem/conditionItem'; }
+        /* #region ITEM SHEETS */
+        &.item {
+            @import 'sheets/item/itemLayout';
+            @import 'sheets/item/itemFormat';
+
+            &.path {
+                form.editable.main { @import 'sheets/item/types/pathItem'; }
+            }
+            &.condition {
+                form.editable.main { @import 'sheets/item/types/conditionItem'; }
+            }
+        }
+        /* #endregion */ 
     }
     /* #endregion */ 
-  }
-  /* #endregion */ 
 }

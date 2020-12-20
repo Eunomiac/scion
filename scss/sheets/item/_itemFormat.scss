@@ -1,0 +1,111 @@
+& {   
+    height: 100%;
+    width: 100%;
+    padding: 20px 20px 60px 20px;
+    background: {
+        image: var(--bgItemSheet);
+        size: 100% 100%;
+        position: center;
+        repeat: no-repeat;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: {
+            image: var(--bgItemOverlay);
+            size: 100% 100%;
+            position: center;
+            repeat: no-repeat;
+        }
+        z-index: 1;    
+    }
+    opacity: 1;
+    filter: drop-shadow(50px 50px 20px black);
+    row-gap: 5px;
+    box-sizing: border-box;
+
+    h1, .h1, h2, .h2 { 
+        width: 103%;
+        margin: 5px 0;
+        margin-left: -2%;
+
+    }
+    h1, .h1 { 
+        border: none;
+    }
+    h2, .h2 { 
+        color: black;
+        background: var(--whiteFade50);
+        border: {
+            bottom: 2px solid black;
+            top: 2px solid white;
+        }
+        box-sizing: content-box;
+        @include embossed-text(1px, 0px, var(--colorHighlight), var(--colorShadow));
+    }    
+    .popout {            
+        &#skillList {
+            width: 150px;
+            height: 480px;
+            left: 94%;
+            top: 0;
+
+            border: 10px outset var(--greyUp1);
+            background: {
+                image: url("../images/textures/stoneGrey.jpg");
+            }
+            box-sizing: content-box;
+            border-radius: 40px;
+
+            filter: drop-shadow(0px 0px 6px black);
+            > div { padding: 15px; }
+        }        
+    }
+    .bubble.condition { 
+        @include bubble(3, 75px, 4px);
+        justify-content: start;
+        margin: 4px 0;
+        .bubbleWrap {
+            height: 100%;
+    
+            .bubbleTitle {
+                height: 25%;
+                margin: 0;
+                padding: 0;
+                flex: 0 0 auto;
+                color: black;
+                font: {
+                    family: "Oswald";
+                    size: 12px;
+                    weight: normal;
+                }
+                line-height: 14px;
+                text: {
+                    transform: uppercase;
+                }
+            }
+            .bubbleBody { 
+                height: 75%;
+                margin: 0;
+                padding: 0;
+                flex: 0 0 auto;
+                color: black;
+                font: {
+                    family: "Overlock SC";
+                    size: 10px;
+                    weight: normal;
+                }
+                line-height: 10px;
+            }
+        }
+    }
+
+    .bubble.connnection.group,
+    .bubble.connection.access { @include bubble(5, 40px); }
+    .bubble.connection.contact { @include bubble(6, 40px); }
+}

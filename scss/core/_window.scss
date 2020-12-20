@@ -1,0 +1,192 @@
+& {  
+    $defaultPadding: 5px;
+
+    /* #region Sandbox-Level Overrides */
+    #logo { display: none; }
+    #navigation { 
+        left: 0px;
+        top: 0px;
+    
+        #nav-toggle { height: 20px; }
+        .nav-item {
+            margin: 0 4px 0 0;
+            line-height: 1.4rem;
+        }
+        #scene-list li {
+            height: 20px;
+            .scene-players { display: none; }
+        }
+    }
+    #controls {
+        top: 30px;
+        left: 0;
+        padding: 0;
+    
+        .scene-control {
+            height: 20px;
+            width: 25px;
+            font-size: 20px;
+            line-height: normal;
+    
+            &[title="Basic Controls"] { 
+                li[title="Measure Distance"] { display: none; } 
+            }
+    
+            &[title="Measurement Controls"] { display: none; }
+    
+            &[title="Tile Controls"] {
+                li[title=""] { display: none; }
+            }
+    
+            &[title="Drawing Tools"] {
+                li[title="Draw Rectangle"] { display: none; }
+                li[title="Draw Ellipse"] { display: none; }
+                li[title="Draw Polygon"] { display: none; }
+                li[title="Draw Freehand"] { display: none; }
+                li[title="Clear Drawings"] { display: none; }
+            }
+    
+            &[title="Wall Controls"] { display: none; }
+    
+            &[title="Lighting Controls"] {
+                li[title="Reset Fog of War"] { display: none; }
+                li[title="Clear Lights"] { display: none; }
+            }
+    
+            &[title="Ambient Sound Controls"] {
+                li[title="Clear Sounds"] { display: none; }
+            }
+    
+            &[title="Journal Notes"] {
+                li[title="Clear Notes"] { display: none; }
+            }    
+    
+            .control-tools {
+                height: 25px;
+                top: -25px;
+                left: 35px;
+                position: relative;
+                margin: 0 0 -25px;
+
+                .control-tool {
+                    display: inline-block;
+                    height: 25px;
+                    font-size: 20px;
+                    line-height: normal;
+                    margin: 0 3px;
+                    i { width: 25px; }
+                }
+            }
+    
+            &.active .control-tools { display: flex; }
+        }
+    }
+    #sidebar {
+        $scaleFactor: 0.75;
+        $chatControlShift: -55px;
+    
+        transform: scale($scaleFactor);
+        transform-origin: 100% 0%;
+        height: calc(99vh / #{$scaleFactor});
+        max-height: calc(99vh / #{$scaleFactor});
+    
+        #chat-log { max-height: calc(100vh / #{$scaleFactor}); }
+    
+        #chat-controls {
+            width: calc(100% * #{$scaleFactor});
+            flex: 0 0 calc(28px / #{$scaleFactor});
+            top: $chatControlShift;
+            position: relative;
+            transform: scale(calc(1/#{$scaleFactor}));
+            transform-origin: 0% 100%;
+        }
+
+        #chat-form {
+            width: calc(100% * #{$scaleFactor});
+            flex: 0.1 0 calc(100px * #{$scaleFactor});
+            transform: scale(calc(1 / #{$scaleFactor}));
+            transform-origin: 0% 100%;
+        }
+    }
+    /* #endregion */
+
+    /* #region Sheet Default Style Overrides */
+    div.sheet.scion {
+        pointer-events: none;
+        border: none;
+        box-shadow: none;
+        background: none;
+        margin: 0;
+      
+        header.window-header {          
+            height: 40px;
+            width: 100%;
+            margin: 0 0 -40px 0;
+            display: block;
+            flex: none;
+            position: relative;
+            z-index: 2;
+            overflow: visible;
+            border: none;
+            pointer-events: none;
+
+            h4.window-title { display: none; }
+
+            a.header-button {
+                display: none;
+
+                &.close {
+                    height: 40px;
+                    width: 40px;
+                    position: absolute;
+                    top: -20px;
+                    right: 20px;
+                    display: block;
+                    pointer-events: all;
+                    font-size: var(--fontSizeBody);
+                    color: white;
+                    line-height: 50px;
+
+                    i { display: none; }
+                }
+            }
+
+            &::before {
+                content: "";
+                height: 100%;
+                width: 100%;
+
+                display: block;
+                position: relative;           
+
+                cursor: move;
+                pointer-events: all;
+
+                @if $isTestingLayout {
+                    background-color: rgba(0, 255, 0, 0.5);
+                }
+            }
+        }
+      
+        section.window-content {
+            padding: 0px; 
+            background: transparent; 
+            pointer-events: none;
+            overflow: visible;
+            position: relative;
+            z-index: 1;
+            max-height: 100%;
+      
+            form.main { 
+                pointer-events: all;
+                section .tab {
+                    width: 100%;
+                    &:not(.active) { display: none !important; }
+                }           
+            }
+        }
+        
+        div.window-resizable-handle { display: none; }
+    }
+    /* #endregion */
+}      

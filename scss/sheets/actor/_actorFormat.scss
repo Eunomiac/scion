@@ -1,0 +1,69 @@
+/* #region Header Styles */
+.title {
+    width: calc(100% / var(--fontScaleTitle));
+    max-height: var(--maxHeightTitle);
+    padding: var(--paddingTitle);
+    color: var(--colorTitle);
+    background: var(--bgTitle);
+    font: {
+        family: var(--fontFamilyTitle);
+        style: var(--fontStyleTitle);
+        variant: var(--fontVariantTitle);
+        weight: var(--fontWeightTitle);
+        size: var(--fontSizeTitle);
+    }
+    line-height: var(--lineHeightTitle);
+    text: {
+        transform: var(--textTransformTitle);
+        shadow: var(--textShadowTitle);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleTitle));
+    transform-origin: 0% 0%;
+    border: none;
+}
+.surTitle {
+    width: calc(100% / var(--fontScaleH2));
+    padding: var(--paddingH2);
+    color: var(--colorH2);
+    background: var;
+    font: {
+        family: var(--fontFamilyH2);
+        style: var(--fontStyleH2);
+        variant: var(--fontVariantH2);
+        weight: var(--fontWeightH2);
+        size: var(--fontSizeH2);
+    }
+    line-height: var(--lineHeightH2);
+    text: {
+        transform: var(--textTransformH2);
+        shadow: var(--textShadowH2);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleH2));
+    transform-origin: 0% 0%;
+    border: none;
+}
+.subTitle {    
+    width: calc(100% / var(--fontScaleH3));
+    padding: var(--paddingH3);
+    color: var(--colorH3);
+    background: var(--bgH3);
+    font: {
+        family: var(--fontFamilyH3);
+        style: var(--fontStyleH3);
+        variant: var(--fontVariantH3);
+        weight: var(--fontWeightH3);
+        size: var(--fontSizeH3);
+    }
+    line-height: var(--lineHeightH3);
+    text: {
+        transform: var(--textTransformH3);
+        shadow: var(--textShadowH3);
+        align: center;
+    }
+    transform: scaleX(var(--fontScaleH3));
+    transform-origin: 0% 0%;
+    border: none;
+}
+/* #endregion */ 

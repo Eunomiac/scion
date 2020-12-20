@@ -1,0 +1,223 @@
+
+
+/* General-Purpose Mixins */
+@mixin element-invisible {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+@mixin placeholderText {
+    color: var(--colorPlaceholder);
+    font: {
+        family: var(--fontFamilyPlaceholder);
+        size: var(--fontSizePlaceholder);
+    style: var(--fontStylePlaceholder);
+        variant: var(--fontVariantPlaceholder);
+        weight: var(--fontWeightPlaceholder);
+    }
+    line-height: var(--lineHeightPlaceholder);
+    text: {
+        transform: var(--textTransformPlaceholder);
+        indent: var(--textIndentPlaceholder);
+        shadow: var(--textShadowPlaceholder);
+    }
+}
+@mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {
+    position: relative;
+    width:  $outer-circle-size;
+    height: $outer-circle-size;
+    top: -($outer-circle-size - $inner-circle-size)/2;
+    left: -($outer-circle-size - $inner-circle-size)/2;
+    padding: 0;
+    border-radius: 50%; 
+    list-style: none;       
+
+    > * {
+        display: block;
+        position: absolute;
+        top:  50%; 
+        left: 50%;
+        width:  $item-size;
+        height: $item-size;
+        margin: -($item-size / 2);
+
+        $angle: (360 / $item-count);
+        $rot: $initial-rotation;
+
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{$i}) {
+                transform: 
+                    rotate($rot * 1deg) 
+                    translate($outer-circle-size / 2) 
+                    rotate($rot * -1deg);
+            }
+
+            $rot: $rot + $angle;
+        }
+    }
+}
+@mixin text-shadow($shadows: (3 0 0 0 $c-black), $propertyName: text-shadow) {
+    @if (length(nth($shadows, 1)) == 1) {
+        $shadows: join([$shadows], (), $separator: comma);
+    }
+    $fullShadow: ();
+    @each $shadow in $shadows {
+        $numRepeats: 1;
+        @if (length($shadow) == 5) {
+            $numRepeats: nth($shadow, 1);
+            $shadow: sliceList($shadow, 2);
+        }
+        @if (length($shadow) > 0) {
+            @for $i from 1 through $numRepeats {
+                $fullShadow: append($fullShadow, $shadow, $separator: comma);
+            }
+        }
+    }
+    #{$propertyName}: $fullShadow;
+}
+@mixin embossed-text($distance: 1px, $blur: 0px, $colorBright: var(--greyFade10), $colorDark: var(--greyFade0), $propertyName: text-shadow) {
+    $shadowBright: #{$distance * -1} #{$distance * -1} #{$blur} #{$colorBright};
+    $shadowDark: #{$distance} #{$distance} #{$blur} #{$colorDark};
+    #{$propertyName}: join(#{$shadowBright}, #{$shadowDark}, $separator: comma);
+}
+@mixin box-shadow($distance: 0px, $size: 5px, $color: $c-black, $isInset: false, $repeats: 3) {
+    $shadowPart: $distance $distance $size $color;
+    @if $isInset { $shadowPart: inset $shadowPart; }
+    $shadowFull: ();
+    @for $i from 1 through $repeats {
+        $shadowFull: append($shadowFull, $shadowPart, $separator: comma); 
+    }
+    box-shadow: $shadowFull;
+}
+@mixin bg-shade($color: $c-black) {
+    background-color: scale-color($color, $alpha: -80%);
+}
+@mixin bg-stoneTablet() {
+    background: {
+        image: var(--bgItemSheet);
+        size: 100% 100%;
+        position: center;
+        repeat: no-repeat;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: {
+            image: var(--bgItemOverlay);
+            size: 100% 100%;
+            position: center;
+            repeat: no-repeat;
+        }      
+    }
+}
+@mixin bubble($bubbleSize: 6, $bubbleHeight: 24px, $bubbleMargin: 4px, $isShowingTestBG: false) {
+    $sizeRatio: $bubbleHeight / 100px; // Raw Image Height = 100px.
+    $paddingLookup: (
+       2: 12px,
+       3: 12px,
+       4: 14px,
+       5: 14px,
+       6: 16px,
+       8: 16px,
+       10: 16px
+    );
+    $indentLookup: (
+       2: 112px,
+       3: 212px,
+       4: 292px,
+       5: 392px,
+       6: 446px,
+       8: 646px,
+       10: 846px
+    );
+ 
+    $bubbleWidth: $bubbleSize * (100px * $sizeRatio);
+    $vertPad: 12px * $sizeRatio;
+    $horizPad: map-get($paddingLookup, $bubbleSize) * $sizeRatio;
+    $vertMarginTitle: $bubbleHeight * 0.05;
+ 
+    $innerHeight: $bubbleHeight - (2 * $vertPad);
+    $innerWidth: $bubbleWidth - (2 * $horizPad);
+ 
+    $middleWidth: map-get($indentLookup, $bubbleSize) * $sizeRatio;
+    $topIndent: ($innerWidth - $middleWidth) / 2;
+    $bgImage: url("../images/bubbles/Bubble1x#{$bubbleSize}.png");
+    
+    @if ($isShowingTestBG) {
+       $bgImage: url("../images/bubbles/TestBubble1x#{$bubbleSize}.png");
+    }
+ 
+    height: $innerHeight;
+    width: $innerWidth;
+    padding: $vertPad $horizPad;
+    margin: $bubbleMargin;
+ 
+    background: {
+       image: $bgImage;
+       size: 100% 100%;
+       repeat: no-repeat;
+       origin: border-box;
+    }
+    text-align: center;
+    box-sizing: content-box;
+    filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5)); 
+     
+    .bubbleWrap::before {
+       content: "";
+       width: $topIndent;
+       height: $innerHeight;
+       float: left;
+       shape-outside: polygon(
+          0% 100%,
+          0% 0%,
+          100% 0%,
+          0% 50%,
+          100% 100%
+          );
+    }    
+      
+      &::before {
+        content: "";
+        width: $topIndent;
+        height: $innerHeight;
+        float: right;
+        shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
+      }
+     
+     span, p {
+        display: block;
+        text: {
+           align: center;
+           align-last: center;
+        }
+        @if ($isShowingTestBG) {
+           background: rgba(0, 255, 255, 0.5);
+           box-shadow: inset 0 0 1px purple, inset 0 0 1px purple, inset 0 0 1px purple;
+        }
+     }
+     .bubbleTitle {
+        display: block;
+        grid-area: title;
+        @if ($isShowingTestBG) {
+           background: rgba(255, 145, 0, 0.5);
+           box-shadow: inset 0 0 1px green, inset 0 0 1px green, inset 0 0 1px green;
+        }
+        text: {
+           align: center;
+           align-last: center;
+        }
+     }
+  }
+/* #endregion */
