@@ -153,15 +153,6 @@ export const EditableDivs = (superClass) => class extends superClass {
                         entityVal[U.Int(dataSet.fieldindex)] = elementVal;
                     else
                         entityVal = elementVal;
-                    U.LOG({
-                        "this": this,
-                        "...entity": this.entity,
-                        "dataSet.field": dataSet.field,
-                        "entityVal-data": getProperty(this.entity.data, dataSet.field),
-                        "entityVal-root": getProperty(this.entity, dataSet.field),
-                        entityVal,
-                        elementVal: elementVal
-                    }, `Setting ${dataSet.field} of ${this.entity.name} to '${entityVal}'`, "Editable Divs", {groupStyle: "l3"});
                     this.entity.update({[dataSet.field]: entityVal});
                     if (elementVal && element.classList.contains("quote"))
                         element.innerHTML = _.escape(`"${elementVal}"`);
@@ -199,14 +190,6 @@ export const EditableDivs = (superClass) => class extends superClass {
                         }, "Invalid Field");
                     } else {
                         entityVal = entityVal || "";
-                        U.LOG({
-                            "this": this,
-                            "...entity": this.entity,
-                            "dataSet.field": dataSet.field,
-                            "entityVal-data": getProperty(this.entity.data, dataSet.field),
-                            "entityVal-root": getProperty(this.entity, dataSet.field),
-                            entityVal
-                        }, `Initializing ${dataSet.field} of ${this.entity.name} to '${entityVal}'`, "Editable Divs", {groupStyle: "l3"});
                         element.innerHTML = (entityVal && element.classList.contains("quote") ? _.escape(`"${entityVal}"`) : entityVal).trim();
                     }
                 }
@@ -224,87 +207,10 @@ export const EditableDivs = (superClass) => class extends superClass {
     }
 };
 /* jshint ignore:start */
-export const RichEdit = (superClass) => class extends superClass {
-    get _richEditDefaults() {
-        return {
-            menubar: false,
-            statusbar: false,
-            inline: true,
-            toolbar: false,
-
-            selector: "[class$=\"Editor\"]",
-            theme: "silver",
-
-            height: "100%",
-            width: "100%",
-
-            plugins: [
-                "autoresize",
-                "bbcode",
-                "charmap",
-                "emoticons",
-                "lists",
-                "advlist",
-                "paste",
-                "quickbars",
-                "template",
-                "help"
-            ],
-
-            placeholder: "",
-            quickbars_insert_toolbar: false,
-            quickbars_selection_toolbar: "bold italic underline h1 h2 h3 | fontselect fontsizeselect forecolor formatselect removeformat",
-            contextmenu: "undo redo | help",
-            paste_block_drop: false,
-            paste_data_images: false,
-            paste_as_text: true
-        };
-    }
-    get richEditDefaults() {
-        return mergeObject(
-            super.richEditDefaults ?? {},
-            this._richEditDefaults,
-            {insertKeys: true, insertValues: true, overwrite: true, recursive: true}
-        );
-    }
-    createRichEditor(configOptions = {}, initialHTML = "", isRecreating = false) {
-        if (!("selector" in configOptions))
-            return THROW({"ERROR": "You must provide a selector in configOptions.", configOptions});
-        this.richEditors = this.richEditors ?? {};
-        if (isRecreating || !this.richEditors[`_${configOptions.selector}`]) {
-            const richEditDefaults = duplicate(this.richEditDefaults);
-            if ("remPlugins" in configOptions)
-                richEditDefaults.plugins = richEditDefaults.filter((plugin) => !configOptions.remPlugins.includes(plugin));
-            const finalConfigOptions = mergeObject(
-                mergeObject(
-                    richEditDefaults,
-                    configOptions,
-                    {insertKeys: true, insertValues: true, overwrite: true, recursive: true}
-                ),
-                {"-=remPlugins": null}
-            );
-            finalConfigOptions.max_height = finalConfigOptions.max_height ?? finalConfigOptions.height;
-            finalConfigOptions.min_height = finalConfigOptions.min_height ?? finalConfigOptions.height;
-            finalConfigOptions.max_width = finalConfigOptions.max_width ?? finalConfigOptions.width;
-            finalConfigOptions.min_width = finalConfigOptions.min_width ?? finalConfigOptions.width;
-
-            (async () => {
-                this.richEditors[`_${configOptions.selector}`] = await TextEditor.create(finalConfigOptions, initialHTML);
-                U.LOG({
-                    richEditDefaults,
-                    configOptions,
-                    finalConfigOptions,
-                    richEditor: this.richEditors[`_${configOptions.selector}`]
-                }, "Rich Editor Creation", "createRichEditor()", {groupStyle: "l2"});
-            })();
-        } else {
-            U.LOG({
-                richEditor: this.richEditors[`_${configOptions.selector}`]
-            }, "Rich Editor Retrieved", "createRichEditor()", {groupStyle: "l2"});
-            // this.richEditors[`_${configOptions.selector}`].render();
-            this.richEditors[`_${configOptions.selector}`].editorManager.execCommand("mceAddEditor", false, this.richEditors[`_${configOptions.selector}`].id);
-        }
-        return this.richEditors[`_${configOptions.selector}`];
+export const CloseButton = (superClass) => class extends superClass {
+    activateListeners(html) {
+        super.activateListeners(html);
+        html.find("div.closeButton").click(() => this.close());
     }
 };
 // #endregion

@@ -1,5 +1,5 @@
 
-<div data-itemID="{{id}}">
+<div class="path-block" data-itemID="{{id}}">
     <h2 class="clickable openPopout {{~#unless data.data.title}} alignCenter{{/unless}}" data-itemID="{{id}}">
         {{~#if data.data.title~}}
             {{name}}: &quot;{{data.data.title}}&quot;
@@ -7,9 +7,8 @@
             {{loc "scion.heading.chargen.pathTitlePlaceholder" "pathType" (concat "scion.path." data.data.type)}}
         {{~/if~}}
     </h2>
-    <div class="path-block flex-row-max-start">
-        <div class="path-subBlock-skills flex-col-stretch alignCenter ">
-            {{!-- <h3 class="alignCenter">{{loc "scion.path.skills"}}</h3> --}}
+    <div class="pathContainer flex-row-start width100">
+        <div class="path-subBlock-skills flex-col-stretch alignCenter">
             {{#if data.data.skills.[0]}}
                 <span class="skill noFlex">{{loc (concat "scion.skill." data.data.skills.[0])}}</span>
             {{else}}
@@ -26,12 +25,19 @@
                 <span class="skill empty noFlex">&nbsp;</span>
             {{/if}}
         </div>
-        <div class="path-subBlock-conditions flex-col alignCenter ">
-            {{!-- <h3 class="alignCenter">{{loc "scion.path.condition"}}</h3> --}}
-            <div class="inline text alignLeft">
-                {{#if data.data.condition.title}}
-                <span class="inline strong text">{{data.data.condition.title}}:</span>{{data.data.condition.description}}
-                {{/if}}
+        <div class="path-subBlock-details flex-col height100 width100 alignLeft">
+            <div class="text connectionDescription">
+                {{#if data.data.connectionDescription}}<span class="strong">{{loc "scion.path.connections"}}:</span> {{data.data.connectionDescription}}{{/if}}
+            </div>
+            <div class="conditionContainer alignRight width100">
+                {{#each (lookup actor.pathConditions data.data.type) as |condition type|}}
+                    {{~#if condition.iData.title~}}
+                    <span class="width10 alignCenter strong">►</span>
+                    <span class="conditionSummary outsetFrame width40 alignCenter strong">
+                            {{condition.iData.title}}
+                    </span>
+                    {{/if}}
+                {{/each}}
             </div>
         </div>
     </div>

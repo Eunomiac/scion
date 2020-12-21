@@ -1,4 +1,5 @@
-<form class="{{cssClass}} flex-col-max main" autocomplete="off">
+<form class="{{cssClass}} flex-col height100 main" autocomplete="off">
+    <div class="closeButton">❌</div>
     <div class="tooltip">{{> (blocks.tooltips.path.template) tooltip}}</div>
     {{!-- Sheet Header --}}
     <section class="header width100">
@@ -6,8 +7,9 @@
         <div id="pathTitle" class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{loc "scion.heading.path.titlePrompt"}}"></div>
     </section>
         
-    <section class="sheet-body flex-col spaceBetween">
-        <div id="pathSkills" class="pathSkills skillDrop flex-row-max-start" data-htmlID="skillList">
+    <section class="sheet-body flex-col-spaceBetween width100">
+        <h2 class="alignCenter">{{loc "scion.heading.path.pathSkills"}}</h2>
+        <div id="pathSkills" class="pathSkills skillDrop flex-row-start width100" data-htmlID="skillList">
             {{#each data.skills as |skill|}}
             {{#if skill}}
             <span class="skill noFlex
@@ -17,11 +19,11 @@
         </div>
         {{> (blocks.skillList.template) }}
         <div class="pathConnections width100 alignCenter">
-            <h2>{{loc "scion.path.connections"}}</h2>
+            <h2>{{loc "scion.heading.path.pathConnections"}}</h2>
             <div id="connectionDescription" class="connectionDescription insetFrame contentEditable alignLeft" data-field="data.connectionDescription" data-placeholder="{{loc "scion.heading.path.pathConnectionsPrompt" "path" (concat "scion.path." data.type "Path")}}">{{data.connectionDescription}}</div>
         </div>
-        <div class="pathCondition flex-full alignCenter">
-            <h2>{{loc "scion.path.conditions"}}</h2>
+        <h2 class="alignCenter">{{loc "scion.heading.path.pathConditions"}}</h2>
+        <div class="pathCondition flex-row alignCenter width100">
             {{#each conditions as |condition type|}}
                 {{#with ../blocks as | blocks |}}
                 {{> (blocks.embeds.pathCondition.template) condition}}

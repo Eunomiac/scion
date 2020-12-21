@@ -102,8 +102,8 @@
                 "longTermDeedPlaceholder": "Something you'll accomplish over a story.",
                 "stepTwoTab": "Paths",
                 "stepTwo": "Step Two: Paths",
-                "stepTwoA": "What Paths Do You Walk?",
                 "pathTitlePlaceholder": "Click here to create your {pathType} Path!",
+                "stepTwoA": "Drag Your Paths to Prioritize Your Starting Skills",
                 "stepThreeTab": "Traits",
                 "stepThree": "Step Three: Skills & Attributes",
                 "stepFourTab": "Callings",
@@ -117,10 +117,11 @@
             },
             "path": {
                 "titlePrompt": "Give your Path a title.",
+                "pathDescriptionPrompt": "Expound on your {path}, adding any additional details you wish to the summarizing title.",
                 "pathSkills": "Path Skills",
                 "pathConnections": "Path Connections",
-                "pathConnectionsPrompt": "Briefly describe the potential Connections you've made by walking your {path}: the people (Contact & Group Connections), places and things (Access Connections) you might call upon by invoking your {path} in the story to come.",
-                "pathCondition": "Path Conditions",
+                "pathConnectionsPrompt": "Briefly describe the potential Connections you've made by walking your {path}: the people (Contacts & Groups), places and things (Access Connections) you might call upon by Invoking your {path}.",
+                "pathConditions": "Path Conditions",
                 "conditionPrompt": "Click to Create!"
             },
             "condition": {

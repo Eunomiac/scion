@@ -2057,44 +2057,31 @@ export const signatureChars = {
                 secondary: "mental",
                 tertiary: "physical"
             }
-        },
-        skills: {
+        }
+    },
+    "Rhys Callaghan II": {
+        genesis: "born",
+        concept: "Lead Singer and All Around Good Lad",
+        pantheon: "tuathaDeDanann",
+        patron: "aengus",
+        divineTitle: "\"Bright Eyes\"",
+        attributes: {
+            favoredApproach: "resilience",
             list: {
-                athletics: {value: 4, purchased: 3, specialty: "Acrobatics"},
-                culture: {value: 5, purchased: 3,  specialty: "Music"},
-                closeCombat: {value: 1, purchased: 0},
-                empathy: {value: 3, purchased: 1, specialty: "Motives/Desires"},
-                subterfuge: {value: 3, purchased: 1, specialty: "Insistence"},
-                leadership: {value: 1, purchased: 0},
-                persuasion: {value: 5, purchased: 3, specialty: "Individuals"},
-                survival: {value: 1, purchased: 0},
-                integrity: {value: 1, purchased: 0}
-            }
-        },
-        pathData: {
-            origin: {
-                title: "Carefree Wanderer with Luck on His Side",
-                skills: ["empathy"],
-                condition: {
-                    title: "Interesting Times",
-                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
-                }
+                presence: {value: 5},
+                manipulation: {value: 2},
+                composure: {value: 4},
+                intellect: {value: 2},
+                cunning: {value: 3},
+                resolve: {value: 4},
+                might: {value: 2},
+                dexterity: {value: 3},
+                stamina: {value: 4}
             },
-            role: {
-                title: "No Heaven Frontman",
-                skills: [],
-                condition: {
-                    title: "Tone Deaf",
-                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
-                }
-            },
-            pantheon: {
-                title: "Scion of Aengus, Step-Scion of the Morrigan",
-                skills: ["closeCombat"],
-                condition: {
-                    title: "Murder of Crows",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
-                }
+            priorities: {
+                primary: "social",
+                secondary: "mental",
+                tertiary: "physical"
             }
         }
     },
@@ -2121,45 +2108,6 @@ export const signatureChars = {
                 secondary: "physical",
                 tertiary: "social"
             }
-        },
-        skills: {
-            list: {
-                academics: {value: 2},
-                athletics: {value: 2},
-                closeCombat: {value: 4, specialty: "Street Fighting"},
-                firearms: {value: 4, specialty: "Heavy Pistols"},
-                integrity: {value: 3, specialty: "Meditations"},
-                leadership: {value: 4, specialty: "Leading the Team"},
-                occult: {value: 1},
-                subterfuge: {value: 1},
-                survival: {value: 2}
-            }
-        },
-        pathData: {
-            origin: {
-                title: "Carefree Wanderer with Luck on His Side",
-                skills: ["empathy", "persuasion", "subterfuge"],
-                condition: {
-                    title: "Interesting Times",
-                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
-                }
-            },
-            role: {
-                title: "No Heaven Frontman",
-                skills: ["athletics", "culture", "persuasion"],
-                condition: {
-                    title: "Tone Deaf",
-                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
-                }
-            },
-            pantheon: {
-                title: "Scion of Aengus, Step-Scion of the Morrigan",
-                skills: ["closeCombat", "culture", "subterfuge"],
-                condition: {
-                    title: "Murder of Crows",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
-                }
-            }
         }
     },
     "Brigitte De La Croix": {
@@ -2184,46 +2132,6 @@ export const signatureChars = {
                 primary: "mental",
                 secondary: "social",
                 tertiary: "physical"
-            }
-        },
-        skills: {
-            list: {
-                academics: {value: 2},
-                athletics: {value: 2},
-                culture: {value: 3, specialty: "Death and Mourning"},
-                integrity: {value: 3, specialty: "Defending Tradition"},
-                leadership: {value: 2},
-                medicine: {value: 2},
-                occult: {value: 5, specialty: "Ghosts"},
-                persuasion: {value: 2},
-                science: {value: 2},
-                subterfuge: {value: 1}
-            }
-        },
-        pathData: {
-            origin: {
-                title: "Carefree Wanderer with Luck on His Side",
-                skills: ["empathy", "persuasion", "subterfuge"],
-                condition: {
-                    title: "Interesting Times",
-                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
-                }
-            },
-            role: {
-                title: "No Heaven Frontman",
-                skills: ["athletics", "culture", "persuasion"],
-                condition: {
-                    title: "Tone Deaf",
-                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
-                }
-            },
-            pantheon: {
-                title: "Scion of Aengus, Step-Scion of the Morrigan",
-                skills: ["closeCombat", "culture", "subterfuge"],
-                condition: {
-                    title: "Murder of Crows",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
-                }
             }
         }
     },
@@ -2250,44 +2158,6 @@ export const signatureChars = {
                 secondary: "physical",
                 tertiary: "mental"
             }
-        },
-        skills: {
-            list: {
-                athletics: {value: 2},
-                culture: {value: 2},
-                empathy: {value: 5, specialty: "Getting to Know You"},
-                firearms: {value: 3, specialty: "Small Arms"},
-                persuasion: {value: 5, specialty: "Getting My Way"},
-                pilot: {value: 2},
-                subterfuge: {value: 2},
-                survival: {value: 2}
-            }
-        },
-        pathData: {
-            origin: {
-                title: "Carefree Wanderer with Luck on His Side",
-                skills: ["empathy", "persuasion", "subterfuge"],
-                condition: {
-                    title: "Interesting Times",
-                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
-                }
-            },
-            role: {
-                title: "No Heaven Frontman",
-                skills: ["athletics", "culture", "persuasion"],
-                condition: {
-                    title: "Tone Deaf",
-                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
-                }
-            },
-            pantheon: {
-                title: "Scion of Aengus, Step-Scion of the Morrigan",
-                skills: ["closeCombat", "culture", "subterfuge"],
-                condition: {
-                    title: "Murder of Crows",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
-                }
-            }
         }
     },
     "Erik Donner": {
@@ -2312,44 +2182,6 @@ export const signatureChars = {
                 primary: "physical",
                 secondary: "social",
                 tertiary: "mental"
-            }
-        },
-        skills: {
-            list: {
-                athletics: {value: 4, specialty: "Feats of Strength"},
-                closeCombat: {value: 4, specialty: "Bareknuckle Boxing"},
-                firearms: {value: 4, specialty: "Pistols"},
-                integrity: {value: 2},
-                leadership: {value: 2},
-                occult: {value: 1},
-                pilot: {value: 4, specialty: "Cars"},
-                survival: {value: 3, specialty: "Camping"}
-            }
-        },
-        pathData: {
-            origin: {
-                title: "Carefree Wanderer with Luck on His Side",
-                skills: ["empathy", "persuasion", "subterfuge"],
-                condition: {
-                    title: "Interesting Times",
-                    description: "2's on any d10s count as 1’s when determining botches.  Resolved when Rhys suffers the effect of a botch."
-                }
-            },
-            role: {
-                title: "No Heaven Frontman",
-                skills: ["athletics", "culture", "persuasion"],
-                condition: {
-                    title: "Tone Deaf",
-                    description: "-2 penalty to all Culture (Music) rolls.  Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
-                }
-            },
-            pantheon: {
-                title: "Scion of Aengus, Step-Scion of the Morrigan",
-                skills: ["closeCombat", "culture", "subterfuge"],
-                condition: {
-                    title: "Murder of Crows",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.  Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
-                }
             }
         }
     }

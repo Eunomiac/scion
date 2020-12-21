@@ -1,50 +1,53 @@
-& {    
-    .h2.contentEditable.placeholder {
-        line-height: 24px;
+& {  
+    h2 {
+        background: var(--whiteFade70);
+    }
+    .h2.contentEditable.placeholder { line-height: 24px; }
+    .contentEditable:not(.h2) {
+        --lineHeight: 14px;
+        --padding: 5px;
+        line-height: var(--lineHeight);
+        min-height: none;
+        max-height: none;
+        font-size: 14px;
+        text-indent: 0;
+        padding: var(--padding);
+        margin: 0 10px;
+        border-color: var(--grey) !important;
+        background-color: var(--blackFade75) !important;
+        &.placeholder { font-size: 12px; line-height: 16px; }
+    }
+    .pathDescription .contentEditable { height: calc(var(--lineHeight) * 3 + var(--padding)); margin-bottom: 5px; }
+    .pathSkills {
+        min-height: 28px;
+        span.skill {
+            margin: 2px calc((100% - 3 * 120px) / 6);
+            &.invalid {
+                background: none;
+                border-color: transparent;
+                color: var(--greyDown3);
+                font-style: italic;
+                font-weight: bold;
+                box-shadow: none;
+            }
+            &.pantheon {
+                filter: invert(100%);
+                border: {
+                    style: inset;
+                    color: var(--greyUp3);
+                }
+                @include box-shadow(2px, 5px, var(--greyUp2));
+            }
+        }
+        &#skillList {
+            span.skill { margin: 2px 0; }
+        }
+    }
+    .pathConnections .contentEditable { height: calc(var(--lineHeight) * 3 + var(--padding)); }
+    .pathCondition {
+        padding-left: 10px;
     }
     h3, .h3 {
        @include embossed-text(1px, 0px, var(--colorHighlight), var(--colorShadow));
-    }
-    .sheet-body {
-        .pathSkills {
-            min-height: 28px;
-            span.skill {
-                margin: 2px calc((100% - 3 * 120px) / 6);
-                &.invalid {
-                    background: none;
-                    border-color: transparent;
-                    color: var(--greyDown3);
-                    font-style: italic;
-                    font-weight: bold;
-                    box-shadow: none;
-                }
-                &.pantheon {
-                    filter: invert(100%);
-                    border: {
-                        style: inset;
-                        color: var(--greyUp3);
-                    }
-                    @include box-shadow(2px, 5px, var(--greyUp2));
-                }
-            }
-        }
-        
-       .pathConnections {
-           .contentEditable {
-               height: 70px;
-               max-height: 70px;
-               font-size: 14px;
-               line-height: 18px;
-               text-indent: 0;
-               padding: 5px;
-               margin: 0 10px;
-               border-color: var(--grey);
-               background-color: rgba(0,0,0,0.25);
-           }
-        }
-
-        .pathCondition {
-            padding-left: 10px;
-        }
     }
 }

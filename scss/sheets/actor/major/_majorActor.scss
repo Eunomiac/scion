@@ -23,8 +23,8 @@
         width: $menuOpenSize;
         height: $menuOpenSize;
         position: absolute;
-        left: -35px;
-        top: -40px;
+        left: -65px;
+        top: -65px;
         z-index: 2;
 
         background: {
@@ -85,7 +85,7 @@
                 $item-size: $menuButtonSize,
                 $initial-rotation: 135
             );
-            transform: scale(0.2) rotate(-125deg) translate(0);
+            transform: scale(0.3) rotate(-125deg) translate(0);
             opacity: 0;
             transition: 0.5s;
     

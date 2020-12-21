@@ -7,7 +7,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
         return mergeObject(super.defaultOptions, {
             classes: [...super.defaultOptions.classes, "path"],
             width: 500,
-            height: 470,
+            height: 510,
             tabs: []
         });
     }

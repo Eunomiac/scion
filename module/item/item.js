@@ -17,15 +17,36 @@ export class ScionItem extends Item {
         const data = this.data.data;
         const actorData = this.actor?.data ?? {};
 
-        U.LOG({
-            "this ScionItem": this,
-            "... .data": this.data,
-            "... ... .data": this.iData,
-            " this.actor": this.actor,
-            " ... .data": this.actor.data,
-            " ... ... .data": this.aData
-        }, this.name, "ScionItem: prepareData()", {groupStyle: "l2"});
+        Handlebars.registerHelper("ifCond", function (v1, operator, v2, options) {
+            switch (operator) {
+                case "==":
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case "===":
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case "!=":
+                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                case "!==":
+                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                case "<":
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case "<=":
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case ">":
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case ">=":
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case "&&":
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case "||":
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+        });
+
+
     }
+
 
     getActorItems(itemType) { return this.actor?.items.filter((item) => item.type === itemType) }
 }

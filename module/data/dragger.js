@@ -1,25 +1,49 @@
+import {U} from "../modules.js";
+
 export class Dragger extends Draggable {
-    constructor(app, element, handle, collapsibleElements, {width: collapsedWidth, height: collapsedHeight} = {}) {
+
+    constructor(app, element, handle, collapsibleElements, {width: collapsedWidth, height: collapsedHeight} = {}, delayedCollapsibles = []) {
         super(app, element, handle, false);
         this.collapsibles = collapsibleElements;
-        this.expandedWidth = this.app.position.width;
-        this.expandedHeight = this.app.position.height;
+        this.delayedCollapsibles = delayedCollapsibles;
+        this.appClassName = app.constructor.name;
+        this.expandedWidth = app.constructor.defaultOptions.width;
+        this.expandedHeight = app.constructor.defaultOptions.height;
         this.collapsedWidth = collapsedWidth || this.handle.offsetWidth;
         this.collapsedHeight = collapsedHeight || this.handle.offsetHeight;
+
+        // Hooks.on(`close${this.appClassName}`, () => { setTimeout(() => this.expand(false), 500) });
+        Hooks.on(`render${this.appClassName}`, () => {
+            if (this.isCollapsed && (this.app.position.width !== this.collapsedWidth || this.app.position.height !== this.collapsedHeight))
+                this.app.setPosition({
+                    width: this.collapsedWidth,
+                    height: this.expandedHeight
+                });
+            else if (this.app.position.width !== this.expandedWidth || this.app.position.height !== this.expandedHeight)
+                this.app.setPosition({
+                    width: this.expandedWidth,
+                    height: this.expandedHeight
+                });
+        });
     }
 
-    expand() {
+    expand(isRendering = true) {
         for (const el of this.collapsibles)
             el.classList.remove("collapsed");
         this.app.setPosition({
             width: this.expandedWidth,
             height: this.expandedHeight
         });
-        setTimeout(() => this.app.render(), 100);
+        if (isRendering)
+            setTimeout(() => this.app.render(), 500);
+        setTimeout(() => {
+            for (const el of this.delayedCollapsibles)
+                el.classList.remove("collapsed");
+        }, 2000);
     }
 
     collapse() {
-        for (const el of this.collapsibles)
+        for (const el of [...this.collapsibles, ...this.delayedCollapsibles])
             el.classList.add("collapsed");
         setTimeout(() => this.app.setPosition({
             width: this.collapsedWidth,

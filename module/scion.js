@@ -13,7 +13,7 @@ import {ConditionItemSheet} from "./item/item-condition-sheet.js";
 import "./external/gl-matrix-min.js";
 // #endregion
 
-const createSigChars = async (isDeletingOriginals = false) => {
+const createSigChars = async (isDeletingOriginals = false, isClearing = false) => {
     if (isDeletingOriginals) {
         for (const id of ActorDirectory.collection.keys())
             await game.actors.get(id).delete();
@@ -26,15 +26,17 @@ const createSigChars = async (isDeletingOriginals = false) => {
         if (!charNames.includes(sigName))
             sigChars.add(sigName);
     });
-    sigChars.forEach(async (sigName) => {
+    for (const sigName of sigChars) {
         const actorData = signatureChars[sigName];
-        U.LOG(actorData, `Creating Signature Character: ${sigName}`, "hookReady", {style: "data"});
+        U.LOG(actorData, `Creating Signature Character: ${sigName} ...`, "SIGNATURE CHARACTER CREATION", {style: "data"});
         await Actor.create({
             name: sigName,
             type: "major",
             data: actorData
         });
-    });
+        U.LOG(actorData, `... ${sigName} Created!`, "SIGNATURE CHARACTER CREATION", {style: "data"});
+    }
+    return true;
 };
 // #region Hook: Initialization
 Hooks.once("init", async () => {
@@ -56,9 +58,9 @@ Hooks.once("init", async () => {
         },
         debug: {
             isDebugging: true,
-            isDebuggingDragula: true,
+            isDebuggingDragula: false,
             isFormattingGroup: false,
-            watchList: []
+            watchList: ["Rhys Callaghan", "SIGNATURE CHARACTER CREATION"]
         },
         createSigChars: createSigChars
     };
@@ -105,7 +107,35 @@ Hooks.once("init", async () => {
         },
         add: (...args) => args.slice(0, -1).reduce((tot, x) => x + tot, 0),
         concat: (...args) => args.slice(0, -1).join(""),
-        contains: (arr, val) => arr.includes(val)
+        contains: (arr, val) => arr.includes(val),
+        ifCond: function (v1, operator, v2, options) {
+            /* eslint-disable eqeqeq */
+            switch (operator) {
+                case "==":
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case "===":
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case "!=":
+                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                case "!==":
+                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                case "<":
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case "<=":
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case ">":
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case ">=":
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case "&&":
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case "||":
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+            /* eslint-enable eqeqeq */
+        }
     });
     // #endregion
 });
@@ -122,7 +152,7 @@ Hooks.once("ready", async () => {
         CONFIG.scion.ATTRIBUTES.approaches,
         (v, k) => U.Loc(`scion.game.${k}`)
     );
-    createSigChars();
+    await createSigChars();
     U.LOG({
         CONFIG,
         "game": game,

@@ -1,5 +1,6 @@
 & {
-    grid: "skills paths"  17rem
+    grid: "skills purviews"  7rem
+        "skills paths" 10rem
         "virtues paths" calc(3.25rem + 2 * 3px)
         / 1fr 2fr;
     column-gap: 0.5rem;
@@ -21,6 +22,9 @@
         }
 
     }
+    .purviews {
+        grid-area: purviews;
+    }
     .paths {
         grid-area: paths;
         grid: "heading" 1.5rem
@@ -30,7 +34,18 @@
         .heading { grid-area: heading; }
         .originpath { grid-area: originpath; }
         .rolepath { grid-area: rolepath; }
-        .pantheonpath { grid-area: pantheonpath }                        
+        .pantheonpath { grid-area: pantheonpath }    
+        .pathBubble {
+            @include bubble(10, 30px);
+            font: {
+                family: "Poiret One";
+                weight: bold;
+                size: 14px;
+            }
+            line-height: 14px;
+            text-align: left;
+            text-align-last: left;
+        }                    
     }
     .virtues {
         border-radius: 1rem;

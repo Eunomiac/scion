@@ -3,7 +3,7 @@ import {U, handlebarTemplates, MIX, ItemMixins as MIXINS} from "../modules.js";
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl) {
+export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton) {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {

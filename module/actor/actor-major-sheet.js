@@ -102,9 +102,10 @@ export class MajorActorSheet extends ScionActorSheet {
             const menuRosette = html.find("nav.menuRosette")[0];
             const sheetContainer = document.getElementById(`actor-${this.actor.id}`);
             const sheetElement = html.find("section#characterSheet")[0];
+            const closeButton = html.find("div.closeButton")[0];
 
             // Make Menu Rosette draggable
-            const menuDragger = new Dragger(this, html, menuRosette, [menuRosette, sheetContainer, sheetElement], {height: 100, width: 100});
+            const menuDragger = new Dragger(this, html, menuRosette, [sheetContainer, sheetElement], {height: 100, width: 100}, [menuRosette, closeButton]);
 
             // Update Pantheon Theme Data when Pantheon Changed
             html.find("#pantheonSelect").change((event) => {

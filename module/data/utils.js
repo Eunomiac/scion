@@ -186,7 +186,16 @@ export const KeyMapObj = (obj, keyFunc = (x) => x, valFunc = undefined) => {
     });
     return newObj;
 };
-
+export const Clone = (obj) => {
+    let cloneObj;
+    try {
+        cloneObj = JSON.parse(JSON.stringify(obj));
+    } catch(err) {
+        THROW({obj, err}, "ERROR: U.Clone()");
+        cloneObj = Object.assign({}, obj);
+    }
+    return cloneObj;
+};
 export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
     const newDict = {};
     for (const key of Object.keys(objRef)) {

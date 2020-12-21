@@ -1,13 +1,49 @@
 & {
-    *[class*="subBlock"] {
-        margin: 3px;
+    background: var(--accentUp4Fade50);
+    border-radius: 25px;
+    border: 2px solid var(--accentDown2);
+    box-shadow: 4px 4px 4px var(--accentDown3);
+    margin: 3px 0;
+    overflow: hidden;
 
-        align: { content: start; self: start; }
+    > h2 { text-indent: 12px; }
 
-        > span { 
-            margin: 1px;
-            &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--greyDown2), false, 1); }            
+    .pathContainer { 
+        padding: 0 0 3px 3px;
+        
+        *[class*="subBlock"] {
+            margin: 3px;
+
+            align: { content: start; self: start; }
+
+            &[class*="skills"] {
+
+            }
+
+            &[class*="details"] {
+                min-height: 84px;
+
+                .connectionDescription { margin: 0 0 auto 0 !important; }
+                .conditionContainer {
+                    .conditionSummary {
+                        display: inline-block;
+                        padding: 3px;
+                        margin: 0;
+
+                        &:nth-child(4) {
+                            background-color: var(--accentDown2);
+                            color: white;
+                        }            
+                    }
+                }
+            }
+
+            > span { 
+                margin: 2px;
+                &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--greyDown2), false, 1); }            
+            }
         }
     }
+
 }
 

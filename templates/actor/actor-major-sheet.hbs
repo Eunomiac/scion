@@ -45,6 +45,7 @@
           </div>
         </div>
     </nav>
+    <div class="closeButton">❌</div>
 
     <section id="characterSheet" class="editable major {{data.pantheon}} grid main">
         {{!-- Sheet Header --}}
@@ -56,13 +57,13 @@
             
         <section class="sheet-body grid">
             {{!-- Chargen Tab --}}
-            <section class="tab flex-column" data-group="primary" data-tab="chargen">
+            <section class="tab flex-col" data-group="primary" data-tab="chargen">
                 {{> (blocks.chargen.template) }}
             </section>
             {{!-- Front Tab --}}
             <section class="tab" data-group="primary" data-tab="front">
                 <section class="front-body grid">
-                    <div class="skills flex-col-start">
+                    <div class="skills flex-col">
                         <h1>{{loc "scion.game.skills"}}</h1>
                         {{#if data.skills.unspentDots}}
                             <div class="dotGrabBin dotDropBin flex">
@@ -79,45 +80,6 @@
                                 {{/for}}
                             </div>
                         {{/each}}
-                    </div>
-                        {{!-- {{#each data.attributes.priorities as |arena priority|}}
-                            <div class="attrBlock {{arena}} flex">
-                                {{#if data.attributes.unspentDots.[arena]}}
-                                    <div class="dotGrabBin dotDropBin flex"> 
-                                        {{#for data.attributes.unspentDots.[arena]}}
-                                            <span class="dot unspent" data-dottype="{{arena}}" data-trait="data.attributes.unspentDots.{{arena}}"></span>
-                                        {{/for}}
-                                    </div>
-                                {{/if}}
-                                {{#each (lookup ../config.ATTRIBUTES.arenas arena) as |attribute|}}
-                                    <div class="attrRow dotDropBin dotline labelledDotLine" data-dottype="{{arena}}" data-trait="{{attribute}}">
-                                        <div class="label">{{loc (concat "scion.attribute." attribute)}}</div>
-                                        {{#for 5}}
-                                            <span class="dot click" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
-                                        {{/for}}
-                                    </div>
-                                {{/each}}
-                            </div>
-                        {{/each}} --}}
-                    <div class="paths flex">
-                        <h1>{{loc "scion.game.paths"}}</h1>
-                        <div class="purview-geasa"></div>
-                        <div class="purview-passion"></div>
-                        <div class="purview-beauty"></div>
-                        <div class="purview-fortune"><span class="text">(Happenstance)</span></div>
-                    </div>
-                    <div class="virtues grid">
-                        {{#if data.pantheon}}
-                        {{#with (lookup config.PANTHEONS data.pantheon) as | pantheon |}}
-                        <div class="leftvirtue strong text">{{loc (concat "scion.virtue." pantheon.virtues.[0])}}</div>
-                        <div class="dotline largeDots">
-                            {{#for 5}}
-                                <span class="dot {{#if (eq (lookup ../data.virtue [value]) @index)}}virtueFull{{/if}} {{#if (eq @index 3)}}virtueCenter{{/if}}" data-trait="virtue" data-val="{{@index}}"></span>
-                            {{/for}}
-                        </div>
-                        <div class="rightvirtue strong text alignRight">{{loc (concat "scion.virtue." pantheon.virtues.[1])}}</div>
-                        {{/with}}
-                        {{/if}}
                     </div>
                 </section>
             </section>

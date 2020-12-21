@@ -5,7 +5,7 @@ import "../external/gl-matrix-min.js";
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl) {
+export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton) {
     static get defaultOptions() {
         /*  super.defaultOptions = {
                 baseApplication: "ActorSheet",
@@ -40,8 +40,9 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, M
         });
     }
     static RegisterSheet(label = "actor", types = [], makeDefault = true) {
-        label = `scion.sheet.${label}Sheet`;
-        Actors.registerSheet("scion", this, {makeDefault, types, label});
+        const locLabel = `scion.sheet.${label}Sheet`;
+        Actors.registerSheet("scion", this, {makeDefault, types, locLabel});
+        U.LOG({"Sheet Registered": this.name, types, defaultOptions: this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionActorSheet");
     }
 
     get template() {

@@ -98,7 +98,7 @@ $defaultTypography: (
         "fontVariant": var(--fontVariantBody),
         "fontWeight": bold,
         "textTransform": var(--textTransformBody),
-        "textShadow": (shadow-glow, 3, 1px, $c-black)
+        "textShadow": var(--textShadowBody)
     ),
     "Weak": (
         "fontStyle": italic,

@@ -40,7 +40,8 @@
                 },
                 "callings": {},
                 "knacks": {},
-                "finishingBonusOn": ""
+                "finishingBonusOn": "",
+                "wasPantheonUpdated": false
             },
             "FULLTRAITS": {
                 "attributes": {
@@ -312,15 +313,15 @@
         "path": {
             "templates": ["BASE"],
             "skills": [],
-            "connections": [],
             "connectionDescription": "",
+            "connections": [],
             "conditions": {
                 "pathSuspension": null,
                 "pathRevocation": null
             },
             "timesInvoked": 0,
-            "obligation": "",
             "effect": "",
+            "obligation": "",
             "enabledKnacks": {
                 "heroic": [],
                 "immortal": []

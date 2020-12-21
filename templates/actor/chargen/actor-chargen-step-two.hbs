@@ -1,4 +1,4 @@
-<div class="chargenTwo flex-col-max padded">
+<div class="chargenTwo flex-col width100 padded">
     <h1>{{loc "scion.heading.chargen.stepTwo"}}</h1>
     <div id="pathContainer" class="width100">
     {{#each items.paths as |path id|}}
@@ -6,5 +6,19 @@
         {{> (blocks.ownedItems.path.template) path}}
         {{/with}}
     {{/each}}
+    </div>
+    <h1 class="alignCenter">{{loc "scion.heading.chargen.stepTwoA"}}</h1>
+    <div class="skillSummary flex-row-center-spaceEven width90 alignCenter">        
+        <div class="skills flex-col-start height100">
+            {{#each skillVals as |value skill|}}
+                {{#ifCond (eq @index 3) "||" (eq @index 6)}}</div><div class="skills flex-col-start height100">{{/ifCond}}
+                <div class="dotline-labelled">
+                    <div class="label alignLeft">{{loc (concat "scion.skill." skill)}}</div>
+                    {{#for 5}}
+                        <span class="dot{{#if (gte value @index)}}-full{{/if}}"></span>
+                    {{/for}}
+                </div>
+            {{/each}}
+        </div>
     </div>
 </div>
