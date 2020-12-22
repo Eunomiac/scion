@@ -1,30 +1,6 @@
 // #region Import Modules
-import { THROW } from "../data/utils.js";
+import {THROW} from "../data/utils.js";
 import {_, U, popoutData} from "../modules.js";
-
-// #region MIXINS GUIDE
-/*  *** BASIC MIXINS ***
-
-        const MyMixin = (superclass) => class extends superclass {
-            foo() {
-                if (super.foo)
-                    super.foo(); // Check for property before calling super
-                console.log("foo from MyMixin");
-
-            }
-        };
-
-    *** MIXIN INHERITING FROM ANOTHER MIXIN ***
-
-        const mySubMixin = (superclass) => class extends MyMixin(superclass) {
-            // Add or Override methods here.
-        };
-
-    *** Using Mixins with Utils.JS Helper Class ***
-    class MyClass extends MIX(MyBaseClass).with(Mixin1, Mixin2) {
-        // ...
-    } */
-// #endregion
 
 // #region CLASS FACTORIES: Applying Mixins
 class MixinBuilder {

@@ -5,6 +5,26 @@ import {THROW} from "../data/utils.js";
 
 
 export class MajorActorSheet extends ScionActorSheet {
+    static get classDefaultOptions() {
+        return {
+            classes: [...super.defaultOptions.classes, "major"],
+            width: 750,
+            height: 750,
+            tabs: [
+                {
+                    navSelector: ".sheet-tabs",
+                    contentSelector: ".sheet-body",
+                    initial: "chargen"
+                },
+                {
+                    navSelector: ".chargen-tabs",
+                    contentSelector: ".chargen-body",
+                    initial: "step-one"
+                }
+            ]
+        };
+    }
+
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: [...super.defaultOptions.classes, "major"],
@@ -49,9 +69,16 @@ export class MajorActorSheet extends ScionActorSheet {
         }
         // #endregion
 
+        // #region OWNED ITEM SORTING
+        data.items = {};
+        for (const [itemCategory, itemTypes] of Object.entries(itemCategories))
+            data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type));
+        // #endregion
+
         // #region CHARGEN
         actorData.charGen = actorData.charGen || {};
 
+        // #region STEP ONE
         // Update Patron List
         if (pantheon)
             actorData.charGen.patronList = U.MakeDict(
@@ -61,38 +88,62 @@ export class MajorActorSheet extends ScionActorSheet {
             );
         // #endregion
 
-        // #region OWNED ITEM SORTING
-        data.items = {};
-        for (const [itemCategory, itemTypes] of Object.entries(itemCategories))
-            data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type));
-        // #endregion
-
-        // #region PATH PRIORITIES & SKILLS
+        // #region STEP TWO
+        // PATH PRIORITIES
         const pathItems = [];
         for (const pathType of actorData.pathPriorities)
             pathItems.push(data.items.paths.find((item) => item.data.data.type === pathType));
         data.items.paths = pathItems;
 
+        // PATH SKILL COUNTS
         data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS, () => 0);
         Object.values(data.items.paths).forEach((pathItem) => {
             pathItem.data.data.skills.forEach((skill) => {
                 data.pathSkillsCount[skill]++;
             });
         });
+
         // #endregion
 
-        // #region Skills
+        // #region STEP THREE
         data.skillVals = U.KeyMapObj(
-            _.omit(this.actor.data.data.skills.list, ((data) => data.value === 0)),
-            (v) => v.value
+            this.actor.skills,
+            (skill) => skill.value
         );
+        // FILTERING OUT 0-SKILLS
+        data.filteredSkillVals = _.pick(data.skillVals, (val) => val > 0);
+        // EXPOSING SPECIALTY DATA
+        data.skillSpecialties = this.actor.specialties;
+
+        // ATTRIBUTE PRIORITIES
+        const attrData = {};
+        for (const arena of this.aData.attributes.priorities)
+            attrData[arena] = U.KeyMapObj(
+                SCION.ATTRIBUTES.arenas[arena],
+                (k, v) => v,
+                (v) => this.aData.attributes.list[v].value
+            );
+        data.arenas = attrData;
+
+        // CREATING ATTRIBUTE DOTS REPORT
+        const attrUpdate = this.actor.updateAttributes();
+        U.LOG(attrUpdate, "Attribute Update Received", this.actor.name);
+        data.unspentArenaDots = isObjectEmpty(attrUpdate.unspentArenaDots) ? false : attrUpdate.unspentArenaDots;
+        data.invalidDots = isObjectEmpty(attrUpdate.invalidDots) ? false : attrUpdate.invalidDots;
+        data.flexDots = attrUpdate.generalFlexDots;
+        data.remainingFlexDots = attrUpdate.flexDotTally;
         // #endregion
+        // #endregion
+        // #endregion
+
+        // #region FRONT
+
 
         U.LOG({
-            "this MajorActorSheet": this,
-            "... .getData() [Sheet Context]": data,
-            "... ... .data": data.data
-        }, this.actor.name, "MajorActorSheet: getData()", {groupStyle: "l2"});
+            "[Sheet Context]": data,
+            "... data": data.data,
+            "ACTOR": this.actor.fullLogReport
+        }, this.actor.name, "MajorActorSheet", {groupStyle: "l2"});
         return data;
     }
 
@@ -135,26 +186,18 @@ export class MajorActorSheet extends ScionActorSheet {
                 });
                 this.actor.updateSkills();
             });
+            // #endregion
 
+            // SORTING ATTRIBUTE PRIORITIES
+            const arenaContainer = html.find("#arenaContainer")[0];
+            const arenaDragger = dragula({containers: [arenaContainer]});
 
-            const priorityContainer = html.find("#prioritySort")[0];
-            const drake = dragula(
-                [priorityContainer],
-                {
-                    direction: "horizontal",
-                    mirrorContainer: html.find(".sortStorer")[0]
-                }
-            );
-            drake.on("drop", () => {
-                console.log({["@@ DRAKE DROP @@"]: this});
-                const prioritiesContainer = html.find("#prioritySort")[0];
-                const children = Array.from(prioritiesContainer.children).map((x) => ["mental", "physical", "social"].find((xx) => Array.from(x.classList).includes(xx)));
-                const updateData = {};
-                children.forEach((x, i) => {
-                    updateData[`data.attributes.priorities.${Object.keys(CONFIG.scion.ATTRIBUTES.priorities)[i]}`] = x;
+            arenaDragger.on("drop", async () => {
+                await this.actor.update({
+                    "data.attributes.priorities": Array.from(arenaContainer.children)
+                        .map((element) => element.dataset.arena)
                 });
-                console.log(updateData);
-                this.actor.update(updateData);
+                this.actor.updateAttributes();
             });
             // #endregion
         }

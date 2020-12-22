@@ -1,3 +1,63 @@
-<div class="flex flexContainer chargenThree">
+<section class="chargenThree flex-col width100 padded">
     <h1>{{loc "scion.heading.chargen.stepThree"}}</h1>
-</div>
+    <div class="grid height100 width100">
+        <h2 class="skillHeader noBG">{{loc "scion.heading.chargen.stepThreeA"}}</h2>
+        <div class="skills padded flex-col">
+            {{#each skillVals as |value skill|}}
+                <div class="dotline-labelled">
+                    <div class="label alignLeft">{{loc (concat "scion.skill." skill)}}</div>
+                    {{#for 5}}
+                        <span class="dot{{#if (gte value @index)}}-full{{/if}}"></span>
+                    {{/for}}
+                </div>
+                {{#for (math (count (lookup ../skillSpecialties skill)) "--")}}
+                <div class="dotline-labelled"></div>
+                {{/for}}
+            {{/each}}
+        </div>
+        <div class="specialties padded flex-col">
+            {{#each skillVals as |value skill|}}
+                {{#if (test (count (lookup ../skillSpecialties skill)) "==" 0)}}
+                <div class="specialty empty"></div>
+                {{else}}
+                <div class="specialty">
+                    <div class="specialtyInput insetFrame contentEditable alignLeft" data-field="data.skills.list.{{skill}}.specialties.list.0" data-placeholder="{{case (article (loc "scion.heading.chargen.specialtyPlaceholder" "skill" (concat "scion.skill." skill))) "Sentence"}}"></div>
+                </div>
+                {{/if}}
+                {{#for (math (count (lookup ../skillSpecialties skill)) "--")}}                
+                <div class="specialty">
+                    <div class="specialtyInput insetFrame contentEditable alignLeft" data-field="data.skills.list.{{skill}}.specialties.list.{{math @index "++"}}" data-placeholder="{{case (loc "scion.heading.chargen.specialtyPlaceholder" "skill" (concat "scion.skill." skill)) "Sentence"}}"></div>
+                </div>
+                {{/for}}
+            {{/each}}
+        </div>
+        <h2 class="attrHeader noBG">{{loc "scion.heading.chargen.stepThreeB"}}</h2>
+        <div id="arenaContainer" class="attributes">
+            {{#each arenas as |attributes arena|}}
+                <div class="attribute-block" data-arena="{{arena}}">
+                    {{#each attributes as |value attribute|}}                    
+                    <div class="dotline-labelled">
+                        <div class="label alignLeft">{{loc (concat "scion.attribute." attribute)}}</div>
+                        {{#for 5}}
+                            <span class="dot{{#if (gte value @index)}}-full{{/if}}"></span>
+                        {{/for}}
+                    </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+        <div class="unspentDots">
+            {{#if unspentArenaDots}}
+            {{#each unspentArenaDots as |value arena|}}
+            <span class="unspent">You have {{value}} dot{{#unless (test value "==" 1)}}s{{/unless}} to assign to your {{case arena "Title"}} Attributes.</span>
+            {{/each}}
+            {{/if}}
+            {{#if invalidDots}}
+            {{#each invalidDots as |value attribute|}}
+            <span class="invalid">You have overspent {{case attribute "Title"}} by {{value}} dot{{#unless (test value "==" 1)}}s{{/unless}}.</span>
+            {{/each}}
+            {{/if}}
+            <span class="freedots">You have {{remainingFlexDots}} general Attribute dot{{#unless (test remainingFlexDots "==" 1)}}s{{/unless}} left to spend.</span>
+        </div>
+    </div>
+</section>

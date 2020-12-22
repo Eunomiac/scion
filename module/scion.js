@@ -13,7 +13,7 @@ import {ConditionItemSheet} from "./item/item-condition-sheet.js";
 import "./external/gl-matrix-min.js";
 // #endregion
 
-const createSigChars = async (isDeletingOriginals = false, isClearing = false) => {
+const createSigChars = async (isDeletingOriginals = false, isClearing = false, nameFilter) => {
     if (isDeletingOriginals) {
         for (const id of ActorDirectory.collection.keys())
             await game.actors.get(id).delete();
@@ -22,19 +22,37 @@ const createSigChars = async (isDeletingOriginals = false, isClearing = false) =
     }
     const sigChars = new Set();
     const charNames = Array.from(ActorDirectory.collection).map((data) => data.name);
-    Object.keys(signatureChars).forEach((sigName) => {
+    (nameFilter ?? Object.keys(signatureChars)).forEach((sigName) => {
         if (!charNames.includes(sigName))
             sigChars.add(sigName);
     });
     for (const sigName of sigChars) {
-        const actorData = signatureChars[sigName];
+        const {actorData, itemCreateData} = signatureChars[sigName];
+        if (itemCreateData) {
+            const skillCounts = U.KeyMapObj(SCION.SKILLS, (k) => k, () => 0);
+            const pantheonPathSkills = SCION.PANTHEONS[actorData.pantheon].assetSkills;
+            pantheonPathSkills.forEach((skill) => skillCounts[skill]++);
+            actorData.callings = itemCreateData.map((itemData) => {
+                if (["origin", "role"].includes(itemData.data.type) && !itemData.data.skills.length) {
+                    itemData.data.skills = _.sample(Object.keys(_.omit(skillCounts, (v) => v === 2)), 3);
+                    itemData.data.skills.forEach((skill) => skillCounts[skill]++);
+                } else if (itemData.data.type === "pantheon") {
+                    itemData.data.skills[0] = pantheonPathSkills[0];
+                    itemData.data.skills[1] = pantheonPathSkills[1];
+                    if (itemData.data.skills.length === 2)
+                        itemData.data.skills[2] = _.sample(Object.keys(_.omit(skillCounts, (v) => v === 2)));
+                    skillCounts[itemData.data.skills[2]]++;
+                }
+                return itemData;
+            });
+        }
         U.LOG(actorData, `Creating Signature Character: ${sigName} ...`, "SIGNATURE CHARACTER CREATION", {style: "data"});
-        await Actor.create({
+        const thisActor = await Actor.create({
             name: sigName,
             type: "major",
             data: actorData
         });
-        U.LOG(actorData, `... ${sigName} Created!`, "SIGNATURE CHARACTER CREATION", {style: "data"});
+        U.LOG(thisActor, `... ${thisActor.name} Created!`, "SIGNATURE CHARACTER CREATION", {style: "data"});
     }
     return true;
 };
@@ -105,36 +123,47 @@ Hooks.once("init", async () => {
                 formatDict[args.shift()] = args.shift();
             return U.Loc(locString, formatDict);
         },
-        add: (...args) => args.slice(0, -1).reduce((tot, x) => x + tot, 0),
+        count: (val) => Object.values(val)?.length || 0,
         concat: (...args) => args.slice(0, -1).join(""),
         contains: (arr, val) => arr.includes(val),
-        ifCond: function (v1, operator, v2, options) {
+        math: function (v1, operator, v2, options) {
+            switch (operator) {
+                case "+": return U.Int(v1) + U.Int(v2);
+                case "-": return U.Int(v1) - U.Int(v2);
+                case "++": return U.Int(v1) + 1;
+                case "--": return U.Int(v1) - 1;
+                case "*": return U.Int(v1) * U.Int(v2);
+                case "/": return U.Int(U.Float(v1) / U.Float(v2));
+                case "%": return U.Int(v1) % U.Int(v2);
+                case "**": case "^": return U.Int(Math.pow(U.Float(v1), U.Float(v2)));
+                default: return U.Int(v1);
+            }
+        },
+        test: function (v1, operator, v2) {
             /* eslint-disable eqeqeq */
             switch (operator) {
-                case "==":
-                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
-                case "===":
-                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
-                case "!=":
-                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
-                case "!==":
-                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-                case "<":
-                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
-                case "<=":
-                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-                case ">":
-                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
-                case ">=":
-                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-                case "&&":
-                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
-                case "||":
-                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
-                default:
-                    return options.inverse(this);
+                case "==": return (v1 == v2);
+                case "===": return (v1 === v2);
+                case "!=": return (v1 != v2);
+                case "!==": return (v1 !== v2);
+                case "<": return (v1 < v2);
+                case "<=": return (v1 <= v2);
+                case ">": return (v1 > v2);
+                case ">=": return (v1 >= v2);
+                case "&&": return (v1 && v2);
+                case "||": return (v1 || v2);
+                default: return true;
             }
-            /* eslint-enable eqeqeq */
+        },
+        article: (val) => U.ParseArticles(val),
+        case: function (v1, operator) {
+            switch (U.LCase(operator.charAt(0))) {
+                case "l": return U.LCase(v1);
+                case "u": return U.UCase(v1);
+                case "s": return U.SCase(v1);
+                case "t": return U.TCase(v1);
+                default: return v1;
+            }
         }
     });
     // #endregion

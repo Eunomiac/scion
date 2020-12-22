@@ -223,8 +223,7 @@
         opacity: 1;        
 
         grid: "header" 90px
-            "body" 470px
-            "footer" 90px;
+            "body" 560px;
 
         .header {
             grid-area: header;
@@ -242,19 +241,6 @@
 
         .sheet-body {
             grid-area: body;
-        }
-        
-        .footer {
-            grid-area: footer;
-            grid: "subTitle subTitle subTitle" 15px
-                ". title ." 50px
-                ". surTitle ." 25px
-                / 90px 470px 90px;
-
-            .subTitle { grid-area: subTitle; }
-            .title { grid-area: title; }
-            .surTitle {grid-area: surTitle; }
-
         }
     }
 }

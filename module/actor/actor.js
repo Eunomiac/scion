@@ -5,13 +5,16 @@ import {_, U, SCION} from "../modules.js";
  * @extends {Actor}
  */
 export class ScionActor extends Actor {
+    // Getters: Data Retrieval
     get aData() { return this.data.data }
+    get eData() { return this.aData }
+    get subtype() { return this.aData.type }
     get ownedItems() { return this.data.items }
 
     prepareData() {
         super.prepareData();
         if (this.data.type === "major")
-            this._prepareMajorCharData();
+            setTimeout(() => this._prepareMajorCharData(), 2000);
     }
 
     async _prepareMajorCharData() {
@@ -60,6 +63,11 @@ export class ScionActor extends Actor {
             });
 
             if (itemCreationData.length) {
+                if (Array.isArray(this.aData.callings)) {
+                    itemCreationData.length = 0;
+                    itemCreationData.push(...this.aData.callings);
+                    await this.update({["data.callings"]: {}});
+                }
                 U.LOG({itemCreationData, "ACTOR": this.fullLogReport}, "Item Creation Data Found: Creating Items", this.name);
                 await this.createOwnedItem(itemCreationData);
                 itemCreationData.length = 0;
@@ -178,9 +186,84 @@ export class ScionActor extends Actor {
         }, "... ... ... [updateSkills] Skills Updated! DONE!", this.name);
     }
 
-    get skills() { return this.data.data.skills.list }
+    updateAttributes() {
+        // 1) Sum ASSIGNED Dots for each Arena (if favored Approach has been chosen, subtract 2 here: will handle FA separately)
+        // 2) For each Arena, subtract total from unspentDots of that arena FIRST, THEN from general dots.
+        // 3) If General Dots is a negative number, must flag dots that are invalid
+        //      Get overflow totals separately from each arena
+        //      Mark HIGHEST dot attributes as invalid first, until overflow total accounted for
+        //          Watch for Favored Approach here: Consider Favored Approach attributes to be two lower than they are for this comparison
+
+        const convertAttrGroup = (arenaOrPriority) => {
+            if (["physical", "social", "mental"].includes(arenaOrPriority))
+                return ["primary", "secondary", "tertiary"][this.aData.attributes.priorities.findIndex((v) => v === arenaOrPriority)];
+            return this.aData.attributes.priorities[{primary: 0, secondary: 1, tertiary: 2}[arenaOrPriority]];
+        };
+        const baseArenaDots = U.KeyMapObj(
+            ["physical", "social", "mental"],
+            (k, v) => v,
+            (v) => SCION.ATTRIBUTES.priorities[convertAttrGroup(v)].startingDots
+        );
+        const baseAttrDots = U.KeyMapObj(
+            SCION.ATTRIBUTES.all,
+            (k, v) => v,
+            (v) => this.favoredAttrs.includes(v) ? 3 : 1
+        );
+        const assignedArenaDots = U.KeyMapObj(
+            ["physical", "social", "mental"],
+            (k, v) => v,
+            (v) => SCION.ATTRIBUTES.arenas[v].reduce((tot, attr) => tot + Math.max(1, this.realAttrVals[attr] - (this.favoredAttrs.includes(attr) ? 2 : 0)) - 1, 0)
+        );
+        const assignedAttrDots = U.KeyMapObj(
+            SCION.ATTRIBUTES.all,
+            (k, v) => v,
+            (v) => this.realAttrVals[v] - baseAttrDots[v]
+        );
+        const arenaDotsDelta = U.KeyMapObj(
+            ["physical", "social", "mental"],
+            (k, v) => v,
+            (v) => baseArenaDots[v] - assignedArenaDots[v]
+        );
+        const generalFlexDots = 2; // Object.values(this.aData.attributes.dotsPurchased).reduce((tot, val) => tot + val, 0);
+        let flexDotTally = generalFlexDots;
+
+        const getInvalidArena = () => _.sortBy(Object.keys(arenaDotsDelta).filter((v) => arenaDotsDelta[v] < 0), (v) => arenaDotsDelta[v])[0];
+
+        const invalidDots = U.KeyMapObj(
+            SCION.ATTRIBUTES.all,
+            (k, v) => v,
+            () => 0
+        );
+        const unValidatedDots = U.Clone(assignedAttrDots);
+        const iterLog = [];
+        let invalidArena = getInvalidArena();
+        while (invalidArena) {
+            const subAttr = _.sortBy(Object.keys(_.pick(unValidatedDots, (v, k) => v > 0 && SCION.ATTRIBUTES.arenas[invalidArena].includes(k))), (v) => -1 * unValidatedDots[v] - (this.favoredAttrs.includes(v) ? 0.5 : 0))[0];
+            unValidatedDots[subAttr]--;
+            arenaDotsDelta[invalidArena]++;
+            if (flexDotTally > 0) {
+                flexDotTally--;
+                iterLog.push(`- ${invalidArena}:${subAttr}. General Flex Dots ${flexDotTally + 1} -> ${flexDotTally}`);
+            } else {
+                invalidDots[subAttr]++;
+                iterLog.push(`- ${invalidArena}:${subAttr}. Invalidating Attribute Dot.`);
+            }
+            invalidArena = getInvalidArena();
+        }
+        const unspentArenaDots = _.pick(arenaDotsDelta, (v) => v > 0);
+        const returnVal = {unspentArenaDots, invalidDots: _.pick(invalidDots, (v) => v > 0), generalFlexDots, flexDotTally};
+        U.LOG({favApproach: this.favoredApproach, unspentArenaDots, invalidDots: _.pick(invalidDots, (v) => v > 0), generalFlexDots, remainingFlexDots: flexDotTally, iterLog, returnVal}, "Update Attributes", this.name);
+        return returnVal;
+    }
+
+    /* #region GETTERS */
+    // Basic Data Retrieval
     get paths() { return this.items.filter((item) => item.type === "path") }
+    get skills() { return this.data.data.skills.list }
+    get attributes() { return this.aData.attributes.list }
     get conditions() { return this.items.filter((item) => item.type === "condition") }
+
+    /* #region Paths */
     get originPath() { return this.paths.find((item) => item.data.data.type === "origin") }
     get originPathConditions() { return U.KeyMapObj(this.originPath.iData.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
     get rolePath() { return this.paths.find((item) => item.data.data.type === "role") }
@@ -199,6 +282,9 @@ export class ScionActor extends Actor {
         });
         return pathSkillVals;
     }
+    /* #endregion */
+
+    /* #region Skills & Specialties */
     get purchasedSkillVals() { return U.KeyMapObj(SCION.SKILLS, (v, k) => this.skills[k].purchased) }
     get derivedSkillVals() {
         const skillVals = {};
@@ -207,8 +293,39 @@ export class ScionActor extends Actor {
         return skillVals;
     }
     get realSkillVals() { return U.KeyMapObj(this.skills, (v) => v.value) }
+    get specialties() {
+        return U.KeyMapObj(this.skills, (data) => {
+            const theseSpecs = data.specialties.list;
+            const numSpecs = data.specialties.purchased + (data.value >= 3 ? 1 : 0);
+            while (theseSpecs.length < numSpecs)
+                theseSpecs.push("");
+            return theseSpecs;
+        });
+    }
+    /* #endregion */
+
+    /* #region Attributes */
+    get favoredApproach() { return this.aData.attributes.favoredApproach }
+    get favoredAttrs() { return this.favoredApproach ? SCION.ATTRIBUTES.approaches[this.favoredApproach] : [] }
+    get baseAttrVals() { 
+        return U.KeyMapObj(
+            SCION.ATTRIBUTES.all,
+            (k, v) => v,
+            (v) => this.favoredAttrs.includes(v) ? 3 : 1
+        );
+    }
+    get arenaDots() {
+        return U.KeyMapObj(
+            Object.values(SCION.ATTRIBUTES.priorities),
+            (k) => this.aData.attributes.priorities[k],
+            (v) => v.startingDots
+        );
+    }
+    get realAttrVals() { return U.KeyMapObj(this.attributes, (v) => v.value) }
+    /* #endregion */
 
     get fullLogReport() {
+        this.updateAttributes();
         return U.Clone({
             "this ScionActor": this,
             "... data": this.data,
@@ -216,7 +333,11 @@ export class ScionActor extends Actor {
             ".*. items": U.Clone(this.data.items),
             ".*. skills": U.Clone(this.skills),
             ".*. paths": U.Clone(this.paths),
-            ".*. conditions": U.Clone(this.conditions)
+            ".*. conditions": U.Clone(this.conditions),
+            ".*. baseAttrVals": U.Clone(this.baseAttrVals),
+            ".*. arenaDots": U.Clone(this.arenaDots),
+            ".*. realAttrVals": U.Clone(this.realAttrVals),
+            ".*. favoredAttrs": U.Clone(this.favoredAttrs)
         });
     }
 }

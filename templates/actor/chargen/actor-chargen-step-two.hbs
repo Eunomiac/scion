@@ -7,11 +7,11 @@
         {{/with}}
     {{/each}}
     </div>
-    <h1 class="alignCenter">{{loc "scion.heading.chargen.stepTwoA"}}</h1>
+    <h1 class="alignCenter width90">{{loc "scion.heading.chargen.stepTwoA"}}</h1>
     <div class="skillSummary flex-row-center-spaceEven width90 alignCenter">        
         <div class="skills flex-col-start height100">
-            {{#each skillVals as |value skill|}}
-                {{#ifCond (eq @index 3) "||" (eq @index 6)}}</div><div class="skills flex-col-start height100">{{/ifCond}}
+            {{#each filteredSkillVals as |value skill|}}
+                {{#if (test (test @index "==" 3) "||" (test @index "==" 6))}}</div><div class="skills flex-col-start height100">{{/if}}
                 <div class="dotline-labelled">
                     <div class="label alignLeft">{{loc (concat "scion.skill." skill)}}</div>
                     {{#for 5}}

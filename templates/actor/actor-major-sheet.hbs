@@ -76,7 +76,7 @@
                             <div class="dotDropBin dotline-labelled" data-dottype="skill" data-trait="data.skills.list.{{skill}}">
                                 <div class="label">{{loc (concat "scion.skill." skill)}}</div>
                                 {{#for 5}}
-                                    <span class="dot{{#if (gte value @index)}}-full{{/if}} click" data-dottype="skill" data-trait="data.skills.list.{{skill}}" data-val="{{add @index 1}}"></span>
+                                    <span class="dot{{#if (gte value @index)}}-full{{/if}} click" data-dottype="skill" data-trait="data.skills.list.{{skill}}" data-val="{{@index}}"></span>
                                 {{/for}}
                             </div>
                         {{/each}}
@@ -108,11 +108,5 @@
                 </div>
             </section>
         </section>
-
-        <div class="footer grid">
-            <div class="subTitle">&nbsp;</div>
-            <div class="title">&nbsp;</div>
-            <div class="surTitle">&nbsp;</div>
-        </div>
     </section>
 </form>

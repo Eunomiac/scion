@@ -6,6 +6,11 @@ import "../external/gl-matrix-min.js";
  * @extends {ActorSheet}
  */
 export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton) {
+    // Getters: Data Retrieval
+    get aData() { return this.actor.aData }
+    get eData() { return this.actor.eData }
+    get ownedItems() { return this.actor.ownedItems }
+
     static get defaultOptions() {
         /*  super.defaultOptions = {
                 baseApplication: "ActorSheet",
@@ -48,6 +53,7 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, M
     get template() {
         return `systems/scion/templates/actor/actor-${this.object.data.type}-sheet.hbs`;
     }
+
     getData() {
         const data = super.getData();
         data.config = CONFIG.scion;

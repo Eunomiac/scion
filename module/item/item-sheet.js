@@ -4,6 +4,11 @@ import {U, handlebarTemplates, MIX, ItemMixins as MIXINS} from "../modules.js";
  * @extends {ItemSheet}
  */
 export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton) {
+    // Getters: Data Retrieval
+    get iData() { return this.item.iData }
+    get eData() { return this.item.eData }
+    get subtype() { return this.item.subtype }
+    get aData() { return this.item.aData }
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -24,10 +29,6 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
         return `systems/scion/templates/item/item-${this.object.data.type}-sheet.hbs`;
     }
 
-    get iData() { return this.item.data.data }
-    get aData() { return this.actor?.aData }
-    get subtype() { return this.iData.type }
-
     getData() {
         const data = super.getData();
         data.blocks = handlebarTemplates;
@@ -36,9 +37,7 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
     }
     activateListeners(html) {
         super.activateListeners(html);
-        if (this.options.editable) {
-            // Make Title draggable
+        if (this.options.editable)
             new Draggable(this, html, html.find("h1.title")[0], false);
-        }
     }
 }

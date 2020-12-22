@@ -47,7 +47,14 @@ form.editable.main {
         }
         box-sizing: content-box;
         @include embossed-text(1px, 0px, var(--colorHighlight), var(--colorShadow));
-    }    
+    }
+
+    div.closeButton {
+        margin-bottom: 0;
+        right: -413px;
+        top: 5px;
+    }
+
     .popout {            
         &#skillList {
             width: 150px;

@@ -45,22 +45,16 @@
             },
             "FULLTRAITS": {
                 "attributes": {
-                    "priorities": {
-                        "primary": "",
-                        "secondary": "",
-                        "tertiary": ""
-                    },
+                    "priorities": ["physical", "social", "mental"],
                     "favoredApproach": "",
                     "dotsPurchased": {
                         "xp": 0,
-                        "other": 0
+                        "other": 1
                     },
                     "unspentDots": {
-                        "general": 0,
-                        "primary": 0,
-                        "secondary": 0,
-                        "tertiary": 0,
-                        "favoredApproach": 0                  
+                        "primary": 6,
+                        "secondary": 4,
+                        "tertiary": 2                
                     },
                     "list": {
                         "intellect": {
@@ -122,10 +116,9 @@
                 "skills": {
                     "dotsPurchased": {
                         "xp": 0,
-                        "other": 0
+                        "other": 5
                     },
                     "specsPurchased": 0,                    
-                    "unspentDots": 0,
                     "list": {
                         "academics": {
                             "min": 0,
@@ -133,7 +126,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "athletics": {
                             "min": 0,
@@ -141,7 +137,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "closeCombat": {
                             "min": 0,
@@ -149,7 +148,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "culture": {
                             "min": 0,
@@ -157,7 +159,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "empathy": {
                             "min": 0,
@@ -165,7 +170,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "firearms": {
                             "min": 0,
@@ -173,7 +181,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "integrity": {
                             "min": 0,
@@ -181,7 +192,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "leadership": {
                             "min": 0,
@@ -189,7 +203,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "medicine": {
                             "min": 0,
@@ -197,7 +214,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "occult": {
                             "min": 0,
@@ -205,7 +225,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "persuasion": {
                             "min": 0,
@@ -213,7 +236,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "pilot": {
                             "min": 0,
@@ -221,7 +247,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "science": {
                             "min": 0,
@@ -229,7 +258,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "subterfuge": {
                             "min": 0,
@@ -237,7 +269,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "survival": {
                             "min": 0,
@@ -245,7 +280,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         },
                         "technology": {
                             "min": 0,
@@ -253,7 +291,10 @@
                             "max": 5,
                             "modifier": [],
                             "purchased": 0,
-                            "specialty": ""
+                            "specialties": {
+                                "purchased": 0,
+                                "list": []
+                            }
                         }
                     }
                 }

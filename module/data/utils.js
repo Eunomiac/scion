@@ -95,7 +95,7 @@ const logLine = (output, title, {style, groupStyle, isGrouping}) => {
             console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle]);
         else
             console.groupCollapsed(isGrouping);
-    if (output)
+    if (output !== undefined)
         console.log(`%c ${title}`, logStyles[style], output);
     else
         console.log(`No Output for ${title}`);
@@ -167,6 +167,7 @@ export const Loc = (locRef, formatDict = {}) => {
     }
     return locRef;
 };
+export const ParseArticles = (str) => `${str}`.replace(/\b(a|A)\s([aeiouAEIOU])/gu, "$1n $2");
 // #endregion
 
 // #region NUMBER FUNCTIONS: Parsing

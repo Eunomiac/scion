@@ -17,7 +17,10 @@
             align: { content: start; self: start; }
 
             &[class*="skills"] {
-
+                > span { 
+                    margin: 2px;
+                    &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--greyDown2), false, 1); }            
+                }
             }
 
             &[class*="details"] {
@@ -37,13 +40,6 @@
                     }
                 }
             }
-
-            > span { 
-                margin: 2px;
-                &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--greyDown2), false, 1); }            
-            }
         }
     }
-
 }
-

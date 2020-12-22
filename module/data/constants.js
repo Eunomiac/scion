@@ -1,3 +1,5 @@
+import * as _ from "../external/underscore/underscore-esm-min.js";
+
 export const baseConstants = {
     noCapTitleCase: ["above", "after", "at", "below", "by", "down", "for", "from", "in", "onto", "of", "off", "on", "out", "to", "under", "up", "with", "for", "and", "nor", "but", "or", "yet", "so", "the", "an", "a"]
 };
@@ -2034,155 +2036,749 @@ export const popoutData = {
 };
 export const signatureChars = {
     "Rhys Callaghan": {
-        genesis: "born",
-        concept: "Lead Singer and All Around Good Lad",
-        pantheon: "tuathaDeDanann",
-        patron: "aengus",
-        divineTitle: "\"Bright Eyes\"",
-        attributes: {
-            favoredApproach: "resilience",
-            list: {
-                presence: {value: 5},
-                manipulation: {value: 2},
-                composure: {value: 4},
-                intellect: {value: 2},
-                cunning: {value: 3},
-                resolve: {value: 4},
-                might: {value: 2},
-                dexterity: {value: 3},
-                stamina: {value: 4}
+        actorData: {
+            genesis: "born",
+            concept: "Lead Singer and All Around Good Lad",
+            pantheon: "tuathaDeDanann",
+            patron: "aengus",
+            divineTitle: "\"Bright Eyes\"",
+            attributes: {
+                favoredApproach: "resilience",
+                list: {
+                    presence: {value: 5},
+                    manipulation: {value: 2},
+                    composure: {value: 4},
+                    intellect: {value: 2},
+                    cunning: {value: 3},
+                    resolve: {value: 4},
+                    might: {value: 2},
+                    dexterity: {value: 3},
+                    stamina: {value: 4}
+                },
+                priorities: ["social", "mental", "physical"]
             },
-            priorities: {
-                primary: "social",
-                secondary: "mental",
-                tertiary: "physical"
-            }
-        }
-    },
-    "Rhys Callaghan II": {
-        genesis: "born",
-        concept: "Lead Singer and All Around Good Lad",
-        pantheon: "tuathaDeDanann",
-        patron: "aengus",
-        divineTitle: "\"Bright Eyes\"",
-        attributes: {
-            favoredApproach: "resilience",
-            list: {
-                presence: {value: 5},
-                manipulation: {value: 2},
-                composure: {value: 4},
-                intellect: {value: 2},
-                cunning: {value: 3},
-                resolve: {value: 4},
-                might: {value: 2},
-                dexterity: {value: 3},
-                stamina: {value: 4}
+            pathPriorities: ["role", "origin", "pantheon"]
+        },
+        itemCreateData: [
+            {
+                name: "Origin",
+                type: "path",
+                data: {
+                    type: "origin",
+                    title: "Carefree Wanderer with Luck On His Side",
+                    skills: ["empathy", "persuasion", "subterfuge"],
+                    connections: [],
+                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
             },
-            priorities: {
-                primary: "social",
-                secondary: "mental",
-                tertiary: "physical"
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Interesting Times",
+                    type: "pathSuspension",
+                    description: "2's on any d10's count as 1's when determining botches.",
+                    resolution: "Rhys suffers the effect of a botch.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Knife in the Back",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Role",
+                type: "path",
+                data: {
+                    type: "role",
+                    title: "No Heaven Frontman",
+                    skills: ["athletics", "culture", "persuasion"],
+                    connections: [],
+                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Tone Deaf",
+                    type: "pathSuspension",
+                    description: "-2 penalty to all Culture (Music) rolls.",
+                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Nickelback 2.0",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Pantheon",
+                type: "path",
+                data: {
+                    type: "pantheon",
+                    title: "Scion of Aengus, Step-Scion of the Morrigan",
+                    skills: ["closeCombat", "culture", "subterfuge"],
+                    connections: [],
+                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Murder of Crows",
+                    type: "pathSuspension",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
+                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "pantheon"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Forced to Choose",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "pantheon"
+                }
             }
-        }
+        ]
     },
     "Horace Farrow": {
-        genesis: "born",
-        pantheon: "netjer",
-        patron: "horus",
-        divineTitle: "\"The Tempered Lawgiver\"",
-        attributes: {
-            favoredApproach: "finesse",
-            list: {
-                presence: {value: 3},
-                manipulation: {value: 2},
-                composure: {value: 2},
-                intellect: {value: 4},
-                cunning: {value: 3},
-                resolve: {value: 3},
-                might: {value: 3},
-                dexterity: {value: 4},
-                stamina: {value: 2}
+        actorData: {
+            genesis: "born",
+            pantheon: "netjer",
+            patron: "horus",
+            divineTitle: "\"The Tempered Lawgiver\"",
+            attributes: {
+                favoredApproach: "finesse",
+                list: {
+                    presence: {value: 3},
+                    manipulation: {value: 3},
+                    composure: {value: 2},
+                    intellect: {value: 4},
+                    cunning: {value: 3},
+                    resolve: {value: 3},
+                    might: {value: 3},
+                    dexterity: {value: 4},
+                    stamina: {value: 2}
+                },
+                priorities: _.shuffle(["social", "mental", "physical"])
             },
-            priorities: {
-                primary: "mental",
-                secondary: "physical",
-                tertiary: "social"
+            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
+        },
+        itemCreateData: [
+            {
+                name: "Origin",
+                type: "path",
+                data: {
+                    type: "origin",
+                    title: "Carefree Wanderer with Luck On His Side",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Interesting Times",
+                    type: "pathSuspension",
+                    description: "2's on any d10's count as 1's when determining botches.",
+                    resolution: "Rhys suffers the effect of a botch.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Knife in the Back",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Role",
+                type: "path",
+                data: {
+                    type: "role",
+                    title: "No Heaven Frontman",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Tone Deaf",
+                    type: "pathSuspension",
+                    description: "-2 penalty to all Culture (Music) rolls.",
+                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Nickelback 2.0",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Pantheon",
+                type: "path",
+                data: {
+                    type: "pantheon",
+                    title: "Scion of Aengus, Step-Scion of the Morrigan",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Murder of Crows",
+                    type: "pathSuspension",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
+                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "pantheon"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Forced to Choose",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "pantheon"
+                }
             }
-        }
+        ]
     },
     "Brigitte De La Croix": {
-        genesis: "chosen",
-        pantheon: "loa",
-        patron: "baronSamedi",
-        divineTitle: "\"Who Waits With Those In Darkness\"",
-        attributes: {
-            favoredApproach: "finesse",
-            list: {
-                presence: {value: 4},
-                manipulation: {value: 2},
-                composure: {value: 3},
-                intellect: {value: 3},
-                cunning: {value: 4},
-                resolve: {value: 4},
-                might: {value: 2},
-                dexterity: {value: 3},
-                stamina: {value: 2}
+        actorData: {
+            genesis: "chosen",
+            pantheon: "loa",
+            patron: "baronSamedi",
+            divineTitle: "\"Who Waits With Those In Darkness\"",
+            attributes: {
+                favoredApproach: "force",
+                list: {
+                    presence: {value: 4},
+                    manipulation: {value: 2},
+                    composure: {value: 3},
+                    intellect: {value: 3},
+                    cunning: {value: 4},
+                    resolve: {value: 4},
+                    might: {value: 3},
+                    dexterity: {value: 2},
+                    stamina: {value: 2}
+                },
+                priorities: _.shuffle(["social", "mental", "physical"])
             },
-            priorities: {
-                primary: "mental",
-                secondary: "social",
-                tertiary: "physical"
+            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
+        },
+        itemCreateData: [
+            {
+                name: "Origin",
+                type: "path",
+                data: {
+                    type: "origin",
+                    title: "Carefree Wanderer with Luck On His Side",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Interesting Times",
+                    type: "pathSuspension",
+                    description: "2's on any d10's count as 1's when determining botches.",
+                    resolution: "Rhys suffers the effect of a botch.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Knife in the Back",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Role",
+                type: "path",
+                data: {
+                    type: "role",
+                    title: "No Heaven Frontman",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Tone Deaf",
+                    type: "pathSuspension",
+                    description: "-2 penalty to all Culture (Music) rolls.",
+                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Nickelback 2.0",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Pantheon",
+                type: "path",
+                data: {
+                    type: "pantheon",
+                    title: "Scion of Aengus, Step-Scion of the Morrigan",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Murder of Crows",
+                    type: "pathSuspension",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
+                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "pantheon"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Forced to Choose",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "pantheon"
+                }
             }
-        }
+        ]
     },
     "Adonis Rhodes": {
-        genesis: "born",
-        pantheon: "theoi",
-        patron: "aphrodite",
-        divineTitle: "\"Steward of the Heart\"",
-        attributes: {
-            favoredApproach: "finesse",
-            list: {
-                presence: {value: 3},
-                manipulation: {value: 5},
-                composure: {value: 3},
-                intellect: {value: 2},
-                cunning: {value: 4},
-                resolve: {value: 2},
-                might: {value: 2},
-                dexterity: {value: 5},
-                stamina: {value: 2}
+        actorData: {
+            genesis: "born",
+            pantheon: "theoi",
+            patron: "aphrodite",
+            divineTitle: "\"Steward of the Heart\"",
+            attributes: {
+                favoredApproach: "finesse",
+                list: {
+                    presence: {value: 3},
+                    manipulation: {value: 5},
+                    composure: {value: 3},
+                    intellect: {value: 2},
+                    cunning: {value: 4},
+                    resolve: {value: 2},
+                    might: {value: 2},
+                    dexterity: {value: 5},
+                    stamina: {value: 2}
+                },
+                priorities: _.shuffle(["social", "mental", "physical"])
             },
-            priorities: {
-                primary: "social",
-                secondary: "physical",
-                tertiary: "mental"
+            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
+        },
+        itemCreateData: [
+            {
+                name: "Origin",
+                type: "path",
+                data: {
+                    type: "origin",
+                    title: "Carefree Wanderer with Luck On His Side",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Interesting Times",
+                    type: "pathSuspension",
+                    description: "2's on any d10's count as 1's when determining botches.",
+                    resolution: "Rhys suffers the effect of a botch.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Knife in the Back",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Role",
+                type: "path",
+                data: {
+                    type: "role",
+                    title: "No Heaven Frontman",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Tone Deaf",
+                    type: "pathSuspension",
+                    description: "-2 penalty to all Culture (Music) rolls.",
+                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Nickelback 2.0",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Pantheon",
+                type: "path",
+                data: {
+                    type: "pantheon",
+                    title: "Scion of Aengus, Step-Scion of the Morrigan",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Murder of Crows",
+                    type: "pathSuspension",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
+                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "pantheon"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Forced to Choose",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "pantheon"
+                }
             }
-        }
+        ]
     },
     "Erik Donner": {
-        genesis: "born",
-        pantheon: "aesir",
-        patron: "thor",
-        divineTitle: "\"Guardian of Midgard\"",
-        attributes: {
-            favoredApproach: "force",
-            list: {
-                presence: {value: 4},
-                manipulation: {value: 1},
-                composure: {value: 4},
-                intellect: {value: 3},
-                cunning: {value: 2},
-                resolve: {value: 2},
-                might: {value: 5},
-                dexterity: {value: 2},
-                stamina: {value: 5}
+        actorData: {
+            genesis: "born",
+            pantheon: "aesir",
+            patron: "thor",
+            divineTitle: "\"Guardian of Midgard\"",
+            attributes: {
+                favoredApproach: "force",
+                list: {
+                    presence: {value: 4},
+                    manipulation: {value: 1},
+                    composure: {value: 4},
+                    intellect: {value: 3},
+                    cunning: {value: 2},
+                    resolve: {value: 2},
+                    might: {value: 5},
+                    dexterity: {value: 2},
+                    stamina: {value: 5}
+                },
+                priorities: _.shuffle(["social", "mental", "physical"])
             },
-            priorities: {
-                primary: "physical",
-                secondary: "social",
-                tertiary: "mental"
+            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
+        },
+        itemCreateData: [
+            {
+                name: "Origin",
+                type: "path",
+                data: {
+                    type: "origin",
+                    title: "Carefree Wanderer with Luck On His Side",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Interesting Times",
+                    type: "pathSuspension",
+                    description: "2's on any d10's count as 1's when determining botches.",
+                    resolution: "Rhys suffers the effect of a botch.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Knife in the Back",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "origin"
+                }
+            },
+            {
+                name: "Role",
+                type: "path",
+                data: {
+                    type: "role",
+                    title: "No Heaven Frontman",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Tone Deaf",
+                    type: "pathSuspension",
+                    description: "-2 penalty to all Culture (Music) rolls.",
+                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Nickelback 2.0",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "role"
+                }
+            },
+            {
+                name: "Pantheon",
+                type: "path",
+                data: {
+                    type: "pantheon",
+                    title: "Scion of Aengus, Step-Scion of the Morrigan",
+                    skills: [],
+                    connections: [],
+                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
+                    conditions: {
+                        pathSuspension: null,
+                        pathRevocation: null
+                    }
+                }
+            },
+            {
+                name: "Suspension",
+                type: "condition",
+                data: {
+                    title: "Murder of Crows",
+                    type: "pathSuspension",
+                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
+                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
+                    effects: [],
+                    isPersistent: false,
+                    linkedItem: "pantheon"
+                }
+            },
+            {
+                name: "Revocation",
+                type: "condition",
+                data: {
+                    title: "Forced to Choose",
+                    type: "pathRevocation",
+                    description: "",
+                    resolution: "",
+                    effects: [],
+                    isPersistent: true,
+                    linkedItem: "pantheon"
+                }
             }
-        }
+        ]
     }
 };

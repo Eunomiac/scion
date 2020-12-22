@@ -6,9 +6,11 @@ import {U} from "../modules.js";
  * @extends {Item}
  */
 export class ScionItem extends Item {
+    // Getters: Data Retrieval
     get iData() { return this.data.data }
-    get aData() { return this.actor.aData }
+    get eData() { return this.iData }
     get subtype() { return this.iData.type }
+    get aData() { return this.actor?.aData }
 
     prepareData() {
         super.prepareData();

@@ -1,8 +1,7 @@
-
-
-
-.deed {
-    min-width: 50%;
+.chargenOne {
+    .deed {
+        min-width: 50%;
+    }
 }
 
 .chargenTwo {
@@ -16,5 +15,75 @@
             .dot:not([class*="-full"]) { display: none !important; }
         }
     }
+}
 
+.chargenThree {
+    .grid { 
+        --gridHeight: calc(560px - 26px - 10px - 5px - 32px); 
+        grid: "skillHeader skillHeader skillHeader skillHeader attrHeader attrHeader" 26px
+            "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 100px - 26px)
+            ". unspentDots unspentDots unspentDots unspentDots. " 100px
+            / 100px 100px 1fr 1fr 1fr 100px;
+
+        h2 {
+            text-indent: 0;
+            &.skillHeader { grid-area: skillHeader; }
+            &.attrHeader { grid-area: attrHeader; }
+        }
+        
+        .skills { 
+            grid-area: skills;
+            .dotline-labelled {
+                margin: 2px 0;
+            } 
+        }
+        .specialties { 
+            grid-area: specialties; 
+            .specialty {
+                width: 100%;
+                height: 16px;
+                min-height: 16px;
+                max-height: 16px;
+                margin: 2px;
+                font-size: 14px;
+                .specialtyInput {
+                    min-height: 16px;
+                    line-height: 16px;
+                    margin: -2px 4px;
+                    border-width: 2px;
+                    &.placeholder {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        .attributes { 
+            grid-area: attributes;
+            .attribute-block {
+                margin: 15px 0;
+                &:first-child {
+                    margin-top: 0px;
+                }
+                .dotline-labelled {
+                    margin: 5px 0;
+                }
+            }
+        }
+        .unspentDots { 
+            grid-area: unspentDots; 
+            width: 80%;
+            margin-left: 10%;
+            span {
+                font-weight: bold;
+                font-family: "Overlock SC";
+                text-shadow: none;
+                display: block;
+                margin: 0;
+                font-size: 14px;
+                &.unspent { color: darkgreen; }
+                &.invalid { color: darkred; }
+                &.freedots { color: darkblue; }
+            }
+        }
+    }
 }
