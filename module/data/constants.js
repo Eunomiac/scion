@@ -1,4 +1,5 @@
 import * as _ from "../external/underscore/underscore-esm-min.js";
+const Rand = (n1, n2) => Math.round(Math.random() * (n2 - n1)) + n1;
 
 export const baseConstants = {
     noCapTitleCase: ["above", "after", "at", "below", "by", "down", "for", "from", "in", "onto", "of", "off", "on", "out", "to", "under", "up", "with", "for", "and", "nor", "but", "or", "yet", "so", "the", "an", "a"]
@@ -1836,6 +1837,8 @@ export const scionSystemData = {
         chosen: "scion.genesis.chosen"
     },
     ATTRIBUTES: {
+        min: 1,
+        max: 5,
         priorities: {
             primary: {
                 label: "scion.game.primary",
@@ -1860,25 +1863,39 @@ export const scionSystemData = {
             finesse: ["manipulation", "cunning", "dexterity"],
             resilience: ["composure", "resolve", "stamina"]
         },
-        get all() { return [...this.arenas.social, ...this.arenas.mental, ...this.arenas.physical] }
+        list: {
+            presence: "scion.attribute.presence",
+            manipulation: "scion.attribute.manipulation",
+            composure: "scion.attribute.composure",
+            intellect: "scion.attribute.intellect",
+            cunning: "scion.attribute.cunning",
+            resolve: "scion.attribute.resolve",
+            might: "scion.attribute.might",
+            dexterity: "scion.attribute.dexterity",
+            stamina: "scion.attribute.stamina"
+        }
     },
     SKILLS: {
-        academics: "scion.skill.academics",
-        athletics: "scion.skill.athletics",
-        closeCombat: "scion.skill.closeCombat",
-        culture: "scion.skill.culture",
-        empathy: "scion.skill.empathy",
-        firearms: "scion.skill.firearms",
-        integrity: "scion.skill.integrity",
-        leadership: "scion.skill.leadership",
-        medicine: "scion.skill.medicine",
-        occult: "scion.skill.occult",
-        persuasion: "scion.skill.persuasion",
-        pilot: "scion.skill.pilot",
-        science: "scion.skill.science",
-        subterfuge: "scion.skill.subterfuge",
-        survival: "scion.skill.survival",
-        technology: "scion.skill.technology"
+        min: 0,
+        max: 5,
+        list: {
+            academics: "scion.skill.academics",
+            athletics: "scion.skill.athletics",
+            closeCombat: "scion.skill.closeCombat",
+            culture: "scion.skill.culture",
+            empathy: "scion.skill.empathy",
+            firearms: "scion.skill.firearms",
+            integrity: "scion.skill.integrity",
+            leadership: "scion.skill.leadership",
+            medicine: "scion.skill.medicine",
+            occult: "scion.skill.occult",
+            persuasion: "scion.skill.persuasion",
+            pilot: "scion.skill.pilot",
+            science: "scion.skill.science",
+            subterfuge: "scion.skill.subterfuge",
+            survival: "scion.skill.survival",
+            technology: "scion.skill.technology"
+        }
     },
     CALLINGS: {
         creator: {
@@ -2043,21 +2060,162 @@ export const signatureChars = {
             patron: "aengus",
             divineTitle: "\"Bright Eyes\"",
             attributes: {
-                favoredApproach: "resilience",
-                list: {
-                    presence: {value: 5},
-                    manipulation: {value: 2},
-                    composure: {value: 4},
-                    intellect: {value: 2},
-                    cunning: {value: 3},
-                    resolve: {value: 4},
-                    might: {value: 2},
-                    dexterity: {value: 3},
-                    stamina: {value: 4}
+                favoredApproach: _.sample(["force", "finesse", "resilience"]),
+                assignableGeneralDots: {
+                    xp: Rand(5, 15),
+                    other: 1
                 },
-                priorities: ["social", "mental", "physical"]
+                list: {
+                    presence: {assigned: Rand(0, 3)},
+                    manipulation: {assigned: Rand(0, 3)},
+                    composure: {assigned: Rand(0, 3)},
+                    intellect: {assigned: Rand(0, 3)},
+                    cunning: {assigned: Rand(0, 3)},
+                    resolve: {assigned: Rand(0, 3)},
+                    might: {assigned: Rand(0, 3)},
+                    dexterity: {assigned: Rand(0, 3)},
+                    stamina: {assigned: Rand(0, 3)}
+                },
+                priorities: _.shuffle(["social", "mental", "physical"])
             },
-            pathPriorities: ["role", "origin", "pantheon"]
+            skills: {
+                "assignableDots": {
+                    "xp": Rand(5, 20),
+                    "other": 5
+                },
+                assignableSpecs: 0,
+                list: {
+                    academics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    athletics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    closeCombat: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    culture: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    empathy: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    firearms: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    integrity: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    leadership: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    medicine: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    occult: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    persuasion: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    pilot: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    science: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    subterfuge: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    survival: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    technology: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    }
+                }
+            },
+            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
         },
         itemCreateData: [
             {
@@ -2192,19 +2350,160 @@ export const signatureChars = {
             patron: "horus",
             divineTitle: "\"The Tempered Lawgiver\"",
             attributes: {
-                favoredApproach: "finesse",
+                favoredApproach: _.sample(["force", "finesse", "resilience"]),
+                assignableGeneralDots: {
+                    xp: Rand(5, 15),
+                    other: 1
+                },
                 list: {
-                    presence: {value: 3},
-                    manipulation: {value: 3},
-                    composure: {value: 2},
-                    intellect: {value: 4},
-                    cunning: {value: 3},
-                    resolve: {value: 3},
-                    might: {value: 3},
-                    dexterity: {value: 4},
-                    stamina: {value: 2}
+                    presence: {assigned: Rand(0, 3)},
+                    manipulation: {assigned: Rand(0, 3)},
+                    composure: {assigned: Rand(0, 3)},
+                    intellect: {assigned: Rand(0, 3)},
+                    cunning: {assigned: Rand(0, 3)},
+                    resolve: {assigned: Rand(0, 3)},
+                    might: {assigned: Rand(0, 3)},
+                    dexterity: {assigned: Rand(0, 3)},
+                    stamina: {assigned: Rand(0, 3)}
                 },
                 priorities: _.shuffle(["social", "mental", "physical"])
+            },
+            skills: {
+                "assignableDots": {
+                    "xp": Rand(5, 20),
+                    "other": 5
+                },
+                assignableSpecs: 0,
+                list: {
+                    academics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    athletics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    closeCombat: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    culture: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    empathy: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    firearms: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    integrity: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    leadership: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    medicine: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    occult: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    persuasion: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    pilot: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    science: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    subterfuge: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    survival: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    technology: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    }
+                }
             },
             pathPriorities: _.shuffle(["role", "origin", "pantheon"])
         },
@@ -2341,19 +2640,160 @@ export const signatureChars = {
             patron: "baronSamedi",
             divineTitle: "\"Who Waits With Those In Darkness\"",
             attributes: {
-                favoredApproach: "force",
+                favoredApproach: _.sample(["force", "finesse", "resilience"]),
+                assignableGeneralDots: {
+                    xp: Rand(5, 15),
+                    other: 1
+                },
                 list: {
-                    presence: {value: 4},
-                    manipulation: {value: 2},
-                    composure: {value: 3},
-                    intellect: {value: 3},
-                    cunning: {value: 4},
-                    resolve: {value: 4},
-                    might: {value: 3},
-                    dexterity: {value: 2},
-                    stamina: {value: 2}
+                    presence: {assigned: Rand(0, 3)},
+                    manipulation: {assigned: Rand(0, 3)},
+                    composure: {assigned: Rand(0, 3)},
+                    intellect: {assigned: Rand(0, 3)},
+                    cunning: {assigned: Rand(0, 3)},
+                    resolve: {assigned: Rand(0, 3)},
+                    might: {assigned: Rand(0, 3)},
+                    dexterity: {assigned: Rand(0, 3)},
+                    stamina: {assigned: Rand(0, 3)}
                 },
                 priorities: _.shuffle(["social", "mental", "physical"])
+            },
+            skills: {
+                "assignableDots": {
+                    "xp": Rand(5, 20),
+                    "other": 5
+                },
+                assignableSpecs: 0,
+                list: {
+                    academics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    athletics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    closeCombat: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    culture: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    empathy: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    firearms: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    integrity: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    leadership: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    medicine: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    occult: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    persuasion: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    pilot: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    science: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    subterfuge: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    survival: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    technology: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    }
+                }
             },
             pathPriorities: _.shuffle(["role", "origin", "pantheon"])
         },
@@ -2490,19 +2930,160 @@ export const signatureChars = {
             patron: "aphrodite",
             divineTitle: "\"Steward of the Heart\"",
             attributes: {
-                favoredApproach: "finesse",
+                favoredApproach: _.sample(["force", "finesse", "resilience"]),
+                assignableGeneralDots: {
+                    xp: Rand(5, 15),
+                    other: 1
+                },
                 list: {
-                    presence: {value: 3},
-                    manipulation: {value: 5},
-                    composure: {value: 3},
-                    intellect: {value: 2},
-                    cunning: {value: 4},
-                    resolve: {value: 2},
-                    might: {value: 2},
-                    dexterity: {value: 5},
-                    stamina: {value: 2}
+                    presence: {assigned: Rand(0, 3)},
+                    manipulation: {assigned: Rand(0, 3)},
+                    composure: {assigned: Rand(0, 3)},
+                    intellect: {assigned: Rand(0, 3)},
+                    cunning: {assigned: Rand(0, 3)},
+                    resolve: {assigned: Rand(0, 3)},
+                    might: {assigned: Rand(0, 3)},
+                    dexterity: {assigned: Rand(0, 3)},
+                    stamina: {assigned: Rand(0, 3)}
                 },
                 priorities: _.shuffle(["social", "mental", "physical"])
+            },
+            skills: {
+                "assignableDots": {
+                    "xp": Rand(5, 20),
+                    "other": 5
+                },
+                assignableSpecs: 0,
+                list: {
+                    academics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    athletics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    closeCombat: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    culture: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    empathy: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    firearms: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    integrity: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    leadership: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    medicine: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    occult: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    persuasion: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    pilot: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    science: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    subterfuge: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    survival: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    technology: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    }
+                }
             },
             pathPriorities: _.shuffle(["role", "origin", "pantheon"])
         },
@@ -2639,19 +3220,160 @@ export const signatureChars = {
             patron: "thor",
             divineTitle: "\"Guardian of Midgard\"",
             attributes: {
-                favoredApproach: "force",
+                favoredApproach: _.sample(["force", "finesse", "resilience"]),
+                assignableGeneralDots: {
+                    xp: Rand(5, 15),
+                    other: 1
+                },
                 list: {
-                    presence: {value: 4},
-                    manipulation: {value: 1},
-                    composure: {value: 4},
-                    intellect: {value: 3},
-                    cunning: {value: 2},
-                    resolve: {value: 2},
-                    might: {value: 5},
-                    dexterity: {value: 2},
-                    stamina: {value: 5}
+                    presence: {assigned: Rand(0, 3)},
+                    manipulation: {assigned: Rand(0, 3)},
+                    composure: {assigned: Rand(0, 3)},
+                    intellect: {assigned: Rand(0, 3)},
+                    cunning: {assigned: Rand(0, 3)},
+                    resolve: {assigned: Rand(0, 3)},
+                    might: {assigned: Rand(0, 3)},
+                    dexterity: {assigned: Rand(0, 3)},
+                    stamina: {assigned: Rand(0, 3)}
                 },
                 priorities: _.shuffle(["social", "mental", "physical"])
+            },
+            skills: {
+                "assignableDots": {
+                    "xp": Rand(5, 20),
+                    "other": 5
+                },
+                assignableSpecs: 0,
+                list: {
+                    academics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    athletics: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    closeCombat: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    culture: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    empathy: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    firearms: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    integrity: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    leadership: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    medicine: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    occult: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    persuasion: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    pilot: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    science: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    subterfuge: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    survival: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    },
+                    technology: {
+                        modifier: [],
+                        assigned: Rand(0, 2),
+                        specialties: {
+                            assigned: 0,
+                            list: {}
+                        }
+                    }
+                }
             },
             pathPriorities: _.shuffle(["role", "origin", "pantheon"])
         },

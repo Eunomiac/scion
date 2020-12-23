@@ -96,7 +96,8 @@ export class MajorActorSheet extends ScionActorSheet {
         data.items.paths = pathItems;
 
         // PATH SKILL COUNTS
-        data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS, () => 0);
+        data.pathSkills = _.pick(this.actor.pathSkillVals, (v) => v > 0);
+        data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS.list, () => 0);
         Object.values(data.items.paths).forEach((pathItem) => {
             pathItem.data.data.skills.forEach((skill) => {
                 data.pathSkillsCount[skill]++;
@@ -106,39 +107,41 @@ export class MajorActorSheet extends ScionActorSheet {
         // #endregion
 
         // #region STEP THREE
-        data.skillVals = U.KeyMapObj(
-            this.actor.skills,
-            (skill) => skill.value
-        );
+        data.skillVals = this.actor.skillVals;
         // FILTERING OUT 0-SKILLS
         data.filteredSkillVals = _.pick(data.skillVals, (val) => val > 0);
+        data.unspentSkillDots = Math.max(0, this.actor.unassignedSkillDots);
         // EXPOSING SPECIALTY DATA
         data.skillSpecialties = this.actor.specialties;
 
         // ATTRIBUTE PRIORITIES
-        const attrData = {};
-        for (const arena of this.aData.attributes.priorities)
-            attrData[arena] = U.KeyMapObj(
-                SCION.ATTRIBUTES.arenas[arena],
-                (k, v) => v,
-                (v) => this.aData.attributes.list[v].value
-            );
-        data.arenas = attrData;
+        data.arenaPriorities = this.aData.attributes.priorities;
+        data.arenas = U.KeyMapObj(
+            SCION.ATTRIBUTES.arenas,
+            (v) => U.KeyMapObj(v, (k, v) => v, (v) => this.actor.attrVals[v])
+        );
 
         // CREATING ATTRIBUTE DOTS REPORT
-        const attrUpdate = this.actor.updateAttributes();
-        U.LOG(attrUpdate, "Attribute Update Received", this.actor.name);
-        data.unspentArenaDots = isObjectEmpty(attrUpdate.unspentArenaDots) ? false : attrUpdate.unspentArenaDots;
-        data.invalidDots = isObjectEmpty(attrUpdate.invalidDots) ? false : attrUpdate.invalidDots;
-        data.flexDots = attrUpdate.generalFlexDots;
-        data.remainingFlexDots = attrUpdate.flexDotTally;
+        // const attrUpdate = this.actor.checkAttributes();
+        // U.LOG(attrUpdate, "Attribute Update Received", this.actor.name);
+
+        // attrUpdate.unspentArenaDots = {physical: 3, mental: 10, social: 15};
+        // attrUpdate.unspentGeneralDots = 5;
+
+        const unspentArenaDots = _.pick(this.actor.unassignedArenaAttrDots, (v) => v > 0);
+        data.unspentArenaDots = [];
+        if (isObjectEmpty(unspentArenaDots))
+            data.unspentArenaDots = false;
+        else
+            for (const [arena, num] of Object.entries(unspentArenaDots))
+                data.unspentArenaDots.push(...new Array(num).fill(arena));
+        data.unspentGeneralAttrDots = Math.max(0, this.actor.unassignedGeneralAttrDots);
+
         // #endregion
         // #endregion
         // #endregion
 
         // #region FRONT
-
-
         U.LOG({
             "[Sheet Context]": data,
             "... data": data.data,
@@ -197,7 +200,8 @@ export class MajorActorSheet extends ScionActorSheet {
                     "data.attributes.priorities": Array.from(arenaContainer.children)
                         .map((element) => element.dataset.arena)
                 });
-                this.actor.updateAttributes();
+                const {newAttrVals} = this.actor.checkAttributes();
+                await this.actor.updateAttributes(newAttrVals);
             });
             // #endregion
         }

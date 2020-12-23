@@ -1,6 +1,6 @@
 <div class="flex chargenOne padded">
     <h1>{{loc "scion.heading.chargen.stepOne"}}</h1>
-    <div class="flex-row width100 padded">
+    <div class="flex-row-baseline width100 padded">
         <label>{{loc "scion.heading.chargen.stepOneA"}}</label>
         <select class="contentEditable insetFrame width20" name="data.genesis" required>
             <option name="" value="" selected hidden disabled>{{loc "scion.heading.chargen.genesisPlaceholder"}}</option>
@@ -13,7 +13,7 @@
         </select> 
     </div>
     {{#if data.charGen.patronList}}
-    <div class="flex-row width100 padded">
+    <div class="flex-row-baseline width100 padded">
         <label>{{loc "scion.heading.chargen.stepOneB"}}</label>
         <select class="contentEditable insetFrame" name="data.patron" required>
             <option name="" value="" selected hidden disabled>{{loc "scion.heading.chargen.divinePatronPlaceholder"}}</option>
@@ -22,13 +22,13 @@
     </div>
     {{/if}}
     {{#if data.patron}}
-    <div class="flex-row width100 padded">
+    <div class="flex-row-baseline width100 padded">
         <label>{{loc "scion.heading.chargen.stepOneC"}}</label>
         <div id="concept" class="contentEditable insetFrame" data-field="data.concept" data-placeholder="{{loc "scion.heading.chargen.conceptPlaceholder"}}"></div>
     </div>
         {{#if data.concept}}
     <h2 class="alignCenter">{{loc "scion.heading.chargen.stepOneD"}}</h2>
-    <div class="flex-row width100 padded alignCenter">
+    <div class="flex-row-baseline width100 padded alignCenter">
         <div id="shortTermDeed" class="contentEditable deed insetFrame" data-field="data.deeds.shortTerm" data-fieldindex="0" data-placeholder="{{loc "scion.heading.chargen.shortTermDeedPlaceholder"}}"></div>
         <div id="longTermDeed" class="contentEditable deed insetFrame" data-field="data.deeds.longTerm" data-fieldindex="0" data-placeholder="{{loc "scion.heading.chargen.longTermDeedPlaceholder"}}"></div>
     </div>

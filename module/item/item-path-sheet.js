@@ -14,7 +14,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
 
     getData() {
         const data = super.getData();
-        data.skills = SCION.SKILLS;
+        data.skills = SCION.SKILLS.list;
         data.tooltip = {
             title: U.Loc("scion.path.tooltip.title", {path: `scion.path.${this.item.data.data.type}`}),
             content: U.Loc(`scion.path.tooltip.content.${this.item.data.data.type}`)
@@ -23,7 +23,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
         const allPathSkills = this.actor.paths
             .map((path) => path.data.data.skills)
             .flat();
-        data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS, (label, skill) => allPathSkills.reduce((count, pathSkill) => (pathSkill === skill ? count + 1 : count), 0));
+        data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS.list, (label, skill) => allPathSkills.reduce((count, pathSkill) => (pathSkill === skill ? count + 1 : count), 0));
 
         data.conditions = {
             suspension: this.suspensionCondition,

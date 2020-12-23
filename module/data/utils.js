@@ -171,8 +171,9 @@ export const ParseArticles = (str) => `${str}`.replace(/\b(a|A)\s([aeiouAEIOU])/
 // #endregion
 
 // #region NUMBER FUNCTIONS: Parsing
-export const Int = (num) => parseInt(`${Math.round(parseFloat(`${num}`))}`);
-export const Float = (num, sigDigits = 2) => Math.round(parseFloat(`${num}`) * 10 ** sigDigits) / 10 ** sigDigits;
+export const Int = (num) => parseInt(`${Math.round(parseFloat(`${num}`) || 0)}`);
+export const Float = (num, sigDigits = 2) => Math.round((parseFloat(`${num}`) || 0) * 10 ** sigDigits) / 10 ** sigDigits;
+export const Rand = (n1, n2) => Math.round(Math.random() * (Math.max(Int(n2), Int(n1)) - Math.min(Int(n2), Int(n1)))) + Math.min(Int(n2), Int(n1));
 // #endregion
 
 // #region OBJECT FUNCTIONS: MapObject, MakeDictionary

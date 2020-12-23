@@ -7,7 +7,8 @@
 .chargenTwo {
     #pathContainer .path-block { @import 'sheets/actor/major/blocks/path-block'; }
     .skillSummary {
-        transform: scale(0.85);
+        transform: scale(0.75);
+        margin-left: 5%;
         .skills { 
             flex: 0 1 33%;
             margin: 0 5px;
@@ -21,9 +22,8 @@
     .grid { 
         --gridHeight: calc(560px - 26px - 10px - 5px - 32px); 
         grid: "skillHeader skillHeader skillHeader skillHeader attrHeader attrHeader" 26px
-            "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 100px - 26px)
-            ". unspentDots unspentDots unspentDots unspentDots. " 100px
-            / 100px 100px 1fr 1fr 1fr 100px;
+              "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px)
+              "unspentSkills unspentSkills unspentSkills unspentAttrs unspentAttrs unspentAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
 
         h2 {
             text-indent: 0;
@@ -59,31 +59,36 @@
         }
         .attributes { 
             grid-area: attributes;
-            .attribute-block {
-                margin: 15px 0;
-                &:first-child {
-                    margin-top: 0px;
-                }
-                .dotline-labelled {
-                    margin: 5px 0;
+            .attribute-block {  
+                margin: 5px 0;
+                border: 3px solid var(--accent);
+                border-radius: 25px;
+                padding: 0px 10px;
+                background: var(--accentUp2Fade75);
+                border-top-left-radius: 0;
+                overflow: hidden;
+                &:first-child { margin-top: 0px; }
+                .dotline-labelled { margin: 5px 0; }
+                h3 {
+                    font-size: 16px;
+                    background: var(--bgH2);
+                    margin-left: -10px;
+                    text-indent: 4px;
+                    width: 120%;
                 }
             }
         }
-        .unspentDots { 
-            grid-area: unspentDots; 
-            width: 80%;
-            margin-left: 10%;
-            span {
-                font-weight: bold;
-                font-family: "Overlock SC";
-                text-shadow: none;
-                display: block;
-                margin: 0;
-                font-size: 14px;
-                &.unspent { color: darkgreen; }
-                &.invalid { color: darkred; }
-                &.freedots { color: darkblue; }
+        .unspentDots {
+            flex: 0 0 50%;
+            h2: { font-size: calc(var(--fontSizeH2) * 0.75) }
+            &.unspentSkillDots { 
+                grid-area: unspentSkills;
             }
+            &.unspentAttrDots {
+                grid-area: unspentAttrs;
+                > div { margin: 3px 0; }
+                label { width: 75px; min-width: 75px; }
+            } 
         }
     }
 }

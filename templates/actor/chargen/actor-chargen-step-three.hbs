@@ -33,31 +33,47 @@
         </div>
         <h2 class="attrHeader noBG">{{loc "scion.heading.chargen.stepThreeB"}}</h2>
         <div id="arenaContainer" class="attributes">
-            {{#each arenas as |attributes arena|}}
+            {{#each arenaPriorities as |arena|}}
                 <div class="attribute-block" data-arena="{{arena}}">
+                    <h3>{{loc (concat "scion.heading.chargen." arena "Arena")}}</h3>
+                    {{#with (lookup ../arenas arena) as |attributes|}}
                     {{#each attributes as |value attribute|}}                    
                     <div class="dotline-labelled">
                         <div class="label alignLeft">{{loc (concat "scion.attribute." attribute)}}</div>
                         {{#for 5}}
-                            <span class="dot{{#if (gte value @index)}}-full{{/if}}"></span>
+                            <span class="dot{{#if (test value ">=" @index)}}-full{{/if}}"></span>
                         {{/for}}
                     </div>
                     {{/each}}
+                    {{/with}}
                 </div>
             {{/each}}
         </div>
-        <div class="unspentDots">
+        <div class="unspentDots unspentSkillDots flex-col alignCenter">
+            <h2 class="alignCenter noBG">Unspent Skill Dots</h2>            
+            <div class="flex-row-wrap alignCenter width100">
+                {{#for unspentSkillDots}}
+                <span class="dot-unspent" data-dottype="skill"></span>
+                {{/for}}
+            </div>
+        </div>
+        <div class="unspentDots unspentAttrDots flex-col alignCenter">
+            <h2 class="alignCenter noBG">Unspent Attribute Dots</h2> 
+            {{#if unspentGeneralAttrDots}}
+            <div class="flex-row-wrap alignCenter width100">                    
+                {{#for unspentGeneralAttrDots}}
+                    <span class="dot-unspent" data-dottype="attribute"></span>
+                {{/for}}
+            </div>
+            {{/if}}
             {{#if unspentArenaDots}}
-            {{#each unspentArenaDots as |value arena|}}
-            <span class="unspent">You have {{value}} dot{{#unless (test value "==" 1)}}s{{/unless}} to assign to your {{case arena "Title"}} Attributes.</span>
+            <div class="flex-row-wrap alignCenter width100">
+            {{#each unspentArenaDots as |arena|}}
+                {{#if (test (test (math @index "%" 10) "==" 0) "&&" (test @index ">" 1))}}</div><div class="flex-row-wrap alignCenter width100">{{/if}}
+                <span class="dot-unspent alignCenter" data-dottype="{{arena}}Attr"></span>
             {{/each}}
+            </div>
             {{/if}}
-            {{#if invalidDots}}
-            {{#each invalidDots as |value attribute|}}
-            <span class="invalid">You have overspent {{case attribute "Title"}} by {{value}} dot{{#unless (test value "==" 1)}}s{{/unless}}.</span>
-            {{/each}}
-            {{/if}}
-            <span class="freedots">You have {{remainingFlexDots}} general Attribute dot{{#unless (test remainingFlexDots "==" 1)}}s{{/unless}} left to spend.</span>
         </div>
     </div>
 </section>

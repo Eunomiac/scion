@@ -19,8 +19,14 @@
             &[class*="skills"] {
                 > span { 
                     margin: 2px;
-                    &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--greyDown2), false, 1); }            
-                }
+                    &.skill:not(.empty) { @include box-shadow(1px, 3px, var(--greyDown2), false, 1); }
+                    &.skill.pantheon {
+                        filter: invert(100%);
+                        border-style: inset;
+                        border-color: var(--greyUp3);
+                        box-shadow: 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2);
+                    }
+                }       
             }
 
             &[class*="details"] {

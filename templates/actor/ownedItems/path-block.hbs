@@ -10,12 +10,12 @@
     <div class="pathContainer flex-row-start width100">
         <div class="path-subBlock-skills flex-col-stretch alignCenter">
             {{#if data.data.skills.[0]}}
-                <span class="skill noFlex">{{loc (concat "scion.skill." data.data.skills.[0])}}</span>
+                <span class="skill noFlex {{~#if (test name "==" "Pantheon")}} pantheon{{/if}}">{{loc (concat "scion.skill." data.data.skills.[0])}}</span>
             {{else}}
                 <span class="skill empty noFlex">&nbsp;</span>
             {{/if}}
             {{#if data.data.skills.[1]}}
-                <span class="skill noFlex">{{loc (concat "scion.skill." data.data.skills.[1])}}</span>
+                <span class="skill noFlex {{~#if (test name "==" "Pantheon")}} pantheon{{/if}}">{{loc (concat "scion.skill." data.data.skills.[1])}}</span>
             {{else}}
                 <span class="skill empty noFlex">&nbsp;</span>
             {{/if}}

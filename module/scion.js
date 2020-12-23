@@ -29,7 +29,7 @@ const createSigChars = async (isDeletingOriginals = false, isClearing = false, n
     for (const sigName of sigChars) {
         const {actorData, itemCreateData} = signatureChars[sigName];
         if (itemCreateData) {
-            const skillCounts = U.KeyMapObj(SCION.SKILLS, (k) => k, () => 0);
+            const skillCounts = U.KeyMapObj(SCION.SKILLS.list, (k) => k, () => 0);
             const pantheonPathSkills = SCION.PANTHEONS[actorData.pantheon].assetSkills;
             pantheonPathSkills.forEach((skill) => skillCounts[skill]++);
             actorData.callings = itemCreateData.map((itemData) => {
@@ -40,7 +40,7 @@ const createSigChars = async (isDeletingOriginals = false, isClearing = false, n
                     itemData.data.skills[0] = pantheonPathSkills[0];
                     itemData.data.skills[1] = pantheonPathSkills[1];
                     if (itemData.data.skills.length === 2)
-                        itemData.data.skills[2] = _.sample(Object.keys(_.omit(skillCounts, (v) => v === 2)));
+                        itemData.data.skills[2] = _.sample(Object.keys(_.omit(skillCounts, (v, k) => v === 2 || pantheonPathSkills.includes(k))));
                     skillCounts[itemData.data.skills[2]]++;
                 }
                 return itemData;
@@ -136,6 +136,8 @@ Hooks.once("init", async () => {
                 case "/": return U.Int(U.Float(v1) / U.Float(v2));
                 case "%": return U.Int(v1) % U.Int(v2);
                 case "**": case "^": return U.Int(Math.pow(U.Float(v1), U.Float(v2)));
+                case "min": return Math.max(U.Int(v1), U.Int(v2));
+                case "max": return Math.min(U.Int(v1), U.Int(v2));
                 default: return U.Int(v1);
             }
         },
@@ -152,6 +154,7 @@ Hooks.once("init", async () => {
                 case ">=": return (v1 >= v2);
                 case "&&": return (v1 && v2);
                 case "||": return (v1 || v2);
+                case "not": return (!v1);
                 default: return true;
             }
         },

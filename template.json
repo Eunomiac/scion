@@ -47,253 +47,187 @@
                 "attributes": {
                     "priorities": ["physical", "social", "mental"],
                     "favoredApproach": "",
-                    "dotsPurchased": {
+                    "assignableGeneralDots": {
                         "xp": 0,
                         "other": 1
                     },
-                    "unspentDots": {
+                    "assignableArenaDots": {
                         "primary": 6,
                         "secondary": 4,
                         "tertiary": 2                
                     },
                     "list": {
                         "intellect": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "cunning": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "resolve": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "might": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "dexterity": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "stamina": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "presence": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "manipulation": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         },
                         "composure": {
-                            "min": 0,
-                            "value": 1,
-                            "max": 5,
+                            "assigned": 0,
                             "modifier": []
                         }   
                     }
                 },
                 "skills": {
-                    "dotsPurchased": {
+                    "assignableDots": {
                         "xp": 0,
                         "other": 5
                     },
-                    "specsPurchased": 0,                    
+                    "assignableSpecs": 0,                    
                     "list": {
                         "academics": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "athletics": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "closeCombat": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "culture": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "empathy": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "firearms": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "integrity": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "leadership": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "medicine": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "occult": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "persuasion": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "pilot": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "science": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "subterfuge": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "survival": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         },
                         "technology": {
-                            "min": 0,
-                            "value": 0,
-                            "max": 5,
                             "modifier": [],
-                            "purchased": 0,
+                            "assigned": 0,
                             "specialties": {
-                                "purchased": 0,
-                                "list": []
+                                "assigned": 0,
+                                "list": {}
                             }
                         }
                     }
