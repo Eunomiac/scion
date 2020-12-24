@@ -2180,6 +2180,9 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .connectionDescription {
   margin: 0 0 auto 0 !important;
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary {

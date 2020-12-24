@@ -7,12 +7,11 @@ export {Dust as DUST} from "./external/dust.js";
 export * as U from "./data/utils.js"; // Utilities
 export {Dragger} from "./data/dragger.js"; // Collapsible Draggable Subclass
 export {
-    baseConstants as C,
     scionSystemData as SCION,
     handlebarTemplates,
     itemCategories,
     popoutData,
-    signatureChars
+    testChars
 } from "./data/constants.js"; // Constants & System Data
 // #endregion
 

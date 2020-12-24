@@ -50,7 +50,7 @@
             {{/each}}
         </div>
         <div class="unspentDots unspentSkillDots flex-col alignCenter">
-            <h2 class="alignCenter noBG">Unspent Skill Dots</h2>            
+            <h2 class="alignCenter noBG">Unassigned Skill Dots</h2>            
             <div class="flex-row-wrap alignCenter width100">
                 {{#for unspentSkillDots}}
                 <span class="dot-unspent" data-dottype="skill"></span>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="unspentDots unspentAttrDots flex-col alignCenter">
-            <h2 class="alignCenter noBG">Unspent Attribute Dots</h2> 
+            <h2 class="alignCenter noBG">Unassigned Attribute Dots</h2> 
             {{#if unspentGeneralAttrDots}}
             <div class="flex-row-wrap alignCenter width100">                    
                 {{#for unspentGeneralAttrDots}}
@@ -69,7 +69,7 @@
             {{#if unspentArenaDots}}
             <div class="flex-row-wrap alignCenter width100">
             {{#each unspentArenaDots as |arena|}}
-                {{#if (test (test (math @index "%" 10) "==" 0) "&&" (test @index ">" 1))}}</div><div class="flex-row-wrap alignCenter width100">{{/if}}
+                {{#if (test (test (math @index "%" 8) "==" 0) "&&" (test @index ">" 1))}}</div><div class="flex-row-wrap alignCenter width100">{{/if}}
                 <span class="dot-unspent alignCenter" data-dottype="{{arena}}Attr"></span>
             {{/each}}
             </div>

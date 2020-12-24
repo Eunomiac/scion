@@ -312,7 +312,8 @@ export class ScionActor extends Actor {
     get assignedSkillVals() { return U.KeyMapObj(SCION.SKILLS.list, (v, k) => this.skills[k].assigned) }
     get derivedSkillVals() { return U.KeyMapObj(SCION.SKILLS.list, (v, k) => this.baseSkillVals[k] + this.assignedSkillVals[k]) }
     get skillVals() { return U.KeyMapObj(this.derivedSkillVals, (v) => Math.max(SCION.SKILLS.min, Math.min(v, SCION.SKILLS.max))) }
-    get excessSkillVals() { return U.KeyMapObj(this.derivedSkillVals, (v, k) => v - this.skillVals[k]) }
+    get nonZeroSkillVals() { return _.pick(this.skillVals, (v) => v !== 0) }
+    get skillValsCorrection() { return _.pick(U.KeyMapObj(this.skillVals, (v, k) => v - this.derivedSkillVals[k]), (v) => v !== 0) }
     get assignableSkillDots() { return Object.values(this.aData.skills.assignableDots).reduce((tot, val) => tot + val, 0) }
     get unassignedSkillDots() { return this.assignableSkillDots - Object.values(this.assignedSkillVals).reduce((tot, val) => tot + val, 0) }
     get specialties() {
@@ -331,7 +332,8 @@ export class ScionActor extends Actor {
             ".*. assignedSkillVals": U.Clone(this.assignedSkillVals),
             ".*. derivedSkillVals": U.Clone(this.derivedSkillVals),
             ".*. skillVals": U.Clone(this.skillVals),
-            ".*. excessSkillVals": U.Clone(this.excessSkillVals),
+            ".*. nonZeroSkillVals": U.Clone(this.nonZeroSkillVals),
+            ".*. skillValsCorrection": U.Clone(this.skillValsCorrection),
             ".*. assignableSkillDots": U.Clone(this.assignableSkillDots),
             ".*. unassignedSkillDots": U.Clone(this.unassignedSkillDots),
             ".*. specialties": U.Clone(this.specialties)
@@ -347,7 +349,7 @@ export class ScionActor extends Actor {
     get assignedAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => this.attributes[k].assigned) }
     get derivedAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => this.baseAttrVals[k] + this.assignedAttrVals[k]) }
     get attrVals() { return U.KeyMapObj(this.derivedAttrVals, (v) => Math.max(SCION.ATTRIBUTES.min, Math.min(v, SCION.ATTRIBUTES.max))) }
-    get excessAttrVals() { return U.KeyMapObj(this.derivedAttrVals, (v, k) => v - this.attrVals[k]) }
+    get attrValsCorrection() { return _.pick(U.KeyMapObj(this.attrVals, (v, k) => v - this.derivedAttrVals[k]), (v) => v !== 0) }
 
     get baseArenaDots() { return U.KeyMapObj(Object.values(SCION.ATTRIBUTES.priorities), (k) => this.aData.attributes.priorities[k], (v) => v.startingDots) }
     get assignableArenaAttrDots() { return U.KeyMapObj(Object.values(this.aData.attributes.assignableArenaDots), (k) => this.aData.attributes.priorities[k], (v) => v) }
@@ -355,7 +357,7 @@ export class ScionActor extends Actor {
     get assignedArenaAttrDots() { return U.KeyMapObj(this.assignedAttrDotsByArena, (val, arena) => Math.min(val, this.assignableArenaAttrDots[arena])) }
     get unassignedArenaAttrDots() { return U.KeyMapObj(this.assignableArenaAttrDots, (val, arena) => val - this.assignedArenaAttrDots[arena]) }
     get assignableGeneralAttrDots() { return Object.values(this.aData.attributes.assignableGeneralDots).reduce((tot, val) => tot + val, 0) }
-    get assignedGeneralAttrDots() { return Math.max(0, Object.values(this.assignedAttrVals).reduce((tot, val) => val + tot, 0) - Object.values(this.unassignedArenaAttrDots).reduce((tot, val) => val + tot, 0)) }
+    get assignedGeneralAttrDots() { return Math.max(0, Object.values(this.assignedAttrVals).reduce((tot, val) => val + tot, 0) - Object.values(this.assignableArenaAttrDots).reduce((tot, val) => val + tot, 0)) }
     get unassignedGeneralAttrDots() { return this.assignableGeneralAttrDots - this.assignedGeneralAttrDots }
 
     get fullAttributeReport() {
@@ -366,7 +368,7 @@ export class ScionActor extends Actor {
             ".*. assignedAttrVals": U.Clone(this.assignedAttrVals),
             ".*. derivedAttrVals": U.Clone(this.derivedAttrVals),
             ".*. attrVals": U.Clone(this.attrVals),
-            ".*. excessAttrVals": U.Clone(this.excessAttrVals),
+            ".*. attrValsCorrection": U.Clone(this.attrValsCorrection),
             ".*. baseArenaDots": U.Clone(this.baseArenaDots),
             ".*. assignableArenaAttrDots": U.Clone(this.assignableArenaAttrDots),
             ".*. assignedAttrDotsByArena": U.Clone(this.assignedAttrDotsByArena),

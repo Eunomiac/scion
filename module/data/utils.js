@@ -1,5 +1,24 @@
 import {_} from "../modules.js";
-import {baseConstants as C} from "./constants.js";
+
+// #region CONSTANTS (INTERNAL)
+const noCapTitleCase = ["above", "after", "at", "below", "by", "down", "for", "from", "in", "onto", "of",
+                        "off", "on", "out", "to", "under", "up", "with", "for", "and", "nor", "but", "or",
+                        "yet", "so", "the", "an", "a"];
+const loremIpsumText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies 
+nibh sed massa euismod lacinia. Aliquam nec est ac nunc ultricies scelerisque porta vulputate odio. 
+Integer gravida mattis odio, semper volutpat tellus. Ut elit leo, auctor eget fermentum hendrerit, 
+aliquet ac nunc. Suspendisse porta turpis vitae mi posuere molestie. Cras lectus lacus, vulputate a 
+vestibulum in, mattis vel mi. Mauris quis semper mauris. Praesent blandit nec diam eget tincidunt. Nunc 
+aliquet consequat massa ac lacinia. Ut posuere velit sagittis, vehicula nisl eget, fringilla nibh. Duis 
+volutpat mattis libero, a porttitor sapien viverra ut. Phasellus vulputate imperdiet ligula, eget 
+eleifend metus tempor nec. Nam eget sapien risus. Praesent id suscipit elit. Sed pellentesque ligula 
+diam, non aliquet magna feugiat vitae. Pellentesque ut tortor id erat placerat dignissim. Pellentesque 
+ut dui vel leo laoreet sodales nec ac tellus. In hac habitasse platea dictumst. Proin sed ex sed augue 
+sollicitudin interdum. Sed id lacus porttitor nisi vestibulum tincidunt. Nulla facilisi. Vestibulum 
+feugiat finibus magna in pretium. Proin consectetur lectus nisi, non commodo lectus tempor et. Cras 
+viverra, mi in consequat aliquet, justo mauris fringilla tellus, at accumsan magna metus in eros. Sed 
+vehicula, diam ut sagittis semper, purus massa mattis dolor, in posuere.`;
+// #endregion
 
 // #region CONSOLE LOGGING
 const groupStyles = {
@@ -74,7 +93,7 @@ const stackTrace = () => {
         .filter((line) => !stackTraceBlacklist.some((regex) => regex.test(line)))
         .map((line) => line.replace(/http:\/\/localhost:[^:]*?(\/scion\/(module\/)?|\/scripts\/)/gu, ""))
         .map((line) => (line.match(/^([^(]+)(?: \(|)([^())]*)\)?$/u) || []).slice(1, 3))
-        .map(([name, loc]) => [name, ...loc.replace(":","=").split("=")]);
+        .map(([name, loc]) => [name, ...(loc ?? "").replace(":","=").split("=")]);
     while (stack.length && (stack[0] || []).join(" ").includes("utils.js"))
         stack.shift();
     return [
@@ -155,7 +174,7 @@ export const UCase = (str) => `${str}`.toUpperCase();
 export const LCase = (str) => `${str}`.toLowerCase();
 export const SCase = (str) => `${`${str}`.slice(0, 1).toUpperCase()}${`${str}`.slice(1)}`;
 export const TCase = (str) => `${str}`.split(/\s/u)
-    .map((x, i) => i && C.noCapTitleCase.includes(`${x}`.toLowerCase()) ? `${x}`.toLowerCase() : SCase(x))
+    .map((x, i) => i && noCapTitleCase.includes(`${x}`.toLowerCase()) ? `${x}`.toLowerCase() : SCase(x))
     .join(" ")
     .replace(/\s+/gu, " ")
     .trim();
@@ -168,6 +187,14 @@ export const Loc = (locRef, formatDict = {}) => {
     return locRef;
 };
 export const ParseArticles = (str) => `${str}`.replace(/\b(a|A)\s([aeiouAEIOU])/gu, "$1n $2");
+export const LoremIpsum = (numWords = 200) => {
+    const loremIpsumWords = loremIpsumText.replace(/\n/gu, "").split(/ /u);
+    while (loremIpsumWords.length < numWords)
+        loremIpsumWords.push(...loremIpsumWords);
+    loremIpsumWords.length = numWords;
+    loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "")}.`;
+    return loremIpsumWords.join(" ");
+};
 // #endregion
 
 // #region NUMBER FUNCTIONS: Parsing
@@ -197,6 +224,45 @@ export const Clone = (obj) => {
         cloneObj = Object.assign({}, obj);
     }
     return cloneObj;
+};
+export const Merge = (target, source, isMergingArrays = false) => {
+    target = ((obj) => {
+        let cloneObj;
+        try {
+            cloneObj = JSON.parse(JSON.stringify(obj));
+        } catch(err) {
+            cloneObj = Object.assign({}, obj);
+        }
+        return cloneObj;
+    })(target);
+
+    const isObject = (obj) => obj && typeof obj === "object";
+
+    if (!isObject(target) || !isObject(source))
+        return source;
+
+    Object.keys(source).forEach(key => {
+        const targetValue = target[key];
+        const sourceValue = source[key];
+
+        if (Array.isArray(targetValue) && Array.isArray(sourceValue))
+            if (isMergingArrays) {
+                target[key] = targetValue.map((x, i) => sourceValue.length <= i
+                    ? x
+                    : Merge(x, sourceValue[i], isMergingArrays));
+                if (sourceValue.length > targetValue.length)
+                    target[key] = target[key].concat(sourceValue.slice(targetValue.length));
+
+            } else {
+                target[key] = targetValue.concat(sourceValue);
+            }
+        else if (isObject(targetValue) && isObject(sourceValue))
+            target[key] = Merge(Object.assign({}, targetValue), sourceValue, isMergingArrays);
+        else
+            target[key] = sourceValue;
+    });
+
+    return target;
 };
 export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
     const newDict = {};

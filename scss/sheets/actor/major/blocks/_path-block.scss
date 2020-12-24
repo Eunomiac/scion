@@ -32,7 +32,13 @@
             &[class*="details"] {
                 min-height: 84px;
 
-                .connectionDescription { margin: 0 0 auto 0 !important; }
+                .connectionDescription { 
+                    margin: 0 0 auto 0 !important; 
+                    max-height: 50px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                }
                 .conditionContainer {
                     .conditionSummary {
                         display: inline-block;

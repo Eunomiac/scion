@@ -21,19 +21,9 @@
                     "longTerm": [],
                     "band": []
                 },
-                "virtue": {
-                    "min": 0,
-                    "value": 3,
-                    "max": 5,
-                    "modifier": []
-                },
+                "virtue": 3,
                 "pathPriorities": ["origin", "role", "pantheon"],
-                "purviews": {
-                    "fromBirthrights": 0,                   
-                    "pantheon": "",
-                    "innate": "",
-                    "other": []                      
-                },
+                "purviews": {},
                 "birthrights": {
                     "unspentDots": 0,
                     "list": {}
@@ -47,189 +37,40 @@
                 "attributes": {
                     "priorities": ["physical", "social", "mental"],
                     "favoredApproach": "",
-                    "assignableGeneralDots": {
-                        "xp": 0,
-                        "other": 1
-                    },
-                    "assignableArenaDots": {
-                        "primary": 6,
-                        "secondary": 4,
-                        "tertiary": 2                
-                    },
+                    "assignableGeneralDots": { "xp": 0, "other": 1 },
+                    "assignableArenaDots": { "primary": 6, "secondary": 4, "tertiary": 2 },
                     "list": {
-                        "intellect": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "cunning": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "resolve": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "might": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "dexterity": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "stamina": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "presence": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "manipulation": {
-                            "assigned": 0,
-                            "modifier": []
-                        },
-                        "composure": {
-                            "assigned": 0,
-                            "modifier": []
-                        }   
+                        "intellect": { "assigned": 0, "modifiers": [] },
+                        "cunning": { "assigned": 0, "modifiers": [] },
+                        "resolve": { "assigned": 0, "modifiers": [] },
+                        "might": { "assigned": 0, "modifiers": [] },
+                        "dexterity": { "assigned": 0, "modifiers": [] },
+                        "stamina": { "assigned": 0, "modifiers": [] },
+                        "presence": { "assigned": 0, "modifiers": [] },
+                        "manipulation": { "assigned": 0, "modifiers": [] },
+                        "composure": { "assigned": 0, "modifiers": [] }
                     }
                 },
                 "skills": {
-                    "assignableDots": {
-                        "xp": 0,
-                        "other": 5
-                    },
+                    "assignableDots": { "xp": 0, "other": 5 },
                     "assignableSpecs": 0,                    
                     "list": {
-                        "academics": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "athletics": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "closeCombat": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "culture": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "empathy": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "firearms": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "integrity": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "leadership": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "medicine": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "occult": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "persuasion": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "pilot": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "science": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "subterfuge": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "survival": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        },
-                        "technology": {
-                            "modifier": [],
-                            "assigned": 0,
-                            "specialties": {
-                                "assigned": 0,
-                                "list": {}
-                            }
-                        }
+                        "academics": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "athletics": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "closeCombat": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "culture": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "empathy": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "firearms": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "integrity": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "leadership": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "medicine": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "occult": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "persuasion": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "pilot": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "science": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "subterfuge": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "survival": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } },
+                        "technology": { "assigned": 0, "modifiers": [], "specialties": { "assigned": 0, "list": {} } }
                     }
                 }
             }

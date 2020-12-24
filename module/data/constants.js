@@ -1,10 +1,47 @@
 import * as _ from "../external/underscore/underscore-esm-min.js";
-const Rand = (n1, n2) => Math.round(Math.random() * (n2 - n1)) + n1;
+import {Rand, LoremIpsum} from "./utils.js";
 
-export const baseConstants = {
-    noCapTitleCase: ["above", "after", "at", "below", "by", "down", "for", "from", "in", "onto", "of", "off", "on", "out", "to", "under", "up", "with", "for", "and", "nor", "but", "or", "yet", "so", "the", "an", "a"]
+// #region TEST CODE FOR VSC "Run Code" EXTENSION
+/*
+const Rand = (n1, n2) => Math.round(Math.random() * (n2 - n1)) + n1;
+const loremIpsumText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies
+nibh sed massa euismod lacinia. Aliquam nec est ac nunc ultricies scelerisque porta vulputate odio.
+Integer gravida mattis odio, semper volutpat tellus. Ut elit leo, auctor eget fermentum hendrerit,
+aliquet ac nunc. Suspendisse porta turpis vitae mi posuere molestie. Cras lectus lacus, vulputate a
+vestibulum in, mattis vel mi. Mauris quis semper mauris. Praesent blandit nec diam eget tincidunt. Nunc
+aliquet consequat massa ac lacinia. Ut posuere velit sagittis, vehicula nisl eget, fringilla nibh. Duis
+volutpat mattis libero, a porttitor sapien viverra ut. Phasellus vulputate imperdiet ligula, eget
+eleifend metus tempor nec. Nam eget sapien risus. Praesent id suscipit elit. Sed pellentesque ligula
+diam, non aliquet magna feugiat vitae. Pellentesque ut tortor id erat placerat dignissim. Pellentesque
+ut dui vel leo laoreet sodales nec ac tellus. In hac habitasse platea dictumst. Proin sed ex sed augue
+sollicitudin interdum. Sed id lacus porttitor nisi vestibulum tincidunt. Nulla facilisi. Vestibulum
+feugiat finibus magna in pretium. Proin consectetur lectus nisi, non commodo lectus tempor et. Cras
+viverra, mi in consequat aliquet, justo mauris fringilla tellus, at accumsan magna metus in eros. Sed
+vehicula, diam ut sagittis semper, purus massa mattis dolor, in posuere.`;
+const LoremIpsum = (numWords = 200) => {
+    const loremIpsumWords = loremIpsumText.replace(/\n/gu, "").split(/ /u);
+    while (loremIpsumWords.length < numWords)
+        loremIpsumWords.push(...loremIpsumWords);
+    loremIpsumWords.length = numWords;
+    loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "")}.`;
+    return loremIpsumWords.join(" ");
 };
-export const scionSystemData = {
+const _ = {
+    sample: (arr) => arr[Rand(0, arr.length - 1)],
+    shuffle: (arr) => {
+        let origArr = [...arr];
+        const newArr = [];
+        while (origArr.length) {
+            for (let i = Rand(0, arr.length - 1); i < origArr.length; i++)
+                origArr.unshift(origArr.pop());
+            newArr.push(origArr.pop());
+        }
+    }
+}
+*/
+// #endregion
+
+const scionSystemData = {
     TIERS: {
         mortal: "scion.tier.mortal",
         hero: "scion.tier.hero",
@@ -2017,7 +2054,7 @@ export const scionSystemData = {
         }
     }
 };
-export const handlebarTemplates = {
+const handlebarTemplates = {
     chargen: {
         template: () => "systems/scion/templates/actor/chargen/actor-chargen.hbs",
         "step-one": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-one.hbs"},
@@ -2039,7 +2076,7 @@ export const handlebarTemplates = {
         path: {template: () => "systems/scion/templates/item/popouts/path-tooltip-block.hbs"}
     }
 };
-export const itemCategories = {
+const itemCategories = {
     paths: ["path"],
     callings: ["calling"],
     knacks: ["knack"],
@@ -2048,475 +2085,71 @@ export const itemCategories = {
     birthrights: ["relic", "follower", "creature", "guide", "cult", "covenant"],
     conditions: ["condition"]
 };
-export const popoutData = {
+const popoutData = {
     path: {leftSpacing: -500, rightSpacing: -500}
 };
-export const signatureChars = {
-    "Rhys Callaghan": {
-        actorData: {
-            genesis: "born",
-            concept: "Lead Singer and All Around Good Lad",
-            pantheon: "tuathaDeDanann",
-            patron: "aengus",
-            divineTitle: "\"Bright Eyes\"",
+const testChars = {
+    get actorData() {
+        const pantheon = _.sample(Object.keys(scionSystemData.PANTHEONS));
+        return {
+            genesis: _.sample(["born", "created", "chosen", "incarnation"]),
+            concept: "I am a test character!",
+            pantheon,
+            patron: _.sample(scionSystemData.PANTHEONS[pantheon].members),
+            divineTitle: "Test Char",
             attributes: {
+                priorities: _.shuffle(["social", "mental", "physical"]),
                 favoredApproach: _.sample(["force", "finesse", "resilience"]),
-                assignableGeneralDots: {
-                    xp: Rand(5, 15),
-                    other: 1
-                },
+                assignableGeneralDots: {xp: Rand(1, 10), other: 1},
+                assignableArenaDots: {"primary": 6, "secondary": 4, "tertiary": 2},
                 list: {
-                    presence: {assigned: Rand(0, 3)},
-                    manipulation: {assigned: Rand(0, 3)},
-                    composure: {assigned: Rand(0, 3)},
-                    intellect: {assigned: Rand(0, 3)},
-                    cunning: {assigned: Rand(0, 3)},
-                    resolve: {assigned: Rand(0, 3)},
-                    might: {assigned: Rand(0, 3)},
-                    dexterity: {assigned: Rand(0, 3)},
-                    stamina: {assigned: Rand(0, 3)}
-                },
-                priorities: _.shuffle(["social", "mental", "physical"])
+                    presence: {assigned: 0, modifiers: []},
+                    manipulation: {assigned: 0, modifiers: []},
+                    composure: {assigned: 0, modifiers: []},
+                    intellect: {assigned: 0, modifiers: []},
+                    cunning: {assigned: 0, modifiers: []},
+                    resolve: {assigned: 0, modifiers: []},
+                    might: {assigned: 0, modifiers: []},
+                    dexterity: {assigned: 0, modifiers: []},
+                    stamina: {assigned: 0, modifiers: []}
+                }
             },
             skills: {
-                "assignableDots": {
-                    "xp": Rand(5, 20),
-                    "other": 5
-                },
-                assignableSpecs: 0,
+                assignableDots: {"xp": Rand(5, 20), "other": 5},
+                assignableSpecs: Rand(0, 3),
                 list: {
-                    academics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    athletics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    closeCombat: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    culture: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    empathy: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    firearms: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    integrity: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    leadership: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    medicine: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    occult: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    persuasion: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    pilot: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    science: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    subterfuge: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    survival: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    technology: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    }
+                    academics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    athletics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    closeCombat: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    culture: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    empathy: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    firearms: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    integrity: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    leadership: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    medicine: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    occult: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    persuasion: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    pilot: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    science: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    subterfuge: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    survival: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                    technology: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}}
                 }
             },
             pathPriorities: _.shuffle(["role", "origin", "pantheon"])
-        },
-        itemCreateData: [
-            {
-                name: "Origin",
-                type: "path",
-                data: {
-                    type: "origin",
-                    title: "Carefree Wanderer with Luck On His Side",
-                    skills: ["empathy", "persuasion", "subterfuge"],
-                    connections: [],
-                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Interesting Times",
-                    type: "pathSuspension",
-                    description: "2's on any d10's count as 1's when determining botches.",
-                    resolution: "Rhys suffers the effect of a botch.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Knife in the Back",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Role",
-                type: "path",
-                data: {
-                    type: "role",
-                    title: "No Heaven Frontman",
-                    skills: ["athletics", "culture", "persuasion"],
-                    connections: [],
-                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Tone Deaf",
-                    type: "pathSuspension",
-                    description: "-2 penalty to all Culture (Music) rolls.",
-                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Nickelback 2.0",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Pantheon",
-                type: "path",
-                data: {
-                    type: "pantheon",
-                    title: "Scion of Aengus, Step-Scion of the Morrigan",
-                    skills: ["closeCombat", "culture", "subterfuge"],
-                    connections: [],
-                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Murder of Crows",
-                    type: "pathSuspension",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
-                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "pantheon"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Forced to Choose",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "pantheon"
-                }
-            }
-        ]
+        };
     },
-    "Horace Farrow": {
-        actorData: {
-            genesis: "born",
-            pantheon: "netjer",
-            patron: "horus",
-            divineTitle: "\"The Tempered Lawgiver\"",
-            attributes: {
-                favoredApproach: _.sample(["force", "finesse", "resilience"]),
-                assignableGeneralDots: {
-                    xp: Rand(5, 15),
-                    other: 1
-                },
-                list: {
-                    presence: {assigned: Rand(0, 3)},
-                    manipulation: {assigned: Rand(0, 3)},
-                    composure: {assigned: Rand(0, 3)},
-                    intellect: {assigned: Rand(0, 3)},
-                    cunning: {assigned: Rand(0, 3)},
-                    resolve: {assigned: Rand(0, 3)},
-                    might: {assigned: Rand(0, 3)},
-                    dexterity: {assigned: Rand(0, 3)},
-                    stamina: {assigned: Rand(0, 3)}
-                },
-                priorities: _.shuffle(["social", "mental", "physical"])
-            },
-            skills: {
-                "assignableDots": {
-                    "xp": Rand(5, 20),
-                    "other": 5
-                },
-                assignableSpecs: 0,
-                list: {
-                    academics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    athletics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    closeCombat: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    culture: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    empathy: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    firearms: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    integrity: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    leadership: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    medicine: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    occult: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    persuasion: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    pilot: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    science: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    subterfuge: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    survival: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    technology: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    }
-                }
-            },
-            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
-        },
-        itemCreateData: [
+    get itemCreateData() {
+        return [
             {
                 name: "Origin",
                 type: "path",
                 data: {
                     type: "origin",
-                    title: "Carefree Wanderer with Luck On His Side",
+                    title: "Test Origin Path Title",
                     skills: [],
                     connections: [],
-                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
+                    connectionDescription: LoremIpsum(Rand(10, 200)),
                     conditions: {
                         pathSuspension: null,
                         pathRevocation: null
@@ -2527,10 +2160,10 @@ export const signatureChars = {
                 name: "Suspension",
                 type: "condition",
                 data: {
-                    title: "Interesting Times",
+                    title: "Origin Suspended",
                     type: "pathSuspension",
-                    description: "2's on any d10's count as 1's when determining botches.",
-                    resolution: "Rhys suffers the effect of a botch.",
+                    description: LoremIpsum(Rand(10, 200)),
+                    resolution: LoremIpsum(Rand(10, 200)),
                     effects: [],
                     isPersistent: false,
                     linkedItem: "origin"
@@ -2540,10 +2173,10 @@ export const signatureChars = {
                 name: "Revocation",
                 type: "condition",
                 data: {
-                    title: "Knife in the Back",
+                    title: "Origin Revoked!",
                     type: "pathRevocation",
-                    description: "",
-                    resolution: "",
+                    description: LoremIpsum(Rand(10, 200)),
+                    resolution: LoremIpsum(Rand(10, 200)),
                     effects: [],
                     isPersistent: true,
                     linkedItem: "origin"
@@ -2554,10 +2187,10 @@ export const signatureChars = {
                 type: "path",
                 data: {
                     type: "role",
-                    title: "No Heaven Frontman",
+                    title: "Test Role Path Title",
                     skills: [],
                     connections: [],
-                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
+                    connectionDescription: LoremIpsum(Rand(10, 200)),
                     conditions: {
                         pathSuspension: null,
                         pathRevocation: null
@@ -2568,10 +2201,10 @@ export const signatureChars = {
                 name: "Suspension",
                 type: "condition",
                 data: {
-                    title: "Tone Deaf",
+                    title: "Role Suspended",
                     type: "pathSuspension",
-                    description: "-2 penalty to all Culture (Music) rolls.",
-                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
+                    description: LoremIpsum(Rand(10, 200)),
+                    resolution: LoremIpsum(Rand(10, 200)),
                     effects: [],
                     isPersistent: false,
                     linkedItem: "role"
@@ -2581,10 +2214,10 @@ export const signatureChars = {
                 name: "Revocation",
                 type: "condition",
                 data: {
-                    title: "Nickelback 2.0",
+                    title: "Role Revoked!",
                     type: "pathRevocation",
-                    description: "",
-                    resolution: "",
+                    description: LoremIpsum(Rand(10, 200)),
+                    resolution: LoremIpsum(Rand(10, 200)),
                     effects: [],
                     isPersistent: true,
                     linkedItem: "role"
@@ -2595,10 +2228,10 @@ export const signatureChars = {
                 type: "path",
                 data: {
                     type: "pantheon",
-                    title: "Scion of Aengus, Step-Scion of the Morrigan",
+                    title: "Test Pantheon Path Title",
                     skills: [],
                     connections: [],
-                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
+                    connectionDescription: LoremIpsum(Rand(10, 200)),
                     conditions: {
                         pathSuspension: null,
                         pathRevocation: null
@@ -2609,10 +2242,10 @@ export const signatureChars = {
                 name: "Suspension",
                 type: "condition",
                 data: {
-                    title: "Murder of Crows",
+                    title: "Pantheon Suspended",
                     type: "pathSuspension",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
-                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
+                    description: LoremIpsum(Rand(10, 200)),
+                    resolution: LoremIpsum(Rand(10, 200)),
                     effects: [],
                     isPersistent: false,
                     linkedItem: "pantheon"
@@ -2622,885 +2255,116 @@ export const signatureChars = {
                 name: "Revocation",
                 type: "condition",
                 data: {
-                    title: "Forced to Choose",
+                    title: "Pantheon Revoked!",
                     type: "pathRevocation",
-                    description: "",
-                    resolution: "",
+                    description: LoremIpsum(Rand(10, 200)),
+                    resolution: LoremIpsum(Rand(10, 200)),
                     effects: [],
                     isPersistent: true,
                     linkedItem: "pantheon"
                 }
             }
-        ]
+        ];
     },
-    "Brigitte De La Croix": {
-        actorData: {
-            genesis: "chosen",
-            pantheon: "loa",
-            patron: "baronSamedi",
-            divineTitle: "\"Who Waits With Those In Darkness\"",
-            attributes: {
-                favoredApproach: _.sample(["force", "finesse", "resilience"]),
-                assignableGeneralDots: {
-                    xp: Rand(5, 15),
-                    other: 1
-                },
-                list: {
-                    presence: {assigned: Rand(0, 3)},
-                    manipulation: {assigned: Rand(0, 3)},
-                    composure: {assigned: Rand(0, 3)},
-                    intellect: {assigned: Rand(0, 3)},
-                    cunning: {assigned: Rand(0, 3)},
-                    resolve: {assigned: Rand(0, 3)},
-                    might: {assigned: Rand(0, 3)},
-                    dexterity: {assigned: Rand(0, 3)},
-                    stamina: {assigned: Rand(0, 3)}
-                },
-                priorities: _.shuffle(["social", "mental", "physical"])
+    sigChars: {
+        "Rhys Callaghan": {
+            actorData: {
+                genesis: "born",
+                concept: "Lead Singer and All Around Good Lad",
+                pantheon: "tuathaDeDanann",
+                patron: "aengus",
+                divineTitle: "Bright Eyes"
             },
-            skills: {
-                "assignableDots": {
-                    "xp": Rand(5, 20),
-                    "other": 5
+            itemCreateData: [
+                {
+                    data: {
+                        title: "Carefree Wanderer with Luck On His Side",
+                        connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots"
+                    }
                 },
-                assignableSpecs: 0,
-                list: {
-                    academics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    athletics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    closeCombat: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    culture: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    empathy: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    firearms: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    integrity: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    leadership: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    medicine: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    occult: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    persuasion: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    pilot: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    science: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    subterfuge: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    survival: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    technology: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
+                {
+                    data: {
+                        title: "Interesting Times",
+                        description: "2's on any d10's count as 1's when determining botches.",
+                        resolution: "Rhys suffers the effect of a botch."
+                    }
+                },
+                {
+                    data: {
+                        title: "Knife in the Back"
+                    }
+                },
+                {
+                    data: {
+                        title: "No Heaven Frontman",
+                        connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth"
+                    }
+                },
+                {
+                    data: {
+                        title: "Tone Deaf",
+                        description: "-2 penalty to all Culture (Music) rolls.",
+                        resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll."
+                    }
+                },
+                {
+                    data: {
+                        title: "Nickelback 2.0"
+                    }
+                },
+                {
+                    data: {
+                        title: "Scion of Aengus, Step-Scion of the Morrigan",
+                        connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle"
+                    }
+                },
+                {
+                    data: {
+                        title: "Murder of Crows",
+                        description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
+                        resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan."
+                    }
+                },
+                {
+                    data: {
+                        title: "Forced to Choose"
                     }
                 }
-            },
-            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
+            ]
         },
-        itemCreateData: [
-            {
-                name: "Origin",
-                type: "path",
-                data: {
-                    type: "origin",
-                    title: "Carefree Wanderer with Luck On His Side",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Interesting Times",
-                    type: "pathSuspension",
-                    description: "2's on any d10's count as 1's when determining botches.",
-                    resolution: "Rhys suffers the effect of a botch.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Knife in the Back",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Role",
-                type: "path",
-                data: {
-                    type: "role",
-                    title: "No Heaven Frontman",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Tone Deaf",
-                    type: "pathSuspension",
-                    description: "-2 penalty to all Culture (Music) rolls.",
-                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Nickelback 2.0",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Pantheon",
-                type: "path",
-                data: {
-                    type: "pantheon",
-                    title: "Scion of Aengus, Step-Scion of the Morrigan",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Murder of Crows",
-                    type: "pathSuspension",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
-                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "pantheon"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Forced to Choose",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "pantheon"
-                }
+        "Horace Farrow": {
+            actorData: {
+                genesis: "born",
+                pantheon: "netjer",
+                patron: "horus",
+                divineTitle: "The Tempered Lawgiver"
             }
-        ]
-    },
-    "Adonis Rhodes": {
-        actorData: {
-            genesis: "born",
-            pantheon: "theoi",
-            patron: "aphrodite",
-            divineTitle: "\"Steward of the Heart\"",
-            attributes: {
-                favoredApproach: _.sample(["force", "finesse", "resilience"]),
-                assignableGeneralDots: {
-                    xp: Rand(5, 15),
-                    other: 1
-                },
-                list: {
-                    presence: {assigned: Rand(0, 3)},
-                    manipulation: {assigned: Rand(0, 3)},
-                    composure: {assigned: Rand(0, 3)},
-                    intellect: {assigned: Rand(0, 3)},
-                    cunning: {assigned: Rand(0, 3)},
-                    resolve: {assigned: Rand(0, 3)},
-                    might: {assigned: Rand(0, 3)},
-                    dexterity: {assigned: Rand(0, 3)},
-                    stamina: {assigned: Rand(0, 3)}
-                },
-                priorities: _.shuffle(["social", "mental", "physical"])
-            },
-            skills: {
-                "assignableDots": {
-                    "xp": Rand(5, 20),
-                    "other": 5
-                },
-                assignableSpecs: 0,
-                list: {
-                    academics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    athletics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    closeCombat: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    culture: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    empathy: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    firearms: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    integrity: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    leadership: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    medicine: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    occult: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    persuasion: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    pilot: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    science: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    subterfuge: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    survival: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    technology: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    }
-                }
-            },
-            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
         },
-        itemCreateData: [
-            {
-                name: "Origin",
-                type: "path",
-                data: {
-                    type: "origin",
-                    title: "Carefree Wanderer with Luck On His Side",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Interesting Times",
-                    type: "pathSuspension",
-                    description: "2's on any d10's count as 1's when determining botches.",
-                    resolution: "Rhys suffers the effect of a botch.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Knife in the Back",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Role",
-                type: "path",
-                data: {
-                    type: "role",
-                    title: "No Heaven Frontman",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Tone Deaf",
-                    type: "pathSuspension",
-                    description: "-2 penalty to all Culture (Music) rolls.",
-                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Nickelback 2.0",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Pantheon",
-                type: "path",
-                data: {
-                    type: "pantheon",
-                    title: "Scion of Aengus, Step-Scion of the Morrigan",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Murder of Crows",
-                    type: "pathSuspension",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
-                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "pantheon"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Forced to Choose",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "pantheon"
-                }
+        "Brigitte De La Croix": {
+            actorData: {
+                genesis: "chosen",
+                pantheon: "loa",
+                patron: "baronSamedi",
+                divineTitle: "Who Waits With Those In Darkness"
             }
-        ]
-    },
-    "Erik Donner": {
-        actorData: {
-            genesis: "born",
-            pantheon: "aesir",
-            patron: "thor",
-            divineTitle: "\"Guardian of Midgard\"",
-            attributes: {
-                favoredApproach: _.sample(["force", "finesse", "resilience"]),
-                assignableGeneralDots: {
-                    xp: Rand(5, 15),
-                    other: 1
-                },
-                list: {
-                    presence: {assigned: Rand(0, 3)},
-                    manipulation: {assigned: Rand(0, 3)},
-                    composure: {assigned: Rand(0, 3)},
-                    intellect: {assigned: Rand(0, 3)},
-                    cunning: {assigned: Rand(0, 3)},
-                    resolve: {assigned: Rand(0, 3)},
-                    might: {assigned: Rand(0, 3)},
-                    dexterity: {assigned: Rand(0, 3)},
-                    stamina: {assigned: Rand(0, 3)}
-                },
-                priorities: _.shuffle(["social", "mental", "physical"])
-            },
-            skills: {
-                "assignableDots": {
-                    "xp": Rand(5, 20),
-                    "other": 5
-                },
-                assignableSpecs: 0,
-                list: {
-                    academics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    athletics: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    closeCombat: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    culture: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    empathy: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    firearms: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    integrity: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    leadership: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    medicine: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    occult: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    persuasion: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    pilot: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    science: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    subterfuge: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    survival: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    },
-                    technology: {
-                        modifier: [],
-                        assigned: Rand(0, 2),
-                        specialties: {
-                            assigned: 0,
-                            list: {}
-                        }
-                    }
-                }
-            },
-            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
         },
-        itemCreateData: [
-            {
-                name: "Origin",
-                type: "path",
-                data: {
-                    type: "origin",
-                    title: "Carefree Wanderer with Luck On His Side",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Interesting Times",
-                    type: "pathSuspension",
-                    description: "2's on any d10's count as 1's when determining botches.",
-                    resolution: "Rhys suffers the effect of a botch.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Knife in the Back",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "origin"
-                }
-            },
-            {
-                name: "Role",
-                type: "path",
-                data: {
-                    type: "role",
-                    title: "No Heaven Frontman",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Tone Deaf",
-                    type: "pathSuspension",
-                    description: "-2 penalty to all Culture (Music) rolls.",
-                    resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Nickelback 2.0",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "role"
-                }
-            },
-            {
-                name: "Pantheon",
-                type: "path",
-                data: {
-                    type: "pantheon",
-                    title: "Scion of Aengus, Step-Scion of the Morrigan",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
-            {
-                name: "Suspension",
-                type: "condition",
-                data: {
-                    title: "Murder of Crows",
-                    type: "pathSuspension",
-                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
-                    resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan.",
-                    effects: [],
-                    isPersistent: false,
-                    linkedItem: "pantheon"
-                }
-            },
-            {
-                name: "Revocation",
-                type: "condition",
-                data: {
-                    title: "Forced to Choose",
-                    type: "pathRevocation",
-                    description: "",
-                    resolution: "",
-                    effects: [],
-                    isPersistent: true,
-                    linkedItem: "pantheon"
-                }
+        "Adonis Rhodes": {
+            actorData: {
+                genesis: "born",
+                pantheon: "theoi",
+                patron: "aphrodite",
+                divineTitle: "Steward of the Heart"
             }
-        ]
+        },
+        "Erik Donner": {
+            actorData: {
+                genesis: "born",
+                pantheon: "aesir",
+                patron: "thor",
+                divineTitle: "Guardian of Midgard"
+            }
+        }
     }
 };
+
+export {scionSystemData, handlebarTemplates, itemCategories, popoutData, testChars}
