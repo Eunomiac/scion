@@ -178,7 +178,7 @@ export class MajorActorSheet extends ScionActorSheet {
 
             // #region DRAGULA: DRAG & DROP
 
-            // SORTING PATH PRIORITIES
+            // #region SORTING PATH PRIORITIES
             const pathContainer = html.find("#pathContainer")[0];
             const pathDragger = dragula({containers: [pathContainer]});
 
@@ -191,9 +191,12 @@ export class MajorActorSheet extends ScionActorSheet {
             });
             // #endregion
 
-            // SORTING ATTRIBUTE PRIORITIES
+            // #region SORTING ATTRIBUTE PRIORITIES
             const arenaContainer = html.find("#arenaContainer")[0];
-            const arenaDragger = dragula({containers: [arenaContainer]});
+            const arenaDragger = dragula({
+                containers: [arenaContainer],
+                moves: (e, s, handle) => handle.classList.contains("handle")
+            });
 
             arenaDragger.on("drop", async () => {
                 await this.actor.update({
@@ -203,6 +206,173 @@ export class MajorActorSheet extends ScionActorSheet {
                 const {newAttrVals} = this.actor.checkAttributes();
                 await this.actor.updateAttributes(newAttrVals);
             });
+            // #endregion
+
+            // #region DOT DRAG-AND-DROP
+            /**
+             * DOTS: class="dot" dataset-types: "attribute|physical|social|mental|skill|general|all"
+             * BINS: class="dotBin" dataset-types: "unassigned|attribute|physical|social|mental|skill|general|all", dataset-attribute / dataset-skill
+             *
+             *
+             *
+             */
+            const getDragTypes = (dot, sourceBin, targetBin) => {
+                const returnVal = {
+                    dotTypes: dot.dataset.types.split("|")
+                };
+                if (sourceBin)
+                    returnVal.sourceTypes = sourceBin.dataset?.types?.split("|") ?? [];
+                if (targetBin)
+                    returnVal.targetTypes = targetBin.dataset?.types?.split("|") ?? [];
+                return returnVal;
+            };
+            const isDotDraggable = (dot, sourceBin) => {
+                const {dotTypes, sourceTypes} = getDragTypes(dot, sourceBin);
+                if (sourceTypes.includes("unassigned")) {
+                    // U.LOG({dotTypes, sourceTypes}, "Unassigned Is Draggable!", "isDotDraggable");
+                    return true;
+                } if (sourceTypes.includes("attribute")) {
+                    const attribute = sourceBin.dataset.attribute;
+                    if (this.actor.attrVals[attribute] === this.actor.baseAttrVals[attribute]) {
+                        // U.LOG({dotTypes, sourceTypes}, `${attribute} is at Base Value: NOT Draggable`, "isDotDraggable");
+                        return false;
+                    }
+                    // U.LOG({dotTypes, sourceTypes}, `${attribute} is Draggable!`, "isDotDraggable");
+                    return true;
+                }
+                if (sourceTypes.includes("skill")) {
+                    const skill = sourceBin.dataset.skill;
+                    if (this.actor.skillVals[skill] === this.actor.baseSkillVals[skill]) {
+                        // U.LOG({dotTypes, sourceTypes}, `${skill} is at Base Value: NOT Draggable`, "isDotDraggable");
+                        return false;
+                    }
+                    // U.LOG({dotTypes, sourceTypes}, `${skill} is Draggable!`, "isDotDraggable");
+                    return true;
+                }
+                // U.LOG({dotTypes, sourceTypes}, "No Draggable Attributes Found: NOT Draggable!", "isDotDraggable");
+                return false;
+            };
+            const isTargetDroppable = (dot, sourceBin, targetBin) => {
+                if (sourceBin.dataset.binid === targetBin.dataset.binid) {
+                    // U.LOG({dot, sourceBin, targetBin}, "Source = Target: NOT Droppable!", "isTargetDroppable");
+                    return false;
+                }
+                const {dotTypes, sourceTypes, targetTypes} = getDragTypes(dot, sourceBin, targetBin);
+                if (targetTypes.includes("unassigned")) {
+                    // U.LOG({dotTypes, targetTypes}, "Can't Drop to Unassigned Bin: NOT Droppable!", "isTargetDroppable");
+                    return false;
+                }
+                if (dotTypes.every((dotType) => !targetTypes.includes(dotType))) {
+                    // U.LOG({dotTypes, targetTypes}, "No Matching Types: NOT Droppable!", "isTargetDroppable");
+                    return false;
+                }
+                if (dotTypes.includes("attribute")) {
+                    if (!targetTypes.includes("attribute")) {
+                        // U.LOG({dotTypes, targetTypes}, "Target isn't an Attribute Bin: NOT Droppable!", "isTargetDroppable");
+                        return false;
+                    }
+                    if (!dotTypes.includes("general")) {
+                        const dotArenas = dotTypes.filter((dotType) => ["physical", "mental", "social"].includes(dotType));
+                        if (dotArenas.every((dotArena) => !targetTypes.includes(dotArena))) {
+                            // U.LOG({dotTypes, targetTypes}, "Arena-Specific Dot Not Accepted Here: NOT Droppable!", "isTargetDroppable");
+                            return false;
+                        }
+                    }
+                    const attribute = targetBin.dataset.attribute;
+                    if (this.actor.attrVals[attribute] === SCION.ATTRIBUTES.max) {
+                        // U.LOG({dotTypes, sourceTypes}, `${attribute} is at MAX: NOT Droppable`, "isTargetDroppable");
+                        return false;
+                    }
+                    // U.LOG({dotTypes, sourceTypes}, `${attribute} is OK: Droppable!`, "isTargetDroppable");
+                    return true;
+                }
+                if (dotTypes.includes("skill")) {
+                    if (!targetTypes.includes("skill")) {
+                        // U.LOG({dotTypes, targetTypes}, "Target isn't a Skill Bin: NOT Droppable!", "isTargetDroppable");
+                        return false;
+                    }
+                    const skill = targetBin.dataset.skill;
+                    if (this.actor.skillVals[skill] === SCION.SKILLS.max) {
+                        // U.LOG({dotTypes, sourceTypes}, `${skill} is at MAX: NOT Droppable`, "isTargetDroppable");
+                        return false;
+                    }
+                    // U.LOG({dotTypes, sourceTypes}, `${skill} is OK: Droppable!`, "isTargetDroppable");
+                    return true;
+                }
+                // U.LOG({dotTypes, sourceTypes}, "No Droppable Attributes Found: NOT Droppable!", "isTargetDroppable");
+                return false;
+            };
+
+
+            const dotBins = html.find(".dotBin");
+            const dots = html.find(".dot");
+            const dotDragger = dragula({
+                containers: [...dotBins],
+                moves: (dot, sourceBin) => isDotDraggable(dot, sourceBin),
+                accepts: (dot, targetBin, sourceBin) => isTargetDroppable(dot, sourceBin, targetBin),
+                direction: "horizontal",
+                copy: false,
+                removeOnSpill: false
+            });
+
+            const _onDotDrag = (dot, sourceBin) => {
+                dotBins.each((i, bin) => {
+                    if (isTargetDroppable(dot, sourceBin, bin))
+                        bin.classList.add("validDrop");
+                    else
+                        bin.classList.remove("validDrop");
+                });
+            };
+            const _onDotDragEnd = (dot) => {
+                dotBins.each((i, bin) => { bin.classList.remove("validDrop") });
+            };
+            const _onDotDrop = (dot, targetBin, sourceBin) => {
+                const {dotTypes, targetTypes, sourceTypes} = getDragTypes(dot, sourceBin, targetBin);
+                const updateData = {};
+                // Increment Target Trait
+                if (targetTypes.includes("attribute")) {
+                    const attribute = targetBin.dataset.attribute;
+                    updateData[targetBin.dataset.field] = this.actor.assignedAttrVals[attribute] + 1;
+                } else if (targetTypes.includes("skill")) {
+                    const skill = targetBin.dataset.skill;
+                    updateData[targetBin.dataset.field] = this.actor.assignedSkillVals[skill] + 1;
+                }
+                // If source was another skill/attribute, decrement that.
+                if (!sourceTypes.includes("unassigned")) {
+                    if (sourceTypes.includes("attribute")) {
+                        const attribute = sourceBin.dataset.attribute;
+                        updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
+                    } else if (sourceTypes.includes("skill")) {
+                        const skill = sourceBin.dataset.skill;
+                        updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
+                    }
+                }
+                dot.remove();
+                U.LOG({targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
+                this.actor.update(updateData);
+            };
+            const _onDropRemove = (dot, x, sourceBin) => {
+                const {dotTypes, sourceTypes} = getDragTypes(dot, sourceBin);
+                const updateData = {};
+                if (!sourceTypes.includes("unassigned")) {
+                    if (sourceTypes.includes("attribute")) {
+                        const attribute = sourceBin.dataset.attribute;
+                        updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
+                    } else if (sourceTypes.includes("skill")) {
+                        const skill = sourceBin.dataset.skill;
+                        updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
+                    }
+                }
+                U.LOG({dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
+                this.actor.update(updateData);
+            };
+
+            dotDragger.on("drag", _onDotDrag);
+            dotDragger.on("dragend", _onDotDragEnd);
+            dotDragger.on("drop", _onDotDrop);
+            dotDragger.on("remove", _onDropRemove);
+
+            // #endregion
             // #endregion
         }
     }

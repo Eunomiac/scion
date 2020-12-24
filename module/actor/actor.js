@@ -357,7 +357,7 @@ export class ScionActor extends Actor {
     get assignedArenaAttrDots() { return U.KeyMapObj(this.assignedAttrDotsByArena, (val, arena) => Math.min(val, this.assignableArenaAttrDots[arena])) }
     get unassignedArenaAttrDots() { return U.KeyMapObj(this.assignableArenaAttrDots, (val, arena) => val - this.assignedArenaAttrDots[arena]) }
     get assignableGeneralAttrDots() { return Object.values(this.aData.attributes.assignableGeneralDots).reduce((tot, val) => tot + val, 0) }
-    get assignedGeneralAttrDots() { return Math.max(0, Object.values(this.assignedAttrVals).reduce((tot, val) => val + tot, 0) - Object.values(this.assignableArenaAttrDots).reduce((tot, val) => val + tot, 0)) }
+    get assignedGeneralAttrDots() { return Object.values(this.assignedAttrDotsByArena).reduce((tot, val) => val + tot, 0) - Object.values(this.assignableArenaAttrDots).reduce((tot, val) => val + tot, 0) }
     get unassignedGeneralAttrDots() { return this.assignableGeneralAttrDots - this.assignedGeneralAttrDots }
 
     get fullAttributeReport() {

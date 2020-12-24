@@ -4,7 +4,6 @@
 # IDE
 .idea/
 .vs/
-scion.code-workspace
 .vscode
 *.cpuprofile
 *.log
@@ -15,4 +14,5 @@ node_modules/
 npm-debug.log
 
 # Auto-Generated Files
+css/scion.css
 css/scion.css

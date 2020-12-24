@@ -1,0 +1,66 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": false,
+			"**/.svn": false,
+			"**/.hg": false,
+			"**/CVS": false,
+			"**/.DS_Store": false,
+			"**/.vscode": false,
+			"**/css": false,
+			"**/lib": false,
+			"**/lang": false,
+			"**/node_modules": false,
+			"**/images": false,
+			"**/fonts": false,
+			"**/.gitattributes": false,
+			".gitattributes": false,
+			"*.code-workspace": false,
+			"README.md": false,
+			"package.json": false,
+			"package-lock.json": false,
+			".prettierrc.js": false,
+			".gitignore": false,
+			".npmignore": false,
+			"gulpfile.js": false,
+			"scss/canvas": false,
+			"scss/window": false,
+			"module/external": false,
+			".eslintignore": false
+		},
+		"explorerExclude.backup": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/.vscode": true,
+			"**/css": true,
+			"**/lib": true,
+			"**/lang": true,
+			"**/node_modules": true,
+			"**/images": true,
+			"**/fonts": true,
+			"**/.gitattributes": true,
+			".gitattributes": true,
+			"*.code-workspace": true,
+			"README.md": true,
+			"package.json": true,
+			"package-lock.json": true,
+			".prettierrc.js": true,
+			".gitignore": true,
+			".npmignore": true,
+			"gulpfile.js": true,
+			"scss/canvas": true,
+			"scss/window": true,
+			"module/external": true,
+			".eslintignore": true
+		}
+		
+	}
+}

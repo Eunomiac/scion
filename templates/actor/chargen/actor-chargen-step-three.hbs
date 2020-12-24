@@ -4,10 +4,10 @@
         <h2 class="skillHeader noBG">{{loc "scion.heading.chargen.stepThreeA"}}</h2>
         <div class="skills padded flex-col">
             {{#each skillVals as |value skill|}}
-                <div class="dotline-labelled">
+                <div class="dotBin dotline-labelled" data-types="skill|general" data-skill="{{skill}}" data-binid="{{skill}}" data-field="data.skills.list.{{skill}}.assigned">
                     <div class="label alignLeft">{{loc (concat "scion.skill." skill)}}</div>
                     {{#for 5}}
-                        <span class="dot{{#if (gte value @index)}}-full{{/if}}"></span>
+                        <span class="dot {{#if (gte value @index)}}dot-full{{/if}}" data-types="skill|general"></span>
                     {{/for}}
                 </div>
                 {{#for (math (count (lookup ../skillSpecialties skill)) "--")}}
@@ -35,13 +35,13 @@
         <div id="arenaContainer" class="attributes">
             {{#each arenaPriorities as |arena|}}
                 <div class="attribute-block" data-arena="{{arena}}">
-                    <h3>{{loc (concat "scion.heading.chargen." arena "Arena")}}</h3>
+                    <h3 class="handle">{{loc (concat "scion.heading.chargen." arena "Arena")}}</h3>
                     {{#with (lookup ../arenas arena) as |attributes|}}
                     {{#each attributes as |value attribute|}}                    
-                    <div class="dotline-labelled">
+                    <div class="dotBin dotline-labelled" data-types="attribute|{{arena}}" data-attribute="{{attribute}}" data-binid="{{attribute}}" data-field="data.attributes.list.{{attribute}}.assigned">
                         <div class="label alignLeft">{{loc (concat "scion.attribute." attribute)}}</div>
                         {{#for 5}}
-                            <span class="dot{{#if (test value ">=" @index)}}-full{{/if}}"></span>
+                            <span class="dot {{#if (test value ">=" @index)}}dot-full{{/if}}" data-types="attribute{{!-- |{{dotType attribute value}} --}}"></span>
                         {{/for}}
                     </div>
                     {{/each}}
@@ -51,26 +51,26 @@
         </div>
         <div class="unspentDots unspentSkillDots flex-col alignCenter">
             <h2 class="alignCenter noBG">Unassigned Skill Dots</h2>            
-            <div class="flex-row-wrap alignCenter width100">
+            <div class="dotBin flex-row-wrap alignCenter width100" data-types="unassigned|skill|general" data-binid="unassignedGeneralSkill">
                 {{#for unspentSkillDots}}
-                <span class="dot-unspent" data-dottype="skill"></span>
+                <span class="dot dot-full-unspent" data-types="unassigned|skill|general"></span>
                 {{/for}}
             </div>
         </div>
         <div class="unspentDots unspentAttrDots flex-col alignCenter">
             <h2 class="alignCenter noBG">Unassigned Attribute Dots</h2> 
             {{#if unspentGeneralAttrDots}}
-            <div class="flex-row-wrap alignCenter width100">                    
+            <div class="dotBin flex-row-wrap alignCenter width100" data-types="unassigned|attribute|general" data-binid="unassignedGeneralAttribute">                    
                 {{#for unspentGeneralAttrDots}}
-                    <span class="dot-unspent" data-dottype="attribute"></span>
+                    <span class="dot dot-full-unspent" data-types="unassigned|attribute|general"></span>
                 {{/for}}
             </div>
             {{/if}}
             {{#if unspentArenaDots}}
-            <div class="flex-row-wrap alignCenter width100">
+            <div class="dotBin flex-row-wrap alignCenter width100" data-types="unassigned|attribute|physical|mental|social" data-binid="unassignedArenaAttributes">
             {{#each unspentArenaDots as |arena|}}
                 {{#if (test (test (math @index "%" 8) "==" 0) "&&" (test @index ">" 1))}}</div><div class="flex-row-wrap alignCenter width100">{{/if}}
-                <span class="dot-unspent alignCenter" data-dottype="{{arena}}Attr"></span>
+                <span class="dot dot-full-unspent alignCenter" data-types="unassigned|attribute|{{arena}}"></span>
             {{/each}}
             </div>
             {{/if}}

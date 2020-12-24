@@ -1195,6 +1195,19 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout {
   z-index: 10;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dotBin {
+  outline-width: 0px;
+  outline-style: solid;
+  outline-color: cyan;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dotBin.validDrop {
+  outline-width: 4px;
+  outline-style: solid;
+  outline-color: cyan;
+  transition: outline-width 1s;
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"] {
   display: grid;
   grid-area: dotline;
@@ -1217,7 +1230,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class*="dotline"][
   grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot {
   --dotBright: transparent;
   --dotDark: transparent;
   height: 16px;
@@ -1229,13 +1242,13 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"] {
   background: radial-gradient(var(--dotBright), var(--dotDark));
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"] {
   --dotBright: #444;
   --dotDark: #0a0a0a;
   box-shadow: 1px 1px 2px var(--dotDark);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"]::after, body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"]::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"]::after {
   content: "";
   height: 16px;
   width: 16px;
@@ -1250,47 +1263,47 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][clas
   text-indent: 2px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="attribute"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="skill"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="attribute"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="skill"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"][data-types*="general"] {
   --dotBright: lime;
   --dotDark: rgb(0, 100, 0);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="physicalAttr"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="physicalAttr"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"][data-types*="physical"] {
   --dotBright: rgb(232, 139, 0);
   --dotDark: rgb(101, 60, 0);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="physicalAttr"]::after, body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="physicalAttr"]::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"][data-types*="physical"]::after {
   content: "P";
   color: gold;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="socialAttr"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="socialAttr"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"][data-types*="social"] {
   --dotBright: rgb(154, 81, 255);
   --dotDark: rgb(65, 0, 155);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="socialAttr"]::after, body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="socialAttr"]::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"][data-types*="social"]::after {
   content: "S";
   color: #ffa8ff;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="mentalAttr"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="mentalAttr"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"][data-types*="mental"] {
   --dotBright: rgb(0, 223, 238);
   --dotDark: rgb(0, 64, 68);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-unspent"][data-dottype="mentalAttr"]::after, body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-unspent"][data-dottype="mentalAttr"]::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][data-types*="unassigned"][data-types*="mental"]::after {
   content: "M";
   color: #82ffff;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-full"][class*="-invalid"], body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"][class*="-unspent"][class*="-invalid"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-full"][class*="-invalid"] {
   --dotBright: #900;
   --dotDark: #ff0000;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"].virtueCenter::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot.virtueCenter::after {
   content: "";
   height: 150%;
   width: 150%;
@@ -1300,7 +1313,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"].virt
   background-size: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * *[class|="dot"].virtueCenter.virtueFull::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot.virtueCenter.virtueFull::after {
   background-image: var(--virtueGlowImg);
 }
 

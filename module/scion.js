@@ -211,7 +211,8 @@ Hooks.once("init", async () => {
                 case "t": return U.TCase(v1);
                 default: return v1;
             }
-        }
+        },
+        // dotType: (attr, val) => 
     });
     // #endregion
 });
