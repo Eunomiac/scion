@@ -77,10 +77,19 @@
                     width: 120%;
                 }
             }
+            .favoredApproach {
+                h3 {
+                    font-size: var(--fontSizeBody);
+                }
+                select {
+                    width: 80%;
+                    margin: 0px 5px 5px 5px;
+                }
+            }
         }
         .unspentDots {
             flex: 0 0 50%;
-            h2: { font-size: calc(var(--fontSizeH2) * 0.75) }
+            h2 { font-size: calc(var(--fontSizeH2) * 0.75) }
             &.unspentSkillDots { 
                 grid-area: unspentSkills;
             }
@@ -88,7 +97,40 @@
                 grid-area: unspentAttrs;
                 > div { margin: 3px 0; }
                 label { width: 75px; min-width: 75px; }
-            } 
+            }
+            div.reportBox {
+                background-color: white !important;
+                width: 320px !important;
+                height: 80px !important;
+                min-height: 80px !important;
+                max-height: 80px !important;
+                vertical-align: bottom !important;
+                position: absolute;
+                bottom: 20px;
+                margin: 0;
+                padding: 5px;
+                outline: 3px solid green;
+                padding-top: 3px;
+                span.reportLine {
+                    display: block !important;
+                    height: 12px !important;
+                    min-height: 12px !important;
+                    max-height: 12px !important;
+                    margin: 2px 0px !important;
+                    padding: 0 !important;
+                    font: {
+                        size: 12px !important;
+                        family: "Overlock SC" !important;
+                        weight: bold !important;
+                    }
+                    line-height: 12px !important;
+                    text: {
+                        align: right !important;
+                        align-last: right !important;
+                        shadow: none !important;
+                    }
+                }
+            }
         }
     }
 }

@@ -29,6 +29,14 @@
         shadow: var(--textShadowPlaceholder);
     }
 }
+@mixin repeat($rep-val, $rep-count, $propertyName, $delim: comma) {
+    $propList: ();
+    @for $i from 1 through $rep-count {
+        $propList: append($propList, $rep-val, $separator: #{$delim});
+    }
+    #{$propertyName}: $propList;
+
+} 
 @mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {
     position: relative;
     width:  $outer-circle-size;

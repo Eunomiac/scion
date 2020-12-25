@@ -6,6 +6,20 @@ $isShowing: (
     "sheetBGShade": false
 );
 
+.dot {    
+    --dotSize: 16px;
+    --dotBright: gold;
+    --dotDark: rgb(255, 183, 0);
+    display: block;
+    height: var(--dotSize);
+    width: var(--dotSize);
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: radial-gradient(var(--dotBright), var(--dotDark));
+    box-shadow: 1px 1px 2px var(--dotDark);
+}
+
 @import 'core/functions';
 @import 'core/fontLoader';
 @import 'core/mixins';

@@ -220,7 +220,7 @@ export const Clone = (obj) => {
     try {
         cloneObj = JSON.parse(JSON.stringify(obj));
     } catch(err) {
-        THROW({obj, err}, "ERROR: U.Clone()");
+        // THROW({obj, err}, "ERROR: U.Clone()");
         cloneObj = Object.assign({}, obj);
     }
     return cloneObj;
@@ -264,6 +264,7 @@ export const Merge = (target, source, isMergingArrays = false) => {
 
     return target;
 };
+export const SumVals = (...objs) => objs.reduce((tot, obj) => tot + Object.values(obj).reduce((subTot, val) => subTot + val, 0), 0);
 export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
     const newDict = {};
     for (const key of Object.keys(objRef)) {

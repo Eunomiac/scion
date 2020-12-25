@@ -110,7 +110,8 @@ export class MajorActorSheet extends ScionActorSheet {
         data.skillVals = this.actor.skillVals;
         // FILTERING OUT 0-SKILLS
         data.filteredSkillVals = _.pick(data.skillVals, (val) => val > 0);
-        data.unspentSkillDots = Math.max(0, this.actor.unassignedSkillDots);
+        data.unspentSkillDots = this.actor.unassignedSkillDots;
+        data.assignableSkillDots = this.actor.assignableSkillDots;
         // EXPOSING SPECIALTY DATA
         data.skillSpecialties = this.actor.specialties;
 
@@ -135,8 +136,23 @@ export class MajorActorSheet extends ScionActorSheet {
         else
             for (const [arena, num] of Object.entries(unspentArenaDots))
                 data.unspentArenaDots.push(...new Array(num).fill(arena));
-        data.unspentGeneralAttrDots = Math.max(0, this.actor.unassignedGeneralAttrDots);
+        data.unspentGeneralAttrDots = this.actor.unassignedGeneralAttrDots;
+        data.assignableGeneralAttrDots = this.actor.assignableGeneralAttrDots;
 
+        data.skillReportLines = [
+            `Total Dots: Base (${U.SumVals(this.actor.baseSkillVals)}) + Assigned (${U.SumVals(this.actor.assignedSkillVals)}) = ${U.SumVals(this.actor.baseSkillVals) + U.SumVals(this.actor.assignedSkillVals)} = ${U.SumVals(this.actor.skillVals)}`,
+            `Assignable Dots: Assigned (${U.SumVals(this.actor.assignedSkillVals)}) + Unspent (${data.unspentSkillDots}) = ${U.SumVals(this.actor.assignedSkillVals) + data.unspentSkillDots} = ${this.actor.assignableSkillDots}`
+        ];
+        data.attrReportLines = [
+            `Total Dots: Base (${U.SumVals(this.actor.baseAttrVals)}) + Arena (${U.SumVals(this.actor.assignedArenaAttrDots)}) + Assigned (${this.actor.assignedGeneralAttrDots}) = ${U.SumVals(this.actor.baseAttrVals) + U.SumVals(this.actor.assignedArenaAttrDots) + this.actor.assignedGeneralAttrDots} = ${U.SumVals(this.actor.attrVals)}`,
+            `Assignable General Dots: Assigned (${this.actor.assignedGeneralAttrDots}) + Unspent (${data.unspentGeneralAttrDots}) = ${this.actor.assignedGeneralAttrDots + data.unspentGeneralAttrDots} = ${this.actor.assignableGeneralAttrDots}`,
+            `Assignable Physical Dots: Assigned (${this.actor.assignedArenaAttrDots.physical}) + Unspent (${this.actor.unassignedArenaAttrDots.physical}) = ${this.actor.assignedArenaAttrDots.physical + this.actor.unassignedArenaAttrDots.physical} = ${this.actor.assignableArenaDots.physical}`,
+            `Assignable Mental Dots: Assigned (${this.actor.assignedArenaAttrDots.mental}) + Unspent (${this.actor.unassignedArenaAttrDots.mental}) = ${this.actor.assignedArenaAttrDots.mental + this.actor.unassignedArenaAttrDots.mental} = ${this.actor.assignableArenaDots.mental}`,
+            `Assignable Social Dots: Assigned (${this.actor.assignedArenaAttrDots.social}) + Unspent (${this.actor.unassignedArenaAttrDots.social}) = ${this.actor.assignedArenaAttrDots.social + this.actor.unassignedArenaAttrDots.social} = ${this.actor.assignableArenaDots.social}`,
+        ];
+
+
+        // this.actor.updateTraits();
         // #endregion
         // #endregion
         // #endregion
@@ -187,7 +203,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     "data.pathPriorities": Array.from(pathContainer.children)
                         .map((element) => this.entity.items.get(element.dataset.itemid).data.data.type)
                 });
-                this.actor.updateSkills();
+                // this.actor.updateTraits();
             });
             // #endregion
 
@@ -203,8 +219,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     "data.attributes.priorities": Array.from(arenaContainer.children)
                         .map((element) => element.dataset.arena)
                 });
-                const {newAttrVals} = this.actor.checkAttributes();
-                await this.actor.updateAttributes(newAttrVals);
+                // await this.actor.updateTraits();
             });
             // #endregion
 
@@ -218,7 +233,7 @@ export class MajorActorSheet extends ScionActorSheet {
              */
             const getDragTypes = (dot, sourceBin, targetBin) => {
                 const returnVal = {
-                    dotTypes: dot.dataset.types.split("|")
+                    dotTypes: dot.dataset.types?.split("|")
                 };
                 if (sourceBin)
                     returnVal.sourceTypes = sourceBin.dataset?.types?.split("|") ?? [];
@@ -312,19 +327,19 @@ export class MajorActorSheet extends ScionActorSheet {
                 accepts: (dot, targetBin, sourceBin) => isTargetDroppable(dot, sourceBin, targetBin),
                 direction: "horizontal",
                 copy: false,
-                removeOnSpill: false
+                removeOnSpill: true
             });
 
             const _onDotDrag = (dot, sourceBin) => {
                 dotBins.each((i, bin) => {
                     if (isTargetDroppable(dot, sourceBin, bin))
-                        bin.classList.add("validDrop");
+                        bin.classList.remove("invalidDrop");
                     else
-                        bin.classList.remove("validDrop");
+                        bin.classList.add("invalidDrop");
                 });
             };
             const _onDotDragEnd = (dot) => {
-                dotBins.each((i, bin) => { bin.classList.remove("validDrop") });
+                dotBins.each((i, bin) => { bin.classList.remove("invalidDrop") });
             };
             const _onDotDrop = (dot, targetBin, sourceBin) => {
                 const {dotTypes, targetTypes, sourceTypes} = getDragTypes(dot, sourceBin, targetBin);

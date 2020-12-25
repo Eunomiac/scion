@@ -1,4 +1,4 @@
-<div class="chargenTwo flex-col width100 padded">
+<div class="chargenTwo flex-col width100 alignCenter padded">
     <h1>{{loc "scion.heading.chargen.stepTwo"}}</h1>
     <div id="pathContainer" class="width100">
     {{#each items.paths as |path id|}}
@@ -15,7 +15,7 @@
                 <div class="dotline-labelled">
                     <div class="label alignLeft">{{loc (concat "scion.skill." skill)}}</div>
                     {{#for 5}}
-                        <span class="dot{{#if (gte value @index)}}-full{{/if}}"></span>
+                        <span class="dot {{#if (gte value @index)}}dot-full{{/if}}"></span>
                     {{/for}}
                 </div>
             {{/each}}

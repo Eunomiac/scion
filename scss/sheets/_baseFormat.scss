@@ -1,5 +1,5 @@
-/* #region Element Default Styles */
 * {
+    /* #region Element Default Styles */
     color: var(--colorBody);
     font: {
         family: var(--fontFamilyBody);
@@ -354,127 +354,127 @@
     /* #endregion */ 
 
     /* #region Dot Trackers */
-    .dotBin {
-        outline: {
-            width: 0px;
-            style: solid;
-            color: cyan;
-        }
-        &.validDrop {
-            outline: {
-                width: 4px;
-                style: solid;
-                color: cyan;
-            };
-            transition: outline-width 1s;
-        }
-    }
-    *[class*="dotline"] {
-        display: grid;
-        grid: {
-            area: dotline;
-            template: { columns: 1rem 1rem 1rem 1rem 1rem; rows: 1rem; }
-        }
-        &[class*="labelled"] {
-            width: 100%;
-            grid-template-columns: 1fr 1rem 1rem 1rem 1rem 1rem;
-        }
-        &[class*="bigDots"] {
-            grid-template-columns: 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
-            grid-template-rows: 1.25rem;
-            column-gap: 0.5rem;
-            &[class*="labelled"] { 
-                grid-template-columns: 1fr 1.25rem 1.25rem 1.25rem 1.25rem 1.25rem;
-            }
-        }
-    }
-    .dot {
-        --dotBright: transparent;
-        --dotDark: transparent;
-        height: 16px;
-        width: 16px;
+    .dot {    
+        --dotSize: 16px;
+        --dotBright: #444;
+        --dotDark: #0a0a0a;
+        display: block;
+        height: var(--dotSize);
+        width: var(--dotSize);
         margin: 0;
         padding: 0;
         border-radius: 50%;
-        box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4), inset -1px -1px 1px white;
         background: radial-gradient(var(--dotBright), var(--dotDark));
-
-        &[class*="-full"] {
-            --dotBright: #444;
-            --dotDark: #0a0a0a;
-            // background: radial-gradient(#444, #0a0a0a);
-            // border: solid 2px black;
-            box-shadow: 1px 1px 2px var(--dotDark);
-                          
-            &[data-types*="unassigned"] {
-                &::after {
-                    content: "";
-                    height: 16px;
-                    width: 16px;
-                    display: block;
-                    line-height: 17px;
-                    font-family: "Arial Black";
-                    font-size: 12px;
-                    color: var(--white);
-                    text-shadow: var(--textShadowStrong);
-                    text-align: center;
-                    text-align-last: center;
-                    text-indent: 2px;
-                }
-                &[data-types*="general"] {
-                    --dotBright: lime;
-                    --dotDark: rgb(0, 100, 0);
-                }
-                &[data-types*="physical"] { 
-                    --dotBright: rgb(232, 139, 0); 
-                    --dotDark: rgb(101, 60, 0);
-                    &::after{
-                        content: "P";
-                        color: gold;
-                    }
-                }
-                &[data-types*="social"] { 
-                    --dotBright: rgb(154, 81, 255); 
-                    --dotDark: rgb(65, 0, 155);
-                    &::after{
-                        content: "S";
-                        color: rgb(255, 168, 255);
-                    }
-                }
-                &[data-types*="mental"] { 
-                    --dotBright: rgb(0, 223, 238); 
-                    --dotDark: rgb(0, 64, 68);
-                    &::after{
-                        content: "M";
-                        color: #82ffff;
-                    }
-                }
-            }
-            
-            &[class*="-invalid"] {
-                --dotBright: #900;
-                --dotDark: #ff0000;
-                // background: radial-gradient(#900, #5a0000);
-                // border: solid 2px #5a0000;
-                // box-shadow: 1px 1px 2px black;
-            }
+        box-shadow: 1px 1px 2px var(--dotDark);
+    
+        &[data-types*="general"] {
+            --dotBright: #fff;
+            --dotDark: #333;
         }
-        
-        &.virtueCenter {
+        &[data-types*="physical"],
+        &[data-types*="mental"],
+        &[data-types*="social"] {
+            --dotBright: #999;
+            --dotDark: #0a0a0a;
+        }
+        &[data-types*="unassigned"] {
+            --scaleFactor: 0.5;
             &::after {
                 content: "";
-                height: 150%;
-                width: 150%;
-                background: {
-                    image: var(--virtueDarkImg);
-                    repeat: no-repeat;
-                    position: center;
-                    size: 100%;
+                height: var(--dotSize);
+                width: calc(var(--dotSize) / var(--scaleFactor));
+                min-width: calc(var(--dotSize) / var(--scaleFactor));
+                max-width: calc(var(--dotSize) / var(--scaleFactor));
+                margin-left: calc(-0.5 * var(--dotSize));
+                
+                display: block;
+                line-height: var(--dotSize);
+                font-family: "Marcellus SC";
+                font-weight: bold;
+                font-size: var(--dotSize);
+                color: var(--white);
+                text-shadow: var(--textShadowStrong);
+                text-align: center;
+                text-align-last: center;
+                transform: scaleX(var(--scaleFactor));
+            }
+            &[data-types*="physical"]::after { content: "P"; }
+            &[data-types*="social"]::after { content: "S"; }
+            &[data-types*="mental"]::after { content: "M"; }
+        }
+    
+        &[class*="-invalid"] {
+            --dotBright: #900;
+            --dotDark: #ff0000;
+        }
+    }
+    [class~="dotline"] {
+        $numDots: 5;
+        --numDots: #{$numDots};
+        --dotSize: 16px;
+        --colGap: 0px;
+        --dotContainerWidth: calc(var(--dotSize) * var(--numDots) + var(--colGap) * (var(--numDots) - 1));
+        display: flex;
+        height: var(--dotSize);
+        max-height: var(--dotSize);
+        min-height: var(--dotSize);
+        width: 100%;
+        margin: 2px 0;
+        flex: {
+            direction: row;
+            wrap: nowrap;
+        }
+        justify-content: space-between;
+        align-items: center;
+        &.noLabel { width: var(--dotContainerWidth); }
+        > .label {
+            display: inline-block;
+            text-align: left;
+            text-align-last: left;
+            justify-self: flex-start;
+            margin: 0;
+            padding: 0;
+            height: var(--dotSize);
+            min-height: var(--dotSize);
+            max-height: var(--dotSize);
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+        > .dotContainer {
+            --dotContainerWidth: calc(var(--dotSize) * var(--numDots) + var(--colGap) * (var(--numDots) - 1));
+            display: inline-grid;
+            height: var(--dotSize);
+            max-height: var(--dotSize);
+            min-height: var(--dotSize);
+            width: var(--dotContainerWidth);
+            max-width: var(--dotContainerWidth);
+            min-width: var(--dotContainerWidth);
+            flex-grow: 0;
+            flex-shrink: 0;
+            justify-self: flex-end;
+            @include repeat(var(--dotSize), 5, grid-template-columns, space);
+            grid-template-rows: var(--dotSize);
+            grid-column-gap: var(--colGap);
+            &.blanks {
+                margin-right: calc(-1 * var(--dotContainerWidth));
+                .dot {
+                    --dotBright: transparent;
+                    --dotDark: transparent;
+                    box-shadow: inset 1px 1px 1px var(--blackFade60), inset -1px -1px 1px var(--white);
                 }
             }
-
-            &.virtueFull::after {
-                background-image: var(--virtueGlowImg);
+        }        
+        &.dots10 { 
+            --numDots: 10;
+            --dotContainerWidth: calc(var(--dotSize) * var(--numDots) + var(--colGap) * (var(--numDots) - 1));
+            > .dotContainer { @include repeat(var(--dotSize), 10, grid-template-columns, space) }
+        }
+    
+        .dotBin {
+            opacity: 1;
+            &.invalidDrop {
+                opacity: 0.25;
+                transition: opacity 1s;
             }
         }
     }

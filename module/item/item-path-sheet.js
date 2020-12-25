@@ -53,11 +53,9 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
         // #region DRAGULA: PATH SKILLS
         const addPathSkill = async (skillElement) => {
             await this.item.update({["data.skills"]: [...pathData.skills, skillElement.dataset.skill]});
-            this.actor.updateSkills();
         };
         const remPathSkill = async (skillElement) => {
             await this.item.update({["data.skills"]: _.without(pathData.skills, skillElement.dataset.skill)});
-            this.actor.updateSkills();
         };
 
         const skillSource = html.find("#pathSkillSource");

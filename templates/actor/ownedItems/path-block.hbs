@@ -1,6 +1,6 @@
 
 <div class="path-block" data-itemID="{{id}}">
-    <h2 class="clickable openPopout {{~#unless data.data.title}} alignCenter{{/unless}}" data-itemID="{{id}}">
+    <h2 class="clickable openPopout {{~#if data.data.title}} alignLeft{{/if}}" data-itemID="{{id}}">
         {{~#if data.data.title~}}
             {{name}}: &quot;{{data.data.title}}&quot;
         {{~else~}}

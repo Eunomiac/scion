@@ -103,6 +103,7 @@ const createSigChars = async () => {
 // #region Hook: Initialization
 Hooks.once("init", async () => {
     CONFIG.isHoldingLogs = true;
+    CONFIG.isInitializing = true;
     console.clear();
     CONFIG.scion = SCION;
 
@@ -212,7 +213,55 @@ Hooks.once("init", async () => {
                 default: return v1;
             }
         },
-        // dotType: (attr, val) => 
+        dottype: (category, trait, value, options) => {
+            // U.LOG({options, category, trait, value}, "dotType Handler");
+            const actor = game.actors.get(options.data.root.actor._id);
+            // const iterLog = [];
+            if (actor)
+                switch (category) {
+                    case "skill": {
+                        const dTypes = ["skill"];
+                        if (value <= actor.baseSkillVals[trait])
+                            dTypes.push("base");
+                        else
+                            dTypes.push("general");
+                        return dTypes.join("|");
+                    }
+                    case "attribute": {
+                        const dTypes = ["attribute"];
+                        if (value <= actor.baseAttrVals[trait]) {
+                            // iterLog.push(`${trait}:${value} <= ${actor.baseAttrVals[trait]}: BASE`);
+                            dTypes.push("base");
+                        } else {
+                            const arena = _.findKey(SCION.ATTRIBUTES.arenas, (attrs) => attrs.includes(trait));
+                            let assignedArenaDots = actor.assignedArenaAttrDots[arena];
+                            const assignedAttrDots = U.Clone(_.pick(actor.baseAttrVals, (v, attr) => SCION.ATTRIBUTES.arenas[arena].includes(attr)));
+                            while (assignedArenaDots) {
+                                try {
+                                    const thisAttr = _.sortBy(Object.entries(_.omit(assignedAttrDots, (val, attr) => val === actor.attrVals[attr])), (v) => v[1] - actor.attrVals[v[0]])[0][0];
+                                    assignedAttrDots[thisAttr]++;
+                                    assignedArenaDots--;
+                                } catch (err) {
+                                    return "";
+                                }
+                                // iterLog.push(`${assignedArenaDots + 1} Assigned. Of [${Object.keys(assignedAttrDots).map((attr) => `${attr.slice(0,3)}:${assignedAttrDots[attr]}/${actor.attrVals[attr]}`).join(", ")}], increasing ${thisAttr} from ${assignedAttrDots[thisAttr] - 1} to ${assignedAttrDots[thisAttr]}`);
+                            }
+                            if (value <= assignedAttrDots[trait]) {
+                                // iterLog.push(`${value} > ${actor.baseAttrVals[trait]} <= ${assignedAttrDots[trait]}: ${U.UCase(arena)}`);
+                                dTypes.push(arena);
+                            } else {
+                                // iterLog.push(`${value} > ${assignedAttrDots[trait]}: GENERAL`);
+                                dTypes.push("general");
+                            }
+                        }
+                        // U.LOG({log: iterLog}, `Checking ${trait}:${value}`);
+                        return dTypes.join("|");
+                    }
+                    default: return "";
+                }
+
+            return "";
+        }
     });
     // #endregion
 });
@@ -234,5 +283,6 @@ Hooks.once("ready", async () => {
         "game": game,
         "... .scion": game.scion
     }, "GLOBALS: Hooks.ready", "SCION", {groupStyle: "l1"});
+    CONFIG.isInitializing = false;
 });
 // #endregion
