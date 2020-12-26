@@ -41,6 +41,8 @@
         border: var(--borderInput);
         box-sizing: content-box;
         outline: none;
+        overflow: hidden;
+        
 
         &:invalid { @include placeholderText; }
     }
@@ -481,7 +483,8 @@
     /* #endregion */
 
     /* #region Bubbles */
-    .bubble {         
+    .bubble {    
+        overflow: hidden;     
         p {margin: 0;}
     }
     /* #endregion */

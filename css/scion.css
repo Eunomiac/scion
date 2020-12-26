@@ -787,6 +787,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .contentEditable {
   border: var(--borderInput);
   box-sizing: content-box;
   outline: none;
+  overflow: hidden;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * textarea:invalid,
@@ -1351,6 +1352,10 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] .
 body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] .dotBin.invalidDrop {
   opacity: 0.25;
   transition: opacity 1s;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .bubble {
+  overflow: hidden;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .bubble p {
@@ -1965,7 +1970,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette:not(.collapsed):hover {
   background-size: 100%;
-  transform: translate(-20px, -20px);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette:not(.collapsed):hover div.circleMenuContainer {
@@ -2255,12 +2259,8 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   margin: 0 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .skillSummary .skills .dotline-labelled {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .skillSummary .skills .dotline {
   margin: 3px 0;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .skillSummary .skills .dot:not([class*="-full"]) {
-  display: none !important;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid {
@@ -2377,6 +2377,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots div.reportBox {
+  display: none !important;
   background-color: white !important;
   width: 320px !important;
   height: 80px !important;
@@ -2834,6 +2835,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editabl
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .pathConnections .contentEditable {
   height: calc(var(--lineHeight) * 3 + var(--padding));
+  padding: 2px var(--padding) 12px var(--padding);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .pathCondition {

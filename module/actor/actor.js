@@ -14,7 +14,7 @@ export class ScionActor extends Actor {
 
     prepareData() {
         super.prepareData();
-        this.pendingUpdateData ??= {};
+        this.pendingUpdateData = this.pendingUpdateData ?? {};
         if (this.data.type === "major")
             setTimeout(() => this._prepareMajorCharData(), 100);
     }

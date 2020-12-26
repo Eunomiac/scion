@@ -65,7 +65,7 @@
             </div>  
         </div>
         <div class="unspentDots unspentSkillDots flex-col alignCenter">
-            <h2 class="alignCenter noBG">Unassigned Skill Dots</h2>
+            <h2 class="alignCenter noBG">{{#if unspentSkillDots}}{{loc "scion.heading.chargen.unassignedSkillDots"}}{{/if}}</h2>
             <div class="dotline unassigned dots10 noLabel">
                 <div class="dotBin dotContainer" data-types="unassigned|skill" data-binid="unassignedSkill">
                     {{#for unspentSkillDots}}
@@ -80,15 +80,15 @@
             </div>
         </div>
         <div class="unspentDots unspentAttrDots flex-col alignCenter">
-            <h2 class="alignCenter noBG">Unassigned Attribute Dots</h2>
+            <h2 class="alignCenter noBG">{{#if unspentAttributeDots}}{{loc "scion.heading.chargen.unassignedAttributeDots"}}{{/if}}</h2>
             <div class="dotline unassigned dots10 noLabel">
                 <div class="dotBin dotContainer" data-types="unassigned|attribute" data-binid="unassignedAttribute">
-                {{#for unspentGeneralAttrDots}}
-                    <span class="dot" data-types="unassigned|attribute|general"></span>
-                {{/for}}
                 {{#each unspentArenaDots as |arena|}}
                     <span class="dot" data-types="unassigned|attribute|{{arena}}"></span>
                 {{/each}}
+                {{#for unspentGeneralAttrDots}}
+                    <span class="dot" data-types="unassigned|attribute|general"></span>
+                {{/for}}
                 </div>
             </div>
             <div class="reportBox">

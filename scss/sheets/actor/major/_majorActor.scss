@@ -41,7 +41,7 @@
 
         &:not(.collapsed):hover {
             background-size: 100%;
-            transform: translate(-20px, -20px);
+            // transform: translate(-20px, -20px);
     
             div.circleMenuContainer {
                 transform: scale(1) rotate(0deg);

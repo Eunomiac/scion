@@ -12,8 +12,7 @@
         .skills { 
             flex: 0 1 33%;
             margin: 0 5px;
-            .dotline-labelled { margin: 3px 0; }
-            .dot:not([class*="-full"]) { display: none !important; }
+            .dotline { margin: 3px 0; }
         }
     }
 }
@@ -99,6 +98,7 @@
                 label { width: 75px; min-width: 75px; }
             }
             div.reportBox {
+                display: none !important;
                 background-color: white !important;
                 width: 320px !important;
                 height: 80px !important;

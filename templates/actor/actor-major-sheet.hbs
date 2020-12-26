@@ -65,20 +65,17 @@
                 <section class="front-body grid">
                     <div class="skills flex-col">
                         <h1>{{loc "scion.game.skills"}}</h1>
-                        {{#if data.skills.unspentDots}}
-                            <div class="dotGrabBin dotDropBin flex">
-                                {{#for data.skills.unspentDots}}
-                                    <span class="dot-unspent" data-dottype="skill" data-trait="data.skills.unspentDots"></span>
-                                {{/for}}
-                            </div>
-                        {{/if}}
                         {{#each skillVals as |value skill|}}
-                            <div class="dotDropBin dotline-labelled" data-dottype="skill" data-trait="data.skills.list.{{skill}}">
-                                <div class="label">{{loc (concat "scion.skill." skill)}}</div>
-                                {{#for 5}}
-                                    <span class="dot{{#if (gte value @index)}}-full{{/if}} click" data-dottype="skill" data-trait="data.skills.list.{{skill}}" data-val="{{@index}}"></span>
+                        {{#if value}}
+                        <div class="dotline">
+                            <div class="label">{{loc (concat "scion.skill." skill)}}</div>
+                            <div class="dotContainer">
+                                {{#for value}}
+                                    <span class="dot"></span>
                                 {{/for}}
                             </div>
+                        </div>
+                        {{/if}}
                         {{/each}}
                     </div>
                 </section>

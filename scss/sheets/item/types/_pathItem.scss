@@ -43,7 +43,10 @@
             span.skill { margin: 2px 0; }
         }
     }
-    .pathConnections .contentEditable { height: calc(var(--lineHeight) * 3 + var(--padding)); }
+    .pathConnections .contentEditable { 
+        height: calc(var(--lineHeight) * 3 + var(--padding)); 
+        padding: 2px var(--padding) 12px var(--padding);
+    }
     .pathCondition {
         padding-left: 10px;
     }

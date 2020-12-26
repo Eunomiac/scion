@@ -130,13 +130,15 @@ export class MajorActorSheet extends ScionActorSheet {
         // attrUpdate.unspentGeneralDots = 5;
 
         const unspentArenaDots = _.pick(this.actor.unassignedArenaAttrDots, (v) => v > 0);
+        data.unspentGeneralAttrDots = this.actor.unassignedGeneralAttrDots;
+        data.unspentAttributeDots = U.SumVals(unspentArenaDots) + data.unspentGeneralAttrDots;
+
         data.unspentArenaDots = [];
         if (isObjectEmpty(unspentArenaDots))
             data.unspentArenaDots = false;
         else
             for (const [arena, num] of Object.entries(unspentArenaDots))
                 data.unspentArenaDots.push(...new Array(num).fill(arena));
-        data.unspentGeneralAttrDots = this.actor.unassignedGeneralAttrDots;
         data.assignableGeneralAttrDots = this.actor.assignableGeneralAttrDots;
 
         data.skillReportLines = [
@@ -270,7 +272,7 @@ export class MajorActorSheet extends ScionActorSheet {
             const isTargetDroppable = (dot, sourceBin, targetBin) => {
                 if (sourceBin.dataset.binid === targetBin.dataset.binid) {
                     // U.LOG({dot, sourceBin, targetBin}, "Source = Target: NOT Droppable!", "isTargetDroppable");
-                    return false;
+                    return true;
                 }
                 const {dotTypes, sourceTypes, targetTypes} = getDragTypes(dot, sourceBin, targetBin);
                 if (targetTypes.includes("unassigned")) {
@@ -344,27 +346,29 @@ export class MajorActorSheet extends ScionActorSheet {
             const _onDotDrop = (dot, targetBin, sourceBin) => {
                 const {dotTypes, targetTypes, sourceTypes} = getDragTypes(dot, sourceBin, targetBin);
                 const updateData = {};
-                // Increment Target Trait
-                if (targetTypes.includes("attribute")) {
-                    const attribute = targetBin.dataset.attribute;
-                    updateData[targetBin.dataset.field] = this.actor.assignedAttrVals[attribute] + 1;
-                } else if (targetTypes.includes("skill")) {
-                    const skill = targetBin.dataset.skill;
-                    updateData[targetBin.dataset.field] = this.actor.assignedSkillVals[skill] + 1;
-                }
-                // If source was another skill/attribute, decrement that.
-                if (!sourceTypes.includes("unassigned")) {
-                    if (sourceTypes.includes("attribute")) {
-                        const attribute = sourceBin.dataset.attribute;
-                        updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
-                    } else if (sourceTypes.includes("skill")) {
-                        const skill = sourceBin.dataset.skill;
-                        updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
+                if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
+                    // Increment Target Trait
+                    if (targetTypes.includes("attribute")) {
+                        const attribute = targetBin.dataset.attribute;
+                        updateData[targetBin.dataset.field] = this.actor.assignedAttrVals[attribute] + 1;
+                    } else if (targetTypes.includes("skill")) {
+                        const skill = targetBin.dataset.skill;
+                        updateData[targetBin.dataset.field] = this.actor.assignedSkillVals[skill] + 1;
                     }
+                    // If source was another skill/attribute, decrement that.
+                    if (!sourceTypes.includes("unassigned")) {
+                        if (sourceTypes.includes("attribute")) {
+                            const attribute = sourceBin.dataset.attribute;
+                            updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
+                        } else if (sourceTypes.includes("skill")) {
+                            const skill = sourceBin.dataset.skill;
+                            updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
+                        }
+                    }
+                    // dot.remove();
+                    U.LOG({targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
+                    this.actor.update(updateData);
                 }
-                dot.remove();
-                U.LOG({targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
-                this.actor.update(updateData);
             };
             const _onDropRemove = (dot, x, sourceBin) => {
                 const {dotTypes, sourceTypes} = getDragTypes(dot, sourceBin);
