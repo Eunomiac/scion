@@ -1936,59 +1936,1095 @@ const scionSystemData = {
     },
     CALLINGS: {
         creator: {
-            label: "scion.calling.creator",
-            skills: ["academics", "culture", "technology"],
-            fateRoles: ["apprentice", "jinx", "rival"]
+            skills: [ "academics", "culture", "technology" ],
+            fateRoles: [ "apprentice", "jinx", "rival" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "flawlesslyPlatonicIdeal",
+                    "innateToolkit",
+                    "perfectRendition",
+                    "reverseEngineer",
+                    "theUnlimitedQuartermaster",
+                    "weGoAllNight",
+                    "wirelessInterface"
+                ] ,
+                immortal: [
+                    "afternoonOfFortnights",
+                    "liftedFromDust",
+                    "raiseThePillarsOfTheEarth",
+                    "touchOfTheMuses"
+                ]
+            }
         },
         guardian: {
-            label: "scion.calling.guardian",
-            skills: ["athletics", "closeCombat", "empathy"],
-            fateRoles: ["canary", "martyr", "nemesis"]
+            skills: [ "athletics", "closeCombat", "empathy" ],
+            fateRoles: [ "canary", "martyr", "nemesis" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "aFortress",
+                    "aPurpose",
+                    "aSentinel",
+                    "aTalisman",
+                    "aVigil",
+                    "aWarning"
+                ] ,
+                immortal: [
+                    "byYourSide",
+                    "eternalGuardian",
+                    "livingPillar",
+                    "theyCannotBeTouched"
+                ]
+            }
         },
         healer: {
-            label: "scion.calling.healer",
-            skills: ["empathy", "medicine", "science"],
-            fateRoles: ["boonCompanion", "canary", "rival"]
+            skills: [ "empathy", "medicine", "science" ],
+            fateRoles: [ "boonCompanion", "canary", "rival" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "combatMedic",
+                    "damageConversion",
+                    "doctorsKit",
+                    "immunizationBooster",
+                    "instantDiagnosis",
+                    "surgeonWithTheHandsOfGod",
+                    "theBareMinimum"
+                ] ,
+                immortal: [
+                    "breathOfLife",
+                    "internalRefinery",
+                    "panacea",
+                    "reconstruction"
+                ]
+            }
         },
         hunter: {
-            label: "scion.calling.hunter",
-            skills: ["athletics", "firearms", "survival"],
-            fateRoles: ["boonCompanion", "paramour", "rival"]
+            skills: [ "athletics", "firearms", "survival" ],
+            fateRoles: [ "boonCompanion", "paramour", "rival" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "apexPredator",
+                    "eyesInTheBlinds",
+                    "internalCompass",
+                    "keeneyedPredator",
+                    "mostDangerousPrey",
+                    "silenceInTheWoods",
+                    "worryingHound"
+                ] ,
+                immortal: [
+                    "alwaysThere",
+                    "perfectCamouflage",
+                    "relentless",
+                    "sendThePack"
+                ]
+            }
         },
         judge: {
-            label: "scion.calling.judge",
-            skills: ["academics", "culture", "persuasion"],
-            fateRoles: ["balm", "traitor", "worshipper"]
+            skills: [ "academics", "culture", "persuasion" ],
+            fateRoles: [ "balm", "traitor", "worshipper" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "eyeForAnEye",
+                    "indisputableAnalysis",
+                    "lieDetector",
+                    "objection",
+                    "onTheCase",
+                    "quickStudy",
+                    "theTruthArises"
+                ] ,
+                immortal: [
+                    "boundByOath",
+                    "iAmTheLaw",
+                    "terrorOfTheGuilty",
+                    "thePainOfDishonesty"
+                ]
+            }
         },
         leader: {
-            label: "scion.calling.leader",
-            skills: ["culture", "empathy", "leadership"],
-            fateRoles: ["boonCompanion", "traitor", "worshipper"]
+            skills: [ "culture", "empathy", "leadership" ],
+            fateRoles: [ "boonCompanion", "traitor", "worshipper" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "captainOfIndustry",
+                    "cloakOfDread",
+                    "goodListener",
+                    "grandEntrance",
+                    "inspirationalAura",
+                    "lighthouseOfSociety",
+                    "perfectPoise"
+                ] ,
+                immortal: [
+                    "invulnerableMaster",
+                    "masterfulEfficiency",
+                    "notTodayFriends"
+                ]
+            }
         },
         liminal: {
-            label: "scion.calling.liminal",
-            skills: ["athletics", "pilot", "subterfuge"],
-            fateRoles: ["canary", "jinx", "unrequitedParamour"]
+            skills: [ "athletics", "pilot", "subterfuge" ],
+            fateRoles: [ "canary", "jinx", "unrequitedParamour" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "beyondMemory",
+                    "completePrivacy",
+                    "experiencedTraveler",
+                    "flatlander",
+                    "neitherTheMinuteNorTheHour",
+                    "unerringDelivery",
+                    "unobtrusiveVisitor"
+                ] ,
+                immortal: [
+                    "enforcingTheBoundary",
+                    "pierceTheVeil",
+                    "stepSideways",
+                    "theLongRoadToAnywhere"
+                ]
+            }
         },
         lover: {
-            label: "scion.calling.lover",
-            skills: ["culture", "empathy", "persuasion"],
-            fateRoles: ["balm", "paramour", "unrequitedParamour", "rival"]
+            skills: [ "culture", "empathy", "persuasion" ],
+            fateRoles: [ "balm", "paramour", "unrequitedParamour", "rival" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "fluidAppeal",
+                    "iAmAFire",
+                    "loversIntuition",
+                    "notAFighter",
+                    "onYourSide",
+                    "perfectPartner",
+                    "soothingPresence"
+                ] ,
+                immortal: [
+                    "centerOfAttention",
+                    "forYouIWill",
+                    "heartsAflame",
+                    "loversOath"
+                ]
+            }
         },
         sage: {
-            label: "scion.calling.sage",
-            skills: ["academics", "occult", "subterfuge"],
-            fateRoles: ["apprentice", "jinx", "traitor"]
+            skills: [ "academics", "occult", "subterfuge" ],
+            fateRoles: [ "apprentice", "jinx", "traitor" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "blockadeOfReason",
+                    "masterOfTheWorld",
+                    "officeHours",
+                    "omniglotTranslation",
+                    "palaceOfMemory",
+                    "presenceOfMagic",
+                    "speedReading"
+                ] ,
+                immortal: [
+                    "cipher",
+                    "eternalGenius",
+                    "immortalMastermind",
+                    "overworldKnowledge"
+                ]
+            }
         },
         trickster: {
-            label: "scion.calling.trickster",
-            skills: ["culture", "persuasion", "subterfuge"],
-            fateRoles: ["boonCompanion", "nemesis", "traitor"]
+            skills: [ "culture", "persuasion", "subterfuge" ],
+            fateRoles: [ "boonCompanion", "nemesis", "traitor" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "blatherAndSkite",
+                    "inSheepsClothing",
+                    "lightFingered",
+                    "rumorMiller",
+                    "smokeAndMirrors",
+                    "takesOneToKnowOne",
+                    "wasntMe"
+                ] ,
+                immortal: [
+                    "doppelganger", "oneMansTrash", "surprise", "wovenFromLies"
+                ]
+            }
         },
         warrior: {
-            label: "scion.calling.warrior",
-            skills: ["athletics", "closeCombat", "firearms"],
-            fateRoles: ["balm", "nemesis", "rival"]
+            skills: [ "athletics", "closeCombat", "firearms" ],
+            fateRoles: [ "balm", "nemesis", "rival" ],
+            keywords: [],
+            knacks: {
+                heroic: [
+                    "closeTheGap",
+                    "deathByTeacup",
+                    "enhancedImpact",
+                    "masterOfWeapons",
+                    "tempered",
+                    "theBiggestThreat",
+                    "trickShot"
+                ] ,
+                immortal: [
+                    "armyOfOne",
+                    "hurlToTheMoon",
+                    "perfectDefense",
+                    "theyreEverywhere"
+                ]
+            }
+        }
+    },
+    KNACKS: {
+        aFortress: {
+            calling: "guardian",
+            tier: "heroic",
+            effect: {},
+            stunts: ["bendSpace"]
+        },
+        aPurpose: {
+            calling: "guardian",
+            tier: "heroic",
+            effect: {},
+            stunts: ["charge"]
+        },
+        aSentinel: {
+            calling: "guardian",
+            tier: "heroic",
+            effect: {},
+            stunts: ["emergencyOperation"]
+        },
+        aTalisman: {
+            calling: "guardian",
+            tier: "heroic",
+            effect: {},
+            stunts: ["getOutOfHere"]
+        },
+        aVigil: {
+            calling: "guardian",
+            tier: "heroic",
+            effect: {},
+            stunts: ["glimpseTheOtherSide"]
+        },
+        aWarning: {
+            calling: "guardian",
+            tier: "heroic",
+            effect: {},
+            stunts: ["icePack"]
+        },
+        afternoonOfFortnights: {
+            calling: "creator",
+            tier: "immortal",
+            effect: {},
+            stunts: ["inescapable"]
+        },
+        alwaysThere: {
+            calling: "hunter",
+            tier: "immortal",
+            effect: {},
+            stunts: ["myTurn"]
+        },
+        apexPredator: {
+            calling: "hunter",
+            tier: "heroic",
+            effect: {},
+            stunts: ["secondWind"]
+        },
+        armyOfOne: {
+            calling: "warrior",
+            tier: "immortal",
+            effect: {},
+            stunts: ["snare"]
+        },
+        auraOfGreatness: {
+            calling: "any",
+            tier: "heroic",
+            effect: {},
+            stunts: ["stalk"]
+        },
+        beyondMemory: {
+            calling: "liminal",
+            tier: "heroic",
+            effect: {},
+            stunts: ["stutterTime"]
+        },
+        blatherAndSkite: {
+            calling: "trickster",
+            tier: "heroic",
+            effect: {},
+            stunts: ["surefooted"]
+        },
+        blockadeOfReason: {
+            calling: "sage",
+            tier: "heroic",
+            effect: {},
+            stunts: ["swiftBandaging"]
+        },
+        bornToBeKings: {
+            calling: "any",
+            tier: "heroic",
+            effect: {},
+            stunts: ["terrify"]
+        },
+        boundByOath: {
+            calling: "judge",
+            tier: "immortal",
+            effect: {},
+            stunts: ["vanish"]
+        },
+        breathOfLife: {
+            calling: "healer",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        byYourSide: {
+            calling: "guardian",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        captainOfIndustry: {
+            calling: "leader",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        centerOfAttention: {
+            calling: "lover",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        cipher: {
+            calling: "sage",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        cloakOfDread: {
+            calling: "leader",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        closeTheGap: {
+            calling: "warrior",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        combatMedic: {
+            calling: "healer",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        completePrivacy: {
+            calling: "liminal",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        damageConversion: {
+            calling: "healer",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        deathByTeacup: {
+            calling: "warrior",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        doctorsKit: {
+            calling: "healer",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        doppelganger: {
+            calling: "trickster",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        enforcingTheBoundary: {
+            calling: "liminal",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        enhancedImpact: {
+            calling: "warrior",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        eternalGenius: {
+            calling: "sage",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        eternalGuardian: {
+            calling: "guardian",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        experiencedTraveler: {
+            calling: "liminal",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        eyeForAnEye: {
+            calling: "judge",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        eyesInTheBlinds: {
+            calling: "hunter",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        flatlander: {
+            calling: "liminal",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        flawlesslyPlatonicIdeal: {
+            calling: "creator",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        fluidAppeal: {
+            calling: "lover",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        forYouIWill: {
+            calling: "lover",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        goodListener: {
+            calling: "leader",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        grandEntrance: {
+            calling: "leader",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        heartsAflame: {
+            calling: "lover",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        hurlToTheMoon: {
+            calling: "warrior",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        iAmAFire: {
+            calling: "lover",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        iAmTheLaw: {
+            calling: "judge",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        immortalMastermind: {
+            calling: "sage",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        immunizationBooster: {
+            calling: "healer",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        inSheepsClothing: {
+            calling: "trickster",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        indisputableAnalysis: {
+            calling: "judge",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        innateToolkit: {
+            calling: "creator",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        inspirationalAura: {
+            calling: "leader",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        instantDiagnosis: {
+            calling: "healer",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        internalCompass: {
+            calling: "hunter",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        internalRefinery: {
+            calling: "healer",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        invulnerableMaster: {
+            calling: "leader",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        keeneyedPredator: {
+            calling: "hunter",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        lieDetector: {
+            calling: "judge",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        liftedFromDust: {
+            calling: "creator",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        lightFingered: {
+            calling: "trickster",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        lighthouseOfSociety: {
+            calling: "leader",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        livingPillar: {
+            calling: "guardian",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        loversIntuition: {
+            calling: "lover",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        loversOath: {
+            calling: "lover",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        masterOfTheWorld: {
+            calling: "sage",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        masterOfWeapons: {
+            calling: "warrior",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        masterfulEfficiency: {
+            calling: "leader",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        mostDangerousPrey: {
+            calling: "hunter",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        neitherTheMinuteNorTheHour: {
+            calling: "liminal",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        notAFighter: {
+            calling: "lover",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        notTodayFriends: {
+            calling: "leader",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        objection: {
+            calling: "judge",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        officeHours: {
+            calling: "sage",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        omniglotTranslation: {
+            calling: "sage",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        onTheCase: {
+            calling: "judge",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        onYourSide: {
+            calling: "lover",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        oneMansTrash: {
+            calling: "trickster",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        overworldKnowledge: {
+            calling: "sage",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        palaceOfMemory: {
+            calling: "sage",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        panacea: {
+            calling: "healer",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        perfectCamouflage: {
+            calling: "hunter",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        perfectDefense: {
+            calling: "warrior",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        perfectPartner: {
+            calling: "lover",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        perfectPoise: {
+            calling: "leader",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        perfectRendition: {
+            calling: "creator",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        pierceTheVeil: {
+            calling: "liminal",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        presenceOfMagic: {
+            calling: "sage",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        quickStudy: {
+            calling: "judge",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        raiseThePillarsOfTheEarth: {
+            calling: "creator",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        reconstruction: {
+            calling: "healer",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        relentless: {
+            calling: "hunter",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        reverseEngineer: {
+            calling: "creator",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        rumorMiller: {
+            calling: "trickster",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        scentTheDivine: {
+            calling: "any",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        sendThePack: {
+            calling: "hunter",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        silenceInTheWoods: {
+            calling: "hunter",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        smokeAndMirrors: {
+            calling: "trickster",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        somebodysWatchingMe: {
+            calling: "any",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        soothingPresence: {
+            calling: "lover",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        speedReading: {
+            calling: "sage",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        stepSideways: {
+            calling: "liminal",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        surgeonWithTheHandsOfGod: {
+            calling: "healer",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        surprise: {
+            calling: "trickster",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        takesOneToKnowOne: {
+            calling: "trickster",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        tempered: {
+            calling: "warrior",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        terrorOfTheGuilty: {
+            calling: "judge",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        theBareMinimum: {
+            calling: "healer",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        theBiggestThreat: {
+            calling: "warrior",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        theLongRoadToAnywhere: {
+            calling: "liminal",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        thePainOfDishonesty: {
+            calling: "judge",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        theTruthArises: {
+            calling: "judge",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        theUnlimitedQuartermaster: {
+            calling: "creator",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        theyCannotBeTouched: {
+            calling: "guardian",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        theyreEverywhere: {
+            calling: "warrior",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        touchOfTheMuses: {
+            calling: "creator",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        },
+        trickShot: {
+            calling: "warrior",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        unerringDelivery: {
+            calling: "liminal",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        unobtrusiveVisitor: {
+            calling: "liminal",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        wasntMe: {
+            calling: "trickster",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        weGoAllNight: {
+            calling: "creator",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        wirelessInterface: {
+            calling: "creator",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        worryingHound: {
+            calling: "hunter",
+            tier: "heroic",
+            effect: {},
+            stunts: []
+        },
+        wovenFromLies: {
+            calling: "trickster",
+            tier: "immortal",
+            effect: {},
+            stunts: []
+        }
+    },
+    STUNTS: {
+        bendSpace: {
+            source: "KNACKS.flatlander",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        charge: {
+            source: "KNACKS.closeTheGap",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        emergencyOperation: {
+            source: "KNACKS.doctorsKit",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        getOutOfHere: {
+            source: "KNACKS.aFortress",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        glimpseTheOtherSide: {
+            source: "KNACKS.flatlander",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        icePack: {
+            source: "KNACKS.doctorsKit",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        inescapable: {
+            source: "KNACKS.closeTheGap",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        myTurn: {
+            source: "KNACKS.aFortress",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        secondWind: {
+            source: "KNACKS.aFortress",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        snare: {
+            source: "KNACKS.mostDangerousPrey",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        stalk: {
+            source: "KNACKS.mostDangerousPrey",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        stutterTime: {
+            source: "KNACKS.flatlander",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        sureFooted: {
+            source: "KNACKS.closeTheGap",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        swiftBandaging: {
+            source: "KNACKS.doctorsKit",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        terrify: {
+            source: "KNACKS.objection",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
+        },
+        vanish: {
+            source: "KNACKS.perfectCamouflage",
+            cost: {},
+            effect: {},
+            applyTags: [],
+            excludeTags: []
         }
     },
     FATEROLES: {
@@ -2367,4 +3403,4 @@ const testChars = {
     }
 };
 
-export {scionSystemData, handlebarTemplates, itemCategories, popoutData, testChars}
+export {scionSystemData, handlebarTemplates, itemCategories, popoutData, testChars};
