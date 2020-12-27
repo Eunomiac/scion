@@ -168,9 +168,18 @@ Hooks.once("init", async () => {
                 formatDict[args.shift()] = args.shift();
             return U.Loc(locString, formatDict);
         },
-        count: (val) => Object.values(val)?.length || 0,
-        concat: (...args) => args.slice(0, -1).join(""),
-        contains: (arr, val) => arr.includes(val),
+        count: (val) => Object.values(val)?.length ?? 0,
+        concat: (...args) => {
+            args.pop();
+            args = args.filter((arg) => arg !== "");
+            const returnVals = [];
+            let delim = "";
+            if (args.some((arg) => Array.isArray(arg)) && ["string", "number"].includes(typeof U.Last(args)))
+                delim = args.pop();
+            for (const arg of _.compact(args))
+                returnVals.push(..._.flatten([arg]));
+            return returnVals.join(delim ?? "");
+        },
         math: function (v1, operator, v2, options) {
             switch (operator) {
                 case "+": return U.Int(v1) + U.Int(v2);
@@ -200,7 +209,16 @@ Hooks.once("init", async () => {
                 case "&&": return (v1 && v2);
                 case "||": return (v1 || v2);
                 case "not": return (!v1);
-                default: return true;
+                case "in": {
+                    if (Array.isArray(v2))
+                        return v2.includes(v1);
+                    if (typeof v2 === "object" && Array.isArray(Object.keys(v2)))
+                        return Object.keys(v2).includes(v1);
+                    if (["string", "number"].includes(typeof v2))
+                        return `${v2}`.includes(`${v1}`);
+                    return false;
+                }
+                default: return Boolean(v1);
             }
         },
         article: (val) => U.ParseArticles(val),

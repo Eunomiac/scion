@@ -23,21 +23,22 @@ $isShowing: (
 @import 'core/functions';
 @import 'core/fontLoader';
 @import 'core/mixins';
+@import 'core/dragula';
+
+@import 'sheets/baseTheme';   
+@import 'sheets/actor/actorThemes';    
 
 body.vtt.game.system-scion {  
     $defaultPadding: 5px;
-    @import 'core/dragula';
     @import 'core/window';
 
     /* #region SHEET STYLES */
     div.app.window-app.scion.sheet {  
-        @import 'sheets/baseTheme';   
         @import 'sheets/baseLayout';
         @import 'sheets/baseFormat'; 
 
         /* #region ACTOR SHEETS */
-        &.actor {
-            @import 'sheets/actor/actorThemes';      
+        &.actor {  
             @import 'sheets/actor/actorLayout';
             @import 'sheets/actor/actorFormat';
 

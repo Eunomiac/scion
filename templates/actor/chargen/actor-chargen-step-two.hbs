@@ -1,6 +1,7 @@
 <div class="chargenTwo flex-col width100 alignCenter padded">
     <h1 class="alignLeft">{{loc "scion.heading.chargen.stepTwo"}}</h1>
-    <div id="pathContainer" class="width100">
+    <div id="pathMirror" class="pathContainer mirrorContainer"></div>
+    <div id="pathContainer" class="pathContainer width100">
     {{#each items.paths as |path id|}}
         {{#with ../blocks as | blocks |}}
         {{> (blocks.ownedItems.path.template) path}}

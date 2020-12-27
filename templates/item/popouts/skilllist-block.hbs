@@ -2,8 +2,8 @@
     <div id="pathSkillSource" class="flex-col">
         {{#each skills as |label skill|}}
         <span class="skill noFlex 
-            {{~#if (eq (lookup ../pathSkillsCount [skill]) 2)}} invalid
-            {{~else}}{{#if (contains ../data/skills [skill])}} invalid{{/if~}}
+            {{~#if (test (lookup ../pathSkillsCount [skill]) "==" 2)}} invalid
+            {{~else}}{{#if (test [skill] "in" ../data/skills)}} invalid{{/if~}}
             {{~/if}}" data-skill="{{skill}}">{{loc label}}</span>
         {{/each}}
     </div>

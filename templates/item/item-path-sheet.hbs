@@ -9,6 +9,7 @@
         
     <section class="sheet-body flex-col-spaceBetween width100">
         <h2 class="alignCenter">{{loc "scion.heading.path.pathSkills"}}</h2>
+        <div id="pathSkillMirror" class="pathSkills mirrorContainer"></div>
         <div id="pathSkills" class="pathSkills skillDrop flex-row-start width100" data-htmlID="skillList">
             {{#each data.skills as |skill|}}
             {{#if skill}}

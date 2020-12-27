@@ -59,6 +59,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
         };
 
         const skillSource = html.find("#pathSkillSource");
+        const skillMirror = html.find("#pathSkillMirror")[0];
         const skillDrops = html.find(".skillDrop");
         const pathSkillDragger = dragula({
             containers: [...skillSource, ...skillDrops],
@@ -72,7 +73,9 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
                 && !(pathData.skills.includes(element.dataset.skill)),
             direction: "horizontal",
             copy: true,
-            removeOnSpill: true
+            removeOnSpill: true,
+            mirrorContainer: skillMirror,
+            sheetElement: this.sheet
         });
         pathSkillDragger.on("cancel", (element, container, source) => {
             if (source.classList.contains("pathSkills"))

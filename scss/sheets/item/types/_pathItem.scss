@@ -20,6 +20,7 @@
     .pathDescription .contentEditable { height: calc(var(--lineHeight) * 3 + var(--padding)); margin-bottom: 5px; }
     .pathSkills {
         min-height: 28px;
+        margin-bottom: 6px;
         span.skill {
             margin: 2px calc((100% - 3 * 120px) / 6);
             &.invalid {
@@ -36,7 +37,7 @@
                     style: inset;
                     color: var(--greyUp3);
                 }
-                @include box-shadow(2px, 5px, var(--greyUp2));
+                @include box-shadow(3px, 3px, var(--greyUp2));
             }
         }
         &#skillList {
@@ -53,4 +54,5 @@
     h3, .h3 {
        @include embossed-text(1px, 0px, var(--colorHighlight), var(--colorShadow));
     }
+    div.closeButton { right: -443px; top: 14px; }
 }

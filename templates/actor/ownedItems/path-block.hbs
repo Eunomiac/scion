@@ -26,14 +26,14 @@
             {{/if}}
         </div>
         <div class="path-subBlock-details flex-col height100 width100 alignLeft">
-            <div class="text connectionDescription">
+            <div class="text connectionDescription clampText" data-clamplines="3">
                 {{#if data.data.connectionDescription}}<span class="strong">{{loc "scion.path.connections"}}:</span> {{data.data.connectionDescription}}{{/if}}
             </div>
-            <div class="conditionContainer alignRight width100">
+            <div class="flex-row-baseline conditionContainer alignRight width100">
                 {{#each (lookup actor.pathConditions data.data.type) as |condition type|}}
                     {{~#if condition.iData.title~}}
                     <span class="width10 alignCenter strong">►</span>
-                    <span class="conditionSummary outsetFrame width40 alignCenter strong">
+                    <span class="conditionSummary outsetFrame width40 alignCenter strong clampText" data-clamplines="1">
                             {{condition.iData.title}}
                     </span>
                     {{/if}}

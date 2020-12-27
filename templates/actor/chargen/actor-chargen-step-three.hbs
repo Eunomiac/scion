@@ -1,5 +1,8 @@
 <section class="chargenThree flex-col width100 padded">
     <h1>{{loc "scion.heading.chargen.stepThree"}}</h1>
+    <div class="dotline mirrorContainer">
+        <div id="chargenThreeDotMirror" class="dotContainer mirrorContainer"></div>
+    </div>
     <div class="grid height100 width100">
         <h2 class="skillHeader noBG">{{loc "scion.heading.chargen.stepThreeA"}}</h2>
         <div class="skills padded flex-col">
@@ -18,6 +21,7 @@
                 {{/for}}
             {{/each}}
         </div>
+        <h2 class="specHeader noBG">{{loc "scion.heading.chargen.stepThreeB"}}</h2>
         <div class="specialties padded flex-col">
             {{#each skillVals as |value skill|}}
                 {{#if (test (count (lookup ../skillSpecialties skill)) "==" 0)}}
@@ -34,16 +38,10 @@
                 {{/for}}
             {{/each}}
         </div>
-        <h2 class="attrHeader noBG">{{loc "scion.heading.chargen.stepThreeB"}}</h2>
-        <div class="attributes">       
-            <div class="favoredApproach alignCenter">
-                <h3>{{loc "scion.heading.chargen.favoredApproach"}}</h3>
-                <select id="favoredApproachSelect" class="contentEditable insetFrame" name="data.attributes.favoredApproach" required>
-                    <option name="" value="" selected hidden disabled></option>
-                    {{selectOptions config.favoredApproachList selected=data.attributes.favoredApproach}}
-                </select>
-            </div>
-            <div id="arenaContainer">
+        <h2 class="attrHeader noBG">{{loc "scion.heading.chargen.stepThreeC"}}</h2>
+        <div class="attributes flex-col-stretch">  
+            <div id="chargenThreeArenaMirror" class="mirrorContainer"></div>
+            <div id="arenaContainer" class="flex-col-stretch-spaceBetween height100">
                 {{#each arenaPriorities as |arena|}}
                     <div class="attribute-block" data-arena="{{arena}}">
                         <h3 class="handle">{{loc (concat "scion.heading.chargen." arena "Arena")}}</h3>
@@ -62,7 +60,14 @@
                         {{/with}}
                     </div>
                 {{/each}}
-            </div>  
+            </div>       
+            <div class="favoredApproach alignCenter">
+                <h3>{{loc "scion.heading.chargen.favoredApproach"}}</h3>
+                <select id="favoredApproachSelect" class="contentEditable insetFrame" name="data.attributes.favoredApproach" required>
+                    <option name="" value="" selected hidden disabled></option>
+                    {{selectOptions config.favoredApproachList selected=data.attributes.favoredApproach}}
+                </select>
+            </div>
         </div>
         <div class="unspentDots unspentSkillDots flex-col alignCenter">
             <h2 class="alignCenter noBG">{{#if unspentSkillDots}}{{loc "scion.heading.chargen.unassignedSkillDots"}}{{/if}}</h2>

@@ -61,12 +61,16 @@
     &[class*="spaceAround"] { justify-content: space-around; align-content: space-around; }
     &[class*="spaceEven"] { justify-content: space-evenly; align-content: space-around; }
     &[class*="start"] {
-        &:not([class*="Cross"]) { justify-content: flex-start; }
-        &[class*="Cross"] { align-items: flex-start; align-content: flex-start; }
+        &:not([class*="cross"]) { justify-content: flex-start; }
+        &[class*="cross"] { align-items: flex-start; align-content: flex-start; }
+    }
+    &[class*="center"] {
+        &:not([class*="cross"]) { justify-content: center; }
+        &[class*="cross"] { align-items: center; align-content: center; }
     }
     &[class*="end"] {
-        &:not([class*="Cross"]) { justify-content: flex-end; }
-        &[class*="Cross"] { align-items: flex-end; align-content: flex-end; }
+        &:not([class*="cross"]) { justify-content: flex-end; }
+        &[class*="cross"] { align-items: flex-end; align-content: flex-end; }
     }
 
     > *[class*="noFlex"] { flex: 0 0 auto; }

@@ -75,6 +75,13 @@ export class MajorActorSheet extends ScionActorSheet {
             data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type));
         // #endregion
 
+        // #region FRONT PAGE
+        if (pantheon)
+            data.virtues = panthData[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`));
+
+        // #endregion
+
+
         // #region CHARGEN
         actorData.charGen = actorData.charGen || {};
 
@@ -109,7 +116,6 @@ export class MajorActorSheet extends ScionActorSheet {
         // #region STEP THREE
         data.skillVals = this.actor.skillVals;
         // FILTERING OUT 0-SKILLS
-        data.filteredSkillVals = _.pick(data.skillVals, (val) => val > 0);
         data.unspentSkillDots = this.actor.unassignedSkillDots;
         data.assignableSkillDots = this.actor.assignableSkillDots;
         // EXPOSING SPECIALTY DATA
@@ -198,8 +204,12 @@ export class MajorActorSheet extends ScionActorSheet {
 
             // #region SORTING PATH PRIORITIES
             const pathContainer = html.find("#pathContainer")[0];
-            const pathDragger = dragula({containers: [pathContainer]});
-
+            const pathMirror = html.find("#pathMirror")[0];
+            const pathDragger = dragula({
+                containers: [pathContainer],
+                mirrorContainer: pathMirror,
+                sheetElement: this.sheet
+            });
             pathDragger.on("drop", async () => {
                 await this.actor.update({
                     "data.pathPriorities": Array.from(pathContainer.children)
@@ -211,9 +221,12 @@ export class MajorActorSheet extends ScionActorSheet {
 
             // #region SORTING ATTRIBUTE PRIORITIES
             const arenaContainer = html.find("#arenaContainer")[0];
+            const arenaMirror = html.find("#chargenThreeArenaMirror")[0];
             const arenaDragger = dragula({
                 containers: [arenaContainer],
-                moves: (e, s, handle) => handle.classList.contains("handle")
+                moves: (e, s, handle) => handle.classList.contains("handle"),
+                mirrorContainer: arenaMirror,
+                sheetElement: this.sheet
             });
 
             arenaDragger.on("drop", async () => {
@@ -322,14 +335,16 @@ export class MajorActorSheet extends ScionActorSheet {
 
 
             const dotBins = html.find(".dotBin");
-            const dots = html.find(".dot");
+            const dotMirror = html.find("#chargenThreeDotMirror")[0];
             const dotDragger = dragula({
                 containers: [...dotBins],
                 moves: (dot, sourceBin) => isDotDraggable(dot, sourceBin),
                 accepts: (dot, targetBin, sourceBin) => isTargetDroppable(dot, sourceBin, targetBin),
                 direction: "horizontal",
                 copy: false,
-                removeOnSpill: true
+                removeOnSpill: true,
+                mirrorContainer: dotMirror,
+                sheetElement: this.sheet
             });
 
             const _onDotDrag = (dot, sourceBin) => {
@@ -340,8 +355,10 @@ export class MajorActorSheet extends ScionActorSheet {
                         bin.classList.add("invalidDrop");
                 });
             };
-            const _onDotDragEnd = (dot) => {
+            const _onDotDragEnd = async (dot) => {
                 dotBins.each((i, bin) => { bin.classList.remove("invalidDrop") });
+                if (!(await this.actor.processUpdateQueue()))
+                    this.render();
             };
             const _onDotDrop = (dot, targetBin, sourceBin) => {
                 const {dotTypes, targetTypes, sourceTypes} = getDragTypes(dot, sourceBin, targetBin);
@@ -367,7 +384,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     }
                     // dot.remove();
                     U.LOG({targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
-                    this.actor.update(updateData);
+                    this.actor.queueUpdateData(updateData);
                 }
             };
             const _onDropRemove = (dot, x, sourceBin) => {

@@ -1,11 +1,12 @@
 .chargenOne {
     .deed {
-        min-width: 50%;
+        margin: 3px 0;
+        label { width: 100px; }
     }
 }
 
 .chargenTwo {
-    #pathContainer .path-block { @import 'sheets/actor/major/blocks/path-block'; }
+    .pathContainer .path-block { @import 'sheets/actor/major/blocks/path-block'; }
     .skillSummary {
         transform: scale(0.75);
         margin-left: 5%;
@@ -20,13 +21,14 @@
 .chargenThree {
     .grid { 
         --gridHeight: calc(560px - 26px - 10px - 5px - 32px); 
-        grid: "skillHeader skillHeader skillHeader skillHeader attrHeader attrHeader" 26px
+        grid: "skillHeader skillHeader specHeader specHeader attrHeader attrHeader" 26px
               "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px)
               "unspentSkills unspentSkills unspentSkills unspentAttrs unspentAttrs unspentAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
 
         h2 {
             text-indent: 0;
             &.skillHeader { grid-area: skillHeader; }
+            &.specHeader { grid-area: specHeader; }
             &.attrHeader { grid-area: attrHeader; }
         }
         
@@ -59,15 +61,13 @@
         .attributes { 
             grid-area: attributes;
             .attribute-block {  
-                margin: 5px 0;
+                margin: 0;
                 border: 3px solid var(--accent);
                 border-radius: 25px;
                 padding: 0px 10px;
                 background: var(--accentUp2Fade75);
                 border-top-left-radius: 0;
                 overflow: hidden;
-                &:first-child { margin-top: 0px; }
-                .dotline-labelled { margin: 5px 0; }
                 h3 {
                     font-size: 16px;
                     background: var(--bgH2);
@@ -79,6 +79,7 @@
             .favoredApproach {
                 h3 {
                     font-size: var(--fontSizeBody);
+                    margin: 5px 0;
                 }
                 select {
                     width: 80%;

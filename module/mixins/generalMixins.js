@@ -1,6 +1,7 @@
 // #region Import Modules
 import {THROW} from "../data/utils.js";
 import {_, U, popoutData} from "../modules.js";
+import "../external/clamp.min.js";
 
 // #region CLASS FACTORIES: Applying Mixins
 class MixinBuilder {
@@ -85,12 +86,36 @@ export const PopoutControl = (superClass) => class extends superClass {
         }
     }
 };
-export const EditableDivs = (superClass) => class extends superClass {
+export const ClampText = (superClass) => class extends superClass {
+    clamp(element) {
+        if ("clamplines" in element.dataset)
+            $clamp(element, {clamp: U.Int(element.dataset.clamplines)});
+        else if ("clampheight" in element.dataset)
+            $clamp(element, {clamp: element.dataset.clampheight});
+        else
+            $clamp(element, {clamp: "auto"});
+    }
+    unClamp(element) { element.style.cssText = "" }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+        html.find(".clampText").each((i, element) => { this.clamp(element) });
+    }
+};
+export const EditableDivs = (superClass) => class extends ClampText(superClass) {
     activateListeners(html) {
         super.activateListeners(html);
 
         if (this.options.editable) {
-            // #region CONTENT-EDITABLE ELEMENTS
+            const checkForPlaceholder = (element) => {
+                if (!element.innerText && "placeholder" in element.dataset) {
+                    element.classList.add("placeholder");
+                    element.innerHTML = element.dataset.placeholder;
+                } else {
+                    element.classList.remove("placeholder");
+                }
+            };
+            // #region ON-EVENT FUNCTIONS
             const _onEditKeyDown = (event) => {
                 if (event.key === "Enter") {
                     event.preventDefault();
@@ -104,6 +129,7 @@ export const EditableDivs = (superClass) => class extends superClass {
                 if (element.classList.contains("placeholder")) {
                     element.innerHTML = "";
                     element.classList.remove("placeholder");
+                    this.unClamp(element);
                 }
                 if (element.classList.contains("quote"))
                     element.innerHTML = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
@@ -119,6 +145,7 @@ export const EditableDivs = (superClass) => class extends superClass {
                 const dataSet = element.dataset;
                 element.setAttribute("contenteditable", false);
                 element.removeEventListener("keydown", _onEditKeyDown);
+                this.clamp(element);
 
                 if ("field" in dataSet) {
                     const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
@@ -133,19 +160,18 @@ export const EditableDivs = (superClass) => class extends superClass {
                     if (elementVal && element.classList.contains("quote"))
                         element.innerHTML = _.escape(`"${elementVal}"`);
                 }
-                if (!element.innerText && "placeholder" in dataSet) {
-                    element.classList.add("placeholder");
-                    element.innerHTML = dataSet.placeholder;
-                } else {
-                    element.classList.remove("placeholder");
-                }
+                checkForPlaceholder(element);
             };
+            // #endregion
+
+            // #region INITIALIZATION
             html.find("div.contentEditable").each((i, element) => {
                 const dataSet = element.dataset;
                 element.setAttribute("contenteditable", false);
                 element.addEventListener("click", _onEditClickOn.bind(this));
                 element.addEventListener("focus", _onEditFocus.bind(this));
                 element.addEventListener("blur", _onEditClickOff.bind(this));
+                this.clamp(element);
 
                 // If dataset includes a field, fill the element with the current data:
                 if ("field" in dataSet) {
@@ -170,13 +196,7 @@ export const EditableDivs = (superClass) => class extends superClass {
                     }
                 }
 
-                // If element innerHTML is blank, populate with placeholder if one is available
-                if (!element.innerText && "placeholder" in dataSet) {
-                    element.innerHTML = dataSet.placeholder;
-                    element.classList.add("placeholder");
-                } else {
-                    element.classList.remove("placeholder");
-                }
+                checkForPlaceholder(element);
             });
             // #endregion
         }

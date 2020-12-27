@@ -11,6 +11,8 @@ export class Dragger extends Draggable {
         this.expandedHeight = app.constructor.defaultOptions.height;
         this.collapsedWidth = collapsedWidth || this.handle.offsetWidth;
         this.collapsedHeight = collapsedHeight || this.handle.offsetHeight;
+        // this.appElement = this.app.element[0];
+        // this.mirrorContainers = this.appElement.getElementsByClassName("mirrorContainer");
 
         // Hooks.on(`close${this.appClassName}`, () => { setTimeout(() => this.expand(false), 500) });
         Hooks.on(`render${this.appClassName}`, () => {
@@ -24,6 +26,7 @@ export class Dragger extends Draggable {
                     width: this.expandedWidth,
                     height: this.expandedHeight
                 });
+            // this.setMirrorPosition();
         });
     }
 
@@ -53,6 +56,17 @@ export class Dragger extends Draggable {
 
     get isCollapsed() { return this.handle.classList.contains("collapsed") }
 
+    // setMirrorPosition() {
+    //     const posData = {
+    //         top: `-${this.appElement.style.top}`,
+    //         left: `-${this.appElement.style.left}`,
+    //         height: `${window.innerHeight}px`,
+    //         width: `${window.innerWidth}px`
+    //     };
+    //     for (const mirrorContainer of this.mirrorContainers)
+    //         Object.assign(mirrorContainer.style, posData);
+    // }
+
     _onDragMouseMove(event) {
         event.preventDefault();
 
@@ -69,5 +83,6 @@ export class Dragger extends Draggable {
             width: this.isCollapsed ? this.collapsedWidth : this.expandedWidth,
             height: this.isCollapsed ? this.collapsedHeight : this.expandedHeight
         });
+        // this.setMirrorPosition();
     }
 }

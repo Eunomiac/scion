@@ -5,11 +5,20 @@ import "../external/gl-matrix-min.js";
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton) {
+export class ScionActorSheet extends MIX(ActorSheet).with(
+    MIXINS.ClampText,
+    MIXINS.EditableDivs,
+    MIXINS.PopoutControl,
+    MIXINS.CloseButton
+) {
     // Getters: Data Retrieval
     get aData() { return this.actor.aData }
     get eData() { return this.actor.eData }
     get ownedItems() { return this.actor.ownedItems }
+    get sheet() {
+        this._sheet = this._sheet ?? document.getElementById(`actor-${this.actor._id}`);
+        return this._sheet;
+    }
 
     static get defaultOptions() {
         /*  super.defaultOptions = {

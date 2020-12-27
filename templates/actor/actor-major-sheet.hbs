@@ -50,7 +50,7 @@
     <section id="characterSheet" class="editable major {{data.pantheon}} grid main">
         {{!-- Sheet Header --}}
         <section class="header grid">
-            <div class="divineTitle h2 noBG alignCenter">{{~data.divineTitle~}}</div>
+            <div class="divineTitle h2 noBG alignCenter">{{#if data.divineTitle}}&quot;{{~data.divineTitle~}}&quot;{{/if}}</div>
             <div class="charName title contentEditable alignCenter" data-field="name"></div>
             <div class="patronage h3 noBG alignCenter">&nbsp;{{~data.patronageLine~}}&nbsp;</div>
         </section>
@@ -63,10 +63,11 @@
             {{!-- Front Tab --}}
             <section class="tab" data-group="primary" data-tab="front">
                 <section class="front-body grid">
-                    <div class="skills flex-col">
+                    <div class="skills flex-col alignLeft">
                         <h1>{{loc "scion.game.skills"}}</h1>
                         {{#each skillVals as |value skill|}}
                         {{#if value}}
+                        <div class="flex-col-start width100">
                         <div class="dotline">
                             <div class="label">{{loc (concat "scion.skill." skill)}}</div>
                             <div class="dotContainer">
@@ -75,8 +76,56 @@
                                 {{/for}}
                             </div>
                         </div>
+                        {{#if (test (concat (lookup ../skillSpecialties skill) ", ") "!=" "")}}
+                        <div class="specSummary weak">{{concat (lookup ../skillSpecialties skill) ", "}}</div>
+                        {{/if}}
+                        </div>
                         {{/if}}
                         {{/each}}
+                    </div>
+                    <div class="paths flex-col alignLeft">
+                      <h1>{{loc "scion.game.paths"}}</h1>
+                    </div>
+                    <div class="callings flex-col alignLeft">
+                      <h1>{{loc "scion.game.callings"}}</h1>
+                    </div>
+                    <div class="deeds flex-col alignLeft">
+                      <h1>{{loc "scion.game.deeds"}}</h1>
+                    </div>
+                    <div class="attributes flex-col-stretch alignCenter">
+                      <h1>{{loc "scion.game.attributes"}}</h1>
+                      <div class="attributeArenas flex-row-spaceBetween padded width100">
+                      {{#each arenaPriorities as |arena|}}
+                        <div class="arena-block flex-col-spaceEvenly width100">
+                          {{#with (lookup ../arenas arena) as |attributes|}}
+                          {{#each attributes as |value attribute|}}  
+                          <div class="dotline">
+                              <div class="label">{{loc (concat "scion.attribute." attribute)}}</div>
+                              <div class="dotContainer">
+                              {{#for value}}
+                                  <span class="dot"></span>
+                              {{/for}}
+                              </div>
+                          </div>
+                          {{/each}}
+                          {{/with}}
+                        </div>
+                      {{/each}}
+                      </div>
+                    </div>
+                    <div class="virtues flex-row-center">
+                      <div class="flex-row-spaceBetween-centercross padded height30">
+                        <label class="alignLeft">{{virtues.[0]}}</label>
+                        <div class="dotline noLabel">
+                            <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>
+                            <div class="dotContainer">
+                                {{#for 3}}
+                                    <span class="dot"></span>
+                                {{/for}}
+                            </div>
+                        </div>
+                        <label class="alignRight">{{virtues.[1]}}</label>
+                      </div>
                     </div>
                 </section>
             </section>

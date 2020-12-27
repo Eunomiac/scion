@@ -109,28 +109,653 @@
 
 /* General-Purpose Mixins */
 /* #endregion */
-body.vtt.game.system-scion {
-  /* #region SHEET STYLES */
-  /* #endregion */
-}
-
-body.vtt.game.system-scion .gu-mirror {
+.gu-mirror {
   position: fixed !important;
   margin: 0 !important;
   z-index: 9999 !important;
-  opacity: 0.5;
+  opacity: 1;
 }
 
-body.vtt.game.system-scion .gu-hide {
+.gu-hide {
   display: none !important;
 }
 
-body.vtt.game.system-scion .gu-unselectable {
+.gu-unselectable {
   user-select: none !important;
 }
 
-body.vtt.game.system-scion .gu-transit {
+.gu-transit {
   opacity: 0.5;
+}
+
+/* #region Default/Generic Actor Sheet Theme */
+/* #endregion */
+/* #region Theme-Specific Mixins */
+/* #endregion */
+body {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-generic.png");
+  --bgItemSheet: url("../images/item-sheet/backgrounds/bgItem-generic.png");
+  --bgItemOverlay: url("../images/item-sheet/backgrounds/overlayItem-generic.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-generic.png");
+  --black: black;
+  --blackFade10: rgba(0, 0, 0, 0.9);
+  --blackFade20: rgba(0, 0, 0, 0.8);
+  --blackFade30: rgba(0, 0, 0, 0.7);
+  --blackFade40: rgba(0, 0, 0, 0.6);
+  --blackFade50: rgba(0, 0, 0, 0.5);
+  --blackFade60: rgba(0, 0, 0, 0.4);
+  --blackFade70: rgba(0, 0, 0, 0.3);
+  --blackFade80: rgba(0, 0, 0, 0.2);
+  --blackFade90: rgba(0, 0, 0, 0.1);
+  --blackFade25: rgba(0, 0, 0, 0.75);
+  --blackFade75: rgba(0, 0, 0, 0.25);
+  --white: white;
+  --whiteFade10: rgba(255, 255, 255, 0.9);
+  --whiteFade20: rgba(255, 255, 255, 0.8);
+  --whiteFade30: rgba(255, 255, 255, 0.7);
+  --whiteFade40: rgba(255, 255, 255, 0.6);
+  --whiteFade50: rgba(255, 255, 255, 0.5);
+  --whiteFade60: rgba(255, 255, 255, 0.4);
+  --whiteFade70: rgba(255, 255, 255, 0.3);
+  --whiteFade80: rgba(255, 255, 255, 0.2);
+  --whiteFade90: rgba(255, 255, 255, 0.1);
+  --whiteFade25: rgba(255, 255, 255, 0.75);
+  --whiteFade75: rgba(255, 255, 255, 0.25);
+  --greyDown4: #1a1a1a;
+  --greyDown4Fade50: rgba(26, 26, 26, 0.5);
+  --greyDown4Fade75: rgba(26, 26, 26, 0.25);
+  --greyDown3: #333333;
+  --greyDown3Fade50: rgba(51, 51, 51, 0.5);
+  --greyDown3Fade75: rgba(51, 51, 51, 0.25);
+  --greyDown2: #4d4d4d;
+  --greyDown2Fade50: rgba(77, 77, 77, 0.5);
+  --greyDown2Fade75: rgba(77, 77, 77, 0.25);
+  --greyDown1: #666666;
+  --greyDown1Fade50: rgba(102, 102, 102, 0.5);
+  --greyDown1Fade75: rgba(102, 102, 102, 0.25);
+  --grey: gray;
+  --greyFade50: rgba(128, 128, 128, 0.5);
+  --greyFade75: rgba(128, 128, 128, 0.25);
+  --greyUp1: #999999;
+  --greyUp1Fade50: rgba(153, 153, 153, 0.5);
+  --greyUp1Fade75: rgba(153, 153, 153, 0.25);
+  --greyUp2: #b3b3b3;
+  --greyUp2Fade50: rgba(179, 179, 179, 0.5);
+  --greyUp2Fade75: rgba(179, 179, 179, 0.25);
+  --greyUp3: #cccccc;
+  --greyUp3Fade50: rgba(204, 204, 204, 0.5);
+  --greyUp3Fade75: rgba(204, 204, 204, 0.25);
+  --greyUp4: #e6e6e6;
+  --greyUp4Fade50: rgba(230, 230, 230, 0.5);
+  --greyUp4Fade75: rgba(230, 230, 230, 0.25);
+  --accentDown4: #1f1c14;
+  --accentDown4Fade50: rgba(31, 28, 20, 0.5);
+  --accentDown4Fade75: rgba(31, 28, 20, 0.25);
+  --accentDown3: #473e1f;
+  --accentDown3Fade50: rgba(71, 62, 31, 0.5);
+  --accentDown3Fade75: rgba(71, 62, 31, 0.25);
+  --accentDown2: #7a651f;
+  --accentDown2Fade50: rgba(122, 101, 31, 0.5);
+  --accentDown2Fade75: rgba(122, 101, 31, 0.25);
+  --accentDown1: #b89214;
+  --accentDown1Fade50: rgba(184, 146, 20, 0.5);
+  --accentDown1Fade75: rgba(184, 146, 20, 0.25);
+  --accent: #ffc400;
+  --accentFade50: rgba(255, 196, 0, 0.5);
+  --accentFade75: rgba(255, 196, 0, 0.25);
+  --accentUp1: #ffd033;
+  --accentUp1Fade50: rgba(255, 208, 51, 0.5);
+  --accentUp1Fade75: rgba(255, 208, 51, 0.25);
+  --accentUp2: #ffdc66;
+  --accentUp2Fade50: rgba(255, 220, 102, 0.5);
+  --accentUp2Fade75: rgba(255, 220, 102, 0.25);
+  --accentUp3: #ffe799;
+  --accentUp3Fade50: rgba(255, 231, 153, 0.5);
+  --accentUp3Fade75: rgba(255, 231, 153, 0.25);
+  --accentUp4: #fff3cc;
+  --accentUp4Fade50: rgba(255, 243, 204, 0.5);
+  --accentUp4Fade75: rgba(255, 243, 204, 0.25);
+  --colorTitle: black;
+  --colorH1: black;
+  --colorH2: black;
+  --colorH3: black;
+  --coloraccent: #ffc400;
+  --colorBody: black;
+  --colorStrong: var(--colorBody);
+  --colorWeak: var(--greyUp2);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: var(--accent);
+  --colorPlaceholder: var(--greyDown3);
+  --colorPurviewRotate: 0deg;
+  --bgTitle: transparent;
+  --bgH1: transparent;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --bgH3: transparent;
+  --fontFamilyTitle: "Marcellus SC";
+  --fontSizeTitle: 36px;
+  --lineHeightTitle: 44px;
+  --maxHeightTitle: none;
+  --paddingTitle: 0px;
+  --fontStyleTitle: normal;
+  --fontVariantTitle: normal;
+  --fontWeightTitle: normal;
+  --textTransformTitle: none;
+  --textIndentTitle: 0px;
+  --textShadowTitle: -1px -1px 1px white, 1px 1px 1px black;
+  --borderTitle: none;
+  --fontFamilyH1: "Marcellus SC";
+  --fontSizeH1: 24px;
+  --lineHeightH1: 32px;
+  --maxHeightH1: 32px;
+  --paddingH1: 0px;
+  --fontStyleH1: normal;
+  --fontVariantH1: small-caps;
+  --fontWeightH1: normal;
+  --textTransformH1: none;
+  --textIndentH1: 0px;
+  --textShadowH1: -1px -1px 1px white, 1px 1px 1px black;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Overlock SC";
+  --fontSizeH2: 20px;
+  --lineHeightH2: 26px;
+  --maxHeightH2: 26px;
+  --paddingH2: 0px;
+  --fontStyleH2: normal;
+  --fontVariantH2: normal;
+  --fontWeightH2: bold;
+  --textTransformH2: none;
+  --textIndentH2: 10px;
+  --textShadowH2: none;
+  --borderH2: none;
+  --fontFamilyH3: "Overlock SC";
+  --fontSizeH3: 16px;
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --paddingH3: 0px;
+  --fontStyleH3: normal;
+  --fontVariantH3: normal;
+  --fontWeightH3: bold;
+  --textTransformH3: none;
+  --textIndentH3: 0px;
+  --textShadowH3: none;
+  --borderH3: none;
+  --fontFamilyBody: "Overlock SC";
+  --fontSizeBody: 16px;
+  --lineHeightBody: var(--fontSizeBody);
+  --fontStyleBody: normal;
+  --fontVariantBody: normal;
+  --fontWeightBody: normal;
+  --textTransformBody: none;
+  --textShadowBody: 0 0 0px black;
+  --fontStyleStrong: normal;
+  --fontVariantStrong: var(--fontVariantBody);
+  --fontWeightStrong: bold;
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: var(--textShadowBody);
+  --fontStyleWeak: italic;
+  --fontVariantWeak: var(--fontVariantBody);
+  --fontWeightWeak: normal;
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --fontFamilyMenu: "Voltaire";
+  --fontSizeMenu: 24px;
+  --lineHeightMenu: 24px;
+  --maxHeightMenu: 24px;
+  --fontStyleMenu: normal;
+  --fontVariantMenu: normal;
+  --fontWeightMenu: normal;
+  --textTransformMenu: uppercase;
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --borderMenu: none;
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --paddingInput: 0px;
+  --fontStyleInput: normal;
+  --fontVariantInput: normal;
+  --fontWeightInput: bold;
+  --textTransformInput: none;
+  --textIndentInput: 5px;
+  --textShadowInput: var(--textShadowBody);
+  --borderInput: none;
+  --fontFamilyPlaceholder: "Della Respira";
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontStylePlaceholder: italic;
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --fontWeightPlaceholder: normal;
+  --textTransformPlaceholder: none;
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
+}
+
+.aesir {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-aesir.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-aesir.png");
+  --colorStrong: var(--colorBody);
+  --colorWeak: var(--greyUp2);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: var(--accent);
+  --colorPlaceholder: var(--greyDown3);
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Amarante";
+  --fontFamilyH1: "Amarante";
+  --borderH1: 2px solid var(--colorH1);
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: var(--textShadowBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
+}
+
+.deva {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-deva.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-deva.png");
+}
+
+.kami {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-kami.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-kami.png");
+}
+
+.loa {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-loa.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-loa.png");
+  --colorStrong: var(--colorBody);
+  --colorWeak: var(--greyUp2);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #dd0000;
+  --colorPlaceholder: var(--greyDown3);
+  --colorPurviewRotate: 225deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Finger Paint";
+  --fontSizeTitle: 2rem;
+  --fontFamilyH1: "Finger Paint";
+  --borderH1: 2px solid var(--colorH1);
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: var(--textShadowBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
+}
+
+.manitou {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-manitou.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-manitou.png");
+}
+
+.netjer {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-netjer.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-netjer.png");
+  --accentDown4: #100f0b;
+  --accentDown4Fade50: rgba(16, 15, 11, 0.5);
+  --accentDown4Fade75: rgba(16, 15, 11, 0.25);
+  --accentDown3: #262212;
+  --accentDown3Fade50: rgba(38, 34, 18, 0.5);
+  --accentDown3Fade75: rgba(38, 34, 18, 0.25);
+  --accentDown2: #403713;
+  --accentDown2Fade50: rgba(64, 55, 19, 0.5);
+  --accentDown2Fade75: rgba(64, 55, 19, 0.25);
+  --accentDown1: #5f4f10;
+  --accentDown1Fade50: rgba(95, 79, 16, 0.5);
+  --accentDown1Fade75: rgba(95, 79, 16, 0.25);
+  --accent: #836a07;
+  --accentFade50: rgba(131, 106, 7, 0.5);
+  --accentFade75: rgba(131, 106, 7, 0.25);
+  --accentUp1: #cca409;
+  --accentUp1Fade50: rgba(204, 164, 9, 0.5);
+  --accentUp1Fade75: rgba(204, 164, 9, 0.25);
+  --accentUp2: #f8ce27;
+  --accentUp2Fade50: rgba(248, 206, 39, 0.5);
+  --accentUp2Fade75: rgba(248, 206, 39, 0.25);
+  --accentUp3: #fcdf6d;
+  --accentUp3Fade50: rgba(252, 223, 109, 0.5);
+  --accentUp3Fade75: rgba(252, 223, 109, 0.25);
+  --accentUp4: #fef0b5;
+  --accentUp4Fade50: rgba(254, 240, 181, 0.5);
+  --accentUp4Fade75: rgba(254, 240, 181, 0.25);
+  --colorTitle: #554a39;
+  --colorH1: #554a39;
+  --colorH2: #6e4a28;
+  --colorH3: #6e4a28;
+  --coloraccent: #836a07;
+  --colorStrong: var(--colorBody);
+  --colorWeak: var(--greyUp2);
+  --colorHighlight: #f6f0e2;
+  --colorShadow: #2d2d2f;
+  --colorMenuGlow: #ffdd00;
+  --colorPlaceholder: var(--greyDown3);
+  --colorPurviewRotate: 245deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Carolingia";
+  --fontSizeTitle: 40px;
+  --lineHeightTitle: 50px;
+  --fontVariantTitle: small-caps;
+  --fontWeightTitle: bold;
+  --fontFamilyH1: "Gothic Ultra";
+  --fontSizeH1: 32px;
+  --lineHeightH1: 36px;
+  --fontVariantH1: none;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Carolingia";
+  --fontSizeH2: 24px;
+  --fontFamilyH3: "Carolingia";
+  --fontSizeH3: 20px;
+  --lineHeightH3: 16px;
+  --maxHeightH3: var(--fontSizeH3);
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: var(--textShadowBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
+}
+
+.shen {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-shen.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-shen.png");
+}
+
+.teotl {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teotl.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-teotl.png");
+}
+
+.theoi {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-theoi.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-theoi.png");
+  --accentDown4: #201b28;
+  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
+  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
+  --accentDown3: #3b285e;
+  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
+  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
+  --accentDown2: #5328a2;
+  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
+  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
+  --accentDown1: #6927e7;
+  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
+  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
+  --accent: #8e52ff;
+  --accentFade50: rgba(142, 82, 255, 0.5);
+  --accentFade75: rgba(142, 82, 255, 0.25);
+  --accentUp1: #a575ff;
+  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
+  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
+  --accentUp2: #bb97ff;
+  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
+  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
+  --accentUp3: #d2baff;
+  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
+  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
+  --accentUp4: #e8dcff;
+  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
+  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
+  --colorTitle: #000fb8;
+  --colorH1: #000fb8;
+  --colorH2: #4757ff;
+  --colorH3: #000b85;
+  --coloraccent: #8e52ff;
+  --colorStrong: var(--colorBody);
+  --colorWeak: var(--greyUp2);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #00ffff;
+  --colorPlaceholder: var(--greyDown3);
+  --colorPurviewRotate: 100deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Poiret One";
+  --fontWeightTitle: bold;
+  --fontFamilyH1: "Poiret One";
+  --fontWeightH1: bold;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Roman Font 7";
+  --fontFamilyH3: "Poiret One";
+  --fontSizeH3: 20px;
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --fontVariantH3: small-caps;
+  --fontWeightH3: normal;
+  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
+  --fontFamilyBody: "Poiret One";
+  --lineHeightBody: var(--fontSizeBody);
+  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
+  --fontVariantStrong: var(--fontVariantBody);
+  --fontWeightStrong: normal;
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: none;
+}
+
+.tuathaDeDanann {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-tuathaDeDanann.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-tuathaDeDanann.png");
+  --accentDown4: #101410;
+  --accentDown4Fade50: rgba(16, 20, 16, 0.5);
+  --accentDown4Fade75: rgba(16, 20, 16, 0.25);
+  --accentDown3: #1c2d1b;
+  --accentDown3Fade50: rgba(28, 45, 27, 0.5);
+  --accentDown3Fade75: rgba(28, 45, 27, 0.25);
+  --accentDown2: #234b21;
+  --accentDown2Fade50: rgba(35, 75, 33, 0.5);
+  --accentDown2Fade75: rgba(35, 75, 33, 0.25);
+  --accentDown1: #266e22;
+  --accentDown1Fade50: rgba(38, 110, 34, 0.5);
+  --accentDown1Fade75: rgba(38, 110, 34, 0.25);
+  --accent: #25951f;
+  --accentFade50: rgba(37, 149, 31, 0.5);
+  --accentFade75: rgba(37, 149, 31, 0.25);
+  --accentUp1: #2bd422;
+  --accentUp1Fade50: rgba(43, 212, 34, 0.5);
+  --accentUp1Fade75: rgba(43, 212, 34, 0.25);
+  --accentUp2: #55eb4d;
+  --accentUp2Fade50: rgba(85, 235, 77, 0.5);
+  --accentUp2Fade75: rgba(85, 235, 77, 0.25);
+  --accentUp3: #8af684;
+  --accentUp3Fade50: rgba(138, 246, 132, 0.5);
+  --accentUp3Fade75: rgba(138, 246, 132, 0.25);
+  --accentUp4: #c2fdbf;
+  --accentUp4Fade50: rgba(194, 253, 191, 0.5);
+  --accentUp4Fade75: rgba(194, 253, 191, 0.25);
+  --colorTitle: #296f17;
+  --colorH1: #296f17;
+  --colorH2: #0d3005;
+  --colorH3: #19430e;
+  --coloraccent: #25951f;
+  --colorStrong: var(--colorBody);
+  --colorWeak: var(--greyUp2);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #00ff00;
+  --colorPlaceholder: var(--greyDown3);
+  --colorPurviewRotate: 330deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Berkshire Swash";
+  --fontSizeTitle: 40px;
+  --fontFamilyH1: "Berkshire Swash";
+  --fontVariantH1: normal;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Della Respira";
+  --fontFamilyH3: "Della Respira";
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --fontStyleH3: italic;
+  --lineHeightBody: var(--fontSizeBody);
+  --fontVariantStrong: var(--fontVariantBody);
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: var(--textShadowBody);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
+}
+
+.nemetondevos {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-nemetondevos.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-nemetondevos.png");
+}
+
+.orisha {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-orisha.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-orisha.png");
+  --accentDown4: #201b28;
+  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
+  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
+  --accentDown3: #3b285e;
+  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
+  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
+  --accentDown2: #5328a2;
+  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
+  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
+  --accentDown1: #6927e7;
+  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
+  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
+  --accent: #8e52ff;
+  --accentFade50: rgba(142, 82, 255, 0.5);
+  --accentFade75: rgba(142, 82, 255, 0.25);
+  --accentUp1: #a575ff;
+  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
+  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
+  --accentUp2: #bb97ff;
+  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
+  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
+  --accentUp3: #d2baff;
+  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
+  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
+  --accentUp4: #e8dcff;
+  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
+  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
+  --colorTitle: #000fb8;
+  --colorH1: #000fb8;
+  --colorH2: #4757ff;
+  --colorH3: #000b85;
+  --coloraccent: #8e52ff;
+  --colorStrong: var(--colorBody);
+  --colorWeak: var(--greyUp2);
+  --colorHighlight: var(--whiteFade50);
+  --colorShadow: var(--blackFade50);
+  --colorMenuGlow: #00ffff;
+  --colorPlaceholder: var(--greyDown3);
+  --colorPurviewRotate: 100deg;
+  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
+  --fontFamilyTitle: "Poiret One";
+  --fontWeightTitle: bold;
+  --fontFamilyH1: "Poiret One";
+  --fontWeightH1: bold;
+  --borderH1: 2px solid var(--colorH1);
+  --fontFamilyH2: "Elektra";
+  --fontFamilyH3: "Poiret One";
+  --fontSizeH3: 20px;
+  --lineHeightH3: var(--fontSizeH3);
+  --maxHeightH3: var(--fontSizeH3);
+  --fontVariantH3: small-caps;
+  --fontWeightH3: normal;
+  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
+  --fontFamilyBody: "Poiret One";
+  --lineHeightBody: var(--fontSizeBody);
+  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
+  --fontVariantStrong: var(--fontVariantBody);
+  --fontWeightStrong: normal;
+  --textTransformStrong: var(--textTransformBody);
+  --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
+  --fontVariantWeak: var(--fontVariantBody);
+  --textTransformWeak: var(--textTransformBody);
+  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
+  --fontFamilyInput: var(--fontFamilyBody);
+  --fontSizeInput: var(--fontSizeBody);
+  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
+  --textShadowInput: var(--textShadowBody);
+  --fontSizePlaceholder: var(--fontSizeInput);
+  --lineHeightPlaceholder: var(--lineHeightInput);
+  --fontVariantPlaceholder: var(--fontVariantInput);
+  --textIndentPlaceholder: var(--textIndentInput);
+  --textShadowPlaceholder: var(--textShadowInput);
+}
+
+.yazata {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-yazata.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-yazata.png");
+}
+
+.teros {
+  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teros.png");
+  --menuImage: url("../images/actor-sheet/menu/rosette-teros.png");
+}
+
+body.vtt.game.system-scion {
+  /* #region SHEET STYLES */
+  /* #endregion */
 }
 
 body.vtt.game.system-scion {
@@ -367,10 +992,6 @@ body.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet {
-  /* #region Default/Generic Actor Sheet Theme */
-  /* #endregion */
-  /* #region Theme-Specific Mixins */
-  /* #endregion */
   /* #region FLEX LAYOUTS */
   /* #endregion */
   /* #region GRID LAYOUTS */
@@ -379,205 +1000,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet {
   /* #endregion */
   /* #region ITEM SHEETS */
   /* #endregion */
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-generic.png");
-  --bgItemSheet: url("../images/item-sheet/backgrounds/bgItem-generic.png");
-  --bgItemOverlay: url("../images/item-sheet/backgrounds/overlayItem-generic.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-generic.png");
-  --black: black;
-  --blackFade10: rgba(0, 0, 0, 0.9);
-  --blackFade20: rgba(0, 0, 0, 0.8);
-  --blackFade30: rgba(0, 0, 0, 0.7);
-  --blackFade40: rgba(0, 0, 0, 0.6);
-  --blackFade50: rgba(0, 0, 0, 0.5);
-  --blackFade60: rgba(0, 0, 0, 0.4);
-  --blackFade70: rgba(0, 0, 0, 0.3);
-  --blackFade80: rgba(0, 0, 0, 0.2);
-  --blackFade90: rgba(0, 0, 0, 0.1);
-  --blackFade25: rgba(0, 0, 0, 0.75);
-  --blackFade75: rgba(0, 0, 0, 0.25);
-  --white: white;
-  --whiteFade10: rgba(255, 255, 255, 0.9);
-  --whiteFade20: rgba(255, 255, 255, 0.8);
-  --whiteFade30: rgba(255, 255, 255, 0.7);
-  --whiteFade40: rgba(255, 255, 255, 0.6);
-  --whiteFade50: rgba(255, 255, 255, 0.5);
-  --whiteFade60: rgba(255, 255, 255, 0.4);
-  --whiteFade70: rgba(255, 255, 255, 0.3);
-  --whiteFade80: rgba(255, 255, 255, 0.2);
-  --whiteFade90: rgba(255, 255, 255, 0.1);
-  --whiteFade25: rgba(255, 255, 255, 0.75);
-  --whiteFade75: rgba(255, 255, 255, 0.25);
-  --greyDown4: #1a1a1a;
-  --greyDown4Fade50: rgba(26, 26, 26, 0.5);
-  --greyDown4Fade75: rgba(26, 26, 26, 0.25);
-  --greyDown3: #333333;
-  --greyDown3Fade50: rgba(51, 51, 51, 0.5);
-  --greyDown3Fade75: rgba(51, 51, 51, 0.25);
-  --greyDown2: #4d4d4d;
-  --greyDown2Fade50: rgba(77, 77, 77, 0.5);
-  --greyDown2Fade75: rgba(77, 77, 77, 0.25);
-  --greyDown1: #666666;
-  --greyDown1Fade50: rgba(102, 102, 102, 0.5);
-  --greyDown1Fade75: rgba(102, 102, 102, 0.25);
-  --grey: gray;
-  --greyFade50: rgba(128, 128, 128, 0.5);
-  --greyFade75: rgba(128, 128, 128, 0.25);
-  --greyUp1: #999999;
-  --greyUp1Fade50: rgba(153, 153, 153, 0.5);
-  --greyUp1Fade75: rgba(153, 153, 153, 0.25);
-  --greyUp2: #b3b3b3;
-  --greyUp2Fade50: rgba(179, 179, 179, 0.5);
-  --greyUp2Fade75: rgba(179, 179, 179, 0.25);
-  --greyUp3: #cccccc;
-  --greyUp3Fade50: rgba(204, 204, 204, 0.5);
-  --greyUp3Fade75: rgba(204, 204, 204, 0.25);
-  --greyUp4: #e6e6e6;
-  --greyUp4Fade50: rgba(230, 230, 230, 0.5);
-  --greyUp4Fade75: rgba(230, 230, 230, 0.25);
-  --accentDown4: #1f1c14;
-  --accentDown4Fade50: rgba(31, 28, 20, 0.5);
-  --accentDown4Fade75: rgba(31, 28, 20, 0.25);
-  --accentDown3: #473e1f;
-  --accentDown3Fade50: rgba(71, 62, 31, 0.5);
-  --accentDown3Fade75: rgba(71, 62, 31, 0.25);
-  --accentDown2: #7a651f;
-  --accentDown2Fade50: rgba(122, 101, 31, 0.5);
-  --accentDown2Fade75: rgba(122, 101, 31, 0.25);
-  --accentDown1: #b89214;
-  --accentDown1Fade50: rgba(184, 146, 20, 0.5);
-  --accentDown1Fade75: rgba(184, 146, 20, 0.25);
-  --accent: #ffc400;
-  --accentFade50: rgba(255, 196, 0, 0.5);
-  --accentFade75: rgba(255, 196, 0, 0.25);
-  --accentUp1: #ffd033;
-  --accentUp1Fade50: rgba(255, 208, 51, 0.5);
-  --accentUp1Fade75: rgba(255, 208, 51, 0.25);
-  --accentUp2: #ffdc66;
-  --accentUp2Fade50: rgba(255, 220, 102, 0.5);
-  --accentUp2Fade75: rgba(255, 220, 102, 0.25);
-  --accentUp3: #ffe799;
-  --accentUp3Fade50: rgba(255, 231, 153, 0.5);
-  --accentUp3Fade75: rgba(255, 231, 153, 0.25);
-  --accentUp4: #fff3cc;
-  --accentUp4Fade50: rgba(255, 243, 204, 0.5);
-  --accentUp4Fade75: rgba(255, 243, 204, 0.25);
-  --colorTitle: black;
-  --colorH1: black;
-  --colorH2: black;
-  --colorH3: black;
-  --coloraccent: #ffc400;
-  --colorBody: black;
-  --colorStrong: var(--colorBody);
-  --colorWeak: gray;
-  --colorHighlight: var(--whiteFade50);
-  --colorShadow: var(--blackFade50);
-  --colorMenuGlow: var(--accent);
-  --colorPlaceholder: var(--greyDown3);
-  --colorPurviewRotate: 0deg;
-  --bgTitle: transparent;
-  --bgH1: transparent;
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --bgH3: transparent;
-  --fontFamilyTitle: "Marcellus SC";
-  --fontSizeTitle: 36px;
-  --lineHeightTitle: 44px;
-  --maxHeightTitle: none;
-  --paddingTitle: 0px;
-  --fontStyleTitle: normal;
-  --fontVariantTitle: normal;
-  --fontWeightTitle: normal;
-  --textTransformTitle: none;
-  --textIndentTitle: 0px;
-  --textShadowTitle: -1px -1px 1px white, 1px 1px 1px black;
-  --borderTitle: none;
-  --fontFamilyH1: "Marcellus SC";
-  --fontSizeH1: 24px;
-  --lineHeightH1: 32px;
-  --maxHeightH1: 32px;
-  --paddingH1: 0px;
-  --fontStyleH1: normal;
-  --fontVariantH1: small-caps;
-  --fontWeightH1: normal;
-  --textTransformH1: none;
-  --textIndentH1: 0px;
-  --textShadowH1: -1px -1px 1px white, 1px 1px 1px black;
-  --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Overlock SC";
-  --fontSizeH2: 20px;
-  --lineHeightH2: 26px;
-  --maxHeightH2: 26px;
-  --paddingH2: 0px;
-  --fontStyleH2: normal;
-  --fontVariantH2: normal;
-  --fontWeightH2: bold;
-  --textTransformH2: none;
-  --textIndentH2: 10px;
-  --textShadowH2: none;
-  --borderH2: none;
-  --fontFamilyH3: "Overlock SC";
-  --fontSizeH3: 16px;
-  --lineHeightH3: var(--fontSizeH3);
-  --maxHeightH3: var(--fontSizeH3);
-  --paddingH3: 0px;
-  --fontStyleH3: normal;
-  --fontVariantH3: normal;
-  --fontWeightH3: bold;
-  --textTransformH3: none;
-  --textIndentH3: 0px;
-  --textShadowH3: none;
-  --borderH3: none;
-  --fontFamilyBody: "Overlock SC";
-  --fontSizeBody: 16px;
-  --lineHeightBody: var(--fontSizeBody);
-  --fontStyleBody: normal;
-  --fontVariantBody: normal;
-  --fontWeightBody: normal;
-  --textTransformBody: none;
-  --textShadowBody: 0 0 0px black;
-  --fontStyleStrong: normal;
-  --fontVariantStrong: var(--fontVariantBody);
-  --fontWeightStrong: bold;
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: var(--textShadowBody);
-  --fontStyleWeak: italic;
-  --fontVariantWeak: var(--fontVariantBody);
-  --fontWeightWeak: normal;
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --fontFamilyMenu: "Voltaire";
-  --fontSizeMenu: 24px;
-  --lineHeightMenu: 24px;
-  --maxHeightMenu: 24px;
-  --fontStyleMenu: normal;
-  --fontVariantMenu: normal;
-  --fontWeightMenu: normal;
-  --textTransformMenu: uppercase;
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --borderMenu: none;
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --paddingInput: 0px;
-  --fontStyleInput: normal;
-  --fontVariantInput: normal;
-  --fontWeightInput: bold;
-  --textTransformInput: none;
-  --textIndentInput: 5px;
-  --textShadowInput: var(--textShadowBody);
-  --borderInput: none;
-  --fontFamilyPlaceholder: "Della Respira";
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontStylePlaceholder: italic;
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --fontWeightPlaceholder: normal;
-  --textTransformPlaceholder: none;
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] {
@@ -694,20 +1116,29 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class
   align-content: space-around;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="start"]:not([class*="Cross"]) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="start"]:not([class*="cross"]) {
   justify-content: flex-start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="start"][class*="Cross"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="start"][class*="cross"] {
   align-items: flex-start;
   align-content: flex-start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="end"]:not([class*="Cross"]) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="center"]:not([class*="cross"]) {
+  justify-content: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="center"][class*="cross"] {
+  align-items: center;
+  align-content: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="end"]:not([class*="cross"]) {
   justify-content: flex-end;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="end"][class*="Cross"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="end"][class*="cross"] {
   align-items: flex-end;
   align-content: flex-end;
 }
@@ -755,6 +1186,8 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * {
   /* #region System-Specific Styles */
   /* #endregion */
   /* #region Buttons */
+  /* #endregion */
+  /* #region Dragula Extension */
   /* #endregion */
   /* #region Popouts/Tooltips */
   /* #endregion */
@@ -1100,13 +1533,13 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .skill {
   background-size: 100%;
   background-repeat: no-repeat;
   border: 4px outset var(--white);
-  box-shadow: 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2), 2px 2px 5px var(--greyDown2);
+  box-shadow: 3px 3px 3px var(--greyDown2), 3px 3px 3px var(--greyDown2), 3px 3px 3px var(--greyDown2);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .skill.empty {
   background-image: url("../images/textures/stoneGrey.jpg");
   border: 4px inset var(--grey);
-  box-shadow: inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey), inset 2px 2px 4px var(--grey);
+  box-shadow: inset 3px 3px 3px var(--grey), inset 3px 3px 3px var(--grey), inset 3px 3px 3px var(--grey);
   opacity: 0.75;
   filter: blur(0.5px);
 }
@@ -1138,6 +1571,11 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * div.closeButton {
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * div.closeButton.collapsed {
   display: none !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .mirrorContainer {
+  position: fixed !important;
+  pointer-events: none;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip {
@@ -1415,422 +1853,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor {
   /* #endregion */
   /* #region MAJOR ACTOR SHEETS */
   /* #endregion */
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .aesir {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-aesir.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-aesir.png");
-  --colorStrong: var(--colorBody);
-  --colorHighlight: var(--whiteFade50);
-  --colorShadow: var(--blackFade50);
-  --colorMenuGlow: var(--accent);
-  --colorPlaceholder: var(--greyDown3);
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Amarante";
-  --fontFamilyH1: "Amarante";
-  --borderH1: 2px solid var(--colorH1);
-  --lineHeightH3: var(--fontSizeH3);
-  --maxHeightH3: var(--fontSizeH3);
-  --lineHeightBody: var(--fontSizeBody);
-  --fontVariantStrong: var(--fontVariantBody);
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: var(--textShadowBody);
-  --fontVariantWeak: var(--fontVariantBody);
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --textShadowInput: var(--textShadowBody);
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .deva {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-deva.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-deva.png");
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .kami {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-kami.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-kami.png");
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .loa {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-loa.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-loa.png");
-  --colorStrong: var(--colorBody);
-  --colorHighlight: var(--whiteFade50);
-  --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #dd0000;
-  --colorPlaceholder: var(--greyDown3);
-  --colorPurviewRotate: 225deg;
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Finger Paint";
-  --fontSizeTitle: 2rem;
-  --fontFamilyH1: "Finger Paint";
-  --borderH1: 2px solid var(--colorH1);
-  --lineHeightH3: var(--fontSizeH3);
-  --maxHeightH3: var(--fontSizeH3);
-  --lineHeightBody: var(--fontSizeBody);
-  --fontVariantStrong: var(--fontVariantBody);
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: var(--textShadowBody);
-  --fontVariantWeak: var(--fontVariantBody);
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --textShadowInput: var(--textShadowBody);
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .manitou {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-manitou.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-manitou.png");
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .netjer {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-netjer.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-netjer.png");
-  --accentDown4: #100f0b;
-  --accentDown4Fade50: rgba(16, 15, 11, 0.5);
-  --accentDown4Fade75: rgba(16, 15, 11, 0.25);
-  --accentDown3: #262212;
-  --accentDown3Fade50: rgba(38, 34, 18, 0.5);
-  --accentDown3Fade75: rgba(38, 34, 18, 0.25);
-  --accentDown2: #403713;
-  --accentDown2Fade50: rgba(64, 55, 19, 0.5);
-  --accentDown2Fade75: rgba(64, 55, 19, 0.25);
-  --accentDown1: #5f4f10;
-  --accentDown1Fade50: rgba(95, 79, 16, 0.5);
-  --accentDown1Fade75: rgba(95, 79, 16, 0.25);
-  --accent: #836a07;
-  --accentFade50: rgba(131, 106, 7, 0.5);
-  --accentFade75: rgba(131, 106, 7, 0.25);
-  --accentUp1: #cca409;
-  --accentUp1Fade50: rgba(204, 164, 9, 0.5);
-  --accentUp1Fade75: rgba(204, 164, 9, 0.25);
-  --accentUp2: #f8ce27;
-  --accentUp2Fade50: rgba(248, 206, 39, 0.5);
-  --accentUp2Fade75: rgba(248, 206, 39, 0.25);
-  --accentUp3: #fcdf6d;
-  --accentUp3Fade50: rgba(252, 223, 109, 0.5);
-  --accentUp3Fade75: rgba(252, 223, 109, 0.25);
-  --accentUp4: #fef0b5;
-  --accentUp4Fade50: rgba(254, 240, 181, 0.5);
-  --accentUp4Fade75: rgba(254, 240, 181, 0.25);
-  --colorTitle: #554a39;
-  --colorH1: #554a39;
-  --colorH2: #6e4a28;
-  --colorH3: #6e4a28;
-  --coloraccent: #836a07;
-  --colorStrong: var(--colorBody);
-  --colorHighlight: #f6f0e2;
-  --colorShadow: #2d2d2f;
-  --colorMenuGlow: #ffdd00;
-  --colorPlaceholder: var(--greyDown3);
-  --colorPurviewRotate: 245deg;
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Carolingia";
-  --fontSizeTitle: 40px;
-  --lineHeightTitle: 50px;
-  --fontVariantTitle: small-caps;
-  --fontWeightTitle: bold;
-  --fontFamilyH1: "Gothic Ultra";
-  --fontSizeH1: 32px;
-  --lineHeightH1: 36px;
-  --fontVariantH1: none;
-  --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Carolingia";
-  --fontSizeH2: 24px;
-  --fontFamilyH3: "Carolingia";
-  --fontSizeH3: 20px;
-  --lineHeightH3: 16px;
-  --maxHeightH3: var(--fontSizeH3);
-  --lineHeightBody: var(--fontSizeBody);
-  --fontVariantStrong: var(--fontVariantBody);
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: var(--textShadowBody);
-  --fontVariantWeak: var(--fontVariantBody);
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --textShadowInput: var(--textShadowBody);
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .shen {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-shen.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-shen.png");
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .teotl {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teotl.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-teotl.png");
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .theoi {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-theoi.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-theoi.png");
-  --accentDown4: #201b28;
-  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
-  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
-  --accentDown3: #3b285e;
-  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
-  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
-  --accentDown2: #5328a2;
-  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
-  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
-  --accentDown1: #6927e7;
-  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
-  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
-  --accent: #8e52ff;
-  --accentFade50: rgba(142, 82, 255, 0.5);
-  --accentFade75: rgba(142, 82, 255, 0.25);
-  --accentUp1: #a575ff;
-  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
-  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
-  --accentUp2: #bb97ff;
-  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
-  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
-  --accentUp3: #d2baff;
-  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
-  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
-  --accentUp4: #e8dcff;
-  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
-  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
-  --colorTitle: #000fb8;
-  --colorH1: #000fb8;
-  --colorH2: #4757ff;
-  --colorH3: #000b85;
-  --coloraccent: #8e52ff;
-  --colorStrong: var(--colorBody);
-  --colorHighlight: var(--whiteFade50);
-  --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #00ffff;
-  --colorPlaceholder: var(--greyDown3);
-  --colorPurviewRotate: 100deg;
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Poiret One";
-  --fontWeightTitle: bold;
-  --fontFamilyH1: "Poiret One";
-  --fontWeightH1: bold;
-  --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Roman Font 7";
-  --fontFamilyH3: "Poiret One";
-  --fontSizeH3: 20px;
-  --lineHeightH3: var(--fontSizeH3);
-  --maxHeightH3: var(--fontSizeH3);
-  --fontVariantH3: small-caps;
-  --fontWeightH3: normal;
-  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
-  --fontFamilyBody: "Poiret One";
-  --lineHeightBody: var(--fontSizeBody);
-  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
-  --fontVariantStrong: var(--fontVariantBody);
-  --fontWeightStrong: normal;
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
-  --fontVariantWeak: var(--fontVariantBody);
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --textShadowInput: var(--textShadowBody);
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: none;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .tuathaDeDanann {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-tuathaDeDanann.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-tuathaDeDanann.png");
-  --accentDown4: #101410;
-  --accentDown4Fade50: rgba(16, 20, 16, 0.5);
-  --accentDown4Fade75: rgba(16, 20, 16, 0.25);
-  --accentDown3: #1c2d1b;
-  --accentDown3Fade50: rgba(28, 45, 27, 0.5);
-  --accentDown3Fade75: rgba(28, 45, 27, 0.25);
-  --accentDown2: #234b21;
-  --accentDown2Fade50: rgba(35, 75, 33, 0.5);
-  --accentDown2Fade75: rgba(35, 75, 33, 0.25);
-  --accentDown1: #266e22;
-  --accentDown1Fade50: rgba(38, 110, 34, 0.5);
-  --accentDown1Fade75: rgba(38, 110, 34, 0.25);
-  --accent: #25951f;
-  --accentFade50: rgba(37, 149, 31, 0.5);
-  --accentFade75: rgba(37, 149, 31, 0.25);
-  --accentUp1: #2bd422;
-  --accentUp1Fade50: rgba(43, 212, 34, 0.5);
-  --accentUp1Fade75: rgba(43, 212, 34, 0.25);
-  --accentUp2: #55eb4d;
-  --accentUp2Fade50: rgba(85, 235, 77, 0.5);
-  --accentUp2Fade75: rgba(85, 235, 77, 0.25);
-  --accentUp3: #8af684;
-  --accentUp3Fade50: rgba(138, 246, 132, 0.5);
-  --accentUp3Fade75: rgba(138, 246, 132, 0.25);
-  --accentUp4: #c2fdbf;
-  --accentUp4Fade50: rgba(194, 253, 191, 0.5);
-  --accentUp4Fade75: rgba(194, 253, 191, 0.25);
-  --colorTitle: #296f17;
-  --colorH1: #296f17;
-  --colorH2: #0d3005;
-  --colorH3: #19430e;
-  --coloraccent: #25951f;
-  --colorStrong: var(--colorBody);
-  --colorHighlight: var(--whiteFade50);
-  --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #00ff00;
-  --colorPlaceholder: var(--greyDown3);
-  --colorPurviewRotate: 330deg;
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Berkshire Swash";
-  --fontSizeTitle: 40px;
-  --fontFamilyH1: "Berkshire Swash";
-  --fontVariantH1: normal;
-  --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Della Respira";
-  --fontFamilyH3: "Della Respira";
-  --lineHeightH3: var(--fontSizeH3);
-  --maxHeightH3: var(--fontSizeH3);
-  --fontStyleH3: italic;
-  --lineHeightBody: var(--fontSizeBody);
-  --fontVariantStrong: var(--fontVariantBody);
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: var(--textShadowBody);
-  --fontVariantWeak: var(--fontVariantBody);
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --textShadowInput: var(--textShadowBody);
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .nemetondevos {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-nemetondevos.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-nemetondevos.png");
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .orisha {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-orisha.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-orisha.png");
-  --accentDown4: #201b28;
-  --accentDown4Fade50: rgba(32, 27, 40, 0.5);
-  --accentDown4Fade75: rgba(32, 27, 40, 0.25);
-  --accentDown3: #3b285e;
-  --accentDown3Fade50: rgba(59, 40, 94, 0.5);
-  --accentDown3Fade75: rgba(59, 40, 94, 0.25);
-  --accentDown2: #5328a2;
-  --accentDown2Fade50: rgba(83, 40, 162, 0.5);
-  --accentDown2Fade75: rgba(83, 40, 162, 0.25);
-  --accentDown1: #6927e7;
-  --accentDown1Fade50: rgba(105, 39, 231, 0.5);
-  --accentDown1Fade75: rgba(105, 39, 231, 0.25);
-  --accent: #8e52ff;
-  --accentFade50: rgba(142, 82, 255, 0.5);
-  --accentFade75: rgba(142, 82, 255, 0.25);
-  --accentUp1: #a575ff;
-  --accentUp1Fade50: rgba(165, 117, 255, 0.5);
-  --accentUp1Fade75: rgba(165, 117, 255, 0.25);
-  --accentUp2: #bb97ff;
-  --accentUp2Fade50: rgba(187, 151, 255, 0.5);
-  --accentUp2Fade75: rgba(187, 151, 255, 0.25);
-  --accentUp3: #d2baff;
-  --accentUp3Fade50: rgba(210, 186, 255, 0.5);
-  --accentUp3Fade75: rgba(210, 186, 255, 0.25);
-  --accentUp4: #e8dcff;
-  --accentUp4Fade50: rgba(232, 220, 255, 0.5);
-  --accentUp4Fade75: rgba(232, 220, 255, 0.25);
-  --colorTitle: #000fb8;
-  --colorH1: #000fb8;
-  --colorH2: #4757ff;
-  --colorH3: #000b85;
-  --coloraccent: #8e52ff;
-  --colorStrong: var(--colorBody);
-  --colorHighlight: var(--whiteFade50);
-  --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #00ffff;
-  --colorPlaceholder: var(--greyDown3);
-  --colorPurviewRotate: 100deg;
-  --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Poiret One";
-  --fontWeightTitle: bold;
-  --fontFamilyH1: "Poiret One";
-  --fontWeightH1: bold;
-  --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Elektra";
-  --fontFamilyH3: "Poiret One";
-  --fontSizeH3: 20px;
-  --lineHeightH3: var(--fontSizeH3);
-  --maxHeightH3: var(--fontSizeH3);
-  --fontVariantH3: small-caps;
-  --fontWeightH3: normal;
-  --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
-  --fontFamilyBody: "Poiret One";
-  --lineHeightBody: var(--fontSizeBody);
-  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
-  --fontVariantStrong: var(--fontVariantBody);
-  --fontWeightStrong: normal;
-  --textTransformStrong: var(--textTransformBody);
-  --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
-  --fontVariantWeak: var(--fontVariantBody);
-  --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: var(--textShadowBody);
-  --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
-  --fontFamilyInput: var(--fontFamilyBody);
-  --fontSizeInput: var(--fontSizeBody);
-  --lineHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --textShadowInput: var(--textShadowBody);
-  --fontSizePlaceholder: var(--fontSizeInput);
-  --lineHeightPlaceholder: var(--lineHeightInput);
-  --fontVariantPlaceholder: var(--fontVariantInput);
-  --textIndentPlaceholder: var(--textIndentInput);
-  --textShadowPlaceholder: var(--textShadowInput);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .yazata {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-yazata.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-yazata.png");
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .teros {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teros.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-teros.png");
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor header.window-header {
@@ -2186,10 +2208,14 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenOne .deed {
-  min-width: 50%;
+  margin: 3px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenOne .deed label {
+  width: 100px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block {
   background: var(--accentUp4Fade50);
   border-radius: 25px;
   border: 2px solid var(--accentDown2);
@@ -2198,53 +2224,51 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   overflow: hidden;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block > h2 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block > h2 {
   text-indent: 12px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer {
   padding: 0 0 3px 3px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"] {
   margin: 3px;
   align-content: start;
   align-self: start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span {
   margin: 2px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill:not(.empty) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill:not(.empty) {
   box-shadow: 1px 1px 3px var(--greyDown2);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill.pantheon {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill.pantheon {
   filter: invert(100%);
   border-style: inset;
   border-color: var(--greyUp3);
-  box-shadow: 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2);
+  box-shadow: 1px 1px 3px var(--greyUp2);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] {
   min-height: 84px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .connectionDescription {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .connectionDescription {
   margin: 0 0 auto 0 !important;
-  max-height: 50px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  height: 50px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary {
   display: inline-block;
   padding: 3px;
   margin: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo #pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary:nth-child(4) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary:nth-child(4) {
   background-color: var(--accentDown2);
   color: white;
 }
@@ -2265,7 +2289,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid {
   --gridHeight: calc(560px - 26px - 10px - 5px - 32px);
-  grid: "skillHeader skillHeader skillHeader skillHeader attrHeader attrHeader" 26px "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px) "unspentSkills unspentSkills unspentSkills unspentAttrs unspentAttrs unspentAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
+  grid: "skillHeader skillHeader specHeader specHeader attrHeader attrHeader" 26px "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px) "unspentSkills unspentSkills unspentSkills unspentAttrs unspentAttrs unspentAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid h2 {
@@ -2274,6 +2298,10 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid h2.skillHeader {
   grid-area: skillHeader;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid h2.specHeader {
+  grid-area: specHeader;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid h2.attrHeader {
@@ -2317,21 +2345,13 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block {
-  margin: 5px 0;
+  margin: 0;
   border: 3px solid var(--accent);
   border-radius: 25px;
   padding: 0px 10px;
   background: var(--accentUp2Fade75);
   border-top-left-radius: 0;
   overflow: hidden;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block:first-child {
-  margin-top: 0px;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block .dotline-labelled {
-  margin: 5px 0;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block h3 {
@@ -2344,6 +2364,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .attributes .favoredApproach h3 {
   font-size: var(--fontSizeBody);
+  margin: 5px 0;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .attributes .favoredApproach select {
@@ -2409,7 +2430,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body {
-  grid: "skills purviews" 7rem "skills paths" 10rem "virtues paths" calc(3.25rem + 2 * 3px)/1fr 2fr;
+  grid: "skills skills paths paths" 210px "skills skills callings callings" 80px "skills skills deeds deeds" 100px "attributes attributes attributes attributes" 100px ". . . ." 30px ". virtues virtues ." 40px/100px 90px 1fr 100px;
   column-gap: 0.5rem;
 }
 
@@ -2417,7 +2438,11 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   grid-area: skills;
   flex-flow: column nowrap;
   justify-content: space-between;
-  align-items: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .skills .specSummary {
+  font-size: calc(var(--fontSizeBody) * 0.75);
+  margin: -5px 0 0 15px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .skills .dotGrabBin {
@@ -2428,10 +2453,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .skills .dotDropBin {
   margin-bottom: 5px;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .purviews {
-  grid-area: purviews;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .paths {
@@ -2504,31 +2525,40 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   text-align-last: center;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .callings {
+  grid-area: callings;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .deeds {
+  grid-area: deeds;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .attributes {
+  grid-area: attributes;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .attributes .arena-block {
+  margin: 5px 17px;
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues {
-  border-radius: 1rem;
   grid-area: virtues;
-  grid: "leftvirtue leftvirtue leftvirtue" 1rem ". dotline ." 1.25rem "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues > div {
+  border-radius: 1rem;
   background-color: var(--accentFade50);
   border: 3px outset var(--accent);
   box-sizing: content-box;
-  margin-left: -0.35rem;
-  height: calc(100% - 2 * 3px);
+  transform: scale(1.75);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues .leftvirtue {
-  grid-area: leftvirtue;
-  margin-left: 0.5rem;
-  line-height: 1rem;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues > div label.alignLeft {
+  margin-right: 10px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues .dotline {
-  grid-area: dotline;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues .rightvirtue {
-  grid-area: rightvirtue;
-  margin-right: 0.5rem;
-  line-height: 1rem;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues > div label.alignRight {
+  margin-left: 10px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item header.window-header {
@@ -2807,6 +2837,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editabl
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .pathSkills {
   min-height: 28px;
+  margin-bottom: 6px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .pathSkills span.skill {
@@ -2826,7 +2857,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editabl
   filter: invert(100%);
   border-style: inset;
   border-color: var(--greyUp3);
-  box-shadow: 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2), 2px 2px 5px var(--greyUp2);
+  box-shadow: 3px 3px 3px var(--greyUp2), 3px 3px 3px var(--greyUp2), 3px 3px 3px var(--greyUp2);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .pathSkills#skillList span.skill {
@@ -2844,6 +2875,11 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editabl
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main h3, body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main .h3 {
   text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable.main div.closeButton {
+  right: -443px;
+  top: 14px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main h1 {
@@ -2869,7 +2905,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.ed
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main div#conditionDescription, body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main div#conditionResolution {
-  height: 60px;
+  height: 55px;
   display: block;
   max-height: 60px;
   font-size: 14px;
@@ -2880,9 +2916,15 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.ed
   border-radius: 15px;
   border-color: var(--grey);
   margin: 0 5px 10px 5px;
+  padding-top: 2px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main div#conditionDescription {
   height: 40px;
   max-height: 40px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable.main div.closeButton {
+  right: -348px;
+  top: 10px;
 }

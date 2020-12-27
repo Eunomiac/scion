@@ -1,16 +1,21 @@
 & {
-    grid: "skills purviews"  7rem
-        "skills paths" 10rem
-        "virtues paths" calc(3.25rem + 2 * 3px)
-        / 1fr 2fr;
+    grid:   "skills skills paths paths" 210px
+            "skills skills callings callings" 80px
+            "skills skills deeds deeds" 100px
+            "attributes attributes attributes attributes" 100px
+            ". . . ." 30px
+            ". virtues virtues ." 40px/100px 90px 1fr 100px;
     column-gap: 0.5rem;
     .skills {
         grid-area: skills;
 
         flex-flow: column nowrap;
         justify-content: space-between;
-        align-items: center;
 
+        .specSummary {
+            font-size: calc(var(--fontSizeBody) * 0.75);
+            margin: -5px 0 0 15px;
+        }
         .dotGrabBin {
             flex-wrap: wrap;
             height: auto;
@@ -21,9 +26,6 @@
             margin-bottom: 5px;
         }
 
-    }
-    .purviews {
-        grid-area: purviews;
     }
     .paths {
         grid-area: paths;
@@ -47,19 +49,33 @@
             text-align-last: left;
         }                    
     }
+    .callings {
+        grid-area: callings;
+    }
+    .deeds {
+        grid-area: deeds;
+    }
+    .attributes {
+        grid-area: attributes;
+        .arena-block { margin: 5px 17px; }
+
+    }
     .virtues {
-        border-radius: 1rem;
         grid-area: virtues;
-        grid: "leftvirtue leftvirtue leftvirtue" 1rem
-            ". dotline ." 1.25rem
-            "rightvirtue rightvirtue rightvirtue" 1rem / 1fr 6.25rem 1fr;
-        background-color: var(--accentFade50);
-        border: 3px outset var(--accent);
-        box-sizing: content-box;
-        margin-left: -0.35rem;
-        height: calc(100% - 2 * 3px);
-        .leftvirtue { grid-area: leftvirtue; margin-left: 0.5rem; line-height: 1rem; }
-        .dotline { grid-area: dotline; }
-        .rightvirtue { grid-area: rightvirtue; margin-right: 0.5rem; line-height: 1rem; }
+        > div {
+            border-radius: 1rem;
+            background-color: var(--accentFade50);
+            border: 3px outset var(--accent);
+            box-sizing: content-box;
+            transform: scale(1.75);
+            label.alignLeft {
+                margin-right: 10px;
+            }
+            div.dotline {
+            }
+            label.alignRight {
+                margin-left: 10px;
+            }
+        }
     }
 }    

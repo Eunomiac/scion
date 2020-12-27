@@ -83,7 +83,7 @@ const testStackMapped = testStack
 console.log(testStackMapped);
 */
 const delayedLogQueue = [];
-const isDebugging = (tag, {isLoud}) => isLoud || game.scion.debug.isDebugging || tag && game.scion.debug.watchList.includes(tag);
+const isDebugging = (tag, {isLoud}) => isLoud || game.scion?.debug.isDebugging || tag && game.scion?.debug.watchList.includes(tag);
 const stackTrace = () => {
     const stackString = new Error().stack;
     const stack = stackString
@@ -204,6 +204,7 @@ export const Rand = (n1, n2) => Math.round(Math.random() * (Math.max(Int(n2), In
 // #endregion
 
 // #region OBJECT FUNCTIONS: MapObject, MakeDictionary
+export const Last = (arr) => Array.isArray(arr) && arr.length ? arr[arr.length - 1] : undefined;
 export const KeyMapObj = (obj, keyFunc = (x) => x, valFunc = undefined) => {
     // An object-equivalent Array.map() function, which accepts mapping functions to transform both keys and values.
     //      If only one function is provided, it's assumed to be mapping the values and will receive (v, k) args.

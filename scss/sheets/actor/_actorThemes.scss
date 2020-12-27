@@ -106,6 +106,9 @@ $pantheonThemes: (
                 "fontWeight": normal,
                 "textShadow": (shadow-glow, 9, 1px, var(--black))
             ),
+            "Weak": (
+                "textShadow": (shadow-glow, 6, 0px, var(--greyUp2))
+            ),
             "Placeholder": (
                 "textShadow": none
             )

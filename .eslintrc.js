@@ -156,6 +156,7 @@ module.exports = {
     // #region GLOBALS
     globals: {
         $: "readonly",
+        $clamp: "readonly",
         dragula: "readonly",
         innerHeight: "readonly",
         innerWidth: "readonly",
