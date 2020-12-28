@@ -1938,7 +1938,6 @@ const scionSystemData = {
         creator: {
             skills: [ "academics", "culture", "technology" ],
             fateRoles: [ "apprentice", "jinx", "rival" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "flawlesslyPlatonicIdeal",
@@ -1960,7 +1959,6 @@ const scionSystemData = {
         guardian: {
             skills: [ "athletics", "closeCombat", "empathy" ],
             fateRoles: [ "canary", "martyr", "nemesis" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "aFortress",
@@ -1981,7 +1979,6 @@ const scionSystemData = {
         healer: {
             skills: [ "empathy", "medicine", "science" ],
             fateRoles: [ "boonCompanion", "canary", "rival" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "combatMedic",
@@ -2003,7 +2000,6 @@ const scionSystemData = {
         hunter: {
             skills: [ "athletics", "firearms", "survival" ],
             fateRoles: [ "boonCompanion", "paramour", "rival" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "apexPredator",
@@ -2025,7 +2021,6 @@ const scionSystemData = {
         judge: {
             skills: [ "academics", "culture", "persuasion" ],
             fateRoles: [ "balm", "traitor", "worshipper" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "eyeForAnEye",
@@ -2047,7 +2042,6 @@ const scionSystemData = {
         leader: {
             skills: [ "culture", "empathy", "leadership" ],
             fateRoles: [ "boonCompanion", "traitor", "worshipper" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "captainOfIndustry",
@@ -2068,7 +2062,6 @@ const scionSystemData = {
         liminal: {
             skills: [ "athletics", "pilot", "subterfuge" ],
             fateRoles: [ "canary", "jinx", "unrequitedParamour" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "beyondMemory",
@@ -2090,7 +2083,6 @@ const scionSystemData = {
         lover: {
             skills: [ "culture", "empathy", "persuasion" ],
             fateRoles: [ "balm", "paramour", "unrequitedParamour", "rival" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "fluidAppeal",
@@ -2112,7 +2104,6 @@ const scionSystemData = {
         sage: {
             skills: [ "academics", "occult", "subterfuge" ],
             fateRoles: [ "apprentice", "jinx", "traitor" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "blockadeOfReason",
@@ -2134,7 +2125,6 @@ const scionSystemData = {
         trickster: {
             skills: [ "culture", "persuasion", "subterfuge" ],
             fateRoles: [ "boonCompanion", "nemesis", "traitor" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "blatherAndSkite",
@@ -2153,7 +2143,6 @@ const scionSystemData = {
         warrior: {
             skills: [ "athletics", "closeCombat", "firearms" ],
             fateRoles: [ "balm", "nemesis", "rival" ],
-            keywords: [],
             knacks: {
                 heroic: [
                     "closeTheGap",

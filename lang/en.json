@@ -716,17 +716,50 @@
             "yin": "Yin"
         },
         "calling": {
-            "creator": "Creator",
-            "guardian": "Guardian",
-            "healer": "Healer",
-            "hunter": "Hunter",
-            "judge": "Judge",
-            "leader": "Leader",
-            "liminal": "Liminal",
-            "lover": "Lover",
-            "sage": "Sage",
-            "trickster": "Trickster",
-            "warrior": "Warrior"
+            "creator": {
+                "name": "Creator",
+                "keywords": "fertile, gifting, generous, inspired, inventor, deft, hammer, maker, shaper, sculptor, painter, demiurge, builder, blacksmith, crafter, mother, father, farmer, gardener, growth, designer, architect"
+            },
+            "guardian": {
+                "name": "Guardian",
+                "keywords": "defender, steward, shield, protector, patron, den mother, rescue, warden, shepherd, guide, shelter, aegis"
+            },
+            "healer": {
+                "name": "Healer",
+                "keywords": "restoration, renewal, health, balm, succor, doctor, nurse, vet, repair, purifier, rebuild, cure, treat"
+            },
+            "hunter": {
+                "name": "Hunter",
+                "keywords": "ranger, tracker, tireless, pursuit, unshakable, surveying, all-seeing, shadowing, relentless"
+            },
+            "judge": {
+                "name": "Judge",
+                "keywords": "mercy, punishment, weigher, assessor, adjudicator, advocate, test, ordeal, legal, law, commandment, oath, fair, even-handed"
+            },
+            "leader": {
+                "name": "Leader",
+                "keywords": "ruler, wise, inspiration, orisha, commander, lawgiver, code, proclaim, director, rank, officer, authority"
+            },
+            "liminal": {
+                "name": "Liminal",
+                "keywords": "seductive, devoted, romantic, beauty, dedication, marriage, husband, wife, sex"
+            },
+            "lover": {
+                "name": "Lover",
+                "keywords": "traveler, Underworld, Overworld, boundary, threshold, portal, sailor, driver, guide, messenger, alone, transition, change, difference, separation, outsider"
+            },
+            "sage": {
+                "name": "Sage",
+                "keywords": "pupil, teacher, mentor, wise, riddle, puzzle, conundrum, clever, expert, academic, learned"
+            },
+            "trickster": {
+                "name": "Trickster",
+                "keywords": "transgression, subversive, antinomian, devil's advocate, cunning, liar, disguise, rascal, wit, chaos, criminal"
+            },
+            "warrior": {
+                "name": "Warrior",
+                "keywords": "fighter, martial artist, bloody, weapon, soldier, killer, murderer, insurgent, terrorist, sniper, undefeated, sharp, threatening"
+            }
         },
         "knack": {
             "aFortress": {

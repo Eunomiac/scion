@@ -1,29 +1,24 @@
 {
 	"version": "2.0.0",
 	"tasks": [
-		{
-			"type": "npm",
-			"script": "build",
-			"group": "build",
-			"problemMatcher": [],
-			"label": "npm: build",
-			"detail": "gulp",
-			"runOptions": {
-				"runOn": "folderOpen"
-			}
-		},
-		{
-			"label": "JSHint Report",
-			"type": "shell",
-			"command": "jshint --c 'C:/Users/Ryan/Documents/Projects/!!!!CODING/.jshintrc' --exclude **/external/** --verbose --show-non-errors '${workspaceFolder}/module'",
-			"presentation": {  
-				"echo": true,
-				"reveal": "always",
-				"focus": true,
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			}
-		}
-	]
+        {
+            "label": "launch Foundry",
+            "type": "shell",
+            "command": "node 'C:/Program Files/FoundryVTT/resources/app/main.js' --dataPath='C:/Users/Ryan/Documents/Projects/!Roleplaying/!!!FOUNDRY VTT'",
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "type": "npm",
+            "script": "build",
+            "group": "build",
+            "problemMatcher": [],
+            "label": "watch: scss",
+            "detail": "gulp",
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }
+    ]
 }

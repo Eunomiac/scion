@@ -88,13 +88,10 @@
     "Item": {
         "types": [
             "path",
-            "skillslist",
             "connectionGroup",
             "connectionContact",
             "connectionAccess",
             "condition",
-            "calling",
-            "legendaryTitle",
             "fatebinding",
             "knack",
             "purview",
@@ -170,17 +167,6 @@
             "isPersistent": false,
             "resolution": "",
             "linkedItem": false
-        },
-        "calling": { 
-            "templates": ["BASE", "DOTLINE"],
-            "dotline.min": 1,
-            "keywords": [],
-            "usedKeywords": [],
-            "knacks": [],
-            "failureDeed": false
-        },
-        "legendaryTitle": {
-            "templates": ["BASE"]
         },
         "fatebinding": {
             "templates": ["BASE", "DOTLINE"]
