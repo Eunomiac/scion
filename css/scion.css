@@ -2429,6 +2429,50 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   text-shadow: none !important;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour {
+  grid: "heading heading heading" 32px "calling1 calling2 calling3" 1fr "footer footer footer" 150px / 1fr 1fr 1fr;
+  column-gap: 20px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour h1 {
+  grid-area: heading;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling {
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: drop-shadow(2px 2px 2px var(--black));
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling:nth-of-type(1) {
+  grid-area: calling1;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling:nth-of-type(2) {
+  grid-area: calling2;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling:nth-of-type(3) {
+  grid-area: calling3;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.generic {
+  background-image: url("../images/actor-sheet/callings/generic.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.creator {
+  background-image: url("../images/actor-sheet/callings/creator.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.guardian {
+  background-image: url("../images/actor-sheet/callings/guardian.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.trickster {
+  background-image: url("../images/actor-sheet/callings/trickster.png");
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body {
   grid: "skills skills paths paths" 210px "skills skills callings callings" 80px "skills skills deeds deeds" 100px "attributes attributes attributes attributes" 100px ". . . ." 30px ". virtues virtues ." 40px/100px 90px 1fr 100px;
   column-gap: 0.5rem;
@@ -2551,14 +2595,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   border: 3px outset var(--accent);
   box-sizing: content-box;
   transform: scale(1.75);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues > div label.alignLeft {
-  margin-right: 10px;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body .virtues > div label.alignRight {
-  margin-left: 10px;
+  padding: 0 10px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item header.window-header {

@@ -1,44 +1,44 @@
 import * as _ from "../external/underscore/underscore-esm-min.js";
-import {Rand, LoremIpsum} from "./utils.js";
+import {LoremIpsum, Rand} from "./utils.js";
 
 // #region TEST CODE FOR VSC "Run Code" EXTENSION
 /*
-const Rand = (n1, n2) => Math.round(Math.random() * (n2 - n1)) + n1;
-const loremIpsumText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies
-nibh sed massa euismod lacinia. Aliquam nec est ac nunc ultricies scelerisque porta vulputate odio.
-Integer gravida mattis odio, semper volutpat tellus. Ut elit leo, auctor eget fermentum hendrerit,
-aliquet ac nunc. Suspendisse porta turpis vitae mi posuere molestie. Cras lectus lacus, vulputate a
-vestibulum in, mattis vel mi. Mauris quis semper mauris. Praesent blandit nec diam eget tincidunt. Nunc
-aliquet consequat massa ac lacinia. Ut posuere velit sagittis, vehicula nisl eget, fringilla nibh. Duis
-volutpat mattis libero, a porttitor sapien viverra ut. Phasellus vulputate imperdiet ligula, eget
-eleifend metus tempor nec. Nam eget sapien risus. Praesent id suscipit elit. Sed pellentesque ligula
-diam, non aliquet magna feugiat vitae. Pellentesque ut tortor id erat placerat dignissim. Pellentesque
-ut dui vel leo laoreet sodales nec ac tellus. In hac habitasse platea dictumst. Proin sed ex sed augue
-sollicitudin interdum. Sed id lacus porttitor nisi vestibulum tincidunt. Nulla facilisi. Vestibulum
-feugiat finibus magna in pretium. Proin consectetur lectus nisi, non commodo lectus tempor et. Cras
-viverra, mi in consequat aliquet, justo mauris fringilla tellus, at accumsan magna metus in eros. Sed
-vehicula, diam ut sagittis semper, purus massa mattis dolor, in posuere.`;
-const LoremIpsum = (numWords = 200) => {
-    const loremIpsumWords = loremIpsumText.replace(/\n/gu, "").split(/ /u);
-    while (loremIpsumWords.length < numWords)
-        loremIpsumWords.push(...loremIpsumWords);
-    loremIpsumWords.length = numWords;
-    loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "")}.`;
-    return loremIpsumWords.join(" ");
-};
-const _ = {
-    sample: (arr) => arr[Rand(0, arr.length - 1)],
-    shuffle: (arr) => {
-        let origArr = [...arr];
-        const newArr = [];
-        while (origArr.length) {
-            for (let i = Rand(0, arr.length - 1); i < origArr.length; i++)
-                origArr.unshift(origArr.pop());
-            newArr.push(origArr.pop());
-        }
-    }
-}
-*/
+ *  const Rand = (n1, n2) => Math.round(Math.random() * (n2 - n1)) + n1;
+ *  const loremIpsumText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies
+ *  nibh sed massa euismod lacinia. Aliquam nec est ac nunc ultricies scelerisque porta vulputate odio.
+ *  Integer gravida mattis odio, semper volutpat tellus. Ut elit leo, auctor eget fermentum hendrerit,
+ *  aliquet ac nunc. Suspendisse porta turpis vitae mi posuere molestie. Cras lectus lacus, vulputate a
+ *  vestibulum in, mattis vel mi. Mauris quis semper mauris. Praesent blandit nec diam eget tincidunt. Nunc
+ *  aliquet consequat massa ac lacinia. Ut posuere velit sagittis, vehicula nisl eget, fringilla nibh. Duis
+ *  volutpat mattis libero, a porttitor sapien viverra ut. Phasellus vulputate imperdiet ligula, eget
+ *  eleifend metus tempor nec. Nam eget sapien risus. Praesent id suscipit elit. Sed pellentesque ligula
+ *  diam, non aliquet magna feugiat vitae. Pellentesque ut tortor id erat placerat dignissim. Pellentesque
+ *  ut dui vel leo laoreet sodales nec ac tellus. In hac habitasse platea dictumst. Proin sed ex sed augue
+ *  sollicitudin interdum. Sed id lacus porttitor nisi vestibulum tincidunt. Nulla facilisi. Vestibulum
+ *  feugiat finibus magna in pretium. Proin consectetur lectus nisi, non commodo lectus tempor et. Cras
+ *  viverra, mi in consequat aliquet, justo mauris fringilla tellus, at accumsan magna metus in eros. Sed
+ *  vehicula, diam ut sagittis semper, purus massa mattis dolor, in posuere.`;
+ *  const LoremIpsum = (numWords = 200) => {
+ *      const loremIpsumWords = loremIpsumText.replace(/\n/gu, "").split(/ /u);
+ *      while (loremIpsumWords.length < numWords)
+ *          loremIpsumWords.push(...loremIpsumWords);
+ *      loremIpsumWords.length = numWords;
+ *      loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "")}.`;
+ *      return loremIpsumWords.join(" ");
+ *  };
+ *  const _ = {
+ *      sample: (arr) => arr[Rand(0, arr.length - 1)],
+ *      shuffle: (arr) => {
+ *          let origArr = [...arr];
+ *          const newArr = [];
+ *          while (origArr.length) {
+ *              for (let i = Rand(0, arr.length - 1); i < origArr.length; i++)
+ *                  origArr.unshift(origArr.pop());
+ *              newArr.push(origArr.pop());
+ *          }
+ *      }
+ *  }
+ */
 // #endregion
 
 const scionSystemData = {
@@ -219,6 +219,7 @@ const scionSystemData = {
         }
     },
     GODS: {
+        /* eslint-disable sort-keys */
         baldr: {
             label: "scion.pantheon.god.baldr",
             pantheon: "aesir",
@@ -1866,6 +1867,7 @@ const scionSystemData = {
             callings: ["guardian", "judge", "liminal"],
             purviews: ["beauty", "death", "fire", "order", "passion:Pride", "sky", "sun"]
         }
+        /* eslint-enable sort-keys */
     },
     GENESES: {
         born: "scion.genesis.born",
@@ -3090,20 +3092,21 @@ const handlebarTemplates = {
         "step-six": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-six.hbs"},
         "step-seven": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-seven.hbs"}
     },
-    ownedItems: {
-        path: {template: () => "systems/scion/templates/actor/ownedItems/path-block.hbs"}
+    partials: {
+        path: {template: () => "systems/scion/templates/actor/partials/path-block.hbs"},
+        calling: {template: () => "systems/scion/templates/actor/partials/calling-block.hbs"},
+        pathCondition: {template: () => "systems/scion/templates/item/partials/path-condition-block.hbs"}
     },
-    embeds: {
-        pathCondition: {template: () => "systems/scion/templates/item/embeds/path-condition-block.hbs"}
+    popouts: {
+        skillList: {template: () => "systems/scion/templates/item/popouts/skilllist-popout.hbs"},
+        callingsList: {template: () => "systems/scion/templates/actor/popouts/callingslist-popout.hbs"}
     },
-    skillList: {template: () => "systems/scion/templates/item/popouts/skilllist-block.hbs"},
     tooltips: {
-        path: {template: () => "systems/scion/templates/item/popouts/path-tooltip-block.hbs"}
+        path: {template: () => "systems/scion/templates/item/tooltips/path-tooltip.hbs"}
     }
 };
 const itemCategories = {
     paths: ["path"],
-    callings: ["calling"],
     knacks: ["knack"],
     purviews: ["purview"],
     boons: ["boon"],

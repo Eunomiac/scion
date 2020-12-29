@@ -15,8 +15,7 @@ export class ScionActor extends Actor {
     prepareData() {
         super.prepareData();
         this.pendingUpdateData = this.pendingUpdateData ?? {};
-        if (this.data.type === "major")
-            setTimeout(() => this._prepareMajorCharData(), 100);
+        if (this.data.type === "major") {setTimeout(() => this._prepareMajorCharData(), 100)}
     }
 
     async _prepareMajorCharData() {
@@ -25,12 +24,14 @@ export class ScionActor extends Actor {
             // #region PREPARE BASE OWNED ITEMS
             const itemCreationData = [];
 
-            // Find the first Path Item of each type, if it exists;
-            // ... if it doesn't exist, add its creation data to pathData
-            // ... if it does exist, increment data.pathSkillCount accordingly
+            /*
+             * Find the first Path Item of each type, if it exists;
+             * ... if it doesn't exist, add its creation data to pathData
+             * ... if it does exist, increment data.pathSkillCount accordingly
+             */
 
             ["origin", "role", "pantheon"].forEach((pathType) => {
-                if (!this.ownedItems.find((item) => item.data.type === pathType))
+                if (!this.ownedItems.find((item) => item.data.type === pathType)) {
                     itemCreationData.push(...[
                         {
                             name: U.Loc(`scion.path.${pathType}`),
@@ -61,13 +62,13 @@ export class ScionActor extends Actor {
                             }
                         ))
                     ]);
+                }
             });
 
             if (itemCreationData.length) {
-                if (Array.isArray(this.aData.callings)) {
+                if (this.aData.testItemCreateData?.length) {
                     itemCreationData.length = 0;
-                    itemCreationData.push(...this.aData.callings);
-                    await this.update({["data.callings"]: {}});
+                    itemCreationData.push(...this.aData.testItemCreateData);
                 }
                 U.LOG({itemCreationData, "ACTOR": this.fullLogReport}, "Item Creation Data Found: Creating Items", this.name);
                 await this.createOwnedItem(itemCreationData);
@@ -120,7 +121,7 @@ export class ScionActor extends Actor {
     async updatePantheon(pantheon) {
         if (pantheon === true || (pantheon && pantheon !== this.data.data.pantheon)) {
             const updateData = {};
-            pantheon = (pantheon && pantheon in SCION.PANTHEONS) ? pantheon : this.data.data.pantheon;
+            pantheon = pantheon && pantheon in SCION.PANTHEONS ? pantheon : this.data.data.pantheon;
             const panthPath = this.paths.find((path) => path.data.data.type === "pantheon");
             const newSkills = Object.assign([], panthPath.data.data.skills, SCION.PANTHEONS[pantheon].assetSkills);
             updateData["data.skills"] = newSkills;
@@ -132,30 +133,20 @@ export class ScionActor extends Actor {
     }
 
     getPendingProperty(fieldKey) {
-        if (fieldKey in this.pendingUpdateData)
-            return this.pendingUpdateData[fieldKey];
+        if (fieldKey in this.pendingUpdateData) {return this.pendingUpdateData[fieldKey]}
         return getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."));
     }
 
     queueUpdateData(updateData, keyPrefix = "", keySuffix = "") {
-        const updateDataFields = _.omit(
-            U.KeyMapObj(
-                updateData,
-                (key) => `${keyPrefix ? `${keyPrefix}.` : ""}${key}${keySuffix ? `.${keySuffix}` : ""}`.replace(/\.\./gu, ".").replace(/^(data\.)+/u, "data."),
-                (val) => val
-            ),
-            (val, fieldKey) => this.getPendingProperty(fieldKey) === val
-        );
-        if (isObjectEmpty(updateDataFields))
-            return false;
+        const updateDataFields = _.omit(U.KeyMapObj(updateData, (key) => `${keyPrefix ? `${keyPrefix}.` : ""}${key}${keySuffix ? `.${keySuffix}` : ""}`.replace(/\.\./gu, ".").replace(/^(data\.)+/u, "data."), (val) => val), (val, fieldKey) => this.getPendingProperty(fieldKey) === val);
+        if (isObjectEmpty(updateDataFields)) {return false}
         Object.assign(this.pendingUpdateData, updateDataFields);
         U.LOG({updateData, updateDataFields, pendingUpdateData: U.Clone(this.pendingUpdateData)}, "Queuing Update Data", this.name);
         return true;
     }
     async processUpdateQueue() {
-        if (isObjectEmpty(this.pendingUpdateData))
-            return false;
-        const updateData = Object.assign({}, this.pendingUpdateData);
+        if (isObjectEmpty(this.pendingUpdateData)) {return false}
+        const updateData = {...this.pendingUpdateData};
         this.pendingUpdateData = {};
         U.LOG({updateData}, "*** PROCESSING UPDATE QUEUE ***", this.name);
         await this.update(updateData);
@@ -211,8 +202,7 @@ export class ScionActor extends Actor {
         return U.KeyMapObj(this.skills, (data, skill) => {
             const theseSpecs = Object.values(data.specialties.list);
             const numSpecs = data.specialties.assigned + (this.skillVals[skill] >= 3 ? 1 : 0);
-            while (theseSpecs.length < numSpecs)
-                theseSpecs.push("");
+            while (theseSpecs.length < numSpecs) {theseSpecs.push("")}
             theseSpecs.length = numSpecs;
             return theseSpecs;
         });
@@ -224,22 +214,25 @@ export class ScionActor extends Actor {
         const logClampedAssignedSkillVals = U.Clone(clampedAssignedSkillVals);
         let totalDotCorrection = Math.max(0, this.assignedSkillVals - this.assignableSkillDots - U.SumVals(skillValsAboveMaxCorrection));
         const iterLog = [];
-        if (totalDotCorrection > 0)
+        if (totalDotCorrection > 0) {
             do {
-                const [skill] = _.sortBy(Object.entries(clampedAssignedSkillVals), (v) => -v[1] - 0.1 * this.skillVals[v[0]])[0];
+                const [[skill]] = _.sortBy(Object.entries(clampedAssignedSkillVals), (v) => -v[1] - (0.1 * this.skillVals[v[0]]));
                 clampedAssignedSkillVals[skill]--;
                 totalDotCorrection--;
                 iterLog.push(`- ${skill} --> Reducing Assignment from ${clampedAssignedSkillVals[skill] + 1} to ${clampedAssignedSkillVals[skill]}`);
             } while (totalDotCorrection);
+        }
 
-        // U.LOG({
-        //     skillVals: this.skillVals,
-        //     skillValsAboveMaxCorrection,
-        //     assignedSkillVals: this.assignedSkillVals,
-        //     clampedAssignedSkillVals: logClampedAssignedSkillVals,
-        //     newAssignedSkillVals: clampedAssignedSkillVals,
-        //     iterLog
-        // }, "Overassigned Skills Correction Log", this.name);
+        /*
+         * U.LOG({
+         *     skillVals: this.skillVals,
+         *     skillValsAboveMaxCorrection,
+         *     assignedSkillVals: this.assignedSkillVals,
+         *     clampedAssignedSkillVals: logClampedAssignedSkillVals,
+         *     newAssignedSkillVals: clampedAssignedSkillVals,
+         *     iterLog
+         * }, "Overassigned Skills Correction Log", this.name);
+         */
         return clampedAssignedSkillVals;
     }
     get fullSkillReport() {
@@ -261,16 +254,13 @@ export class ScionActor extends Actor {
     get favoredApproach() { return this.aData.attributes.favoredApproach }
     get favoredAttrs() { return this.favoredApproach ? SCION.ATTRIBUTES.approaches[this.favoredApproach] : [] }
 
-    get baseAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => this.favoredAttrs.includes(k) ? 3 : 1) }
+    get baseAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => (this.favoredAttrs.includes(k) ? 3 : 1)) }
     get assignedAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => this.attributes[k].assigned) }
     get derivedAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => this.baseAttrVals[k] + this.assignedAttrVals[k]) }
     get attrVals() { return U.KeyMapObj(this.derivedAttrVals, (v) => Math.max(SCION.ATTRIBUTES.min, Math.min(v, SCION.ATTRIBUTES.max))) }
 
     convertAttrGroup = (groupRef) => {
-        if (Object.keys(SCION.ATTRIBUTES.arenas).includes(groupRef))
-            return Object.keys(SCION.ATTRIBUTES.priorities)[this.aData.attributes.priorities.findIndex((arena) => arena === groupRef)];
-        else if (Object.keys(SCION.ATTRIBUTES.priorities).includes(groupRef))
-            return this.aData.attributes.priorities[Object.keys(SCION.ATTRIBUTES.priorities).findIndex((priority) => priority === groupRef)];
+        if (Object.keys(SCION.ATTRIBUTES.arenas).includes(groupRef)) {return Object.keys(SCION.ATTRIBUTES.priorities)[this.aData.attributes.priorities.findIndex((arena) => arena === groupRef)]} else if (Object.keys(SCION.ATTRIBUTES.priorities).includes(groupRef)) {return this.aData.attributes.priorities[Object.keys(SCION.ATTRIBUTES.priorities).findIndex((priority) => priority === groupRef)]}
         return U.THROW(groupRef, "ERROR: Invalid Attribute Group Reference");
     };
 
@@ -278,7 +268,7 @@ export class ScionActor extends Actor {
     get assignableArenaDots() { return U.KeyMapObj(this.aData.attributes.assignableArenaDots, (priority) => this.convertAttrGroup(priority), (v) => v) }
     get assignableGeneralAttrDots() { return U.SumVals(this.aData.attributes.assignableGeneralDots) }
     get assignedArenaAttrDots() { return U.KeyMapObj(this.totalAssignedDotsByArena, (val, arena) => Math.min(this.assignableArenaDots[arena], val)) }
-    get assignedGeneralDotsByArena () { return U.KeyMapObj(this.totalAssignedDotsByArena, (val, arena) => Math.max(0, val - this.assignedArenaAttrDots[arena])) }
+    get assignedGeneralDotsByArena() { return U.KeyMapObj(this.totalAssignedDotsByArena, (val, arena) => Math.max(0, val - this.assignedArenaAttrDots[arena])) }
     get assignedGeneralAttrDots() { return U.SumVals(this.assignedGeneralDotsByArena) }
     get unassignedArenaAttrDots() { return U.KeyMapObj(this.assignableArenaDots, (val, arena) => Math.max(0, val - this.assignedArenaAttrDots[arena])) }
     get unassignedGeneralAttrDots() { return Math.max(0, this.assignableGeneralAttrDots - this.assignedGeneralAttrDots) }
@@ -286,16 +276,7 @@ export class ScionActor extends Actor {
     get attributesCorrection() {
         const attrValsAboveMaxCorrection = U.KeyMapObj(this.derivedAttrVals, (val, attribute) => val - this.attrVals[attribute]);
         const clampedAssignedAttrVals = U.KeyMapObj(this.assignedAttrVals, (val, attribute) => val - attrValsAboveMaxCorrection[attribute]);
-        const arenaAssignedAttrVals = _.mapObject(
-            _.groupBy(
-                Object.entries(clampedAssignedAttrVals),
-                (attrVal) => _.findKey(
-                    SCION.ATTRIBUTES.arenas,
-                    (arenaAttrs) => arenaAttrs.includes(attrVal[0])
-                )
-            ),
-            (v) => _.object(v)
-        );
+        const arenaAssignedAttrVals = _.mapObject(_.groupBy(Object.entries(clampedAssignedAttrVals), (attrVal) => _.findKey(SCION.ATTRIBUTES.arenas, (arenaAttrs) => arenaAttrs.includes(attrVal[0]))), (v) => _.object(v));
         const logArenaAssignedAttrVals = U.Clone(arenaAssignedAttrVals);
         let totalDotCorrection = Math.max(0, this.assignedGeneralAttrDots - this.assignableGeneralAttrDots - U.SumVals(attrValsAboveMaxCorrection));
         const iterLog = [];
@@ -303,21 +284,23 @@ export class ScionActor extends Actor {
             const getInvalidArena = () => _.sortBy(Object.entries(_.pick(_.mapObject(arenaAssignedAttrVals, (v) => U.SumVals(v)), (v) => v > 0)), (v) => -v[1])?.[0]?.[0] ?? false;
             do {
                 const invalidArena = getInvalidArena();
-                const [attribute] = _.sortBy(Object.entries(arenaAssignedAttrVals[invalidArena]), (v) => -v[1] - (this.favoredAttrs.includes(v[0]) ? 0.5 : 0))[0];
+                const [[attribute]] = _.sortBy(Object.entries(arenaAssignedAttrVals[invalidArena]), (v) => -v[1] - (this.favoredAttrs.includes(v[0]) ? 0.5 : 0));
                 arenaAssignedAttrVals[invalidArena][attribute]--;
                 totalDotCorrection--;
                 iterLog.push(`- ${invalidArena}:${attribute} --> Reducing Assignment from ${arenaAssignedAttrVals[invalidArena][attribute] + 1} to ${arenaAssignedAttrVals[invalidArena][attribute]}`);
             } while (totalDotCorrection && getInvalidArena());
         }
-        // U.LOG({
-        //     attrVals: this.attrVals,
-        //     attrValsAboveMaxCorrection,
-        //     assignedAttrVals: this.assignedAttrVals,
-        //     clampedAssignedAttrVals,
-        //     arenaAssignedAttrVals: logArenaAssignedAttrVals,
-        //     newArenaAssignedAttrVals: arenaAssignedAttrVals,
-        //     newAssignedAttrVals: Object.values(arenaAssignedAttrVals).reduce((obj, val) => Object.assign(obj, val), {})
-        // }, "Overassigned Attribute Correction Log", this.name);
+        /*
+         * U.LOG({
+         *     attrVals: this.attrVals,
+         *     attrValsAboveMaxCorrection,
+         *     assignedAttrVals: this.assignedAttrVals,
+         *     clampedAssignedAttrVals,
+         *     arenaAssignedAttrVals: logArenaAssignedAttrVals,
+         *     newArenaAssignedAttrVals: arenaAssignedAttrVals,
+         *     newAssignedAttrVals: Object.values(arenaAssignedAttrVals).reduce((obj, val) => Object.assign(obj, val), {})
+         * }, "Overassigned Attribute Correction Log", this.name);
+         */
         return Object.values(arenaAssignedAttrVals).reduce((obj, val) => Object.assign(obj, val), {});
     }
 

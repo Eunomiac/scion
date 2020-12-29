@@ -135,3 +135,29 @@
         }
     }
 }
+
+.chargenFour {
+    grid: "heading heading heading" 32px
+        "calling1 calling2 calling3" 1fr
+        "footer footer footer" 150px / 1fr 1fr 1fr;
+    column-gap: 20px;
+    h1 { grid-area: heading; }
+
+    .calling {
+        &:nth-of-type(1) { grid-area: calling1; }
+        &:nth-of-type(2) { grid-area: calling2; }
+        &:nth-of-type(3) { grid-area: calling3; }
+
+        background: {
+            size: 100%;
+            position: center;
+            repeat: no-repeat;
+        }
+        filter: drop-shadow(2px 2px 2px var(--black));
+
+        &.generic { background-image: url("../images/actor-sheet/callings/generic.png"); }
+        &.creator { background-image: url("../images/actor-sheet/callings/creator.png"); }
+        &.guardian { background-image: url("../images/actor-sheet/callings/guardian.png"); }
+        &.trickster { background-image: url("../images/actor-sheet/callings/trickster.png"); }
+    }
+}

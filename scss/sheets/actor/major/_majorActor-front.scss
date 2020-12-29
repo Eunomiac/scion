@@ -68,14 +68,7 @@
             border: 3px outset var(--accent);
             box-sizing: content-box;
             transform: scale(1.75);
-            label.alignLeft {
-                margin-right: 10px;
-            }
-            div.dotline {
-            }
-            label.alignRight {
-                margin-left: 10px;
-            }
+            padding: 0 10px;
         }
     }
 }    

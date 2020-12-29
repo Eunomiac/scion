@@ -17,11 +17,8 @@ export const PopoutControl = (superClass) => class extends superClass {
     popoutSheet(popOutSheet, {leftSpacing, rightSpacing} = {}) {
         const {left: mainLeft, top: mainTop, width: mainWidth} = this.entity.sheet.position;
         const {width: popWidth} = popOutSheet.position;
-        const popOutPos = Object.assign({}, popOutSheet.position);
-        if (innerWidth - (mainLeft + mainWidth) > (popWidth + rightSpacing))
-            popOutPos.left = mainLeft + mainWidth + rightSpacing;
-        else
-            popOutPos.left = mainLeft - popWidth - leftSpacing;
+        const popOutPos = {...popOutSheet.position};
+        if (innerWidth - (mainLeft + mainWidth) > (popWidth + rightSpacing)) {popOutPos.left = mainLeft + mainWidth + rightSpacing} else {popOutPos.left = mainLeft - popWidth - leftSpacing}
         popOutPos.top = mainTop;
         popOutSheet.position = popOutPos;
         popOutSheet.render(true);
@@ -35,20 +32,16 @@ export const PopoutControl = (superClass) => class extends superClass {
                 const element = event.currentTarget;
                 const dataSet = element.dataset;
                 if ("htmlid" in dataSet) {
-                    const popout = html.find(`#${dataSet.htmlid}`)[0];
+                    const [popout] = html.find(`#${dataSet.htmlid}`);
                     U.LOG({
                         event,
                         element,
                         "... dataset": dataSet,
                         "PopOut": popout
                     }, `on CLICK: Open Popout ${dataSet.htmlid}`, "MIXIN: PopoutControl", {groupStyle: "l3"});
-                    if (popout)
-                        if (popout.classList.contains("hidden"))
-                            popout.classList.remove("hidden");
-                        else
-                            popout.classList.add("hidden");
-                    else
-                        U.THROW(event, "Popout Element Not Found!");
+                    if (popout) {
+                        if (popout.classList.contains("hidden")) {popout.classList.remove("hidden")} else {popout.classList.add("hidden")}
+                    } else {U.THROW(event, "Popout Element Not Found!")}
                 } else if ("itemid" in dataSet) {
                     const item = this.actor.items.get(dataSet.itemid);
                     U.LOG({
@@ -66,17 +59,14 @@ export const PopoutControl = (superClass) => class extends superClass {
                 const element = event.currentTarget;
                 const dataSet = element.dataset;
                 if ("htmlid" in dataSet) {
-                    const popout = html.find(`#${dataSet.htmlid}`)[0];
+                    const [popout] = html.find(`#${dataSet.htmlid}`);
                     U.LOG({
                         event,
                         element,
                         "... dataset": dataSet,
                         "PopIn": popout
                     }, `on BLUR: Close Popout ${dataSet.htmlid}`, "MIXIN: PopoutControl", {groupStyle: "l3"});
-                    if (popout && !popout.classList.contains("hidden"))
-                        popout.classList.add("hidden");
-                    else
-                        U.THROW(event, "Popout Element Not Found or already hidden!");
+                    if (popout && !popout.classList.contains("hidden")) {popout.classList.add("hidden")} else {U.THROW(event, "Popout Element Not Found or already hidden!")}
                 }
             };
 
@@ -88,12 +78,7 @@ export const PopoutControl = (superClass) => class extends superClass {
 };
 export const ClampText = (superClass) => class extends superClass {
     clamp(element) {
-        if ("clamplines" in element.dataset)
-            $clamp(element, {clamp: U.Int(element.dataset.clamplines)});
-        else if ("clampheight" in element.dataset)
-            $clamp(element, {clamp: element.dataset.clampheight});
-        else
-            $clamp(element, {clamp: "auto"});
+        if ("clamplines" in element.dataset) {$clamp(element, {clamp: U.Int(element.dataset.clamplines)})} else if ("clampheight" in element.dataset) {$clamp(element, {clamp: element.dataset.clampheight})} else {$clamp(element, {clamp: "auto"})}
     }
     unClamp(element) { element.style.cssText = "" }
 
@@ -131,8 +116,7 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                     element.classList.remove("placeholder");
                     this.unClamp(element);
                 }
-                if (element.classList.contains("quote"))
-                    element.innerHTML = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
+                if (element.classList.contains("quote")) {element.innerHTML = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim()}
                 // Add an event listener for when the player hits the 'Enter' key.
                 element.addEventListener("keydown", _onEditKeyDown.bind(this));
                 // Focus the element, which will fire the _onEditFocus event to select all text.
@@ -150,15 +134,10 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                 if ("field" in dataSet) {
                     const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
                     let entityVal = getProperty(this.entity.data, dataSet.field);
-                    if (entityVal === undefined)
-                        entityVal = getProperty(this.entity, dataSet.field);
-                    if ("fieldindex" in dataSet && Array.isArray(entityVal))
-                        entityVal[U.Int(dataSet.fieldindex)] = elementVal;
-                    else
-                        entityVal = elementVal;
+                    if (entityVal === undefined) {entityVal = getProperty(this.entity, dataSet.field)}
+                    if ("fieldindex" in dataSet && Array.isArray(entityVal)) {entityVal[U.Int(dataSet.fieldindex)] = elementVal} else {entityVal = elementVal}
                     this.entity.update({[dataSet.field]: entityVal});
-                    if (elementVal && element.classList.contains("quote"))
-                        element.innerHTML = _.escape(`"${elementVal}"`);
+                    if (elementVal && element.classList.contains("quote")) {element.innerHTML = _.escape(`"${elementVal}"`)}
                 }
                 checkForPlaceholder(element);
             };
@@ -177,10 +156,8 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                 if ("field" in dataSet) {
                     // const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
                     let entityVal = getProperty(this.entity.data, dataSet.field);
-                    if (entityVal === undefined)
-                        entityVal = getProperty(this.entity, dataSet.field);
-                    if ("fieldindex" in dataSet && Array.isArray(entityVal))
-                        entityVal = entityVal[U.Int(dataSet.fieldindex)];
+                    if (entityVal === undefined) {entityVal = getProperty(this.entity, dataSet.field)}
+                    if ("fieldindex" in dataSet && Array.isArray(entityVal)) {entityVal = entityVal[U.Int(dataSet.fieldindex)]}
                     if (entityVal && typeof entityVal !== "string") {
                         U.THROW({
                             "this": this,

@@ -56,14 +56,12 @@ export class MajorActorSheet extends ScionActorSheet {
         const {genesis, pantheon, patron} = actorData;
         actorData.patronageLine = "";
         if (pantheon && patron && panthData[pantheon].members.includes(patron)) {
-            if (genesis)
-                actorData.patronageLine = U.Loc(
-                    `scion.genesis.${genesis}Line`,
-                    {
-                        divinePatronName: U.Loc(godData[patron].label),
-                        divinePatronMantle: godData[patron].mantle ? `, ${U.Loc(godData[patron].mantle)}` : ""
-                    }
-                );
+            if (genesis) {
+                actorData.patronageLine = U.Loc(`scion.genesis.${genesis}Line`, {
+                    divinePatronName: U.Loc(godData[patron].label),
+                    divinePatronMantle: godData[patron].mantle ? `, ${U.Loc(godData[patron].mantle)}` : ""
+                });
+            }
         } else {
             actorData.patron = "";
         }
@@ -71,35 +69,27 @@ export class MajorActorSheet extends ScionActorSheet {
 
         // #region OWNED ITEM SORTING
         data.items = {};
-        for (const [itemCategory, itemTypes] of Object.entries(itemCategories))
-            data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type));
+        for (const [itemCategory, itemTypes] of Object.entries(itemCategories)) {data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type))}
         // #endregion
 
         // #region FRONT PAGE
-        if (pantheon)
-            data.virtues = panthData[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`));
-
+        if (pantheon) {data.virtues = panthData[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`))}
         // #endregion
 
-
         // #region CHARGEN
-        actorData.charGen = actorData.charGen || {};
+        actorData.charGen = actorData.charGen ?? {};
 
         // #region STEP ONE
+
         // Update Patron List
-        if (pantheon)
-            actorData.charGen.patronList = U.MakeDict(
-                panthData[pantheon].members,
-                (v) => U.Loc(`scion.pantheon.god.${v}`),
-                (k, v) => v
-            );
+        if (pantheon) {actorData.charGen.patronList = U.MakeDict(panthData[pantheon].members, (v) => U.Loc(`scion.pantheon.god.${v}`), (k, v) => v)}
         // #endregion
 
         // #region STEP TWO
+
         // PATH PRIORITIES
         const pathItems = [];
-        for (const pathType of actorData.pathPriorities)
-            pathItems.push(data.items.paths.find((item) => item.data.data.type === pathType));
+        for (const pathType of actorData.pathPriorities) {pathItems.push(data.items.paths.find((item) => item.data.data.type === pathType))}
         data.items.paths = pathItems;
 
         // PATH SKILL COUNTS
@@ -110,41 +100,33 @@ export class MajorActorSheet extends ScionActorSheet {
                 data.pathSkillsCount[skill]++;
             });
         });
-
         // #endregion
 
         // #region STEP THREE
         data.skillVals = this.actor.skillVals;
+
         // FILTERING OUT 0-SKILLS
         data.unspentSkillDots = this.actor.unassignedSkillDots;
         data.assignableSkillDots = this.actor.assignableSkillDots;
+
         // EXPOSING SPECIALTY DATA
         data.skillSpecialties = this.actor.specialties;
 
         // ATTRIBUTE PRIORITIES
         data.arenaPriorities = this.aData.attributes.priorities;
-        data.arenas = U.KeyMapObj(
-            SCION.ATTRIBUTES.arenas,
-            (v) => U.KeyMapObj(v, (k, v) => v, (v) => this.actor.attrVals[v])
-        );
-
-        // CREATING ATTRIBUTE DOTS REPORT
-        // const attrUpdate = this.actor.checkAttributes();
-        // U.LOG(attrUpdate, "Attribute Update Received", this.actor.name);
-
-        // attrUpdate.unspentArenaDots = {physical: 3, mental: 10, social: 15};
-        // attrUpdate.unspentGeneralDots = 5;
+        data.arenas = U.KeyMapObj(SCION.ATTRIBUTES.arenas, (v) => U.KeyMapObj(v, (k, v) => v, (v) => this.actor.attrVals[v]));
 
         const unspentArenaDots = _.pick(this.actor.unassignedArenaAttrDots, (v) => v > 0);
         data.unspentGeneralAttrDots = this.actor.unassignedGeneralAttrDots;
         data.unspentAttributeDots = U.SumVals(unspentArenaDots) + data.unspentGeneralAttrDots;
-
         data.unspentArenaDots = [];
-        if (isObjectEmpty(unspentArenaDots))
+        if (isObjectEmpty(unspentArenaDots)) {
             data.unspentArenaDots = false;
-        else
-            for (const [arena, num] of Object.entries(unspentArenaDots))
+        } else {
+            for (const [arena, num] of Object.entries(unspentArenaDots)) {
                 data.unspentArenaDots.push(...new Array(num).fill(arena));
+            }
+        }
         data.assignableGeneralAttrDots = this.actor.assignableGeneralAttrDots;
 
         data.skillReportLines = [
@@ -156,13 +138,16 @@ export class MajorActorSheet extends ScionActorSheet {
             `Assignable General Dots: Assigned (${this.actor.assignedGeneralAttrDots}) + Unspent (${data.unspentGeneralAttrDots}) = ${this.actor.assignedGeneralAttrDots + data.unspentGeneralAttrDots} = ${this.actor.assignableGeneralAttrDots}`,
             `Assignable Physical Dots: Assigned (${this.actor.assignedArenaAttrDots.physical}) + Unspent (${this.actor.unassignedArenaAttrDots.physical}) = ${this.actor.assignedArenaAttrDots.physical + this.actor.unassignedArenaAttrDots.physical} = ${this.actor.assignableArenaDots.physical}`,
             `Assignable Mental Dots: Assigned (${this.actor.assignedArenaAttrDots.mental}) + Unspent (${this.actor.unassignedArenaAttrDots.mental}) = ${this.actor.assignedArenaAttrDots.mental + this.actor.unassignedArenaAttrDots.mental} = ${this.actor.assignableArenaDots.mental}`,
-            `Assignable Social Dots: Assigned (${this.actor.assignedArenaAttrDots.social}) + Unspent (${this.actor.unassignedArenaAttrDots.social}) = ${this.actor.assignedArenaAttrDots.social + this.actor.unassignedArenaAttrDots.social} = ${this.actor.assignableArenaDots.social}`,
+            `Assignable Social Dots: Assigned (${this.actor.assignedArenaAttrDots.social}) + Unspent (${this.actor.unassignedArenaAttrDots.social}) = ${this.actor.assignedArenaAttrDots.social + this.actor.unassignedArenaAttrDots.social} = ${this.actor.assignableArenaDots.social}`
         ];
 
+        // #endregion
+        
+        // #region STEP FOUR
+        data.callings = actorData.callings;
 
-        // this.actor.updateTraits();
         // #endregion
-        // #endregion
+
         // #endregion
 
         // #region FRONT
@@ -177,10 +162,10 @@ export class MajorActorSheet extends ScionActorSheet {
     activateListeners(html) {
         super.activateListeners(html);
         if (this.options.editable) {
-            const menuRosette = html.find("nav.menuRosette")[0];
+            const [menuRosette] = html.find("nav.menuRosette");
             const sheetContainer = document.getElementById(`actor-${this.actor.id}`);
-            const sheetElement = html.find("section#characterSheet")[0];
-            const closeButton = html.find("div.closeButton")[0];
+            const [sheetElement] = html.find("section#characterSheet");
+            const [closeButton] = html.find("div.closeButton");
 
             // Make Menu Rosette draggable
             const menuDragger = new Dragger(this, html, menuRosette, [sheetContainer, sheetElement], {height: 100, width: 100}, [menuRosette, closeButton]);
@@ -194,17 +179,14 @@ export class MajorActorSheet extends ScionActorSheet {
             // Double-Click on Menu Rosette to Collapse Sheet
             html.find("nav.menuRosette").dblclick((event) => {
                 event.preventDefault();
-                if (menuDragger.isCollapsed)
-                    menuDragger.expand();
-                else
-                    menuDragger.collapse();
+                if (menuDragger.isCollapsed) {menuDragger.expand()} else {menuDragger.collapse()}
             });
 
             // #region DRAGULA: DRAG & DROP
 
             // #region SORTING PATH PRIORITIES
-            const pathContainer = html.find("#pathContainer")[0];
-            const pathMirror = html.find("#pathMirror")[0];
+            const [pathContainer] = html.find("#pathContainer");
+            const [pathMirror] = html.find("#pathMirror");
             const pathDragger = dragula({
                 containers: [pathContainer],
                 mirrorContainer: pathMirror,
@@ -212,16 +194,16 @@ export class MajorActorSheet extends ScionActorSheet {
             });
             pathDragger.on("drop", async () => {
                 await this.actor.update({
-                    "data.pathPriorities": Array.from(pathContainer.children)
-                        .map((element) => this.entity.items.get(element.dataset.itemid).data.data.type)
+                    "data.pathPriorities": Array.from(pathContainer.children).
+                        map((element) => this.entity.items.get(element.dataset.itemid).data.data.type)
                 });
                 // this.actor.updateTraits();
             });
             // #endregion
 
             // #region SORTING ATTRIBUTE PRIORITIES
-            const arenaContainer = html.find("#arenaContainer")[0];
-            const arenaMirror = html.find("#chargenThreeArenaMirror")[0];
+            const [arenaContainer] = html.find("#arenaContainer");
+            const [arenaMirror] = html.find("#chargenThreeArenaMirror");
             const arenaDragger = dragula({
                 containers: [arenaContainer],
                 moves: (e, s, handle) => handle.classList.contains("handle"),
@@ -231,8 +213,8 @@ export class MajorActorSheet extends ScionActorSheet {
 
             arenaDragger.on("drop", async () => {
                 await this.actor.update({
-                    "data.attributes.priorities": Array.from(arenaContainer.children)
-                        .map((element) => element.dataset.arena)
+                    "data.attributes.priorities": Array.from(arenaContainer.children).
+                        map((element) => element.dataset.arena)
                 });
                 // await this.actor.updateTraits();
             });
@@ -250,10 +232,8 @@ export class MajorActorSheet extends ScionActorSheet {
                 const returnVal = {
                     dotTypes: dot.dataset.types?.split("|")
                 };
-                if (sourceBin)
-                    returnVal.sourceTypes = sourceBin.dataset?.types?.split("|") ?? [];
-                if (targetBin)
-                    returnVal.targetTypes = targetBin.dataset?.types?.split("|") ?? [];
+                if (sourceBin) {returnVal.sourceTypes = sourceBin.dataset?.types?.split("|") ?? []}
+                if (targetBin) {returnVal.targetTypes = targetBin.dataset?.types?.split("|") ?? []}
                 return returnVal;
             };
             const isDotDraggable = (dot, sourceBin) => {
@@ -262,7 +242,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     // U.LOG({dotTypes, sourceTypes}, "Unassigned Is Draggable!", "isDotDraggable");
                     return true;
                 } if (sourceTypes.includes("attribute")) {
-                    const attribute = sourceBin.dataset.attribute;
+                    const {attribute} = sourceBin.dataset;
                     if (this.actor.attrVals[attribute] === this.actor.baseAttrVals[attribute]) {
                         // U.LOG({dotTypes, sourceTypes}, `${attribute} is at Base Value: NOT Draggable`, "isDotDraggable");
                         return false;
@@ -271,7 +251,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     return true;
                 }
                 if (sourceTypes.includes("skill")) {
-                    const skill = sourceBin.dataset.skill;
+                    const {skill} = sourceBin.dataset;
                     if (this.actor.skillVals[skill] === this.actor.baseSkillVals[skill]) {
                         // U.LOG({dotTypes, sourceTypes}, `${skill} is at Base Value: NOT Draggable`, "isDotDraggable");
                         return false;
@@ -308,7 +288,7 @@ export class MajorActorSheet extends ScionActorSheet {
                             return false;
                         }
                     }
-                    const attribute = targetBin.dataset.attribute;
+                    const {attribute} = targetBin.dataset;
                     if (this.actor.attrVals[attribute] === SCION.ATTRIBUTES.max) {
                         // U.LOG({dotTypes, sourceTypes}, `${attribute} is at MAX: NOT Droppable`, "isTargetDroppable");
                         return false;
@@ -321,7 +301,7 @@ export class MajorActorSheet extends ScionActorSheet {
                         // U.LOG({dotTypes, targetTypes}, "Target isn't a Skill Bin: NOT Droppable!", "isTargetDroppable");
                         return false;
                     }
-                    const skill = targetBin.dataset.skill;
+                    const {skill} = targetBin.dataset;
                     if (this.actor.skillVals[skill] === SCION.SKILLS.max) {
                         // U.LOG({dotTypes, sourceTypes}, `${skill} is at MAX: NOT Droppable`, "isTargetDroppable");
                         return false;
@@ -335,7 +315,7 @@ export class MajorActorSheet extends ScionActorSheet {
 
 
             const dotBins = html.find(".dotBin");
-            const dotMirror = html.find("#chargenThreeDotMirror")[0];
+            const [dotMirror] = html.find("#chargenThreeDotMirror");
             const dotDragger = dragula({
                 containers: [...dotBins],
                 moves: (dot, sourceBin) => isDotDraggable(dot, sourceBin),
@@ -349,16 +329,12 @@ export class MajorActorSheet extends ScionActorSheet {
 
             const _onDotDrag = (dot, sourceBin) => {
                 dotBins.each((i, bin) => {
-                    if (isTargetDroppable(dot, sourceBin, bin))
-                        bin.classList.remove("invalidDrop");
-                    else
-                        bin.classList.add("invalidDrop");
+                    if (isTargetDroppable(dot, sourceBin, bin)) {bin.classList.remove("invalidDrop")} else {bin.classList.add("invalidDrop")}
                 });
             };
             const _onDotDragEnd = async (dot) => {
                 dotBins.each((i, bin) => { bin.classList.remove("invalidDrop") });
-                if (!(await this.actor.processUpdateQueue()))
-                    this.render();
+                if (!await this.actor.processUpdateQueue()) {this.render()}
             };
             const _onDotDrop = (dot, targetBin, sourceBin) => {
                 const {dotTypes, targetTypes, sourceTypes} = getDragTypes(dot, sourceBin, targetBin);
@@ -366,19 +342,19 @@ export class MajorActorSheet extends ScionActorSheet {
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
                     // Increment Target Trait
                     if (targetTypes.includes("attribute")) {
-                        const attribute = targetBin.dataset.attribute;
+                        const {attribute} = targetBin.dataset;
                         updateData[targetBin.dataset.field] = this.actor.assignedAttrVals[attribute] + 1;
                     } else if (targetTypes.includes("skill")) {
-                        const skill = targetBin.dataset.skill;
+                        const {skill} = targetBin.dataset;
                         updateData[targetBin.dataset.field] = this.actor.assignedSkillVals[skill] + 1;
                     }
                     // If source was another skill/attribute, decrement that.
                     if (!sourceTypes.includes("unassigned")) {
                         if (sourceTypes.includes("attribute")) {
-                            const attribute = sourceBin.dataset.attribute;
+                            const {attribute} = sourceBin.dataset;
                             updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
                         } else if (sourceTypes.includes("skill")) {
-                            const skill = sourceBin.dataset.skill;
+                            const {skill} = sourceBin.dataset;
                             updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
                         }
                     }
@@ -392,10 +368,10 @@ export class MajorActorSheet extends ScionActorSheet {
                 const updateData = {};
                 if (!sourceTypes.includes("unassigned")) {
                     if (sourceTypes.includes("attribute")) {
-                        const attribute = sourceBin.dataset.attribute;
+                        const {attribute} = sourceBin.dataset;
                         updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
                     } else if (sourceTypes.includes("skill")) {
-                        const skill = sourceBin.dataset.skill;
+                        const {skill} = sourceBin.dataset;
                         updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
                     }
                 }
@@ -408,8 +384,10 @@ export class MajorActorSheet extends ScionActorSheet {
             dotDragger.on("drop", _onDotDrop);
             dotDragger.on("remove", _onDropRemove);
 
-            // #endregion
-            // #endregion
+            /*
+             * #endregion
+             * #endregion
+             */
         }
     }
 }

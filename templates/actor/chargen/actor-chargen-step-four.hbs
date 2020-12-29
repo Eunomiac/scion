@@ -1,3 +1,9 @@
-<section class="chargenFour flex-col width100 padded">
+<section class="chargenFour grid padded">
     <h1>{{loc "scion.heading.chargen.stepFour"}}</h1>
+    {{#each callings as |calling|}}
+        {{#with ../blocks as | blocks |}}
+        {{> (blocks.partials.calling.template) calling}}
+        {{/with}}
+    {{/each}}
+    {{> (blocks.popouts.callingsList.template) }}
 </section>

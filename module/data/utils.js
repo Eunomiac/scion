@@ -1,9 +1,34 @@
 import {_} from "../modules.js";
 
 // #region CONSTANTS (INTERNAL)
-const noCapTitleCase = ["above", "after", "at", "below", "by", "down", "for", "from", "in", "onto", "of",
-                        "off", "on", "out", "to", "under", "up", "with", "for", "and", "nor", "but", "or",
-                        "yet", "so", "the", "an", "a"];
+const noCapTitleCase = ["above",
+                        "after",
+                        "at",
+                        "below",
+                        "by",
+                        "down",
+                        "for",
+                        "from",
+                        "in",
+                        "onto",
+                        "of",
+                        "off",
+                        "on",
+                        "out",
+                        "to",
+                        "under",
+                        "up",
+                        "with",
+                        "for",
+                        "and",
+                        "nor",
+                        "but",
+                        "or",
+                        "yet",
+                        "so",
+                        "the",
+                        "an",
+                        "a"];
 const loremIpsumText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies 
 nibh sed massa euismod lacinia. Aliquam nec est ac nunc ultricies scelerisque porta vulputate odio. 
 Integer gravida mattis odio, semper volutpat tellus. Ut elit leo, auctor eget fermentum hendrerit, 
@@ -51,85 +76,69 @@ const stackTraceBlacklist = [
     /jquery\.min\.js/u
 ];
 /*
-const testStack = `Error
-    at stackTrace (http://localhost:30000/systems/scion/module/data/utils.js:33:25)
-    at Module.LOG (http://localhost:30000/systems/scion/module/data/utils.js:68:143)
-    at HTMLDivElement.<anonymous> (http://localhost:30000/systems/scion/module/mixins/generalMixins.js:207:27)
-    at Function.each (http://localhost:30000/scripts/jquery.min.js:2:2976)
-    at S.fn.init.each (http://localhost:30000/scripts/jquery.min.js:2:1454)
-    at MajorActorSheet.activateListeners (http://localhost:30000/systems/scion/module/mixins/generalMixins.js:181:46)
-    at MajorActorSheet.activateListeners (http://localhost:30000/systems/scion/module/mixins/generalMixins.js:59:15)
-    at MajorActorSheet.activateListeners (http://localhost:30000/systems/scion/module/actor/actor-major-sheet.js:99:15)
-    at MajorActorSheet._render (http://localhost:30000/scripts/foundry.js:4537:10)
-    at async MajorActorSheet._render (http://localhost:30000/scripts/foundry.js:5163:5)
-    at stackTrace (http://localhost:30000/systems/scion/module/data/utils.js:33:25)
-    at Module.LOG (http://localhost:30000/systems/scion/module/data/utils.js:73:90)
-    at Function.RegisterSheet (http://localhost:30000/systems/scion/module/item/item-sheet.js:20:11)
-    at http://localhost:30000/systems/scion/module/scion.js:53:98
-    at Array.forEach (<anonymous>)
-    at http://localhost:30000/systems/scion/module/scion.js:53:40
-    at Function._call (http://localhost:30000/scripts/foundry.js:2496:14)
-    at Function.callAll (http://localhost:30000/scripts/foundry.js:2456:12)
-    at Game.initialize (http://localhost:30000/scripts/foundry.js:6465:11)
-    at window.addEventListener.once (http://localhost:30000/scripts/foundry.js:7436:8)`;
-const testStackMapped = testStack
-    .replace(/(\n\s+at\s+)(http:[^\n]+)(\n?)/gu, "$1BASE ($2)$3")
-    .split(/\n\s+at\s+/gu)
-    .slice(1)
-    .filter((line) => !stackTraceBlacklist.some((regex) => regex.test(line)))
-    .map((line) => line.replace(/http:\/\/localhost:[^:]*?(\/scion\/(module\/)?|\/scripts\/)/gu, ""))
-    .map((line) => (line.match(/^([^(]+)(?: \(|)([^())]*)\)?$/u) || []).slice(1, 3))
-    .map(([name, loc]) => [name.toUpperCase(), ...loc.replace(":","=").split("=")]);
-console.log(testStackMapped);
-*/
+ *const testStack = `Error
+ *    at stackTrace (http://localhost:30000/systems/scion/module/data/utils.js:33:25)
+ *    at Module.LOG (http://localhost:30000/systems/scion/module/data/utils.js:68:143)
+ *    at HTMLDivElement.<anonymous> (http://localhost:30000/systems/scion/module/mixins/generalMixins.js:207:27)
+ *    at Function.each (http://localhost:30000/scripts/jquery.min.js:2:2976)
+ *    at S.fn.init.each (http://localhost:30000/scripts/jquery.min.js:2:1454)
+ *    at MajorActorSheet.activateListeners (http://localhost:30000/systems/scion/module/mixins/generalMixins.js:181:46)
+ *    at MajorActorSheet.activateListeners (http://localhost:30000/systems/scion/module/mixins/generalMixins.js:59:15)
+ *    at MajorActorSheet.activateListeners (http://localhost:30000/systems/scion/module/actor/actor-major-sheet.js:99:15)
+ *    at MajorActorSheet._render (http://localhost:30000/scripts/foundry.js:4537:10)
+ *    at async MajorActorSheet._render (http://localhost:30000/scripts/foundry.js:5163:5)
+ *    at stackTrace (http://localhost:30000/systems/scion/module/data/utils.js:33:25)
+ *    at Module.LOG (http://localhost:30000/systems/scion/module/data/utils.js:73:90)
+ *    at Function.RegisterSheet (http://localhost:30000/systems/scion/module/item/item-sheet.js:20:11)
+ *    at http://localhost:30000/systems/scion/module/scion.js:53:98
+ *    at Array.forEach (<anonymous>)
+ *    at http://localhost:30000/systems/scion/module/scion.js:53:40
+ *    at Function._call (http://localhost:30000/scripts/foundry.js:2496:14)
+ *    at Function.callAll (http://localhost:30000/scripts/foundry.js:2456:12)
+ *    at Game.initialize (http://localhost:30000/scripts/foundry.js:6465:11)
+ *    at window.addEventListener.once (http://localhost:30000/scripts/foundry.js:7436:8)`;
+ *const testStackMapped = testStack
+ *    .replace(/(\n\s+at\s+)(http:[^\n]+)(\n?)/gu, "$1BASE ($2)$3")
+ *    .split(/\n\s+at\s+/gu)
+ *    .slice(1)
+ *    .filter((line) => !stackTraceBlacklist.some((regex) => regex.test(line)))
+ *    .map((line) => line.replace(/http:\/\/localhost:[^:]*?(\/scion\/(module\/)?|\/scripts\/)/gu, ""))
+ *    .map((line) => (line.match(/^([^(]+)(?: \(|)([^())]*)\)?$/u) || []).slice(1, 3))
+ *    .map(([name, loc]) => [name.toUpperCase(), ...loc.replace(":","=").split("=")]);
+ *console.log(testStackMapped);
+ */
 const delayedLogQueue = [];
-const isDebugging = (tag, {isLoud}) => isLoud || game.scion?.debug.isDebugging || tag && game.scion?.debug.watchList.includes(tag);
+const isDebugging = (tag, {isLoud}) => isLoud || game.scion?.debug.isDebugging || (tag && game.scion?.debug.watchList.includes(tag));
 const stackTrace = () => {
     const stackString = new Error().stack;
-    const stack = stackString
-        .replace(/(\n\s+at\s+)(http:[^\n]+)(\n?)/gu, "$1<Anonymous> ($2)$3")
-        .split(/\n\s+at\s+/gu)
-        .slice(1)
-        .filter((line) => !stackTraceBlacklist.some((regex) => regex.test(line)))
-        .map((line) => line.replace(/http:\/\/localhost:[^:]*?(\/scion\/(module\/)?|\/scripts\/)/gu, ""))
-        .map((line) => (line.match(/^([^(]+)(?: \(|)([^())]*)\)?$/u) || []).slice(1, 3))
-        .map(([name, loc]) => [name, ...(loc ?? "").replace(":","=").split("=")]);
-    while (stack.length && (stack[0] || []).join(" ").includes("utils.js"))
-        stack.shift();
+    const stack = stackString.
+        replace(/(\n\s+at\s+)(http:[^\n]+)(\n?)/gu, "$1<Anonymous> ($2)$3").
+        split(/\n\s+at\s+/gu).
+        slice(1).
+        filter((line) => !stackTraceBlacklist.some((regex) => regex.test(line))).
+        map((line) => line.replace(/http:\/\/localhost:[^:]*?(\/scion\/(module\/)?|\/scripts\/)/gu, "")).
+        map((line) => (line.match(/^([^(]+)(?: \(|)([^())]*)\)?$/u) || []).slice(1, 3)).
+        map(([name, loc]) => [name, ...(loc ?? "").replace(":","=").split("=")]);
+    while (stack.length && (stack[0] || []).join(" ").includes("utils.js")) {stack.shift()}
     return [
         stack.shift(),
-        Object.assign(
-            KeyMapObj(
-                stack,
-                (k, v) => `${v[0]} (${v[1]})`,
-                (v) => _.last(v)
-            ),
-            {"traceString:": stackString.replace(/ +/gu, " ").replace(/Error/u, "")}
-        )
+        Object.assign(KeyMapObj(stack, (k, v) => `${v[0]} (${v[1]})`, (v) => _.last(v)), {"traceString:": stackString.replace(/ +/gu, " ").replace(/Error/u, "")})
     ];
 };
 const logLine = (output, title, {style, groupStyle, isGrouping}) => {
-    if (isGrouping)
-        if (game.scion.debug.isFormattingGroup)
-            console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle]);
-        else
-            console.groupCollapsed(isGrouping);
-    if (output !== undefined)
-        console.log(`%c ${title}`, logStyles[style], output);
-    else
-        console.log(`No Output for ${title}`);
+    if (isGrouping) {
+        if (game.scion.debug.isFormattingGroup) {console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle])} else {console.groupCollapsed(isGrouping)}
+    }
+    if (output !== undefined) {console.log(`%c ${title}`, logStyles[style], output)} else {console.log(`No Output for ${title}`)}
 };
 const logStackTrace = (stack) => {
     if (stack) {
         const [stackRef, stackData] = stack;
         Object.entries(stackData).forEach(([locRef, lineRef], i) => {
-            const style = /foundry\.js/u.test(locRef) && "traceFoundry"
-                || locRef === "traceString:" && "traceString"
+            const style = (/foundry\.js/u.test(locRef) && "traceFoundry")
+                || (locRef === "traceString:" && "traceString")
                 || "traceLocal";
-            if (i === 0)
-                logLine(lineRef, locRef, {style, groupStyle: "trace", isGrouping: `STACK TRACE [${stackRef.shift()}]: ${stackRef.join(" at ")}`});
-            else
-                logLine(lineRef, locRef, {style});
+            if (i === 0) {logLine(lineRef, locRef, {style, groupStyle: "trace", isGrouping: `STACK TRACE [${stackRef.shift()}]: ${stackRef.join(" at ")}`})} else {logLine(lineRef, locRef, {style})}
         });
         console.groupEnd();
     }
@@ -138,8 +147,7 @@ const logGroup = (outputs, groupTitle, tag, {style, groupStyle}, stackTrace) => 
     if (["number", "string"].includes(typeof outputs)) {
         logGroup({}, outputs, tag, {style, groupStyle}, stackTrace);
     } else {
-        if (Array.isArray(outputs))
-            outputs = outputs.map((x, i) => ({[`${i}. ${JSON.stringify(x)}`]: ""}));
+        if (Array.isArray(outputs)) {outputs = outputs.map((x, i) => ({[`${i}. ${JSON.stringify(x)}`]: ""}))}
         outputs = Object.entries(outputs);
         (([lineTitle, lineOutput]) => {
             logLine(lineOutput, lineTitle, {style, groupStyle, isGrouping: _.compact([tag && `[${tag}]`, groupTitle]).join(" ")});
@@ -152,11 +160,9 @@ const logGroup = (outputs, groupTitle, tag, {style, groupStyle}, stackTrace) => 
     }
 };
 export const LOG = (outputs = {title: Object}, groupTitle = "", tag = undefined, {style="log", groupStyle="data", isLoud=false} = {}, stack = stackTrace()) => {
-    if (isDebugging(tag, {isLoud}))
-        if (CONFIG.isHoldingLogs)
-            delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack]);
-        else
-            logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack);
+    if (isDebugging(tag, {isLoud})) {
+        if (CONFIG.isHoldingLogs) {delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack])} else {logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack)}
+    }
 };
 export const ReleaseLogs = () => {
     CONFIG.isHoldingLogs = false;
@@ -173,15 +179,14 @@ export const THROW = (data, tag, {isLoud=true} = {}) => LOG(data, tag ? `[${tag}
 export const UCase = (str) => `${str}`.toUpperCase();
 export const LCase = (str) => `${str}`.toLowerCase();
 export const SCase = (str) => `${`${str}`.slice(0, 1).toUpperCase()}${`${str}`.slice(1)}`;
-export const TCase = (str) => `${str}`.split(/\s/u)
-    .map((x, i) => i && noCapTitleCase.includes(`${x}`.toLowerCase()) ? `${x}`.toLowerCase() : SCase(x))
-    .join(" ")
-    .replace(/\s+/gu, " ")
-    .trim();
+export const TCase = (str) => `${str}`.split(/\s/u).
+    map((x, i) => (i && noCapTitleCase.includes(`${x}`.toLowerCase()) ? `${x}`.toLowerCase() : SCase(x))).
+    join(" ").
+    replace(/\s+/gu, " ").
+    trim();
 export const Loc = (locRef, formatDict = {}) => {
     if (/^"?scion\./u.test(JSON.stringify(locRef))) {
-        for (const [key, val] of Object.entries(formatDict))
-            formatDict[key] = Loc(val);
+        for (const [key, val] of Object.entries(formatDict)) {formatDict[key] = Loc(val)}
         return game.i18n.format(locRef, formatDict) || "";
     }
     return locRef;
@@ -189,8 +194,7 @@ export const Loc = (locRef, formatDict = {}) => {
 export const ParseArticles = (str) => `${str}`.replace(/\b(a|A)\s([aeiouAEIOU])/gu, "$1n $2");
 export const LoremIpsum = (numWords = 200) => {
     const loremIpsumWords = loremIpsumText.replace(/\n/gu, "").split(/ /u);
-    while (loremIpsumWords.length < numWords)
-        loremIpsumWords.push(...loremIpsumWords);
+    while (loremIpsumWords.length < numWords) {loremIpsumWords.push(...loremIpsumWords)}
     loremIpsumWords.length = numWords;
     loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "")}.`;
     return loremIpsumWords.join(" ");
@@ -199,15 +203,17 @@ export const LoremIpsum = (numWords = 200) => {
 
 // #region NUMBER FUNCTIONS: Parsing
 export const Int = (num) => parseInt(`${Math.round(parseFloat(`${num}`) || 0)}`);
-export const Float = (num, sigDigits = 2) => Math.round((parseFloat(`${num}`) || 0) * 10 ** sigDigits) / 10 ** sigDigits;
+export const Float = (num, sigDigits = 2) => Math.round((parseFloat(`${num}`) || 0) * (10 ** sigDigits)) / (10 ** sigDigits);
 export const Rand = (n1, n2) => Math.round(Math.random() * (Math.max(Int(n2), Int(n1)) - Math.min(Int(n2), Int(n1)))) + Math.min(Int(n2), Int(n1));
 // #endregion
 
 // #region OBJECT FUNCTIONS: MapObject, MakeDictionary
-export const Last = (arr) => Array.isArray(arr) && arr.length ? arr[arr.length - 1] : undefined;
+export const Last = (arr) => (Array.isArray(arr) && arr.length ? arr[arr.length - 1] : undefined);
 export const KeyMapObj = (obj, keyFunc = (x) => x, valFunc = undefined) => {
-    // An object-equivalent Array.map() function, which accepts mapping functions to transform both keys and values.
-    //      If only one function is provided, it's assumed to be mapping the values and will receive (v, k) args.
+    /*
+     * An object-equivalent Array.map() function, which accepts mapping functions to transform both keys and values.
+     *      If only one function is provided, it's assumed to be mapping the values and will receive (v, k) args.
+     */
     [valFunc, keyFunc] = [valFunc, keyFunc].filter((x) => typeof x === "function");
     keyFunc = keyFunc || function(k) {return k};
     const newObj = {};
@@ -222,7 +228,7 @@ export const Clone = (obj) => {
         cloneObj = JSON.parse(JSON.stringify(obj));
     } catch(err) {
         // THROW({obj, err}, "ERROR: U.Clone()");
-        cloneObj = Object.assign({}, obj);
+        cloneObj = {...obj};
     }
     return cloneObj;
 };
@@ -232,35 +238,29 @@ export const Merge = (target, source, isMergingArrays = false) => {
         try {
             cloneObj = JSON.parse(JSON.stringify(obj));
         } catch(err) {
-            cloneObj = Object.assign({}, obj);
+            cloneObj = {...obj};
         }
         return cloneObj;
     })(target);
 
     const isObject = (obj) => obj && typeof obj === "object";
 
-    if (!isObject(target) || !isObject(source))
-        return source;
+    if (!isObject(target) || !isObject(source)) {return source}
 
     Object.keys(source).forEach(key => {
         const targetValue = target[key];
         const sourceValue = source[key];
 
-        if (Array.isArray(targetValue) && Array.isArray(sourceValue))
+        if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
             if (isMergingArrays) {
-                target[key] = targetValue.map((x, i) => sourceValue.length <= i
+                target[key] = targetValue.map((x, i) => (sourceValue.length <= i
                     ? x
-                    : Merge(x, sourceValue[i], isMergingArrays));
-                if (sourceValue.length > targetValue.length)
-                    target[key] = target[key].concat(sourceValue.slice(targetValue.length));
-
+                    : Merge(x, sourceValue[i], isMergingArrays)));
+                if (sourceValue.length > targetValue.length) {target[key] = target[key].concat(sourceValue.slice(targetValue.length))}
             } else {
                 target[key] = targetValue.concat(sourceValue);
             }
-        else if (isObject(targetValue) && isObject(sourceValue))
-            target[key] = Merge(Object.assign({}, targetValue), sourceValue, isMergingArrays);
-        else
-            target[key] = sourceValue;
+        } else if (isObject(targetValue) && isObject(sourceValue)) {target[key] = Merge({...targetValue}, sourceValue, isMergingArrays)} else {target[key] = sourceValue}
     });
 
     return target;
@@ -276,8 +276,7 @@ export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
             const newValProp = ((nVal) => ["label", "name", "value"].find((x) => x in nVal))(newVal);
             newVal = newValProp && newVal[newValProp];
         }
-        if (["string", "number"].includes(typeof newVal))
-            newDict[newKey] = Loc(newVal);
+        if (["string", "number"].includes(typeof newVal)) {newDict[newKey] = Loc(newVal)}
     }
     return newDict;
 };
@@ -286,10 +285,7 @@ export const FlattenNestedValues = (obj, flatVals = []) => {
     if (obj && typeof obj === "object") {
         for (const key of Object.keys(obj)) {
             const val = obj[key];
-            if (val && typeof val === "object")
-                flatVals.push(...FlattenNestedValues(val));
-            else
-                flatVals.push(val);
+            if (val && typeof val === "object") {flatVals.push(...FlattenNestedValues(val))} else {flatVals.push(val)}
         }
         return flatVals;
     }

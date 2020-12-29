@@ -21,7 +21,7 @@ import * as actorMixins from "./mixins/actorMixins.js";
 import * as itemMixins from "./mixins/itemMixins.js";
 
 export {applyMixins as MIX} from "./mixins/generalMixins.js"; // Mixin-Enabling Class Factory
-export const MIXINS = Object.assign({}, generalMixins, actorMixins, itemMixins);
-export const ActorMixins = Object.assign({}, generalMixins, actorMixins);
-export const ItemMixins = Object.assign({}, generalMixins, itemMixins);
+export const MIXINS = {...generalMixins, ...actorMixins, ...itemMixins};
+export const ActorMixins = {...generalMixins, ...actorMixins};
+export const ItemMixins = {...generalMixins, ...itemMixins};
 // #endregion

@@ -1,0 +1,10 @@
+<div id="callingsList" class="popout callings flex-col height100 {{#if callings.[2]}}hidden{{/if}}">
+    <div id="callingsSource" class="flex-col">
+        {{#each skills as |label skill|}}
+        <span class="skill noFlex 
+            {{~#if (test (lookup ../pathSkillsCount [skill]) "==" 2)}} invalid
+            {{~else}}{{#if (test [skill] "in" ../data/skills)}} invalid{{/if~}}
+            {{~/if}}" data-skill="{{skill}}">{{loc label}}</span>
+        {{/each}}
+    </div>
+</div>

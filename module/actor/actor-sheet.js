@@ -5,12 +5,7 @@ import "../external/gl-matrix-min.js";
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class ScionActorSheet extends MIX(ActorSheet).with(
-    MIXINS.ClampText,
-    MIXINS.EditableDivs,
-    MIXINS.PopoutControl,
-    MIXINS.CloseButton
-) {
+export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampText, MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton) {
     // Getters: Data Retrieval
     get aData() { return this.actor.aData }
     get eData() { return this.actor.eData }
@@ -21,34 +16,36 @@ export class ScionActorSheet extends MIX(ActorSheet).with(
     }
 
     static get defaultOptions() {
-        /*  super.defaultOptions = {
-                baseApplication: "ActorSheet",
-                classes: ["sheet"],
-                template: "templates/sheets/actor-sheet.html",
-                id: "",
-                title: "",
-                top: null,
-                left: null,
-                height: 720,
-                width: 800,
-                editable: true,
-                minimizable: true,
-                popOut: true,
-                resizable: true,
-                submitOnChange: true,
-                submitOnClose: true,
-                closeOnSubmit: false,
-                tabs: [],
-                filters: [],
-                scrollY: [],
-                dragDrop: [
-                    {
-                        dragSelector: ".item-list .item",
-                        dropSelector: null
-                    }
-                ],
-                viewPermission: 1
-            }; */
+        /*
+         *  super.defaultOptions = {
+         *      baseApplication: "ActorSheet",
+         *      classes: ["sheet"],
+         *      template: "templates/sheets/actor-sheet.html",
+         *      id: "",
+         *      title: "",
+         *      top: null,
+         *      left: null,
+         *      height: 720,
+         *      width: 800,
+         *      editable: true,
+         *      minimizable: true,
+         *      popOut: true,
+         *      resizable: true,
+         *      submitOnChange: true,
+         *      submitOnClose: true,
+         *      closeOnSubmit: false,
+         *      tabs: [],
+         *      filters: [],
+         *      scrollY: [],
+         *      dragDrop: [
+         *          {
+         *              dragSelector: ".item-list .item",
+         *              dropSelector: null
+         *          }
+         *      ],
+         *      viewPermission: 1
+         *  }; 
+         */
         return mergeObject(super.defaultOptions, {
             classes: ["scion", "sheet", "actor"]
         });
@@ -70,11 +67,13 @@ export class ScionActorSheet extends MIX(ActorSheet).with(
         return data;
     }
 
-    /* activateListeners(html) {
-        super.activateListeners(html);
-
-        if (this.options.editable) {
-
-        }
-    } */
+    /*
+     * activateListeners(html) {
+     *  super.activateListeners(html);
+     * 
+     *  if (this.options.editable) {
+     * 
+     *  }
+     * } 
+     */
 }

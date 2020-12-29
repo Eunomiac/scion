@@ -37,8 +37,7 @@ const createTestChar = async (name) => {
             const availableSkills = skills.filter((skill) => Object.values(pathSkills).flat().filter((pathSkill) => pathSkill === skill).length < 2 && !pathSkills[pathType].includes(skill));
             pathSkills[pathType].push(_.sample(availableSkills));
         }
-        for (const skill of pathSkills[pathType])
-            baseSkillVals[skill] += baseVal;
+        for (const skill of pathSkills[pathType]) {baseSkillVals[skill] += baseVal}
     });
     let assignableSkillDots = U.Rand(0, Object.values(actorData.skills.assignableDots).reduce((tot, val) => tot + val, 0));
     while (assignableSkillDots) {
@@ -49,7 +48,7 @@ const createTestChar = async (name) => {
 
     // Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
     const attributes = Object.keys(SCION.ATTRIBUTES.list);
-    const baseAttrVals = U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(k) ? 3 : 1);
+    const baseAttrVals = U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => (SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(k) ? 3 : 1));
     const priorityAttrs = {
         primary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[0]],
         secondary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[1]],
@@ -70,10 +69,9 @@ const createTestChar = async (name) => {
         assignableGeneralAttrDots--;
     }
 
-    // Update itemCreationData with selected path skills, and (temporarily) assign it to "callings"
-    actorData.callings = itemCreateData.map((itemData) => {
-        if (itemData.type === "path")
-            itemData.data.skills = pathSkills[itemData.data.type];
+    // Update itemCreationData with selected path skills, and assign to actorData for later creation
+    actorData.testItemCreateData = itemCreateData.map((itemData) => {
+        if (itemData.type === "path") {itemData.data.skills = pathSkills[itemData.data.type]}
         return itemData;
     });
     U.LOG({
@@ -84,7 +82,7 @@ const createTestChar = async (name) => {
         pathSkills,
         baseSkillVals,
         skills: actorData.skills,
-        items: actorData.callings,
+        items: actorData.testItemCreateData,
         "ACTOR DATA": actorData
     }, `Creating Test Character: ${name} ...`, "TEST CHARACTER CREATION", {style: "data"});
     const thisActor = await Actor.create({
@@ -96,8 +94,7 @@ const createTestChar = async (name) => {
     return thisActor;
 };
 const createSigChars = async () => {
-    for (const sigName of Object.keys(testChars.sigChars))
-        await createTestChar(sigName);
+    for (const sigName of Object.keys(testChars.sigChars)) {await createTestChar(sigName)}
     return true;
 };
 // #region Hook: Initialization
@@ -120,10 +117,10 @@ Hooks.once("init", async () => {
             condition: ConditionItemSheet
         },
         debug: {
-            isDebugging: true,
+            isDebugging: false,
             isDebuggingDragula: false,
             isFormattingGroup: false,
-            watchList: ["Rhys Callaghan", "SIGNATURE CHARACTER CREATION"]
+            watchList: []
         },
         createSigChars: createSigChars
     };
@@ -145,8 +142,8 @@ Hooks.once("init", async () => {
     Object.keys(game.scion.itemSheets).forEach((entityType) => game.scion.itemSheets[entityType].RegisterSheet(entityType, [entityType]));
 
     // Preload Handlebars Template Partials
-    (async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates)
-        .map((x) => (typeof x === "function" ? x() : x)))
+    (async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates).
+        map((x) => (typeof x === "function" ? x() : x)))
     )();
 
     // #region Handlebar Helpers
@@ -164,8 +161,7 @@ Hooks.once("init", async () => {
             args.pop();
             const locString = args.shift();
             const formatDict = {};
-            while (args.length && args.length % 2 === 0)
-                formatDict[args.shift()] = args.shift();
+            while (args.length && args.length % 2 === 0) {formatDict[args.shift()] = args.shift()}
             return U.Loc(locString, formatDict);
         },
         count: (val) => Object.values(val)?.length ?? 0,
@@ -174,13 +170,11 @@ Hooks.once("init", async () => {
             args = args.filter((arg) => arg !== "");
             const returnVals = [];
             let delim = "";
-            if (args.some((arg) => Array.isArray(arg)) && ["string", "number"].includes(typeof U.Last(args)))
-                delim = args.pop();
-            for (const arg of _.compact(args))
-                returnVals.push(..._.flatten([arg]));
+            if (args.some((arg) => Array.isArray(arg)) && ["string", "number"].includes(typeof U.Last(args))) {delim = args.pop()}
+            for (const arg of _.compact(args)) {returnVals.push(..._.flatten([arg]))}
             return returnVals.join(delim ?? "");
         },
-        math: function (v1, operator, v2, options) {
+        math: function(v1, operator, v2, options) {
             switch (operator) {
                 case "+": return U.Int(v1) + U.Int(v2);
                 case "-": return U.Int(v1) - U.Int(v2);
@@ -195,34 +189,31 @@ Hooks.once("init", async () => {
                 default: return U.Int(v1);
             }
         },
-        test: function (v1, operator, v2) {
+        test: function(v1, operator, v2) {
             /* eslint-disable eqeqeq */
             switch (operator) {
-                case "==": return (v1 == v2);
-                case "===": return (v1 === v2);
-                case "!=": return (v1 != v2);
-                case "!==": return (v1 !== v2);
-                case "<": return (v1 < v2);
-                case "<=": return (v1 <= v2);
-                case ">": return (v1 > v2);
-                case ">=": return (v1 >= v2);
-                case "&&": return (v1 && v2);
-                case "||": return (v1 || v2);
-                case "not": return (!v1);
+                case "==": return v1 == v2;
+                case "===": return v1 === v2;
+                case "!=": return v1 != v2;
+                case "!==": return v1 !== v2;
+                case "<": return v1 < v2;
+                case "<=": return v1 <= v2;
+                case ">": return v1 > v2;
+                case ">=": return v1 >= v2;
+                case "&&": return v1 && v2;
+                case "||": return v1 || v2;
+                case "not": return !v1;
                 case "in": {
-                    if (Array.isArray(v2))
-                        return v2.includes(v1);
-                    if (typeof v2 === "object" && Array.isArray(Object.keys(v2)))
-                        return Object.keys(v2).includes(v1);
-                    if (["string", "number"].includes(typeof v2))
-                        return `${v2}`.includes(`${v1}`);
+                    if (Array.isArray(v2)) {return v2.includes(v1)}
+                    if (typeof v2 === "object" && Array.isArray(Object.keys(v2))) {return Object.keys(v2).includes(v1)}
+                    if (["string", "number"].includes(typeof v2)) {return `${v2}`.includes(`${v1}`)}
                     return false;
                 }
                 default: return Boolean(v1);
             }
         },
         article: (val) => U.ParseArticles(val),
-        case: function (v1, operator) {
+        case: function(v1, operator) {
             switch (U.LCase(operator.charAt(0))) {
                 case "l": return U.LCase(v1);
                 case "u": return U.UCase(v1);
@@ -235,14 +226,11 @@ Hooks.once("init", async () => {
             // U.LOG({options, category, trait, value}, "dotType Handler");
             const actor = game.actors.get(options.data.root.actor._id);
             // const iterLog = [];
-            if (actor)
+            if (actor) {
                 switch (category) {
                     case "skill": {
                         const dTypes = ["skill"];
-                        if (value <= actor.baseSkillVals[trait])
-                            dTypes.push("base");
-                        else
-                            dTypes.push("general");
+                        if (value <= actor.baseSkillVals[trait]) {dTypes.push("base")} else {dTypes.push("general")}
                         return dTypes.join("|");
                     }
                     case "attribute": {
@@ -256,7 +244,7 @@ Hooks.once("init", async () => {
                             const assignedAttrDots = U.Clone(_.pick(actor.baseAttrVals, (v, attr) => SCION.ATTRIBUTES.arenas[arena].includes(attr)));
                             while (assignedArenaDots) {
                                 try {
-                                    const thisAttr = _.sortBy(Object.entries(_.omit(assignedAttrDots, (val, attr) => val === actor.attrVals[attr])), (v) => v[1] - actor.attrVals[v[0]])[0][0];
+                                    const [[thisAttr]] = _.sortBy(Object.entries(_.omit(assignedAttrDots, (val, attr) => val === actor.attrVals[attr])), (v) => v[1] - actor.attrVals[v[0]]);
                                     assignedAttrDots[thisAttr]++;
                                     assignedArenaDots--;
                                 } catch (err) {
@@ -277,6 +265,7 @@ Hooks.once("init", async () => {
                     }
                     default: return "";
                 }
+            }
 
             return "";
         }
@@ -292,10 +281,7 @@ Hooks.once("ready", async () => {
     CONFIG.scion.tierList = U.MakeDict(CONFIG.scion.TIERS);
     CONFIG.scion.pantheonList = U.MakeDict(CONFIG.scion.PANTHEONS);
     CONFIG.scion.genesisList = U.MakeDict(CONFIG.scion.GENESES);
-    CONFIG.scion.favoredApproachList = U.MakeDict(
-        CONFIG.scion.ATTRIBUTES.approaches,
-        (v, k) => U.Loc(`scion.game.${k}`)
-    );
+    CONFIG.scion.favoredApproachList = U.MakeDict(CONFIG.scion.ATTRIBUTES.approaches, (v, k) => U.Loc(`scion.game.${k}`));
     U.LOG({
         CONFIG,
         "game": game,

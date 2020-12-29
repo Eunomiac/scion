@@ -4,7 +4,7 @@
     <div id="pathContainer" class="pathContainer width100">
     {{#each items.paths as |path id|}}
         {{#with ../blocks as | blocks |}}
-        {{> (blocks.ownedItems.path.template) path}}
+        {{> (blocks.partials.path.template) path}}
         {{/with}}
     {{/each}}
     </div>

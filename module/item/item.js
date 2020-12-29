@@ -16,37 +16,37 @@ export class ScionItem extends Item {
         super.prepareData();
 
         // Get the Item's data, as well as the owning Actor, if there is one
-        const data = this.data.data;
+        const {data} = this.data;
         const actorData = this.actor?.data ?? {};
 
-        Handlebars.registerHelper("ifCond", function (v1, operator, v2, options) {
+        Handlebars.registerHelper("ifCond", function(v1, operator, v2, options) {
             switch (operator) {
+                /* eslint-disable eqeqeq */
                 case "==":
-                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
-                case "===":
-                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                    return v1 == v2 ? options.fn(this) : options.inverse(this);
                 case "!=":
-                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                    return v1 != v2 ? options.fn(this) : options.inverse(this);
+                /* eslint-enable eqeqeq */
+                case "===":
+                    return v1 === v2 ? options.fn(this) : options.inverse(this);
                 case "!==":
-                    return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                    return v1 !== v2 ? options.fn(this) : options.inverse(this);
                 case "<":
-                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                    return v1 < v2 ? options.fn(this) : options.inverse(this);
                 case "<=":
-                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                    return v1 <= v2 ? options.fn(this) : options.inverse(this);
                 case ">":
-                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                    return v1 > v2 ? options.fn(this) : options.inverse(this);
                 case ">=":
-                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                    return v1 >= v2 ? options.fn(this) : options.inverse(this);
                 case "&&":
-                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                    return v1 && v2 ? options.fn(this) : options.inverse(this);
                 case "||":
-                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                    return v1 || v2 ? options.fn(this) : options.inverse(this);
                 default:
                     return options.inverse(this);
             }
         });
-
-
     }
 
 

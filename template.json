@@ -5,7 +5,8 @@
             "BASE": {
                 "concept": "",
                 "description": "",
-                "imageURL": ""
+                "imageURL": "",
+                "testItemCreateData": []
             },
             "PC": {
                 "playerName": ""
@@ -23,13 +24,32 @@
                 },
                 "virtue": 3,
                 "pathPriorities": ["origin", "role", "pantheon"],
-                "purviews": {},
+                "purviews": [],
                 "birthrights": {
                     "unspentDots": 0,
-                    "list": {}
+                    "list": []
                 },
-                "callings": {},
-                "knacks": {},
+                "callings": [
+                    {
+                        "name": "",
+                        "value": 1,
+                        "keywordsChosen": [],
+                        "keywordsUsed": []
+                    },
+                    {
+                        "name": "",
+                        "value": 1,
+                        "keywordsChosen": [],
+                        "keywordsUsed": []
+                    },
+                    {
+                        "name": "",
+                        "value": 1,
+                        "keywordsChosen": [],
+                        "keywordsUsed": []
+                    }
+                ],
+                "knacks": [],
                 "finishingBonusOn": "",
                 "wasPantheonUpdated": false
             },
