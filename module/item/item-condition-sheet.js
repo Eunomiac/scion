@@ -14,7 +14,7 @@ export class ConditionItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit
     getData() {
         const data = super.getData();
 
-        U.LOG({
+        U.LOG(U.IsDebug() && {
             "this ConditionItemSheet": this,
             "... .getData() [Sheet Context]": data,
             "... ... .data": data.data

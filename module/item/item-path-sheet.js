@@ -29,7 +29,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
             "suspension": this.suspensionCondition,
             "revocation": this.revocationCondition
         };
-        U.LOG({
+        U.LOG(U.IsDebug() && {
             "this PathItemSheet": this,
             "... .getData() [Sheet Context]": data,
             "... .iData": data.data,
@@ -91,47 +91,47 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
 
         if (game.scion.debug.isDebuggingDragula) {
             pathSkillDragger.on("drag", (el, source) => {
-                U.LOG({el,
-                       source}, "on DRAG", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el,
+                                      source}, "on DRAG", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("dragend", (el) => {
-                U.LOG({el}, "on DRAGEND", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el}, "on DRAGEND", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("drop", (el, target, source, sibling) => {
-                U.LOG({el,
-                       target,
-                       source,
-                       sibling}, "on DROP", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el,
+                                      target,
+                                      source,
+                                      sibling}, "on DROP", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("cancel", (el, container, source) => {
-                U.LOG({el,
-                       container,
-                       source}, "on CANCEL", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el,
+                                      container,
+                                      source}, "on CANCEL", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("remove", (el, container, source) => {
-                U.LOG({el,
-                       container,
-                       source}, "on REMOVE", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el,
+                                      container,
+                                      source}, "on REMOVE", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("shadow", (el, container, source) => {
-                U.LOG({el,
-                       container,
-                       source}, "on SHADOW", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el,
+                                      container,
+                                      source}, "on SHADOW", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("over", (el, container, source) => {
-                U.LOG({el,
-                       container,
-                       source}, "on OVER", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el,
+                                      container,
+                                      source}, "on OVER", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("out", (el, container, source) => {
-                U.LOG({el,
-                       container,
-                       source}, "on OUT", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {el,
+                                      container,
+                                      source}, "on OUT", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
             pathSkillDragger.on("cloned", (clone, original, type) => {
-                U.LOG({clone,
-                       original,
-                       type}, "on CLONED", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
+                U.LOG(U.IsDebug() && {clone,
+                                      original,
+                                      type}, "on CLONED", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
         }
 

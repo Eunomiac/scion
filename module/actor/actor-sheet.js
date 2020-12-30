@@ -53,7 +53,7 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampText, MIXI
     static RegisterSheet(label = "actor", types = [], makeDefault = true) {
         const locLabel = `scion.sheet.${label}Sheet`;
         Actors.registerSheet("scion", this, {makeDefault, types, locLabel});
-        U.LOG({"Sheet Registered": this.name, types, defaultOptions: this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionActorSheet");
+        U.LOG(U.IsDebug() && {"Sheet Registered": this.name, types, defaultOptions: this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionActorSheet");
     }
 
     get template() {

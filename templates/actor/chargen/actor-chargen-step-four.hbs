@@ -1,9 +1,27 @@
 <section class="chargenFour grid padded">
     <h1>{{loc "scion.heading.chargen.stepFour"}}</h1>
-    {{#each callings as |calling|}}
+    <div class="dotline mirrorContainer">
+        <div id="chargenFourDotMirror" class="dotContainer mirrorContainer"></div>
+    </div>
+    {{#each callings.actor as |calling|}}
         {{#with ../blocks as | blocks |}}
         {{> (blocks.partials.calling.template) calling}}
         {{/with}}
     {{/each}}
+    <div id="callingsMirror" class="callingsList popout flex-col mirrorContainer"></div>
     {{> (blocks.popouts.callingsList.template) }}
+    {{#if (test (count callings.actorSelected) "==" 3)}}
+    <div class="footer">
+        <div class="unspentDots unspentCallingDots flex-col alignCenter">
+            <h2 class="alignCenter noBG">{{#if unspentCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>
+            <div class="dotline unassigned space5 noLabel">
+                <div class="chargenFourDotBin dotBin dotContainer" data-types="unassigned|calling" data-binid="unassignedCalling">
+                    {{#for unspentCallingDots}}
+                    <span class="dot" data-types="unassigned|calling|general"></span>
+                    {{/for}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
 </section>

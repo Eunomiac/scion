@@ -1062,6 +1062,8 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"].alignCenter {
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"].alignLeft {
@@ -1421,6 +1423,27 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .blur {
   transform: scale(75%) !important;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader {
+  opacity: 1;
+  transition: 0.5s;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade25 {
+  opacity: 0.75;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade50 {
+  opacity: 0.5;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade75 {
+  opacity: 0.25;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade100 {
+  opacity: 0;
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .width10 {
   width: 10%;
 }
@@ -1576,6 +1599,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * div.closeButton.coll
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .mirrorContainer {
   position: fixed !important;
   pointer-events: none;
+  z-index: 9999999;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip {
@@ -1642,10 +1666,58 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip:hover > div
   opacity: 1;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout:not(.mirrorContainer) {
   position: absolute;
   overflow: hidden;
   z-index: 10;
+  border: 10px outset var(--greyUp1);
+  background-image: url("../images/textures/stoneGrey.jpg");
+  box-sizing: content-box;
+  border-radius: 40px;
+  filter: drop-shadow(0px 0px 6px black);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout > div {
+  padding: 15px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout#skillList {
+  width: 150px;
+  height: 480px;
+  left: 94%;
+  top: 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout#callingsList {
+  width: 150px;
+  height: 580px;
+  left: 94%;
+  top: 70px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling {
+  height: 40px;
+  width: 120px;
+  background-image: url("../images/bubbles/calling-generic.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  line-height: 37px;
+  font-size: 24px;
+  font-family: Oswald;
+  text-transform: uppercase;
+  text-shadow: var(--textShadowTitle);
+  margin: 5px 0px;
+  filter: drop-shadow(2px 2px 2px black);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.patron {
+  background-image: url("../images/bubbles/calling-patron.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.invalid {
+  background-image: none;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot {
@@ -1733,6 +1805,10 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].n
   width: var(--dotContainerWidth);
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].space5 {
+  --colGap: 5px;
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] > .label {
   display: inline-block;
   text-align: left;
@@ -1781,15 +1857,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].d
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].dots10 > .dotContainer {
   grid-template-columns: var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] .dotBin {
-  opacity: 1;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] .dotBin.invalidDrop {
-  opacity: 0.25;
-  transition: opacity 1s;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .bubble {
@@ -2434,43 +2501,48 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   column-gap: 20px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour h1 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > h1 {
   grid-area: heading;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling {
+  background-image: url("../images/actor-sheet/backgrounds/calling.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  filter: drop-shadow(2px 2px 2px var(--black));
+  filter: drop-shadow(2px 2px 0px var(--greyFade50));
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling:nth-of-type(1) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(2) {
   grid-area: calling1;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling:nth-of-type(2) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(3) {
   grid-area: calling2;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling:nth-of-type(3) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(4) {
   grid-area: calling3;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.generic {
-  background-image: url("../images/actor-sheet/callings/generic.png");
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling .dotline {
+  margin-top: 15px;
+  transform: scale(1.5);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.creator {
-  background-image: url("../images/actor-sheet/callings/creator.png");
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling h1 {
+  margin-top: 20px;
+  border: none;
+  font-size: calc(var(--fontSizeH1) * 1.5);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.guardian {
-  background-image: url("../images/actor-sheet/callings/guardian.png");
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .footer {
+  grid-area: footer;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .calling.trickster {
-  background-image: url("../images/actor-sheet/callings/trickster.png");
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .footer .dotline {
+  margin-top: 15px;
+  transform: scale(1.5);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body {
@@ -2656,22 +2728,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable.mai
   margin-bottom: 0;
   right: -413px;
   top: 5px;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable.main .popout#skillList {
-  width: 150px;
-  height: 480px;
-  left: 94%;
-  top: 0;
-  border: 10px outset var(--greyUp1);
-  background-image: url("../images/textures/stoneGrey.jpg");
-  box-sizing: content-box;
-  border-radius: 40px;
-  filter: drop-shadow(0px 0px 6px black);
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable.main .popout#skillList > div {
-  padding: 15px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable.main .bubble.condition {

@@ -129,22 +129,29 @@ export class MajorActorSheet extends ScionActorSheet {
         }
         data.assignableGeneralAttrDots = this.actor.assignableGeneralAttrDots;
 
-        data.skillReportLines = [
-            `Total Dots: Base (${U.SumVals(this.actor.baseSkillVals)}) + Assigned (${U.SumVals(this.actor.assignedSkillVals)}) = ${U.SumVals(this.actor.baseSkillVals) + U.SumVals(this.actor.assignedSkillVals)} = ${U.SumVals(this.actor.skillVals)}`,
-            `Assignable Dots: Assigned (${U.SumVals(this.actor.assignedSkillVals)}) + Unspent (${data.unspentSkillDots}) = ${U.SumVals(this.actor.assignedSkillVals) + data.unspentSkillDots} = ${this.actor.assignableSkillDots}`
-        ];
-        data.attrReportLines = [
-            `Total Dots: Base (${U.SumVals(this.actor.baseAttrVals)}) + Arena (${U.SumVals(this.actor.assignedArenaAttrDots)}) + Assigned (${this.actor.assignedGeneralAttrDots}) = ${U.SumVals(this.actor.baseAttrVals) + U.SumVals(this.actor.assignedArenaAttrDots) + this.actor.assignedGeneralAttrDots} = ${U.SumVals(this.actor.attrVals)}`,
-            `Assignable General Dots: Assigned (${this.actor.assignedGeneralAttrDots}) + Unspent (${data.unspentGeneralAttrDots}) = ${this.actor.assignedGeneralAttrDots + data.unspentGeneralAttrDots} = ${this.actor.assignableGeneralAttrDots}`,
-            `Assignable Physical Dots: Assigned (${this.actor.assignedArenaAttrDots.physical}) + Unspent (${this.actor.unassignedArenaAttrDots.physical}) = ${this.actor.assignedArenaAttrDots.physical + this.actor.unassignedArenaAttrDots.physical} = ${this.actor.assignableArenaDots.physical}`,
-            `Assignable Mental Dots: Assigned (${this.actor.assignedArenaAttrDots.mental}) + Unspent (${this.actor.unassignedArenaAttrDots.mental}) = ${this.actor.assignedArenaAttrDots.mental + this.actor.unassignedArenaAttrDots.mental} = ${this.actor.assignableArenaDots.mental}`,
-            `Assignable Social Dots: Assigned (${this.actor.assignedArenaAttrDots.social}) + Unspent (${this.actor.unassignedArenaAttrDots.social}) = ${this.actor.assignedArenaAttrDots.social + this.actor.unassignedArenaAttrDots.social} = ${this.actor.assignableArenaDots.social}`
-        ];
+        // data.skillReportLines = [
+        //     `Total Dots: Base (${U.SumVals(this.actor.baseSkillVals)}) + Assigned (${U.SumVals(this.actor.assignedSkillVals)}) = ${U.SumVals(this.actor.baseSkillVals) + U.SumVals(this.actor.assignedSkillVals)} = ${U.SumVals(this.actor.skillVals)}`,
+        //     `Assignable Dots: Assigned (${U.SumVals(this.actor.assignedSkillVals)}) + Unspent (${data.unspentSkillDots}) = ${U.SumVals(this.actor.assignedSkillVals) + data.unspentSkillDots} = ${this.actor.assignableSkillDots}`
+        // ];
+        // data.attrReportLines = [
+        //     `Total Dots: Base (${U.SumVals(this.actor.baseAttrVals)}) + Arena (${U.SumVals(this.actor.assignedArenaAttrDots)}) + Assigned (${this.actor.assignedGeneralAttrDots}) = ${U.SumVals(this.actor.baseAttrVals) + U.SumVals(this.actor.assignedArenaAttrDots) + this.actor.assignedGeneralAttrDots} = ${U.SumVals(this.actor.attrVals)}`,
+        //     `Assignable General Dots: Assigned (${this.actor.assignedGeneralAttrDots}) + Unspent (${data.unspentGeneralAttrDots}) = ${this.actor.assignedGeneralAttrDots + data.unspentGeneralAttrDots} = ${this.actor.assignableGeneralAttrDots}`,
+        //     `Assignable Physical Dots: Assigned (${this.actor.assignedArenaAttrDots.physical}) + Unspent (${this.actor.unassignedArenaAttrDots.physical}) = ${this.actor.assignedArenaAttrDots.physical + this.actor.unassignedArenaAttrDots.physical} = ${this.actor.assignableArenaDots.physical}`,
+        //     `Assignable Mental Dots: Assigned (${this.actor.assignedArenaAttrDots.mental}) + Unspent (${this.actor.unassignedArenaAttrDots.mental}) = ${this.actor.assignedArenaAttrDots.mental + this.actor.unassignedArenaAttrDots.mental} = ${this.actor.assignableArenaDots.mental}`,
+        //     `Assignable Social Dots: Assigned (${this.actor.assignedArenaAttrDots.social}) + Unspent (${this.actor.unassignedArenaAttrDots.social}) = ${this.actor.assignedArenaAttrDots.social + this.actor.unassignedArenaAttrDots.social} = ${this.actor.assignableArenaDots.social}`
+        // ];
 
         // #endregion
         
         // #region STEP FOUR
-        data.callings = actorData.callings;
+        data.callings = {
+            patron: (patron && SCION.GODS[patron].callings) || [],
+            other: Object.keys(SCION.CALLINGS.list).filter((calling) => !patron || !SCION.GODS[patron].callings.includes(calling)),
+            actorSelected: Object.values(actorData.callings.list).filter((calling) => calling.name in SCION.CALLINGS.list).map((calling) => calling.name),
+            actor: actorData.callings.list
+        };
+        data.unspentCallingDots = Math.max(0, U.SumVals(actorData.callings.assignableGeneralDots)
+            - U.SumVals(actorData.callings.list.map((calling) => Math.max(0, calling.value - 1))));
 
         // #endregion
 
@@ -155,7 +162,7 @@ export class MajorActorSheet extends ScionActorSheet {
             "[Sheet Context]": data,
             "... data": data.data,
             "ACTOR": this.actor.fullLogReport
-        }, this.actor.name, "MajorActorSheet", {groupStyle: "l2"});
+        }, this.actor.name, "MajorActorSheet", {isLoud: true});
         return data;
     }
 
@@ -197,7 +204,6 @@ export class MajorActorSheet extends ScionActorSheet {
                     "data.pathPriorities": Array.from(pathContainer.children).
                         map((element) => this.entity.items.get(element.dataset.itemid).data.data.type)
                 });
-                // this.actor.updateTraits();
             });
             // #endregion
 
@@ -216,7 +222,6 @@ export class MajorActorSheet extends ScionActorSheet {
                     "data.attributes.priorities": Array.from(arenaContainer.children).
                         map((element) => element.dataset.arena)
                 });
-                // await this.actor.updateTraits();
             });
             // #endregion
 
@@ -228,6 +233,11 @@ export class MajorActorSheet extends ScionActorSheet {
              *
              *
              */
+            
+            
+            const addDragListener = (dragger, listener, listenFunc, extraArgs = []) => {
+                dragger.on(listener, (...args) => listenFunc.bind(this)(...extraArgs, ...args));
+            };            
             const getDragTypes = (dot, sourceBin, targetBin) => {
                 const returnVal = {
                     dotTypes: dot.dataset.types?.split("|")
@@ -237,130 +247,112 @@ export class MajorActorSheet extends ScionActorSheet {
                 return returnVal;
             };
             const isDotDraggable = (dot, sourceBin) => {
-                const {dotTypes, sourceTypes} = getDragTypes(dot, sourceBin);
+                const {sourceTypes} = getDragTypes(dot, sourceBin);
                 if (sourceTypes.includes("unassigned")) {
-                    // U.LOG({dotTypes, sourceTypes}, "Unassigned Is Draggable!", "isDotDraggable");
                     return true;
                 } if (sourceTypes.includes("attribute")) {
                     const {attribute} = sourceBin.dataset;
                     if (this.actor.attrVals[attribute] === this.actor.baseAttrVals[attribute]) {
-                        // U.LOG({dotTypes, sourceTypes}, `${attribute} is at Base Value: NOT Draggable`, "isDotDraggable");
                         return false;
                     }
-                    // U.LOG({dotTypes, sourceTypes}, `${attribute} is Draggable!`, "isDotDraggable");
                     return true;
                 }
                 if (sourceTypes.includes("skill")) {
                     const {skill} = sourceBin.dataset;
                     if (this.actor.skillVals[skill] === this.actor.baseSkillVals[skill]) {
-                        // U.LOG({dotTypes, sourceTypes}, `${skill} is at Base Value: NOT Draggable`, "isDotDraggable");
                         return false;
                     }
-                    // U.LOG({dotTypes, sourceTypes}, `${skill} is Draggable!`, "isDotDraggable");
                     return true;
                 }
-                // U.LOG({dotTypes, sourceTypes}, "No Draggable Attributes Found: NOT Draggable!", "isDotDraggable");
+                if (sourceTypes.includes("calling")) {
+                    const {calling} = sourceBin.dataset;
+                    if (this.actor.callings[calling].value === 1) {
+                        return false;
+                    }
+                    return true;
+                }
                 return false;
             };
             const isTargetDroppable = (dot, sourceBin, targetBin) => {
                 if (sourceBin.dataset.binid === targetBin.dataset.binid) {
-                    // U.LOG({dot, sourceBin, targetBin}, "Source = Target: NOT Droppable!", "isTargetDroppable");
                     return true;
                 }
                 const {dotTypes, sourceTypes, targetTypes} = getDragTypes(dot, sourceBin, targetBin);
                 if (targetTypes.includes("unassigned")) {
-                    // U.LOG({dotTypes, targetTypes}, "Can't Drop to Unassigned Bin: NOT Droppable!", "isTargetDroppable");
                     return false;
                 }
                 if (dotTypes.every((dotType) => !targetTypes.includes(dotType))) {
-                    // U.LOG({dotTypes, targetTypes}, "No Matching Types: NOT Droppable!", "isTargetDroppable");
                     return false;
                 }
                 if (dotTypes.includes("attribute")) {
-                    if (!targetTypes.includes("attribute")) {
-                        // U.LOG({dotTypes, targetTypes}, "Target isn't an Attribute Bin: NOT Droppable!", "isTargetDroppable");
-                        return false;
-                    }
                     if (!dotTypes.includes("general")) {
                         const dotArenas = dotTypes.filter((dotType) => ["physical", "mental", "social"].includes(dotType));
                         if (dotArenas.every((dotArena) => !targetTypes.includes(dotArena))) {
-                            // U.LOG({dotTypes, targetTypes}, "Arena-Specific Dot Not Accepted Here: NOT Droppable!", "isTargetDroppable");
                             return false;
                         }
                     }
                     const {attribute} = targetBin.dataset;
                     if (this.actor.attrVals[attribute] === SCION.ATTRIBUTES.max) {
-                        // U.LOG({dotTypes, sourceTypes}, `${attribute} is at MAX: NOT Droppable`, "isTargetDroppable");
                         return false;
                     }
-                    // U.LOG({dotTypes, sourceTypes}, `${attribute} is OK: Droppable!`, "isTargetDroppable");
                     return true;
                 }
                 if (dotTypes.includes("skill")) {
-                    if (!targetTypes.includes("skill")) {
-                        // U.LOG({dotTypes, targetTypes}, "Target isn't a Skill Bin: NOT Droppable!", "isTargetDroppable");
-                        return false;
-                    }
                     const {skill} = targetBin.dataset;
                     if (this.actor.skillVals[skill] === SCION.SKILLS.max) {
-                        // U.LOG({dotTypes, sourceTypes}, `${skill} is at MAX: NOT Droppable`, "isTargetDroppable");
                         return false;
                     }
-                    // U.LOG({dotTypes, sourceTypes}, `${skill} is OK: Droppable!`, "isTargetDroppable");
                     return true;
                 }
-                // U.LOG({dotTypes, sourceTypes}, "No Droppable Attributes Found: NOT Droppable!", "isTargetDroppable");
+                if (dotTypes.includes("calling")) {
+                    const {calling} = targetBin.dataset;
+                    if (this.actor.callings[calling].value === SCION.CALLINGS.max) {
+                        return false;
+                    }
+                    return true;
+                }
                 return false;
             };
-
-
-            const dotBins = html.find(".dotBin");
-            const [dotMirror] = html.find("#chargenThreeDotMirror");
-            const dotDragger = dragula({
-                containers: [...dotBins],
-                moves: (dot, sourceBin) => isDotDraggable(dot, sourceBin),
-                accepts: (dot, targetBin, sourceBin) => isTargetDroppable(dot, sourceBin, targetBin),
-                direction: "horizontal",
-                copy: false,
-                removeOnSpill: true,
-                mirrorContainer: dotMirror,
-                sheetElement: this.sheet
-            });
-
-            const _onDotDrag = (dot, sourceBin) => {
+            const _onDotDrag = (dotBins, dot, sourceBin) => {
                 dotBins.each((i, bin) => {
-                    if (isTargetDroppable(dot, sourceBin, bin)) {bin.classList.remove("invalidDrop")} else {bin.classList.add("invalidDrop")}
+                    if (isTargetDroppable(dot, sourceBin, bin)) {bin.classList.remove("fade75")} else {bin.classList.add("fade75")}
                 });
             };
-            const _onDotDragEnd = async (dot) => {
-                dotBins.each((i, bin) => { bin.classList.remove("invalidDrop") });
-                if (!await this.actor.processUpdateQueue()) {this.render()}
+            const _onDotDragEnd = async (dotBins, dot) => {
+                dotBins.each((i, bin) => { bin.classList.remove("fade75") });
+                await this.actor.processUpdateQueue(true);
+                this.render();
             };
             const _onDotDrop = (dot, targetBin, sourceBin) => {
-                const {dotTypes, targetTypes, sourceTypes} = getDragTypes(dot, sourceBin, targetBin);
+                const {targetTypes, sourceTypes} = getDragTypes(dot, sourceBin, targetBin);
                 const updateData = {};
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
                     // Increment Target Trait
                     if (targetTypes.includes("attribute")) {
-                        const {attribute} = targetBin.dataset;
-                        updateData[targetBin.dataset.field] = this.actor.assignedAttrVals[attribute] + 1;
+                        const {attribute, field, fieldindex} = targetBin.dataset;
+                        this.actor.setProp(this.actor.assignedAttrVals[attribute] + 1, field, fieldindex);
                     } else if (targetTypes.includes("skill")) {
-                        const {skill} = targetBin.dataset;
-                        updateData[targetBin.dataset.field] = this.actor.assignedSkillVals[skill] + 1;
+                        const {skill, field, fieldindex} = targetBin.dataset;
+                        this.actor.setProp(this.actor.assignedSkillVals[skill] + 1, field, fieldindex);
+                    } else if (targetTypes.includes("calling")) {
+                        const {calling, field, fieldindex} = targetBin.dataset;
+                        this.actor.setProp(this.actor.callings[calling].value + 1, field, fieldindex);
                     }
                     // If source was another skill/attribute, decrement that.
                     if (!sourceTypes.includes("unassigned")) {
                         if (sourceTypes.includes("attribute")) {
-                            const {attribute} = sourceBin.dataset;
+                            const {attribute, field, fieldindex} = sourceBin.dataset;
+                            this.actor.setProp(this.actor.assignedAttrVals[attribute] - 1, field, fieldindex);
                             updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
                         } else if (sourceTypes.includes("skill")) {
-                            const {skill} = sourceBin.dataset;
-                            updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
+                            const {skill, field, fieldindex} = sourceBin.dataset;
+                            this.actor.setProp(this.actor.assignedSkillVals[skill] - 1, field, fieldindex);
+                        } else if (sourceTypes.includes("calling")) {
+                            const {calling, field, fieldindex} = sourceBin.dataset;
+                            this.actor.setProp(this.actor.callings[calling].value - 1, field, fieldindex);
                         }
                     }
-                    // dot.remove();
-                    U.LOG({targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
-                    this.actor.queueUpdateData(updateData);
+                    U.LOG(U.IsDebug() && {targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
                 }
             };
             const _onDropRemove = (dot, x, sourceBin) => {
@@ -368,26 +360,97 @@ export class MajorActorSheet extends ScionActorSheet {
                 const updateData = {};
                 if (!sourceTypes.includes("unassigned")) {
                     if (sourceTypes.includes("attribute")) {
-                        const {attribute} = sourceBin.dataset;
+                        const {attribute, field, fieldindex} = sourceBin.dataset;
+                        this.actor.setProp(this.actor.assignedAttrVals[attribute] - 1, field, fieldindex);
                         updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
                     } else if (sourceTypes.includes("skill")) {
-                        const {skill} = sourceBin.dataset;
-                        updateData[sourceBin.dataset.field] = this.actor.assignedSkillVals[skill] - 1;
+                        const {skill, field, fieldindex} = sourceBin.dataset;
+                        this.actor.setProp(this.actor.assignedSkillVals[skill] - 1, field, fieldindex);
+                    } else if (sourceTypes.includes("calling")) {
+                        const {calling, field, fieldindex} = sourceBin.dataset;
+                        this.actor.setProp(this.actor.callings[calling].value - 1, field, fieldindex);
                     }
                 }
-                U.LOG({dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
-                this.actor.update(updateData);
+                U.LOG(U.IsDebug() && {dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
             };
 
-            dotDragger.on("drag", _onDotDrag);
-            dotDragger.on("dragend", _onDotDragEnd);
-            dotDragger.on("drop", _onDotDrop);
-            dotDragger.on("remove", _onDropRemove);
+            const chargenThreeDotBins = html.find(".chargenThreeDotBin");
+            const [chargenThreeDotMirror] = html.find("#chargenThreeDotMirror");
+            const chargenThreeDotDragger = dragula({
+                containers: [...chargenThreeDotBins],
+                moves: (dot, sourceBin) => isDotDraggable(dot, sourceBin),
+                accepts: (dot, targetBin, sourceBin) => isTargetDroppable(dot, sourceBin, targetBin),
+                direction: "horizontal",
+                copy: false,
+                removeOnSpill: true,
+                mirrorContainer: chargenThreeDotMirror,
+                sheetElement: this.sheet
+            });
 
-            /*
-             * #endregion
-             * #endregion
-             */
+            addDragListener(chargenThreeDotDragger, "drag", _onDotDrag, [chargenThreeDotBins]);
+            addDragListener(chargenThreeDotDragger, "dragend", _onDotDragEnd, [chargenThreeDotBins]);
+            addDragListener(chargenThreeDotDragger, "drop", _onDotDrop);
+            addDragListener(chargenThreeDotDragger, "remove", _onDropRemove);
+
+            // #endregion
+            
+            // #region CALLING SELECTION
+            const addCalling = async (callingElement, callingBin) => {
+                const actorCallings = this.aData.callings.list;
+                actorCallings[U.Int(callingBin.dataset.slot)] = {...SCION.CALLINGS.actorDefault, name: callingElement.dataset.calling, value: 1};
+                await this.actor.update({"data.callings.list": actorCallings});
+            };
+            const remCalling = async (callingBin) => {
+                const actorCallings = this.aData.callings.list;
+                actorCallings[U.Int(callingBin.dataset.slot)] = {...SCION.CALLINGS.actorDefault};
+                await this.actor.update({"data.callings.list": actorCallings});
+            };
+
+            const callingSource = html.find("#callingsSource");
+            const [callingMirror] = html.find("#callingsMirror");
+            const callingDrop = html.find(".callingDrop");
+            const callingDragger = dragula({
+                "containers": [...callingSource, ...callingDrop],
+                "moves": (element, source, handle) => handle.classList.contains("handle") && !element.classList.contains("invalid"),                    
+                "accepts": (element, target, source) => source.id === "callingsSource" && target.classList.contains("callingDrop")
+                    && this.aData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length < 3
+                    && !this.aData.callings.list.map((calling) => calling.name).includes(element.dataset.calling),
+                "direction": "horizontal",
+                "copy": true,
+                "removeOnSpill": true,
+                "mirrorContainer": callingMirror,
+                "sheetElement": this.sheet
+            });
+            callingDragger.on("cancel", (element, container, source) => {
+                if (source.classList.contains("callingDrop")) {
+                    remCalling(source);
+                }
+            });
+            callingDragger.on("drop", (element, target) => addCalling(element, target));
+
+            
+            const chargenFourDotBins = html.find(".chargenFourDotBin");
+            const [chargenFourDotMirror] = html.find("#chargenFourDotMirror");
+            const chargenFourDotDragger = dragula({
+                containers: [...chargenFourDotBins],
+                moves: (dot, sourceBin) => isDotDraggable(dot, sourceBin),
+                accepts: (dot, targetBin, sourceBin) => isTargetDroppable(dot, sourceBin, targetBin),
+                direction: "horizontal",
+                copy: false,
+                removeOnSpill: true,
+                mirrorContainer: chargenFourDotMirror,
+                sheetElement: this.sheet
+            });
+
+            addDragListener(chargenFourDotDragger, "drag", _onDotDrag, [chargenFourDotBins]);
+            addDragListener(chargenFourDotDragger, "dragend", _onDotDragEnd, [chargenFourDotBins]);
+            addDragListener(chargenFourDotDragger, "drop", _onDotDrop);
+            addDragListener(chargenFourDotDragger, "remove", _onDropRemove);            
+
+            // #endregion
+            
+            
+            // #endregion
         }
     }
 }

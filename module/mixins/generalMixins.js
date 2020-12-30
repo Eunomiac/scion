@@ -33,7 +33,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                 const dataSet = element.dataset;
                 if ("htmlid" in dataSet) {
                     const [popout] = html.find(`#${dataSet.htmlid}`);
-                    U.LOG({
+                    U.LOG(U.IsDebug() && {
                         event,
                         element,
                         "... dataset": dataSet,
@@ -44,7 +44,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                     } else {U.THROW(event, "Popout Element Not Found!")}
                 } else if ("itemid" in dataSet) {
                     const item = this.actor.items.get(dataSet.itemid);
-                    U.LOG({
+                    U.LOG(U.IsDebug() && {
                         event,
                         element,
                         "... dataset": dataSet,
@@ -60,7 +60,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                 const dataSet = element.dataset;
                 if ("htmlid" in dataSet) {
                     const [popout] = html.find(`#${dataSet.htmlid}`);
-                    U.LOG({
+                    U.LOG(U.IsDebug() && {
                         event,
                         element,
                         "... dataset": dataSet,

@@ -29,27 +29,14 @@
                     "unspentDots": 0,
                     "list": []
                 },
-                "callings": [
-                    {
-                        "name": "",
-                        "value": 1,
-                        "keywordsChosen": [],
-                        "keywordsUsed": []
-                    },
-                    {
-                        "name": "",
-                        "value": 1,
-                        "keywordsChosen": [],
-                        "keywordsUsed": []
-                    },
-                    {
-                        "name": "",
-                        "value": 1,
-                        "keywordsChosen": [],
-                        "keywordsUsed": []
-                    }
-                ],
-                "knacks": [],
+                "callings": {
+                    "assignableGeneralDots": { "xp": 0, "other": 2 },
+                    "list": []
+                },
+                "knacks": {
+                    "assignableExtraKnacks": { "xp": 0, "other": 0},
+                    "list": []
+                },
                 "finishingBonusOn": "",
                 "wasPantheonUpdated": false
             },

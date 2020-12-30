@@ -217,6 +217,15 @@
         transform-origin: 0% 0% !important;
         transform: scale(75%) !important;
     }
+
+    .fader {
+        opacity: 1;
+        transition: 0.5s;
+        &.fade25 { opacity: 0.75; }
+        &.fade50 { opacity: 0.5; }
+        &.fade75 { opacity: 0.25; }
+        &.fade100 { opacity: 0; }
+    }
     /* #endregion */
 
     /* #region GRADIATED CLASSES */
@@ -290,6 +299,7 @@
     .mirrorContainer {
         position: fixed !important;
         pointer-events: none;
+        z-index: 9999999;
     }
     /* #endregion */
     /* #region Popouts/Tooltips */
@@ -354,10 +364,69 @@
         }
     }
 
-    .popout {
+    .popout:not(.mirrorContainer) {
         position: absolute;
         overflow: hidden;
-        z-index: 10;    
+        z-index: 10;
+
+        border: 10px outset var(--greyUp1);
+        
+        background: {
+            image: url("../images/textures/stoneGrey.jpg");
+        }
+        box-sizing: content-box;
+        border-radius: 40px;
+
+        filter: drop-shadow(0px 0px 6px black);
+                 
+    }
+
+    .popout {        
+        > div { padding: 15px; }
+         
+        &#skillList {
+            width: 150px;
+            height: 480px;
+            left: 94%;
+            top: 0;
+        }
+        
+        &#callingsList {
+            width: 150px;
+            height: 580px;
+            left: 94%;
+            top: 70px;
+        }
+
+        &.callingsList {
+
+            span.calling {
+                height: 40px;
+                width: 120px;
+                background: {
+                    image: url("../images/bubbles/calling-generic.png");
+                    size: 100%;
+                    position: center;
+                    repeat: no-repeat;
+                }
+                text-align: center;
+                line-height: 37px;
+                font-size: 24px;
+                font-family: Oswald;
+                text-transform: uppercase;
+                text-shadow: var(--textShadowTitle);
+                margin: 5px 0px;
+                filter: drop-shadow(2px 2px 2px black);
+              
+                &.patron {
+                    background-image: url("../images/bubbles/calling-patron.png");
+                }
+                &.invalid {
+                    background-image: none;
+                }
+            }
+
+        }     
     }
     /* #endregion */ 
 
@@ -435,6 +504,7 @@
         justify-content: space-between;
         align-items: center;
         &.noLabel { width: var(--dotContainerWidth); }
+        &.space5 { --colGap: 5px; }
         > .label {
             display: inline-block;
             text-align: left;
@@ -476,14 +546,6 @@
             --numDots: 10;
             --dotContainerWidth: calc(var(--dotSize) * var(--numDots) + var(--colGap) * (var(--numDots) - 1));
             > .dotContainer { @include repeat(var(--dotSize), 10, grid-template-columns, space) }
-        }
-    
-        .dotBin {
-            opacity: 1;
-            &.invalidDrop {
-                opacity: 0.25;
-                transition: opacity 1s;
-            }
         }
     }
     /* #endregion */

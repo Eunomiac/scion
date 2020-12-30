@@ -22,7 +22,7 @@ const createTestChar = async (name) => {
     const sigCharItemData = testChars.sigChars[name]?.itemCreateData ?? [];
     const itemCreateData = U.Merge(defaultItemData, sigCharItemData);
 
-    // Determine Path Skills & Randomly Assign Available Skill Dots
+    // #region Determine Path Skills & Randomly Assign Available Skill Dots
     const skills = Object.keys(SCION.SKILLS.list);
     const baseSkillVals = U.KeyMapObj(SCION.SKILLS.list, () => 0);
     const pathSkills = {
@@ -45,8 +45,9 @@ const createTestChar = async (name) => {
         actorData.skills.list[_.sample(availableSkills)].assigned++;
         assignableSkillDots--;
     }
+    // #endregion
 
-    // Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
+    // #region Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
     const attributes = Object.keys(SCION.ATTRIBUTES.list);
     const baseAttrVals = U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => (SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(k) ? 3 : 1));
     const priorityAttrs = {
@@ -68,13 +69,60 @@ const createTestChar = async (name) => {
         actorData.attributes.list[_.sample(availableAttrs)].assigned++;
         assignableGeneralAttrDots--;
     }
+    // #endregion
 
-    // Update itemCreationData with selected path skills, and assign to actorData for later creation
+    // #region Randomly Select Callings, Assign Dots, Select Keywords
+    const callings = U.KeyMapObj(
+        _.uniq([
+            _.sample(SCION.GODS[actorData.patron].callings),
+            ..._.sample(Object.keys(SCION.CALLINGS.list), 4)
+        ]).slice(0, 3).sort(),
+        (k, calling) => calling,
+        (calling) => ({
+            name: calling,
+            value: 1,
+            knacks: [],
+            keywordsChosen: _.sample(U.Loc(`scion.calling.${calling}.keywords`).split(", "), 3),
+            keywordsUsed: []
+        })
+    );
+    let randomCalling = _.sample(Object.keys(callings));
+    for (let i = 0; i < 2; i++) {
+        callings[randomCalling].value++;
+        randomCalling = _.sample(Object.keys(callings));
+    }
+    const chosenKnacks = [];
+    for (const calling of Object.keys(callings)) {
+        callings[calling].keywordsChosen.length = callings[calling].value;
+        let callingPointsLeft = callings[calling].value;
+        while (callingPointsLeft) {
+            const availableKnacks = Object.keys(SCION.KNACKS).filter((knackName) => {
+                const knack = SCION.KNACKS[knackName];
+                return !chosenKnacks.includes(knackName)
+                    && ["any", calling].includes(knack.calling)
+                    && (callingPointsLeft >= 2 || knack.tier === "heroic");
+            });
+            chosenKnacks.unshift(_.sample(availableKnacks));
+            callingPointsLeft -= SCION.KNACKS[chosenKnacks[0]].tier === "immortal" ? 2 : 1;
+            callings[calling].knacks.push(chosenKnacks[0]);
+        }
+    }
+    callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
+
+    actorData.callings.list = Object.values(callings);
+    actorData.knacks.list = chosenKnacks;
+
+    // #endregion
+
+    // #region Update itemCreationData with selected path skills, and assign to actorData for later item creation
     actorData.testItemCreateData = itemCreateData.map((itemData) => {
         if (itemData.type === "path") {itemData.data.skills = pathSkills[itemData.data.type]}
         return itemData;
     });
-    U.LOG({
+    // #endregion
+
+
+    U.LOG(U.IsDebug() && {
         attrPriorities: actorData.attributes.priorities,
         favoredApproach: actorData.attributes.favoredApproach,
         attributes: actorData.attributes,
@@ -90,7 +138,7 @@ const createTestChar = async (name) => {
         type: "major",
         data: actorData
     });
-    U.LOG(thisActor, `... ${thisActor.name} Created!`, "TEST CHARACTER CREATION", {style: "data"});
+    U.LOG(U.IsDebug() && thisActor, `... ${thisActor.name} Created!`, "TEST CHARACTER CREATION", {style: "data"});
     return thisActor;
 };
 const createSigChars = async () => {
@@ -125,7 +173,7 @@ Hooks.once("init", async () => {
         createSigChars: createSigChars
     };
 
-    U.LOG("INITIALIZING SCION.JS ...");
+    U.LOG(U.IsDebug() && "INITIALIZING SCION.JS ...");
 
     // Define custom Entity classes
     CONFIG.Actor.entityClass = ScionActor;
@@ -222,21 +270,45 @@ Hooks.once("init", async () => {
                 default: return v1;
             }
         },
-        dottype: (category, trait, value, options) => {
-            // U.LOG({options, category, trait, value}, "dotType Handler");
+        checkInvalid: (categories, trait, options) => {
             const actor = game.actors.get(options.data.root.actor._id);
-            // const iterLog = [];
+            const [cat, subCat] = categories.split(":");
+            switch (cat) {
+                case "calling": {
+                    switch (subCat) {
+                        case "other": {
+                            if (actor.aData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length >= 2
+                                && !actor.aData.callings.list.some((calling) => SCION.GODS[actor.aData.patron].callings.includes(calling.name))) {
+                                return "invalid";
+                            }
+                        }
+                        // falls through
+                        case "patron": {
+                            if (actor.aData.callings.list.map((calling) => calling.name).includes(trait)) {
+                                return "invalid";
+                            }
+                            break;
+                        }
+                        // no default
+                    }
+                }
+                // no default
+            }
+            return "";
+        },
+        dottype: (category, trait, value, options) => {
+            const actor = game.actors.get(options.data.root.actor._id);
+            const dTypes = [];
             if (actor) {
                 switch (category) {
                     case "skill": {
-                        const dTypes = ["skill"];
+                        dTypes.push("skill");
                         if (value <= actor.baseSkillVals[trait]) {dTypes.push("base")} else {dTypes.push("general")}
-                        return dTypes.join("|");
+                        break;
                     }
                     case "attribute": {
-                        const dTypes = ["attribute"];
+                        dTypes.push("attribute");
                         if (value <= actor.baseAttrVals[trait]) {
-                            // iterLog.push(`${trait}:${value} <= ${actor.baseAttrVals[trait]}: BASE`);
                             dTypes.push("base");
                         } else {
                             const arena = _.findKey(SCION.ATTRIBUTES.arenas, (attrs) => attrs.includes(trait));
@@ -250,24 +322,29 @@ Hooks.once("init", async () => {
                                 } catch (err) {
                                     return "";
                                 }
-                                // iterLog.push(`${assignedArenaDots + 1} Assigned. Of [${Object.keys(assignedAttrDots).map((attr) => `${attr.slice(0,3)}:${assignedAttrDots[attr]}/${actor.attrVals[attr]}`).join(", ")}], increasing ${thisAttr} from ${assignedAttrDots[thisAttr] - 1} to ${assignedAttrDots[thisAttr]}`);
                             }
                             if (value <= assignedAttrDots[trait]) {
-                                // iterLog.push(`${value} > ${actor.baseAttrVals[trait]} <= ${assignedAttrDots[trait]}: ${U.UCase(arena)}`);
                                 dTypes.push(arena);
                             } else {
-                                // iterLog.push(`${value} > ${assignedAttrDots[trait]}: GENERAL`);
                                 dTypes.push("general");
                             }
                         }
-                        // U.LOG({log: iterLog}, `Checking ${trait}:${value}`);
-                        return dTypes.join("|");
+                        break;
                     }
-                    default: return "";
+                    case "calling": {
+                        dTypes.push("calling");
+                        if (value === 1) {
+                            dTypes.push("base");
+                        } else {
+                            dTypes.push("general");
+                        }
+                        break;
+                    }
+                    // no default
                 }
             }
 
-            return "";
+            return dTypes.join("|");
         }
     });
     // #endregion
@@ -282,7 +359,7 @@ Hooks.once("ready", async () => {
     CONFIG.scion.pantheonList = U.MakeDict(CONFIG.scion.PANTHEONS);
     CONFIG.scion.genesisList = U.MakeDict(CONFIG.scion.GENESES);
     CONFIG.scion.favoredApproachList = U.MakeDict(CONFIG.scion.ATTRIBUTES.approaches, (v, k) => U.Loc(`scion.game.${k}`));
-    U.LOG({
+    U.LOG(U.IsDebug() && {
         CONFIG,
         "game": game,
         "... .scion": game.scion

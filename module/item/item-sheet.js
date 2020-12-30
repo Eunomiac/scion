@@ -39,7 +39,7 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
         Items.registerSheet("scion", this, {makeDefault,
                                             types,
                                             "label": locLabel});
-        U.LOG({"Sheet Registered": this.name,
+        U.LOG(U.IsDebug() && {"Sheet Registered": this.name,
                types,
                "defaultOptions": this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionItemSheet");
     }

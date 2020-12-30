@@ -70,24 +70,24 @@ export class ScionActor extends Actor {
                     itemCreationData.length = 0;
                     itemCreationData.push(...this.aData.testItemCreateData);
                 }
-                U.LOG({itemCreationData, "ACTOR": this.fullLogReport}, "Item Creation Data Found: Creating Items", this.name);
+                U.LOG(U.IsDebug() && {itemCreationData, "ACTOR": this.fullLogReport}, "Item Creation Data Found: Creating Items", this.name);
                 await this.createOwnedItem(itemCreationData);
                 itemCreationData.length = 0;
-                U.LOG({items: this.ownedItems, "ACTOR": this.fullLogReport}, "... Items Created; Updating Path Links ...", this.name);
+                U.LOG(U.IsDebug() && {items: this.ownedItems, "ACTOR": this.fullLogReport}, "... Items Created; Updating Path Links ...", this.name);
                 await this.updatePathConditionLinks();
-                U.LOG({items: this.ownedItems, "ACTOR": this.fullLogReport}, "... Path Links Updated; Updating Pantheon ...", this.name);
+                U.LOG(U.IsDebug() && {items: this.ownedItems, "ACTOR": this.fullLogReport}, "... Path Links Updated; Updating Pantheon ...", this.name);
                 await this.updatePantheon(true);
                 await this.update({["data.wasPantheonUpdated"]: true});
-                U.LOG({"aData.pantheon": this.data.data.pantheon, "ACTOR": this.fullLogReport}, "... Pantheon Updated: DONE!", this.name);
+                U.LOG(U.IsDebug() && {"aData.pantheon": this.data.data.pantheon, "ACTOR": this.fullLogReport}, "... Pantheon Updated: DONE!", this.name);
             } else if (!this.aData.wasPantheonUpdated) {
-                U.LOG({
+                U.LOG(U.IsDebug() && {
                     "aData.pantheon": this.data.data.pantheon,
                     "this.aData.wasPantheonUpdated": this.data.data.wasPantheonUpdated,
                     "ACTOR": this.fullLogReport
                 }, "Pantheon NOT Updated: Updating Pantheon...", this.name);
                 await this.updatePantheon(true);
                 await this.update({["data.wasPantheonUpdated"]: true});
-                U.LOG({
+                U.LOG(U.IsDebug() && {
                     "aData.pantheon": this.data.data.pantheon,
                     "this.aData.wasPantheonUpdated": this.aData.wasPantheonUpdated,
                     "ACTOR": this.fullLogReport
@@ -107,14 +107,14 @@ export class ScionActor extends Actor {
             for (const conditionType of ["pathSuspension", "pathRevocation"]) {
                 const conditionItem = this.conditions.find((item) => item.iData.type === conditionType && item.iData.linkedItem === pathType);
                 if (conditionItem) {
-                    U.LOG({conditionItem, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Linking ${conditionType} Condition ...`, this.name);
+                    U.LOG(U.IsDebug() && {conditionItem, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Linking ${conditionType} Condition ...`, this.name);
                     await conditionItem.update({"data.linkedItem": pathItem.id});
                     pathUpdateData[`data.conditions.${conditionType}`] = conditionItem.id;
                 }
             }
-            U.LOG({pathUpdateData, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Conditions Linked! Updating ${U.TCase(pathType)} Path Data ...`, this.name);
+            U.LOG(U.IsDebug() && {pathUpdateData, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Conditions Linked! Updating ${U.TCase(pathType)} Path Data ...`, this.name);
             await pathItem.update(pathUpdateData);
-            U.LOG({pathUpdateData, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Path Updated!`, this.name);
+            U.LOG(U.IsDebug() && {pathUpdateData, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Path Updated!`, this.name);
         }
     }
 
@@ -125,30 +125,65 @@ export class ScionActor extends Actor {
             const panthPath = this.paths.find((path) => path.data.data.type === "pantheon");
             const newSkills = Object.assign([], panthPath.data.data.skills, SCION.PANTHEONS[pantheon].assetSkills);
             updateData["data.skills"] = newSkills;
-            U.LOG({pantheon, panthPath, updateData, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Updating Pantheon Path Skills ...", this.name);
+            U.LOG(U.IsDebug() && {pantheon, panthPath, updateData, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Updating Pantheon Path Skills ...", this.name);
             await panthPath.update(updateData);
-            U.LOG({pantheon, panthPath, updateData, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Pantheon Path Updated, Proceeding to Update Skills ...", this.name);
+            U.LOG(U.IsDebug() && {pantheon, panthPath, updateData, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Pantheon Path Updated, Proceeding to Update Skills ...", this.name);
             await this.updateTraits();
         }
     }
 
-    getPendingProperty(fieldKey) {
-        if (fieldKey in this.pendingUpdateData) {return this.pendingUpdateData[fieldKey]}
-        return getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."));
+    getProp(fieldKey, fieldIndex) {
+        fieldIndex = _.isNumber(fieldIndex) ? U.Int(fieldIndex) : false;
+        let returnVal, fieldSuffix;
+        if (fieldIndex !== false && fieldKey.includes(".@")) {
+            [fieldKey, fieldSuffix] = fieldKey.split(/\.@\.?/);
+        }
+        returnVal = this.pendingUpdateData[fieldKey] ?? getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."));
+        if (fieldIndex !== false && Array.isArray(returnVal)) {
+            returnVal = returnVal[fieldIndex] ?? getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."))[fieldIndex];
+            if (fieldSuffix) {
+                returnVal = getProperty(returnVal, fieldSuffix) ?? getProperty(getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."))[fieldIndex], fieldSuffix);
+            }
+        }        
+        return returnVal;
+    }
+
+    setProp(value, fieldKey, fieldIndex) {
+        fieldIndex = isNaN(fieldIndex) ? false : U.Int(fieldIndex);
+        let fieldSuffix,
+            updateValue = value;        
+        if (fieldIndex !== false) {
+            if (fieldKey.includes(".@")) {
+                [fieldKey, fieldSuffix] = fieldKey.split(/\.@\.?/);
+            }
+            updateValue = this.getProp(fieldKey) ?? [];
+            if (fieldSuffix) {
+                const expandedSuffix = expandObject({[fieldSuffix]: value});
+                updateValue[fieldIndex] = {...updateValue[fieldIndex] ?? {}, ...expandObject({[fieldSuffix]: value})};
+            } else {
+                updateValue[fieldIndex] = value;
+            }
+        }
+        this.queueUpdateData({[fieldKey]: updateValue});
     }
 
     queueUpdateData(updateData, keyPrefix = "", keySuffix = "") {
-        const updateDataFields = _.omit(U.KeyMapObj(updateData, (key) => `${keyPrefix ? `${keyPrefix}.` : ""}${key}${keySuffix ? `.${keySuffix}` : ""}`.replace(/\.\./gu, ".").replace(/^(data\.)+/u, "data."), (val) => val), (val, fieldKey) => this.getPendingProperty(fieldKey) === val);
+        console.log("*** QUEUING DATA ***");
+        updateData = U.KeyMapObj(updateData, (key) => `${keyPrefix ? `${keyPrefix}.` : ""}${key}${keySuffix ? `.${keySuffix}` : ""}`.replace(/\.\./gu, ".").replace(/^(data\.)+/u, "data."), (val) => val);
+        console.log(updateData);
+        const updateDataFields = _.omit(updateData, (val, fieldKey) => JSON.stringify(this.getProp(fieldKey)) === JSON.stringify(val));
+        console.log(updateDataFields);
         if (isObjectEmpty(updateDataFields)) {return false}
-        Object.assign(this.pendingUpdateData, updateDataFields);
-        U.LOG({updateData, updateDataFields, pendingUpdateData: U.Clone(this.pendingUpdateData)}, "Queuing Update Data", this.name);
+        this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateDataFields, true);
+        console.log(this.pendingUpdateData);
         return true;
     }
-    async processUpdateQueue() {
-        if (isObjectEmpty(this.pendingUpdateData)) {return false}
+    async processUpdateQueue(isForcing = false) {
+        if (!isForcing && isObjectEmpty(this.pendingUpdateData)) {return false}
         const updateData = {...this.pendingUpdateData};
         this.pendingUpdateData = {};
-        U.LOG({updateData}, "*** PROCESSING UPDATE QUEUE ***", this.name);
+        console.log("*** PROCESSING UPDATE QUEUE ***");
+        console.log(updateData);
         await this.update(updateData);
         return true;
     }
@@ -166,6 +201,7 @@ export class ScionActor extends Actor {
     get paths() { return this.items.filter((item) => item.type === "path") }
     get skills() { return this.data.data.skills.list }
     get attributes() { return this.aData.attributes.list }
+    get callings() { return U.KeyMapObj(this.aData.callings.list, (k, calling) => calling.name, (calling) => calling) }
     get conditions() { return this.items.filter((item) => item.type === "condition") }
     // #endregion
 
@@ -224,7 +260,7 @@ export class ScionActor extends Actor {
         }
 
         /*
-         * U.LOG({
+         * U.LOG(U.IsDebug() && {
          *     skillVals: this.skillVals,
          *     skillValsAboveMaxCorrection,
          *     assignedSkillVals: this.assignedSkillVals,
@@ -291,7 +327,7 @@ export class ScionActor extends Actor {
             } while (totalDotCorrection && getInvalidArena());
         }
         /*
-         * U.LOG({
+         * U.LOG(U.IsDebug() && {
          *     attrVals: this.attrVals,
          *     attrValsAboveMaxCorrection,
          *     assignedAttrVals: this.assignedAttrVals,

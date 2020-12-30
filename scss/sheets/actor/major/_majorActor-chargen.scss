@@ -141,23 +141,38 @@
         "calling1 calling2 calling3" 1fr
         "footer footer footer" 150px / 1fr 1fr 1fr;
     column-gap: 20px;
-    h1 { grid-area: heading; }
+    > h1 { grid-area: heading; }
 
-    .calling {
-        &:nth-of-type(1) { grid-area: calling1; }
-        &:nth-of-type(2) { grid-area: calling2; }
-        &:nth-of-type(3) { grid-area: calling3; }
+    > .calling {
+        &:nth-of-type(2) { grid-area: calling1; }
+        &:nth-of-type(3) { grid-area: calling2; }
+        &:nth-of-type(4) { grid-area: calling3; }
 
         background: {
+            image: url("../images/actor-sheet/backgrounds/calling.png");
             size: 100%;
             position: center;
             repeat: no-repeat;
         }
-        filter: drop-shadow(2px 2px 2px var(--black));
+        filter: drop-shadow(2px 2px 0px var(--greyFade50));
 
-        &.generic { background-image: url("../images/actor-sheet/callings/generic.png"); }
-        &.creator { background-image: url("../images/actor-sheet/callings/creator.png"); }
-        &.guardian { background-image: url("../images/actor-sheet/callings/guardian.png"); }
-        &.trickster { background-image: url("../images/actor-sheet/callings/trickster.png"); }
+        .dotline {
+            margin-top: 15px;
+            transform: scale(1.5);
+        }
+
+        h1 {
+            margin-top: 20px;
+            border: none;
+            font-size: calc(var(--fontSizeH1) * 1.5);
+        }
+
+    }
+    .footer { 
+        grid-area: footer; 
+        .dotline {
+            margin-top: 15px;
+            transform: scale(1.5);
+        }
     }
 }

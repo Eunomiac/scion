@@ -48,7 +48,7 @@ const defaultRules = {
     "max-lines-per-function": "off",
     "max-params": "off",
     "max-statements": "off",
-    "multiline-comment-style": ["warn", "starred-block"],
+    "multiline-comment-style": 0,
     "multiline-ternary": ["warn", "always-multiline"],
     "new-cap": ["error", {"capIsNewExceptionPattern": "[A-Z]+"}],
     "no-confusing-arrow": ["warn", {"allowParens": true}],
@@ -133,6 +133,7 @@ const defaultRules = {
     "space-before-function-paren": ["warn", {"anonymous": "never", "named": "never", "asyncArrow": "always"}]
 };
 const deploymentRules = {
+    "multiline-comment-style": ["warn", "starred-block"],
     "no-console": "error",
     "no-debugger": "error",
     "no-empty-function": "error",

@@ -126,7 +126,7 @@ const stackTrace = () => {
     ];
 };
 const logLine = (output, title, {style, groupStyle, isGrouping}) => {
-    if (isGrouping) {
+    if (isGrouping && game.scion.debug.isFormattingGroup) {
         if (game.scion.debug.isFormattingGroup) {console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle])} else {console.groupCollapsed(isGrouping)}
     }
     if (output !== undefined) {console.log(`%c ${title}`, logStyles[style], output)} else {console.log(`No Output for ${title}`)}
@@ -155,10 +155,13 @@ const logGroup = (outputs, groupTitle, tag, {style, groupStyle}, stackTrace) => 
         outputs.forEach(([lineTitle, lineOutput]) => {
             logLine(lineOutput, lineTitle, {style});
         });
-        logStackTrace(stackTrace);
-        console.groupEnd();
+        if (game.scion.debug.isFormattingGroup) {
+            logStackTrace(stackTrace);
+            console.groupEnd();
+        }
     }
 };
+export const IsDebug = () => Boolean(game.scion?.debug.isDebugging);
 export const LOG = (outputs = {title: Object}, groupTitle = "", tag = undefined, {style="log", groupStyle="data", isLoud=false} = {}, stack = stackTrace()) => {
     if (isDebugging(tag, {isLoud})) {
         if (CONFIG.isHoldingLogs) {delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack])} else {logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack)}
@@ -173,7 +176,6 @@ export const ReleaseLogs = () => {
 export const DB = (data, tag, {isLoud=false} = {}) => LOG(data, tag ? `[DB: ${tag}]` : "[DB]", null, {groupStyle: "debug", style: "debug", isLoud});
 export const THROW = (data, tag, {isLoud=true} = {}) => LOG(data, tag ? `[${tag} ERROR]` : "[ERROR]", null, {groupStyle: "error", style: "error", isLoud}) && false;
 // #endregion
-
 
 // #region STRING FUNCTIONS: Capitalization, Parsing, Localization
 export const UCase = (str) => `${str}`.toUpperCase();

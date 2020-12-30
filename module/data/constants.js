@@ -1937,230 +1937,241 @@ const scionSystemData = {
         }
     },
     CALLINGS: {
-        creator: {
-            skills: [ "academics", "culture", "technology" ],
-            fateRoles: [ "apprentice", "jinx", "rival" ],
-            knacks: {
-                heroic: [
-                    "flawlesslyPlatonicIdeal",
-                    "innateToolkit",
-                    "perfectRendition",
-                    "reverseEngineer",
-                    "theUnlimitedQuartermaster",
-                    "weGoAllNight",
-                    "wirelessInterface"
-                ] ,
-                immortal: [
-                    "afternoonOfFortnights",
-                    "liftedFromDust",
-                    "raiseThePillarsOfTheEarth",
-                    "touchOfTheMuses"
-                ]
-            }
+        min: 1,
+        max: 5,
+        actorDefault: {
+            "name": "",
+            "value": 0,
+            "knacks": [],
+            "keywordsChosen": [],
+            "keywordsUsed": []
         },
-        guardian: {
-            skills: [ "athletics", "closeCombat", "empathy" ],
-            fateRoles: [ "canary", "martyr", "nemesis" ],
-            knacks: {
-                heroic: [
-                    "aFortress",
-                    "aPurpose",
-                    "aSentinel",
-                    "aTalisman",
-                    "aVigil",
-                    "aWarning"
-                ] ,
-                immortal: [
-                    "byYourSide",
-                    "eternalGuardian",
-                    "livingPillar",
-                    "theyCannotBeTouched"
-                ]
-            }
-        },
-        healer: {
-            skills: [ "empathy", "medicine", "science" ],
-            fateRoles: [ "boonCompanion", "canary", "rival" ],
-            knacks: {
-                heroic: [
-                    "combatMedic",
-                    "damageConversion",
-                    "doctorsKit",
-                    "immunizationBooster",
-                    "instantDiagnosis",
-                    "surgeonWithTheHandsOfGod",
-                    "theBareMinimum"
-                ] ,
-                immortal: [
-                    "breathOfLife",
-                    "internalRefinery",
-                    "panacea",
-                    "reconstruction"
-                ]
-            }
-        },
-        hunter: {
-            skills: [ "athletics", "firearms", "survival" ],
-            fateRoles: [ "boonCompanion", "paramour", "rival" ],
-            knacks: {
-                heroic: [
-                    "apexPredator",
-                    "eyesInTheBlinds",
-                    "internalCompass",
-                    "keeneyedPredator",
-                    "mostDangerousPrey",
-                    "silenceInTheWoods",
-                    "worryingHound"
-                ] ,
-                immortal: [
-                    "alwaysThere",
-                    "perfectCamouflage",
-                    "relentless",
-                    "sendThePack"
-                ]
-            }
-        },
-        judge: {
-            skills: [ "academics", "culture", "persuasion" ],
-            fateRoles: [ "balm", "traitor", "worshipper" ],
-            knacks: {
-                heroic: [
-                    "eyeForAnEye",
-                    "indisputableAnalysis",
-                    "lieDetector",
-                    "objection",
-                    "onTheCase",
-                    "quickStudy",
-                    "theTruthArises"
-                ] ,
-                immortal: [
-                    "boundByOath",
-                    "iAmTheLaw",
-                    "terrorOfTheGuilty",
-                    "thePainOfDishonesty"
-                ]
-            }
-        },
-        leader: {
-            skills: [ "culture", "empathy", "leadership" ],
-            fateRoles: [ "boonCompanion", "traitor", "worshipper" ],
-            knacks: {
-                heroic: [
-                    "captainOfIndustry",
-                    "cloakOfDread",
-                    "goodListener",
-                    "grandEntrance",
-                    "inspirationalAura",
-                    "lighthouseOfSociety",
-                    "perfectPoise"
-                ] ,
-                immortal: [
-                    "invulnerableMaster",
-                    "masterfulEfficiency",
-                    "notTodayFriends"
-                ]
-            }
-        },
-        liminal: {
-            skills: [ "athletics", "pilot", "subterfuge" ],
-            fateRoles: [ "canary", "jinx", "unrequitedParamour" ],
-            knacks: {
-                heroic: [
-                    "beyondMemory",
-                    "completePrivacy",
-                    "experiencedTraveler",
-                    "flatlander",
-                    "neitherTheMinuteNorTheHour",
-                    "unerringDelivery",
-                    "unobtrusiveVisitor"
-                ] ,
-                immortal: [
-                    "enforcingTheBoundary",
-                    "pierceTheVeil",
-                    "stepSideways",
-                    "theLongRoadToAnywhere"
-                ]
-            }
-        },
-        lover: {
-            skills: [ "culture", "empathy", "persuasion" ],
-            fateRoles: [ "balm", "paramour", "unrequitedParamour", "rival" ],
-            knacks: {
-                heroic: [
-                    "fluidAppeal",
-                    "iAmAFire",
-                    "loversIntuition",
-                    "notAFighter",
-                    "onYourSide",
-                    "perfectPartner",
-                    "soothingPresence"
-                ] ,
-                immortal: [
-                    "centerOfAttention",
-                    "forYouIWill",
-                    "heartsAflame",
-                    "loversOath"
-                ]
-            }
-        },
-        sage: {
-            skills: [ "academics", "occult", "subterfuge" ],
-            fateRoles: [ "apprentice", "jinx", "traitor" ],
-            knacks: {
-                heroic: [
-                    "blockadeOfReason",
-                    "masterOfTheWorld",
-                    "officeHours",
-                    "omniglotTranslation",
-                    "palaceOfMemory",
-                    "presenceOfMagic",
-                    "speedReading"
-                ] ,
-                immortal: [
-                    "cipher",
-                    "eternalGenius",
-                    "immortalMastermind",
-                    "overworldKnowledge"
-                ]
-            }
-        },
-        trickster: {
-            skills: [ "culture", "persuasion", "subterfuge" ],
-            fateRoles: [ "boonCompanion", "nemesis", "traitor" ],
-            knacks: {
-                heroic: [
-                    "blatherAndSkite",
-                    "inSheepsClothing",
-                    "lightFingered",
-                    "rumorMiller",
-                    "smokeAndMirrors",
-                    "takesOneToKnowOne",
-                    "wasntMe"
-                ] ,
-                immortal: [
-                    "doppelganger", "oneMansTrash", "surprise", "wovenFromLies"
-                ]
-            }
-        },
-        warrior: {
-            skills: [ "athletics", "closeCombat", "firearms" ],
-            fateRoles: [ "balm", "nemesis", "rival" ],
-            knacks: {
-                heroic: [
-                    "closeTheGap",
-                    "deathByTeacup",
-                    "enhancedImpact",
-                    "masterOfWeapons",
-                    "tempered",
-                    "theBiggestThreat",
-                    "trickShot"
-                ] ,
-                immortal: [
-                    "armyOfOne",
-                    "hurlToTheMoon",
-                    "perfectDefense",
-                    "theyreEverywhere"
-                ]
+        list: {
+            creator: {
+                skills: [ "academics", "culture", "technology" ],
+                fateRoles: [ "apprentice", "jinx", "rival" ],
+                knacks: {
+                    heroic: [
+                        "flawlesslyPlatonicIdeal",
+                        "innateToolkit",
+                        "perfectRendition",
+                        "reverseEngineer",
+                        "theUnlimitedQuartermaster",
+                        "weGoAllNight",
+                        "wirelessInterface"
+                    ] ,
+                    immortal: [
+                        "afternoonOfFortnights",
+                        "liftedFromDust",
+                        "raiseThePillarsOfTheEarth",
+                        "touchOfTheMuses"
+                    ]
+                }
+            },
+            guardian: {
+                skills: [ "athletics", "closeCombat", "empathy" ],
+                fateRoles: [ "canary", "martyr", "nemesis" ],
+                knacks: {
+                    heroic: [
+                        "aFortress",
+                        "aPurpose",
+                        "aSentinel",
+                        "aTalisman",
+                        "aVigil",
+                        "aWarning"
+                    ] ,
+                    immortal: [
+                        "byYourSide",
+                        "eternalGuardian",
+                        "livingPillar",
+                        "theyCannotBeTouched"
+                    ]
+                }
+            },
+            healer: {
+                skills: [ "empathy", "medicine", "science" ],
+                fateRoles: [ "boonCompanion", "canary", "rival" ],
+                knacks: {
+                    heroic: [
+                        "combatMedic",
+                        "damageConversion",
+                        "doctorsKit",
+                        "immunizationBooster",
+                        "instantDiagnosis",
+                        "surgeonWithTheHandsOfGod",
+                        "theBareMinimum"
+                    ] ,
+                    immortal: [
+                        "breathOfLife",
+                        "internalRefinery",
+                        "panacea",
+                        "reconstruction"
+                    ]
+                }
+            },
+            hunter: {
+                skills: [ "athletics", "firearms", "survival" ],
+                fateRoles: [ "boonCompanion", "paramour", "rival" ],
+                knacks: {
+                    heroic: [
+                        "apexPredator",
+                        "eyesInTheBlinds",
+                        "internalCompass",
+                        "keeneyedPredator",
+                        "mostDangerousPrey",
+                        "silenceInTheWoods",
+                        "worryingHound"
+                    ] ,
+                    immortal: [
+                        "alwaysThere",
+                        "perfectCamouflage",
+                        "relentless",
+                        "sendThePack"
+                    ]
+                }
+            },
+            judge: {
+                skills: [ "academics", "culture", "persuasion" ],
+                fateRoles: [ "balm", "traitor", "worshipper" ],
+                knacks: {
+                    heroic: [
+                        "eyeForAnEye",
+                        "indisputableAnalysis",
+                        "lieDetector",
+                        "objection",
+                        "onTheCase",
+                        "quickStudy",
+                        "theTruthArises"
+                    ] ,
+                    immortal: [
+                        "boundByOath",
+                        "iAmTheLaw",
+                        "terrorOfTheGuilty",
+                        "thePainOfDishonesty"
+                    ]
+                }
+            },
+            leader: {
+                skills: [ "culture", "empathy", "leadership" ],
+                fateRoles: [ "boonCompanion", "traitor", "worshipper" ],
+                knacks: {
+                    heroic: [
+                        "captainOfIndustry",
+                        "cloakOfDread",
+                        "goodListener",
+                        "grandEntrance",
+                        "inspirationalAura",
+                        "lighthouseOfSociety",
+                        "perfectPoise"
+                    ] ,
+                    immortal: [
+                        "invulnerableMaster",
+                        "masterfulEfficiency",
+                        "notTodayFriends"
+                    ]
+                }
+            },
+            liminal: {
+                skills: [ "athletics", "pilot", "subterfuge" ],
+                fateRoles: [ "canary", "jinx", "unrequitedParamour" ],
+                knacks: {
+                    heroic: [
+                        "beyondMemory",
+                        "completePrivacy",
+                        "experiencedTraveler",
+                        "flatlander",
+                        "neitherTheMinuteNorTheHour",
+                        "unerringDelivery",
+                        "unobtrusiveVisitor"
+                    ] ,
+                    immortal: [
+                        "enforcingTheBoundary",
+                        "pierceTheVeil",
+                        "stepSideways",
+                        "theLongRoadToAnywhere"
+                    ]
+                }
+            },
+            lover: {
+                skills: [ "culture", "empathy", "persuasion" ],
+                fateRoles: [ "balm", "paramour", "unrequitedParamour", "rival" ],
+                knacks: {
+                    heroic: [
+                        "fluidAppeal",
+                        "iAmAFire",
+                        "loversIntuition",
+                        "notAFighter",
+                        "onYourSide",
+                        "perfectPartner",
+                        "soothingPresence"
+                    ] ,
+                    immortal: [
+                        "centerOfAttention",
+                        "forYouIWill",
+                        "heartsAflame",
+                        "loversOath"
+                    ]
+                }
+            },
+            sage: {
+                skills: [ "academics", "occult", "subterfuge" ],
+                fateRoles: [ "apprentice", "jinx", "traitor" ],
+                knacks: {
+                    heroic: [
+                        "blockadeOfReason",
+                        "masterOfTheWorld",
+                        "officeHours",
+                        "omniglotTranslation",
+                        "palaceOfMemory",
+                        "presenceOfMagic",
+                        "speedReading"
+                    ] ,
+                    immortal: [
+                        "cipher",
+                        "eternalGenius",
+                        "immortalMastermind",
+                        "overworldKnowledge"
+                    ]
+                }
+            },
+            trickster: {
+                skills: [ "culture", "persuasion", "subterfuge" ],
+                fateRoles: [ "boonCompanion", "nemesis", "traitor" ],
+                knacks: {
+                    heroic: [
+                        "blatherAndSkite",
+                        "inSheepsClothing",
+                        "lightFingered",
+                        "rumorMiller",
+                        "smokeAndMirrors",
+                        "takesOneToKnowOne",
+                        "wasntMe"
+                    ] ,
+                    immortal: [
+                        "doppelganger", "oneMansTrash", "surprise", "wovenFromLies"
+                    ]
+                }
+            },
+            warrior: {
+                skills: [ "athletics", "closeCombat", "firearms" ],
+                fateRoles: [ "balm", "nemesis", "rival" ],
+                knacks: {
+                    heroic: [
+                        "closeTheGap",
+                        "deathByTeacup",
+                        "enhancedImpact",
+                        "masterOfWeapons",
+                        "tempered",
+                        "theBiggestThreat",
+                        "trickShot"
+                    ] ,
+                    immortal: [
+                        "armyOfOne",
+                        "hurlToTheMoon",
+                        "perfectDefense",
+                        "theyreEverywhere"
+                    ]
+                }
             }
         }
     },
@@ -3164,7 +3175,15 @@ const testChars = {
                     technology: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}}
                 }
             },
-            pathPriorities: _.shuffle(["role", "origin", "pantheon"])
+            pathPriorities: _.shuffle(["role", "origin", "pantheon"]),
+            callings: {
+                assignableGeneralDots: {xp: 0, other: 2},
+                list: []
+            },
+            knacks: {
+                assignableExtraKnacks: {xp: 0, other: 0},
+                list: []
+            }
         };
     },
     get itemCreateData() {

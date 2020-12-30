@@ -55,24 +55,6 @@ form.editable.main {
         top: 5px;
     }
 
-    .popout {            
-        &#skillList {
-            width: 150px;
-            height: 480px;
-            left: 94%;
-            top: 0;
-
-            border: 10px outset var(--greyUp1);
-            background: {
-                image: url("../images/textures/stoneGrey.jpg");
-            }
-            box-sizing: content-box;
-            border-radius: 40px;
-
-            filter: drop-shadow(0px 0px 6px black);
-            > div { padding: 15px; }
-        }        
-    }
     .bubble.condition { 
         @include bubble(3, 75px, 4px);
         justify-content: start;
