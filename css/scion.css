@@ -1423,6 +1423,10 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .blur {
   transform: scale(75%) !important;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .glow {
+  filter: drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2));
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader {
   opacity: 1;
   transition: 0.5s;
@@ -1695,28 +1699,40 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout#callingsList
   top: 70px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout[id|="knacksList"] {
+  width: 200px;
+  height: 600px;
+  left: -25%;
+  top: 70px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle {
+  display: block;
   height: 40px;
+  min-height: 40px;
   width: 120px;
+  margin: 5px 0px;
+  color: var(--black);
   background-image: url("../images/bubbles/calling-generic.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  text-align: center;
-  line-height: 37px;
+  border: none;
   font-size: 24px;
   font-family: Oswald;
+  font-weight: normal;
+  line-height: 37px;
   text-transform: uppercase;
   text-shadow: var(--textShadowTitle);
-  margin: 5px 0px;
+  text-align: center;
   filter: drop-shadow(2px 2px 2px black);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.patron {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.immortal {
   background-image: url("../images/bubbles/calling-patron.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.invalid {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.invalid {
   background-image: none;
 }
 
@@ -2505,12 +2521,16 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   grid-area: heading;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .dot[data-types*="general"] {
+  --dotBright: #999;
+  --dotDark: #0a0a0a;
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling {
   background-image: url("../images/actor-sheet/backgrounds/calling.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  filter: drop-shadow(2px 2px 0px var(--greyFade50));
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(2) {
@@ -2523,6 +2543,18 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(4) {
   grid-area: calling3;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:not(.glow) {
+  filter: drop-shadow(2px 2px 0px var(--greyFade50));
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling > .gu-transit {
+  display: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling > .calling {
+  display: none;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling .dotline {

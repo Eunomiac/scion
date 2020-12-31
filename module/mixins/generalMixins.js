@@ -1,6 +1,6 @@
 // #region Import Modules
 import {THROW} from "../data/utils.js";
-import {_, U, popoutData} from "../modules.js";
+import {_, U, popoutData, SCION} from "../modules.js";
 import "../external/clamp.min.js";
 
 // #region CLASS FACTORIES: Applying Mixins
@@ -85,6 +85,152 @@ export const ClampText = (superClass) => class extends superClass {
     activateListeners(html) {
         super.activateListeners(html);
         html.find(".clampText").each((i, element) => { this.clamp(element) });
+    }
+};
+
+export const DotDragger = (superClass) => class extends superClass {
+    get listenFuncs() {
+        return {
+            drag: (dotBins, dot, sourceBin) => {
+                dotBins.each((i, bin) => {
+                    if (this.isTargetDroppable(dot, sourceBin, bin)) {bin.classList.remove("fade75")} else {bin.classList.add("fade75")}
+                });
+            },
+            dragend: async (dotBins, dot) => {
+                dotBins.each((i, bin) => { bin.classList.remove("fade75") });
+                await this.actor.processUpdateQueue(true);
+                this.render();
+            },
+            drop: (dot, targetBin, sourceBin) => {
+                const {targetTypes, sourceTypes} = this.getDragTypes(dot, sourceBin, targetBin);
+                const updateData = {};
+                if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
+                    // Increment Target Trait
+                    if (targetTypes.includes("attribute")) {
+                        const {attribute, field, fieldindex} = targetBin.dataset;
+                        this.actor.setProp(this.actor.assignedAttrVals[attribute] + 1, field, fieldindex);
+                    } else if (targetTypes.includes("skill")) {
+                        const {skill, field, fieldindex} = targetBin.dataset;
+                        this.actor.setProp(this.actor.assignedSkillVals[skill] + 1, field, fieldindex);
+                    } else if (targetTypes.includes("calling")) {
+                        const {calling, field, fieldindex} = targetBin.dataset;
+                        this.actor.setProp(this.actor.callings[calling].value + 1, field, fieldindex);
+                    }
+                    // If source was another skill/attribute, decrement that.
+                    if (!sourceTypes.includes("unassigned")) {
+                        if (sourceTypes.includes("attribute")) {
+                            const {attribute, field, fieldindex} = sourceBin.dataset;
+                            this.actor.setProp(this.actor.assignedAttrVals[attribute] - 1, field, fieldindex);
+                            updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
+                        } else if (sourceTypes.includes("skill")) {
+                            const {skill, field, fieldindex} = sourceBin.dataset;
+                            this.actor.setProp(this.actor.assignedSkillVals[skill] - 1, field, fieldindex);
+                        } else if (sourceTypes.includes("calling")) {
+                            const {calling, field, fieldindex} = sourceBin.dataset;
+                            this.actor.setProp(this.actor.callings[calling].value - 1, field, fieldindex);
+                        }
+                    }
+                    U.LOG(U.IsDebug() && {targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
+                }
+            },
+            remove: (dot, x, sourceBin) => {
+                const {dotTypes, sourceTypes} = this.getDragTypes(dot, sourceBin);
+                const updateData = {};
+                if (!sourceTypes.includes("unassigned")) {
+                    if (sourceTypes.includes("attribute")) {
+                        const {attribute, field, fieldindex} = sourceBin.dataset;
+                        this.actor.setProp(this.actor.assignedAttrVals[attribute] - 1, field, fieldindex);
+                        updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
+                    } else if (sourceTypes.includes("skill")) {
+                        const {skill, field, fieldindex} = sourceBin.dataset;
+                        this.actor.setProp(this.actor.assignedSkillVals[skill] - 1, field, fieldindex);
+                    } else if (sourceTypes.includes("calling")) {
+                        const {calling, field, fieldindex} = sourceBin.dataset;
+                        this.actor.setProp(this.actor.callings[calling].value - 1, field, fieldindex);
+                    }
+                }
+                U.LOG(U.IsDebug() && {dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
+            }
+        };
+    }
+    addDragListener(dragger, listener, extraArgs = [], listenFunc = null) {
+        listenFunc = listenFunc ?? this.listenFuncs[listener];
+        dragger.on(listener, (...args) => listenFunc.bind(this)(...extraArgs, ...args));
+    }          
+    getDragTypes(dot, sourceBin, targetBin) {
+        const returnVal = {
+            dotTypes: dot.dataset.types?.split("|")
+        };
+        if (sourceBin) {returnVal.sourceTypes = sourceBin.dataset?.types?.split("|") ?? []}
+        if (targetBin) {returnVal.targetTypes = targetBin.dataset?.types?.split("|") ?? []}
+        return returnVal;
+    }
+    isDotDraggable(dot, sourceBin) {
+        const {sourceTypes} = this.getDragTypes(dot, sourceBin);
+        if (sourceTypes.includes("unassigned")) {
+            return true;
+        } if (sourceTypes.includes("attribute")) {
+            const {attribute} = sourceBin.dataset;
+            if (this.actor.attrVals[attribute] === this.actor.baseAttrVals[attribute]) {
+                return false;
+            }
+            return true;
+        }
+        if (sourceTypes.includes("skill")) {
+            const {skill} = sourceBin.dataset;
+            if (this.actor.skillVals[skill] === this.actor.baseSkillVals[skill]) {
+                return false;
+            }
+            return true;
+        }
+        if (sourceTypes.includes("calling")) {
+            const {calling} = sourceBin.dataset;
+            if (this.actor.callings[calling].value === 1) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    isTargetDroppable(dot, sourceBin, targetBin) {
+        if (sourceBin.dataset.binid === targetBin.dataset.binid) {
+            return true;
+        }
+        const {dotTypes, sourceTypes, targetTypes} = this.getDragTypes(dot, sourceBin, targetBin);
+        if (targetTypes.includes("unassigned")) {
+            return false;
+        }
+        if (dotTypes.every((dotType) => !targetTypes.includes(dotType))) {
+            return false;
+        }
+        if (dotTypes.includes("attribute")) {
+            if (!dotTypes.includes("general")) {
+                const dotArenas = dotTypes.filter((dotType) => ["physical", "mental", "social"].includes(dotType));
+                if (dotArenas.every((dotArena) => !targetTypes.includes(dotArena))) {
+                    return false;
+                }
+            }
+            const {attribute} = targetBin.dataset;
+            if (this.actor.attrVals[attribute] === SCION.ATTRIBUTES.max) {
+                return false;
+            }
+            return true;
+        }
+        if (dotTypes.includes("skill")) {
+            const {skill} = targetBin.dataset;
+            if (this.actor.skillVals[skill] === SCION.SKILLS.max) {
+                return false;
+            }
+            return true;
+        }
+        if (dotTypes.includes("calling")) {
+            const {calling} = targetBin.dataset;
+            if (this.actor.callings[calling].value === SCION.CALLINGS.max) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 };
 export const EditableDivs = (superClass) => class extends ClampText(superClass) {

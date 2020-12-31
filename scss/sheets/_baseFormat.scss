@@ -218,6 +218,10 @@
         transform: scale(75%) !important;
     }
 
+    .glow {
+        filter: drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2));
+    }
+
     .fader {
         opacity: 1;
         transition: 0.5s;
@@ -398,27 +402,43 @@
             top: 70px;
         }
 
-        &.callingsList {
+        &[id|="knacksList"] {
+            width: 200px;
+            height: 600px;
+            left: -25%;
+            top: 70px;
+        }
 
-            span.calling {
+        &.callingsList, &.knacksList {
+
+            span.calling, span.knack, h1.gu-mirror.handle {
+                display: block;
                 height: 40px;
+                min-height: 40px;
                 width: 120px;
+                margin: 5px 0px;
+                color: var(--black);
                 background: {
                     image: url("../images/bubbles/calling-generic.png");
                     size: 100%;
                     position: center;
                     repeat: no-repeat;
                 }
-                text-align: center;
+                border: none;
+                font: {
+                    size: 24px;
+                    family: Oswald;
+                    weight: normal;
+                }
                 line-height: 37px;
-                font-size: 24px;
-                font-family: Oswald;
-                text-transform: uppercase;
-                text-shadow: var(--textShadowTitle);
-                margin: 5px 0px;
+                text: {
+                    transform: uppercase;
+                    shadow: var(--textShadowTitle);
+                    align: center;
+                }                
                 filter: drop-shadow(2px 2px 2px black);
               
-                &.patron {
+                &.patron, &.immortal {
                     background-image: url("../images/bubbles/calling-patron.png");
                 }
                 &.invalid {

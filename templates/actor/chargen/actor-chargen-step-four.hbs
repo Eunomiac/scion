@@ -4,8 +4,9 @@
         <div id="chargenFourDotMirror" class="dotContainer mirrorContainer"></div>
     </div>
     {{#each callings.actor as |calling|}}
-        {{#with ../blocks as | blocks |}}
-        {{> (blocks.partials.calling.template) calling}}
+        {{#with ../blocks as |blocks|}}
+        {{> (blocks.partials.calling.template) (merge calling ../../callings)}}
+        {{> (blocks.popouts.knacksList.template) (merge calling ../../callings)}}
         {{/with}}
     {{/each}}
     <div id="callingsMirror" class="callingsList popout flex-col mirrorContainer"></div>

@@ -143,6 +143,11 @@
     column-gap: 20px;
     > h1 { grid-area: heading; }
 
+    .dot[data-types*="general"] {
+        --dotBright: #999;
+        --dotDark: #0a0a0a;
+    }
+
     > .calling {
         &:nth-of-type(2) { grid-area: calling1; }
         &:nth-of-type(3) { grid-area: calling2; }
@@ -154,7 +159,13 @@
             position: center;
             repeat: no-repeat;
         }
-        filter: drop-shadow(2px 2px 0px var(--greyFade50));
+
+        &:not(.glow) {
+            filter: drop-shadow(2px 2px 0px var(--greyFade50));
+        }
+
+        > .gu-transit { display: none; }
+        > .calling { display: none; }
 
         .dotline {
             margin-top: 15px;

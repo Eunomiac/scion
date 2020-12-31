@@ -168,40 +168,56 @@ export class ScionActor extends Actor {
     }
 
     queueUpdateData(updateData, keyPrefix = "", keySuffix = "") {
-        console.log("*** QUEUING DATA ***");
         updateData = U.KeyMapObj(updateData, (key) => `${keyPrefix ? `${keyPrefix}.` : ""}${key}${keySuffix ? `.${keySuffix}` : ""}`.replace(/\.\./gu, ".").replace(/^(data\.)+/u, "data."), (val) => val);
-        console.log(updateData);
         const updateDataFields = _.omit(updateData, (val, fieldKey) => JSON.stringify(this.getProp(fieldKey)) === JSON.stringify(val));
-        console.log(updateDataFields);
         if (isObjectEmpty(updateDataFields)) {return false}
         this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateDataFields, true);
-        console.log(this.pendingUpdateData);
         return true;
     }
     async processUpdateQueue(isForcing = false) {
         if (!isForcing && isObjectEmpty(this.pendingUpdateData)) {return false}
         const updateData = {...this.pendingUpdateData};
         this.pendingUpdateData = {};
-        console.log("*** PROCESSING UPDATE QUEUE ***");
-        console.log(updateData);
         await this.update(updateData);
         return true;
     }
     queueSkillValsUpdate(newAssignedSkillVals = this.skillsCorrection) { this.queueUpdateData(newAssignedSkillVals, "data.skills.list", "assigned") }
     queueAttrValsUpdate(newAssignedAttrVals = this.attributesCorrection) { this.queueUpdateData(newAssignedAttrVals, "data.attributes.list", "assigned") }
+    queueSyncKnacks() {
+        const extraKnackValue = (knacks) => knacks.reduce((tot, knack) => tot + (SCION.KNACKS[knack].tier === "immortal" ? 2 : 1), 0);
+        let extraKnacks = this.aData.knacks.list.filter((knack) => !this.callingKnacks.includes(knack)),
+            spareHeroicKnack;
+        while (extraKnackValue(extraKnacks) > U.SumVals(this.aData.knacks.assignableExtraKnacks)) {
+            const thisKnack = _.sample(extraKnacks);
+            extraKnacks = _.without(extraKnacks, thisKnack);
+            if (SCION.KNACKS[thisKnack].tier === "heroic" && !spareHeroicKnack) {
+                spareHeroicKnack = thisKnack;
+            }
+        }
+        if (extraKnackValue(extraKnacks) < U.SumVals(this.aData.knacks.assignableExtraKnacks)) {
+            extraKnacks.push(spareHeroicKnack);
+        }
+        this.queueUpdateData({["data.knacks.list"]: [...this.callingKnacks, ...extraKnacks]});
+    }
+
     async updateTraits() {
         this.queueSkillValsUpdate();
         this.queueAttrValsUpdate();
+        this.queueSyncKnacks();
+
         await this.processUpdateQueue();
         return true;
     }
+
+    getAvailableKnacks(calling) { return _.groupBy(Object.keys(SCION.KNACKS).filter((knack) => ["any", calling].includes(SCION.KNACKS[knack].calling)), (knack) => SCION.KNACKS[knack].tier) }
 
     /* #region GETTERS */
     // #region Basic Data Retrieval
     get paths() { return this.items.filter((item) => item.type === "path") }
     get skills() { return this.data.data.skills.list }
     get attributes() { return this.aData.attributes.list }
-    get callings() { return U.KeyMapObj(this.aData.callings.list, (k, calling) => calling.name, (calling) => calling) }
+    get callings() { return U.KeyMapObj(this.aData.callings.list, (k, calling) => calling.name, (calling) => ({...calling, availableKnacks: this.getAvailableKnacks(calling.name)})) }
+    get callingKnacks() { return Object.values(this.callings).reduce((knacksList, calling) => [...knacksList, ...calling.knacks], []) }
     get conditions() { return this.items.filter((item) => item.type === "condition") }
     // #endregion
 
@@ -369,6 +385,7 @@ export class ScionActor extends Actor {
             ".*. aData": U.Clone(this.aData),
             ".*. items": U.Clone(this.data.items),
             ".*. paths": U.Clone(this.paths),
+            ".*. callings": U.Clone(this.callings),
             ".*. conditions": U.Clone(this.conditions),
             "SKILL REPORT": this.fullSkillReport,
             "ATTRIBUTE REPORT": this.fullAttributeReport

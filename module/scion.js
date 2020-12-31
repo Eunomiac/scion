@@ -72,20 +72,16 @@ const createTestChar = async (name) => {
     // #endregion
 
     // #region Randomly Select Callings, Assign Dots, Select Keywords
-    const callings = U.KeyMapObj(
-        _.uniq([
-            _.sample(SCION.GODS[actorData.patron].callings),
-            ..._.sample(Object.keys(SCION.CALLINGS.list), 4)
-        ]).slice(0, 3).sort(),
-        (k, calling) => calling,
-        (calling) => ({
-            name: calling,
-            value: 1,
-            knacks: [],
-            keywordsChosen: _.sample(U.Loc(`scion.calling.${calling}.keywords`).split(", "), 3),
-            keywordsUsed: []
-        })
-    );
+    const callings = U.KeyMapObj(_.uniq([
+        _.sample(SCION.GODS[actorData.patron].callings),
+        ..._.sample(Object.keys(SCION.CALLINGS.list), 4)
+    ]).slice(0, 3).sort(), (k, calling) => calling, (calling) => ({
+        name: calling,
+        value: 1,
+        knacks: [],
+        keywordsChosen: _.sample(U.Loc(`scion.calling.${calling}.keywords`).split(", "), 3),
+        keywordsUsed: []
+    }));
     let randomCalling = _.sample(Object.keys(callings));
     for (let i = 0; i < 2; i++) {
         callings[randomCalling].value++;
@@ -166,7 +162,7 @@ Hooks.once("init", async () => {
         },
         debug: {
             isDebugging: false,
-            isDebuggingDragula: false,
+            isDebuggingDragula: true,
             isFormattingGroup: false,
             watchList: []
         },
@@ -221,6 +217,20 @@ Hooks.once("init", async () => {
             if (args.some((arg) => Array.isArray(arg)) && ["string", "number"].includes(typeof U.Last(args))) {delim = args.pop()}
             for (const arg of _.compact(args)) {returnVals.push(..._.flatten([arg]))}
             return returnVals.join(delim ?? "");
+        },
+        split: (string, ...args) => {
+            args.pop();
+            const delim = args[0] ?? ",";
+            return `${string}`.split(`${delim}`).map((str) => `${str}`.trim());
+        },
+        merge: (...args) => {
+            args.pop();
+            args = args.filter((arg) => arg && typeof arg === "object" && (Array.isArray(arg) || Array.isArray(Object.keys(arg))));
+            let mergedObject = {};
+            while (args.length) {
+                mergedObject = U.Merge(mergedObject, args.shift());
+            }
+            return mergedObject;
         },
         math: function(v1, operator, v2, options) {
             switch (operator) {
@@ -291,6 +301,13 @@ Hooks.once("init", async () => {
                         }
                         // no default
                     }
+                    break;
+                }
+                case "knack": {
+                    const actorKnacks = actor.aData.callings.list.reduce((knacksList, calling) => _.uniq([...knacksList, ...calling.knacks]), []);
+                    const [knack, calling] = trait.split(":");
+                    if (actorKnacks.includes(knack)) {return "invalid"}
+                    if (SCION.KNACKS[knack].tier === "immortal" && actor.callings[calling].value < 2) {return "invalid"}
                 }
                 // no default
             }

@@ -1,0 +1,14 @@
+<div id="knacksList-{{name}}" class="popout knacksList flex-col height100 {{#unless (test selectedCalling "==" name)}}hidden{{/unless}}{{#if (test (count knacks) "==" value)}}hidden{{/if}}">
+    <div id="knacksSource-{{name}}" class="flex-col" data-binid="knacksSource-{{name}}">
+        {{#each immortalKnacksList as |knack|}}
+        <span class="knack handle immortal noFlex {{checkInvalid "knack:immortal" knack}}" data-calling="{{../name}}" data-knack="{{knack}}">
+            {{loc (concat "scion.knack." knack ".name")}}
+        </span>
+        {{/each}}        
+        {{#each heroicKnacksList as |knack|}}
+        <span class="knack handle noFlex {{checkInvalid "knack:heroic" (concat knack ":" ../name)}}" data-calling="{{../name}}" data-knack="{{knack}}">
+            {{loc (concat "scion.knack." knack ".name")}}
+        </span>
+        {{/each}}
+    </div>
+</div>

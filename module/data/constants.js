@@ -2180,97 +2180,97 @@ const scionSystemData = {
             calling: "guardian",
             tier: "heroic",
             effect: {},
-            stunts: ["bendSpace"]
+            stunts: ["getOutOfHere", "secondWind", "myTurn"]
         },
         aPurpose: {
             calling: "guardian",
             tier: "heroic",
             effect: {},
-            stunts: ["charge"]
+            stunts: []
         },
         aSentinel: {
             calling: "guardian",
             tier: "heroic",
             effect: {},
-            stunts: ["emergencyOperation"]
+            stunts: []
         },
         aTalisman: {
             calling: "guardian",
             tier: "heroic",
             effect: {},
-            stunts: ["getOutOfHere"]
+            stunts: []
         },
         aVigil: {
             calling: "guardian",
             tier: "heroic",
             effect: {},
-            stunts: ["glimpseTheOtherSide"]
+            stunts: []
         },
         aWarning: {
             calling: "guardian",
             tier: "heroic",
             effect: {},
-            stunts: ["icePack"]
+            stunts: []
         },
         afternoonOfFortnights: {
             calling: "creator",
             tier: "immortal",
             effect: {},
-            stunts: ["inescapable"]
+            stunts: []
         },
         alwaysThere: {
             calling: "hunter",
             tier: "immortal",
             effect: {},
-            stunts: ["myTurn"]
+            stunts: []
         },
         apexPredator: {
             calling: "hunter",
             tier: "heroic",
             effect: {},
-            stunts: ["secondWind"]
+            stunts: []
         },
         armyOfOne: {
             calling: "warrior",
             tier: "immortal",
             effect: {},
-            stunts: ["snare"]
+            stunts: []
         },
         auraOfGreatness: {
             calling: "any",
             tier: "heroic",
             effect: {},
-            stunts: ["stalk"]
+            stunts: []
         },
         beyondMemory: {
             calling: "liminal",
             tier: "heroic",
             effect: {},
-            stunts: ["stutterTime"]
+            stunts: []
         },
         blatherAndSkite: {
             calling: "trickster",
             tier: "heroic",
             effect: {},
-            stunts: ["surefooted"]
+            stunts: []
         },
         blockadeOfReason: {
             calling: "sage",
             tier: "heroic",
             effect: {},
-            stunts: ["swiftBandaging"]
+            stunts: []
         },
         bornToBeKings: {
             calling: "any",
             tier: "heroic",
             effect: {},
-            stunts: ["terrify"]
+            stunts: []
         },
         boundByOath: {
             calling: "judge",
             tier: "immortal",
             effect: {},
-            stunts: ["vanish"]
+            stunts: []
         },
         breathOfLife: {
             calling: "healer",
@@ -2312,7 +2312,7 @@ const scionSystemData = {
             calling: "warrior",
             tier: "heroic",
             effect: {},
-            stunts: []
+            stunts: ["charge", "inescapable", "surefooted"]
         },
         combatMedic: {
             calling: "healer",
@@ -2342,7 +2342,7 @@ const scionSystemData = {
             calling: "healer",
             tier: "heroic",
             effect: {},
-            stunts: []
+            stunts: ["icePack", "swiftBandaging", "emergencyOperation"]
         },
         doppelganger: {
             calling: "trickster",
@@ -2396,7 +2396,7 @@ const scionSystemData = {
             calling: "liminal",
             tier: "heroic",
             effect: {},
-            stunts: []
+            stunts: ["glimpseTheOtherSide", "stutterTime", "bendSpace"]
         },
         flawlesslyPlatonicIdeal: {
             calling: "creator",
@@ -2582,7 +2582,7 @@ const scionSystemData = {
             calling: "hunter",
             tier: "heroic",
             effect: {},
-            stunts: []
+            stunts: ["stalk", "snare"]
         },
         neitherTheMinuteNorTheHour: {
             calling: "liminal",
@@ -2606,7 +2606,7 @@ const scionSystemData = {
             calling: "judge",
             tier: "heroic",
             effect: {},
-            stunts: []
+            stunts: ["terrify"]
         },
         officeHours: {
             calling: "sage",
@@ -2660,7 +2660,7 @@ const scionSystemData = {
             calling: "hunter",
             tier: "immortal",
             effect: {},
-            stunts: []
+            stunts: ["vanish"]
         },
         perfectDefense: {
             calling: "warrior",
@@ -3110,7 +3110,8 @@ const handlebarTemplates = {
     },
     popouts: {
         skillList: {template: () => "systems/scion/templates/item/popouts/skilllist-popout.hbs"},
-        callingsList: {template: () => "systems/scion/templates/actor/popouts/callingslist-popout.hbs"}
+        callingsList: {template: () => "systems/scion/templates/actor/popouts/callingslist-popout.hbs"},
+        knacksList: {template: () => "systems/scion/templates/actor/popouts/knackslist-popout.hbs"}
     },
     tooltips: {
         path: {template: () => "systems/scion/templates/item/tooltips/path-tooltip.hbs"}
