@@ -128,6 +128,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 other: []
             },
             actor: this.actor.callings,
+            numChosen: Object.keys(this.actor.callings).filter((calling) => calling in SCION.CALLINGS.list).length,
             selected: actorData.callings.selected || false
         };
         data.callings.available.other = Object.keys(SCION.CALLINGS.list).filter((calling) => !data.callings.available.patron.includes(calling));
@@ -183,7 +184,7 @@ export class MajorActorSheet extends ScionActorSheet {
             const pathDragger = dragula({
                 containers: [pathContainer],
                 mirrorContainer: pathMirror,
-                sheetElem: this.sheetElem
+                sheetElement: this.sheetElem
             });
             pathDragger.on("drop", async () => {
                 await this.actor.update({
@@ -200,7 +201,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 containers: [arenaContainer],
                 moves: (e, s, handle) => handle.classList.contains("handle"),
                 mirrorContainer: arenaMirror,
-                sheetElem: this.sheetElem
+                sheetElement: this.sheetElem
             });
 
             arenaDragger.on("drop", async () => {
@@ -266,10 +267,10 @@ export class MajorActorSheet extends ScionActorSheet {
                     return false;
                 },
                 "direction": "horizontal",
-                "copy": false,
+                "copy": true,
                 "removeOnSpill": true,
                 "mirrorContainer": callingMirror,
-                "sheetElem": this.sheetElem
+                "sheetElement": this.sheetElem
             });
             callingDragger.on("cancel", (element, container, source) => {
                 if (source.classList.contains("callingDrop") && this.currentlyOver?.dataset.calling !== element.dataset.calling) {
@@ -305,10 +306,10 @@ export class MajorActorSheet extends ScionActorSheet {
                 moves: (dot, sourceBin) => this.isDotDraggable(dot, sourceBin),
                 accepts: (dot, targetBin, sourceBin) => this.isTargetDroppable(dot, sourceBin, targetBin),
                 direction: "horizontal",
-                copy: false,
+                copy: true,
                 removeOnSpill: true,
                 mirrorContainer: chargenThreeDotMirror,
-                sheetElem: this.sheetElem
+                sheetElement: this.sheetElem
             });
             this.addDragListener(chargenThreeDotDragger, "drag", [chargenThreeDotBins]);
             this.addDragListener(chargenThreeDotDragger, "dragend", [chargenThreeDotBins]);
@@ -324,10 +325,10 @@ export class MajorActorSheet extends ScionActorSheet {
                 moves: (dot, sourceBin) => this.isDotDraggable(dot, sourceBin),
                 accepts: (dot, targetBin, sourceBin) => this.isTargetDroppable(dot, sourceBin, targetBin),
                 direction: "horizontal",
-                copy: false,
+                copy: true,
                 removeOnSpill: true,
                 mirrorContainer: chargenFourDotMirror,
-                sheetElem: this.sheetElem
+                sheetElement: this.sheetElem
             });
 
             this.addDragListener(chargenFourDotDragger, "drag", [chargenFourDotBins]);

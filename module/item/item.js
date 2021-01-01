@@ -5,7 +5,7 @@ import {U, MIX, MIXINS} from "../modules.js";
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
  */
-export class ScionItem extends MIX(Item).with(MIXINS.Updater) {
+export class ScionItem extends Item {
     // Getters: Data Retrieval
     get iData() { return this.data.data }
     get eData() { return this.iData }

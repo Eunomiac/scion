@@ -1,11 +1,11 @@
-<div id="callingsList" class="popout callingsList flex-col height100 {{#if (test (count callings.actorSelected) "==" 3)}}hidden{{/if}}">
+<div id="callingsList" class="popout callingsList flex-col height100 {{#if (test callings.numChosen "==" 3)}}hidden{{/if}}">
     <div id="callingsSource" class="flex-col" data-binid="callingsSource">
-        {{#each callings.patron as |calling|}}
+        {{#each callings.available.patron as |calling|}}
         <span class="calling handle patron noFlex {{checkInvalid "calling:patron" calling}}" data-calling="{{calling}}">
             {{loc (concat "scion.calling." calling ".name")}}
         </span>
         {{/each}}        
-        {{#each callings.other as |calling|}}
+        {{#each callings.available.other as |calling|}}
         <span class="calling handle noFlex {{checkInvalid "calling:other" calling}}" data-calling="{{calling}}">
             {{loc (concat "scion.calling." calling ".name")}}
         </span>

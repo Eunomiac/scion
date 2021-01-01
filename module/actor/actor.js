@@ -6,7 +6,7 @@ import {_, U, SCION, MIX, MIXINS} from "../modules.js";
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export class ScionActor extends MIX(Actor).with(MIXINS.Updater) {
+export class ScionActor extends Actor {
     // Getters: Data Retrieval
     get aData() { return this.data.data }
     get eData() { return this.aData }
@@ -14,8 +14,81 @@ export class ScionActor extends MIX(Actor).with(MIXINS.Updater) {
     get ownedItems() { return this.data.items }
 
     prepareData() {
+        this.pendingUpdateData = this.pendingUpdateData ?? {};
         super.prepareData();
         if (this.data.type === "major") {setTimeout(() => this._prepareMajorCharData(), 100)}
+    }
+
+    getProp(fieldKey, fieldIndex) {
+        let propRef = this;
+        if (fieldKey.includes("@")) {
+            const fieldIndices = (fieldIndex !== undefined && fieldIndex.split("|").map((index) => U.Int(index))) || [];
+            const fieldKeys = fieldKey.split(".");
+            while (fieldKeys.length) {
+                const theseFields = [];
+                while (fieldKeys.length && fieldKeys[0] !== "@") {
+                    theseFields.push(fieldKeys.shift());
+                }
+                if (theseFields.length) {
+                    propRef = getProperty(propRef, theseFields.join(".").replace(/^(data\.)+/u, "data.data."));
+                }
+                if (propRef !== undefined && fieldKeys[0] === "@") {
+                    fieldKeys.shift();
+                    propRef = propRef[fieldIndices.shift()];
+                }
+            }
+        } else {
+            propRef = getProperty(propRef, fieldKey.replace(/^(data\.)+/u, "data.data."));
+        }
+        return propRef;
+    }
+
+    setProp(value, fieldKey, fieldIndex = "") {
+        if (fieldKey.includes("@")) {
+            const fieldIndices = fieldIndex.split("|").map((index) => U.Int(index));
+            const fieldKeys = fieldKey.split(".");
+            const finalVal = value;
+            const initialFieldKeys = [];
+            while (fieldKeys.length > 1 && fieldKeys[0] !== "@") {
+                initialFieldKeys.push(fieldKeys.shift());
+            }
+            const dotRef = initialFieldKeys.join(".");
+            value = this.getProp(dotRef);
+            const mergeValue = Array.isArray(value) ? [] : {};
+            let mergeRef = mergeValue;
+            while (fieldKeys.length > 1) {
+                let thisKey = fieldKeys.shift();
+                if (thisKey === "@") {
+                    thisKey = fieldIndices.shift();
+                }
+                mergeRef[thisKey] = fieldKeys[0] === "@" ? [] : {};
+                mergeRef = mergeRef[thisKey];
+            }
+            const [finalKey] = fieldKeys[0] === "@" ? fieldIndices : fieldKeys;
+            mergeRef[finalKey] = finalVal;
+            this.setProp(U.Merge(value, mergeValue, true), dotRef);
+        } else {            
+            this.queueUpdateData({[fieldKey]: value});
+        }
+    }
+
+    queueUpdateData(updateData) {
+        updateData = U.KeyMapObj(updateData, (key) => key.replace(/^(data\.)+/u, "data."), (val) => val);
+        const updateDataFields = _.omit(updateData, (val, fieldKey) => JSON.stringify(this.getProp(fieldKey)) === JSON.stringify(val));
+        if (isObjectEmpty(updateDataFields)) {
+            return false;
+        }
+        this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateDataFields, true);
+        return true;
+    }
+    async processUpdateQueue(isForcing = false) {
+        if (!isForcing && isObjectEmpty(this.pendingUpdateData)) {
+            return false;
+        }
+        const updateData = {...this.pendingUpdateData};
+        this.pendingUpdateData = {};
+        await this.update(updateData);
+        return true;
     }
 
     async _prepareMajorCharData() {

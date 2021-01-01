@@ -14,7 +14,7 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
 
     get aData() { return this.item.aData }
 
-    get sheet() {
+    get sheetElem() {
         if (!this._sheet) {
             if (this.actor) {
                 this._sheet = document.getElementById(`actor-${this.actor._id}-item-${this.item._id}`);

@@ -1,7 +1,6 @@
 
 <div class="calling callingDrop {{#if calling.name}}{{calling.name}}{{else}}generic{{/if}} alignCenter" data-calling="{{#if calling.name}}{{calling.name}}{{else}}empty{{/if}}" data-slot="{{index}}" data-binid="calling-{{index}}">
     {{#if calling.name}}    
-    {{log this}}
     <h1 class="clickable openPopout handle {{#if (test calling.name "in" callings.available.patron)}}patron{{/if}}" data-htmlid="knacksList-{{calling.name}}" data-calling="{{calling.name}}">{{calling.name}}</h1>
     <div class="dotline space5 flex-row alignCenter noLabel">
         <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>

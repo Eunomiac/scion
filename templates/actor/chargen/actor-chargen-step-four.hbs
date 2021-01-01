@@ -11,7 +11,7 @@
     {{/each}}
     <div id="callingsMirror" class="callingsList popout flex-col mirrorContainer"></div>
     {{> (blocks.popouts.callingsList.template) }}
-    {{#if (test (count callings.actor) "==" 3)}}
+    {{#if (test callings.numChosen "==" 3)}}
     <div class="footer">
         <div class="unassignedDots unassignedCallingDots flex-col alignCenter">
             <h2 class="alignCenter noBG">{{#if unassignedCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>

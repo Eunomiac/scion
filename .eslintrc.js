@@ -90,6 +90,7 @@ const defaultRules = {
     "no-new": 0,
     "no-param-reassign": 0,
     "no-plusplus": 0,
+    // "no-prototype-builtins": 0,
     "no-restricted-globals": 0,
     "no-restricted-syntax": 0,
     "no-tabs": ["warn", {"allowIndentationTabs": true}],
@@ -137,6 +138,7 @@ const deploymentRules = {
     "no-console": "error",
     "no-debugger": "error",
     "no-empty-function": "error",
+    "no-prototype-builtins": "error",
     "no-trailing-spaces": "error",
     "no-unused-vars": "error"
 };

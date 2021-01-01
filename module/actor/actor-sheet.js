@@ -10,7 +10,7 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampText, MIXI
     get aData() { return this.actor.aData }
     get eData() { return this.actor.eData }
     get ownedItems() { return this.actor.ownedItems }
-    get sheet() {
+    get sheetElem() {
         this._sheet = this._sheet ?? document.getElementById(`actor-${this.actor._id}`);
         return this._sheet;
     }
