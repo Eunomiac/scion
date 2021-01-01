@@ -2372,7 +2372,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid {
   --gridHeight: calc(560px - 26px - 10px - 5px - 32px);
-  grid: "skillHeader skillHeader specHeader specHeader attrHeader attrHeader" 26px "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px) "unspentSkills unspentSkills unspentSkills unspentAttrs unspentAttrs unspentAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
+  grid: "skillHeader skillHeader specHeader specHeader attrHeader attrHeader" 26px "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px) "unassignedSkills unassignedSkills unassignedSkills unassignedAttrs unassignedAttrs unassignedAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid h2 {
@@ -2455,32 +2455,32 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   margin: 0px 5px 5px 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots {
   flex: 0 0 50%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots h2 {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots h2 {
   font-size: calc(var(--fontSizeH2) * 0.75);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots.unspentSkillDots {
-  grid-area: unspentSkills;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedSkillDots {
+  grid-area: unassignedSkills;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots.unspentAttrDots {
-  grid-area: unspentAttrs;
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots {
+  grid-area: unassignedAttrs;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots.unspentAttrDots > div {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots > div {
   margin: 3px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots.unspentAttrDots label {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots label {
   width: 75px;
   min-width: 75px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots div.reportBox {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots div.reportBox {
   display: none !important;
   background-color: white !important;
   width: 320px !important;
@@ -2496,7 +2496,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   padding-top: 3px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unspentDots div.reportBox span.reportLine {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenThree .grid .unassignedDots div.reportBox span.reportLine {
   display: block !important;
   height: 12px !important;
   min-height: 12px !important;

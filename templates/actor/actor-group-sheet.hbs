@@ -83,7 +83,7 @@
                                 <div class="attrRow dotDropBin dotline labelledDotLine" data-dottype="{{arena}}" data-trait="{{attribute}}">
                                     <div class="label">{{loc (concat "scion.attribute." attribute)}}</div>
                                     {{#for 5}}
-                                        <span class="dot click" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{@index}}"></span>
+                                        <span class="dot click" data-dottype="{{arena}}" data-trait="{{attribute}}" data-val="{{math @index "++"}}"></span>
                                     {{/for}}
                                 </div>
                             {{/each}}
@@ -102,7 +102,7 @@
                     <div class="leftvirtue strong text">{{loc (concat "scion.virtue." pantheon.virtues.[0])}}</div>
                     <div class="dotline largeDots">
                         {{#for 5}}
-                            <span class="dot {{#if (eq (lookup ../data.virtue [value]) @index)}}virtueFull{{/if}} {{#if (eq @index 3)}}virtueCenter{{/if}}" data-trait="virtue" data-val="{{@index}}"></span>
+                            <span class="dot {{#if (test (lookup ../data.virtue [value]) "==" (math @index "++"))}}virtueFull{{/if}} {{#if (test @index "==" 2)}}virtueCenter{{/if}}" data-trait="virtue" data-val="{{math @index "++"}}"></span>
                         {{/for}}
                     </div>
                     <div class="rightvirtue strong text alignRight">{{loc (concat "scion.virtue." pantheon.virtues.[1])}}</div>

@@ -26,15 +26,15 @@
                 "pathPriorities": ["origin", "role", "pantheon"],
                 "purviews": [],
                 "birthrights": {
-                    "unspentDots": 0,
+                    "assignableGeneralDots": {"xp": 0, "other": 0},
                     "list": []
                 },
                 "callings": {
-                    "assignableGeneralDots": { "xp": 0, "other": 2 },
+                    "assignableGeneralDots": {"xp": 0, "other": 2},
                     "list": []
                 },
                 "knacks": {
-                    "assignableExtraKnacks": { "xp": 0, "other": 0},
+                    "assignableExtraKnacks": {"xp": 0, "other": 0},
                     "list": []
                 },
                 "finishingBonusOn": "",

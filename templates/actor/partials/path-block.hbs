@@ -31,10 +31,10 @@
             </div>
             <div class="flex-row-baseline conditionContainer alignRight width100">
                 {{#each (lookup actor.pathConditions data.data.type) as |condition type|}}
-                    {{~#if condition.iData.title~}}
+                    {{~#if condition.eData.title~}}
                     <span class="width10 alignCenter strong">►</span>
                     <span class="conditionSummary outsetFrame width40 alignCenter strong clampText" data-clamplines="1">
-                            {{condition.iData.title}}
+                            {{condition.eData.title}}
                     </span>
                     {{/if}}
                 {{/each}}

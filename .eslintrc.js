@@ -17,7 +17,7 @@ const defaultRules = {
     "dot-notation": ["warn"],
     "eol-last": 0,
     "eqeqeq": ["warn", "always"],
-    "function-call-argument-newline": ["warn", "never"],
+    "function-call-argument-newline": ["warn", "consistent"],
     "function-paren-newline": "warn",
     "indent": [
         "warn",

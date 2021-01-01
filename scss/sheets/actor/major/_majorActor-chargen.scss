@@ -23,7 +23,7 @@
         --gridHeight: calc(560px - 26px - 10px - 5px - 32px); 
         grid: "skillHeader skillHeader specHeader specHeader attrHeader attrHeader" 26px
               "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px)
-              "unspentSkills unspentSkills unspentSkills unspentAttrs unspentAttrs unspentAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
+              "unassignedSkills unassignedSkills unassignedSkills unassignedAttrs unassignedAttrs unassignedAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
 
         h2 {
             text-indent: 0;
@@ -87,14 +87,14 @@
                 }
             }
         }
-        .unspentDots {
+        .unassignedDots {
             flex: 0 0 50%;
             h2 { font-size: calc(var(--fontSizeH2) * 0.75) }
-            &.unspentSkillDots { 
-                grid-area: unspentSkills;
+            &.unassignedSkillDots { 
+                grid-area: unassignedSkills;
             }
-            &.unspentAttrDots {
-                grid-area: unspentAttrs;
+            &.unassignedAttrDots {
+                grid-area: unassignedAttrs;
                 > div { margin: 3px 0; }
                 label { width: 75px; min-width: 75px; }
             }

@@ -1,11 +1,11 @@
-import {U} from "../modules.js";
+import {U, MIX, MIXINS} from "../modules.js";
 // import "../external/dragula.min.js";
 
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
  */
-export class ScionItem extends Item {
+export class ScionItem extends MIX(Item).with(MIXINS.Updater) {
     // Getters: Data Retrieval
     get iData() { return this.data.data }
     get eData() { return this.iData }

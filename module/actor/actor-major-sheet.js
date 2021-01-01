@@ -89,7 +89,9 @@ export class MajorActorSheet extends ScionActorSheet {
 
         // PATH PRIORITIES
         const pathItems = [];
-        for (const pathType of actorData.pathPriorities) {pathItems.push(data.items.paths.find((item) => item.data.data.type === pathType))}
+        for (const pathType of actorData.pathPriorities) {
+            pathItems.push(data.items.paths.find((item) => item.data.data.type === pathType));
+        }
         data.items.paths = pathItems;
 
         // PATH SKILL COUNTS
@@ -103,58 +105,39 @@ export class MajorActorSheet extends ScionActorSheet {
         // #endregion
 
         // #region STEP THREE
+
+        // SKILLS
         data.skillVals = this.actor.skillVals;
+        data.unassignedSkillDots = this.actor.unassignedSkillDots;
 
-        // FILTERING OUT 0-SKILLS
-        data.unspentSkillDots = this.actor.unassignedSkillDots;
-        data.assignableSkillDots = this.actor.assignableSkillDots;
-
-        // EXPOSING SPECIALTY DATA
+        // SPECIALTIES
         data.skillSpecialties = this.actor.specialties;
 
-        // ATTRIBUTE PRIORITIES
-        data.arenaPriorities = this.aData.attributes.priorities;
-        data.arenas = U.KeyMapObj(SCION.ATTRIBUTES.arenas, (v) => U.KeyMapObj(v, (k, v) => v, (v) => this.actor.attrVals[v]));
-
-        const unspentArenaDots = _.pick(this.actor.unassignedArenaAttrDots, (v) => v > 0);
-        data.unspentGeneralAttrDots = this.actor.unassignedGeneralAttrDots;
-        data.unspentAttributeDots = U.SumVals(unspentArenaDots) + data.unspentGeneralAttrDots;
-        data.unspentArenaDots = [];
-        if (isObjectEmpty(unspentArenaDots)) {
-            data.unspentArenaDots = false;
-        } else {
-            for (const [arena, num] of Object.entries(unspentArenaDots)) {
-                data.unspentArenaDots.push(...new Array(num).fill(arena));
-            }
-        }
-        data.assignableGeneralAttrDots = this.actor.assignableGeneralAttrDots;
+        // ATTRIBUTES
+        data.arenaPriorities = this.eData.attributes.priorities;
+        data.arenas = U.KeyMapObj(SCION.ATTRIBUTES.arenas, (arenaAttrs) => U.KeyMapObj(arenaAttrs, (i, attrName) => attrName, (attrName) => this.actor.attrVals[attrName]));
+        data.unassignedAttributeDots = {...this.actor.unassignedArenaAttrDots, general: this.actor.unassignedGeneralAttrDots};
+        data.isUnassignedAttributeDots = Boolean(U.SumVals(data.unassignedAttributeDots));
 
         // #endregion
         
         // #region STEP FOUR
         data.callings = {
-            patron: (patron && SCION.GODS[patron].callings) || [],
-            other: Object.keys(SCION.CALLINGS.list).filter((calling) => !patron || !SCION.GODS[patron].callings.includes(calling)),
-            actorSelected: Object.values(actorData.callings.list).filter((calling) => calling.name in SCION.CALLINGS.list).map((calling) => calling.name),
-            actor: actorData.callings.list,
-            selectedCalling: actorData.callings.selected,
-            keywordsAvailable: {},
-            heroicKnacksList: actorData.callings.selected ? SCION.CALLINGS.list[actorData.callings.selected].knacks.heroic : false,
-            immortalKnacksList: actorData.callings.selected ? SCION.CALLINGS.list[actorData.callings.selected].knacks.immortal : false
+            available: {
+                patron: patron ? SCION.GODS[patron].callings : [],
+                other: []
+            },
+            actor: this.actor.callings,
+            selected: actorData.callings.selected || false
         };
-        data.unspentCallingDots = Math.max(0, U.SumVals(actorData.callings.assignableGeneralDots)
-            - U.SumVals(actorData.callings.list.map((calling) => Math.max(0, calling.value - 1))));
-        data.callings.actorSelected.forEach((callingName) => {
-            data.callings.keywordsAvailable[callingName] = U.Loc(`scion.calling.${callingName}.keywords`).
-                split(", ").
-                filter((keyword) => !this.actor.callings[callingName].keywordsChosen.includes(keyword));
-        });
+        data.callings.available.other = Object.keys(SCION.CALLINGS.list).filter((calling) => !data.callings.available.patron.includes(calling));
+
+        data.unassignedCallingDots = this.actor.unassignedCallingDots;
 
         // #endregion
 
         // #endregion
 
-        // #region FRONT
         U.LOG({
             "ACTOR REPORT": {
                 "[Sheet Context]": data,
@@ -171,11 +154,11 @@ export class MajorActorSheet extends ScionActorSheet {
             // #region Menu Rosette
             const [menuRosette] = html.find("nav.menuRosette");
             const sheetContainer = document.getElementById(`actor-${this.actor.id}`);
-            const [sheetElement] = html.find("section#characterSheet");
+            const [sheetElem] = html.find("section#characterSheet");
             const [closeButton] = html.find("div.closeButton");
 
             // Make Menu Rosette draggable
-            const menuDragger = new Dragger(this, html, menuRosette, [sheetContainer, sheetElement], {height: 100, width: 100}, [menuRosette, closeButton]);
+            const menuDragger = new Dragger(this, html, menuRosette, [sheetContainer, sheetElem], {height: 100, width: 100}, [menuRosette, closeButton]);
 
             // Double-Click on Menu Rosette to Collapse Sheet
             html.find("nav.menuRosette").dblclick((event) => {
@@ -200,7 +183,7 @@ export class MajorActorSheet extends ScionActorSheet {
             const pathDragger = dragula({
                 containers: [pathContainer],
                 mirrorContainer: pathMirror,
-                sheetElement: this.sheet
+                sheetElem: this.sheetElem
             });
             pathDragger.on("drop", async () => {
                 await this.actor.update({
@@ -217,7 +200,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 containers: [arenaContainer],
                 moves: (e, s, handle) => handle.classList.contains("handle"),
                 mirrorContainer: arenaMirror,
-                sheetElement: this.sheet
+                sheetElem: this.sheetElem
             });
 
             arenaDragger.on("drop", async () => {
@@ -231,7 +214,7 @@ export class MajorActorSheet extends ScionActorSheet {
             // #region [GEN DRAG] CALLING SELECTION
             const addCalling = async (callingElement, targetBin, sourceBin) => {
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
-                    const actorCallings = this.aData.callings.list;
+                    const actorCallings = this.eData.callings.list;
                     if (sourceBin.classList.contains("callingDrop")) {
                         const sourceData = U.Clone(actorCallings[U.Int(sourceBin.dataset.slot)]);
                         actorCallings[U.Int(sourceBin.dataset.slot)] = U.Clone(actorCallings[U.Int(targetBin.dataset.slot)]);
@@ -243,7 +226,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 }
             };
             const remCalling = async (callingBin) => {
-                const actorCallings = this.aData.callings.list;
+                const actorCallings = this.eData.callings.list;
                 actorCallings[U.Int(callingBin.dataset.slot)] = {...SCION.CALLINGS.actorDefault};
                 await this.actor.update({"data.callings.list": actorCallings});
             };
@@ -258,7 +241,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 }
             };
             const selectCalling = async (callingBin) => {
-                if (this.aData.callings.selected === callingBin.dataset.calling) {
+                if (this.eData.callings.selected === callingBin.dataset.calling) {
                     await this.actor.update({["data.callings.selected"]: false});
                 } else {    
                     await this.actor.update({["data.callings.selected"]: callingBin.dataset.calling});
@@ -275,8 +258,8 @@ export class MajorActorSheet extends ScionActorSheet {
                 "accepts": (element, target, source) => {
                     if (source.id === "callingsSource") {
                         return target.classList.contains("callingDrop")
-                            && this.aData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length < 3
-                            && !this.aData.callings.list.map((calling) => calling.name).includes(element.dataset.calling);
+                            && this.eData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length < 3
+                            && !this.eData.callings.list.map((calling) => calling.name).includes(element.dataset.calling);
                     } else if (source.classList.contains("callingDrop")) {
                         return target.classList.contains("callingDrop");
                     }
@@ -286,7 +269,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 "copy": false,
                 "removeOnSpill": true,
                 "mirrorContainer": callingMirror,
-                "sheetElement": this.sheet
+                "sheetElem": this.sheetElem
             });
             callingDragger.on("cancel", (element, container, source) => {
                 if (source.classList.contains("callingDrop") && this.currentlyOver?.dataset.calling !== element.dataset.calling) {
@@ -325,7 +308,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 copy: false,
                 removeOnSpill: true,
                 mirrorContainer: chargenThreeDotMirror,
-                sheetElement: this.sheet
+                sheetElem: this.sheetElem
             });
             this.addDragListener(chargenThreeDotDragger, "drag", [chargenThreeDotBins]);
             this.addDragListener(chargenThreeDotDragger, "dragend", [chargenThreeDotBins]);
@@ -344,7 +327,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 copy: false,
                 removeOnSpill: true,
                 mirrorContainer: chargenFourDotMirror,
-                sheetElement: this.sheet
+                sheetElem: this.sheetElem
             });
 
             this.addDragListener(chargenFourDotDragger, "drag", [chargenFourDotBins]);

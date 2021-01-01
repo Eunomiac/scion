@@ -1,25 +1,26 @@
 
-<div class="calling callingDrop {{#if name}}{{name}}{{else}}generic{{/if}} alignCenter" data-calling="{{#if name}}{{name}}{{else}}empty{{/if}}" data-slot="{{@index}}" data-binid="calling-{{@index}}">
-    {{#if name}}    
-    <h1 class="clickable openPopout handle {{#if (test name "in" patron)}}patron{{/if}}" data-htmlid="knacksList-{{name}}" data-calling="{{name}}">{{name}}</h1>
+<div class="calling callingDrop {{#if calling.name}}{{calling.name}}{{else}}generic{{/if}} alignCenter" data-calling="{{#if calling.name}}{{calling.name}}{{else}}empty{{/if}}" data-slot="{{index}}" data-binid="calling-{{index}}">
+    {{#if calling.name}}    
+    {{log this}}
+    <h1 class="clickable openPopout handle {{#if (test calling.name "in" callings.available.patron)}}patron{{/if}}" data-htmlid="knacksList-{{calling.name}}" data-calling="{{calling.name}}">{{calling.name}}</h1>
     <div class="dotline space5 flex-row alignCenter noLabel">
         <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>
-        <div class="chargenFourDotBin dotBin dotContainer fader" data-types="calling" data-calling="{{name}}" data-binid="{{name}}" data-field="data.callings.list.@.value" data-fieldindex="{{@index}}">
-        {{#for value}}
-            <span class="dot" data-types="{{dottype "calling" name @index}}"></span>
+        <div class="chargenFourDotBin dotBin dotContainer fader" data-types="calling" data-calling="{{calling.name}}" data-binid="{{calling.name}}" data-field="data.callings.list.@.value" data-fieldindex="{{index}}">
+        {{#for calling.value}}
+            <span class="dot" data-types="{{dottype "calling" calling.name (math @index "++")}}"></span>
         {{/for}}
         </div>
     </div>
     <h2>Knacks</h2>
-    <div class="knacks flex-col-start knacksDrop alignCenter height30 width100" data-calling="{{name}}" data-binid="{{name}}-knacks">
-        {{#each knacks as |knack|}}
-        <span class="knack outsetFrame width90 text" data-calling="{{../name}}" data-knack="{{knack}}">{{loc (concat "scion.knack." knack ".name")}}</span>
+    <div class="knacks flex-col-start knacksDrop alignCenter height30 width100" data-calling="{{calling.name}}" data-binid="{{calling.name}}-knacks">
+        {{#each calling.knacks as |knack|}}
+        <span class="knack outsetFrame width90 text" data-calling="{{../calling.name}}" data-knack="{{knack}}">{{loc (concat "scion.knack." knack ".name")}}</span>
         {{/each}}
     </div>
     <h2>Keywords</h2>
     <div class="keywords flex-col-start alignCenter height30 width100">
-        {{#for value}}
-        <div class="contentEditable outsetFrame width70 text"></div>
+        {{#for calling.value}}
+        <div class="contentEditable outsetFrame width70 text" data-field="data.callings.list.@.keywordsChosen.@" data-fieldindex="{{../index}}|{{@index}}"></div>
         {{/for}}
     </div>
     {{/if}}

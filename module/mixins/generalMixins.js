@@ -233,6 +233,87 @@ export const DotDragger = (superClass) => class extends superClass {
         return false;
     }
 };
+export const Updater = (superClass) => class extends superClass {
+    prepareData() {
+        this.pendingUpdateData = this.pendingUpdateData ?? {};
+        super.prepareData();
+    }
+
+    getProp(fieldKey, fieldIndex, isCheckingPendingUpdates = true) {
+        let propRef = isCheckingPendingUpdates ? this.pendingUpdateData : this;
+        if (fieldKey.includes("@")) {
+            const fieldIndices = (fieldIndex !== undefined && fieldIndex.split("|").map((index) => U.Int(index))) || [];
+            const fieldKeys = fieldKey.split(".");
+            while (fieldKeys.length) {
+                const theseFields = [];
+                while (fieldKeys.length && fieldKeys[0] !== "@") {
+                    theseFields.push(fieldKeys.shift());
+                }
+                if (theseFields.length) {
+                    propRef = getProperty(propRef, theseFields.join(".").replace(/^(data\.)+/u, isCheckingPendingUpdates ? "data." : "data.data."));
+                }
+                if (propRef !== undefined && fieldKeys[0] === "@") {
+                    fieldKeys.shift();
+                    propRef = propRef[fieldIndices.shift()];
+                }
+            }
+        } else {
+            propRef = getProperty(propRef, fieldKey.replace(/^(data\.)+/u, isCheckingPendingUpdates ? "data." : "data.data."));
+        }        
+        if (propRef === undefined && isCheckingPendingUpdates) {
+            propRef = this.getProp(fieldKey, fieldIndex, false);
+        }
+        return propRef;
+    }
+
+    setProp(value, fieldKey, fieldIndex = "") {
+        if (fieldKey.includes("@")) {
+            const fieldIndices = fieldIndex.split("|").map((index) => U.Int(index));
+            const fieldKeys = fieldKey.split(".");
+            const finalVal = value;
+            const initialFieldKeys = [];
+            while (fieldKeys.length > 1 && fieldKeys[0] !== "@") {
+                initialFieldKeys.push(fieldKeys.shift());
+            }
+            const dotRef = initialFieldKeys.join(".");
+            value = this.getProp(dotRef);
+            const mergeValue = Array.isArray(value) ? [] : {};
+            let mergeRef = mergeValue;
+            while (fieldKeys.length > 1) {
+                let thisKey = fieldKeys.shift();
+                if (thisKey === "@") {
+                    thisKey = fieldIndices.shift();
+                }
+                mergeRef[thisKey] = fieldKeys[0] === "@" ? [] : {};
+                mergeRef = mergeRef[thisKey];
+            }
+            const [finalKey] = fieldKeys[0] === "@" ? fieldIndices : fieldKeys;
+            mergeRef[finalKey] = finalVal;
+            this.setProp(U.Merge(value, mergeValue, true), dotRef);
+        } else {            
+            this.queueUpdateData({[fieldKey]: value});
+        }
+    }
+
+    queueUpdateData(updateData) {
+        updateData = U.KeyMapObj(updateData, (key) => key.replace(/^(data\.)+/u, "data."), (val) => val);
+        const updateDataFields = _.omit(updateData, (val, fieldKey) => JSON.stringify(this.getProp(fieldKey)) === JSON.stringify(val));
+        if (isObjectEmpty(updateDataFields)) {
+            return false;
+        }
+        this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateDataFields, true);
+        return true;
+    }
+    async processUpdateQueue(isForcing = false) {
+        if (!isForcing && isObjectEmpty(this.pendingUpdateData)) {
+            return false;
+        }
+        const updateData = {...this.pendingUpdateData};
+        this.pendingUpdateData = {};
+        await this.update(updateData);
+        return true;
+    }
+};
 export const EditableDivs = (superClass) => class extends ClampText(superClass) {
     activateListeners(html) {
         super.activateListeners(html);
@@ -269,7 +350,7 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                 element.focus();
             };
             const _onEditFocus = () => { document.execCommand("selectAll") };
-            const _onEditClickOff = (event) => {
+            const _onEditClickOff = async (event) => {
                 event.preventDefault();
                 const element = event.currentTarget;
                 const dataSet = element.dataset;
@@ -279,11 +360,11 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
 
                 if ("field" in dataSet) {
                     const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
-                    let entityVal = getProperty(this.entity.data, dataSet.field);
-                    if (entityVal === undefined) {entityVal = getProperty(this.entity, dataSet.field)}
-                    if ("fieldindex" in dataSet && Array.isArray(entityVal)) {entityVal[U.Int(dataSet.fieldindex)] = elementVal} else {entityVal = elementVal}
-                    this.entity.update({[dataSet.field]: entityVal});
-                    if (elementVal && element.classList.contains("quote")) {element.innerHTML = _.escape(`"${elementVal}"`)}
+                    this.entity.setProp(elementVal, dataSet.field, dataSet.fieldindex);
+                    await this.entity.processUpdateQueue();
+                    if (elementVal && element.classList.contains("quote")) {
+                        element.innerHTML = _.escape(`"${elementVal}"`);
+                    }
                 }
                 checkForPlaceholder(element);
             };
@@ -300,25 +381,9 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
 
                 // If dataset includes a field, fill the element with the current data:
                 if ("field" in dataSet) {
-                    // const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
-                    let entityVal = getProperty(this.entity.data, dataSet.field);
-                    if (entityVal === undefined) {entityVal = getProperty(this.entity, dataSet.field)}
-                    if ("fieldindex" in dataSet && Array.isArray(entityVal)) {entityVal = entityVal[U.Int(dataSet.fieldindex)]}
-                    if (entityVal && typeof entityVal !== "string") {
-                        U.THROW({
-                            "this": this,
-                            "...entity": this.entity,
-                            "dataSet.field": dataSet.field,
-                            "entityVal-data": getProperty(this.entity.data, dataSet.field),
-                            "entityVal-root": getProperty(this.entity, dataSet.field),
-                            entityVal
-                        }, "Invalid Field");
-                    } else {
-                        entityVal = entityVal || "";
-                        element.innerHTML = (entityVal && element.classList.contains("quote") ? _.escape(`"${entityVal}"`) : entityVal).trim();
-                    }
+                    const entityVal = this.entity.getProp(dataSet.field, dataSet.fieldindex) || "";
+                    element.innerHTML = (entityVal && element.classList.contains("quote") ? _.escape(`"${entityVal}"`) : entityVal).trim();
                 }
-
                 checkForPlaceholder(element);
             });
             // #endregion

@@ -32,9 +32,8 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
         U.LOG(U.IsDebug() && {
             "this PathItemSheet": this,
             "... .getData() [Sheet Context]": data,
-            "... .iData": data.data,
+            "... .eData": data.data,
             "... .actor": this.actor,
-            "... .aData": this.aData,
             "... .conditions": data.conditions
         }, this.item.name, "PathItemSheet: getData()", {"groupStyle": "l2"});
 
@@ -42,11 +41,11 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
     }
 
     get suspensionCondition() {
-        return this.item.getActorItems("condition").find((item) => item.subtype === "pathSuspension" && item.iData.linkedItem === this.item.id);
+        return this.item.getActorItems("condition").find((item) => item.subtype === "pathSuspension" && item.eData.linkedItem === this.item.id);
     }
 
     get revocationCondition() {
-        return this.item.getActorItems("condition").find((item) => item.subtype === "pathRevocation" && item.iData.linkedItem === this.item.id);
+        return this.item.getActorItems("condition").find((item) => item.subtype === "pathRevocation" && item.eData.linkedItem === this.item.id);
     }
 
     activateListeners(html) {
@@ -80,7 +79,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
             "copy": true,
             "removeOnSpill": true,
             "mirrorContainer": skillMirror,
-            "sheetElement": this.sheet
+            "sheetElem": this.sheetElem
         });
         pathSkillDragger.on("cancel", (element, container, source) => {
             if (source.classList.contains("pathSkills")) {

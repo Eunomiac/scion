@@ -92,14 +92,14 @@ const createTestChar = async (name) => {
         callings[calling].keywordsChosen.length = callings[calling].value;
         let callingPointsLeft = callings[calling].value;
         while (callingPointsLeft) {
-            const availableKnacks = Object.keys(SCION.KNACKS).filter((knackName) => {
-                const knack = SCION.KNACKS[knackName];
+            const availableKnacks = Object.keys(SCION.KNACKS.list).filter((knackName) => {
+                const knack = SCION.KNACKS.list[knackName];
                 return !chosenKnacks.includes(knackName)
                     && ["any", calling].includes(knack.calling)
                     && (callingPointsLeft >= 2 || knack.tier === "heroic");
             });
             chosenKnacks.unshift(_.sample(availableKnacks));
-            callingPointsLeft -= SCION.KNACKS[chosenKnacks[0]].tier === "immortal" ? 2 : 1;
+            callingPointsLeft -= SCION.KNACKS.list[chosenKnacks[0]].tier === "immortal" ? 2 : 1;
             callings[calling].knacks.push(chosenKnacks[0]);
         }
     }
@@ -195,7 +195,7 @@ Hooks.once("init", async () => {
         for: (n, options) => {
             const results = [];
             const data = Handlebars.createFrame(options.data);
-            for (let i = 1; i <= n; i++) {
+            for (let i = 0; i < n; i++) {
                 data.index = i;
                 results.push(options.fn(i, {data}));
             }
@@ -208,7 +208,7 @@ Hooks.once("init", async () => {
             while (args.length && args.length % 2 === 0) {formatDict[args.shift()] = args.shift()}
             return U.Loc(locString, formatDict);
         },
-        count: (val) => Object.values(val)?.length ?? 0,
+        count: (val) => Object.values(val ?? {})?.length ?? 0,
         concat: (...args) => {
             args.pop();
             args = args.filter((arg) => arg !== "");
@@ -231,6 +231,14 @@ Hooks.once("init", async () => {
                 mergedObject = U.Merge(mergedObject, args.shift());
             }
             return mergedObject;
+        },
+        bundle: (...args) => {
+            args.pop();
+            const bundle = {};
+            while (args.length && args.length % 2 === 0) {
+                bundle[args.shift()] = args.shift();
+            }
+            return bundle;
         },
         math: function(v1, operator, v2, options) {
             switch (operator) {
@@ -287,14 +295,14 @@ Hooks.once("init", async () => {
                 case "calling": {
                     switch (subCat) {
                         case "other": {
-                            if (actor.aData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length >= 2
-                                && !actor.aData.callings.list.some((calling) => SCION.GODS[actor.aData.patron].callings.includes(calling.name))) {
+                            if (actor.eData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length >= 2
+                                && !actor.eData.callings.list.some((calling) => SCION.GODS[actor.eData.patron].callings.includes(calling.name))) {
                                 return "invalid";
                             }
                         }
                         // falls through
                         case "patron": {
-                            if (actor.aData.callings.list.map((calling) => calling.name).includes(trait)) {
+                            if (actor.eData.callings.list.map((calling) => calling.name).includes(trait)) {
                                 return "invalid";
                             }
                             break;
@@ -304,10 +312,10 @@ Hooks.once("init", async () => {
                     break;
                 }
                 case "knack": {
-                    const actorKnacks = actor.aData.callings.list.reduce((knacksList, calling) => _.uniq([...knacksList, ...calling.knacks]), []);
+                    const actorKnacks = actor.eData.callings.list.reduce((knacksList, calling) => _.uniq([...knacksList, ...calling.knacks]), []);
                     const [knack, calling] = trait.split(":");
                     if (actorKnacks.includes(knack)) {return "invalid"}
-                    if (SCION.KNACKS[knack].tier === "immortal" && actor.callings[calling].value < 2) {return "invalid"}
+                    if (SCION.KNACKS.list[knack].tier === "immortal" && actor.callings[calling].value < 2) {return "invalid"}
                 }
                 // no default
             }
