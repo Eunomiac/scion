@@ -1699,41 +1699,69 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout#callingsList
   top: 70px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout[id|="knacksList"] {
-  width: 200px;
-  height: 600px;
-  left: -25%;
-  top: 70px;
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout#knacksList {
+  width: 180px;
+  left: -180px;
+  top: 110px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout#knacksList h1.knackCategory {
+  text-transform: uppercase;
+  font-family: Oswald;
+  color: var(--black);
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout#knacksList > div {
+  padding: 0 0 15px 0;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle {
   display: block;
-  height: 40px;
-  min-height: 40px;
-  width: 120px;
-  margin: 5px 0px;
   color: var(--black);
-  background-image: url("../images/bubbles/calling-generic.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
   border: none;
-  font-size: 24px;
   font-family: Oswald;
   font-weight: normal;
-  line-height: 37px;
   text-transform: uppercase;
   text-shadow: var(--textShadowTitle);
   text-align: center;
   filter: drop-shadow(2px 2px 2px black);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.immortal {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.invalid {
+  background-image: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle {
+  height: 40px;
+  min-height: 40px;
+  width: 120px;
+  margin: 5px 0;
+  background-image: url("../images/bubbles/calling-generic.png");
+  font-size: 24px;
+  line-height: 37px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.patron {
   background-image: url("../images/bubbles/calling-patron.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.calling.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList h1.gu-mirror.handle.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.calling.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList h1.gu-mirror.handle.invalid {
-  background-image: none;
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack {
+  height: 20px;
+  min-height: 20px;
+  width: 170px;
+  margin: 2px 0;
+  background-image: url("../images/bubbles/knack-heroic.png");
+  font-size: 12px;
+  line-height: 20px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.callingsList span.knack.immortal, body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout.knacksList span.knack.immortal {
+  background-image: url("../images/bubbles/knack-immortal.png");
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot {

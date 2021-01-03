@@ -20,74 +20,43 @@ export class ScionActor extends Actor {
     }
 
     getProp(fieldKey, fieldIndex) {
-        let propRef = this;
-        if (fieldKey.includes("@")) {
-            const fieldIndices = (fieldIndex !== undefined && fieldIndex.split("|").map((index) => U.Int(index))) || [];
-            const fieldKeys = fieldKey.split(".");
-            while (fieldKeys.length) {
-                const theseFields = [];
-                while (fieldKeys.length && fieldKeys[0] !== "@") {
-                    theseFields.push(fieldKeys.shift());
-                }
-                if (theseFields.length) {
-                    propRef = getProperty(propRef, theseFields.join(".").replace(/^(data\.)+/u, "data.data."));
-                }
-                if (propRef !== undefined && fieldKeys[0] === "@") {
-                    fieldKeys.shift();
-                    propRef = propRef[fieldIndices.shift()];
-                }
-            }
-        } else {
-            propRef = getProperty(propRef, fieldKey.replace(/^(data\.)+/u, "data.data."));
+        const entityVal = (this.updatingData ? getProperty(this.updatingData, fieldKey) : null)
+            ?? getProperty(this.pendingUpdateData, fieldKey)
+            ?? getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."));
+        if (!_.isUndefined(fieldIndex)) {
+            return Array.isArray(entityVal) ? U.Clone(entityVal[U.Int(fieldIndex)]) : undefined; 
         }
-        return propRef;
+        return U.Clone(entityVal);
     }
 
-    setProp(value, fieldKey, fieldIndex = "") {
-        if (fieldKey.includes("@")) {
-            const fieldIndices = fieldIndex.split("|").map((index) => U.Int(index));
-            const fieldKeys = fieldKey.split(".");
-            const finalVal = value;
-            const initialFieldKeys = [];
-            while (fieldKeys.length > 1 && fieldKeys[0] !== "@") {
-                initialFieldKeys.push(fieldKeys.shift());
-            }
-            const dotRef = initialFieldKeys.join(".");
-            value = this.getProp(dotRef);
-            const mergeValue = Array.isArray(value) ? [] : {};
-            let mergeRef = mergeValue;
-            while (fieldKeys.length > 1) {
-                let thisKey = fieldKeys.shift();
-                if (thisKey === "@") {
-                    thisKey = fieldIndices.shift();
-                }
-                mergeRef[thisKey] = fieldKeys[0] === "@" ? [] : {};
-                mergeRef = mergeRef[thisKey];
-            }
-            const [finalKey] = fieldKeys[0] === "@" ? fieldIndices : fieldKeys;
-            mergeRef[finalKey] = finalVal;
-            this.setProp(U.Merge(value, mergeValue, true), dotRef);
-        } else {            
-            this.queueUpdateData({[fieldKey]: value});
+    async setProp(value, fieldKey, fieldIndex) {
+        if (!_.isUndefined(fieldIndex)) {
+            const updateVal = value;
+            value = this.getProp(fieldKey);
+            value[U.Int(fieldIndex)] = updateVal;
         }
+        if (fieldKey.startsWith("data.")) {
+            return this.queueUpdateData({[fieldKey.replace(/^(data\.)+/u, "data.")]: value});
+        }
+        return await this.update({[fieldKey]: value});
     }
 
     queueUpdateData(updateData) {
-        updateData = U.KeyMapObj(updateData, (key) => key.replace(/^(data\.)+/u, "data."), (val) => val);
-        const updateDataFields = _.omit(updateData, (val, fieldKey) => JSON.stringify(this.getProp(fieldKey)) === JSON.stringify(val));
-        if (isObjectEmpty(updateDataFields)) {
+        updateData = _.omit(U.Flatten(updateData), (val, fieldKey) => U.Equal(val, this.getProp(fieldKey)));
+        if (isObjectEmpty(updateData)) {
             return false;
         }
-        this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateDataFields, true);
+        this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateData);
         return true;
     }
     async processUpdateQueue(isForcing = false) {
-        if (!isForcing && isObjectEmpty(this.pendingUpdateData)) {
+        if (this.updatingData || (!isForcing && isObjectEmpty(this.pendingUpdateData))) {
             return false;
         }
-        const updateData = {...this.pendingUpdateData};
+        this.updatingData = U.Expand(this.pendingUpdateData);
         this.pendingUpdateData = {};
-        await this.update(updateData);
+        await this.update(this.updatingData);
+        delete this.updatingData;
         return true;
     }
 
@@ -223,7 +192,7 @@ export class ScionActor extends Actor {
         const extraKnackValue = (knacks) => knacks.reduce((tot, knack) => tot + (SCION.KNACKS.list[knack].tier === "immortal" ? 2 : 1), 0);
         let extraKnacks = this.eData.knacks.list.filter((knack) => !this.callingKnacks.includes(knack)),
             spareHeroicKnack;
-        while (extraKnackValue(extraKnacks) > U.SumVals(this.eData.knacks.assignableExtraKnacks)) {
+        while (extraKnacks.length && extraKnackValue(extraKnacks) > U.SumVals(this.eData.knacks.assignableExtraKnacks)) {
             const thisKnack = _.sample(extraKnacks);
             extraKnacks = _.without(extraKnacks, thisKnack);
             if (SCION.KNACKS.list[thisKnack].tier === "heroic" && !spareHeroicKnack) {
@@ -256,11 +225,11 @@ export class ScionActor extends Actor {
     get skills() { return this.data.data.skills.list }
     get attributes() { return this.eData.attributes.list }
     get callings() {
-        return U.KeyMapObj(this.eData.callings.list, (k, calling) => calling.name, (calling) => (
+        return U.KeyMapObj(_.omit(this.eData.callings.list, (data, calling) => !((data?.name ?? "") in SCION.CALLINGS.list)), (calling, name) => (
             {
                 ...calling,
-                availableKnacks: this.getAvailableKnacks(calling.name),
-                keywords: U.Loc(`scion.calling.${calling.name}.keywords`).split(/, /gu)
+                availableKnacks: this.getAvailableKnacks(name),
+                keywords: U.Loc(`scion.calling.${name}.keywords`).split(/, /gu)
             }
         ));
     }

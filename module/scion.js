@@ -75,7 +75,7 @@ const createTestChar = async (name) => {
     const callings = U.KeyMapObj(_.uniq([
         _.sample(SCION.GODS[actorData.patron].callings),
         ..._.sample(Object.keys(SCION.CALLINGS.list), 4)
-    ]).slice(0, 3).sort(), (k, calling) => calling, (calling) => ({
+    ]).slice(0, 3), (k, calling) => calling, (calling) => ({
         name: calling,
         value: 1,
         knacks: [],
@@ -102,11 +102,12 @@ const createTestChar = async (name) => {
             callingPointsLeft -= SCION.KNACKS.list[chosenKnacks[0]].tier === "immortal" ? 2 : 1;
             callings[calling].knacks.push(chosenKnacks[0]);
         }
+        callings[calling].knacks = callings[calling].knacks.sort();
     }
     callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
-
-    actorData.callings.list = Object.values(callings);
-    actorData.knacks.list = chosenKnacks;
+    actorData.callings.chargen = Object.keys(callings);
+    actorData.callings.list = callings;
+    actorData.knacks.list = chosenKnacks.sort();
 
     // #endregion
 
@@ -186,7 +187,7 @@ Hooks.once("init", async () => {
     Object.keys(game.scion.itemSheets).forEach((entityType) => game.scion.itemSheets[entityType].RegisterSheet(entityType, [entityType]));
 
     // Preload Handlebars Template Partials
-    (async () => loadTemplates(U.FlattenNestedValues(handlebarTemplates).
+    (async () => loadTemplates(U.NestedValues(handlebarTemplates).
         map((x) => (typeof x === "function" ? x() : x)))
     )();
 
@@ -197,7 +198,11 @@ Hooks.once("init", async () => {
             const data = Handlebars.createFrame(options.data);
             for (let i = 0; i < n; i++) {
                 data.index = i;
-                results.push(options.fn(i, {data}));
+                try {
+                    results.push(options.fn(i, {data}));
+                } catch {
+                    results.push(`Bad For at ${i} of ${n}`);
+                }
             }
             return results.join("");
         },
@@ -293,16 +298,17 @@ Hooks.once("init", async () => {
             const [cat, subCat] = categories.split(":");
             switch (cat) {
                 case "calling": {
+                    const callings = Object.values(actor.getProp("data.callings.list")).filter((v) => Boolean(v));
                     switch (subCat) {
                         case "other": {
-                            if (actor.eData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length >= 2
-                                && !actor.eData.callings.list.some((calling) => SCION.GODS[actor.eData.patron].callings.includes(calling.name))) {
+                            if (callings.filter((calling) => calling.name in SCION.CALLINGS.list).length >= 2
+                                && !callings.some((calling) => SCION.GODS[actor.getProp("data.patron")].callings.includes(calling.name))) {
                                 return "invalid";
                             }
                         }
                         // falls through
                         case "patron": {
-                            if (actor.eData.callings.list.map((calling) => calling.name).includes(trait)) {
+                            if (callings.map((calling) => calling.name).includes(trait)) {
                                 return "invalid";
                             }
                             break;
@@ -312,7 +318,8 @@ Hooks.once("init", async () => {
                     break;
                 }
                 case "knack": {
-                    const actorKnacks = actor.eData.callings.list.reduce((knacksList, calling) => _.uniq([...knacksList, ...calling.knacks]), []);
+                    const callings = Object.values(actor.getProp("data.callings.list")).filter((v) => Boolean(v));
+                    const actorKnacks = callings.reduce((knacksList, calling) => _.uniq([...knacksList, ...calling.knacks]), []);
                     const [knack, calling] = trait.split(":");
                     if (actorKnacks.includes(knack)) {return "invalid"}
                     if (SCION.KNACKS.list[knack].tier === "immortal" && actor.callings[calling].value < 2) {return "invalid"}

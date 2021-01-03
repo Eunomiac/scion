@@ -24,14 +24,16 @@
                 },
                 "virtue": 3,
                 "pathPriorities": ["origin", "role", "pantheon"],
-                "purviews": [],
+                "purviews": {},
                 "birthrights": {
                     "assignableGeneralDots": {"xp": 0, "other": 0},
-                    "list": []
+                    "list": {}
                 },
                 "callings": {
                     "assignableGeneralDots": {"xp": 0, "other": 2},
-                    "list": []
+                    "chargen": [null, null, null],
+                    "selected": false,
+                    "list": {}
                 },
                 "knacks": {
                     "assignableExtraKnacks": {"xp": 0, "other": 0},

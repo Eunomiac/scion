@@ -402,47 +402,74 @@
             top: 70px;
         }
 
-        &[id|="knacksList"] {
-            width: 200px;
-            height: 600px;
-            left: -25%;
-            top: 70px;
+        &#knacksList {
+            width: 180px;
+            left: -180px;
+            top: 110px;
+
+            h1.knackCategory {
+                text-transform: uppercase;
+                font-family: Oswald;
+                color: var(--black);
+                border: none;
+                border-bottom: 2px solid black;
+            }
+            > div {
+                padding: 0 0 15px 0;
+            }
         }
 
         &.callingsList, &.knacksList {
 
             span.calling, span.knack, h1.gu-mirror.handle {
                 display: block;
-                height: 40px;
-                min-height: 40px;
-                width: 120px;
-                margin: 5px 0px;
                 color: var(--black);
                 background: {
-                    image: url("../images/bubbles/calling-generic.png");
                     size: 100%;
                     position: center;
                     repeat: no-repeat;
                 }
                 border: none;
                 font: {
-                    size: 24px;
                     family: Oswald;
                     weight: normal;
                 }
-                line-height: 37px;
                 text: {
                     transform: uppercase;
                     shadow: var(--textShadowTitle);
                     align: center;
                 }                
                 filter: drop-shadow(2px 2px 2px black);
-              
-                &.patron, &.immortal {
-                    background-image: url("../images/bubbles/calling-patron.png");
-                }
+
                 &.invalid {
                     background-image: none;
+                }
+            }
+
+            span.calling, h1.gu-mirror.handle {
+                height: 40px;
+                min-height: 40px;
+                width: 120px;
+                margin: 5px 0;
+                background-image: url("../images/bubbles/calling-generic.png");
+                font-size: 24px;
+                line-height: 37px;
+
+                &.patron {
+                    background-image: url("../images/bubbles/calling-patron.png");
+                }
+            }
+
+            span.knack {
+                height: 20px;
+                min-height: 20px;
+                width: 170px;
+                margin: 2px 0;
+                background-image: url("../images/bubbles/knack-heroic.png");
+                font-size: 12px;
+                line-height: 20px;
+                &.immortal {
+                    background-image: url("../images/bubbles/knack-immortal.png");
                 }
             }
 

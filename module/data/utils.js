@@ -177,6 +177,37 @@ export const DB = (data, tag, {isLoud=false} = {}) => LOG(data, tag ? `[DB: ${ta
 export const THROW = (data, tag, {isLoud=true} = {}) => LOG(data, tag ? `[${tag} ERROR]` : "[ERROR]", null, {groupStyle: "error", style: "error", isLoud}) && false;
 // #endregion
 
+// #region LOGIC FUNCTIONS // null, String, Number, Boolean, Array, Set, HTMLElement, Object
+
+export const GetType = (val) => {
+    if (_.isUndefined(val)) {
+        return "undefined";
+    }
+    const tVal = getType(val);
+    if (tVal === "Object" && typeof val === "function") {
+        return "Function";
+    }
+    return tVal;
+};
+export const Equal = (val1, val2) => {
+    const [tVal1, tVal2] = [GetType(val1), GetType(val2)];
+    if (tVal1 === tVal2) {
+        switch (tVal1) {
+            case "null": case "String": case "Number": case "Boolean": return val1 === val2;
+            case "Array": case "Set": case "Object": return _.isEqual(val1, val2);
+            default: {
+                try {
+                    return JSON.stringify(val1) === JSON.stringify(val2);
+                } catch {
+                    throw `Unable to stringify values to test equality (${tVal1} ?= ${tVal2})`;
+                }
+            }
+        }
+    }
+    return false;
+};
+// #endregion
+
 // #region STRING FUNCTIONS: Capitalization, Parsing, Localization
 export const UCase = (str) => `${str}`.toUpperCase();
 export const LCase = (str) => `${str}`.toLowerCase();
@@ -209,8 +240,11 @@ export const Float = (num, sigDigits = 2) => Math.round((parseFloat(`${num}`) ||
 export const Rand = (n1, n2) => Math.round(Math.random() * (Math.max(Int(n2), Int(n1)) - Math.min(Int(n2), Int(n1)))) + Math.min(Int(n2), Int(n1));
 // #endregion
 
-// #region OBJECT FUNCTIONS: MapObject, MakeDictionary
+// #region ARRAY FUNCTIONS: Last
 export const Last = (arr) => (Array.isArray(arr) && arr.length ? arr[arr.length - 1] : undefined);
+// #endregion
+
+// #region OBJECT FUNCTIONS: Dot Notation, MapObject, MakeDictionary
 export const KeyMapObj = (obj, keyFunc = (x) => x, valFunc = undefined) => {
     /*
      * An object-equivalent Array.map() function, which accepts mapping functions to transform both keys and values.
@@ -234,17 +268,8 @@ export const Clone = (obj) => {
     }
     return cloneObj;
 };
-export const Merge = (target, source, isMergingArrays = false) => {
-    target = ((obj) => {
-        let cloneObj;
-        try {
-            cloneObj = JSON.parse(JSON.stringify(obj));
-        } catch(err) {
-            cloneObj = {...obj};
-        }
-        return cloneObj;
-    })(target);
-
+export const Merge = (target, source, isMergingArrays = true) => {
+    target = Clone(target);
     const isObject = (obj) => obj && typeof obj === "object";
 
     if (!isObject(target) || !isObject(source)) {return source}
@@ -267,6 +292,33 @@ export const Merge = (target, source, isMergingArrays = false) => {
 
     return target;
 };
+export const Expand = (obj) => {    
+    const expObj = {};
+    for ( let [key, val] of Object.entries(obj) ) {
+        if (getType(val) === "Object") {
+            val = Expand(val);
+        }
+        setProperty(expObj, key, val);
+    }
+    return expObj;
+};
+export const Flatten = (obj) => {
+    const flatObj = {};
+    for ( const [key, val] of Object.entries(obj) ) {
+        if (getType(val) === "Object") {
+            if ( isObjectEmpty(val) ) {
+                flatObj[key] = val;
+            } else {
+                for ( const [subKey, subVal] of Object.entries(Flatten(val)) ) {
+                    flatObj[`${key}.${subKey}`] = subVal;
+                }
+            }
+        } else {
+            flatObj[key] = val;
+        }
+    }
+    return flatObj;
+};
 export const SumVals = (...objs) => objs.reduce((tot, obj) => tot + Object.values(obj).reduce((subTot, val) => subTot + val, 0), 0);
 export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
     const newDict = {};
@@ -283,11 +335,11 @@ export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
     return newDict;
 };
 
-export const FlattenNestedValues = (obj, flatVals = []) => {
+export const NestedValues = (obj, flatVals = []) => {
     if (obj && typeof obj === "object") {
         for (const key of Object.keys(obj)) {
             const val = obj[key];
-            if (val && typeof val === "object") {flatVals.push(...FlattenNestedValues(val))} else {flatVals.push(val)}
+            if (val && typeof val === "object") {flatVals.push(...NestedValues(val))} else {flatVals.push(val)}
         }
         return flatVals;
     }

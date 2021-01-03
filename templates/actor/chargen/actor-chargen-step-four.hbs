@@ -3,15 +3,18 @@
     <div class="dotline mirrorContainer">
         <div id="chargenFourDotMirror" class="dotContainer mirrorContainer"></div>
     </div>
-    {{#each callings.actor as |calling|}}
-        {{#with ../blocks as |blocks|}}
-        {{> (blocks.partials.calling.template) (bundle "calling" calling "callings" ../../callings "index" @index)}}
-        {{> (blocks.popouts.knacksList.template) (merge calling ../../callings)}}
+    {{#each callings.chargen as |callingName|}}
+        {{#with (bundle "index" @index "callings" ../callings "calling" (lookup ../callings.actor callingName)) as |callingsData|}}
+        {{> (../../blocks.partials.calling.template) callingsData}}
         {{/with}}
     {{/each}}
     <div id="callingsMirror" class="callingsList popout flex-col mirrorContainer"></div>
-    {{> (blocks.popouts.callingsList.template) }}
-    {{#if (test callings.numChosen "==" 3)}}
+    {{#if (test callings.numChosen "<" 3)}}
+    {{> (blocks.popouts.callingsList.template) callings }}
+    {{else}}
+    {{#if callings.selected}}
+    {{> (blocks.popouts.knacksList.template) (lookup callings.actor callings.selected) }}
+    {{/if}}
     <div class="footer">
         <div class="unassignedDots unassignedCallingDots flex-col alignCenter">
             <h2 class="alignCenter noBG">{{#if unassignedCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>

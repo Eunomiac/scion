@@ -220,6 +220,7 @@ module.exports = {
         "flattenObject": "readonly",
         "game": "readonly",
         "getProperty": "readonly",
+        "getType": "readonly",
         "hasProperty": "readonly",
         "innerHeight": "readonly",
         "innerWidth": "readonly",

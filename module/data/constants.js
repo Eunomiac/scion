@@ -3181,6 +3181,7 @@ const testChars = {
             pathPriorities: _.shuffle(["role", "origin", "pantheon"]),
             callings: {
                 assignableGeneralDots: {xp: 0, other: 2},
+                chargen: [null, null, null],
                 list: []
             },
             knacks: {

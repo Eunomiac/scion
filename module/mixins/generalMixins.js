@@ -1,5 +1,5 @@
 // #region Import Modules
-import {THROW} from "../data/utils.js";
+import {GetType, THROW} from "../data/utils.js";
 import {_, U, popoutData, SCION} from "../modules.js";
 import "../external/clamp.min.js";
 
@@ -287,10 +287,15 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
 
                 if ("field" in dataSet) {
                     const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
-                    this.entity.setProp(elementVal, dataSet.field, dataSet.fieldindex);
+                    let entityVal = elementVal;
+                    if ("fieldindex" in dataSet) {
+                        entityVal = this.entity.getProp(dataSet.field);
+                        entityVal[U.Int(dataSet.fieldindex)] = elementVal;
+                    }
+                    await this.entity.setProp(entityVal, dataSet.field);
                     await this.entity.processUpdateQueue();
-                    if (elementVal && element.classList.contains("quote")) {
-                        element.innerHTML = _.escape(`"${elementVal}"`);
+                    if (entityVal && element.classList.contains("quote")) {
+                        element.innerHTML = _.escape(`"${entityVal}"`);
                     }
                 }
                 checkForPlaceholder(element);
@@ -309,7 +314,11 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                 // If dataset includes a field, fill the element with the current data:
                 if ("field" in dataSet) {
                     const entityVal = this.entity.getProp(dataSet.field, dataSet.fieldindex) || "";
-                    element.innerHTML = (entityVal && element.classList.contains("quote") ? _.escape(`"${entityVal}"`) : entityVal).trim();
+                    if (!entityVal || (typeof entityVal === "object" && _.isEmpty(entityVal))) {
+                        element.innerHTML = "";
+                    } else {
+                        element.innerHTML = (element.classList.contains("quote") ? _.escape(`"${entityVal}"`) : `${entityVal}`).trim();
+                    }
                 }
                 checkForPlaceholder(element);
             });

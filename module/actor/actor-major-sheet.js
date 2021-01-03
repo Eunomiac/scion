@@ -114,7 +114,7 @@ export class MajorActorSheet extends ScionActorSheet {
         data.skillSpecialties = this.actor.specialties;
 
         // ATTRIBUTES
-        data.arenaPriorities = this.eData.attributes.priorities;
+        data.arenaPriorities = this.actor.getProp("data.attributes.priorities");
         data.arenas = U.KeyMapObj(SCION.ATTRIBUTES.arenas, (arenaAttrs) => U.KeyMapObj(arenaAttrs, (i, attrName) => attrName, (attrName) => this.actor.attrVals[attrName]));
         data.unassignedAttributeDots = {...this.actor.unassignedArenaAttrDots, general: this.actor.unassignedGeneralAttrDots};
         data.isUnassignedAttributeDots = Boolean(U.SumVals(data.unassignedAttributeDots));
@@ -128,6 +128,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 other: []
             },
             actor: this.actor.callings,
+            chargen: this.actor.getProp("data.callings.chargen"),
             numChosen: Object.keys(this.actor.callings).filter((calling) => calling in SCION.CALLINGS.list).length,
             selected: actorData.callings.selected || false
         };
@@ -215,21 +216,32 @@ export class MajorActorSheet extends ScionActorSheet {
             // #region [GEN DRAG] CALLING SELECTION
             const addCalling = async (callingElement, targetBin, sourceBin) => {
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
-                    const actorCallings = this.eData.callings.list;
+                    const {calling} = callingElement.dataset;
+                    const {calling: targetCalling} = targetBin.dataset;
+                    const chargenCallings = this.actor.getProp("data.callings.chargen");
+                    chargenCallings[U.Int(targetBin.dataset.slot)] = calling;
                     if (sourceBin.classList.contains("callingDrop")) {
-                        const sourceData = U.Clone(actorCallings[U.Int(sourceBin.dataset.slot)]);
-                        actorCallings[U.Int(sourceBin.dataset.slot)] = U.Clone(actorCallings[U.Int(targetBin.dataset.slot)]);
-                        actorCallings[U.Int(targetBin.dataset.slot)] = sourceData;
+                        chargenCallings[U.Int(sourceBin.dataset.slot)] = targetCalling;
                     } else {
-                        actorCallings[U.Int(targetBin.dataset.slot)] = {...SCION.CALLINGS.actorDefault, name: callingElement.dataset.calling, value: 1};
+                        this.actor.setProp({...SCION.CALLINGS.actorDefault, name: callingElement.dataset.calling, value: 1}, `data.callings.list.${calling}`);
+                        if (targetCalling !== "empty") {
+                            this.actor.setProp(null, `data.callings.list.${targetCalling}`);
+                            if (this.actor.getProp("data.callings.selected") === targetCalling) {
+                                this.actor.setProp(false, "data.callings.selected");
+                            }
+                        }
                     }
-                    await this.actor.update({"data.callings.list": actorCallings});
+                    this.actor.setProp(chargenCallings, "data.callings.chargen");
+                    await this.actor.processUpdateQueue();
                 }
             };
             const remCalling = async (callingBin) => {
-                const actorCallings = this.eData.callings.list;
-                actorCallings[U.Int(callingBin.dataset.slot)] = {...SCION.CALLINGS.actorDefault};
-                await this.actor.update({"data.callings.list": actorCallings});
+                if (this.actor.getProp("data.callings.selected") === callingBin.dataset.calling) {
+                    this.actor.setProp(false, "data.callings.selected");
+                }
+                this.actor.setProp(null, "data.callings.chargen", U.Int(callingBin.dataset.slot));
+                this.actor.setProp(null, `data.callings.list.${callingBin.dataset.calling}`);
+                await this.actor.processUpdateQueue();
             };
             const addHoverGlow = (callingElement, callingBin) => {
                 if (callingBin.classList.contains("callingDrop")) {
@@ -242,25 +254,26 @@ export class MajorActorSheet extends ScionActorSheet {
                 }
             };
             const selectCalling = async (callingBin) => {
-                if (this.eData.callings.selected === callingBin.dataset.calling) {
-                    await this.actor.update({["data.callings.selected"]: false});
+                if (this.actor.getProp("data.callings.selected") === callingBin.dataset.calling) {
+                    this.actor.setProp(false, "data.callings.selected");
                 } else {    
-                    await this.actor.update({["data.callings.selected"]: callingBin.dataset.calling});
+                    this.actor.setProp(callingBin.dataset.calling, "data.callings.selected");
                 }
+                await this.actor.processUpdateQueue();
             };
 
             const callingSource = html.find("#callingsSource");
             const [callingMirror] = html.find("#callingsMirror");
             const callingDrop = html.find(".callingDrop");
-            const callingHandles = html.find(".callingHeader");
             const callingDragger = dragula({
                 "containers": [...callingSource, ...callingDrop],
                 "moves": (element, source, handle) => handle.classList.contains("handle") && !element.classList.contains("invalid"),                    
                 "accepts": (element, target, source) => {
                     if (source.id === "callingsSource") {
+                        const callings = Object.keys(this.actor.callings);
                         return target.classList.contains("callingDrop")
-                            && this.eData.callings.list.filter((calling) => calling.name in SCION.CALLINGS.list).length < 3
-                            && !this.eData.callings.list.map((calling) => calling.name).includes(element.dataset.calling);
+                            && callings.length < 3
+                            && !callings.includes(element.dataset.calling);
                     } else if (source.classList.contains("callingDrop")) {
                         return target.classList.contains("callingDrop");
                     }
@@ -280,10 +293,17 @@ export class MajorActorSheet extends ScionActorSheet {
             callingDragger.on("drop", (element, target, source) => addCalling(element, target, source));
             callingDragger.on("over", (element, target) => {this.currentlyOver = target; addHoverGlow(element, target)});
             callingDragger.on("out", (element, target) => {this.currentlyOver = null; remHoverGlow(element, target)});
-
-            html.find(".callingHeader").each((i, element) => {
-
-            })
+            
+            html.find("h1.callingHeader").click(async (event) => { 
+                const curSelect = this.actor.getProp("data.callings.selected");
+                const newSelect = event.currentTarget.dataset.calling;
+                if (curSelect === newSelect) {
+                    this.actor.setProp(false, "data.callings.selected");
+                } else {
+                    this.actor.setProp(newSelect, "data.callings.selected");
+                }
+                return await this.actor.processUpdateQueue();
+            });
 
             if (game.scion.debug.isDebuggingDragula) {
                 ["drag", "dragend", "drop", "cancel", "remove", "shadow", "over", "out", "cloned"].forEach((event) => {

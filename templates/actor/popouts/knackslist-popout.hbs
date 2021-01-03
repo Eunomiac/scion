@@ -1,14 +1,30 @@
-<div id="knacksList-{{name}}" class="popout knacksList flex-col height100 {{#unless (test selectedCalling "==" name)}}hidden{{/unless}}{{#if (test (count knacks) "==" value)}}hidden{{/if}}">
+<div id="knacksList" class="popout knacksList flex-col alignCenter {{#if (test (count knacks) "==" value)}}hidden{{/if}}">
     <div id="knacksSource-{{name}}" class="flex-col" data-binid="knacksSource-{{name}}">
-        {{#each immortalKnacksList as |knack|}}
-        <span class="knack handle immortal noFlex {{checkInvalid "knack:immortal" knack}}" data-calling="{{../name}}" data-knack="{{knack}}">
-            {{loc (concat "scion.knack." knack ".name")}}
-        </span>
-        {{/each}}        
-        {{#each heroicKnacksList as |knack|}}
-        <span class="knack handle noFlex {{checkInvalid "knack:heroic" (concat knack ":" ../name)}}" data-calling="{{../name}}" data-knack="{{knack}}">
+        {{#if (test availableKnacks.any_immortal "||" availableKnacks.any_heroic)}}
+        <h1 class="knackCategory alignCenter">Generic</h1>        
+        {{#each availableKnacks.any_immortal as |knack|}}
+        <span class="knack handle immortal noFlex" data-calling="{{../name}}" data-knack="{{knack}}">
             {{loc (concat "scion.knack." knack ".name")}}
         </span>
         {{/each}}
+        {{#each availableKnacks.any_heroic as |knack|}}
+        <span class="knack handle noFlex" data-calling="{{../name}}" data-knack="{{knack}}">
+            {{loc (concat "scion.knack." knack ".name")}}
+        </span>
+        {{/each}}
+        {{/if}}
+        {{#if (test availableKnacks.immortal "||" availableKnacks.heroic)}}
+        <h1 class="knackCategory alignCenter">{{loc (concat "scion.calling." name ".name")}}</h1>
+        {{#each availableKnacks.immortal as |knack|}}
+        <span class="knack handle immortal noFlex" data-calling="{{../name}}" data-knack="{{knack}}">
+            {{loc (concat "scion.knack." knack ".name")}}
+        </span>
+        {{/each}}
+        {{#each availableKnacks.heroic as |knack|}}
+        <span class="knack handle noFlex" data-calling="{{../name}}" data-knack="{{knack}}">
+            {{loc (concat "scion.knack." knack ".name")}}
+        </span>
+        {{/each}}
+        {{/if}}
     </div>
 </div>

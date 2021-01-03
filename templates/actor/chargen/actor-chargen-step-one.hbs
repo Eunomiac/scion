@@ -33,13 +33,13 @@
         {{#if (test (test @index "==" 0) "||" (lookup ../data.deeds.shortTerm (math @index "--")))}}
         <div class="deed flex-row-crosscenter width100 alignLeft">
             <label>Short-Term</label>
-            <div class="contentEditable insetFrame" data-field="data.deeds.shortTerm.@" data-fieldindex="{{@index}}" data-placeholder="{{loc "scion.heading.chargen.shortTermDeedPlaceholder"}}"></div>  
+            <div class="contentEditable insetFrame" data-field="data.deeds.shortTerm" data-fieldindex="{{@index}}" data-placeholder="{{loc "scion.heading.chargen.shortTermDeedPlaceholder"}}"></div>  
         </div>
         {{/if}}
         {{/for}}
         <div class="deed flex-row-crosscenter width100 alignLeft" style="margin-top: 20px;">
             <label>Long-Term</label>       
-            <div class="contentEditable insetFrame" data-field="data.deeds.longTerm.@" data-fieldindex="0" data-placeholder="{{loc "scion.heading.chargen.longTermDeedPlaceholder"}}"></div>
+            <div class="contentEditable insetFrame" data-field="data.deeds.longTerm" data-fieldindex="0" data-placeholder="{{loc "scion.heading.chargen.longTermDeedPlaceholder"}}"></div>
         </div>
     </div>
         {{/if}}
