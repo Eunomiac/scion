@@ -9,6 +9,7 @@
         {{/with}}
     {{/each}}
     <div id="callingsMirror" class="callingsList popout flex-col mirrorContainer"></div>
+    <div id="knacksMirror" class="knacksList popout flex-col alignCenter mirrorContainer"></div>
     {{#if (test callings.numChosen "<" 3)}}
     {{> (blocks.popouts.callingsList.template) callings }}
     {{else}}

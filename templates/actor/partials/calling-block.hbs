@@ -10,13 +10,13 @@
         </div>
     </div>
     <h2>Knacks</h2>
-    <div class="knacks flex-col-start knacksDrop alignCenter height30 width100" data-calling="{{calling.name}}" data-binid="{{calling.name}}-knacks">
+    <div class="knacks flex-col-start knackDrop alignCenter height30 width100" data-calling="{{calling.name}}" data-binid="{{calling.name}}-knacks">
         {{#for calling.value}}
         {{#with (lookup ../calling.knacks @index) as |knack|}}
         {{#if knack}}
-        <span class="knack outsetFrame width90 text" data-calling="{{../calling.name}}" data-knack="{{knack}}">{{loc (concat "scion.knack." knack ".name")}}</span>
+        <span class="knack {{#if (test knack.tier "==" "immortal")}}immortal{{/if}}" data-calling="{{../calling.name}}" data-knack="{{knack.name}}">{{loc (concat "scion.knack." knack.name ".name")}}</span>
         {{else}}
-        <span class="knack outsetFrame width90 text empty" data-calling="{{../calling.name}}" data-knack="empty">&nbsp;</span>
+        <span class="knack {{#if (test knack.tier "==" "immortal")}}immortal{{/if}}" data-calling="{{../calling.name}}" data-knack="empty">&nbsp;</span>
         {{/if}}
         {{/with}}
         {{/for}}

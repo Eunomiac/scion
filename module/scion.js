@@ -78,7 +78,6 @@ const createTestChar = async (name) => {
     ]).slice(0, 3), (k, calling) => calling, (calling) => ({
         name: calling,
         value: 1,
-        knacks: [],
         keywordsChosen: _.sample(U.Loc(`scion.calling.${calling}.keywords`).split(", "), 3),
         keywordsUsed: []
     }));
@@ -94,20 +93,18 @@ const createTestChar = async (name) => {
         while (callingPointsLeft) {
             const availableKnacks = Object.keys(SCION.KNACKS.list).filter((knackName) => {
                 const knack = SCION.KNACKS.list[knackName];
-                return !chosenKnacks.includes(knackName)
+                return !chosenKnacks.some((knack) => knack.name === knackName)
                     && ["any", calling].includes(knack.calling)
                     && (callingPointsLeft >= 2 || knack.tier === "heroic");
-            });
+            }).map((knackName) => ({name: knackName, assignment: calling, ...SCION.KNACKS.list[knackName]}));
             chosenKnacks.unshift(_.sample(availableKnacks));
-            callingPointsLeft -= SCION.KNACKS.list[chosenKnacks[0]].tier === "immortal" ? 2 : 1;
-            callings[calling].knacks.push(chosenKnacks[0]);
+            callingPointsLeft -= SCION.KNACKS.list[chosenKnacks[0].name].tier === "immortal" ? 2 : 1;
         }
-        callings[calling].knacks = callings[calling].knacks.sort();
     }
     callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
     actorData.callings.chargen = Object.keys(callings);
     actorData.callings.list = callings;
-    actorData.knacks.list = chosenKnacks.sort();
+    actorData.knacks.list = chosenKnacks;
 
     // #endregion
 
@@ -162,9 +159,9 @@ Hooks.once("init", async () => {
             condition: ConditionItemSheet
         },
         debug: {
-            isDebugging: false,
-            isDebuggingDragula: true,
-            isFormattingGroup: false,
+            isDebugging: true,
+            isDebuggingDragula: false,
+            isFormattingGroup: true,
             watchList: []
         },
         createSigChars: createSigChars
@@ -293,9 +290,11 @@ Hooks.once("init", async () => {
                 default: return v1;
             }
         },
-        checkInvalid: (categories, trait, options) => {
-            const actor = game.actors.get(options.data.root.actor._id);
+        checkInvalid: (...args) => {
+            const options = args.pop();
+            const [categories, trait, subTrait] = args;
             const [cat, subCat] = categories.split(":");
+            const actor = game.actors.get(options.data.root.actor._id);
             switch (cat) {
                 case "calling": {
                     const callings = Object.values(actor.getProp("data.callings.list")).filter((v) => Boolean(v));
@@ -318,11 +317,15 @@ Hooks.once("init", async () => {
                     break;
                 }
                 case "knack": {
-                    const callings = Object.values(actor.getProp("data.callings.list")).filter((v) => Boolean(v));
-                    const actorKnacks = callings.reduce((knacksList, calling) => _.uniq([...knacksList, ...calling.knacks]), []);
-                    const [knack, calling] = trait.split(":");
-                    if (actorKnacks.includes(knack)) {return "invalid"}
-                    if (SCION.KNACKS.list[knack].tier === "immortal" && actor.callings[calling].value < 2) {return "invalid"}
+                    const [knackData, knackName] = [SCION.KNACKS.list[trait], trait];
+                    if (actor.knacks.some((knack) => knack.name === knackName)) {
+                        return "hidden";
+                    }
+                    const calling = actor.callings[subTrait];
+                    if (actor.getKnacksValue([knackData]) > (calling.value - actor.getKnacksValue(calling.knacks))) {
+                        return "invalid";
+                    }
+                    break;                    
                 }
                 // no default
             }

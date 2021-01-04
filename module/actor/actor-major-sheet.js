@@ -48,18 +48,17 @@ export class MajorActorSheet extends ScionActorSheet {
     getData() {
         const data = super.getData();
 
-        const actorData = data.data;
-        const panthData = CONFIG.scion.PANTHEONS;
-        const godData = CONFIG.scion.GODS;
+        const actorData = data.data;        
+        const C = _.pick(CONFIG.scion, "PANTHEONS", "GODS");
 
         // #region HEADER
         const {genesis, pantheon, patron} = actorData;
         actorData.patronageLine = "";
-        if (pantheon && patron && panthData[pantheon].members.includes(patron)) {
+        if (pantheon && patron && C.PANTHEONS[pantheon].members.includes(patron)) {
             if (genesis) {
                 actorData.patronageLine = U.Loc(`scion.genesis.${genesis}Line`, {
-                    divinePatronName: U.Loc(godData[patron].label),
-                    divinePatronMantle: godData[patron].mantle ? `, ${U.Loc(godData[patron].mantle)}` : ""
+                    divinePatronName: U.Loc(C.GODS[patron].label),
+                    divinePatronMantle: C.GODS[patron].mantle ? `, ${U.Loc(C.GODS[patron].mantle)}` : ""
                 });
             }
         } else {
@@ -73,7 +72,7 @@ export class MajorActorSheet extends ScionActorSheet {
         // #endregion
 
         // #region FRONT PAGE
-        if (pantheon) {data.virtues = panthData[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`))}
+        if (pantheon) {data.virtues = C.PANTHEONS[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`))}
         // #endregion
 
         // #region CHARGEN
@@ -82,7 +81,7 @@ export class MajorActorSheet extends ScionActorSheet {
         // #region STEP ONE
 
         // Update Patron List
-        if (pantheon) {actorData.charGen.patronList = U.MakeDict(panthData[pantheon].members, (v) => U.Loc(`scion.pantheon.god.${v}`), (k, v) => v)}
+        if (pantheon) {actorData.charGen.patronList = U.MakeDict(C.PANTHEONS[pantheon].members, (v) => U.Loc(`scion.pantheon.god.${v}`), (k, v) => v)}
         // #endregion
 
         // #region STEP TWO
@@ -140,13 +139,27 @@ export class MajorActorSheet extends ScionActorSheet {
 
         // #endregion
 
-        U.LOG({
-            "ACTOR REPORT": {
-                "[Sheet Context]": data,
-                "... data": data.data,
-                "ACTOR": this.actor.fullLogReport
-            }
-        }, this.actor.name, "MajorActorSheet", {isLoud: true});
+        U.LOG(game.scion.debug.isFormattingGroup 
+            ? {
+                    "data [Sheet Context]": data,
+                    "... data": data.data,
+                    "ACTOR LOG": this.actor.fullLogReport,
+                    "Instances": {
+                        sheet: this,
+                        entity: this.ent
+                    }
+                }
+            : {
+                    "ACTOR SHEET REPORT": {
+                        "data [Sheet Context]": data,
+                        "... data": data.data,
+                        "ACTOR LOG": this.actor.fullLogReport,
+                        "Instances": {
+                            sheet: this,
+                            entity: this.ent
+                        }
+                    }
+                }, this.actor.name, "MajorActorSheet", {isLoud: true});
         return data;
     }
 
@@ -236,7 +249,7 @@ export class MajorActorSheet extends ScionActorSheet {
                 }
             };
             const remCalling = async (callingBin) => {
-                if (this.actor.getProp("data.callings.selected") === callingBin.dataset.calling) {
+                if (this.actor.getProp("data.callings.selected")) {
                     this.actor.setProp(false, "data.callings.selected");
                 }
                 this.actor.setProp(null, "data.callings.chargen", U.Int(callingBin.dataset.slot));
@@ -252,14 +265,6 @@ export class MajorActorSheet extends ScionActorSheet {
                 if (callingBin.classList.contains("glow")) {
                     callingBin.classList.remove("glow");
                 }
-            };
-            const selectCalling = async (callingBin) => {
-                if (this.actor.getProp("data.callings.selected") === callingBin.dataset.calling) {
-                    this.actor.setProp(false, "data.callings.selected");
-                } else {    
-                    this.actor.setProp(callingBin.dataset.calling, "data.callings.selected");
-                }
-                await this.actor.processUpdateQueue();
             };
 
             const callingSource = html.find("#callingsSource");
@@ -305,6 +310,64 @@ export class MajorActorSheet extends ScionActorSheet {
                 return await this.actor.processUpdateQueue();
             });
 
+            const addKnack = async (knackElement, targetBin, sourceBin) => {
+                if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
+                    const {knack: elementKnack} = knackElement.dataset;
+                    const {knack: targetKnack} = targetBin.dataset;
+                    const knackData = U.Clone(this.actor.knacks);
+                    const knackIndex = knackData.findIndex((knack) => knack.name === elementKnack);
+                    if (knackIndex > -1) {
+                        knackData[knackIndex].assignment = targetBin.dataset.calling;
+                        this.actor.setProp(knackData, "data.knacks.list");
+                    } else {
+                        this.actor.addKnack(elementKnack, targetBin.dataset.calling);
+                    }
+                    if (this.actor.unassignedKnackDots[targetBin.dataset.calling] - (SCION.KNACKS.list[elementKnack].tier === "immortal" ? 2 : 1) === 0) {
+                        this.actor.setProp(false, "data.callings.selected");
+                    }
+                    await this.actor.processUpdateQueue();
+                }
+            };
+            const remKnack = async (knackName, sourceBin) => {
+                this.actor.remKnack(knackName);                
+                if (sourceBin.classList.contains("knackDrop") && !this.actor.getProp("data.callings.selected")) {
+                    this.actor.setProp(sourceBin.dataset.calling, "data.callings.selected");
+                }
+                await this.actor.processUpdateQueue();
+            };
+
+            const knackSource = html.find("#knacksSource");
+            const [knackMirror] = html.find("#knacksMirror");
+            const knackDrop = html.find(".knackDrop");
+            const knackDragger = dragula({
+                "containers": [...knackSource, ...knackDrop],
+                "moves": (element) => !element.classList.contains("invalid"),                    
+                "accepts": (element, target, source) => {
+                    return target.classList.contains("knackDrop")
+                        && ["any", target.dataset.calling].includes(element.dataset.calling)
+                        && this.actor.unassignedKnackDots[target.dataset.calling] >= (SCION.KNACKS.list[element.dataset.knack].tier === "immortal" ? 2 : 1);
+                },
+                "direction": "horizontal",
+                "copy": false,
+                "removeOnSpill": true,
+                "mirrorContainer": knackMirror,
+                "sheetElement": this.sheetElem
+            });            
+            knackDragger.on("remove", (element, container, source) => {
+                if (source.classList.contains("knackDrop") && this.currentlyOver?.dataset.knack !== element.dataset.knack) {
+                    remKnack(element.dataset.knack, source);
+                }
+            });
+            knackDragger.on("cancel", (element, container, source) => {
+                if (source.classList.contains("knackDrop") && this.currentlyOver?.dataset.knack !== element.dataset.knack) {
+                    remKnack(element.dataset.knack, source);
+                }
+            });
+            knackDragger.on("drop", (element, target, source) => addKnack(element, target, source));
+            // knackDragger.on("over", (element, target) => {this.currentlyOver = target; addHoverGlow(element, target)});
+            // knackDragger.on("out", (element, target) => {this.currentlyOver = null; remHoverGlow(element, target)});
+
+
             if (game.scion.debug.isDebuggingDragula) {
                 ["drag", "dragend", "drop", "cancel", "remove", "shadow", "over", "out", "cloned"].forEach((event) => {
                     callingDragger.on(event, (...args) => console.log([event, args]));
@@ -331,8 +394,8 @@ export class MajorActorSheet extends ScionActorSheet {
                 mirrorContainer: chargenThreeDotMirror,
                 sheetElement: this.sheetElem
             });
-            this.addDragListener(chargenThreeDotDragger, "drag", [chargenThreeDotBins]);
-            this.addDragListener(chargenThreeDotDragger, "dragend", [chargenThreeDotBins]);
+            this.addDragListener(chargenThreeDotDragger, "drag", {extraArgs: [chargenThreeDotBins]});
+            this.addDragListener(chargenThreeDotDragger, "dragend", {extraArgs: [chargenThreeDotBins]});
             this.addDragListener(chargenThreeDotDragger, "drop");
             this.addDragListener(chargenThreeDotDragger, "remove");
             // #endregion
@@ -351,8 +414,8 @@ export class MajorActorSheet extends ScionActorSheet {
                 sheetElement: this.sheetElem
             });
 
-            this.addDragListener(chargenFourDotDragger, "drag", [chargenFourDotBins]);
-            this.addDragListener(chargenFourDotDragger, "dragend", [chargenFourDotBins]);
+            this.addDragListener(chargenFourDotDragger, "drag", {extraArgs: [chargenFourDotBins]});
+            this.addDragListener(chargenFourDotDragger, "dragend", {extraArgs: [chargenFourDotBins]});
             this.addDragListener(chargenFourDotDragger, "drop");
             this.addDragListener(chargenFourDotDragger, "remove");   
             // #endregion

@@ -1942,7 +1942,6 @@ const scionSystemData = {
         actorDefault: {
             "name": "",
             "value": 0,
-            "knacks": [],
             "keywordsChosen": [],
             "keywordsUsed": []
         },
@@ -2176,6 +2175,10 @@ const scionSystemData = {
         }
     },
     KNACKS: {
+        actorDefault: {
+            "name": "",
+            "assignment": false
+        },
         list: {
             aFortress: {
                 calling: "guardian",

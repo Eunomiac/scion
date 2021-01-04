@@ -102,14 +102,6 @@ export const DotDragger = (superClass) => class extends superClass {
                 this.render();
             },
             drop: (dot, targetBin, sourceBin) => {
-                const testObj = {
-                    "data.array.0": "zero",
-                    "data.array.1": "one",
-                    "data.array2.[0]": "zero",
-                    "data.array2.[1]": "one",
-                    "data.array2.[2]": undefined
-                };
-                console.log(expandObject(testObj));
                 const {targetTypes, sourceTypes} = this.getDragTypes(dot, sourceBin, targetBin);
                 const updateData = {};
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
@@ -136,6 +128,7 @@ export const DotDragger = (superClass) => class extends superClass {
                         } else if (sourceTypes.includes("calling")) {
                             const {calling, field, fieldindex} = sourceBin.dataset;
                             this.actor.setProp(this.actor.callings[calling].value - 1, field, fieldindex);
+                            this.actor.queueSyncKnacks();
                         }
                     }
                     U.LOG(U.IsDebug() && {targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
@@ -161,9 +154,23 @@ export const DotDragger = (superClass) => class extends superClass {
             }
         };
     }
-    addDragListener(dragger, listener, extraArgs = [], listenFunc = null) {
-        listenFunc = listenFunc ?? this.listenFuncs[listener];
-        dragger.on(listener, (...args) => listenFunc.bind(this)(...extraArgs, ...args));
+
+    get dragFunc() { return this.listenFuncs.drag.bind(this) }
+    get dropFunc() { return this.listenFuncs.drop.bind(this) }
+    get removeFunc() { return this.listenFuncs.remove.bind(this) }
+    get dragendFunc() { return this.listenFuncs.dragend.bind(this) } 
+
+    addDragListener(dragger, listener, {extraArgs = [], listenFunc = null, extraFunc = null} = {}) {
+        listenFunc = (listenFunc ?? this.listenFuncs[listener]).bind(this);
+        let compFunc = listenFunc;
+        if (extraFunc) {
+            extraFunc = extraFunc.bind(this);
+            compFunc = (...args) => {
+                listenFunc(...args);
+                extraFunc(...args);
+            };
+        }
+        dragger.on(listener, (...args) => compFunc.bind(this)(...extraArgs, ...args));
     }          
     getDragTypes(dot, sourceBin, targetBin) {
         const returnVal = {

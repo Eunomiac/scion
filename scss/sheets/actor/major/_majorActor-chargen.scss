@@ -179,6 +179,101 @@
         }
 
     }
+  
+    #callingsList.popout {
+        width: 150px;
+        height: 580px;
+        left: 94%;
+        top: 70px;
+    }
+
+    span.calling, h1.gu-mirror.callingHeader.handle {
+        height: 40px;
+        min-height: 40px;
+        width: 120px;
+        margin: 5px 0;
+        display: block;
+        color: var(--black);
+        background: {
+            image: url("../images/bubbles/calling-generic.png");
+            size: 100%;
+            position: center;
+            repeat: no-repeat;
+        }
+        border: none;
+        font: {
+            family: Oswald;
+            size: 24px;
+            weight: normal;
+        }
+        line-height: 37px;
+        text: {
+            transform: uppercase;
+            shadow: var(--textShadowTitle);
+            align: center;
+        }                
+        filter: drop-shadow(2px 2px 2px black);
+
+        &.patron {
+            background-image: url("../images/bubbles/calling-patron.png");
+        }
+
+        &.invalid {
+            background-image: none;
+        }
+    }
+    span.knack {
+        display: block;
+        height: 20px;
+        min-height: 20px;
+        width: 170px;
+        margin: 2px 0;
+        color: var(--black);
+        background: {
+            image: url("../images/bubbles/knack-heroic.png");
+            size: 100%;
+            position: center;
+            repeat: no-repeat;
+        }
+        border: none;
+        font: {
+            family: Oswald;
+            size: 12px;
+            weight: normal;
+        }
+        line-height: 20px;
+        text: {
+            transform: uppercase;
+            shadow: var(--textShadowTitle);
+            align: center;
+        }                
+        filter: drop-shadow(2px 2px 2px black);
+
+        &.immortal {
+            background-image: url("../images/bubbles/knack-immortal.png");
+        }
+        &.invalid {
+            background-image: none;
+        }
+    }
+
+    #knacksList.popout {
+        width: 180px;
+        left: -180px;
+        top: 110px;           
+
+        h1.knackCategory {
+            text-transform: uppercase;
+            font-family: Oswald;
+            color: var(--black);
+            border: none;
+            border-bottom: 2px solid black;
+        }
+        > div {
+            padding: 0 0 15px 0;
+        }
+    }
+
     .footer { 
         grid-area: footer; 
         .dotline {

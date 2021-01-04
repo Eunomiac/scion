@@ -8,10 +8,20 @@ import {_, U, SCION, MIX, MIXINS} from "../modules.js";
  */
 export class ScionActor extends Actor {
     // Getters: Data Retrieval
-    get aData() { return this.data.data }
-    get eData() { return this.aData }
-    get subtype() { return this.aData.type }
-    get ownedItems() { return this.data.items }
+    get ent() { return typeof this.entity === "string" ? this : this.entity }
+    get sht() { return this.ent.sheet }
+    get eID() { return this.ent._id }
+    get eData() { return this.ent.data.data }
+    get subtype() { return this.eData.type }
+    get sheetElem() {
+        this._sheet = this._sheet ?? $(`[id$='${this.eID}']`)[0];
+        return this._sheet;
+    }
+    get ownedItems() { return this.ent.data.items }
+
+    // get eData() { return this.data.data }
+    // get subtype() { return this.eData.type }
+    // get ownedItems() { return this.data.items }
 
     prepareData() {
         this.pendingUpdateData = this.pendingUpdateData ?? {};
@@ -50,7 +60,13 @@ export class ScionActor extends Actor {
         return true;
     }
     async processUpdateQueue(isForcing = false) {
-        if (this.updatingData || (!isForcing && isObjectEmpty(this.pendingUpdateData))) {
+        if (this.updatingData) {
+            return false;
+        }
+        if (isObjectEmpty(this.pendingUpdateData)) {
+            if (isForcing) {
+                // await this.sheet.render();
+            }
             return false;
         }
         this.updatingData = U.Expand(this.pendingUpdateData);
@@ -188,22 +204,6 @@ export class ScionActor extends Actor {
             (val) => val
         ));
     }
-    queueSyncKnacks() {
-        const extraKnackValue = (knacks) => knacks.reduce((tot, knack) => tot + (SCION.KNACKS.list[knack].tier === "immortal" ? 2 : 1), 0);
-        let extraKnacks = this.eData.knacks.list.filter((knack) => !this.callingKnacks.includes(knack)),
-            spareHeroicKnack;
-        while (extraKnacks.length && extraKnackValue(extraKnacks) > U.SumVals(this.eData.knacks.assignableExtraKnacks)) {
-            const thisKnack = _.sample(extraKnacks);
-            extraKnacks = _.without(extraKnacks, thisKnack);
-            if (SCION.KNACKS.list[thisKnack].tier === "heroic" && !spareHeroicKnack) {
-                spareHeroicKnack = thisKnack;
-            }
-        }
-        if (extraKnackValue(extraKnacks) < U.SumVals(this.eData.knacks.assignableExtraKnacks)) {
-            extraKnacks.push(spareHeroicKnack);
-        }
-        this.queueUpdateData({["data.knacks.list"]: [...this.callingKnacks, ...extraKnacks]});
-    }
 
     async updateTraits() {
         this.queueSkillValsUpdate();
@@ -214,9 +214,81 @@ export class ScionActor extends Actor {
         return true;
     }
 
-    getAvailableKnacks(calling) { 
-        return _.groupBy(Object.keys(SCION.KNACKS.list).
-            filter((knack) => ["any", calling].includes(SCION.KNACKS.list[knack].calling)), (knack) => `${SCION.KNACKS.list[knack].calling === "any" ? "any_" : ""}${SCION.KNACKS.list[knack].tier}`);
+    getKnacksValue = (knacks) => knacks.reduce((tot, knack) => tot + (knack.tier === "immortal" ? 2 : 1), 0);
+    getAvailableCallingKnacks = (calling) => _.groupBy(
+        Object.keys(SCION.KNACKS.list).
+            filter((knack) => ["any", calling].includes(SCION.KNACKS.list[knack].calling)),
+        (knack) => `${SCION.KNACKS.list[knack].calling === "any" ? "any_" : ""}${SCION.KNACKS.list[knack].tier}`
+    );
+    getAssignedCallingKnacks = (calling) => this.knacks.filter((knack) => knack.assignment === calling);
+    pruneKnacks(assignment, maxValue, knacksData) {
+        assignment = assignment ?? false;
+        const origKnacksData = U.Clone(knacksData ?? this.knacks);
+        knacksData = U.Clone(knacksData ?? this.knacks).filter((knack) => [false, ...Object.keys(this.callings)].includes(knack.assignment));
+        const getKnacks = (assignment, calling, tier) => knacksData.filter((knack) => knack.assignment === assignment && (!calling || knack.calling === calling) && (!tier || knack.tier === tier));
+        const reassignKnack = (oldAssignment, newAssignment, tier) => {
+            const [thisKnack] = getKnacks(oldAssignment, newAssignment, tier);
+            if (thisKnack) {
+                const knackIndex = knacksData.findIndex((knack) => knack.name === thisKnack.name);
+                knacksData[knackIndex].assignment = newAssignment;
+                return true;
+            }
+            return false;
+        };
+        const removeKnack = (assign, tier) => {
+            const [thisKnack] = getKnacks(assign, false, tier);
+            if (thisKnack) {
+                knacksData = knacksData.filter((knack) => knack.name !== thisKnack.name);
+                return true;
+            }
+            return false;
+        };
+        if (assignment in SCION.CALLINGS.list) {
+            while (this.getKnacksValue(getKnacks(assignment)) > maxValue) {
+                if (!reassignKnack(assignment, false, this.getKnacksValue(getKnacks(assignment)) - 1 === maxValue ? "heroic" : false)) {
+                    reassignKnack(assignment, false);
+                    break;
+                }
+            }
+            while (this.getKnacksValue(getKnacks(assignment)) < maxValue) {
+                if (!reassignKnack(false, assignment, this.getKnacksValue(getKnacks(assignment)) + 1 === maxValue ? "heroic" : false )) {
+                    break;
+                }
+            }
+        }
+        while (this.getKnacksValue(getKnacks(false)) > this.assignableKnackDots.extra) {
+            if (!removeKnack(false, this.getKnacksValue(getKnacks(false)) - 1 === maxValue ? "heroic" : false )) {
+                removeKnack(false);
+                break;
+            }
+        }
+        return knacksData;
+    }
+
+    addKnack(knackName, assignment = false) {
+        const knacksList = U.Clone(this.getProp("data.knacks.list"));
+        const knackIndex = knacksList.findIndex((knack) => knack.name === knackName);
+        if (knackIndex > 0) {
+            knacksList[knackIndex].assignment = assignment;
+        } else {
+            knacksList.push({
+                name: knackName,
+                assignment,
+                ...SCION.KNACKS.list[knackName]
+            });
+        }
+        this.setProp(knacksList, "data.knacks.list");
+    }
+    remKnack(knackName) {
+        const knacksList = U.Clone(this.getProp("data.knacks.list")).filter((knack) => knack.name !== knackName);
+        this.setProp(knacksList, "data.knacks.list");
+    }
+    queueSyncKnacks() {
+        let knacksData = U.Clone(this.getProp("data.knacks.list"));
+        Object.entries(this.callings).forEach(([callingName, callingData]) => {
+            knacksData = this.pruneKnacks(callingName, callingData.value, knacksData);
+        });
+        this.setProp(knacksData, "data.knacks.list");
     }
 
     /* #region GETTERS */
@@ -225,10 +297,11 @@ export class ScionActor extends Actor {
     get skills() { return this.data.data.skills.list }
     get attributes() { return this.eData.attributes.list }
     get callings() {
-        return U.KeyMapObj(_.omit(this.eData.callings.list, (data, calling) => !((data?.name ?? "") in SCION.CALLINGS.list)), (calling, name) => (
+        return U.KeyMapObj(_.pick(this.eData.callings.list, (callingData) => (callingData?.name ?? "") in SCION.CALLINGS.list), (calling, name) => (
             {
                 ...calling,
-                availableKnacks: this.getAvailableKnacks(name),
+                knacks: this.getAssignedCallingKnacks(calling.name),
+                availableKnacks: this.getAvailableCallingKnacks(name),
                 keywords: U.Loc(`scion.calling.${name}.keywords`).split(/, /gu)
             }
         ));
@@ -383,12 +456,12 @@ export class ScionActor extends Actor {
     // #endregion
     
     // #region Callings & Knacks
-    get knackVals() { return U.KeyMapObj(this.knacks, (i, knack) => knack, (knack) => (SCION.KNACKS.list[knack].tier === "immortal" ? 2 : 1)) }
-    get callingKnacks() { return Object.values(this.callings).reduce((knacksList, calling) => [...knacksList, ...calling.knacks], []) }
-    get extraKnacks() { return _.without(this.knacks, ...this.callingKnacks) }
-    get heroicKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack].tier === "heroic") }
-    get immortalKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack].tier === "immortal") }
-    get genericKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack].calling === "any") }
+    get knackVals() { return U.KeyMapObj(this.knacks, (i, knack) => knack.name, (knack) => (SCION.KNACKS.list[knack.name].tier === "immortal" ? 2 : 1)) }
+    get assignedKnacks() { return this.knacks.filter((knack) => Boolean(knack.assignment)) }
+    get unassignedKnacks() { return this.knacks.filter((knack) => !knack.assignment) }
+    get heroicKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack.name].tier === "heroic") }
+    get immortalKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack.name].tier === "immortal") }
+    get genericKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack.name].calling === "any") }
 
     get assignableCallingDots() { return U.SumVals(this.eData.callings.assignableGeneralDots) }
     get unassignedCallingDots() { return Math.max(0, this.assignableCallingDots - Object.values(this.callings).reduce((tot, calling) => tot + calling.value - SCION.CALLINGS.min, 0)) }
@@ -400,8 +473,8 @@ export class ScionActor extends Actor {
     }
     get unassignedKnackDots() {
         return {
-            ...U.KeyMapObj(this.callings, (callingData, calling) => Math.max(0, this.assignableKnackDots[calling] - callingData.knacks.reduce((tot, knack) => tot + this.knackVals[knack], 0)) ),
-            extra: Math.max(0, this.assignableKnackDots.extra - this.extraKnacks.reduce((tot, knack) => tot + this.knackVals[knack], 0))
+            ...U.KeyMapObj(this.callings, (callingData, calling) => Math.max(0, this.assignableKnackDots[calling] - callingData.knacks.reduce((tot, knack) => tot + this.knackVals[knack.name], 0)) ),
+            extra: Math.max(0, this.assignableKnackDots.extra - this.unassignedKnacks.reduce((tot, knack) => tot + this.knackVals[knack.name], 0))
         };
     }
 
@@ -410,14 +483,14 @@ export class ScionActor extends Actor {
             ".*. callings": U.Clone(this.callings),
             ".*. knacks": U.Clone(this.knacks),
             ".*. knackVals": U.Clone(this.knackVals),
-            ".*. callingKnacks": U.Clone(this.callingKnacks),
-            ".*. extraKnacks": U.Clone(this.extraKnacks),
+            ".*. assignedKnacks": U.Clone(this.assignedKnacks),
+            ".*. unassignedKnacks": U.Clone(this.unassignedKnacks),
             ".*. heroicKnacks": U.Clone(this.heroicKnacks),
             ".*. immortalKnacks": U.Clone(this.immortalKnacks),
             ".*. genericKnacks": U.Clone(this.genericKnacks),
             ".*. assignableCallingDots": U.Clone(this.assignableCallingDots),
             ".*. unassignedCallingDots": U.Clone(this.unassignedCallingDots),
-            ".*. assignableKnackDots ": U.Clone(this.assignableKnackDots ),
+            ".*. assignableKnackDots": U.Clone(this.assignableKnackDots ),
             ".*. unassignedKnackDots": U.Clone(this.unassignedKnackDots)
         });
     }
@@ -434,6 +507,7 @@ export class ScionActor extends Actor {
             ".*. items": U.Clone(this.data.items),
             ".*. paths": U.Clone(this.paths),
             ".*. conditions": U.Clone(this.conditions),
+            "... sheet": this.sheet,
             "SKILL REPORT": this.fullSkillReport,
             "ATTRIBUTE REPORT": this.fullAttributeReport,
             "CALLINGS & KNACKS REPORT": this.fullCallingsKnacksReport

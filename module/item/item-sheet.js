@@ -40,8 +40,8 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
                                             types,
                                             "label": locLabel});
         U.LOG(U.IsDebug() && {"Sheet Registered": this.name,
-               types,
-               "defaultOptions": this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionItemSheet");
+                              types,
+                              "defaultOptions": this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionItemSheet");
     }
 
     get template() {

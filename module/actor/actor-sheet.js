@@ -7,13 +7,16 @@ import "../external/gl-matrix-min.js";
  */
 export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampText, MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton, MIXINS.DotDragger) {
     // Getters: Data Retrieval
-    get aData() { return this.actor.aData }
-    get eData() { return this.actor.eData }
-    get ownedItems() { return this.actor.ownedItems }
+    get ent() { return typeof this.entity === "string" ? this : this.entity }
+    get sht() { return this.ent.sheet }
+    get eID() { return this.ent._id }
+    get eData() { return this.ent.data.data }
+    get subtype() { return this.eData.type }
     get sheetElem() {
-        this._sheet = this._sheet ?? document.getElementById(`actor-${this.actor._id}`);
+        this._sheet = this._sheet ?? $(`[id$='${this.eID}']`)[0];
         return this._sheet;
     }
+    get ownedItems() { return this.ent.data.items }
 
     static get defaultOptions() {
         /*
