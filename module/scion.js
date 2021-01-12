@@ -160,8 +160,8 @@ Hooks.once("init", async () => {
         },
         debug: {
             isDebugging: true,
-            isDebuggingDragula: false,
-            isFormattingGroup: true,
+            isDebuggingDragula: ["dragend"],
+            isFullDebugConsole: false,
             watchList: []
         },
         createSigChars: createSigChars

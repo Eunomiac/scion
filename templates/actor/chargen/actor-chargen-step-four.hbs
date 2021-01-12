@@ -12,8 +12,7 @@
     <div id="knacksMirror" class="knacksList popout flex-col alignCenter mirrorContainer"></div>
     {{#if (test callings.numChosen "<" 3)}}
     {{> (blocks.popouts.callingsList.template) callings }}
-    {{else}}
-    {{#if callings.selected}}
+    {{else}}{{#if callings.selected}}
     {{> (blocks.popouts.knacksList.template) (lookup callings.actor callings.selected) }}
     {{/if}}
     <div class="footer">

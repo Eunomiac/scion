@@ -5,48 +5,31 @@ import {U, MIX, MIXINS} from "../modules.js";
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
  */
-export class ScionItem extends Item {
-    // Getters: Data Retrieval
-    get iData() { return this.data.data }
-    get eData() { return this.iData }
-    get subtype() { return this.iData.type }
-    get aData() { return this.actor?.aData }
+export class ScionItem extends MIX(Item).with(MIXINS.UpdateQueue) {
+    // Getters: Data Retrieval    
+    get ent() { return typeof this.entity === "string" ? this : this.entity }
+    get sht() { return this.ent.sheet }
+    get eID() { return this.ent._id }
+    get eData() { return this.ent.data.data }
+    get subtype() { return this.eData.type }
+    get sheetElem() {
+        this._sheet = this._sheet ?? $(`[id$='${this.eID}']`)[0];
+        return this._sheet;
+    }
+    get ownedItems() { return this.ent.data.items }
+
+    // get iData() { return this.data.data }
+    // get eData() { return this.iData }
+    // get subtype() { return this.iData.type }
+    // get aData() { return this.actor?.aData }
 
     prepareData() {
         super.prepareData();
 
+        // console.log({"ITEM: THIS.ACTOR": this.actor});
         // Get the Item's data, as well as the owning Actor, if there is one
         const {data} = this.data;
         const actorData = this.actor?.data ?? {};
-
-        Handlebars.registerHelper("ifCond", function(v1, operator, v2, options) {
-            switch (operator) {
-                /* eslint-disable eqeqeq */
-                case "==":
-                    return v1 == v2 ? options.fn(this) : options.inverse(this);
-                case "!=":
-                    return v1 != v2 ? options.fn(this) : options.inverse(this);
-                /* eslint-enable eqeqeq */
-                case "===":
-                    return v1 === v2 ? options.fn(this) : options.inverse(this);
-                case "!==":
-                    return v1 !== v2 ? options.fn(this) : options.inverse(this);
-                case "<":
-                    return v1 < v2 ? options.fn(this) : options.inverse(this);
-                case "<=":
-                    return v1 <= v2 ? options.fn(this) : options.inverse(this);
-                case ">":
-                    return v1 > v2 ? options.fn(this) : options.inverse(this);
-                case ">=":
-                    return v1 >= v2 ? options.fn(this) : options.inverse(this);
-                case "&&":
-                    return v1 && v2 ? options.fn(this) : options.inverse(this);
-                case "||":
-                    return v1 || v2 ? options.fn(this) : options.inverse(this);
-                default:
-                    return options.inverse(this);
-            }
-        });
     }
 
 

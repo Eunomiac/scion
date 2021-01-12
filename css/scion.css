@@ -1608,22 +1608,22 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .mirrorContainer {
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip {
   display: block;
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  background-image: url("../images/ToolTipBall.png");
-  background-size: 100%;
   z-index: 9999;
-  background-position: center;
-  right: 30px;
+  filter: drop-shadow(5px 5px 10px black);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div {
-  min-width: 300px;
-  max-width: 400px;
-  top: 50%;
-  left: 100%;
-  transform: translate(0, -50%);
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.helper {
+  height: 40px;
+  width: 40px;
+  right: 30px;
+  position: absolute;
+  background-image: url("../images/ToolTipBall.png");
+  background-size: 100%;
+  background-position: center;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents {
+  width: 300px;
   padding: 5px;
   color: #444444;
   background-color: white;
@@ -1639,33 +1639,79 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div {
   transition: opacity 0.8s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div p {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li {
   font-family: "Della Respira";
   font-size: 12px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div i {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents i {
   position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -25px;
   width: 50px;
   height: 50px;
   overflow: hidden;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > div i::after {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents i::after {
   content: '';
   position: absolute;
   width: 50px;
   height: 50px;
-  top: 50%;
-  transform: translate(50%, -50%) rotate(-45deg);
   background-color: white;
   border: 10px outset #DDD;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip:hover > div {
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
+  top: 50%;
+  left: 100%;
+  transform: translate(0, -50%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
+  top: 50%;
+  right: 100%;
+  margin-top: -25px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i::after {
+  top: 50%;
+  transform: translate(50%, -50%) rotate(-45deg);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents {
+  top: 50%;
+  right: 107%;
+  transform: translate(0, -50%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i {
+  top: 50%;
+  right: -50px;
+  margin-top: -25px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i::after {
+  top: 50%;
+  transform: translate(-50px, -50%) rotate(-45deg);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents {
+  bottom: 115%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i {
+  left: calc(50% - 1.2 * 20px);
+  margin-top: -7px;
+  transform: scale(0.8);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i::after {
+  top: 50%;
+  transform: translate(-15%, -90%) rotate(45deg);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip:hover > .tipContents {
   visibility: visible;
   opacity: 1;
 }
@@ -2508,13 +2554,32 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling .dotline {
   margin-top: 15px;
+  margin-bottom: 15px;
   transform: scale(1.5);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling h1 {
-  margin-top: 20px;
+  margin-top: 30px;
   border: none;
   font-size: calc(var(--fontSizeH1) * 1.5);
+  text-transform: capitalize;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling h2 {
+  background: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling div.keywords .contentEditable {
+  flex: 0.4 0.4 40%;
+  text-indent: 0;
+  font-family: "Amarante";
+  font-size: 14px;
+  height: 14px;
+  min-height: 14px;
+  line-height: 14px;
+  border-width: 2px;
+  margin: 2px;
+  font-weight: normal;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour #callingsList.popout {
@@ -2587,7 +2652,9 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour #knacksList.popout {
   width: 180px;
   left: -180px;
-  top: 110px;
+  top: 150px;
+  overflow: visible;
+  padding-top: 10px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour #knacksList.popout h1.knackCategory {
@@ -2596,6 +2663,16 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   color: var(--black);
   border: none;
   border-bottom: 2px solid black;
+  text-transform: uppercase;
+  font-family: Oswald;
+  color: var(--accentDown2);
+  background-image: url("../images/textures/stoneWhite.jpg");
+  min-height: 28px;
+  line-height: 24px;
+  margin: 5px 0px;
+  border-radius: 25px;
+  filter: drop-shadow(4px 4px 4px black);
+  border: none;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour #knacksList.popout > div {

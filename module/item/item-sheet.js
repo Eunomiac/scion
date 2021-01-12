@@ -49,6 +49,7 @@ export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIX
     }
 
     getData() {
+        // console.log({"ITEMSHEET: THIS.ACTOR": this.actor});
         const data = super.getData();
         data.blocks = handlebarTemplates;
         data.openPopouts = data.openPopouts || {};

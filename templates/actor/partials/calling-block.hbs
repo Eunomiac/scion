@@ -22,9 +22,9 @@
         {{/for}}
     </div>
     <h2>Keywords</h2>
-    <div class="keywords flex-col-start alignCenter height30 width100">
+    <div class="keywords flex-row-wrap alignCenter height30 width90">
         {{#for calling.value}}
-        <div class="contentEditable outsetFrame width70 text" data-field="data.callings.list.{{../calling.name}}.keywordsChosen" data-fieldindex="{{@index}}"></div>
+        <div class="contentEditable outsetFrame width50" data-field="data.callings.list.{{../calling.name}}.keywordsChosen" data-fieldindex="{{@index}}"></div>
         {{/for}}
     </div>
 </div>

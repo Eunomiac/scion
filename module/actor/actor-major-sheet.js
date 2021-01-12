@@ -139,7 +139,7 @@ export class MajorActorSheet extends ScionActorSheet {
 
         // #endregion
 
-        U.LOG(game.scion.debug.isFormattingGroup 
+        U.LOG(game.scion.debug.isFullDebugConsole 
             ? {
                     "data [Sheet Context]": data,
                     "... data": data.data,
@@ -227,41 +227,81 @@ export class MajorActorSheet extends ScionActorSheet {
             // #endregion
 
             // #region [GEN DRAG] CALLING SELECTION
+            const updateSelectedCalling = async (...args) => {
+                return false;
+            }; /* 
+                let [focusedCalling] = args.slice(0, 2).reverse();
+                if (typeof focusedCalling === "object" && "dataset" in focusedCalling) {
+                    focusedCalling = focusedCalling.dataset.calling;
+                }
+                const curSelected = () => this.actor.getProp("data.callings.selected");
+                const curCallings = this.actor.getProp("data.callings.chargen");
+                let callingFocus = focusedCalling ?? curSelected();
+                this.actor.queueSyncKnacks();
+                // If any of the callings are not chosen, clear selected callings.
+                if (curCallings?.length < 3) {
+                    this.actor.setProp("data.callings.selected", false);
+                    await this.actor.processUpdateQueue();
+                    return curSelected();
+                }
+                // If the indicated focus was expressly chosen, it's valid, so okay!
+                if (callingFocus && callingFocus === focusedCalling) {
+                    this.actor.setProp("data.callings.selected", callingFocus);
+                    await this.actor.processUpdateQueue();
+                    return curSelected();
+                // Otherwise, if all knacks are chosen, clear selected callings.
+                } else if (!focusedCalling && U.SumVals(this.actor.unassignedKnackDots) === this.actor.unassignedKnackDots.extra) {
+                    callingFocus = false;
+                // Otherwise, set the focus to the last bin a dot was dropped into.
+                } else {
+                    callingFocus = this.lastBin?.dataset?.calling;
+                }
+
+                // Now, if no callingFocus OR the focused calling has all knacks selected, choose a calling with knacks to select.
+                if (!callingFocus || this.actor.unassignedKnackDots[callingFocus] === 0) {
+                    callingFocus = _.findKey(this.actor.unassignedKnackDots, (v, k) => k !== "extra" && v > 0);
+                }
+
+                // If the indicated calling focus isn't a valid calling, set to false.
+                if (callingFocus && !curCallings.includes(callingFocus)) {
+                    callingFocus = false;
+                }
+                this.actor.setProp("data.callings.selected", callingFocus);
+                await this.actor.processUpdateQueue();
+                return curSelected();
+            }; */
             const addCalling = async (callingElement, targetBin, sourceBin) => {
+                const targetSlot = U.Int(targetBin.dataset.slot);
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
                     const {calling} = callingElement.dataset;
                     const {calling: targetCalling} = targetBin.dataset;
                     const chargenCallings = this.actor.getProp("data.callings.chargen");
-                    chargenCallings[U.Int(targetBin.dataset.slot)] = calling;
+                    chargenCallings[targetSlot] = calling;
                     if (sourceBin.classList.contains("callingDrop")) {
-                        chargenCallings[U.Int(sourceBin.dataset.slot)] = targetCalling;
+                        chargenCallings[targetSlot] = targetCalling;
                     } else {
-                        this.actor.setProp({...SCION.CALLINGS.actorDefault, name: callingElement.dataset.calling, value: 1}, `data.callings.list.${calling}`);
+                        this.actor.setProp(`data.callings.list.${calling}`, {...SCION.CALLINGS.actorDefault, name: callingElement.dataset.calling, value: 1});
                         if (targetCalling !== "empty") {
-                            this.actor.setProp(null, `data.callings.list.${targetCalling}`);
-                            if (this.actor.getProp("data.callings.selected") === targetCalling) {
-                                this.actor.setProp(false, "data.callings.selected");
-                            }
+                            this.actor.setProp(`data.callings.list.${targetCalling}`, null);
                         }
                     }
-                    this.actor.setProp(chargenCallings, "data.callings.chargen");
-                    await this.actor.processUpdateQueue();
+                    this.actor.setProp("data.callings.chargen", chargenCallings);       
+                    this.actor.queueSyncKnacks();             
+                    await updateSelectedCalling();
                 }
             };
             const remCalling = async (callingBin) => {
-                if (this.actor.getProp("data.callings.selected")) {
-                    this.actor.setProp(false, "data.callings.selected");
-                }
-                this.actor.setProp(null, "data.callings.chargen", U.Int(callingBin.dataset.slot));
-                this.actor.setProp(null, `data.callings.list.${callingBin.dataset.calling}`);
-                await this.actor.processUpdateQueue();
+                this.actor.setProp("data.callings.chargen", callingBin.dataset.slot, null);
+                this.actor.setProp(`data.callings.list.${callingBin.dataset.calling}`, null);       
+                this.actor.queueSyncKnacks();
+                await updateSelectedCalling();
             };
-            const addHoverGlow = (callingElement, callingBin) => {
+            const addHoverGlow = (__, callingBin) => {
                 if (callingBin.classList.contains("callingDrop")) {
                     callingBin.classList.add("glow");
                 }
             };
-            const remHoverGlow = (callingElement, callingBin) => {
+            const remHoverGlow = (__, callingBin) => {
                 if (callingBin.classList.contains("glow")) {
                     callingBin.classList.remove("glow");
                 }
@@ -271,9 +311,9 @@ export class MajorActorSheet extends ScionActorSheet {
             const [callingMirror] = html.find("#callingsMirror");
             const callingDrop = html.find(".callingDrop");
             const callingDragger = dragula({
-                "containers": [...callingSource, ...callingDrop],
-                "moves": (element, source, handle) => handle.classList.contains("handle") && !element.classList.contains("invalid"),                    
-                "accepts": (element, target, source) => {
+                containers: [...callingSource, ...callingDrop],
+                moves: (element, source, handle) => handle.classList.contains("handle") && !element.classList.contains("invalid"),                    
+                accepts: (element, target, source) => {
                     if (source.id === "callingsSource") {
                         const callings = Object.keys(this.actor.callings);
                         return target.classList.contains("callingDrop")
@@ -284,95 +324,72 @@ export class MajorActorSheet extends ScionActorSheet {
                     }
                     return false;
                 },
-                "direction": "horizontal",
-                "copy": true,
-                "removeOnSpill": true,
-                "mirrorContainer": callingMirror,
-                "sheetElement": this.sheetElem
+                direction: "horizontal",
+                copy: true,
+                removeOnSpill: true,
+                mirrorContainer: callingMirror,
+                sheetElement: this.sheetElem
             });
-            callingDragger.on("cancel", (element, container, source) => {
+            callingDragger.on("cancel", async (element, __, source) => {
                 if (source.classList.contains("callingDrop") && this.currentlyOver?.dataset.calling !== element.dataset.calling) {
-                    remCalling(source);
+                    await remCalling(source);
                 }
             });
-            callingDragger.on("drop", (element, target, source) => addCalling(element, target, source));
+            callingDragger.on("drop", async (element, target, source) => await addCalling(element, target, source));
             callingDragger.on("over", (element, target) => {this.currentlyOver = target; addHoverGlow(element, target)});
             callingDragger.on("out", (element, target) => {this.currentlyOver = null; remHoverGlow(element, target)});
             
-            html.find("h1.callingHeader").click(async (event) => { 
-                const curSelect = this.actor.getProp("data.callings.selected");
-                const newSelect = event.currentTarget.dataset.calling;
-                if (curSelect === newSelect) {
-                    this.actor.setProp(false, "data.callings.selected");
-                } else {
-                    this.actor.setProp(newSelect, "data.callings.selected");
-                }
-                return await this.actor.processUpdateQueue();
+            html.find("h1.callingHeader").click(async (event) => {
+                await updateSelectedCalling(event.currentTarget.dataset.calling);
             });
 
             const addKnack = async (knackElement, targetBin, sourceBin) => {
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
                     const {knack: elementKnack} = knackElement.dataset;
-                    const {knack: targetKnack} = targetBin.dataset;
                     const knackData = U.Clone(this.actor.knacks);
                     const knackIndex = knackData.findIndex((knack) => knack.name === elementKnack);
                     if (knackIndex > -1) {
                         knackData[knackIndex].assignment = targetBin.dataset.calling;
-                        this.actor.setProp(knackData, "data.knacks.list");
+                        this.actor.setProp("data.knacks.list", knackData);
                     } else {
-                        this.actor.addKnack(elementKnack, targetBin.dataset.calling);
+                        await this.actor.addKnack(elementKnack, targetBin.dataset.calling);
                     }
-                    if (this.actor.unassignedKnackDots[targetBin.dataset.calling] - (SCION.KNACKS.list[elementKnack].tier === "immortal" ? 2 : 1) === 0) {
-                        this.actor.setProp(false, "data.callings.selected");
-                    }
-                    await this.actor.processUpdateQueue();
+                    await updateSelectedCalling();
                 }
             };
             const remKnack = async (knackName, sourceBin) => {
-                this.actor.remKnack(knackName);                
-                if (sourceBin.classList.contains("knackDrop") && !this.actor.getProp("data.callings.selected")) {
-                    this.actor.setProp(sourceBin.dataset.calling, "data.callings.selected");
+                await this.actor.remKnack(knackName);
+                await updateSelectedCalling();
+            };
+            const cancelKnack = async (element, target, source) => {
+                if (source.classList.contains("knackDrop") && this.currentlyOver?.dataset.knack !== element.dataset.knack) {
+                    await remKnack(element.dataset.knack, source);
                 }
-                await this.actor.processUpdateQueue();
             };
 
             const knackSource = html.find("#knacksSource");
             const [knackMirror] = html.find("#knacksMirror");
             const knackDrop = html.find(".knackDrop");
             const knackDragger = dragula({
-                "containers": [...knackSource, ...knackDrop],
-                "moves": (element) => !element.classList.contains("invalid"),                    
-                "accepts": (element, target, source) => {
+                containers: [...knackSource, ...knackDrop],
+                moves: (element) => !element.classList.contains("invalid"),                    
+                accepts: (element, target, source) => {
                     return target.classList.contains("knackDrop")
                         && ["any", target.dataset.calling].includes(element.dataset.calling)
                         && this.actor.unassignedKnackDots[target.dataset.calling] >= (SCION.KNACKS.list[element.dataset.knack].tier === "immortal" ? 2 : 1);
                 },
-                "direction": "horizontal",
-                "copy": false,
-                "removeOnSpill": true,
-                "mirrorContainer": knackMirror,
-                "sheetElement": this.sheetElem
+                direction: "horizontal",
+                copy: false,
+                removeOnSpill: true,
+                mirrorContainer: knackMirror,
+                sheetElement: this.sheetElem
             });            
-            knackDragger.on("remove", (element, container, source) => {
-                if (source.classList.contains("knackDrop") && this.currentlyOver?.dataset.knack !== element.dataset.knack) {
-                    remKnack(element.dataset.knack, source);
-                }
+            knackDragger.on("remove", cancelKnack.bind(this));
+            knackDragger.on("cancel", cancelKnack.bind(this));
+            knackDragger.on("drop", async (element, target, source) => {
+                await addKnack(element, target, source);
             });
-            knackDragger.on("cancel", (element, container, source) => {
-                if (source.classList.contains("knackDrop") && this.currentlyOver?.dataset.knack !== element.dataset.knack) {
-                    remKnack(element.dataset.knack, source);
-                }
-            });
-            knackDragger.on("drop", (element, target, source) => addKnack(element, target, source));
-            // knackDragger.on("over", (element, target) => {this.currentlyOver = target; addHoverGlow(element, target)});
-            // knackDragger.on("out", (element, target) => {this.currentlyOver = null; remHoverGlow(element, target)});
 
-
-            if (game.scion.debug.isDebuggingDragula) {
-                ["drag", "dragend", "drop", "cancel", "remove", "shadow", "over", "out", "cloned"].forEach((event) => {
-                    callingDragger.on(event, (...args) => console.log([event, args]));
-                });
-            }
             // #endregion
 
             // #region *** DOT DRAG-AND-DROP ***
@@ -416,9 +433,21 @@ export class MajorActorSheet extends ScionActorSheet {
 
             this.addDragListener(chargenFourDotDragger, "drag", {extraArgs: [chargenFourDotBins]});
             this.addDragListener(chargenFourDotDragger, "dragend", {extraArgs: [chargenFourDotBins]});
-            this.addDragListener(chargenFourDotDragger, "drop");
+            this.addDragListener(chargenFourDotDragger, "drop", {extraFunc: (__, target) => updateSelectedCalling.bind(this)(target.dataset.calling)});
             this.addDragListener(chargenFourDotDragger, "remove");   
             // #endregion
+
+            /* ["drag", "dragend", "drop", "cancel", "remove", "shadow", "over", "out", "cloned"].forEach((event) => {
+                [callingDragger, knackDragger, chargenThreeDotDragger, chargenFourDotDragger].forEach((dragger) => {
+                    dragger.on(event, (...args) => {
+                        if (game.scion.debug.isDebuggingDragula === true || Array.isArray(game.scion.debug.isDebuggingDragula) && game.scion.debug.isDebuggingDragula.includes(event)) {
+                            console.log([event, args]);
+                        }
+                    });
+                });
+            }); */
+
+
             // #endregion
             
             // #endregion

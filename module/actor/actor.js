@@ -1,12 +1,12 @@
-import {THROW} from "../data/utils.js";
-import _$1 from "../external/underscore/underscore-esm-min.js";
+// import {THROW} from "../data/utils.js";
+// import _$1 from "../external/underscore/underscore-esm-min.js";
 import {_, U, SCION, MIX, MIXINS} from "../modules.js";
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export class ScionActor extends Actor {
+export class ScionActor extends MIX(Actor).with(MIXINS.UpdateQueue) {
     // Getters: Data Retrieval
     get ent() { return typeof this.entity === "string" ? this : this.entity }
     get sht() { return this.ent.sheet }
@@ -18,62 +18,18 @@ export class ScionActor extends Actor {
         return this._sheet;
     }
     get ownedItems() { return this.ent.data.items }
+    get actor() { return super.actor ?? this }
 
     // get eData() { return this.data.data }
     // get subtype() { return this.eData.type }
     // get ownedItems() { return this.data.items }
 
     prepareData() {
-        this.pendingUpdateData = this.pendingUpdateData ?? {};
         super.prepareData();
-        if (this.data.type === "major") {setTimeout(() => this._prepareMajorCharData(), 100)}
-    }
-
-    getProp(fieldKey, fieldIndex) {
-        const entityVal = (this.updatingData ? getProperty(this.updatingData, fieldKey) : null)
-            ?? getProperty(this.pendingUpdateData, fieldKey)
-            ?? getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."));
-        if (!_.isUndefined(fieldIndex)) {
-            return Array.isArray(entityVal) ? U.Clone(entityVal[U.Int(fieldIndex)]) : undefined; 
+        // console.log({"ACTOR: THIS.ACTOR": this.actor});
+        if (this.data.type === "major") {
+            this._prepareMajorCharData();
         }
-        return U.Clone(entityVal);
-    }
-
-    async setProp(value, fieldKey, fieldIndex) {
-        if (!_.isUndefined(fieldIndex)) {
-            const updateVal = value;
-            value = this.getProp(fieldKey);
-            value[U.Int(fieldIndex)] = updateVal;
-        }
-        if (fieldKey.startsWith("data.")) {
-            return this.queueUpdateData({[fieldKey.replace(/^(data\.)+/u, "data.")]: value});
-        }
-        return await this.update({[fieldKey]: value});
-    }
-
-    queueUpdateData(updateData) {
-        updateData = _.omit(U.Flatten(updateData), (val, fieldKey) => U.Equal(val, this.getProp(fieldKey)));
-        if (isObjectEmpty(updateData)) {
-            return false;
-        }
-        this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateData);
-        return true;
-    }
-    async processUpdateQueue(isForcing = false) {
-        if (this.updatingData) {
-            return false;
-        }
-        if (isObjectEmpty(this.pendingUpdateData)) {
-            if (isForcing) {
-                // await this.sheet.render();
-            }
-            return false;
-        }
-        this.updatingData = U.Expand(this.pendingUpdateData);
-        this.pendingUpdateData = {};
-        await this.update(this.updatingData);
-        delete this.updatingData;
-        return true;
     }
 
     async _prepareMajorCharData() {
@@ -214,13 +170,15 @@ export class ScionActor extends Actor {
         return true;
     }
 
-    getKnacksValue = (knacks) => knacks.reduce((tot, knack) => tot + (knack.tier === "immortal" ? 2 : 1), 0);
-    getAvailableCallingKnacks = (calling) => _.groupBy(
-        Object.keys(SCION.KNACKS.list).
-            filter((knack) => ["any", calling].includes(SCION.KNACKS.list[knack].calling)),
-        (knack) => `${SCION.KNACKS.list[knack].calling === "any" ? "any_" : ""}${SCION.KNACKS.list[knack].tier}`
-    );
-    getAssignedCallingKnacks = (calling) => this.knacks.filter((knack) => knack.assignment === calling);
+    getKnacksValue(knacks) { return knacks.reduce((tot, knack) => tot + (knack.tier === "immortal" ? 2 : 1), 0) }
+    getAvailableCallingKnacks(calling) {
+        return _.groupBy(
+            Object.keys(SCION.KNACKS.list).
+                filter((knack) => ["any", calling].includes(SCION.KNACKS.list[knack].calling)),
+            (knack) => `${SCION.KNACKS.list[knack].calling === "any" ? "any_" : ""}${SCION.KNACKS.list[knack].tier}`
+        );
+    }
+    getAssignedCallingKnacks(calling) { return this.knacks.filter((knack) => knack.assignment === calling) }
     pruneKnacks(assignment, maxValue, knacksData) {
         assignment = assignment ?? false;
         const origKnacksData = U.Clone(knacksData ?? this.knacks);
@@ -265,7 +223,7 @@ export class ScionActor extends Actor {
         return knacksData;
     }
 
-    addKnack(knackName, assignment = false) {
+    async addKnack(knackName, assignment = false) {
         const knacksList = U.Clone(this.getProp("data.knacks.list"));
         const knackIndex = knacksList.findIndex((knack) => knack.name === knackName);
         if (knackIndex > 0) {
@@ -277,18 +235,22 @@ export class ScionActor extends Actor {
                 ...SCION.KNACKS.list[knackName]
             });
         }
-        this.setProp(knacksList, "data.knacks.list");
+        this.setProp("data.knacks.list", knacksList);
+        this.queueSyncKnacks();
+        await this.processUpdateQueue();
     }
-    remKnack(knackName) {
+    async remKnack(knackName) {
         const knacksList = U.Clone(this.getProp("data.knacks.list")).filter((knack) => knack.name !== knackName);
-        this.setProp(knacksList, "data.knacks.list");
+        this.setProp("data.knacks.list", knacksList);
+        this.queueSyncKnacks();
+        await this.processUpdateQueue();
     }
     queueSyncKnacks() {
         let knacksData = U.Clone(this.getProp("data.knacks.list"));
         Object.entries(this.callings).forEach(([callingName, callingData]) => {
             knacksData = this.pruneKnacks(callingName, callingData.value, knacksData);
         });
-        this.setProp(knacksData, "data.knacks.list");
+        this.setProp("data.knacks.list", knacksData);
     }
 
     /* #region GETTERS */
@@ -400,10 +362,10 @@ export class ScionActor extends Actor {
     get derivedAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => this.baseAttrVals[k] + this.assignedAttrVals[k]) }
     get attrVals() { return U.KeyMapObj(this.derivedAttrVals, (v) => Math.max(SCION.ATTRIBUTES.min, Math.min(v, SCION.ATTRIBUTES.max))) }
 
-    convertAttrGroup = (groupRef) => {
+    convertAttrGroup(groupRef) {
         if (Object.keys(SCION.ATTRIBUTES.arenas).includes(groupRef)) {return Object.keys(SCION.ATTRIBUTES.priorities)[this.eData.attributes.priorities.findIndex((arena) => arena === groupRef)]} else if (Object.keys(SCION.ATTRIBUTES.priorities).includes(groupRef)) {return this.eData.attributes.priorities[Object.keys(SCION.ATTRIBUTES.priorities).findIndex((priority) => priority === groupRef)]}
         return U.THROW(groupRef, "ERROR: Invalid Attribute Group Reference");
-    };
+    }
 
     get totalAssignedDotsByArena() { return U.KeyMapObj(SCION.ATTRIBUTES.arenas, (attrs) => attrs.reduce((tot, attr) => tot + this.assignedAttrVals[attr], 0)) }
     get assignableArenaDots() { return U.KeyMapObj(this.eData.attributes.assignableArenaDots, (priority) => this.convertAttrGroup(priority), (v) => v) }

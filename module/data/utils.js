@@ -126,10 +126,22 @@ const stackTrace = () => {
     ];
 };
 const logLine = (output, title, {style, groupStyle, isGrouping}) => {
-    if (isGrouping && game.scion.debug.isFormattingGroup) {
-        if (game.scion.debug.isFormattingGroup) {console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle])} else {console.groupCollapsed(isGrouping)}
+    if (isGrouping && game.scion.debug.isFullDebugConsole) {
+        if (game.scion.debug.isFullDebugConsole) {
+            console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle]);
+        } else {
+            console.groupCollapsed(isGrouping);
+        }
     }
-    if (output !== undefined) {console.log(`%c ${title}`, logStyles[style], output)} else {console.log(`No Output for ${title}`)}
+    if (output !== undefined) {
+        if (game.scion.debug.isFullDebugConsole) {
+            console.log(`%c ${title}`, logStyles[style], output);
+        } else {
+            console.log(title, _.pick(output, (v, k) => Object.prototype.hasOwnProperty.call(output, k)));
+        }
+    } else {
+        console.log(`No Output for ${title}`);
+    }
 };
 const logStackTrace = (stack) => {
     if (stack) {
@@ -146,8 +158,10 @@ const logStackTrace = (stack) => {
 const logGroup = (outputs, groupTitle, tag, {style, groupStyle}, stackTrace) => {
     if (["number", "string"].includes(typeof outputs)) {
         logGroup({}, outputs, tag, {style, groupStyle}, stackTrace);
-    } else {
-        if (Array.isArray(outputs)) {outputs = outputs.map((x, i) => ({[`${i}. ${JSON.stringify(x)}`]: ""}))}
+    } else if (game.scion.debug.isFullDebugConsole) {
+        if (Array.isArray(outputs)) {
+            outputs = outputs.map((x, i) => ({[`${i}. ${JSON.stringify(x)}`]: ""}))
+        }
         outputs = Object.entries(outputs);
         (([lineTitle, lineOutput]) => {
             logLine(lineOutput, lineTitle, {style, groupStyle, isGrouping: _.compact([tag && `[${tag}]`, groupTitle]).join(" ")});
@@ -155,16 +169,20 @@ const logGroup = (outputs, groupTitle, tag, {style, groupStyle}, stackTrace) => 
         outputs.forEach(([lineTitle, lineOutput]) => {
             logLine(lineOutput, lineTitle, {style});
         });
-        if (game.scion.debug.isFormattingGroup) {
-            logStackTrace(stackTrace);
-            console.groupEnd();
-        }
+        logStackTrace(stackTrace);
+        console.groupEnd();
+    } else {
+        console.log(groupTitle, outputs);
     }
 };
 export const IsDebug = () => Boolean(game.scion?.debug.isDebugging);
 export const LOG = (outputs = {title: Object}, groupTitle = "", tag = undefined, {style="log", groupStyle="data", isLoud=false} = {}, stack = stackTrace()) => {
     if (isDebugging(tag, {isLoud})) {
-        if (CONFIG.isHoldingLogs) {delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack])} else {logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack)}
+        if (CONFIG.isHoldingLogs) {
+            delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack])
+        } else {
+            logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack)
+        }
     }
 };
 export const ReleaseLogs = () => {
@@ -219,8 +237,15 @@ export const TCase = (str) => `${str}`.split(/\s/u).
     trim();
 export const Loc = (locRef, formatDict = {}) => {
     if (/^"?scion\./u.test(JSON.stringify(locRef))) {
-        for (const [key, val] of Object.entries(formatDict)) {formatDict[key] = Loc(val)}
-        return game.i18n.format(locRef, formatDict) || "";
+        formatDict = {...formatDict, li: "<li>"};
+        for (const [key, val] of Object.entries(formatDict)) {
+            formatDict[key] = Loc(val);
+        }
+        let locVal = game.i18n.format(locRef, formatDict) || "";
+        if (/<li>/u.test(locVal)) {
+            locVal = `${locVal.replace(/<li>/u, "<ul><li>")}</ul>`;
+        }
+        return locVal;
     }
     return locRef;
 };
@@ -242,6 +267,7 @@ export const Rand = (n1, n2) => Math.round(Math.random() * (Math.max(Int(n2), In
 
 // #region ARRAY FUNCTIONS: Last
 export const Last = (arr) => (Array.isArray(arr) && arr.length ? arr[arr.length - 1] : undefined);
+export const Insert = (arr, val, index) => { arr[Int(index)] = val; return arr };
 // #endregion
 
 // #region OBJECT FUNCTIONS: Dot Notation, MapObject, MakeDictionary
@@ -292,6 +318,7 @@ export const Merge = (target, source, isMergingArrays = true) => {
 
     return target;
 };
+export const Filter = (obj, testFunc = (v, k) => true) => Object.keys(obj).reduce((newObj, key) => Object.assign(newObj, testFunc(obj[key], key) ? {[key]: obj[key]} : {}), {});
 export const Expand = (obj) => {    
     const expObj = {};
     for ( let [key, val] of Object.entries(obj) ) {
@@ -319,7 +346,13 @@ export const Flatten = (obj) => {
     }
     return flatObj;
 };
-export const SumVals = (...objs) => objs.reduce((tot, obj) => tot + Object.values(obj).reduce((subTot, val) => subTot + val, 0), 0);
+export const SumVals = (...objs) => {
+    const valKey = objs.pop();
+    if (typeof valKey === "object") {
+        objs.push(valKey);
+    }
+    return objs.reduce((tot, obj) => tot + Object.values(obj).reduce((subTot, val) => (subTot + (typeof val === "object" && valKey in val) ? val[valKey] : val), 0), 0);   
+};
 export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
     const newDict = {};
     for (const key of Object.keys(objRef)) {

@@ -17,6 +17,13 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampText, MIXI
         return this._sheet;
     }
     get ownedItems() { return this.ent.data.items }
+    get actor() { 
+        if (super.actor ?? this._actor) {
+            return super.actor ?? this._actor;
+        }
+        this._actor = this.entity === "Actor" ? this : undefined;
+        return this._actor;
+    }
 
     static get defaultOptions() {
         /*
@@ -64,6 +71,7 @@ export class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampText, MIXI
     }
 
     getData() {
+        // console.log({"ACTORSHEET: THIS.ACTOR": this.actor});
         const data = super.getData();
         data.config = CONFIG.scion;
         data.blocks = handlebarTemplates;

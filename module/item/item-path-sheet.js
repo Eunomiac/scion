@@ -41,6 +41,7 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
     }
 
     get suspensionCondition() {
+        
         return this.item.getActorItems("condition").find((item) => item.subtype === "pathSuspension" && item.eData.linkedItem === this.item.id);
     }
 

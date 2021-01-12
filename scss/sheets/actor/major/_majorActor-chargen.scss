@@ -169,13 +169,30 @@
 
         .dotline {
             margin-top: 15px;
+            margin-bottom: 15px;
             transform: scale(1.5);
         }
 
         h1 {
-            margin-top: 20px;
+            margin-top: 30px;
             border: none;
             font-size: calc(var(--fontSizeH1) * 1.5);
+            text-transform: capitalize;
+        }
+        h2 { background: none; }
+        div.keywords {
+            .contentEditable {
+                flex: 0.4 0.4 40%;
+                text-indent: 0;
+                font-family: "Amarante";
+                font-size: 14px;
+                height: 14px;
+                min-height: 14px;
+                line-height: 12px;
+                border-width: 2px;
+                margin: 2px;
+                font-weight: normal;
+            }
         }
 
     }
@@ -260,7 +277,9 @@
     #knacksList.popout {
         width: 180px;
         left: -180px;
-        top: 110px;           
+        top: 150px;           
+        overflow: visible;
+        padding-top: 10px;
 
         h1.knackCategory {
             text-transform: uppercase;
@@ -268,6 +287,17 @@
             color: var(--black);
             border: none;
             border-bottom: 2px solid black;
+
+            text-transform: uppercase;
+            font-family: Oswald;
+            color: var(--accentDown2);
+            background-image: url("../images/textures/stoneWhite.jpg");
+            min-height: 28px;
+            line-height: 24px;
+            margin: 5px 0px;
+            border-radius: 25px;
+            filter: drop-shadow(4px 4px 4px black);
+            border: none;
         }
         > div {
             padding: 0 0 15px 0;
