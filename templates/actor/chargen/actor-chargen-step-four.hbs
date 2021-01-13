@@ -4,7 +4,7 @@
         <div id="chargenFourDotMirror" class="dotContainer mirrorContainer"></div>
     </div>
     {{#each callings.chargen as |callingName|}}
-        {{#with (bundle "index" @index "callings" ../callings "calling" (lookup ../callings.actor callingName)) as |callingsData|}}
+        {{#with (bundle "index" @index "callings" ../callings "calling" (lookup ../callings.callings callingName)) as |callingsData|}}
         {{> (../../blocks.partials.calling.template) callingsData}}
         {{/with}}
     {{/each}}
@@ -13,14 +13,14 @@
     {{#if (test callings.numChosen "<" 3)}}
     {{> (blocks.popouts.callingsList.template) callings }}
     {{else}}{{#if callings.selected}}
-    {{> (blocks.popouts.knacksList.template) (lookup callings.actor callings.selected) }}
+    {{> (blocks.popouts.knacksList.template) (lookup callings.callings callings.selected) }}
     {{/if}}
     <div class="footer">
         <div class="unassignedDots unassignedCallingDots flex-col alignCenter">
-            <h2 class="alignCenter noBG">{{#if unassignedCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>
+            <h2 class="alignCenter noBG">{{#if callings.unassignedCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>
             <div class="dotline unassigned space5 noLabel">
                 <div class="chargenFourDotBin dotBin dotContainer" data-types="unassigned|calling" data-binid="unassignedCalling">
-                    {{#for unassignedCallingDots}}
+                    {{#for callings.unassignedCallingDots}}
                     <span class="dot" data-types="unassigned|calling|general"></span>
                     {{/for}}
                 </div>

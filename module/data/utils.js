@@ -160,7 +160,7 @@ const logGroup = (outputs, groupTitle, tag, {style, groupStyle}, stackTrace) => 
         logGroup({}, outputs, tag, {style, groupStyle}, stackTrace);
     } else if (game.scion.debug.isFullDebugConsole) {
         if (Array.isArray(outputs)) {
-            outputs = outputs.map((x, i) => ({[`${i}. ${JSON.stringify(x)}`]: ""}))
+            outputs = outputs.map((x, i) => ({[`${i}. ${JSON.stringify(x)}`]: ""}));
         }
         outputs = Object.entries(outputs);
         (([lineTitle, lineOutput]) => {
@@ -179,9 +179,9 @@ export const IsDebug = () => Boolean(game.scion?.debug.isDebugging);
 export const LOG = (outputs = {title: Object}, groupTitle = "", tag = undefined, {style="log", groupStyle="data", isLoud=false} = {}, stack = stackTrace()) => {
     if (isDebugging(tag, {isLoud})) {
         if (CONFIG.isHoldingLogs) {
-            delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack])
+            delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack]);
         } else {
-            logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack)
+            logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack);
         }
     }
 };
@@ -268,6 +268,34 @@ export const Rand = (n1, n2) => Math.round(Math.random() * (Math.max(Int(n2), In
 // #region ARRAY FUNCTIONS: Last
 export const Last = (arr) => (Array.isArray(arr) && arr.length ? arr[arr.length - 1] : undefined);
 export const Insert = (arr, val, index) => { arr[Int(index)] = val; return arr };
+export const Change = (arr, findFunc = (e, i, a) => true, changeFunc = (e, i, a) => e) => {
+    const index = arr.findIndex(findFunc);
+    if (index >= 0) {
+        arr[index] = changeFunc(arr[index], index, arr);
+        return arr;
+    } else {
+        return false;
+    }
+};
+export const Remove = (arr, findFunc = (e, i, a) => true) => {
+    const index = arr.findIndex(findFunc);
+    if (index >= 0) {
+        delete arr[index];
+        for (let i = index; i < (arr.length - 1); i++) {
+            arr[i] = arr[i+1];
+        }
+        arr.length = arr.length - 1;
+        return arr;
+    } else {
+        return false;
+    }
+};
+
+// const testArray = [0, 1, 2, 3, 4, 5];
+// const findFunc = (e, i) => i > 3;
+// const changeFunc = (e) => e + 3;
+// console.log(Remove(testArray, findFunc, changeFunc));
+// console.log(testArray);
 // #endregion
 
 // #region OBJECT FUNCTIONS: Dot Notation, MapObject, MakeDictionary

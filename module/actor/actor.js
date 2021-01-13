@@ -6,7 +6,7 @@ import {_, U, SCION, MIX, MIXINS} from "../modules.js";
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export class ScionActor extends MIX(Actor).with(MIXINS.UpdateQueue) {
+export class ScionActor extends Actor {
     // Getters: Data Retrieval
     get ent() { return typeof this.entity === "string" ? this : this.entity }
     get sht() { return this.ent.sheet }
@@ -146,27 +146,38 @@ export class ScionActor extends MIX(Actor).with(MIXINS.UpdateQueue) {
         }
     }
 
+    async writeUpdates() {
+        const data = U.Clone(this.eData);
+        await this.update({data});
+        return true;
+    }
+
     queueSkillValsUpdate(newAssignedSkillVals = this.skillsCorrection) {
-        this.queueUpdateData(U.KeyMapObj(
-            newAssignedSkillVals,
-            (skill) => `data.skills.list.${skill}.assigned`,
-            (val) => val
-        ));
+        for (const [skill, value] of Object.entries(newAssignedSkillVals)) {
+            this.eData.skills.list[skill].assigned = value;
+        }
+        // this.queueUpdateData(U.KeyMapObj(
+        //     newAssignedSkillVals,
+        //     (skill) => `data.skills.list.${skill}.assigned`,
+        //     (val) => val
+        // ));
     }
     queueAttrValsUpdate(newAssignedAttrVals = this.attributesCorrection) {
-        this.queueUpdateData(U.KeyMapObj(
-            newAssignedAttrVals,
-            (attribute) => `data.attributes.list.${attribute}.assigned`,
-            (val) => val
-        ));
+        for (const [attribute, value] of Object.entries(newAssignedAttrVals)) {
+            this.eData.attributes.list[attribute].assigned = value;
+        }
+        // this.queueUpdateData(U.KeyMapObj(
+        //     newAssignedAttrVals,
+        //     (attribute) => `data.attributes.list.${attribute}.assigned`,
+        //     (val) => val
+        // ));
     }
 
     async updateTraits() {
         this.queueSkillValsUpdate();
         this.queueAttrValsUpdate();
-        this.queueSyncKnacks();
-
-        await this.processUpdateQueue();
+        await this.writeUpdates();
+        // await this.processUpdateQueue();
         return true;
     }
 
@@ -179,80 +190,7 @@ export class ScionActor extends MIX(Actor).with(MIXINS.UpdateQueue) {
         );
     }
     getAssignedCallingKnacks(calling) { return this.knacks.filter((knack) => knack.assignment === calling) }
-    pruneKnacks(assignment, maxValue, knacksData) {
-        assignment = assignment ?? false;
-        const origKnacksData = U.Clone(knacksData ?? this.knacks);
-        knacksData = U.Clone(knacksData ?? this.knacks).filter((knack) => [false, ...Object.keys(this.callings)].includes(knack.assignment));
-        const getKnacks = (assignment, calling, tier) => knacksData.filter((knack) => knack.assignment === assignment && (!calling || knack.calling === calling) && (!tier || knack.tier === tier));
-        const reassignKnack = (oldAssignment, newAssignment, tier) => {
-            const [thisKnack] = getKnacks(oldAssignment, newAssignment, tier);
-            if (thisKnack) {
-                const knackIndex = knacksData.findIndex((knack) => knack.name === thisKnack.name);
-                knacksData[knackIndex].assignment = newAssignment;
-                return true;
-            }
-            return false;
-        };
-        const removeKnack = (assign, tier) => {
-            const [thisKnack] = getKnacks(assign, false, tier);
-            if (thisKnack) {
-                knacksData = knacksData.filter((knack) => knack.name !== thisKnack.name);
-                return true;
-            }
-            return false;
-        };
-        if (assignment in SCION.CALLINGS.list) {
-            while (this.getKnacksValue(getKnacks(assignment)) > maxValue) {
-                if (!reassignKnack(assignment, false, this.getKnacksValue(getKnacks(assignment)) - 1 === maxValue ? "heroic" : false)) {
-                    reassignKnack(assignment, false);
-                    break;
-                }
-            }
-            while (this.getKnacksValue(getKnacks(assignment)) < maxValue) {
-                if (!reassignKnack(false, assignment, this.getKnacksValue(getKnacks(assignment)) + 1 === maxValue ? "heroic" : false )) {
-                    break;
-                }
-            }
-        }
-        while (this.getKnacksValue(getKnacks(false)) > this.assignableKnackDots.extra) {
-            if (!removeKnack(false, this.getKnacksValue(getKnacks(false)) - 1 === maxValue ? "heroic" : false )) {
-                removeKnack(false);
-                break;
-            }
-        }
-        return knacksData;
-    }
-
-    async addKnack(knackName, assignment = false) {
-        const knacksList = U.Clone(this.getProp("data.knacks.list"));
-        const knackIndex = knacksList.findIndex((knack) => knack.name === knackName);
-        if (knackIndex > 0) {
-            knacksList[knackIndex].assignment = assignment;
-        } else {
-            knacksList.push({
-                name: knackName,
-                assignment,
-                ...SCION.KNACKS.list[knackName]
-            });
-        }
-        this.setProp("data.knacks.list", knacksList);
-        this.queueSyncKnacks();
-        await this.processUpdateQueue();
-    }
-    async remKnack(knackName) {
-        const knacksList = U.Clone(this.getProp("data.knacks.list")).filter((knack) => knack.name !== knackName);
-        this.setProp("data.knacks.list", knacksList);
-        this.queueSyncKnacks();
-        await this.processUpdateQueue();
-    }
-    queueSyncKnacks() {
-        let knacksData = U.Clone(this.getProp("data.knacks.list"));
-        Object.entries(this.callings).forEach(([callingName, callingData]) => {
-            knacksData = this.pruneKnacks(callingName, callingData.value, knacksData);
-        });
-        this.setProp("data.knacks.list", knacksData);
-    }
-
+    
     /* #region GETTERS */
     // #region Basic Data Retrieval
     get paths() { return this.items.filter((item) => item.type === "path") }

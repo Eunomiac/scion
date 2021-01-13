@@ -297,11 +297,11 @@ Hooks.once("init", async () => {
             const actor = game.actors.get(options.data.root.actor._id);
             switch (cat) {
                 case "calling": {
-                    const callings = Object.values(actor.getProp("data.callings.list")).filter((v) => Boolean(v));
+                    const callings = actor.eData.callings.list.filter((v) => Boolean(v));
                     switch (subCat) {
                         case "other": {
                             if (callings.filter((calling) => calling.name in SCION.CALLINGS.list).length >= 2
-                                && !callings.some((calling) => SCION.GODS[actor.getProp("data.patron")].callings.includes(calling.name))) {
+                                && !callings.some((calling) => SCION.GODS[actor.eData.patron].callings.includes(calling.name))) {
                                 return "invalid";
                             }
                         }

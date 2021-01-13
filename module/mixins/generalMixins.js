@@ -87,153 +87,6 @@ export const ClampText = (superClass) => class extends superClass {
         html.find(".clampText").each((i, element) => { this.clamp(element) });
     }
 };
-export const UpdateQueue = (superClass) => class extends superClass {
-    get isQueueing() {
-        return true;
-    }
-
-
-    // prepareData() {
-        // console.log("MIXIN PrepData");
-        // this.pendingUpdateData = this.pendingUpdateData ?? {};
-        // this.updatingData = false;
-        // super.prepareData();
-    // }
-
-    get pendingUpdateData() {
-        return isObjectEmpty(this._pendingUpdateData ?? {}) ? false : this._pendingUpdateData;
-    }
-    set pendingUpdateData(v) {
-        if (v && typeof v === "object") {
-            if (!this.isQueueing) {
-                this.entity.update(v);
-            } else {
-                this._pendingUpdateData = {...this._pendingUpdateData ?? {}, ...v};
-            }
-        } else {
-            this._pendingUpdateData = null;
-        }
-    }
-
-    get updatingData() {
-        return isObjectEmpty(this._updatingData ?? {}) ? false : _.pick(this._updatingData, "data");
-    }
-    set updatingData(v) {
-        if (v && typeof v === "object") {
-            this._updatingData = v;
-        } else {
-            this._updatingData = null; 
-        }
-    }
-
-    getProp(fieldKey, fieldIndex) {
-        let entityVal;
-        const reportTitle = `gPr("${fieldKey}"${fieldIndex !== undefined ? `, ${fieldIndex}` : ""})`;
-        let reportString = "";
-        
-        if (!this.isQueueing || !fieldKey.startsWith("data.")) {            
-            // Only fields stored in entity.data are queued; things like 'name' don't need it,
-            // and are instead fetched directly from the entity instance.
-            entityVal = getProperty(this, fieldKey.replace(/^(data\.)+/u, "data.data."));
-        } else {
-            // Standardize the "data.(data.)?" ambiguity between Handlebars and get/setProperty by ensuring "data." appears once:
-            fieldKey = fieldKey.replace(/^(data\.)+/u, "data.");
-            // Look through the three places data could be, in order of "freshness":
-            /*
-                // First check data that is being applied right this moment by the async processUpdateQueue method (below)...
-            entityVal = (this.updatingData ? getProperty(this.updatingData, fieldKey) : null)  
-                // ... if nothing, retrieve value if it's in the pendingUpdateData queue ...
-                ?? getProperty(this.pendingUpdateData, fieldKey)
-                // ... if nothing, retrieve value from entity instance directly.
-                ?? getProperty(this, `data.${fieldKey}`);
-            */
-            if (this.updatingData) {
-                entityVal = getProperty(this.updatingData, fieldKey);
-                if (entityVal) {
-                    reportString += " >>> uD: " + entityVal;
-                }
-            }
-            if (!entityVal) {
-                entityVal = getProperty(this.pendingUpdateData, fieldKey);
-                if (entityVal) {
-                    reportString += " >> puD: " + entityVal;
-                }
-            }
-            if (!entityVal) {
-                entityVal = getProperty(this, `data.${fieldKey}`);
-            }
-        }
-        if (fieldIndex !== undefined) {
-            // If a fieldIndex is given and the value retrieved by fieldKey is an array, return associated element:
-            if (this.isQueueing && reportString && Array.isArray(entityVal)) {
-                reportString += ` -> [${fieldIndex}]: ${entityVal[U.Int(fieldIndex)]}`;
-            }
-            entityVal = Array.isArray(entityVal) ? entityVal[U.Int(fieldIndex)] : undefined;
-        }
-        // Clone everything (simple JSON.parse(JSON stringify)) because I always get tripped up by unexpected mutations:
-        if (this.isQueueing && reportString) {
-            // console.log(`${reportTitle} ${reportString}`);
-        }
-        return U.Clone(entityVal);
-    }
-
-    async setProp(fieldKey, fieldIndex, value) {
-        // Hacky function overloading; can do 'setProp(fieldKey, value)' and this ensures it'll work:
-        if (value === undefined) {
-            [value, fieldIndex] = [fieldIndex, undefined];
-        }
-        if (fieldIndex !== undefined) {
-            // If array index given: Set update value to entire array, then change the indicated element.
-            // (By using the above 'getProp' method, we know we're getting the most current data, even if it
-            // hasn't been set on the entity yet.)
-            value = U.Insert(this.getProp(fieldKey), value, fieldIndex);
-        }   
-        if (this.isQueueing && fieldKey.startsWith("data.")) {
-            return this.queueUpdateData({[fieldKey]: value});
-        }
-        return await this.update({[fieldKey]: value});
-    }
-
-    queueUpdateData(updateData) {
-        if (!this.isQueueing) {
-            this.entity.update(updateData);
-            return true;
-        }
-        const reportObj = {
-            newData: {...updateData},
-            prevPending: {...this.pendingUpdateData}
-        };
-        // Filter out any data that isn't changing.
-        updateData = _.omit(U.Flatten(updateData), (value, fieldKey) => U.Equal(value, this.getProp(fieldKey)));
-        if (isObjectEmpty(updateData)) {
-            return false;
-        }
-        // Merge new data with data awaiting update.
-        reportObj.newPending = U.Merge(this.pendingUpdateData, updateData);
-        this.pendingUpdateData = U.Merge(this.pendingUpdateData, updateData);
-
-        console.dir({"QUEUING DATA:": reportObj});
-        return true;
-    }
-    async processUpdateQueue(isForcing = false) {
-        if (this.updatingData) { // Ignore calls if in the process of updating.
-            // console.warn("Blocking Update: Currently Updating!");
-            // console.dir(this.updatingData);
-            // console.dir(this);
-        } else if (this.pendingUpdateData) {
-            this.updatingData = U.Expand(this.pendingUpdateData);
-            this.pendingUpdateData = null;
-            // console.log("PROCESSING UPDATE QUEUE...");
-            await this.update(this.updatingData);
-            // console.log("PROCESSED!");
-            this.updatingData = null;
-            return true;
-        } else if (isForcing) {
-            await this.sheet.render(); // Can force a re-render with isForcing = true.
-        }
-        return false;
-    }
-};
 export const DotDragger = (superClass) => class extends superClass {
     get lastBin() { return this._lastBin ?? null }
     set lastBin(bin) { this._lastBin = bin }
@@ -248,63 +101,69 @@ export const DotDragger = (superClass) => class extends superClass {
                     }
                 });
             },
-            dragend: async (dotBins, dot) => {
+            dragend: (dotBins, dot) => {
                 dotBins.each((i, bin) => { 
                     bin.classList.remove("fade75");
                 });
-                await this.actor.processUpdateQueue(true);
-                // this.render();
+                // setTimeout(() => this.render(), 150);
             },
-            drop: (dot, targetBin, sourceBin) => {
+            drop: async (dot, targetBin, sourceBin) => {
                 const {targetTypes, sourceTypes} = this.getDragTypes(dot, sourceBin, targetBin);
                 const updateData = {};
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
-                    console.log(`LAST BIN: ${targetBin.dataset.binid}`);
                     this.lastBin = targetBin;
                     // Increment Target Trait
                     if (targetTypes.includes("attribute")) {
-                        const {attribute, field, fieldindex} = targetBin.dataset;
-                        this.actor.setProp(field, fieldindex, this.actor.assignedAttrVals[attribute] + 1);
+                        const {attribute, field} = targetBin.dataset;
+                        updateData[field] = this.actor.assignedAttrVals[attribute] + 1;
+                        // this.actor.setProp(field, fieldindex, this.actor.assignedAttrVals[attribute] + 1);
                     } else if (targetTypes.includes("skill")) {
-                        const {skill, field, fieldindex} = targetBin.dataset;
-                        this.actor.setProp(field, fieldindex, this.actor.assignedSkillVals[skill] + 1);
+                        const {skill, field} = targetBin.dataset;
+                        updateData[field] = this.actor.assignedSkillVals[skill] + 1;
+                        // this.actor.setProp(field, fieldindex, this.actor.assignedSkillVals[skill] + 1);
                     } else if (targetTypes.includes("calling")) {
-                        const {calling, field, fieldindex} = targetBin.dataset;
-                        this.actor.setProp(field, fieldindex, this.actor.callings[calling].value + 1);
+                        const {calling, field} = targetBin.dataset;
+                        updateData[field] = this.actor.callings[calling].value + 1;
+                        // this.actor.setProp(field, fieldindex, this.actor.callings[calling].value + 1);
                     }
                     // If source was another skill/attribute, decrement that.
                     if (!sourceTypes.includes("unassigned")) {
                         if (sourceTypes.includes("attribute")) {
-                            const {attribute, field, fieldindex} = sourceBin.dataset;
-                            this.actor.setProp(field, fieldindex, this.actor.assignedAttrVals[attribute] - 1);
-                            updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
+                            const {attribute, field} = sourceBin.dataset;
+                            // this.actor.setProp(field, this.actor.assignedAttrVals[attribute] - 1);
+                            updateData[field] = this.actor.assignedAttrVals[attribute] - 1;
                         } else if (sourceTypes.includes("skill")) {
-                            const {skill, field, fieldindex} = sourceBin.dataset;
-                            this.actor.setProp(field, fieldindex, this.actor.assignedSkillVals[skill] - 1);
+                            const {skill, field} = sourceBin.dataset;
+                            updateData[field] = this.actor.assignedSkillVals[skill] - 1;
+                            // this.actor.setProp(field, this.actor.assignedSkillVals[skill] - 1);
                         } else if (sourceTypes.includes("calling")) {
-                            const {calling, field, fieldindex} = sourceBin.dataset;
-                            this.actor.setProp(field, fieldindex, this.actor.callings[calling].value - 1);
-                            this.actor.queueSyncKnacks();
+                            const {calling, field} = sourceBin.dataset;
+                            updateData[field] = this.actor.callings[calling].value - 1;
+                            // this.actor.setProp(field, this.actor.callings[calling].value - 1);
                         }
                     }
+                    await this.actor.update(updateData);
                     U.LOG(U.IsDebug() && {targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
                 }
             },
-            remove: (dot, x, sourceBin) => {
+            remove: async (dot, x, sourceBin) => {
                 const {dotTypes, sourceTypes} = this.getDragTypes(dot, sourceBin);
                 const updateData = {};
                 if (!sourceTypes.includes("unassigned")) {
                     if (sourceTypes.includes("attribute")) {
-                        const {attribute, field, fieldindex} = sourceBin.dataset;
-                        this.actor.setProp(field, fieldindex, this.actor.assignedAttrVals[attribute] - 1);
-                        updateData[sourceBin.dataset.field] = this.actor.assignedAttrVals[attribute] - 1;
+                        const {attribute, field} = sourceBin.dataset;
+                        updateData[field] = this.actor.assignedAttrVals[attribute] - 1;
+                        // this.actor.setProp(field, this.actor.assignedAttrVals[attribute] - 1);
                     } else if (sourceTypes.includes("skill")) {
-                        const {skill, field, fieldindex} = sourceBin.dataset;
-                        this.actor.setProp(field, fieldindex, this.actor.assignedSkillVals[skill] - 1);
+                        const {skill, field} = sourceBin.dataset;
+                        updateData[field] = this.actor.assignedSkillVals[skill] - 1;
+                        // this.actor.setProp(field, this.actor.assignedSkillVals[skill] - 1);
                     } else if (sourceTypes.includes("calling")) {
-                        const {calling, field, fieldindex} = sourceBin.dataset;
-                        this.actor.setProp(field, fieldindex, this.actor.callings[calling].value - 1);
+                        const {calling, field} = sourceBin.dataset;
+                        updateData[field] = this.actor.callings[calling].value - 1;
+                        // this.actor.setProp(field, this.actor.callings[calling].value - 1);
                     }
+                    await this.actor.update(updateData);
                 }
                 U.LOG(U.IsDebug() && {dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
             }
@@ -444,11 +303,11 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                     const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
                     let entityVal = elementVal;
                     if ("fieldindex" in dataSet) {
-                        entityVal = this.entity.getProp(dataSet.field);
+                        entityVal = getProperty(this.entity, dataSet.field.replace(/^(data\.)+/gu, "data."));
                         entityVal[U.Int(dataSet.fieldindex)] = elementVal;
                     }
-                    await this.entity.setProp(dataSet.field, entityVal);
-                    await this.entity.processUpdateQueue();
+                    await this.entity.update({[dataSet.field]: entityVal});
+                    // await this.entity.processUpdateQueue();
                     if (entityVal && element.classList.contains("quote")) {
                         element.innerHTML = _.escape(`"${entityVal}"`);
                     }
@@ -468,9 +327,12 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
 
                 // If dataset includes a field, fill the element with the current data:
                 if ("field" in dataSet) {
-                    const entityVal = this.entity.getProp(dataSet.field, dataSet.fieldindex) || "";
+                    let entityVal = getProperty(this.entity, dataSet.field);
+                    if (dataSet.fieldindex !== undefined && Array.isArray(entityVal)) {
+                        entityVal = entityVal[U.Int(dataSet.fieldindex)];
+                    }
                     if (!entityVal || (typeof entityVal === "object" && _.isEmpty(entityVal))) {
-                        element.innerHTML = "";
+                        element.innerHTML = "&nbsp;";
                     } else {
                         element.innerHTML = (element.classList.contains("quote") ? _.escape(`"${entityVal}"`) : `${entityVal}`).trim();
                     }

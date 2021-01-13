@@ -41,6 +41,10 @@ import {LoremIpsum, Rand} from "./utils.js";
  */
 // #endregion
 
+const testString = "12.5tV";
+const [value, mag] = testString.match(/(^[\d\.,]+)([a-zA-Z]*$)/u).slice(1);
+console.log(value, mag);
+
 const scionSystemData = {
     TIERS: {
         mortal: "scion.tier.mortal",
