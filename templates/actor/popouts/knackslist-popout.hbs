@@ -2,7 +2,7 @@
     <div id="knacksSource" class="flex-col" data-binid="knacksSource-{{name}}">
         {{#if (test availableKnacks.any_immortal "||" availableKnacks.any_heroic)}}
         {{#each availableKnacks.any_immortal as |knack|}}
-        <span class="tooltip tipLeft knack handle immortal noFlex {{checkInvalid "knack:immortal" knack ../name}}" data-calling="{{../name}}" data-knack="{{knack}}">
+        <span class="tooltip tipLeft knack handle immortal noFlex {{checkInvalid "knack:immortal" knack ../name}}" data-calling="any" data-knack="{{knack}}">
             <div class="tipContents alignLeft">
                 <h2 class="alignCenter">{{loc (concat "scion.knack." knack ".name")}}</h2>
                 <p>
@@ -14,7 +14,7 @@
         </span>
         {{/each}}
         {{#each availableKnacks.any_heroic as |knack|}}
-        <span class="tooltip tipLeft knack handle noFlex {{checkInvalid "knack:heroic" knack ../name}}" data-calling="{{../name}}" data-knack="{{knack}}">
+        <span class="tooltip tipLeft knack handle noFlex {{checkInvalid "knack:heroic" knack ../name}}" data-calling="any" data-knack="{{knack}}">
             <div class="tipContents alignLeft">
                 <h2 class="alignCenter">{{loc (concat "scion.knack." knack ".name")}}</h2>
                 <p>

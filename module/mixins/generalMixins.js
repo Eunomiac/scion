@@ -142,7 +142,11 @@ export const DotDragger = (superClass) => class extends superClass {
                             // this.actor.setProp(field, this.actor.callings[calling].value - 1);
                         }
                     }
-                    await this.actor.update(updateData);
+                    if (targetTypes.includes("calling")) {
+                        await this.processCallingUpdate(updateData);
+                    } else {
+                        await this.actor.update(updateData);
+                    }
                     U.LOG(U.IsDebug() && {targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
                 }
             },
@@ -163,7 +167,11 @@ export const DotDragger = (superClass) => class extends superClass {
                         updateData[field] = this.actor.callings[calling].value - 1;
                         // this.actor.setProp(field, this.actor.callings[calling].value - 1);
                     }
-                    await this.actor.update(updateData);
+                    if (sourceTypes.includes("calling")) {
+                        await this.processCallingUpdate(updateData);
+                    } else {
+                        await this.actor.update(updateData);
+                    }
                 }
                 U.LOG(U.IsDebug() && {dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
             }
@@ -303,7 +311,7 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                     const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
                     let entityVal = elementVal;
                     if ("fieldindex" in dataSet) {
-                        entityVal = getProperty(this.entity, dataSet.field.replace(/^(data\.)+/gu, "data."));
+                        entityVal = getProperty(this.entity, dataSet.field.replace(/^(data\.)+/gu, "data.data."));
                         entityVal[U.Int(dataSet.fieldindex)] = elementVal;
                     }
                     await this.entity.update({[dataSet.field]: entityVal});
@@ -327,7 +335,7 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
 
                 // If dataset includes a field, fill the element with the current data:
                 if ("field" in dataSet) {
-                    let entityVal = getProperty(this.entity, dataSet.field);
+                    let entityVal = getProperty(this.entity.data, dataSet.field);
                     if (dataSet.fieldindex !== undefined && Array.isArray(entityVal)) {
                         entityVal = entityVal[U.Int(dataSet.fieldindex)];
                     }

@@ -322,7 +322,7 @@ export const Clone = (obj) => {
     }
     return cloneObj;
 };
-export const Merge = (target, source, isMergingArrays = true) => {
+export const Merge = (target, source, {isMergingArrays = true, isOverwritingArrays = true} = {}) => {
     target = Clone(target);
     const isObject = (obj) => obj && typeof obj === "object";
 
@@ -333,15 +333,21 @@ export const Merge = (target, source, isMergingArrays = true) => {
         const sourceValue = source[key];
 
         if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
-            if (isMergingArrays) {
+            if (isOverwritingArrays) {
+                target[key] = sourceValue;
+            } else if (isMergingArrays) {
                 target[key] = targetValue.map((x, i) => (sourceValue.length <= i
                     ? x
-                    : Merge(x, sourceValue[i], isMergingArrays)));
+                    : Merge(x, sourceValue[i], {isMergingArrays, isOverwritingArrays})));
                 if (sourceValue.length > targetValue.length) {target[key] = target[key].concat(sourceValue.slice(targetValue.length))}
             } else {
                 target[key] = targetValue.concat(sourceValue);
             }
-        } else if (isObject(targetValue) && isObject(sourceValue)) {target[key] = Merge({...targetValue}, sourceValue, isMergingArrays)} else {target[key] = sourceValue}
+        } else if (isObject(targetValue) && isObject(sourceValue)) {
+            target[key] = Merge({...targetValue}, sourceValue, {isMergingArrays, isOverwritingArrays});
+        } else {
+            target[key] = sourceValue;
+        }
     });
 
     return target;

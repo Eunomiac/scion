@@ -1,5 +1,5 @@
 {{#if calling.name}}
-<div class="calling callingDrop {{calling.name}} alignCenter" data-calling="{{calling.name}}" data-slot="{{index}}" data-binid="calling-{{index}}">
+<div class="calling callingDrop fader {{calling.name}} alignCenter" data-calling="{{calling.name}}" data-slot="{{index}}" data-binid="calling-{{index}}">
     <h1 class="callingHeader handle {{#if (test calling.name "in" callings.available.patron)}}patron{{/if}}" data-calling="{{calling.name}}">{{calling.name}}</h1>
     <div class="dotline space5 flex-row alignCenter noLabel">
         <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>
@@ -14,7 +14,7 @@
         {{#for calling.value}}
         {{#with (lookup ../calling.knacks @index) as |knack|}}
         {{#if knack}}
-        <span class="knack {{#if (test knack.tier "==" "immortal")}}immortal{{/if}}" data-calling="{{../calling.name}}" data-knack="{{knack.name}}">{{loc (concat "scion.knack." knack.name ".name")}}</span>
+        <span class="knack {{#if (test knack.tier "==" "immortal")}}immortal{{/if}}" data-calling="{{knack.calling}}" data-knack="{{knack.name}}">{{loc (concat "scion.knack." knack.name ".name")}}</span>
         {{else}}
         <span class="knack {{#if (test knack.tier "==" "immortal")}}immortal{{/if}}" data-calling="{{../calling.name}}" data-knack="empty">&nbsp;</span>
         {{/if}}
