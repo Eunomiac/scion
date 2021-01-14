@@ -31,8 +31,6 @@
                 },
                 "callings": {
                     "assignableGeneralDots": {"xp": 0, "other": 2},
-                    "chargen": [null, null, null],
-                    "selected": false,
                     "list": {}
                 },
                 "knacks": {

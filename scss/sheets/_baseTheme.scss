@@ -56,7 +56,7 @@ $defaultTypography: (
         "border": (border-bottom, 2px solid var(--colorH1))
     ),
     "H2": (
-        "fontFamily": 'Overlock SC',
+        "fontFamily": 'Benguiat',
         "fontSize": 20px,
         "lineHeight": 26px,
         "maxHeight": 26px,
@@ -64,13 +64,13 @@ $defaultTypography: (
         "fontStyle": normal,
         "fontVariant": normal,
         "fontWeight": bold,
-        "textTransform": none,
+        "textTransform": uppercase,
         "textIndent": 10px,
         "textShadow": none,
         "border": none
     ),
     "H3": (
-        "fontFamily": 'Overlock SC',
+        "fontFamily": 'Benguiat',
         "fontSize": 16px,
         "lineHeight": var(--fontSizeH3),
         "maxHeight": var(--fontSizeH3),
@@ -84,7 +84,7 @@ $defaultTypography: (
         "border": none
     ),
     "Body": (
-        "fontFamily": 'Overlock SC',
+        "fontFamily": 'MercuryG2',
         "fontSize": 16px,
         "lineHeight": var(--fontSizeBody),
         "fontStyle": normal,
@@ -134,7 +134,7 @@ $defaultTypography: (
         "border": none
     ),
     "Placeholder": (
-        "fontFamily": "Della Respira",
+        "fontFamily": "MercuryG2",
         "fontSize": var(--fontSizeInput),
         "lineHeight": var(--lineHeightInput),
         "fontStyle": italic,

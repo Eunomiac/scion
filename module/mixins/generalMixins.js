@@ -269,7 +269,8 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
 
         if (this.options.editable) {
             const checkForPlaceholder = (element) => {
-                if (!element.innerText && "placeholder" in element.dataset) {
+                const innerText = element.innerText.trim();
+                if (!innerText && "placeholder" in element.dataset) {
                     element.classList.add("placeholder");
                     element.innerHTML = element.dataset.placeholder;
                 } else {
@@ -288,11 +289,13 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
                 const element = event.currentTarget;
                 element.setAttribute("contenteditable", true);
                 if (element.classList.contains("placeholder")) {
-                    element.innerHTML = "";
+                    element.innerHTML = "&nbsp;";
                     element.classList.remove("placeholder");
                     this.unClamp(element);
                 }
-                if (element.classList.contains("quote")) {element.innerHTML = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim()}
+                if (element.classList.contains("quote")) {
+                    element.innerHTML = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
+                }
                 // Add an event listener for when the player hits the 'Enter' key.
                 element.addEventListener("keydown", _onEditKeyDown.bind(this));
                 // Focus the element, which will fire the _onEditFocus event to select all text.

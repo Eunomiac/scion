@@ -181,6 +181,14 @@
 
     .greyText { color: var(--grey) !important; }
 
+    .scionText {
+        text-shadow: var(--textShadowTitle);
+        font-family: "Benguiat";
+        text-transform: uppercase;
+        font-weight: bold;
+        color: var(--greyDown2);
+    }
+
     .noBG { background: none !important; }
     .noBorder { border: none !important; }
 
@@ -302,8 +310,9 @@
     /* #region Dragula Extension */
     .mirrorContainer {
         position: fixed !important;
-        pointer-events: none;
-        z-index: 9999999;
+        pointer-events: none !important;
+        z-index: 9999999 !important;
+        div.tooltipContents { display: none !important; }
     }
     /* #endregion */
     /* #region Popouts/Tooltips */

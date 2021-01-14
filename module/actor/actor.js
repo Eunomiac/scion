@@ -197,7 +197,7 @@ export class ScionActor extends Actor {
     get skills() { return this.data.data.skills.list }
     get attributes() { return this.eData.attributes.list }
     get callings() {
-        return U.KeyMapObj(_.pick(this.eData.callings.list, (callingData) => (callingData?.name ?? "") in SCION.CALLINGS.list), (calling, name) => (
+        return U.KeyMapObj(_.pick(this.eData.callings.list, (callingData) => (callingData?.name ?? "") in SCION.CALLINGS.list && Number.isInteger(callingData?.slot)), (calling, name) => (
             {
                 ...calling,
                 knacks: this.getAssignedCallingKnacks(calling.name),
@@ -356,6 +356,15 @@ export class ScionActor extends Actor {
     // #endregion
     
     // #region Callings & Knacks
+    get orderedCallings() {
+        const callingsList = [null, null, null];
+        for (const callingData of Object.values(this.callings)) {
+            if (Number.isInteger(callingData.slot)) {
+                callingsList[U.Int(callingData.slot)] = callingData.name;
+            }
+        }
+        return callingsList;
+    }
     get knackVals() { return U.KeyMapObj(this.knacks, (i, knack) => knack.name, (knack) => (SCION.KNACKS.list[knack.name].tier === "immortal" ? 2 : 1)) }
     get assignedKnacks() { return this.knacks.filter((knack) => Boolean(knack.assignment)) }
     get unassignedKnacks() { return this.knacks.filter((knack) => !knack.assignment) }
@@ -383,6 +392,7 @@ export class ScionActor extends Actor {
             ".*. callings": U.Clone(this.callings),
             ".*. knacks": U.Clone(this.knacks),
             ".*. knackVals": U.Clone(this.knackVals),
+            ".*. orderedCallings": U.Clone(this.orderedCallings),
             ".*. assignedKnacks": U.Clone(this.assignedKnacks),
             ".*. unassignedKnacks": U.Clone(this.unassignedKnacks),
             ".*. heroicKnacks": U.Clone(this.heroicKnacks),

@@ -14,6 +14,34 @@
 }
 
 @font-face {
+  font-family: "Crud";
+  src: url(../fonts/official/Crud.ttf);
+}
+
+@font-face {
+  font-family: "Benguiat";
+  src: url(../fonts/official/Benguiat.ttf);
+}
+
+@font-face {
+  font-family: "Benguiat";
+  font-style: italic;
+  src: url(../fonts/official/BenguiatItalic.ttf);
+}
+
+@font-face {
+  font-family: "Benguiat";
+  font-weight: bold;
+  font-style: italic;
+  src: url(../fonts/official/BenguiatBoldItalic.ttf);
+}
+
+@font-face {
+  font-family: "MercuryG2";
+  src: url(../fonts/official/MercuryTextG2.otf);
+}
+
+@font-face {
   font-family: "Bootle";
   src: url(../fonts/netjer/bootle.ttf);
 }
@@ -256,7 +284,7 @@ body {
   --textIndentH1: 0px;
   --textShadowH1: -1px -1px 1px white, 1px 1px 1px black;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Overlock SC";
+  --fontFamilyH2: "Benguiat";
   --fontSizeH2: 20px;
   --lineHeightH2: 26px;
   --maxHeightH2: 26px;
@@ -264,11 +292,11 @@ body {
   --fontStyleH2: normal;
   --fontVariantH2: normal;
   --fontWeightH2: bold;
-  --textTransformH2: none;
+  --textTransformH2: uppercase;
   --textIndentH2: 10px;
   --textShadowH2: none;
   --borderH2: none;
-  --fontFamilyH3: "Overlock SC";
+  --fontFamilyH3: "Benguiat";
   --fontSizeH3: 16px;
   --lineHeightH3: var(--fontSizeH3);
   --maxHeightH3: var(--fontSizeH3);
@@ -280,7 +308,7 @@ body {
   --textIndentH3: 0px;
   --textShadowH3: none;
   --borderH3: none;
-  --fontFamilyBody: "Overlock SC";
+  --fontFamilyBody: "MercuryG2";
   --fontSizeBody: 16px;
   --lineHeightBody: var(--fontSizeBody);
   --fontStyleBody: normal;
@@ -320,7 +348,7 @@ body {
   --textIndentInput: 5px;
   --textShadowInput: var(--textShadowBody);
   --borderInput: none;
-  --fontFamilyPlaceholder: "Della Respira";
+  --fontFamilyPlaceholder: "MercuryG2";
   --fontSizePlaceholder: var(--fontSizeInput);
   --lineHeightPlaceholder: var(--lineHeightInput);
   --fontStylePlaceholder: italic;
@@ -1377,6 +1405,14 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .greyText {
   color: var(--grey) !important;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .scionText {
+  text-shadow: var(--textShadowTitle);
+  font-family: "Benguiat";
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--greyDown2);
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .noBG {
   background: none !important;
 }
@@ -1602,8 +1638,12 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * div.closeButton.coll
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .mirrorContainer {
   position: fixed !important;
-  pointer-events: none;
-  z-index: 9999999;
+  pointer-events: none !important;
+  z-index: 9999999 !important;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .mirrorContainer div.tooltipContents {
+  display: none !important;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip {
@@ -2522,6 +2562,8 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling {
+  transition: 0.5s;
+  transform: translateY(0px) scale(1);
   background-image: url("../images/actor-sheet/backgrounds/calling.png");
   background-size: 100%;
   background-position: center;
@@ -2548,8 +2590,16 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   display: none;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling .gu-unselectable > * {
+  display: none;
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling > .calling {
   display: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling span.knack.empty {
+  background-image: url("../images/bubbles/knack-empty.png");
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling .dotline {
@@ -2567,6 +2617,19 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling h2 {
   background: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling div.knacksBackground {
+  height: 100px;
+  min-height: 100px;
+  max-height: 100px;
+  margin-bottom: -100px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling div.knacks {
+  height: 100px;
+  min-height: 100px;
+  max-height: 100px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling div.keywords .contentEditable {
@@ -2624,10 +2687,10 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   height: 20px;
   min-height: 20px;
   width: 170px;
-  margin: 2px 0;
+  margin: 5px 0;
   color: var(--black);
   background-image: url("../images/bubbles/knack-heroic.png");
-  background-size: 100%;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   border: none;
@@ -2641,8 +2704,16 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   filter: drop-shadow(2px 2px 2px black);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour span.knack.immortal {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour span.knack:not(.invalid).generic {
+  background-image: url("../images/bubbles/knack-generic.png");
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour span.knack:not(.invalid).immortal {
   background-image: url("../images/bubbles/knack-immortal.png");
+  height: 50px;
+  min-height: 50px;
+  line-height: 50px;
+  font-size: 16px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour span.knack.invalid {
@@ -2677,6 +2748,13 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour #knacksList.popout > div {
   padding: 0 0 15px 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour #knacksList.popout span.knack.immortal {
+  height: 20px;
+  min-height: 20px;
+  line-height: 20px;
+  font-size: 12px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .footer {

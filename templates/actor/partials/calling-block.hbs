@@ -1,6 +1,6 @@
 {{#if calling.name}}
-<div class="calling callingDrop fader {{calling.name}} alignCenter" data-calling="{{calling.name}}" data-slot="{{index}}" data-binid="calling-{{index}}">
-    <h1 class="callingHeader handle {{#if (test calling.name "in" callings.available.patron)}}patron{{/if}}" data-calling="{{calling.name}}">{{calling.name}}</h1>
+<div class="calling callingDrop fader {{calling.name}} alignCenter {{#if (test callings.selected "==" calling.name)}}selected{{/if}}" data-calling="{{calling.name}}" data-slot="{{index}}" data-binid="calling-{{index}}">
+    <h1 class="callingHeader callingHandle {{#if (test calling.name "in" callings.available.patron)}}patron{{/if}}" data-calling="{{calling.name}}">{{calling.name}}</h1>
     <div class="dotline space5 flex-row alignCenter noLabel">
         <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>
         <div class="chargenFourDotBin dotBin dotContainer fader" data-types="calling" data-calling="{{calling.name}}" data-binid="{{calling.name}}" data-field="data.callings.list.{{calling.name}}.value">
@@ -9,19 +9,31 @@
         {{/for}}
         </div>
     </div>
-    <h2>Knacks</h2>
-    <div class="knacks flex-col-start knackDrop alignCenter height30 width100" data-calling="{{calling.name}}" data-binid="{{calling.name}}-knacks">
+    <h2 class="scionText">{{loc "scion.game.knacks"}}</h2>
+    <div class="knacksBackground alignCenter flex-col-start">
         {{#for calling.value}}
-        {{#with (lookup ../calling.knacks @index) as |knack|}}
-        {{#if knack}}
-        <span class="knack {{#if (test knack.tier "==" "immortal")}}immortal{{/if}}" data-calling="{{knack.calling}}" data-knack="{{knack.name}}">{{loc (concat "scion.knack." knack.name ".name")}}</span>
-        {{else}}
-        <span class="knack {{#if (test knack.tier "==" "immortal")}}immortal{{/if}}" data-calling="{{../calling.name}}" data-knack="empty">&nbsp;</span>
-        {{/if}}
-        {{/with}}
+        <span class="knack empty" data-calling="{{../calling.name}}" data-knack="empty"></span>
         {{/for}}
     </div>
-    <h2>Keywords</h2>
+    <div class="knacks flex-col-start knackBin knackDrop alignCenter width100" data-calling="{{calling.name}}" data-binid="{{calling.name}}-knacks">
+        {{#for calling.value}}
+        {{#if (lookup ../calling.knacks @index)}}
+        {{#with (lookup ../calling.knacks @index) as |knack|}}
+        <span class="tooltip tipUp knack knackHandle {{#if (test knack.tier "==" "immortal")}}immortal{{else}}{{#if (test knack.calling "==" "any")}}generic{{/if}}{{/if}}" data-calling="{{knack.calling}}" data-knack="{{knack.name}}">
+            <div class="tipContents alignLeft">
+                <h2 class="alignCenter">{{loc (concat "scion.knack." knack.name ".name")}}</h2>
+                <p>
+                    {{{loc (concat "scion.knack." knack.name ".description")}}}
+                </p>
+                <i></i>
+            </div>
+            {{loc (concat "scion.knack." knack.name ".name")}}
+        </span>
+        {{/with}}        
+        {{/if}}
+        {{/for}}
+    </div>
+    <h2 class="scionText">{{loc "scion.game.keywords"}}</h2>
     <div class="keywords flex-row-wrap alignCenter height30 width90">
         {{#for calling.value}}
         <div class="contentEditable outsetFrame width50" data-field="data.callings.list.{{../calling.name}}.keywordsChosen" data-fieldindex="{{@index}}"></div>
@@ -30,6 +42,6 @@
 </div>
 {{else}}
 <div class="calling callingDrop generic alignCenter" data-calling="empty" data-slot="{{index}}" data-binid="calling-{{index}}">
-    <h1 class="handle" data-calling="empty">&nbsp;</h1>
+    <h1 class="callingHandle" data-calling="empty">&nbsp;</h1>
 </div>
 {{/if}}

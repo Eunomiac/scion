@@ -42,7 +42,32 @@ export class MajorActorSheet extends ScionActorSheet {
                 }
             ]
         });
-    }    
+    }
+
+    get selectedCalling() {
+        const chosenCallings = Object.keys(this.actor.callings);
+        const sumKnackVals = (calling) => this.actor.knacks.reduce((tot, knack) => tot + (
+            knack.assignment === calling ? {heroic: 1, immortal: 2}[knack.tier] : 0
+        ), 0);
+        if (chosenCallings.length < 3) {
+            this._selectedCalling = false;
+            return this._selectedCalling;
+        }
+        if (this._selectedCalling && (
+            !(this._selectedCalling in this.actor.callings)
+            || sumKnackVals(this._selectedCalling) === this.actor.callings[this._selectedCalling].value
+        )) {
+            this._selectedCalling = false;
+        }
+        // If selected calling has been falsified, set it to a calling with available knack slots.
+        if (!this._selectedCalling) {
+            const newCallingData = _.max(this.actor.callings, (callingData, callingName) => callingData.value - sumKnackVals(callingName));
+            if (newCallingData && newCallingData.value > sumKnackVals(newCallingData.name)) {
+                this._selectedCalling = newCallingData.name;
+            }
+        }
+        return this._selectedCalling;
+    }
     // #region GET DATA
     getData() {
         const data = super.getData();
@@ -130,9 +155,9 @@ export class MajorActorSheet extends ScionActorSheet {
             },
             callings: actorCallingData,
             knacks: actorKnackData,
-            selected: this.actor.eData.callings.selected || false,
-            chargen: U.Clone(this.actor.eData.callings.chargen),
-            get numChosen() { return Object.keys(this.callings).length },
+            selected: this.selectedCalling,
+            chargen: this.actor.orderedCallings,
+            get numChosen() { return Object.keys(this.callings).filter((key) => key && key in SCION.CALLINGS.list).length },
             get unassignedCallingDots() { return Math.max(0, actorAssignableCallingDots - Object.values(this.callings).reduce((tot, val) => tot + val.value - 1, 0)) },
             get groupedKnacks() {
                 const knackData = {
@@ -148,34 +173,21 @@ export class MajorActorSheet extends ScionActorSheet {
                 return knackData;
             }
         };
+        
 
         // #endregion
 
         // #endregion
 
         // #region RETURN
-        U.LOG(game.scion.debug.isFullDebugConsole 
-            ? {
-                    "data [Sheet Context]": data,
-                    "... data": data.data,
-                    "ACTOR LOG": this.actor.fullLogReport,
-                    "Instances": {
-                        sheet: this,
-                        entity: this.ent
-                    }
-                }
-            : {
-                    "CALLING DATA": U.Clone(data.callings),
-                    "ACTOR SHEET REPORT": {
-                        "data [Sheet Context]": data,
-                        "... data": data.data,
-                        "ACTOR LOG": this.actor.fullLogReport,
-                        "Instances": {
-                            sheet: this,
-                            entity: this.ent
-                        }
-                    }
-                }, this.actor.name, "MajorActorSheet", {isLoud: true});
+        U.LOG({
+            "SHEET CONTEXT": data,
+            "ACTOR LOG": this.actor.fullLogReport,
+            "Instances": {
+                sheet: this,
+                entity: this.ent
+            }
+        }, this.actor.name, "MajorActorSheet", {isLoud: true});
 
         return data;
         // #endregion
@@ -184,54 +196,43 @@ export class MajorActorSheet extends ScionActorSheet {
 
     // #region ENTITY UPDATING
     async processCallingUpdate(updateData = {}) {
-        const mergedUpdateData = U.Merge(
-            {
+        updateData = U.Expand(updateData);
+        const mergedUpdateData = U.Expand(Object.assign(
+            U.Flatten({
                 data: {
-                    callings: _.pick(this.eData.callings, "chargen", "list", "selected"),
+                    callings: {list: U.Clone(this.eData.callings.list)},
                     knacks: {list: U.Clone(this.eData.knacks.list)}
                 }
-            },
-            U.Expand(updateData)
-        );
+            }),
+            U.Flatten(updateData)
+        ));
         const initialMergedUpdateData = U.Clone(mergedUpdateData);
 
         const sumKnackVals = (calling) => mergedUpdateData.data.knacks.list.reduce((tot, knack) => tot + (
             knack.assignment === calling ? {heroic: 1, immortal: 2}[knack.tier] : 0
         ), 0);
         for (const [calling, callingData] of Object.entries(mergedUpdateData.data.callings.list)) {
-            const dataRef = mergedUpdateData.data.callings.list[calling];
-            while (sumKnackVals(calling) > callingData.value) {
-                U.Remove(mergedUpdateData.data.knacks.list, (knack) => knack.assignment === calling);
-                console.log(`SumKnackVals(${calling}) = ${sumKnackVals(calling)}, callingData.value = ${callingData.value}, knacks = ${mergedUpdateData.data.knacks.list}`);
-            }
-            dataRef.keywordsUsed = dataRef.keywordsUsed.filter((keyword) => dataRef.keywordsChosen.includes(keyword));
-            while (dataRef.keywordsChosen.length > callingData.value) {
-                const thisKeyword = dataRef.keywordsChosen.find((keyword) => !dataRef.keywordsUsed.includes(keyword))
-                    || U.Last(dataRef.keywordsChosen);
-                U.Remove(dataRef.keywordsChosen, (keyword) => keyword === thisKeyword);
-                U.Remove(dataRef.keywordsUsed, (keyword) => keyword === thisKeyword);
-            }
-            dataRef.keywordsUsed.length = Math.min(dataRef.keywordsUsed.length, callingData.value);
-        }
-        // If any of the callings are not chosen, clear selected callings and break.
-        if (mergedUpdateData.data.callings.chargen?.length < 3) {
-            mergedUpdateData.data.callings.selected = false;
-        } else {
-            // If the selected calling is no longer chosen, clear it.
-            if (!(mergedUpdateData.data.callings.selected in mergedUpdateData.data.callings.list)) {
-                mergedUpdateData.data.callings.selected = false;
-            // If the selected calling has no more knack slots, clear it.
-            } else if (sumKnackVals(mergedUpdateData.data.callings.selected) === mergedUpdateData.data.callings.list[mergedUpdateData.data.callings.selected].value) {
-                mergedUpdateData.data.callings.selected = false;
-            }
-            // If selected calling has been falsified, set it to a calling with available knack slots.
-            if (!mergedUpdateData.data.callings.selected) {
-                const newCalling = mergedUpdateData.data.callings.chargen.find((calling) => calling && sumKnackVals(calling) < mergedUpdateData.data.callings.list[calling].value);
-                mergedUpdateData.data.callings.selected = newCalling || false;
+            if (Number.isInteger(callingData.slot)) {
+                const dataRef = mergedUpdateData.data.callings.list[calling];
+                while (sumKnackVals(calling) > callingData.value) {
+                    U.Remove(mergedUpdateData.data.knacks.list, (knack) => knack.assignment === calling);
+                    // console.log(`SumKnackVals(${calling}) = ${sumKnackVals(calling)}, callingData.value = ${callingData.value}, knacks = ${mergedUpdateData.data.knacks.list}`);
+                }
+                dataRef.keywordsUsed = dataRef.keywordsUsed.filter((keyword) => dataRef.keywordsChosen.includes(keyword));
+                while (dataRef.keywordsChosen.length > callingData.value) {
+                    const thisKeyword = dataRef.keywordsChosen.find((keyword) => !dataRef.keywordsUsed.includes(keyword))
+                        || U.Last(dataRef.keywordsChosen);
+                    U.Remove(dataRef.keywordsChosen, (keyword) => keyword === thisKeyword);
+                    U.Remove(dataRef.keywordsUsed, (keyword) => keyword === thisKeyword);
+                }
+                dataRef.keywordsUsed.length = Math.min(dataRef.keywordsUsed.length, callingData.value);
+            } else {
+                mergedUpdateData.data.knacks.list = mergedUpdateData.data.knacks.list.filter((knack) => knack.assignment !== calling);
             }
         }
-        console.dir({updateData, initialMergedUpdateData, mergedUpdateData});
-        await this.actor.update(mergedUpdateData);
+        // console.dir({updateData, initialMergedUpdateData, mergedUpdateData});
+        U.LOG({"1: updateData": updateData, "2: initialMerge": initialMergedUpdateData, "3: finalData": mergedUpdateData}, this.actor.name, "processCallingData", {groupStyle: "l2"});
+        await this.actor.update(U.Flatten(mergedUpdateData));
     }
     // #endregion
     activateListeners(html) {
@@ -301,33 +302,25 @@ export class MajorActorSheet extends ScionActorSheet {
 
             const addCalling = async (callingElement, targetBin, sourceBin) => {
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
-                    const updateData = {
-                        "data.callings.chargen": U.Clone(this.eData.callings.chargen)
-                    };
-                    const targetSlot = U.Int(targetBin.dataset.slot);
-                    const sourceSlot = U.Int(sourceBin.dataset.slot);
                     const {calling} = callingElement.dataset;
-                    const {calling: targetCalling} = targetBin.dataset;
-                    updateData["data.callings.chargen"][targetSlot] = calling;
-                    if (sourceBin.classList.contains("callingDrop")) {
-                        updateData["data.callings.chargen"][sourceSlot] = targetCalling;
+                    const {slot: targetSlot, calling: targetCalling} = targetBin.dataset;
+                    const {slot: sourceSlot, calling: sourceCalling} = sourceBin.dataset;
+                    const updateData = {"data.callings.list": U.Clone(this.eData.callings.list)};
+                    if (sourceCalling && sourceCalling !== "empty") {
+                        updateData["data.callings.list"][sourceCalling].slot = U.Int(targetSlot);
+                        updateData["data.callings.list"][targetCalling].slot = U.Int(sourceSlot);                               
                     } else {
-                        updateData["data.callings.list"] = U.Clone(this.eData.callings.list);
                         if (targetCalling !== "empty") {
-                            delete updateData["data.callings.list"][targetCalling];
+                            updateData["data.callings.list"][targetCalling].slot = null;
                         }
-                        updateData["data.callings.list"][calling] = {...SCION.CALLINGS.actorDefault, name: calling, value: 1};
+                        updateData["data.callings.list"][calling] = {...SCION.CALLINGS.actorDefault, name: calling, value: 1, slot: U.Int(targetSlot)};
                     }
                     await this.processCallingUpdate(updateData);
                 }
             };
             const remCalling = async (callingBin) => {
-                const updateData = {
-                    "data.callings.chargen": U.Clone(this.eData.callings.chargen),
-                    "data.callings.list": U.Clone(this.eData.callings.list)
-                };
-                updateData["data.callings.chargen"][callingBin.dataset.slot] = null;
-                delete updateData["data.callings.list"][callingBin.dataset.calling];
+                const updateData = {"data.callings.list": U.Clone(this.eData.callings.list)};
+                updateData["data.callings.list"][callingBin.dataset.calling].slot = null;
                 await this.processCallingUpdate(updateData);
             };
             const addHoverGlow = (__, callingBin) => {
@@ -346,7 +339,7 @@ export class MajorActorSheet extends ScionActorSheet {
             const callingDrop = html.find(".callingDrop");
             const callingDragger = dragula({
                 containers: [...callingSource, ...callingDrop],
-                moves: (element, source, handle) => handle.classList.contains("handle") && !element.classList.contains("invalid"),                    
+                moves: (element, source, handle) => handle.classList.contains("callingHandle") && !element.classList.contains("invalid"),                    
                 accepts: (element, target, source) => {
                     if (source.id === "callingsSource") {
                         const callings = Object.keys(this.actor.callings);
@@ -373,24 +366,33 @@ export class MajorActorSheet extends ScionActorSheet {
             callingDragger.on("over", (element, target) => {this.currentlyOver = target; addHoverGlow(element, target)});
             callingDragger.on("out", (element, target) => {this.currentlyOver = null; remHoverGlow(element, target)});
             
-            html.find("h1.callingHeader").click(async (event) => {
-                await this.actor.update({["data.callings.selected"]: event.currentTarget.dataset.calling});
+            html.find("h1.callingHeader").click((event) => {
+                this._selectedCalling = event.currentTarget.dataset.calling;
+                this.render();
             });
 
             const isKnackTargetDroppable = (element, target, source) => {
-                return (source.classList.contains("knackSource") && target.classList.contains("knackSource"))
+                return source.classList.contains("knackBin") && target.classList.contains("knackBin") && (
+                    (source.dataset.binid === target.dataset.binid)
                 || (target.classList.contains("knackDrop")
                     && ["any", target.dataset.calling].includes(element.dataset.calling)
-                    && this.actor.unassignedKnackDots[target.dataset.calling] >= (SCION.KNACKS.list[element.dataset.knack].tier === "immortal" ? 2 : 1));
+                    && this.actor.unassignedKnackDots[target.dataset.calling] >= (SCION.KNACKS.list[element.dataset.knack].tier === "immortal" ? 2 : 1))
+                );
             };
             const addKnack = async (knackElement, targetBin, sourceBin) => {
-                if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
+                const knackData = U.Clone(knackElement.dataset);
+                const targetData = U.Clone(targetBin.dataset);
+                const sourceData = U.Clone(sourceBin.dataset);
+                if (targetData.binid !== sourceData.binid) {
                     const updateData = {
                         "data.knacks.list": U.Clone(this.eData.knacks.list)
                     };
-                    const {knack: elementKnack} = knackElement.dataset;
-                    if (!U.Change(updateData["data.knacks.list"], (knack) => knack.name === elementKnack, (knack) => {knack.assignment = targetBin.dataset.calling; return knack})) {
-                        updateData["data.knacks.list"].push({...SCION.KNACKS.list[elementKnack], name: elementKnack, assignment: targetBin.dataset.calling});
+                    const {knack: knackName} = knackData;
+                    const knackIndex = updateData["data.knacks.list"].findIndex((knack) => knack.name === knackName);
+                    if (knackIndex >= 0) {
+                        updateData["data.knacks.list"][knackIndex].assignment = targetData.calling;
+                    } else {
+                        updateData["data.knacks.list"].push({...SCION.KNACKS.list[knackName], name: knackName, assignment: targetData.calling});
                     }
                     await this.processCallingUpdate(updateData);
                 }
@@ -402,8 +404,13 @@ export class MajorActorSheet extends ScionActorSheet {
                 U.Remove(updateData["data.knacks.list"], (knack) => knack.name === knackName);
                 await this.processCallingUpdate(updateData);
             };
-            const cancelKnack = async (element, target, source) => {
+            const removeKnack = async (element, __, source) => {
                 if (source.classList.contains("knackDrop")) {
+                    await remKnack(element.dataset.knack);
+                }
+            };
+            const cancelKnack = async (element, target, source) => {
+                if (source.dataset.binid !== target.dataset.binid && source.classList.contains("knackDrop")) {
                     await remKnack(element.dataset.knack);
                 }
             };
@@ -413,7 +420,7 @@ export class MajorActorSheet extends ScionActorSheet {
             const knackDrop = html.find(".knackDrop");
             const knackDragger = dragula({
                 containers: [...knackSource, ...knackDrop],
-                moves: (element) => !element.classList.contains("invalid"),                    
+                moves: (element, source, handle) => handle.classList.contains("knackHandle") && !element.classList.contains("invalid"),                    
                 accepts: (element, target, source) => isKnackTargetDroppable(element, target, source),
                 direction: "horizontal",
                 copy: false,
@@ -421,13 +428,13 @@ export class MajorActorSheet extends ScionActorSheet {
                 mirrorContainer: knackMirror,
                 sheetElement: this.sheetElem
             });     
-            knackDragger.on("drag", (el) => {
-                callingDrop.each((i, bin) => {
-                    const knackBin = Array.from(knackDrop).find((el) => el.dataset.calling = bin.dataset.calling);
-                    if (["any", bin.dataset.calling].includes(el.dataset.calling) && isKnackTargetDroppable(el, knackBin, knackBin)) {
-                        bin.classList.remove("fade75");
+            knackDragger.on("drag", (element, knackSourceBin) => {
+                callingDrop.each((i, callingBin) => {
+                    const knackTargetBin = Array.from(knackDrop).find((el) => el.dataset.calling === callingBin.dataset.calling);
+                    if (["any", callingBin.dataset.calling].includes(element.dataset.calling) && isKnackTargetDroppable(element, knackTargetBin, knackSourceBin)) {
+                        callingBin.classList.remove("fade75");
                     } else {
-                        bin.classList.add("fade75");
+                        callingBin.classList.add("fade75");
                     }
                 });
             });   
@@ -436,7 +443,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     bin.classList.remove("fade75");
                 });
             });      
-            knackDragger.on("remove", async (...args) => await cancelKnack.bind(this)(...args));
+            knackDragger.on("remove", async (...args) => await removeKnack.bind(this)(...args));
             knackDragger.on("cancel", async (...args) => await cancelKnack.bind(this)(...args));
             knackDragger.on("drop", async (...args) => await addKnack.bind(this)(...args));
 

@@ -1941,6 +1941,7 @@ const scionSystemData = {
         actorDefault: {
             "name": "",
             "value": 0,
+            "slot": null,
             "keywordsChosen": [],
             "keywordsUsed": []
         },
@@ -3183,8 +3184,7 @@ const testChars = {
             pathPriorities: _.shuffle(["role", "origin", "pantheon"]),
             callings: {
                 assignableGeneralDots: {xp: 0, other: 2},
-                chargen: [null, null, null],
-                list: []
+                list: {}
             },
             knacks: {
                 assignableExtraKnacks: {xp: 0, other: 0},

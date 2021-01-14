@@ -385,7 +385,7 @@ export const SumVals = (...objs) => {
     if (typeof valKey === "object") {
         objs.push(valKey);
     }
-    return objs.reduce((tot, obj) => tot + Object.values(obj).reduce((subTot, val) => (subTot + (typeof val === "object" && valKey in val) ? val[valKey] : val), 0), 0);   
+    return objs.reduce((tot, obj) => tot + Object.values(obj).reduce((subTot, val) => subTot + (typeof val === "object" && valKey in val ? val[valKey] : val), 0), 0);   
 };
 export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
     const newDict = {};

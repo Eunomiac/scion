@@ -37,6 +37,14 @@
     "Voltaire": (400)
 )));
 
+// Official Scion Fonts
+@font-face { font-family: "Crud"; src: url(../fonts/official/Crud.ttf); }
+@font-face { font-family: "Benguiat"; src: url(../fonts/official/Benguiat.ttf); }
+// @font-face { font-family: "Benguiat"; font-weight: bold; src: url(../fonts/official/BenguiatBold.ttf); }
+@font-face { font-family: "Benguiat"; font-style: italic; src: url(../fonts/official/BenguiatItalic.ttf); }
+@font-face { font-family: "Benguiat"; font-weight: bold; font-style: italic; src: url(../fonts/official/BenguiatBoldItalic.ttf); }
+@font-face { font-family: "MercuryG2"; src: url(../fonts/official/MercuryTextG2.otf); }
+
 // Netjer Fonts
 @font-face { font-family: "Bootle"; src: url(../fonts/netjer/bootle.ttf); }
 @font-face { font-family: "Carolingia"; src: url(../fonts/netjer/carolingia.ttf); }

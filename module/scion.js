@@ -72,12 +72,14 @@ const createTestChar = async (name) => {
     // #endregion
 
     // #region Randomly Select Callings, Assign Dots, Select Keywords
+    let callingSlot = 0;
     const callings = U.KeyMapObj(_.uniq([
         _.sample(SCION.GODS[actorData.patron].callings),
         ..._.sample(Object.keys(SCION.CALLINGS.list), 4)
     ]).slice(0, 3), (k, calling) => calling, (calling) => ({
         name: calling,
         value: 1,
+        slot: callingSlot++,
         keywordsChosen: _.sample(U.Loc(`scion.calling.${calling}.keywords`).split(", "), 3),
         keywordsUsed: []
     }));
@@ -102,7 +104,6 @@ const createTestChar = async (name) => {
         }
     }
     callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
-    actorData.callings.chargen = Object.keys(callings);
     actorData.callings.list = callings;
     actorData.knacks.list = chosenKnacks;
 
@@ -160,8 +161,8 @@ Hooks.once("init", async () => {
         },
         debug: {
             isDebugging: true,
-            isDebuggingDragula: ["dragend"],
-            isFullDebugConsole: false,
+            isDebuggingDragula: false,
+            isFullDebugConsole: true,
             watchList: []
         },
         createSigChars: createSigChars
@@ -190,7 +191,7 @@ Hooks.once("init", async () => {
 
     // #region Handlebar Helpers
     Handlebars.registerHelper({
-        for: (n, options) => {
+        for: (n, options) => {            
             const results = [];
             const data = Handlebars.createFrame(options.data);
             for (let i = 0; i < n; i++) {
@@ -297,17 +298,17 @@ Hooks.once("init", async () => {
             const actor = game.actors.get(options.data.root.actor._id);
             switch (cat) {
                 case "calling": {
-                    const callings = actor.eData.callings.list.filter((v) => Boolean(v));
+                    const callings = U.Clone(Object.values(actor.callings));
                     switch (subCat) {
                         case "other": {
-                            if (callings.filter((calling) => calling.name in SCION.CALLINGS.list).length >= 2
+                            if (callings.length >= 2
                                 && !callings.some((calling) => SCION.GODS[actor.eData.patron].callings.includes(calling.name))) {
                                 return "invalid";
                             }
                         }
                         // falls through
                         case "patron": {
-                            if (callings.map((calling) => calling.name).includes(trait)) {
+                            if (trait in actor.callings) {
                                 return "invalid";
                             }
                             break;
