@@ -4,7 +4,7 @@
         <div id="chargenFourDotMirror" class="dotContainer mirrorContainer"></div>
     </div>
     {{#each callings.chargen as |callingName|}}
-        {{#with (bundle "index" @index "callings" ../callings "calling" (lookup ../callings.callings callingName)) as |callingsData|}}
+        {{#with (bundle "index" @index "blocks" ../blocks "tooltips" ../tooltips.knacks "callings" ../callings "calling" (lookup ../callings.callings callingName)) as |callingsData|}}
         {{> (../../blocks.partials.calling.template) callingsData}}
         {{/with}}
     {{/each}}
@@ -12,10 +12,23 @@
     <div id="knacksMirror" class="knacksList popout flex-col alignCenter mirrorContainer"></div>
     {{#if (test callings.numChosen "<" 3)}}
     {{> (blocks.popouts.callingsList.template) callings }}
-    {{else}}{{#if callings.selected}}
-    {{> (blocks.popouts.knacksList.template) (lookup callings.callings callings.selected) }}
+    {{else}}{{#if (test callings.unassignedCallingDots "==" 0)}}
+    {{#unless callings.areAllKnacksFull}}
+    {{#with (bundle "blocks" blocks "knacks" callings.genericKnacks "tooltips" tooltips.knacks) as |knackData|}}
+    {{> (../blocks.popouts.knacksList.template) knackData }}
+    {{/with}}
+    {{/unless}}
+    {{#each callings.chargen as |callingName|}}
+        {{#unless (lookup (lookup ../callings.callings callingName) "areKnacksFull")}}
+        {{#with (bundle "index" @index "blocks" ../blocks "tooltips" ../tooltips.knacks "calling" (lookup ../callings.callings callingName)) as |knackData|}}
+        {{> (../../blocks.popouts.knacksList.template) knackData }}
+        {{/with}}
+        {{/unless}}
+    {{/each}}
+    {{/if}}
     {{/if}}
     <div class="footer">
+        {{#if (test callings.unassignedCallingDots ">" 0)}}
         <div class="unassignedDots unassignedCallingDots flex-col alignCenter">
             <h2 class="alignCenter noBG">{{#if callings.unassignedCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>
             <div class="dotline unassigned space5 noLabel">
@@ -26,6 +39,9 @@
                 </div>
             </div>
         </div>
+        {{else}}{{#if (test callings.areAllKnacksFull "&&" callings.areAllKeywordsFull)}}
+        <h1 class="alignCenter">LEGENDARY!</h1>
+        {{/if}}
+        {{/if}}
     </div>
-    {{/if}}
 </section>

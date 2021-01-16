@@ -5,6 +5,11 @@ $c-black: rgba(0, 0, 0, 1);
 $c-yellow: rgba(255, 255, 0, 1);
 $c-gold: rgba(255, 196, 0, 1);
 
+// Generic Backgrounds
+$c-goldBG: linear-gradient(270deg, scale-color($c-gold, $lightness: 30%, $saturation: 30%), scale-color($c-gold, $lightness: 70%, $saturation: 70%), scale-color($c-gold, $lightness: 30%, $saturation: 30%));
+$c-greyBG: linear-gradient(270deg, scale-color($c-grey, $lightness: 20%), scale-color($c-grey, $lightness: 60%), scale-color($c-grey, $lightness: 20%));
+$c-whiteBG: linear-gradient(270deg, scale-color($c-grey, $lightness: 40%), scale-color($c-grey, $lightness: 90%), scale-color($c-grey, $lightness: 40%));
+
 $defaultColors: (
     "Title": $c-black,
     "H1": $c-black,

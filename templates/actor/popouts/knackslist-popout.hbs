@@ -1,57 +1,38 @@
-<div id="knacksList" class="popout knacksList flex-col alignCenter">
-    <div id="knacksSource" class="flex-col knackBin knackSource" data-binid="knacksSource-{{name}}">
-        {{#if (test availableKnacks.any_immortal "||" availableKnacks.any_heroic)}}
-        {{#each availableKnacks.any_immortal as |knack|}}
-        <span class="tooltip tipLeft knack knackHandle immortal noFlex {{checkInvalid "knack:immortal" knack ../name}}" data-calling="any" data-knack="{{knack}}">
-            <div class="tipContents alignLeft">
-                <h2 class="alignCenter">{{loc (concat "scion.knack." knack ".name")}}</h2>
-                <p>
-                    {{{loc (concat "scion.knack." knack ".description")}}}
-                </p>
-                <i></i>
-            </div>
+{{#if calling}}
+<div class="popout knacksList flex-col alignCenter float{{#if (test index "==" 0)}}Left{{/if}}{{#if (test index "==" 1)}}Mid{{/if}}{{#if (test index "==" 2)}}Right{{/if}}">
+    <h1 class="knackCategory alignCenter">{{loc (concat "scion.calling." calling.name ".name")}}</h1>
+    <div class="flex-{{#if (test index "==" 1)}}row-wrap{{else}}col{{/if}} knackBin knackSource" data-binid="knacksSource-{{calling.name}}">
+        {{#each calling.availableKnacks.immortal as |knack|}}
+        <span class="tooltip tip{{#if (test ../index "==" 0)}}Left{{/if}}{{#if (test ../index "==" 1)}}Up{{/if}}{{#if (test ../index "==" 2)}}Right{{/if}} knack knackHandle immortal short noFlex {{checkInvalid "knack:immortal" knack ../calling.name}}" data-calling="{{../calling.name}}" data-knack="{{knack}}">
+            {{> (../blocks.tooltips.template) (lookup ../tooltips knack)}}
             {{loc (concat "scion.knack." knack ".name")}}
         </span>
         {{/each}}
-        {{#each availableKnacks.any_heroic as |knack|}}
-        <span class="tooltip tipLeft knack generic knackHandle noFlex {{checkInvalid "knack:heroic" knack ../name}}" data-calling="any" data-knack="{{knack}}">
-            <div class="tipContents alignLeft">
-                <h2 class="alignCenter">{{loc (concat "scion.knack." knack ".name")}}</h2>
-                <p>
-                    {{{loc (concat "scion.knack." knack ".description")}}}
-                </p>
-                <i></i>
-            </div>
+        {{#each calling.availableKnacks.heroic as |knack|}}
+        <span class="tooltip tip{{#if (test ../index "==" 0)}}Left{{/if}}{{#if (test ../index "==" 1)}}Up{{/if}}{{#if (test ../index "==" 2)}}Right{{/if}} knack knackHandle noFlex {{checkInvalid "knack:heroic" knack ../calling.name}}" data-calling="{{../calling.name}}" data-knack="{{knack}}">
+            {{> (../blocks.tooltips.template) (lookup ../tooltips knack)}}
             {{loc (concat "scion.knack." knack ".name")}}
         </span>
         {{/each}}
-        {{/if}}
-        {{#if (test availableKnacks.immortal "||" availableKnacks.heroic)}}
-        <h1 class="knackCategory alignCenter">{{loc (concat "scion.calling." name ".name")}}</h1>
-        {{#each availableKnacks.immortal as |knack|}}
-        <span class="tooltip tipLeft knack knackHandle immortal noFlex {{checkInvalid "knack:immortal" knack ../name}}" data-calling="{{../name}}" data-knack="{{knack}}">
-            <div class="tipContents alignLeft">
-                <h2 class="alignCenter">{{loc (concat "scion.knack." knack ".name")}}</h2>
-                <p>
-                    {{{loc (concat "scion.knack." knack ".description")}}}
-                </p>
-                <i></i>
-            </div>
+    </div>
+</div>
+{{else}}
+<div class="popout knacksList flex-col alignCenter floatBottom">
+    <div class="flex-row knackBin knackSource" data-binid="knacksSource-generic">
+        {{#if (test (math (count knacks.immortal) "+" (count knacks.heroic)) ">" 0)}}
+        {{#each knacks.immortal as |knack|}}
+        <span class="tooltip tipUp knack generic knackHandle immortal short noFlex {{checkInvalid "knack:immortal" knack}}" data-calling="any" data-knack="{{knack}}">
+            {{> (../blocks.tooltips.template) (lookup ../tooltips knack)}}
             {{loc (concat "scion.knack." knack ".name")}}
         </span>
         {{/each}}
-        {{#each availableKnacks.heroic as |knack|}}
-        <span class="tooltip tipLeft knack knackHandle noFlex {{checkInvalid "knack:heroic" knack ../name}}" data-calling="{{../name}}" data-knack="{{knack}}">
-            <div class="tipContents alignLeft">
-                <h2 class="alignCenter">{{loc (concat "scion.knack." knack ".name")}}</h2>
-                <p>
-                    {{{loc (concat "scion.knack." knack ".description")}}}
-                </p>
-                <i></i>
-            </div>
+        {{#each knacks.heroic as |knack|}}
+        <span class="tooltip tip{{#if (test @index ">" 1)}}Right{{else}}Left{{/if}} knack generic knackHandle noFlex {{checkInvalid "knack:heroic" knack}}" data-calling="any" data-knack="{{knack}}">
+            {{> (../blocks.tooltips.template) (lookup ../tooltips knack)}}
             {{loc (concat "scion.knack." knack ".name")}}
         </span>
         {{/each}}
         {{/if}}
     </div>
 </div>
+{{/if}}

@@ -185,8 +185,8 @@ export class ScionActor extends Actor {
     getAvailableCallingKnacks(calling) {
         return _.groupBy(
             Object.keys(SCION.KNACKS.list).
-                filter((knack) => ["any", calling].includes(SCION.KNACKS.list[knack].calling)),
-            (knack) => `${SCION.KNACKS.list[knack].calling === "any" ? "any_" : ""}${SCION.KNACKS.list[knack].tier}`
+                filter((knack) => SCION.KNACKS.list[knack].calling === calling),
+            (knack) => SCION.KNACKS.list[knack].tier
         );
     }
     getAssignedCallingKnacks(calling) { return this.knacks.filter((knack) => knack.assignment === calling) }
@@ -202,7 +202,9 @@ export class ScionActor extends Actor {
                 ...calling,
                 knacks: this.getAssignedCallingKnacks(calling.name),
                 availableKnacks: this.getAvailableCallingKnacks(name),
-                keywords: U.Loc(`scion.calling.${name}.keywords`).split(/, /gu)
+                keywords: U.Loc(`scion.calling.${name}.keywords`).split(/, /gu),
+                areKnacksFull: this.getKnacksValue(this.getAssignedCallingKnacks(calling.name)) >= calling.value,
+                areKeywordsFull: calling.keywordsChosen.length >= calling.value
             }
         ));
     }
@@ -417,7 +419,6 @@ export class ScionActor extends Actor {
             ".*. items": U.Clone(this.data.items),
             ".*. paths": U.Clone(this.paths),
             ".*. conditions": U.Clone(this.conditions),
-            "... sheet": this.sheet,
             "SKILL REPORT": this.fullSkillReport,
             "ATTRIBUTE REPORT": this.fullAttributeReport,
             "CALLINGS & KNACKS REPORT": this.fullCallingsKnacksReport

@@ -221,6 +221,7 @@ Hooks.once("init", async () => {
             for (const arg of _.compact(args)) {returnVals.push(..._.flatten([arg]))}
             return returnVals.join(delim ?? "");
         },
+        wrap: (content, tag) => new Handlebars.SafeString(`<${tag}>${content}</${tag}>`),
         split: (string, ...args) => {
             args.pop();
             const delim = args[0] ?? ",";
@@ -322,9 +323,11 @@ Hooks.once("init", async () => {
                     if (actor.knacks.some((knack) => knack.name === knackName)) {
                         return "hidden";
                     }
-                    const calling = actor.callings[subTrait];
-                    if (actor.getKnacksValue([knackData]) > (calling.value - actor.getKnacksValue(calling.knacks))) {
-                        return "invalid";
+                    if (subTrait) {
+                        const calling = actor.callings[subTrait];
+                        if (actor.getKnacksValue([knackData]) > (calling.value - actor.getKnacksValue(calling.knacks))) {
+                            return "invalid";
+                        }
                     }
                     break;                    
                 }

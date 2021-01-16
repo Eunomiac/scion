@@ -1,0 +1,10 @@
+<div class="tipContents alignLeft">
+    {{#each lines as |line|}}
+    {{#with ../lines as |lines|}}{{#with (lookup lines (math (math @index "--") "min" 0)) as |prevLine|}}
+        {{~#if (test line.[0] "==" "li")}}{{#unless (test prevLine.[0] "==" "li")}}<ul>{{/unless}}{{else}}{{#if (test prevLine.[0] "==" "li")}}</ul>{{/if}}{{/if~}}
+        {{~#if line.[1]}}{{wrap line.[1] line.[0]}}{{else}}<p>{{line.[0]}}</p>{{/if~}}
+        {{~#if (test @index "==" (math (count lines) "--"))}}</ul>{{/if~}}
+    {{/with}}{{/with}}
+    {{/each}}
+    <i></i>
+</div>

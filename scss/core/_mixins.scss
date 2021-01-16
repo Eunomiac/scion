@@ -90,7 +90,7 @@
     }
     #{$propertyName}: $fullShadow;
 }
-@mixin embossed-text($distance: 1px, $blur: 0px, $colorBright: var(--greyFade10), $colorDark: var(--greyFade0), $propertyName: text-shadow) {
+@mixin embossed-text($distance: 1px, $blur: 0px, $colorBright: var(--white), $colorDark: var(--black), $propertyName: text-shadow) {
     $shadowBright: #{$distance * -1} #{$distance * -1} #{$blur} #{$colorBright};
     $shadowDark: #{$distance} #{$distance} #{$blur} #{$colorDark};
     #{$propertyName}: join(#{$shadowBright}, #{$shadowDark}, $separator: comma);

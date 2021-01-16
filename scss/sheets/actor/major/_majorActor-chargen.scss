@@ -154,9 +154,9 @@
 
         // &.selected { transform: translateY(50px) scale(1.1) }
 
-        &:nth-of-type(2) { grid-area: calling1; }
-        &:nth-of-type(3) { grid-area: calling2; }
-        &:nth-of-type(4) { grid-area: calling3; }
+        &:nth-of-type(2) { grid-area: calling1; z-index: 49; }
+        &:nth-of-type(3) { grid-area: calling2; z-index: 50; }
+        &:nth-of-type(4) { grid-area: calling3; z-index: 49; }
 
         background: {
             image: url("../images/actor-sheet/backgrounds/calling.png");
@@ -165,19 +165,13 @@
             repeat: no-repeat;
         }
 
-        &:not(.glow) {
-            filter: drop-shadow(2px 2px 0px var(--greyFade50));
-        }
+        &:not(.glow) { filter: drop-shadow(3px 3px 3px var(--black)); }
 
-        > .gu-transit { display: none; }
-        .gu-unselectable > * {
-            display: none;
-        }
+        > .gu-transit,
+        .gu-unselectable > *,
         > .calling { display: none; }
 
-        span.knack.empty {
-            background-image: url("../images/bubbles/knack-empty.png");
-        }
+        span.knack.empty { pointer-events: none; background-image: url("../images/bubbles/knack-empty.png"); }
 
         .dotline {
             margin-top: 15px;
@@ -208,15 +202,33 @@
         div.keywords {
             .contentEditable {
                 flex: 0.4 0.4 40%;
-                text-indent: 0;
-                font-family: "Amarante";
-                font-size: 14px;
                 height: 14px;
                 min-height: 14px;
-                line-height: 12px;
-                border-width: 2px;
                 margin: 2px;
-                font-weight: normal;
+                border: {
+                    width: 2px;
+                    color: var(--greyUp1);
+                }
+                color: var(--black);
+                font: {
+                    family: "MercuryG2";
+                    size: 14px;
+                    weight: bold;
+                    variant: small-caps;
+                }
+                line-height: 13px;
+                text: {
+                    indent: 0;
+                    transform: lowercase;
+                }
+                @include text-shadow((1 0 0 0 var(--black)));
+                background: {
+                    image: url("../images/textures/stoneWhite.jpg");
+                    size: 100%;
+                    repeat: no-repeat;
+                    position: bottom;
+                }
+                filter: drop-shadow(1px 1px 1px var(--black));
             }
         }
 
@@ -268,12 +280,12 @@
         display: block;
         height: 20px;
         min-height: 20px;
-        width: 170px;
+        width: 176px;
         margin: 5px 0;
         color: var(--black);
         background: {
             image: url("../images/bubbles/knack-heroic.png");
-            size: 100% 100%;
+            size: 100%;
             position: center;
             repeat: no-repeat;
         }
@@ -307,39 +319,71 @@
         }
     }
 
-    #knacksList.popout {
-        width: 180px;
-        left: -180px;
-        top: 150px;           
+    .knacksList.popout {  
         overflow: visible;
-        padding-top: 10px;
-
-        h1.knackCategory {
-            text-transform: uppercase;
-            font-family: Oswald;
-            color: var(--black);
-            border: none;
-            border-bottom: 2px solid black;
-
-            text-transform: uppercase;
-            font-family: Oswald;
-            color: var(--accentDown2);
-            background-image: url("../images/textures/stoneWhite.jpg");
+        padding: 5px;
+        filter: drop-shadow(40px 30px 10px var(--blackFade25));
+        z-index: 55;
+        > h1 {
             min-height: 28px;
+            margin: 0 0 5px 0;
+            color: var(--black);
+            font: {
+                family: Benguiat;
+                size: 36px;
+                variant: small-caps;
+            }
             line-height: 24px;
-            margin: 5px 0px;
-            border-radius: 25px;
-            filter: drop-shadow(4px 4px 4px black);
+            text: {
+                transform: lowercase;
+            }
+            background: none;
             border: none;
         }
-        > div {
-            padding: 0 0 15px 0;
+        > div { 
+            padding: 0 0 10px 0;
+            justify-content: space-around;
+            height: calc(100% - 28px - 5px);
         }
-        span.knack.immortal {            
+        &.floatBottom, &.floatMid {
+            // z-index: 51;
+            > div { padding-bottom: 0px; }
+        }
+        &.floatBottom {
+            // z-index: 48;
+            width: calc(100% - 2 * (10px + 5px));
+            top: 170px;
+            border-width: 5px;
+            min-height: 26px;
+        }
+        &.floatMid { 
+            --panelWidth: 380px;
+            width: var(--panelWidth);
+            left: calc(50% - 0.5*(var(--panelWidth) + 2 * (10px + 5px) + 15px));
+            top: calc(100% - 320px);
+        }
+        &.floatLeft, &.floatRight {
+            height: 350px;
+            width: 180px;
+            top: 250px;
+            justify-content: space-between;
+            // z-index: 5;
+
+        }
+        &.floatLeft { left: -150px; }
+        &.floatRight { right: -130px; }
+
+        span.knack, span.knack.immortal {
+            margin: 3px 2px;
             height: 20px;
             min-height: 20px;
             line-height: 20px;
             font-size: 12px;
+            &.invalid {
+                height: 16px;
+                min-height: 16px;
+                line-height: 16px;
+            }
         }
     }
 

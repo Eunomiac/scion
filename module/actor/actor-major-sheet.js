@@ -68,6 +68,20 @@ export class MajorActorSheet extends ScionActorSheet {
         }
         return this._selectedCalling;
     }
+    get tooltipLines() {
+        this._tooltipLines = this._tooltipLines ?? {
+            knacks: U.KeyMapObj(SCION.KNACKS.list, (data, name) => ({
+                lines: [
+                    ["h3 class=\"alignCenter\"", U.Loc(`scion.knack.${name}.name`)],
+                    ...U.Loc(`scion.knack.${name}.description`).
+                        split("<").
+                        map((line) => (/^\w{0,2}>/u.test(line) ? [line.match(/^(\w{0,2})>/u)[1], line.replace(/^\w{0,2}>/gu, "")] : [line])),
+                    ...data.stunts.map((stunt) => ["li", `<span class="stuntName strong">${U.Loc(`scion.stunt.${stunt}.name`)}</span> <span class="stuntCost">(${U.Loc(`scion.stunt.${stunt}.cost`)})</span> — ${U.Loc(`scion.stunt.${stunt}.effect`)}`])
+                ]
+            }))
+        };
+        return this._tooltipLines;
+    }
     // #region GET DATA
     getData() {
         const data = super.getData();
@@ -93,6 +107,11 @@ export class MajorActorSheet extends ScionActorSheet {
         // #region OWNED ITEM SORTING
         data.items = {};
         for (const [itemCategory, itemTypes] of Object.entries(itemCategories)) {data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type))}
+        // #endregion
+
+        // #region TOOLTIP DATA
+        data.tooltips = this.tooltipLines;
+
         // #endregion
 
         // #region FRONT PAGE
@@ -154,9 +173,12 @@ export class MajorActorSheet extends ScionActorSheet {
                 get other() { return Object.keys(SCION.CALLINGS.list).filter((calling) => !this.patron.includes(calling)) }
             },
             callings: actorCallingData,
+            genericKnacks: this.actor.getAvailableCallingKnacks("any"),
             knacks: actorKnackData,
             selected: this.selectedCalling,
             chargen: this.actor.orderedCallings,
+            get areAllKnacksFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKnacksFull, true) },
+            get areAllKeywordsFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKeywordsFull, true) },
             get numChosen() { return Object.keys(this.callings).filter((key) => key && key in SCION.CALLINGS.list).length },
             get unassignedCallingDots() { return Math.max(0, actorAssignableCallingDots - Object.values(this.callings).reduce((tot, val) => tot + val.value - 1, 0)) },
             get groupedKnacks() {
@@ -174,7 +196,6 @@ export class MajorActorSheet extends ScionActorSheet {
             }
         };
         
-
         // #endregion
 
         // #endregion
@@ -410,20 +431,21 @@ export class MajorActorSheet extends ScionActorSheet {
                 }
             };
             const cancelKnack = async (element, target, source) => {
-                if (source.dataset.binid !== target.dataset.binid && source.classList.contains("knackDrop")) {
+                if (source.dataset.binid !== target?.dataset.binid && source.classList.contains("knackDrop")) {
                     await remKnack(element.dataset.knack);
                 }
             };
 
-            const knackSource = html.find("#knacksSource");
+            const knackSource = html.find(".knackSource");
             const [knackMirror] = html.find("#knacksMirror");
             const knackDrop = html.find(".knackDrop");
+            const knackTooltips = html.find(".knack.tooltip");
             const knackDragger = dragula({
                 containers: [...knackSource, ...knackDrop],
                 moves: (element, source, handle) => handle.classList.contains("knackHandle") && !element.classList.contains("invalid"),                    
                 accepts: (element, target, source) => isKnackTargetDroppable(element, target, source),
                 direction: "horizontal",
-                copy: false,
+                copy: true,
                 removeOnSpill: true,
                 mirrorContainer: knackMirror,
                 sheetElement: this.sheetElem
@@ -437,11 +459,19 @@ export class MajorActorSheet extends ScionActorSheet {
                         callingBin.classList.add("fade75");
                     }
                 });
+                knackTooltips.each((i, knackTooltip) => {
+                    knackTooltip.classList.add("hideTooltip");
+                });
             });   
             knackDragger.on("dragend", () => {
                 callingDrop.each((i, bin) => {
                     bin.classList.remove("fade75");
                 });
+                setTimeout(() => {
+                    knackTooltips.each((i, knackTooltip) => {
+                        knackTooltip.classList.remove("hideTooltip");
+                    });
+                }, 500);
             });      
             knackDragger.on("remove", async (...args) => await removeKnack.bind(this)(...args));
             knackDragger.on("cancel", async (...args) => await cancelKnack.bind(this)(...args));

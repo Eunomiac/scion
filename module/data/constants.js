@@ -3118,9 +3118,7 @@ const handlebarTemplates = {
         callingsList: {template: () => "systems/scion/templates/actor/popouts/callingslist-popout.hbs"},
         knacksList: {template: () => "systems/scion/templates/actor/popouts/knackslist-popout.hbs"}
     },
-    tooltips: {
-        path: {template: () => "systems/scion/templates/item/tooltips/path-tooltip.hbs"}
-    }
+    tooltips: {template: () => "systems/scion/templates/tooltips/tooltip-contents.hbs"}
 };
 const itemCategories = {
     paths: ["path"],

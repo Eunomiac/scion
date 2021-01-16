@@ -883,7 +883,7 @@
             },
             "enforcingTheBoundary": {
                 "name": "Enforcing the Boundary",
-                "description": "Make a Knack Skill roll— on a success, create a barrier of force that protects you and all allies within short range of you. It moves with you, but you may not take the Rush or Disengage actions. The force field lasts until the end of a fight scene, until you are Taken Out, or until you choose to end the effect — whichever comes first. While enforcing this boundary, characters under its protection may not be targeted by attacks by weapons or abilities with the Firearms or Arcing tags. It adds your Legend in Enhancement to any rolls you make to resist the Rush action. This applies before you roll."
+                "description": "Make a Knack Skill roll — on a success, create a barrier of force that protects you and all allies within short range of you. It moves with you, but you may not take the Rush or Disengage actions. The force field lasts until the end of a fight scene, until you are Taken Out, or until you choose to end the effect — whichever comes first. While enforcing this boundary, characters under its protection may not be targeted by attacks by weapons or abilities with the Firearms or Arcing tags. It adds your Legend in Enhancement to any rolls you make to resist the Rush action. This applies before you roll."
             },
             "enhancedImpact": {
                 "name": "Enhanced Impact",
@@ -923,7 +923,7 @@
             },
             "forYouIWill": {
                 "name": "For You, I Will",
-                "description": "Regain 1 point of spent Legend when you perform an impressive feat that positively impacts a character whom you love (which expressly includes the platonic bond of close friendship) —this can be a Storyguide character or a bandmate, but the feat must be suitably impressive depending on the target. What impresses an ordinary mortal is not the same as what impresses a Demigod."
+                "description": "Regain 1 point of spent Legend when you perform an impressive feat that positively impacts a character whom you love (which expressly includes the platonic bond of close friendship) — this can be a Storyguide character or a bandmate, but the feat must be suitably impressive depending on the target. What impresses an ordinary mortal is not the same as what impresses a Demigod."
             },
             "goodListener": {
                 "name": "Good Listener",
@@ -991,7 +991,7 @@
             },
             "keeneyedPredator": {
                 "name": "Keen-Eyed Predator",
-                "description": "When you enter a Field, you extend your senses to determine what might await you. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question. The Storyguide must answer these questions honestly:{li}What kinds of hazards (such as terrain) are present?{li}Where is the nearest exit?{li}Where is the safest way in?{li}How many hostile enemies are present?{li}Who (or what) is the biggest threat?"
+                "description": "When you enter a Field, you extend your senses to determine what might await you. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question. The Storyguide must answer these questions honestly:<li>What kinds of hazards (such as terrain) are present?<li>Where is the nearest exit?<li>Where is the safest way in?<li>How many hostile enemies are present?<li>Who (or what) is the biggest threat?"
             },
             "lieDetector": {
                 "name": "Lie Detector",
@@ -1015,7 +1015,7 @@
             },
             "loversIntuition": {
                 "name": "Lover's Intuition",
-                "description": "When touching another character, which may be as brief as a handshake, you gain an understanding of your target's romantic life. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question.{li}Who or what does the character love?{li}Who is the character romantically involved with? Who is the character close to?{li}Who would the character like to be romantically involved with?{li}This may be used on your bandmates with consent from the player."
+                "description": "When touching another character, which may be as brief as a handshake, you gain an understanding of your target's romantic life. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question.<li>Who or what does the character love?<li>Who is the character romantically involved with? Who is the character close to?<li>Who would the character like to be romantically involved with?<p>This may be used on your bandmates with consent from the player."
             },
             "loversOath": {
                 "name": "Lover's Oath",
@@ -1151,7 +1151,7 @@
             },
             "smokeAndMirrors": {
                 "name": "Smoke and Mirrors",
-                "description": "Once per scene, when you would be Taken Out, you instead spend Momentum, negate the damage that would have taken you out and move one range band away from your attacker— but leave behind a brief afterimage of your outline, which crumbles into dust seconds later."
+                "description": "Once per scene, when you would be Taken Out, you instead spend Momentum, negate the damage that would have taken you out and move one range band away from your attacker — but leave behind a brief afterimage of your outline, which crumbles into dust seconds later."
             },
             "somebodysWatchingMe": {
                 "name": "Somebody's Watching Me",

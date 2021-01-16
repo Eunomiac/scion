@@ -19,26 +19,22 @@
         {{#for calling.value}}
         {{#if (lookup ../calling.knacks @index)}}
         {{#with (lookup ../calling.knacks @index) as |knack|}}
-        <span class="tooltip tipUp knack knackHandle {{#if (test knack.tier "==" "immortal")}}immortal{{else}}{{#if (test knack.calling "==" "any")}}generic{{/if}}{{/if}}" data-calling="{{knack.calling}}" data-knack="{{knack.name}}">
-            <div class="tipContents alignLeft">
-                <h2 class="alignCenter">{{loc (concat "scion.knack." knack.name ".name")}}</h2>
-                <p>
-                    {{{loc (concat "scion.knack." knack.name ".description")}}}
-                </p>
-                <i></i>
-            </div>
+        <span class="tooltip tip{{#if (test ../../index "==" 0)}}Left{{/if}}{{#if (test ../../index "==" 1)}}Up{{/if}}{{#if (test ../../index "==" 2)}}Right{{/if}} knack knackHandle {{#if (test knack.tier "==" "immortal")}}immortal{{else}}{{#if (test knack.calling "==" "any")}}generic{{/if}}{{/if}}" data-calling="{{knack.calling}}" data-knack="{{knack.name}}">
+            {{> (../../blocks.tooltips.template) (lookup ../../tooltips knack.name)}}
             {{loc (concat "scion.knack." knack.name ".name")}}
         </span>
         {{/with}}        
         {{/if}}
         {{/for}}
     </div>
+    {{#if callings.areAllKnacksFull}}
     <h2 class="scionText">{{loc "scion.game.keywords"}}</h2>
     <div class="keywords flex-row-wrap alignCenter height30 width90">
         {{#for calling.value}}
         <div class="contentEditable outsetFrame width50" data-field="data.callings.list.{{../calling.name}}.keywordsChosen" data-fieldindex="{{@index}}"></div>
         {{/for}}
     </div>
+    {{/if}}
 </div>
 {{else}}
 <div class="calling callingDrop generic alignCenter" data-calling="empty" data-slot="{{index}}" data-binid="calling-{{index}}">

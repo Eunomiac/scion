@@ -3,13 +3,16 @@
   margin: 0 !important;
   z-index: 9999 !important;
   opacity: 1;
+  div.tipContents { display: none !important; }
   }
 .gu-hide { // Attached to hide elements.
   display: none !important;
 }
 .gu-unselectable { // Attached to make elements unselectable
   user-select: none !important;
+  div.tipContents { display: none !important; }
 }
 .gu-transit { // The dragged image held by user's cursor.
   opacity: 0.5;
+  div.tipContents { display: none !important; }
 }

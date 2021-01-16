@@ -312,7 +312,7 @@
         position: fixed !important;
         pointer-events: none !important;
         z-index: 9999999 !important;
-        div.tooltipContents { display: none !important; }
+        div.tipContents { display: none !important; }
     }
     /* #endregion */
     /* #region Popouts/Tooltips */
@@ -332,6 +332,7 @@
         }
 
         > .tipContents {
+            $scaleFactor: 0.7;
             width: 300px;
             padding: 5px;
             color: #444444;
@@ -346,9 +347,39 @@
             visibility: hidden; 
             opacity: 0; 
             transition: opacity 0.8s;
-            p, li {
-                font-family: "Della Respira";
-                font-size: 12px;
+            pointer-events: none;
+            filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.75));
+            h3 {
+                background: $c-greyBG;
+                color: black !important;
+                padding: 0px;
+                max-height: 25px;
+                font-style: normal;
+                font-variant: normal;
+                font-weight: bold;
+                font-size: 20px;
+                border: none;
+                min-height: 25px;
+                line-height: 25px;
+                font-family: Benguiat;
+                width: calc((100% + 2 * 5px)/#{$scaleFactor});
+                transform: scaleX(#{$scaleFactor});
+                transform-origin: left;
+                margin: -5px 0 0 -5px;
+                text-transform: uppercase;
+                @include embossed-text(1px, 2px, var(--white), var(--black));
+            }
+            p, li, span {
+                font-family: "MercuryG2";
+                font-size: 11px;
+                line-height: 13px;
+                @include text-shadow((1 0 0 0 var(--black)));
+                &.stuntName { 
+                    font-family: "Benguiat";
+                    text-transform: uppercase;
+                    @include text-shadow((3 0 0 0 var(--black)));
+                }
+                &.stuntCost { text-shadow: none; }
             }
             i {
                 position: absolute;
@@ -365,48 +396,46 @@
                 }
             }
         }
-        
-        &.tipRight {
+        &.hideTooltip > .tipContents { display: none !important; }
+
+        &.knack.immortal > .tipContents {
+            border-color: $c-gold;
+            i::after { border-color: $c-gold; }
+            h3 { background: $c-goldBG; }
+        }
+        &.knack.generic > .tipContents h3 { background: $c-whiteBG; }
+
+        &.tipLeft, &.tipRight {
             > .tipContents {
                 top: 50%;
-                left: 100%;
                 transform: translate(0, -50%);
                 i {
                     top: 50%;
-                    right: 100%;
                     margin-top: -25px;
-                    &::after {
-                        top: 50%;
-                        transform: translate(50%, -50%) rotate(-45deg);
-                    }
+                    &::after { top: 50%; }
                 }
             }
         }
-
-        &.tipLeft {
-            > .tipContents {
-                top: 50%;
-                right: 107%;
-                transform: translate(0, -50%);
-                i {
-                    top: 50%;
-                    right: -50px;
-                    margin-top: -25px;
-                    &::after {
-                        top: 50%;
-                        transform: translate(-50px, -50%) rotate(-45deg);
-                    }
-                }
+        &.tipRight > .tipContents {
+            left: calc(100% + 5px + 10px);
+            i { 
+                right: 100%;
+                &::after { transform: translate(50%, -50%) rotate(-45deg); }
+            }
+        }        
+        &.tipLeft > .tipContents {
+            right: calc(100% + 5px + 10px);
+            i { 
+                right: -50px;
+                &::after { transform: translate(-50px, -50%) rotate(-45deg); }
             }
         }
 
-        &.tipUp {
+        &.tipUpLeft, &.tipUp, &.tipUpRight {
             > .tipContents {
-                bottom: 115%;
-                left: 50%;
+                bottom: 45px;
                 transform: translate(-50%, 0%);
                 i {
-                    left: calc(50% - 1.2 * 20px);
                     margin-top: -7px;
                     transform: scale(0.8);
                     &::after {
@@ -414,7 +443,22 @@
                         transform: translate(-15%, -90%) rotate(45deg);
                     }
                 }
+
             }
+            &.immortal:not(.short) > .tipContents { bottom: 75px; }
+        }
+
+        &.tipUpLeft > .tipContents {
+            left: 0%;
+            i { left: calc(80% - 20px / 0.8); }
+        }
+        &.tipUp > .tipContents {
+            left: 50%;
+            i { left: calc(50% - 20px / 0.8); }
+        }
+        &.tipUpRight > .tipContents {
+            left: 100%;
+            i { left: calc(20% - 20px / 0.8); }
         }
 
         &:hover > .tipContents { 

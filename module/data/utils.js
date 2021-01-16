@@ -237,15 +237,10 @@ export const TCase = (str) => `${str}`.split(/\s/u).
     trim();
 export const Loc = (locRef, formatDict = {}) => {
     if (/^"?scion\./u.test(JSON.stringify(locRef))) {
-        formatDict = {...formatDict, li: "<li>"};
         for (const [key, val] of Object.entries(formatDict)) {
             formatDict[key] = Loc(val);
         }
-        let locVal = game.i18n.format(locRef, formatDict) || "";
-        if (/<li>/u.test(locVal)) {
-            locVal = `${locVal.replace(/<li>/u, "<ul><li>")}</ul>`;
-        }
-        return locVal;
+        return game.i18n.format(locRef, formatDict) || "";
     }
     return locRef;
 };
