@@ -76,7 +76,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     ...U.Loc(`scion.knack.${name}.description`).
                         split("<").
                         map((line) => (/^\w{0,2}>/u.test(line) ? [line.match(/^(\w{0,2})>/u)[1], line.replace(/^\w{0,2}>/gu, "")] : [line])),
-                    ...data.stunts.map((stunt) => ["li", `<span class="stuntName strong">${U.Loc(`scion.stunt.${stunt}.name`)}</span> <span class="stuntCost">(${U.Loc(`scion.stunt.${stunt}.cost`)})</span> — ${U.Loc(`scion.stunt.${stunt}.effect`)}`])
+                    ...data.stunts.map((stunt) => ["li", `<span class="stuntName">${U.Loc(`scion.stunt.${stunt}.name`)}</span> <span class="stuntCost">(${U.Loc(`scion.stunt.${stunt}.cost`)})</span> — ${U.Loc(`scion.stunt.${stunt}.effect`)}`])
                 ]
             }))
         };
@@ -177,10 +177,13 @@ export class MajorActorSheet extends ScionActorSheet {
             knacks: actorKnackData,
             selected: this.selectedCalling,
             chargen: this.actor.orderedCallings,
-            get areAllKnacksFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKnacksFull, true) },
-            get areAllKeywordsFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKeywordsFull, true) },
             get numChosen() { return Object.keys(this.callings).filter((key) => key && key in SCION.CALLINGS.list).length },
             get unassignedCallingDots() { return Math.max(0, actorAssignableCallingDots - Object.values(this.callings).reduce((tot, val) => tot + val.value - 1, 0)) },
+            get areAllCallingsChosen() { return this.numChosen === 3 },
+            get areAllDotsAssigned() { return this.unassignedCallingDots === 0 },
+            get areAllKnacksFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKnacksFull, true) },
+            get areAllKeywordsFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKeywordsFull, true) },
+            get areCallingsDone() { return this.areAllCallingsChosen && this.areAllKnacksFull && this.areAllKeywordsFull },
             get groupedKnacks() {
                 const knackData = {
                     all: [],

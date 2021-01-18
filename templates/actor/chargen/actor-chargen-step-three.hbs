@@ -8,7 +8,7 @@
         <div class="skills padded flex-col">
             {{#each skillVals as |value skill|}}
                 <div class="dotline">
-                    <div class="label">{{loc (concat "scion.skill." skill)}}</div>
+                    <div class="label">{{loc (concat "scion.skill." skill ".name")}}</div>
                     <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>
                     <div class="chargenThreeDotBin dotBin dotContainer fader" data-types="skill|general" data-skill="{{skill}}" data-binid="{{skill}}" data-field="data.skills.list.{{skill}}.assigned">
                         {{#for value}}
@@ -28,12 +28,12 @@
                 <div class="specialty empty"></div>
                 {{else}}
                 <div class="specialty">
-                    <div class="specialtyInput insetFrame contentEditable alignLeft" data-field="data.skills.list.{{skill}}.specialties.list.0" data-placeholder="{{case (article (loc "scion.heading.chargen.specialtyPlaceholder" "skill" (concat "scion.skill." skill))) "Sentence"}}"></div>
+                    <div class="specialtyInput insetFrame contentEditable alignLeft" data-field="data.skills.list.{{skill}}.specialties.list.0" data-placeholder="{{case (article (loc "scion.heading.chargen.specialtyPlaceholder" "skill" (concat "scion.skill." skill ".name"))) "Sentence"}}"></div>
                 </div>
                 {{/if}}
                 {{#for (math (count (lookup ../skillSpecialties skill)) "--")}}                
                 <div class="specialty">
-                    <div class="specialtyInput insetFrame contentEditable alignLeft" data-field="data.skills.list.{{skill}}.specialties.list.{{math @index "++"}}" data-placeholder="{{case (loc "scion.heading.chargen.specialtyPlaceholder" "skill" (concat "scion.skill." skill)) "Sentence"}}"></div>
+                    <div class="specialtyInput insetFrame contentEditable alignLeft" data-field="data.skills.list.{{skill}}.specialties.list.{{math @index "++"}}" data-placeholder="{{case (loc "scion.heading.chargen.specialtyPlaceholder" "skill" (concat "scion.skill." skill ".name")) "Sentence"}}"></div>
                 </div>
                 {{/for}}
             {{/each}}

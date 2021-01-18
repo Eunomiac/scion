@@ -2162,7 +2162,8 @@ const scionSystemData = {
                         "masterOfWeapons",
                         "tempered",
                         "theBiggestThreat",
-                        "trickShot"
+                        "trickShot",
+                        "trimarkisia"
                     ] ,
                     immortal: [
                         "armyOfOne",
@@ -2170,6 +2171,65 @@ const scionSystemData = {
                         "perfectDefense",
                         "theyreEverywhere"
                     ]
+                }
+            }
+        },
+        listTitan: {            
+            adversary: {
+                skills: [ "culture", "persuasion", "subterfuge" ],
+                fateRoles: [ "jinx", "nemesis", "traitor" ],
+                knacks: {
+                    heroic: [
+                        "allThoseLovelyEnemies",
+                        "cantKillTheRooster",
+                        "familiarWounds",
+                        "letsContainMultitudes",
+                        "nothingIsInevitable",
+                        "suddenButInevitable",
+                        "trueFriendship"
+                    ] ,
+                    immortal: [
+                        "atYourSideInYourWay",
+                        "contraMundum",
+                        "enemiesForever",
+                        "evilAppearing",
+                        "fromHellsHeart",
+                        "nothingIsForbidden",
+                        "oppositionWithoutLimit",
+                        "satisfactionOrTheKnife"
+                    ]
+                }
+            },          
+            destroyer: {
+                skills: [ "athletics", "closeCombat", "science" ],
+                fateRoles: [ "canary", "nemesis", "rival" ],
+                knacks: {
+                    heroic: [] ,
+                    immortal: []
+                }
+            },          
+            monster: {
+                skills: [ "athletics", "medicine", "survival" ],
+                fateRoles: [ "nemesis", "rival", "traitor" ],
+                knacks: {
+                    heroic: [] ,
+                    immortal: []
+                }
+            },          
+            primeval: {
+                skills: [ "academics", "occult", "survival" ],
+                fateRoles: [ "balm", "nemesis", "worshipper" ],
+                knacks: {
+                    heroic: [] ,
+                    immortal: []
+                }
+            },          
+            tyrant: {
+                skills: [ "empathy", "leadership", "persuasion" ],
+                fateRoles: [ "apprentice", "rival", "worshipper" ],
+                knacks: {
+                    heroic: [] ,
+                    immortal: []
                 }
             }
         }
@@ -2871,6 +2931,12 @@ const scionSystemData = {
                 stunts: []
             },
             trickShot: {
+                calling: "warrior",
+                tier: "heroic",
+                effect: {},
+                stunts: []
+            },
+            trimarkisia: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},

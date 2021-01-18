@@ -1,5 +1,21 @@
 <section class="chargenFour grid padded">
     <h1>{{loc "scion.heading.chargen.stepFour"}}</h1>
+    <div class="unassignedDotsContainer">
+    {{#if callings.areAllCallingsChosen}}
+    {{#unless callings.areAllDotsAssigned}}
+        <div class="unassignedDots unassignedCallingDots flex-row">
+            <h2 class="alignCenter inline noBG">{{#if callings.unassignedCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>{{#if callings.unassignedCallingDots}}►&nbsp;{{/if}}
+            <div class="dotline inline unassigned space5 noLabel">
+                <div class="chargenFourDotBin dotBin dotContainer" data-types="unassigned|calling" data-binid="unassignedCalling">
+                    {{#for callings.unassignedCallingDots}}
+                    <span class="dot" data-types="unassigned|calling|general"></span>
+                    {{/for}}
+                </div>
+            </div>
+        </div>
+    {{/unless}}
+    {{/if}}
+    </div>
     <div class="dotline mirrorContainer">
         <div id="chargenFourDotMirror" class="dotContainer mirrorContainer"></div>
     </div>
@@ -10,38 +26,28 @@
     {{/each}}
     <div id="callingsMirror" class="callingsList popout flex-col mirrorContainer"></div>
     <div id="knacksMirror" class="knacksList popout flex-col alignCenter mirrorContainer"></div>
-    {{#if (test callings.numChosen "<" 3)}}
-    {{> (blocks.popouts.callingsList.template) callings }}
-    {{else}}{{#if (test callings.unassignedCallingDots "==" 0)}}
-    {{#unless callings.areAllKnacksFull}}
-    {{#with (bundle "blocks" blocks "knacks" callings.genericKnacks "tooltips" tooltips.knacks) as |knackData|}}
-    {{> (../blocks.popouts.knacksList.template) knackData }}
-    {{/with}}
-    {{/unless}}
-    {{#each callings.chargen as |callingName|}}
-        {{#unless (lookup (lookup ../callings.callings callingName) "areKnacksFull")}}
-        {{#with (bundle "index" @index "blocks" ../blocks "tooltips" ../tooltips.knacks "calling" (lookup ../callings.callings callingName)) as |knackData|}}
-        {{> (../../blocks.popouts.knacksList.template) knackData }}
-        {{/with}}
-        {{/unless}}
-    {{/each}}
-    {{/if}}
+
+    {{#if callings.areAllCallingsChosen}}
+        {{#if callings.areAllDotsAssigned}}
+            {{#unless callings.areAllKnacksFull}}
+                {{#with (bundle "blocks" blocks "knacks" callings.genericKnacks "tooltips" tooltips.knacks) as |knackData|}}
+                    {{> (../blocks.popouts.knacksList.template) knackData }}
+                {{/with}}
+            {{/unless}}
+            {{#each callings.chargen as |callingName|}}
+                {{#unless (lookup (lookup ../callings.callings callingName) "areKnacksFull")}}
+                    {{#with (bundle "index" @index "blocks" ../blocks "tooltips" ../tooltips.knacks "calling" (lookup ../callings.callings callingName)) as |knackData|}}
+                        {{> (../../blocks.popouts.knacksList.template) knackData }}
+                    {{/with}}
+                {{/unless}}
+            {{/each}}
+        {{/if}}
+    {{else}}
+        {{> (blocks.popouts.callingsList.template) callings }}
     {{/if}}
     <div class="footer">
-        {{#if (test callings.unassignedCallingDots ">" 0)}}
-        <div class="unassignedDots unassignedCallingDots flex-col alignCenter">
-            <h2 class="alignCenter noBG">{{#if callings.unassignedCallingDots}}{{loc "scion.heading.chargen.unassignedCallingDots"}}{{/if}}</h2>
-            <div class="dotline unassigned space5 noLabel">
-                <div class="chargenFourDotBin dotBin dotContainer" data-types="unassigned|calling" data-binid="unassignedCalling">
-                    {{#for callings.unassignedCallingDots}}
-                    <span class="dot" data-types="unassigned|calling|general"></span>
-                    {{/for}}
-                </div>
-            </div>
-        </div>
-        {{else}}{{#if (test callings.areAllKnacksFull "&&" callings.areAllKeywordsFull)}}
+        {{#if callings.areCallingsDone}}
         <h1 class="alignCenter">LEGENDARY!</h1>
-        {{/if}}
         {{/if}}
     </div>
 </section>

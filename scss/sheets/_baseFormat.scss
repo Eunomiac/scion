@@ -375,12 +375,21 @@
                 line-height: 13px;
                 @include text-shadow((1 0 0 0 var(--black)));
                 &.stuntName { 
-                    font-family: "Benguiat";
-                    text-transform: uppercase;
-                    @include text-shadow((3 0 0 0 var(--black)));
+                    font: {
+                        family: "Benguiat";
+                        weight: normal;
+                        variant: small-caps;
+                        size: 13px;
+                    }
+                    text-shadow: 0 0 0px var(--black), 0 0 2px var(--black);
                 }
                 &.stuntCost { text-shadow: none; }
             }
+            p { 
+                margin: 5px 0;
+                &:not(:first-of-type()) { text-indent: 15px; }
+            }
+            li { margin: 10px 0; text-indent: 0; }
             i {
                 position: absolute;
                 width: 50px;
@@ -417,14 +426,14 @@
             }
         }
         &.tipRight > .tipContents {
-            left: calc(100% + 5px + 10px);
+            left: calc(50% + 5px + 10px);
             i { 
                 right: 100%;
                 &::after { transform: translate(50%, -50%) rotate(-45deg); }
             }
         }        
         &.tipLeft > .tipContents {
-            right: calc(100% + 5px + 10px);
+            right: calc(50% + 5px + 10px);
             i { 
                 right: -50px;
                 &::after { transform: translate(-50px, -50%) rotate(-45deg); }
@@ -433,7 +442,7 @@
 
         &.tipUpLeft, &.tipUp, &.tipUpRight {
             > .tipContents {
-                bottom: 45px;
+                bottom: 40px;
                 transform: translate(-50%, 0%);
                 i {
                     margin-top: -7px;

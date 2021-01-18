@@ -19,7 +19,7 @@
         {{#for calling.value}}
         {{#if (lookup ../calling.knacks @index)}}
         {{#with (lookup ../calling.knacks @index) as |knack|}}
-        <span class="tooltip tip{{#if (test ../../index "==" 0)}}Left{{/if}}{{#if (test ../../index "==" 1)}}Up{{/if}}{{#if (test ../../index "==" 2)}}Right{{/if}} knack knackHandle {{#if (test knack.tier "==" "immortal")}}immortal{{else}}{{#if (test knack.calling "==" "any")}}generic{{/if}}{{/if}}" data-calling="{{knack.calling}}" data-knack="{{knack.name}}">
+        <span class="tooltip tipUp{{#if (test ../../index "==" 0)}}Left{{else}}{{#if (test ../../index "==" 2)}}Right{{/if}}{{/if}} knack knackHandle {{#if (test knack.tier "==" "immortal")}}immortal{{else}}{{#if (test knack.calling "==" "any")}}generic{{/if}}{{/if}}" data-calling="{{knack.calling}}" data-knack="{{knack.name}}">
             {{> (../../blocks.tooltips.template) (lookup ../../tooltips knack.name)}}
             {{loc (concat "scion.knack." knack.name ".name")}}
         </span>

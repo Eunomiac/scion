@@ -19,21 +19,35 @@
 }
 
 @font-face {
-  font-family: "Benguiat";
-  src: url(../fonts/official/Benguiat.ttf);
-}
-
-@font-face {
-  font-family: "Benguiat";
-  font-style: italic;
-  src: url(../fonts/official/BenguiatItalic.ttf);
-}
-
-@font-face {
-  font-family: "Benguiat";
+  font-family: 'Benguiat';
+  src: url("../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff") format("woff");
   font-weight: bold;
   font-style: italic;
-  src: url(../fonts/official/BenguiatBoldItalic.ttf);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benguiat';
+  src: url("../fonts/body/Benguiat/hinted-Benguiat.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benguiat';
+  src: url("../fonts/body/Benguiat/hinted-Benguiat-Italic.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benguiat';
+  src: url("../fonts/body/Benguiat/hinted-Benguiat-Bold.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -1723,12 +1737,27 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipConte
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p.stuntName, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li.stuntName, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents span.stuntName {
   font-family: "Benguiat";
-  text-transform: uppercase;
-  text-shadow: 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black);
+  font-weight: normal;
+  font-variant: small-caps;
+  font-size: 13px;
+  text-shadow: 0 0 0px var(--black), 0 0 2px var(--black);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p.stuntCost, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li.stuntCost, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents span.stuntCost {
   text-shadow: none;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p {
+  margin: 5px 0;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p:not(:first-of-type()) {
+  text-indent: 15px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li {
+  margin: 10px 0;
+  text-indent: 0;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents i {
@@ -1782,7 +1811,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
-  left: calc(100% + 5px + 10px);
+  left: calc(50% + 5px + 10px);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
@@ -1794,7 +1823,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > 
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents {
-  right: calc(100% + 5px + 10px);
+  right: calc(50% + 5px + 10px);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i {
@@ -1806,7 +1835,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents {
-  bottom: 45px;
+  bottom: 40px;
   transform: translate(-50%, 0%);
 }
 
@@ -2645,7 +2674,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour {
-  grid: "heading heading heading" 32px "calling1 calling2 calling3" 1fr "footer footer footer" 150px / 1fr 1fr 1fr;
+  grid: "heading heading heading" 32px "dotsbin dotsbin dotsbin" 34px "calling1 calling2 calling3" 1fr "footer footer footer" 150px / 1fr 1fr 1fr;
   column-gap: 20px;
 }
 
@@ -2653,31 +2682,69 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   grid-area: heading;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer {
+  grid-area: dotsbin;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots {
+  align-content: flex-start;
+  margin: 3px 0 0 5px;
+  line-height: 26px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > h2 {
+  width: auto;
+  flex-basis: auto;
+  margin-right: 5px;
+  font-family: "Benguiat";
+  color: var(--black);
+  text-shadow: var(--textShadowTitle);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > .dotline {
+  height: 26px;
+  width: 50%;
+  min-height: 26px;
+  max-height: 26px;
+  line-height: 26px;
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > .dotline > .dotBin {
+  transform: scale(1.5);
+  transform-origin: left;
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .dot[data-types*="general"] {
   --dotBright: #999;
   --dotDark: #0a0a0a;
 }
 
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .dot[data-types*="unassigned"] {
+  --dotBright: var(--accentUp4);
+  --dotDark: var(--accentDown4);
+}
+
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling {
   transition: 0.5s;
   transform: translateY(0px) scale(1);
+  position: relative;
   background-image: url("../images/actor-sheet/backgrounds/calling.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(2) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(3) {
   grid-area: calling1;
   z-index: 49;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(3) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(4) {
   grid-area: calling2;
   z-index: 50;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(4) {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(5) {
   grid-area: calling3;
   z-index: 49;
 }
@@ -2704,13 +2771,14 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling h1 {
-  margin-top: 30px;
+  margin-top: 10px;
   border: none;
   font-size: calc(var(--fontSizeH1) * 1.5);
   text-transform: capitalize;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling h2 {
+  pointer-events: none;
   background: none;
 }
 
@@ -2722,9 +2790,12 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling div.knacks {
-  height: 100px;
-  min-height: 100px;
-  max-height: 100px;
+  height: 180px;
+  min-height: 180px;
+  max-height: 180px;
+  margin-top: -130px;
+  margin-bottom: -60px;
+  padding-top: 30px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour > .calling div.keywords .contentEditable {
@@ -2828,8 +2899,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout {
   overflow: visible;
   padding: 5px;
-  filter: drop-shadow(40px 30px 10px var(--blackFade25));
-  z-index: 55;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout > h1 {
@@ -2851,37 +2920,45 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   height: calc(100% - 28px - 5px);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom > div, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatMid > div {
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom {
+  --panelWidth: 380px;
+  width: var(--panelWidth);
+  left: calc(50% - 0.5*(var(--panelWidth) + 2 * (var(--borderWidth) + 5px) + 15px));
+  border-width: var(--borderWidth);
+}
+
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop > div, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom > div {
   padding-bottom: 0px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom {
-  width: calc(100% - 2 * (10px + 5px));
-  top: 170px;
-  border-width: 5px;
-  min-height: 26px;
+  --borderWidth: 10px;
+  top: calc(100% - 210px);
+  z-index: 60;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatMid {
-  --panelWidth: 380px;
-  width: var(--panelWidth);
-  left: calc(50% - 0.5*(var(--panelWidth) + 2 * (10px + 5px) + 15px));
-  top: calc(100% - 320px);
+body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop {
+  --borderWidth: 4px;
+  bottom: calc(100% - 235px);
+  z-index: 40;
+  padding: 2px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatLeft, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatRight {
-  height: 350px;
+  --panelHeight: 350px;
+  height: var(--panelHeight);
   width: 180px;
-  top: 250px;
+  top: calc((100% - var(--panelHeight)) / 2);
   justify-content: space-between;
+  z-index: 48;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatLeft {
-  left: -150px;
+  left: -180px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout.floatRight {
-  right: -130px;
+  right: -150px;
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack.immortal {
@@ -2900,11 +2977,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .footer {
   grid-area: footer;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.chargen-body .chargenFour .footer .dotline {
-  margin-top: 15px;
-  transform: scale(1.5);
 }
 
 body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section.sheet-body section.front-body {

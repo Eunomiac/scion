@@ -39,10 +39,40 @@
 
 // Official Scion Fonts
 @font-face { font-family: "Crud"; src: url(../fonts/official/Crud.ttf); }
-@font-face { font-family: "Benguiat"; src: url(../fonts/official/Benguiat.ttf); }
-// @font-face { font-family: "Benguiat"; font-weight: bold; src: url(../fonts/official/BenguiatBold.ttf); }
-@font-face { font-family: "Benguiat"; font-style: italic; src: url(../fonts/official/BenguiatItalic.ttf); }
-@font-face { font-family: "Benguiat"; font-weight: bold; font-style: italic; src: url(../fonts/official/BenguiatBoldItalic.ttf); }
+
+@font-face {
+    font-family: 'Benguiat';
+    src: url('../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff2') format('woff2'),
+        url('../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Benguiat';
+    src: url('../fonts/body/Benguiat/hinted-Benguiat.woff2') format('woff2'),
+        url('../fonts/body/Benguiat/hinted-Benguiat.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Benguiat';
+    src: url('../fonts/body/Benguiat/hinted-Benguiat-Italic.woff2') format('woff2'),
+        url('../fonts/body/Benguiat/hinted-Benguiat-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Benguiat';
+    src: url('../fonts/body/Benguiat/hinted-Benguiat-Bold.woff2') format('woff2'),
+        url('../fonts/body/Benguiat/hinted-Benguiat-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 @font-face { font-family: "MercuryG2"; src: url(../fonts/official/MercuryTextG2.otf); }
 
 // Netjer Fonts

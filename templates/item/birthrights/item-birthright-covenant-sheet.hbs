@@ -1,0 +1,15 @@
+<form class="{{cssClass}} flex-col height100 main {{#if data.isPersistent}}persistent{{/if}}" autocomplete="off">
+    <div class="closeButton">❌</div>
+    {{!-- <div class="tooltip">{{> (blocks.tooltips.condition.template) tooltip}}</div> --}}
+    {{!-- Sheet Header --}}
+    <section class="header width100">
+        <h1 class="title alignCenter">{{loc (concat "scion.condition." data.type "Condition")}}</h1><input class="h2 toggleBox" type="checkbox" value="{{data.isPersistent}}" {{#if data.isPersistent}}checked{{/if}}>
+        <div id="conditionTitle" class="h2 contentEditable quote alignCenter" data-field="data.title" data-placeholder="{{loc "scion.heading.condition.titlePrompt"}}"></div>
+    </section>
+        
+    <section class="sheet-body flex-col width100 spaceBetween">
+        <div id="conditionDescription" class="conditionDescription insetFrame contentEditable alignLeft width90 clampText" data-field="data.description" data-placeholder="{{loc "scion.heading.condition.descriptionPrompt"}}"></div>
+        <h3 class="alignLeft">{{loc "scion.condition.resolution"}}</h3>
+        <div id="conditionResolution" class="conditionResolution insetFrame contentEditable alignLeft width90 clampText" data-field="data.resolution" data-clamplines="4" data-placeholder="{{loc "scion.heading.condition.resolutionPrompt"}}"></div>
+    </section>    
+</form>

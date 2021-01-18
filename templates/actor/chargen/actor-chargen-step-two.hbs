@@ -14,7 +14,7 @@
             {{#each pathSkills as |value skill|}}
             {{#if (test (test @index "==" 3) "||" (test @index "==" 6))}}</div><div class="skills flex-col-start height100">{{/if}}
             <div class="dotline">
-                <div class="label">{{loc (concat "scion.skill." skill)}}</div>
+                <div class="label">{{loc (concat "scion.skill." skill ".name")}}</div>
                 <div class="dotContainer">
                     {{#for value}}
                         <span class="dot"></span>

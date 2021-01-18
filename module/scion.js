@@ -9,6 +9,12 @@ import {GroupActorSheet} from "./actor/actor-group-sheet.js";
 import {ScionItem} from "./item/item.js";
 import {PathItemSheet} from "./item/item-path-sheet.js";
 import {ConditionItemSheet} from "./item/item-condition-sheet.js";
+import {CultItemSheet} from "./item/birthrights/birthright-cult-sheet.js";
+import {CovenantItemSheet} from "./item/birthrights/birthright-covenant-sheet.js";
+import {CreatureItemSheet} from "./item/birthrights/birthright-creature-sheet.js";
+import {FollowerItemSheet} from "./item/birthrights/birthright-follower-sheet.js";
+import {GuideItemSheet} from "./item/birthrights/birthright-guide-sheet.js";
+import {RelicItemSheet} from "./item/birthrights/birthright-relic-sheet.js";
 
 import "./external/gl-matrix-min.js";
 // #endregion
@@ -144,7 +150,7 @@ const createSigChars = async () => {
 Hooks.once("init", async () => {
     CONFIG.isHoldingLogs = true;
     CONFIG.isInitializing = true;
-    console.clear();
+    // console.clear();
     CONFIG.scion = SCION;
 
     game.scion = {
@@ -157,7 +163,13 @@ Hooks.once("init", async () => {
         },
         itemSheets: {
             path: PathItemSheet,
-            condition: ConditionItemSheet
+            condition: ConditionItemSheet,
+            covenant: CovenantItemSheet,
+            creature: CreatureItemSheet,
+            cult: CultItemSheet,
+            follower: FollowerItemSheet,
+            guide: GuideItemSheet,
+            relic: RelicItemSheet
         },
         debug: {
             isDebugging: true,

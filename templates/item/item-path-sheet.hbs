@@ -14,7 +14,7 @@
             {{#each data.skills as |skill|}}
             {{#if skill}}
             <span class="skill noFlex
-            {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} pantheon{{/if}}{{/if}}" data-skill="{{skill}}">{{loc (concat "scion.skill." skill)}}</span>
+            {{~#if (lte @index 1)}}{{#if (eq ../data.type "pantheon")}} pantheon{{/if}}{{/if}}" data-skill="{{skill}}">{{loc (concat "scion.skill." skill ".name")}}</span>
             {{/if}}
             {{/each}}            
         </div>

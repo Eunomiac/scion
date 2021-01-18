@@ -62,11 +62,15 @@ body.vtt.game.system-scion {
             @import 'sheets/item/itemLayout';
             @import 'sheets/item/itemFormat';
 
-            &.path {
-                form.editable.main { @import 'sheets/item/types/pathItem'; }
-            }
-            &.condition {
-                form.editable.main { @import 'sheets/item/types/conditionItem'; }
+            &.path form.editable.main { @import 'sheets/item/types/pathItem'; }
+            &.condition form.editable.main { @import 'sheets/item/types/conditionItem'; }
+            &.birthright {
+                &.creature form.editable.main { @import 'sheets/item/types/creatureItem'; }
+                &.covenant form.editable.main { @import 'sheets/item/types/covenantItem'; }
+                &.cult form.editable.main { @import 'sheets/item/types/cultItem'; }
+                &.follower form.editable.main { @import 'sheets/item/types/followerItem'; }
+                &.guide form.editable.main { @import 'sheets/item/types/guideItem'; }
+                &.relic form.editable.main { @import 'sheets/item/types/relicItem'; }
             }
         }
         /* #endregion */ 

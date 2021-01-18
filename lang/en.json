@@ -50,6 +50,7 @@
             "paths": "Paths",
             "calling": "Calling",
             "callings": "Callings",
+            "any": "Any",
             "knack": "Knack",
             "knacks": "Knacks",
             "keyword": "Keyword",
@@ -664,22 +665,86 @@
             "stamina": "Stamina"
         },
         "skill": {
-            "academics": "Academics",
-            "athletics": "Athletics",
-            "closeCombat": "Close Combat",
-            "culture": "Culture",
-            "empathy": "Empathy",
-            "firearms": "Firearms",
-            "integrity": "Integrity",
-            "leadership": "Leadership",
-            "medicine": "Medicine",
-            "occult": "Occult",
-            "persuasion": "Persuasion",
-            "pilot": "Pilot",
-            "science": "Science",
-            "subterfuge": "Subterfuge",
-            "survival": "Survival",
-            "technology": "Technology"
+            "academics": {
+                "name": "Academics",
+                "description": "",
+                "shortdesc": "general knowledge of the humanities, including law and bureaucracy"
+            },
+            "athletics": {
+                "name": "Athletics",
+                "description": "",
+                "shortdesc": "physical training and prowess, including archaic ranged weapons such as javelins and bows"
+            },
+            "closeCombat": {
+                "name": "Close Combat",
+                "description": "",
+                "shortdesc": "fighting Skill with melee weapons and unarmed combat"
+            },
+            "culture": {
+                "name": "Culture",
+                "description": "",
+                "shortdesc": "expertise with cultural and social practices including proper etiquette"
+            },
+            "empathy": {
+                "name": "Empathy",
+                "description": "",
+                "shortdesc": "ability to work out motivations and emotions and manipulate that understanding"
+            },
+            "firearms": {
+                "name": "Firearms",
+                "description": "",
+                "shortdesc": "experience with modern projectile weapons, including accuracy and maintenance"
+            },
+            "integrity": {
+                "name": "Integrity",
+                "description": "",
+                "shortdesc": "ability to resist social influences and keep intentions hidden"
+            },
+            "leadership": {
+                "name": "Leadership",
+                "description": "",
+                "shortdesc": "effective management of large groups and ability to take command"
+            },
+            "medicine": {
+                "name": "Medicine",
+                "description": "",
+                "shortdesc": "diagnose and treat injury and disease"
+            },
+            "occult": {
+                "name": "Occult",
+                "description": "",
+                "shortdesc": "knowledge of the supernatural elements of the World"
+            },
+            "persuasion": {
+                "name": "Persuasion",
+                "description": "",
+                "shortdesc": "ability to bring others around to your way of thinking"
+            },
+            "pilot": {
+                "name": "Pilot",
+                "description": "",
+                "shortdesc": "ability to control any method of transportation"
+            },
+            "science": {
+                "name": "Science",
+                "description": "",
+                "shortdesc": "knowledge to apply scientific understanding, including evaluation of physical evidence"
+            },
+            "subterfuge": {
+                "name": "Subterfuge",
+                "description": "",
+                "shortdesc": "stealth, deception, and criminal expertise, including hiding, disguise, lockpicking, and forgery"
+            },
+            "survival": {
+                "name": "Survival",
+                "description": "",
+                "shortdesc": "ability to survive in hostile environments, including navigation and animal handling"
+            },
+            "technology": {
+                "name": "Technology",
+                "description": "",
+                "shortdesc": "expertise with modern mechanisms and software"
+            }
         },
         "virtue": {
             "ambition": "Ambition",
@@ -1228,6 +1293,10 @@
             "trickShot": {
                 "name": "Trick Shot",
                 "description": "When showing off with a ranged weapon, convert any additional Difficulty imposed because of your showmanship into Enhancement instead which may be spent on any Ranged Attack Stunt besides Inflict Damage. This applies before your roll."
+            },
+            "trimarkisia": {
+                "name": "Trimarkisia",
+                "description": "When the Keltoi marched on ancient Greece, the Greeks were baffled at how the invaders could replace their fallen soldiers almost immediately. One servant brought the wounded warrior to safety while a second took up the fight, using the trimarkisia, or \"three horsemen,\" technique.<p>Make a Knack Skill roll and gain temporary dots of the Followers Birthright (Scion: Hero, p. 203) equal to successes rolled, to a maximum of Followers 5. This represents your foresight in coordinating auxiliary forces and finding or recruiting backup whenever you need it. These Followers have the Heavy archetype and gain tags in the following order as their rating increases: Tough, Group, Knack (The Biggest Threat; Scion: Hero, p. 235), Savage, Mob."
             },
             "unerringDelivery": {
                 "name": "Unerring Delivery",

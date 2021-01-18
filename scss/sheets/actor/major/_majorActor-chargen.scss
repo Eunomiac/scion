@@ -138,25 +138,60 @@
 
 .chargenFour {
     grid: "heading heading heading" 32px
+        "dotsbin dotsbin dotsbin" 34px
         "calling1 calling2 calling3" 1fr
         "footer footer footer" 150px / 1fr 1fr 1fr;
     column-gap: 20px;
     > h1 { grid-area: heading; }
+    > .unassignedDotsContainer { 
+        grid-area: dotsbin; 
+        > .unassignedCallingDots {
+            align-content: flex-start;
+            margin: 3px 0 0 5px;
+            line-height: 26px;
+            > h2 {
+                width: auto;
+                flex-basis: auto;
+                margin-right: 5px;
+                font-family: "Benguiat";
+                color: var(--black);
+                text-shadow: var(--textShadowTitle);
+
+            }
+            > .dotline {
+                height: 26px;
+                width: 50%;
+                min-height: 26px;
+                max-height: 26px;
+                line-height: 26px;
+                > .dotBin {
+                    transform: scale(1.5);
+                    transform-origin: left;
+                }
+
+            }
+        }
+    }
 
     .dot[data-types*="general"] {
         --dotBright: #999;
         --dotDark: #0a0a0a;
     }
+    .dot[data-types*="unassigned"] {
+        --dotBright: var(--accentUp4);
+        --dotDark: var(--accentDown4);
+    }
 
     > .calling {
         transition: 0.5s;
         transform: translateY(0px) scale(1);
+        position: relative;
 
         // &.selected { transform: translateY(50px) scale(1.1) }
-
-        &:nth-of-type(2) { grid-area: calling1; z-index: 49; }
-        &:nth-of-type(3) { grid-area: calling2; z-index: 50; }
-        &:nth-of-type(4) { grid-area: calling3; z-index: 49; }
+        
+        &:nth-of-type(3) { grid-area: calling1; z-index: 49; }
+        &:nth-of-type(4) { grid-area: calling2; z-index: 50; }
+        &:nth-of-type(5) { grid-area: calling3; z-index: 49; }
 
         background: {
             image: url("../images/actor-sheet/backgrounds/calling.png");
@@ -180,12 +215,12 @@
         }
 
         h1 {
-            margin-top: 30px;
+            margin-top: 10px;
             border: none;
             font-size: calc(var(--fontSizeH1) * 1.5);
             text-transform: capitalize;
         }
-        h2 { background: none; }
+        h2 { pointer-events: none; background: none; }
 
         div.knacksBackground {
             height: 100px;
@@ -194,9 +229,12 @@
             margin-bottom: -100px;
         }
         div.knacks {
-            height: 100px;
-            min-height: 100px;
-            max-height: 100px;
+            height: 180px;
+            min-height: 180px;
+            max-height: 180px;
+            margin-top: -130px;
+            margin-bottom: -60px;
+            padding-top: 30px;
         }
 
         div.keywords {
@@ -322,8 +360,7 @@
     .knacksList.popout {  
         overflow: visible;
         padding: 5px;
-        filter: drop-shadow(40px 30px 10px var(--blackFade25));
-        z-index: 55;
+        // filter: drop-shadow(40px 30px 10px var(--blackFade25));
         > h1 {
             min-height: 28px;
             margin: 0 0 5px 0;
@@ -345,33 +382,25 @@
             justify-content: space-around;
             height: calc(100% - 28px - 5px);
         }
-        &.floatBottom, &.floatMid {
-            // z-index: 51;
-            > div { padding-bottom: 0px; }
-        }
-        &.floatBottom {
-            // z-index: 48;
-            width: calc(100% - 2 * (10px + 5px));
-            top: 170px;
-            border-width: 5px;
-            min-height: 26px;
-        }
-        &.floatMid { 
+        &.floatTop, &.floatBottom {
             --panelWidth: 380px;
             width: var(--panelWidth);
-            left: calc(50% - 0.5*(var(--panelWidth) + 2 * (10px + 5px) + 15px));
-            top: calc(100% - 320px);
+            left: calc(50% - 0.5*(var(--panelWidth) + 2 * (var(--borderWidth) + 5px) + 15px));
+            border-width: var(--borderWidth);
+            > div { padding-bottom: 0px; }
         }
+        &.floatBottom { --borderWidth: 10px; top: calc(100% - 210px); z-index: 60; }
+        &.floatTop { --borderWidth: 4px; bottom: calc(100% - 235px); z-index: 40; padding: 2px; } 
         &.floatLeft, &.floatRight {
-            height: 350px;
+            --panelHeight: 350px;
+            height: var(--panelHeight);
             width: 180px;
-            top: 250px;
+            top: calc((100% - var(--panelHeight)) / 2);
             justify-content: space-between;
-            // z-index: 5;
-
+            z-index: 48;
         }
-        &.floatLeft { left: -150px; }
-        &.floatRight { right: -130px; }
+        &.floatLeft { left: -180px; }
+        &.floatRight { right: -150px; }
 
         span.knack, span.knack.immortal {
             margin: 3px 2px;
@@ -389,9 +418,5 @@
 
     .footer { 
         grid-area: footer; 
-        .dotline {
-            margin-top: 15px;
-            transform: scale(1.5);
-        }
     }
 }
