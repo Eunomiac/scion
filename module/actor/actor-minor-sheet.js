@@ -1,7 +1,7 @@
 import {_, U, handlebarTemplates, itemCategories} from "../modules.js";
-import {ScionActorSheet} from "./actor-sheet.js";
+import ScionActorSheet from "./actor-sheet.js";
 
-export class MinorActorSheet extends ScionActorSheet {
+export default class MinorActorSheet extends ScionActorSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: [...super.defaultOptions.classes, "minor"],

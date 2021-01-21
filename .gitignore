@@ -6,6 +6,7 @@
 .vs/
 *.cpuprofile
 *.log
+.yarn/
 
 
 # Node Modules

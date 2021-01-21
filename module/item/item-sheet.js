@@ -4,7 +4,7 @@ import {MIX, ItemMixins as MIXINS, U, handlebarTemplates} from "../modules.js";
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.ClampText, MIXINS.CloseButton) {
+export default class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.ClampText, MIXINS.CloseButton) {
     // Getters: Data Retrieval
     get iData() { return this.item.iData }
 

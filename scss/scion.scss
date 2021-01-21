@@ -1,24 +1,23 @@
 @import 'core/reset';
 
-
-$isTestingLayout: true;
-$isShowing: (
-    "sheetFrame": false,
-    "sheetBorders": false,
-    "sheetPadding": false,
-    "sheetBGShade": false
+$isTesting-layout: true;
+$isTesting-display: (
+    'sheetFrame': false,
+    'sheetBorders': false,
+    'sheetPadding': false,
+    'sheetBGShade': false
 );
 
 .dot {    
     --dotSize: 16px;
-    --dotBright: gold;
+    --dotBright: $c-gold;
     --dotDark: rgb(255, 183, 0);
     display: block;
-    height: var(--dotSize);
     width: var(--dotSize);
-    margin: 0; 
+    height: var(--dotSize);
     padding: 0;
     border-radius: 50%;
+    margin: 0;
     background: radial-gradient(var(--dotBright), var(--dotDark));
     box-shadow: 1px 1px 2px var(--dotDark);
 }
@@ -28,7 +27,7 @@ $isShowing: (
 @import 'core/mixins';
 @import 'core/dragula';
 
-$defaultPadding: 5px;
+$default-padding: 5px;
 $lineHeight-Short: 1;
 $lineHeight-Medium: 1.2;
 $lineHeight-Tall: 1.5;
@@ -36,11 +35,11 @@ $lineHeight-Tall: 1.5;
 @import 'sheets/baseTheme';   
 @import 'sheets/actor/actorThemes';    
 
-body.vtt.game.system-scion {  
+.vtt.game.system-scion {  
     @import 'core/window';
 
     /* #region SHEET STYLES */
-    div.app.window-app.scion.sheet {  
+    .app.window-app.scion.sheet {  
         @import 'sheets/baseLayout';
         @import 'sheets/baseFormat'; 
 
@@ -60,6 +59,7 @@ body.vtt.game.system-scion {
 
             &.path { @import 'sheets/item/types/pathItem'; }
             &.condition { @import 'sheets/item/types/conditionItem'; }
+
             &.birthright { @import 'sheets/item/types/birthrightItem'; 
                 &.creature { @import 'sheets/item/types/birthrights/creatureBirthright'; }
                 &.covenant { @import 'sheets/item/types/birthrights/covenantBirthright'; }

@@ -10,150 +10,150 @@ $c-goldBG: linear-gradient(270deg, scale-color($c-gold, $lightness: 30%, $satura
 $c-greyBG: linear-gradient(270deg, scale-color($c-grey, $lightness: 20%), scale-color($c-grey, $lightness: 60%), scale-color($c-grey, $lightness: 20%));
 $c-whiteBG: linear-gradient(270deg, scale-color($c-grey, $lightness: 40%), scale-color($c-grey, $lightness: 90%), scale-color($c-grey, $lightness: 40%));
 
-$defaultColors: (
-    "Title": $c-black,
-    "H1": $c-black,
-    "H2": $c-black,
-    "H3": $c-black,
-    "accent": $c-gold,
-    "Body": $c-black,
-    "Strong": var(--colorBody),
-    "Weak": var(--greyUp2),
-    "Highlight": var(--whiteFade50),
-    "Shadow": var(--blackFade50),
-    "MenuGlow": var(--accent),
-    "Placeholder": var(--greyDown3),
-    "PurviewRotate": 0deg
+$default-colors: (
+    'Title': $c-black,
+    'H1': $c-black,
+    'H2': $c-black,
+    'H3': $c-black,
+    'accent': $c-gold,
+    'Body': $c-black,
+    'Strong': var(--colorBody),
+    'Weak': var(--greyUp2),
+    'Highlight': var(--whiteFade50),
+    'Shadow': var(--blackFade50),
+    'MenuGlow': var(--accent),
+    'Placeholder': var(--greyDown3),
+    'PurviewRotate': 0deg
 );
-$defaultBGs: (
-    "Title": transparent,
-    "H1": transparent,
-    "H2": linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2)),
-    "H3": transparent
+$default-BGs: (
+    'Title': transparent,
+    'H1': transparent,
+    'H2': linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2)),
+    'H3': transparent
 );
-$defaultTypography: (
-    "Title": (
-        "fontFamily": 'Marcellus SC',
-        "fontSize": 36px,
-        "lineHeight": $lineHeight-Medium,
-        "maxHeight": none,
-        "padding": 0px,
-        "fontStyle": normal,
-        "fontVariant": normal,
-        "fontWeight": normal,
-        "textTransform": none,
-        "textIndent": 0px,
-        "textShadow": (shadow-embossed, 1px, 1px, $c-white, $c-black),
-        "border": none
+$default-typography: (
+    'Title': (
+        'fontFamily': 'Marcellus SC',
+        'fontSize': 36px,
+        'lineHeight': $lineHeight-Medium,
+        'maxHeight': none,
+        'padding': 0,
+        'fontStyle': normal,
+        'fontVariant': normal,
+        'fontWeight': normal,
+        'textTransform': none,
+        'textIndent': 0,
+        'textShadow': (shadow-embossed, 1px, 1px, $c-white, $c-black),
+        'border': none
     ),
-    "H1": (
-        "fontFamily": 'Marcellus SC',
-        "fontSize": 24px,
-        "lineHeight": $lineHeight-Medium,
-        "maxHeight": 32px,
-        "padding": 0px,
-        "fontStyle": normal,
-        "fontVariant": small-caps,
-        "fontWeight": normal,
-        "textTransform": none,
-        "textIndent": 0px,
-        "textShadow": (shadow-embossed, 1px, 1px, $c-white, $c-black),
-        "border": (border-bottom, 2px solid var(--colorH1))
+    'H1': (
+        'fontFamily': 'Marcellus SC',
+        'fontSize': 24px,
+        'lineHeight': $lineHeight-Medium,
+        'maxHeight': 32px,
+        'padding': 0,
+        'fontStyle': normal,
+        'fontVariant': small-caps,
+        'fontWeight': normal,
+        'textTransform': none,
+        'textIndent': 0,
+        'textShadow': (shadow-embossed, 1px, 1px, $c-white, $c-black),
+        'border': (border-bottom, 2px solid var(--colorH1))
     ),
-    "H2": (
-        "fontFamily": 'Benguiat',
-        "fontSize": 20px,
-        "lineHeight": $lineHeight-Medium,
-        "maxHeight": 26px,
-        "padding": 0px,
-        "fontStyle": normal,
-        "fontVariant": normal,
-        "fontWeight": bold,
-        "textTransform": uppercase,
-        "textIndent": 10px,
-        "textShadow": none,
-        "border": none
+    'H2': (
+        'fontFamily': 'Benguiat',
+        'fontSize': 20px,
+        'lineHeight': $lineHeight-Medium,
+        'maxHeight': 26px,
+        'padding': 0,
+        'fontStyle': normal,
+        'fontVariant': normal,
+        'fontWeight': bold,
+        'textTransform': uppercase,
+        'textIndent': 10px,
+        'textShadow': none,
+        'border': none
     ),
-    "H3": (
-        "fontFamily": 'Benguiat',
-        "fontSize": 16px,
-        "lineHeight": $lineHeight-Short,
-        "maxHeight": var(--fontSizeH3),
-        "padding": 0px,
-        "fontStyle": normal,
-        "fontVariant": normal,
-        "fontWeight": bold,
-        "textTransform": none,
-        "textIndent": 0px,
-        "textShadow": none,
-        "border": none
+    'H3': (
+        'fontFamily': 'Benguiat',
+        'fontSize': 16px,
+        'lineHeight': $lineHeight-Short,
+        'maxHeight': var(--fontSizeH3),
+        'padding': 0,
+        'fontStyle': normal,
+        'fontVariant': normal,
+        'fontWeight': bold,
+        'textTransform': none,
+        'textIndent': 0,
+        'textShadow': none,
+        'border': none
     ),
-    "Body": (
-        "fontFamily": 'MercuryG2',
-        "fontSize": 16px,
-        "lineHeight": $lineHeight-Short,
-        "fontStyle": normal,
-        "fontVariant": normal,
-        "fontWeight": normal,
-        "textTransform": none,
-        "textShadow": (shadow-glow, 1, 0px, $c-black)
+    'Body': (
+        'fontFamily': 'MercuryG2',
+        'fontSize': 16px,
+        'lineHeight': $lineHeight-Short,
+        'fontStyle': normal,
+        'fontVariant': normal,
+        'fontWeight': normal,
+        'textTransform': none,
+        'textShadow': (shadow-glow, 1, 0, $c-black)
     ),
-    "Strong": (
-        "fontStyle": normal,
-        "fontVariant": var(--fontVariantBody),
-        "fontWeight": bold,
-        "textTransform": var(--textTransformBody),
-        "textShadow": var(--textShadowBody)
+    'Strong': (
+        'fontStyle': normal,
+        'fontVariant': var(--fontVariantBody),
+        'fontWeight': bold,
+        'textTransform': var(--textTransformBody),
+        'textShadow': var(--textShadowBody)
     ),
-    "Weak": (
-        "fontStyle": italic,
-        "fontVariant": var(--fontVariantBody),
-        "fontWeight": normal,
-        "textTransform": var(--textTransformBody),
-        "textShadow": (shadow-glow, 1, 0px, var(--greyUp2))
+    'Weak': (
+        'fontStyle': italic,
+        'fontVariant': var(--fontVariantBody),
+        'fontWeight': normal,
+        'textTransform': var(--textTransformBody),
+        'textShadow': (shadow-glow, 1, 0, var(--greyUp2))
     ),
-    "Menu": (
-        "fontFamily": 'Voltaire',
-        "fontSize": 24px,
-        "lineHeight": $lineHeight-Short,
-        "maxHeight": 24px,
-        "fontStyle": normal,
-        "fontVariant": normal,
-        "fontWeight": normal,
-        "textTransform": uppercase,
-        "textShadow": (filter-dropShadow, 3, 0, 0, 8px, var(--colorMenuGlow)),
-        "border": none
+    'Menu': (
+        'fontFamily': 'Voltaire',
+        'fontSize': 24px,
+        'lineHeight': $lineHeight-Short,
+        'maxHeight': 24px,
+        'fontStyle': normal,
+        'fontVariant': normal,
+        'fontWeight': normal,
+        'textTransform': uppercase,
+        'textShadow': (filter-dropShadow, 3, 0, 0, 8px, var(--colorMenuGlow)),
+        'border': none
     ),
-    "Input": (
-        "fontFamily": var(--fontFamilyBody),
-        "fontSize": var(--fontSizeBody),
-        "lineHeight": $lineHeight-Medium,
-        "maxHeight": calc(var(--lineHeightBody) * 1.2),
-        "padding": 0px,
-        "fontStyle": normal,
-        "fontVariant": normal,
-        "fontWeight": bold,
-        "textTransform": none,
-        "textIndent": 5px,
-        "textShadow": var(--textShadowBody),
-        "border": none
+    'Input': (
+        'fontFamily': var(--fontFamilyBody),
+        'fontSize': var(--fontSizeBody),
+        'lineHeight': $lineHeight-Medium,
+        'maxHeight': calc(var(--lineHeightBody) * 1.2),
+        'padding': 0,
+        'fontStyle': normal,
+        'fontVariant': normal,
+        'fontWeight': bold,
+        'textTransform': none,
+        'textIndent': 5px,
+        'textShadow': var(--textShadowBody),
+        'border': none
     ),
-    "Placeholder": (
-        "fontFamily": var(--fontFamilyInput),
-        "fontSize": var(--fontSizeInput),
-        "lineHeight": var(--lineHeightInput),
-        "fontStyle": italic,
-        "fontVariant": var(--fontVariantInput),
-        "fontWeight": normal,
-        "textTransform": none,
-        "textIndent": var(--textIndentInput),
-        "textShadow": var(--textShadowInput)
+    'Placeholder': (
+        'fontFamily': var(--fontFamilyInput),
+        'fontSize': var(--fontSizeInput),
+        'lineHeight': var(--lineHeightInput),
+        'fontStyle': italic,
+        'fontVariant': var(--fontVariantInput),
+        'fontWeight': normal,
+        'textTransform': none,
+        'textIndent': var(--textIndentInput),
+        'textShadow': var(--textShadowInput)
     )
 );
 /* #endregion */
 
 /* #region Theme-Specific Mixins */
-@mixin scaled-colors($baseColor, $name: "scale", $isGreyscale: false, $isAlphaOnly: false) {
+@mixin scaled-colors($baseColor, $name: 'scale', $isGreyscale: false, $isAlphaOnly: false) {
     @if $isAlphaOnly {
         --#{$name}: #{$baseColor};
         @for $i from 1 through 9 {
@@ -166,7 +166,7 @@ $defaultTypography: (
     } @else {
         @for $i from 1 through 9 {
             $thisScale: 10% * ($i * 2 - 10);
-            $thisSuffix: "";
+            $thisSuffix: '';
             $thisColor: scale-color($baseColor, $lightness: $thisScale, $saturation: $thisScale);
             @if $i < 5 {
                 $thisSuffix: Down#{5 - $i};
@@ -183,48 +183,48 @@ $defaultTypography: (
         }
     }
 }
-@mixin set-colors($themeColors: (), $defaultColors: (), $isSettingDefault: false) {
-    $colorMap: $defaultColors;
-    @if (type-of($themeColors) == "map") {
+@mixin set-colors($themeColors: (), $default-colors: (), $isSettingDefault: false) {
+    $colorMap: $default-colors;
+    @if (type-of($themeColors) == 'map') {
         $colorMap: map-merge($colorMap, $themeColors);
     }
-    $accentColor: map-get($colorMap, "accent");
-    $defaultAccentColor: map-get($defaultColors, "accent");
+    $accentColor: map-get($colorMap, 'accent');
+    $defaultAccentColor: map-get($default-colors, 'accent');
     @if ($accentColor 
-        and ($isSettingDefault
-            or str-index("#{$accentColor}", "var(")
-            or $accentColor != $defaultAccentColor)) {
-        @include scaled-colors(map-get($colorMap, "accent"), "accent");
+    and ($isSettingDefault
+    or str-index('#{$accentColor}', 'var(')
+    or $accentColor != $defaultAccentColor)) {
+        @include scaled-colors(map-get($colorMap, 'accent'), 'accent');
     }
     @each $class, $value in $colorMap {
-        $defaultVal: map-get($defaultColors, $class);
+        $defaultVal: map-get($default-colors, $class);
         @if ($value 
-            and ($isSettingDefault
-                or str-index("#{$value}", "var(")
-                or $value != $defaultVal)) {
+        and ($isSettingDefault
+        or str-index('#{$value}', 'var(')
+        or $value != $defaultVal)) {
             --color#{$class}: #{$value};
         }
     }   
 }
-@mixin set-typography($themeType: (), $defaultTypography: (), $isSettingDefault: false) {
-    @each $class, $defaultTypeMap in $defaultTypography {
+@mixin set-typography($themeType: (), $default-typography: (), $isSettingDefault: false) {
+    @each $class, $defaultTypeMap in $default-typography {
         $typeMap: $defaultTypeMap;
         $themeMap: map-get($themeType, $class);
-        @if type-of($themeMap) == "map" {
+        @if type-of($themeMap) == 'map' {
             $typeMap: map-merge($typeMap, $themeMap);
         }
         @each $type, $value in $typeMap {
             $defaultVal: map-get($defaultTypeMap, $type);
             @if ($value 
-                and ($isSettingDefault
-                    or str-index("#{$value}", "var(")
-                    or $value != $defaultVal)) {
+            and ($isSettingDefault
+            or str-index('#{$value}', 'var(')
+            or $value != $defaultVal)) {
                 @if type-of($value) == list {
                     --#{$type}#{$class}: #{parseStyleList($value)};
-                } @else if str-index("#{$value}", "var(") {
+                } @else if str-index('#{$value}', 'var(') {
                     --#{$type}#{$class}: #{$value};
                 } @else if $type == fontFamily {
-                    --#{$type}#{$class}: "#{$value}";
+                    --#{$type}#{$class}: '#{$value}';
                 } @else {
                     --#{$type}#{$class}: #{$value};
                 }
@@ -232,17 +232,17 @@ $defaultTypography: (
         }
     }
 }
-@mixin set-BGs($themeBGs: (), $defaultBGs: (), $isSettingDefault: false) {
-    $bgMap: $defaultBGs;
-    @if type-of($themeBGs) == "map" {
+@mixin set-BGs($themeBGs: (), $default-BGs: (), $isSettingDefault: false) {
+    $bgMap: $default-BGs;
+    @if type-of($themeBGs) == 'map' {
         $bgMap: map-merge($bgMap, $themeBGs);
     }
     @each $class, $value in $bgMap {
-        $defaultVal: map-get($defaultBGs, $class);
+        $defaultVal: map-get($default-BGs, $class);
         @if ($value 
-            and ($isSettingDefault
-                or str-index("#{$value}", "var(")
-                or $value != $defaultVal)) {
+        and ($isSettingDefault
+        or str-index('#{$value}', 'var(')
+        or $value != $defaultVal)) {
             --bg#{$class}: #{$value}; 
         }
     }
@@ -250,14 +250,14 @@ $defaultTypography: (
 /* #endregion */
 
 body {
-    --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-generic.png");
-    --bgItemSheet: url("../images/item-sheet/backgrounds/bgItem-generic.png");
-    --bgItemOverlay: url("../images/item-sheet/backgrounds/overlayItem-generic.png");
-    --menuImage: url("../images/actor-sheet/menu/rosette-generic.png");
-    @include scaled-colors($c-black, "black", true, true);
-    @include scaled-colors($c-white, "white", true, true);
-    @include scaled-colors($c-grey, "grey", true);
-    @include set-colors($defaultColors, $defaultColors, true);
-    @include set-BGs($defaultBGs, $defaultBGs, true);
-    @include set-typography($defaultTypography, $defaultTypography, true);
+    --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-generic.png');
+    --bgItemSheet: url('../images/item-sheet/backgrounds/bgItem-generic.png');
+    --bgItemOverlay: url('../images/item-sheet/backgrounds/overlayItem-generic.png');
+    --menuImage: url('../images/actor-sheet/menu/rosette-generic.png');
+    @include scaled-colors($c-black, 'black', true, true);
+    @include scaled-colors($c-white, 'white', true, true);
+    @include scaled-colors($c-grey, 'grey', true);
+    @include set-colors($default-colors, $default-colors, true);
+    @include set-BGs($default-BGs, $default-BGs, true);
+    @include set-typography($default-typography, $default-typography, true);
 }

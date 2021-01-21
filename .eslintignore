@@ -1,4 +1,5 @@
 /.vscode/**
 /Exports&Examples/**
-/modules/external/**
+/module/external/**
 foundry.js
+/module/data/debug.js

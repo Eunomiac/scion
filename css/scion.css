@@ -51,151 +51,375 @@ table {
 
 .dot {
   --dotSize: 16px;
-  --dotBright: gold;
+  --dotBright: $c-gold;
   --dotDark: rgb(255, 183, 0);
   display: block;
-  height: var(--dotSize);
   width: var(--dotSize);
-  margin: 0;
+  height: var(--dotSize);
   padding: 0;
   border-radius: 50%;
+  margin: 0;
   background: radial-gradient(var(--dotBright), var(--dotDark));
   box-shadow: 1px 1px 2px var(--dotDark);
 }
 
 @font-face {
-  font-family: "Crud";
+  font-family: 'Crud';
   src: url(../fonts/official/Crud.ttf);
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'Benguiat';
+  font-style: italic;
+  font-weight: bold;
   src: url("../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'Benguiat';
+  font-style: normal;
+  font-weight: normal;
   src: url("../fonts/body/Benguiat/hinted-Benguiat.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'Benguiat';
-  src: url("../fonts/body/Benguiat/hinted-Benguiat-Italic.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-Italic.woff") format("woff");
-  font-weight: normal;
   font-style: italic;
-  font-display: swap;
+  font-weight: normal;
+  src: url("../fonts/body/Benguiat/hinted-Benguiat-Italic.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-Italic.woff") format("woff");
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'Benguiat';
-  src: url("../fonts/body/Benguiat/hinted-Benguiat-Bold.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-Bold.woff") format("woff");
-  font-weight: bold;
   font-style: normal;
-  font-display: swap;
+  font-weight: bold;
+  src: url("../fonts/body/Benguiat/hinted-Benguiat-Bold.woff2") format("woff2"), url("../fonts/body/Benguiat/hinted-Benguiat-Bold.woff") format("woff");
 }
 
 @font-face {
-  font-family: "MercuryG2";
+  font-family: 'MercuryG2';
   src: url(../fonts/official/MercuryTextG2.otf);
 }
 
 @font-face {
-  font-family: "Bootle";
+  font-display: swap;
+  font-family: 'Grail New Condensed';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-GrailNewCondensed.woff2") format("woff2"), url("../fonts/hinted-GrailNewCondensed.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Eire';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Eire.woff2") format("woff2"), url("../fonts/hinted-Eire.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Alexandria.woff2") format("woff2"), url("../fonts/hinted-Alexandria.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Grail New';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-GrailNewRegular.woff2") format("woff2"), url("../fonts/hinted-GrailNewRegular.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Grail';
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/hinted-GrailLight.woff2") format("woff2"), url("../fonts/hinted-GrailLight.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Oh Mighty Isis Expanded';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-OhMightyIsisExpanded.woff2") format("woff2"), url("../fonts/hinted-OhMightyIsisExpanded.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Alberta';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Alberta.woff2") format("woff2"), url("../fonts/hinted-Alberta.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'elektra';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-elektra.woff2") format("woff2"), url("../fonts/hinted-elektra.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'AntiqueRow';
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/hinted-AntiqueRow.woff2") format("woff2"), url("../fonts/hinted-AntiqueRow.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Paradise';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-ParadisePlain.woff2") format("woff2"), url("../fonts/hinted-ParadisePlain.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Stonehenge';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-Stonehenge.woff2") format("woff2"), url("../fonts/hinted-Stonehenge.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Sherwood';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-SherwoodRegular.woff2") format("woff2"), url("../fonts/hinted-SherwoodRegular.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Paradox';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-Paradox-Light.woff2") format("woff2"), url("../fonts/hinted-Paradox-Light.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Zanzabar';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Zanzabar.woff2") format("woff2"), url("../fonts/hinted-Zanzabar.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Grail';
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/hinted-GrailLight.woff2") format("woff2"), url("../fonts/hinted-GrailLight.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Grail New';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-GrailNewRegular.woff2") format("woff2"), url("../fonts/hinted-GrailNewRegular.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Grail New Condensed';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-GrailNewCondensed.woff2") format("woff2"), url("../fonts/hinted-GrailNewCondensed.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Paradise';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-ParadisePlain.woff2") format("woff2"), url("../fonts/hinted-ParadisePlain.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Oh Mighty Isis Expanded';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-OhMightyIsisExpanded.woff2") format("woff2"), url("../fonts/hinted-OhMightyIsisExpanded.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'AntiqueRow';
+  font-style: italic;
+  font-weight: normal;
+  src: url("../fonts/hinted-AntiqueRow.woff2") format("woff2"), url("../fonts/hinted-AntiqueRow.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Alberta';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Alberta.woff2") format("woff2"), url("../fonts/hinted-Alberta.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Alexandria.woff2") format("woff2"), url("../fonts/hinted-Alexandria.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Eire';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Eire.woff2") format("woff2"), url("../fonts/hinted-Eire.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Paradox';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-Paradox-Light.woff2") format("woff2"), url("../fonts/hinted-Paradox-Light.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Stonehenge';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-Stonehenge.woff2") format("woff2"), url("../fonts/hinted-Stonehenge.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Sherwood';
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/hinted-SherwoodRegular.woff2") format("woff2"), url("../fonts/hinted-SherwoodRegular.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'elektra';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-elektra.woff2") format("woff2"), url("../fonts/hinted-elektra.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Zanzabar';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/hinted-Zanzabar.woff2") format("woff2"), url("../fonts/hinted-Zanzabar.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Bootle';
   src: url(../fonts/netjer/bootle.ttf);
 }
 
 @font-face {
-  font-family: "Carolingia";
+  font-family: 'Carolingia';
   src: url(../fonts/netjer/carolingia.ttf);
 }
 
 @font-face {
-  font-family: "Gothic Ultra";
+  font-family: 'Gothic Ultra';
   src: url(../fonts/netjer/gothic_ultra_ot.otf);
 }
 
 @font-face {
-  font-family: "Khaleefa";
+  font-family: 'Khaleefa';
   src: url(../fonts/netjer/Khaleefa.otf);
 }
 
 @font-face {
-  font-family: "Zanzabar";
+  font-family: 'Zanzabar';
   src: url(../fonts/netjer/Zanzabar.otf);
 }
 
 @font-face {
-  font-family: "Goodfish";
+  font-family: 'Goodfish';
   src: url(../fonts/teotl/goodfish.ttf);
 }
 
 @font-face {
-  font-family: "Kirsty";
+  font-family: 'Kirsty';
   src: url(../fonts/teotl/Kirsty.ttf);
 }
 
 @font-face {
-  font-family: "Kirsty";
+  font-family: 'Kirsty';
   font-weight: bold;
   src: url(../fonts/teotl/KirstyBold.ttf);
 }
 
 @font-face {
-  font-family: "Kirsty";
+  font-family: 'Kirsty';
   font-style: italic;
   src: url(../fonts/teotl/KirstyItalic.ttf);
 }
 
 @font-face {
-  font-family: "Kirsty";
-  font-weight: bold;
+  font-family: 'Kirsty';
   font-style: italic;
+  font-weight: bold;
   src: url(../fonts/teotl/KirstyBoldItalic.ttf);
 }
 
 @font-face {
-  font-family: "Voga";
+  font-family: 'Voga';
   src: url(../fonts/teotl/Voga-Medium.otf);
 }
 
 @font-face {
-  font-family: "Stein Antik";
+  font-family: 'Stein Antik';
   src: url(../fonts/theoi/SteinAntik-Bold.ttf);
 }
 
 @font-face {
-  font-family: "Dacian Donarium";
+  font-family: 'Dacian Donarium';
   src: url(../fonts/theoi/DacianDonarium.ttf);
 }
 
 @font-face {
-  font-family: "Roman Font 7";
+  font-family: 'Roman Font 7';
   src: url(../fonts/theoi/RomanFont7.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: "Diogenes";
+  font-family: 'Diogenes';
   src: url(../fonts/theoi/Diogenes.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: "Adonais";
+  font-family: 'Adonais';
   src: url(../fonts/theoi/Adonais.ttf);
 }
 
 @font-face {
-  font-family: "Basileus";
+  font-family: 'Basileus';
   src: url(../fonts/theoi/Basileus.ttf);
 }
 
 @font-face {
-  font-family: "CapitalisTypOasis";
+  font-family: 'CapitalisTypOasis';
   src: url(../fonts/theoi/CapitalisTypOasis.ttf) format("truetype");
 }
 
@@ -237,10 +461,10 @@ table {
 /* #region Theme-Specific Mixins */
 /* #endregion */
 body {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-generic.png");
-  --bgItemSheet: url("../images/item-sheet/backgrounds/bgItem-generic.png");
-  --bgItemOverlay: url("../images/item-sheet/backgrounds/overlayItem-generic.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-generic.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-generic.png');
+  --bgItemSheet: url('../images/item-sheet/backgrounds/bgItem-generic.png');
+  --bgItemOverlay: url('../images/item-sheet/backgrounds/overlayItem-generic.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-generic.png');
   --black: black;
   --blackFade10: rgba(0, 0, 0, 0.9);
   --blackFade20: rgba(0, 0, 0, 0.8);
@@ -336,35 +560,35 @@ body {
   --bgH1: transparent;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
   --bgH3: transparent;
-  --fontFamilyTitle: "Marcellus SC";
+  --fontFamilyTitle: 'Marcellus SC';
   --fontSizeTitle: 36px;
   --lineHeightTitle: 1.2;
   --maxHeightTitle: none;
-  --paddingTitle: 0px;
+  --paddingTitle: 0;
   --fontStyleTitle: normal;
   --fontVariantTitle: normal;
   --fontWeightTitle: normal;
   --textTransformTitle: none;
-  --textIndentTitle: 0px;
+  --textIndentTitle: 0;
   --textShadowTitle: -1px -1px 1px white, 1px 1px 1px black;
   --borderTitle: none;
-  --fontFamilyH1: "Marcellus SC";
+  --fontFamilyH1: 'Marcellus SC';
   --fontSizeH1: 24px;
   --lineHeightH1: 1.2;
   --maxHeightH1: 32px;
-  --paddingH1: 0px;
+  --paddingH1: 0;
   --fontStyleH1: normal;
   --fontVariantH1: small-caps;
   --fontWeightH1: normal;
   --textTransformH1: none;
-  --textIndentH1: 0px;
+  --textIndentH1: 0;
   --textShadowH1: -1px -1px 1px white, 1px 1px 1px black;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Benguiat";
+  --fontFamilyH2: 'Benguiat';
   --fontSizeH2: 20px;
   --lineHeightH2: 1.2;
   --maxHeightH2: 26px;
-  --paddingH2: 0px;
+  --paddingH2: 0;
   --fontStyleH2: normal;
   --fontVariantH2: normal;
   --fontWeightH2: bold;
@@ -372,26 +596,26 @@ body {
   --textIndentH2: 10px;
   --textShadowH2: none;
   --borderH2: none;
-  --fontFamilyH3: "Benguiat";
+  --fontFamilyH3: 'Benguiat';
   --fontSizeH3: 16px;
   --lineHeightH3: 1;
   --maxHeightH3: var(--fontSizeH3);
-  --paddingH3: 0px;
+  --paddingH3: 0;
   --fontStyleH3: normal;
   --fontVariantH3: normal;
   --fontWeightH3: bold;
   --textTransformH3: none;
-  --textIndentH3: 0px;
+  --textIndentH3: 0;
   --textShadowH3: none;
   --borderH3: none;
-  --fontFamilyBody: "MercuryG2";
+  --fontFamilyBody: 'MercuryG2';
   --fontSizeBody: 16px;
   --lineHeightBody: 1;
   --fontStyleBody: normal;
   --fontVariantBody: normal;
   --fontWeightBody: normal;
   --textTransformBody: none;
-  --textShadowBody: 0 0 0px black;
+  --textShadowBody: 0 0 0 black;
   --fontStyleStrong: normal;
   --fontVariantStrong: var(--fontVariantBody);
   --fontWeightStrong: bold;
@@ -401,8 +625,8 @@ body {
   --fontVariantWeak: var(--fontVariantBody);
   --fontWeightWeak: normal;
   --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: 0 0 0px var(--greyUp2);
-  --fontFamilyMenu: "Voltaire";
+  --textShadowWeak: 0 0 0 var(--greyUp2);
+  --fontFamilyMenu: 'Voltaire';
   --fontSizeMenu: 24px;
   --lineHeightMenu: 1;
   --maxHeightMenu: 24px;
@@ -416,7 +640,7 @@ body {
   --fontSizeInput: var(--fontSizeBody);
   --lineHeightInput: 1.2;
   --maxHeightInput: calc(var(--lineHeightBody) * 1.2);
-  --paddingInput: 0px;
+  --paddingInput: 0;
   --fontStyleInput: normal;
   --fontVariantInput: normal;
   --fontWeightInput: bold;
@@ -436,8 +660,8 @@ body {
 }
 
 .aesir {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-aesir.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-aesir.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-aesir.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-aesir.png');
   --colorStrong: var(--colorBody);
   --colorWeak: var(--greyUp2);
   --colorHighlight: var(--whiteFade50);
@@ -445,8 +669,8 @@ body {
   --colorMenuGlow: var(--accent);
   --colorPlaceholder: var(--greyDown3);
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Amarante";
-  --fontFamilyH1: "Amarante";
+  --fontFamilyTitle: 'Amarante';
+  --fontFamilyH1: 'Amarante';
   --borderH1: 2px solid var(--colorH1);
   --maxHeightH3: var(--fontSizeH3);
   --fontVariantStrong: var(--fontVariantBody);
@@ -454,7 +678,7 @@ body {
   --textShadowStrong: var(--textShadowBody);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowWeak: 0 0 0 var(--greyUp2);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -469,29 +693,29 @@ body {
 }
 
 .deva {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-deva.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-deva.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-deva.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-deva.png');
 }
 
 .kami {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-kami.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-kami.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-kami.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-kami.png');
 }
 
 .loa {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-loa.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-loa.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-loa.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-loa.png');
   --colorStrong: var(--colorBody);
   --colorWeak: var(--greyUp2);
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #dd0000;
+  --colorMenuGlow: #d00;
   --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 225deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Finger Paint";
+  --fontFamilyTitle: 'Finger Paint';
   --fontSizeTitle: 2rem;
-  --fontFamilyH1: "Finger Paint";
+  --fontFamilyH1: 'Finger Paint';
   --borderH1: 2px solid var(--colorH1);
   --maxHeightH3: var(--fontSizeH3);
   --fontVariantStrong: var(--fontVariantBody);
@@ -499,7 +723,7 @@ body {
   --textShadowStrong: var(--textShadowBody);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowWeak: 0 0 0 var(--greyUp2);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -514,13 +738,13 @@ body {
 }
 
 .manitou {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-manitou.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-manitou.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-manitou.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-manitou.png');
 }
 
 .netjer {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-netjer.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-netjer.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-netjer.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-netjer.png');
   --accentDown4: #100f0b;
   --accentDown4Fade50: rgba(16, 15, 11, 0.5);
   --accentDown4Fade75: rgba(16, 15, 11, 0.25);
@@ -557,32 +781,28 @@ body {
   --colorWeak: var(--greyUp2);
   --colorHighlight: #f6f0e2;
   --colorShadow: #2d2d2f;
-  --colorMenuGlow: #ffdd00;
+  --colorMenuGlow: #fd0;
   --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 245deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Carolingia";
+  --fontFamilyTitle: 'Carolingia';
   --fontSizeTitle: 40px;
-  --lineHeightTitle: 50px;
   --fontVariantTitle: small-caps;
   --fontWeightTitle: bold;
-  --fontFamilyH1: "Gothic Ultra";
-  --fontSizeH1: 32px;
-  --lineHeightH1: 36px;
-  --fontVariantH1: none;
+  --fontFamilyH1: 'Alberta';
+  --lineHeightH1: 1;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Carolingia";
-  --fontSizeH2: 24px;
-  --fontFamilyH3: "Carolingia";
-  --fontSizeH3: 20px;
-  --lineHeightH3: 16px;
+  --fontFamilyH2: 'Alberta';
+  --lineHeightH2: 1.5;
+  --fontFamilyH3: 'Khaleefa';
+  --fontSizeH3: 24px;
   --maxHeightH3: var(--fontSizeH3);
   --fontVariantStrong: var(--fontVariantBody);
   --textTransformStrong: var(--textTransformBody);
   --textShadowStrong: var(--textShadowBody);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowWeak: 0 0 0 var(--greyUp2);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -597,18 +817,18 @@ body {
 }
 
 .shen {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-shen.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-shen.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-shen.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-shen.png');
 }
 
 .teotl {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teotl.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-teotl.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-teotl.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-teotl.png');
 }
 
 .theoi {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-theoi.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-theoi.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-theoi.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-theoi.png');
   --accentDown4: #201b28;
   --accentDown4Fade50: rgba(32, 27, 40, 0.5);
   --accentDown4Fade75: rgba(32, 27, 40, 0.25);
@@ -645,31 +865,31 @@ body {
   --colorWeak: var(--greyUp2);
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #00ffff;
+  --colorMenuGlow: #0ff;
   --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 100deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Poiret One";
+  --fontFamilyTitle: 'Poiret One';
   --fontWeightTitle: bold;
-  --fontFamilyH1: "Poiret One";
+  --fontFamilyH1: 'Poiret One';
   --fontWeightH1: bold;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Roman Font 7";
-  --fontFamilyH3: "Poiret One";
+  --fontFamilyH2: 'Roman Font 7';
+  --fontFamilyH3: 'Poiret One';
   --fontSizeH3: 20px;
   --maxHeightH3: var(--fontSizeH3);
   --fontVariantH3: small-caps;
   --fontWeightH3: normal;
   --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
-  --fontFamilyBody: "Poiret One";
-  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
+  --fontFamilyBody: 'Poiret One';
+  --textShadowBody: 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black);
   --fontVariantStrong: var(--fontVariantBody);
   --fontWeightStrong: normal;
   --textTransformStrong: var(--textTransformBody);
   --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2), 0 0 0px var(--greyUp2);
+  --textShadowWeak: 0 0 0 var(--greyUp2), 0 0 0 var(--greyUp2), 0 0 0 var(--greyUp2), 0 0 0 var(--greyUp2), 0 0 0 var(--greyUp2), 0 0 0 var(--greyUp2);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -684,8 +904,8 @@ body {
 }
 
 .tuathaDeDanann {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-tuathaDeDanann.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-tuathaDeDanann.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-tuathaDeDanann.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-tuathaDeDanann.png');
   --accentDown4: #101410;
   --accentDown4Fade50: rgba(16, 20, 16, 0.5);
   --accentDown4Fade75: rgba(16, 20, 16, 0.25);
@@ -722,17 +942,17 @@ body {
   --colorWeak: var(--greyUp2);
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #00ff00;
+  --colorMenuGlow: #0f0;
   --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 330deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Berkshire Swash";
+  --fontFamilyTitle: 'Berkshire Swash';
   --fontSizeTitle: 40px;
-  --fontFamilyH1: "Berkshire Swash";
+  --fontFamilyH1: 'Berkshire Swash';
   --fontVariantH1: normal;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Della Respira";
-  --fontFamilyH3: "Della Respira";
+  --fontFamilyH2: 'Della Respira';
+  --fontFamilyH3: 'Della Respira';
   --maxHeightH3: var(--fontSizeH3);
   --fontStyleH3: italic;
   --fontVariantStrong: var(--fontVariantBody);
@@ -740,7 +960,7 @@ body {
   --textShadowStrong: var(--textShadowBody);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowWeak: 0 0 0 var(--greyUp2);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -755,13 +975,13 @@ body {
 }
 
 .nemetondevos {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-nemetondevos.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-nemetondevos.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-nemetondevos.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-nemetondevos.png');
 }
 
 .orisha {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-orisha.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-orisha.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-orisha.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-orisha.png');
   --accentDown4: #201b28;
   --accentDown4Fade50: rgba(32, 27, 40, 0.5);
   --accentDown4Fade75: rgba(32, 27, 40, 0.25);
@@ -798,31 +1018,31 @@ body {
   --colorWeak: var(--greyUp2);
   --colorHighlight: var(--whiteFade50);
   --colorShadow: var(--blackFade50);
-  --colorMenuGlow: #00ffff;
+  --colorMenuGlow: #0ff;
   --colorPlaceholder: var(--greyDown3);
   --colorPurviewRotate: 100deg;
   --bgH2: linear-gradient(270deg, var(--accentUp2), var(--accentUp4), var(--accentUp2));
-  --fontFamilyTitle: "Poiret One";
+  --fontFamilyTitle: 'Poiret One';
   --fontWeightTitle: bold;
-  --fontFamilyH1: "Poiret One";
+  --fontFamilyH1: 'Poiret One';
   --fontWeightH1: bold;
   --borderH1: 2px solid var(--colorH1);
-  --fontFamilyH2: "Elektra";
-  --fontFamilyH3: "Poiret One";
+  --fontFamilyH2: 'Elektra';
+  --fontFamilyH3: 'Poiret One';
   --fontSizeH3: 20px;
   --maxHeightH3: var(--fontSizeH3);
   --fontVariantH3: small-caps;
   --fontWeightH3: normal;
   --textShadowH3: 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2), 0 0 1px var(--colorH2);
-  --fontFamilyBody: "Poiret One";
-  --textShadowBody: 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black), 0 0 0px var(--black);
+  --fontFamilyBody: 'Poiret One';
+  --textShadowBody: 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black), 0 0 0 var(--black);
   --fontVariantStrong: var(--fontVariantBody);
   --fontWeightStrong: normal;
   --textTransformStrong: var(--textTransformBody);
   --textShadowStrong: 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black), 0 0 1px var(--black);
   --fontVariantWeak: var(--fontVariantBody);
   --textTransformWeak: var(--textTransformBody);
-  --textShadowWeak: 0 0 0px var(--greyUp2);
+  --textShadowWeak: 0 0 0 var(--greyUp2);
   --textShadowMenu: drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow)) drop-shadow(0 0 8px var(--colorMenuGlow));
   --fontFamilyInput: var(--fontFamilyBody);
   --fontSizeInput: var(--fontSizeBody);
@@ -837,208 +1057,206 @@ body {
 }
 
 .yazata {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-yazata.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-yazata.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-yazata.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-yazata.png');
 }
 
 .teros {
-  --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-teros.png");
-  --menuImage: url("../images/actor-sheet/menu/rosette-teros.png");
+  --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-teros.png');
+  --menuImage: url('../images/actor-sheet/menu/rosette-teros.png');
 }
 
-body.vtt.game.system-scion {
+.vtt.game.system-scion {
   /* #region SHEET STYLES */
   /* #endregion */
 }
 
-body.vtt.game.system-scion {
+.vtt.game.system-scion {
   /* #region Sandbox-Level Overrides */
   /* #endregion */
   /* #region Sheet Default Style Overrides */
   /* #endregion */
 }
 
-body.vtt.game.system-scion #logo {
+.vtt.game.system-scion #logo {
   display: none;
 }
 
-body.vtt.game.system-scion #navigation {
-  left: 0px;
-  top: 0px;
+.vtt.game.system-scion #navigation {
+  top: 0;
+  left: 0;
 }
 
-body.vtt.game.system-scion #navigation #nav-toggle {
+.vtt.game.system-scion #navigation #nav-toggle {
   height: 20px;
 }
 
-body.vtt.game.system-scion #navigation .nav-item {
+.vtt.game.system-scion #navigation .nav-item {
   margin: 0 4px 0 0;
   line-height: 1.4rem;
 }
 
-body.vtt.game.system-scion #navigation #scene-list li {
+.vtt.game.system-scion #navigation #scene-list li {
   height: 20px;
 }
 
-body.vtt.game.system-scion #navigation #scene-list li .scene-players {
+.vtt.game.system-scion #navigation #scene-list li .scene-players {
   display: none;
 }
 
-body.vtt.game.system-scion #controls {
+.vtt.game.system-scion #controls {
   top: 30px;
   left: 0;
   padding: 0;
 }
 
-body.vtt.game.system-scion #controls .scene-control {
-  height: 20px;
+.vtt.game.system-scion #controls .scene-control {
   width: 25px;
+  height: 20px;
   font-size: 20px;
   line-height: normal;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Basic Controls"] li[title="Measure Distance"] {
+.vtt.game.system-scion #controls .scene-control[title='Basic Controls'] li[title='Measure Distance'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Measurement Controls"] {
+.vtt.game.system-scion #controls .scene-control[title='Measurement Controls'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Tile Controls"] li[title=""] {
+.vtt.game.system-scion #controls .scene-control[title='Tile Controls'] li[title=''] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Rectangle"] {
+.vtt.game.system-scion #controls .scene-control[title='Drawing Tools'] li[title='Draw Rectangle'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Ellipse"] {
+.vtt.game.system-scion #controls .scene-control[title='Drawing Tools'] li[title='Draw Ellipse'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Polygon"] {
+.vtt.game.system-scion #controls .scene-control[title='Drawing Tools'] li[title='Draw Polygon'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Draw Freehand"] {
+.vtt.game.system-scion #controls .scene-control[title='Drawing Tools'] li[title='Draw Freehand'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Drawing Tools"] li[title="Clear Drawings"] {
+.vtt.game.system-scion #controls .scene-control[title='Drawing Tools'] li[title='Clear Drawings'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Wall Controls"] {
+.vtt.game.system-scion #controls .scene-control[title='Wall Controls'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Reset Fog of War"] {
+.vtt.game.system-scion #controls .scene-control[title='Lighting Controls'] li[title='Reset Fog of War'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Lighting Controls"] li[title="Clear Lights"] {
+.vtt.game.system-scion #controls .scene-control[title='Lighting Controls'] li[title='Clear Lights'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Ambient Sound Controls"] li[title="Clear Sounds"] {
+.vtt.game.system-scion #controls .scene-control[title='Ambient Sound Controls'] li[title='Clear Sounds'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control[title="Journal Notes"] li[title="Clear Notes"] {
+.vtt.game.system-scion #controls .scene-control[title='Journal Notes'] li[title='Clear Notes'] {
   display: none;
 }
 
-body.vtt.game.system-scion #controls .scene-control .control-tools {
-  height: 25px;
+.vtt.game.system-scion #controls .scene-control .control-tools {
+  position: relative;
   top: -25px;
   left: 35px;
-  position: relative;
+  height: 25px;
   margin: 0 0 -25px;
 }
 
-body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool {
+.vtt.game.system-scion #controls .scene-control .control-tools .control-tool {
   display: inline-block;
   height: 25px;
+  margin: 0 3px;
   font-size: 20px;
   line-height: normal;
-  margin: 0 3px;
 }
 
-body.vtt.game.system-scion #controls .scene-control .control-tools .control-tool i {
+.vtt.game.system-scion #controls .scene-control .control-tools .control-tool i {
   width: 25px;
 }
 
-body.vtt.game.system-scion #controls .scene-control.active .control-tools {
+.vtt.game.system-scion #controls .scene-control.active .control-tools {
   display: flex;
 }
 
-body.vtt.game.system-scion #sidebar {
+.vtt.game.system-scion #sidebar {
+  height: calc(99vh / 0.75);
   transform: scale(0.75);
   transform-origin: 100% 0%;
-  height: calc(99vh / 0.75);
-  max-height: calc(99vh / 0.75);
 }
 
-body.vtt.game.system-scion #sidebar #chat-log {
-  max-height: calc(100vh / 0.75);
+.vtt.game.system-scion #sidebar #chat-log {
+  /* max-height: calc(100vh / 0.75); */
 }
 
-body.vtt.game.system-scion #sidebar #chat-controls {
+.vtt.game.system-scion #sidebar #chat-controls {
+  position: relative;
+  top: -55px;
   width: calc(100% * 0.75);
   flex: 0 0 calc(28px / 0.75);
-  top: -55px;
-  position: relative;
   transform: scale(calc(1/0.75));
   transform-origin: 0% 100%;
 }
 
-body.vtt.game.system-scion #sidebar #chat-form {
+.vtt.game.system-scion #sidebar #chat-form {
   width: calc(100% * 0.75);
   flex: 0.1 0 calc(100px * 0.75);
   transform: scale(calc(1 / 0.75));
   transform-origin: 0% 100%;
 }
 
-body.vtt.game.system-scion div.sheet.scion {
-  pointer-events: none;
+.vtt.game.system-scion div.sheet.scion {
   border: none;
-  box-shadow: none;
-  background: none;
   margin: 0;
+  background: none;
+  box-shadow: none;
+  pointer-events: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion header.window-header {
+.vtt.game.system-scion div.sheet.scion header.window-header {
   display: none !important;
 }
 
-body.vtt.game.system-scion div.sheet.scion section.window-content {
-  padding: 0px;
-  background: transparent;
-  pointer-events: none;
-  overflow: visible;
+.vtt.game.system-scion div.sheet.scion section.window-content {
   position: relative;
   z-index: 1;
-  max-height: 100%;
+  overflow: visible;
+  padding: 0;
+  background: transparent;
+  pointer-events: none;
 }
 
-body.vtt.game.system-scion div.sheet.scion section.window-content .main {
+.vtt.game.system-scion div.sheet.scion section.window-content .main {
   pointer-events: all;
 }
 
-body.vtt.game.system-scion div.sheet.scion section.window-content .main .tab {
+.vtt.game.system-scion div.sheet.scion section.window-content .main .tab {
   width: 100%;
 }
 
-body.vtt.game.system-scion div.sheet.scion section.window-content .main .tab:not(.active) {
+.vtt.game.system-scion div.sheet.scion section.window-content .main .tab:not(.active) {
   display: none !important;
 }
 
-body.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
+.vtt.game.system-scion div.sheet.scion div.window-resizable-handle {
   display: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet {
+.vtt.game.system-scion .app.window-app.scion.sheet {
   /* #region FLEX LAYOUTS */
   /* #endregion */
   /* #region GRID LAYOUTS */
@@ -1049,7 +1267,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet {
   /* #endregion */
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1058,149 +1276,149 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] {
   align-items: flex-start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] {
   flex-direction: column;
   flex-wrap: nowrap;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"].alignCenter {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"].alignCenter {
   align-content: center;
   align-items: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"].alignLeft {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"].alignLeft {
   align-content: flex-start;
   align-items: flex-start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"].alignRight {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"].alignRight {
   align-content: flex-end;
   align-items: flex-end;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] > h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] h3, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] .h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] > h1, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] .h1, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] h2, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] .h2, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] h3, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] .h3 {
   flex: 0 0 auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] > label {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] > label {
   flex: 0 0 auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"] > .contentEditable {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"] > .contentEditable {
   flex: 1 0 auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] > div, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] section, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h3, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] > div, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] section, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h1, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h1, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h2, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h2, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h3, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h3 {
   margin: 2px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] > div:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] section:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h1:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h1:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h2:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h2:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h3:first-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h3:first-child {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] > div:first-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] section:first-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h1:first-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h1:first-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h2:first-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h2:first-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h3:first-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h3:first-child {
   margin-top: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] > div:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] section:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h1:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h1:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h2:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h2:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h3:last-child, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h3:last-child {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] > div:last-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] section:last-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h1:last-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h1:last-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h2:last-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h2:last-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] h3:last-child, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="col"][class*="space"] .h3:last-child {
   margin-bottom: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] {
   flex-direction: row;
   flex-wrap: nowrap;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"].alignCenter {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"].alignCenter {
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"].alignLeft {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"].alignLeft {
   justify-content: flex-start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"].alignRight {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"].alignRight {
   justify-content: flex-end;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] > h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] h3, body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] .h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] > h1, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] .h1, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] h2, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] .h2, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] h3, .vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] .h3 {
   flex: 0 0 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] > label {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] > label {
   flex: 0 0 auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"] > .contentEditable {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"] > .contentEditable {
   flex: 1 1 auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="row"][class*="baseline"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="row"][class*="baseline"] {
   align-items: baseline;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="wrap"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="wrap"] {
   flex-wrap: wrap;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="nowrap"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="nowrap"] {
   flex-wrap: nowrap;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="stretch"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="stretch"] {
   align-items: stretch;
   align-content: stretch;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="spaceBetween"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="spaceBetween"] {
   justify-content: space-between;
   align-content: space-between;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="spaceAround"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="spaceAround"] {
   justify-content: space-around;
   align-content: space-around;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="spaceEven"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="spaceEven"] {
   justify-content: space-evenly;
   align-content: space-around;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="start"]:not([class*="cross"]) {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="start"]:not([class*="cross"]) {
   justify-content: flex-start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="start"][class*="cross"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="start"][class*="cross"] {
   align-items: flex-start;
   align-content: flex-start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="center"]:not([class*="cross"]) {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="center"]:not([class*="cross"]) {
   justify-content: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="center"][class*="cross"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="center"][class*="cross"] {
   align-items: center;
   align-content: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="end"]:not([class*="cross"]) {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="end"]:not([class*="cross"]) {
   justify-content: flex-end;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"][class*="end"][class*="cross"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"][class*="end"][class*="cross"] {
   align-items: flex-end;
   align-content: flex-end;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] > *[class*="noFlex"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"] > *[class*="noFlex"] {
   flex: 0 0 auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet *[class*="flex"] > *[class*="fullFlex"] {
+.vtt.game.system-scion .app.window-app.scion.sheet *[class*="flex"] > *[class*="fullFlex"] {
   flex: 1 1 auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet .grid {
+.vtt.game.system-scion .app.window-app.scion.sheet .grid {
   display: grid;
   height: 100%;
   width: 100%;
@@ -1210,17 +1428,17 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet .grid {
   grid-gap: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * {
+.vtt.game.system-scion .app.window-app.scion.sheet * {
   /* #region Element Default Styles */
   color: var(--colorBody);
+  line-height: var(--lineHeightBody);
   font-family: var(--fontFamilyBody);
   font-size: var(--fontSizeBody);
-  font-weight: var(--fontWeightBody);
   font-style: var(--fontStyleBody);
   font-variant: var(--fontVariantBody);
-  text-transform: var(--textTransformBody);
+  font-weight: var(--fontWeightBody);
   text-shadow: var(--textShadowBody);
-  line-height: var(--lineHeightBody);
+  text-transform: var(--textTransformBody);
   /* HOW TO TRIGGER A FUNCTION WHEN AN ANIMATION OR TRANSITION IS COMPLETE:
 
         $( '.item' ).addClass( 'disappear' ).on( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => { $( this ).remove(); });
@@ -1229,8 +1447,6 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * {
     */
   /* #endregion */
   /* #region Single-Purpose Classes */
-  /* #endregion */
-  /* #region GRADIATED CLASSES */
   /* #endregion */
   /* #region System-Specific Styles */
   /* #endregion */
@@ -1246,841 +1462,845 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet * {
   /* #endregion */
   /* #region Purview Display */
   /* #endregion */
+  /* #region GRADIATED CLASSES */
+  /* #endregion */
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * textarea,
-body.vtt.game.system-scion div.app.window-app.scion.sheet * input[type="text"],
-body.vtt.game.system-scion div.app.window-app.scion.sheet * select,
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .contentEditable {
-  margin: 0 4px;
+.vtt.game.system-scion .app.window-app.scion.sheet * textarea,
+.vtt.game.system-scion .app.window-app.scion.sheet * input[type='text'],
+.vtt.game.system-scion .app.window-app.scion.sheet * select,
+.vtt.game.system-scion .app.window-app.scion.sheet * .contentEditable {
+  overflow: hidden;
+  height: unset;
+  box-sizing: content-box;
   padding: var(--paddingInput);
+  border: var(--borderInput);
+  margin: 0 4px;
+  box-shadow: none;
   line-height: var(--lineHeightInput);
-  max-height: var(--maxHeightInput);
-  min-height: var(--maxHeightInput);
+  outline: none;
   font-family: var(--fontFamilyInput);
   font-size: var(--fontSizeInput);
   font-style: var(--fontStyleInput);
   font-variant: var(--fontVariantInput);
   font-weight: var(--fontWeightInput);
-  text-transform: var(--textTransformInput);
   text-indent: var(--textIndentInput);
   text-shadow: var(--textShadowInput);
-  box-shadow: none;
-  border: var(--borderInput);
-  box-sizing: content-box;
-  outline: none;
-  overflow: hidden;
+  text-transform: var(--textTransformInput);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * textarea:invalid,
-body.vtt.game.system-scion div.app.window-app.scion.sheet * input[type="text"]:invalid,
-body.vtt.game.system-scion div.app.window-app.scion.sheet * select:invalid,
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .contentEditable:invalid {
+.vtt.game.system-scion .app.window-app.scion.sheet * textarea:invalid,
+.vtt.game.system-scion .app.window-app.scion.sheet * input[type='text']:invalid,
+.vtt.game.system-scion .app.window-app.scion.sheet * select:invalid,
+.vtt.game.system-scion .app.window-app.scion.sheet * .contentEditable:invalid {
   color: var(--colorPlaceholder);
   font-family: var(--fontFamilyPlaceholder);
   font-size: var(--fontSizePlaceholder);
   font-style: var(--fontStylePlaceholder);
   font-variant: var(--fontVariantPlaceholder);
   font-weight: var(--fontWeightPlaceholder);
-  text-transform: var(--textTransformPlaceholder);
   text-indent: var(--textIndentPlaceholder);
   text-shadow: var(--textShadowPlaceholder);
+  text-transform: var(--textTransformPlaceholder);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * h3, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet * h1,
+.vtt.game.system-scion .app.window-app.scion.sheet * h2,
+.vtt.game.system-scion .app.window-app.scion.sheet * h3,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h1,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h2,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h3 {
   width: 100%;
   margin: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet * h1,
+.vtt.game.system-scion .app.window-app.scion.sheet * h2,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h1,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h2 {
   display: block;
   text-indent: 15px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * h1, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h1 {
-  color: var(--colorH1);
-  background: var(--bgH1);
+.vtt.game.system-scion .app.window-app.scion.sheet * h1,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h1 {
   padding: var(--paddingH1);
-  max-height: var(--maxHeightH1);
-  min-height: var(--maxHeightH1);
+  border-bottom: var(--borderH1);
+  background: var(--bgH1);
+  color: var(--colorH1);
   line-height: var(--lineHeightH1);
   font-family: var(--fontFamilyH1);
+  font-size: var(--fontSizeH1);
   font-style: var(--fontStyleH1);
   font-variant: var(--fontVariantH1);
   font-weight: var(--fontWeightH1);
-  font-size: var(--fontSizeH1);
-  text-transform: var(--textTransformH1);
-  text-shadow: var(--textShadowH1);
   text-indent: var(--textIndentH1);
-  border-bottom: var(--borderH1);
+  text-shadow: var(--textShadowH1);
+  text-transform: var(--textTransformH1);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * h2, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h2 {
-  color: var(--colorH2);
-  background: var(--bgH2);
+.vtt.game.system-scion .app.window-app.scion.sheet * h2,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h2 {
   padding: var(--paddingH2);
-  max-height: var(--maxHeightH2);
-  min-height: var(--maxHeightH2);
+  border-bottom: var(--borderH2);
+  background: var(--bgH2);
+  color: var(--colorH2);
   line-height: var(--lineHeightH2);
   font-family: var(--fontFamilyH2);
+  font-size: var(--fontSizeH2);
   font-style: var(--fontStyleH2);
   font-variant: var(--fontVariantH2);
   font-weight: var(--fontWeightH2);
-  font-size: var(--fontSizeH2);
-  text-transform: var(--textTransformH2);
-  text-shadow: var(--textShadowH2);
   text-indent: var(--textIndentH2);
-  border-bottom: var(--borderH2);
+  text-shadow: var(--textShadowH2);
+  text-transform: var(--textTransformH2);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * h3, body.vtt.game.system-scion div.app.window-app.scion.sheet * .h3 {
-  color: var(--colorH3);
-  background: var(--bgH3);
+.vtt.game.system-scion .app.window-app.scion.sheet * h3,
+.vtt.game.system-scion .app.window-app.scion.sheet * .h3 {
   padding: var(--paddingH3);
-  max-height: var(--maxHeightH3);
-  min-height: var(--maxHeightH3);
+  border-bottom: var(--borderH3);
+  background: var(--bgH3);
+  color: var(--colorH3);
   line-height: var(--lineHeightH3);
   font-family: var(--fontFamilyH3);
+  font-size: var(--fontSizeH3);
   font-style: var(--fontStyleH3);
   font-variant: var(--fontVariantH3);
   font-weight: var(--fontWeightH3);
-  font-size: var(--fontSizeH3);
-  text-transform: var(--textTransformH3);
-  text-shadow: var(--textShadowH3);
   text-indent: var(--textIndentH3);
-  border-bottom: var(--borderH3);
+  text-shadow: var(--textShadowH3);
+  text-transform: var(--textTransformH3);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * label {
-  font-size: var(--fontSizeBody);
+.vtt.game.system-scion .app.window-app.scion.sheet * label {
   margin: 0 4px;
+  font-size: var(--fontSizeBody);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .readonly {
+.vtt.game.system-scion .app.window-app.scion.sheet * .readonly {
+  overflow: hidden !important;
   pointer-events: none !important;
   resize: none !important;
-  overflow: hidden !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .insetFrame {
+.vtt.game.system-scion .app.window-app.scion.sheet * .insetFrame {
+  border: inset 3px var(--accentUp1);
+  border-radius: 1rem;
+  background: var(--accentDown3Fade75);
   color: var(--colorBody);
   font-family: var(--fontFamilyBody);
   font-size: var(--fontSizeBody);
   font-weight: var(--fontWeightBody);
-  border-radius: 1rem;
-  background: var(--accentDown3Fade75);
-  border: inset 3px var(--accentUp1);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .outsetFrame {
+.vtt.game.system-scion .app.window-app.scion.sheet * .outsetFrame {
+  border: outset 3px var(--accentUp1);
+  border-radius: 1rem;
+  background: var(--accentUp3Fade75);
   color: var(--colorBody);
   font-family: var(--fontFamilyBody);
   font-size: var(--fontSizeBody);
-  border-radius: 1rem;
-  background: var(--accentUp3Fade75);
-  border: outset 3px var(--accentUp1);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .hidden {
+.vtt.game.system-scion .app.window-app.scion.sheet * .hidden {
   display: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .text {
+.vtt.game.system-scion .app.window-app.scion.sheet * .text {
   color: var(--colorBody) !important;
   font-size: var(--fontSizeBody) !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .inline {
+.vtt.game.system-scion .app.window-app.scion.sheet * .inline {
   display: inline-block !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .inline.text {
+.vtt.game.system-scion .app.window-app.scion.sheet * .inline.text {
   padding-right: 5px !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .padded {
+.vtt.game.system-scion .app.window-app.scion.sheet * .padded {
   padding: 5px !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .padVert {
+.vtt.game.system-scion .app.window-app.scion.sheet * .padVert {
   padding: 5px 0 !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .placeholder {
+.vtt.game.system-scion .app.window-app.scion.sheet * .placeholder {
   color: var(--colorPlaceholder);
   font-family: var(--fontFamilyPlaceholder);
   font-size: var(--fontSizePlaceholder);
   font-style: var(--fontStylePlaceholder);
   font-variant: var(--fontVariantPlaceholder);
   font-weight: var(--fontWeightPlaceholder);
-  text-transform: var(--textTransformPlaceholder);
   text-indent: var(--textIndentPlaceholder);
   text-shadow: var(--textShadowPlaceholder);
+  text-transform: var(--textTransformPlaceholder);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .greyText {
+.vtt.game.system-scion .app.window-app.scion.sheet * .greyText {
   color: var(--grey) !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .scionText {
-  text-shadow: var(--textShadowTitle);
-  font-family: "Benguiat";
-  text-transform: uppercase;
-  font-weight: bold;
+.vtt.game.system-scion .app.window-app.scion.sheet * .scionText {
   color: var(--greyDown2);
+  font-family: 'Benguiat';
+  font-weight: bold;
+  text-shadow: var(--textShadowTitle);
+  text-transform: uppercase;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .noBG {
+.vtt.game.system-scion .app.window-app.scion.sheet * .noBG {
   background: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .noBorder {
+.vtt.game.system-scion .app.window-app.scion.sheet * .noBorder {
   border: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .alignLeft {
+.vtt.game.system-scion .app.window-app.scion.sheet * .alignLeft {
   text-align: left !important;
   text-align-last: left !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .alignCenter {
+.vtt.game.system-scion .app.window-app.scion.sheet * .alignCenter {
   text-align: center !important;
   text-align-last: center !important;
   text-indent: 0 !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .alignRight {
+.vtt.game.system-scion .app.window-app.scion.sheet * .alignRight {
   text-align: right !important;
   text-align-last: right !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .strong {
-  font-weight: var(--fontWeightStrong) !important;
+.vtt.game.system-scion .app.window-app.scion.sheet * .strong {
   font-style: var(--fontStyleStrong) !important;
   font-variant: var(--fontVariantStrong) !important;
-  text-transform: var(--textTransformStrong) !important;
+  font-weight: var(--fontWeightStrong) !important;
   text-shadow: var(--textShadowStrong) !important;
+  text-transform: var(--textTransformStrong) !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .weak {
-  font-weight: var(--fontWeightWeak) !important;
+.vtt.game.system-scion .app.window-app.scion.sheet * .weak {
   font-style: var(--fontStyleWeak) !important;
   font-variant: var(--fontVariantWeak) !important;
-  text-transform: var(--textTransformWeak) !important;
+  font-weight: var(--fontWeightWeak) !important;
   text-shadow: var(--textShadowWeak) !important;
+  text-transform: var(--textTransformWeak) !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .blur {
-  transform-origin: 0% 0% !important;
+.vtt.game.system-scion .app.window-app.scion.sheet * .blur {
   transform: scale(75%) !important;
+  transform-origin: 0% 0% !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader {
+.vtt.game.system-scion .app.window-app.scion.sheet * .fader {
   opacity: 1;
   transition: 0.5s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade25 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .fader.fade25 {
   opacity: 0.75;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade50 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .fader.fade50 {
   opacity: 0.5;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade75 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .fader.fade75 {
   opacity: 0.25;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .fader.fade100 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .fader.fade100 {
   opacity: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width10 {
-  width: 10%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height10 {
-  height: 10%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width20 {
-  width: 20%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height20 {
-  height: 20%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width30 {
-  width: 30%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height30 {
-  height: 30%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width40 {
-  width: 40%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height40 {
-  height: 40%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width50 {
-  width: 50%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height50 {
-  height: 50%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width60 {
-  width: 60%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height60 {
-  height: 60%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width70 {
-  width: 70%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height70 {
-  height: 70%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width80 {
-  width: 80%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height80 {
-  height: 80%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width90 {
-  width: 90%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height90 {
-  height: 90%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width100 {
-  width: 100%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height100 {
-  height: 100%;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width25 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .width25 {
   width: 25%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height25 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .height25 {
   height: 25%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .width75 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .width75 {
   width: 75%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .height75 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .height75 {
   width: 75%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .widthAuto {
+.vtt.game.system-scion .app.window-app.scion.sheet * .widthAuto {
   width: auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .heightAuto {
+.vtt.game.system-scion .app.window-app.scion.sheet * .heightAuto {
   height: auto;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .skill {
+.vtt.game.system-scion .app.window-app.scion.sheet * .skill {
+  box-shadow: 3px 3px 3px var(--greyDown2), 3px 3px 3px var(--greyDown2), 3px 3px 3px var(--greyDown2);
   width: 120px;
+  border: 4px outset var(--white);
   text-align: center;
   text-align-last: center;
   background-image: url("../images/textures/stoneWhite.jpg");
-  background-size: 100%;
   background-repeat: no-repeat;
-  border: 4px outset var(--white);
-  box-shadow: 3px 3px 3px var(--greyDown2), 3px 3px 3px var(--greyDown2), 3px 3px 3px var(--greyDown2);
+  background-size: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .skill.empty {
-  background-image: url("../images/textures/stoneGrey.jpg");
-  border: 4px inset var(--grey);
+.vtt.game.system-scion .app.window-app.scion.sheet * .skill.empty {
   box-shadow: inset 3px 3px 3px var(--grey), inset 3px 3px 3px var(--grey), inset 3px 3px 3px var(--grey);
+  border: 4px inset var(--grey);
+  background-image: url("../images/textures/stoneGrey.jpg");
   opacity: 0.75;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * div.closeButton {
-  display: block;
-  float: right;
-  pointer-events: all;
-  color: var(--white);
-  cursor: pointer;
+.vtt.game.system-scion .app.window-app.scion.sheet * div.closeButton {
   position: relative;
   z-index: 4;
   top: 38px;
   right: 28px;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 3px outset white;
+  border-radius: 20px;
+  margin-top: -36px;
+  margin-bottom: -36px;
+  background: rgba(0, 0, 0, 0.6);
   background-color: black;
+  color: var(--white);
+  cursor: pointer;
+  float: right;
   font-size: 20px;
+  pointer-events: all;
   text-align: center;
   text-align-last: center;
-  border: 3px outset white;
-  height: 36px;
-  width: 36px;
-  border-radius: 20px;
-  background: rgba(0, 0, 0, 0.6);
   transform: scale(0.8);
-  margin-bottom: -36px;
-  margin-top: -36px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * div.closeButton.collapsed {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.closeButton.collapsed {
   display: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .mirrorContainer {
+.vtt.game.system-scion .app.window-app.scion.sheet * .mirrorContainer {
   position: fixed !important;
-  pointer-events: none !important;
   z-index: 9999999 !important;
+  pointer-events: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .mirrorContainer div.tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .mirrorContainer div.tipContents {
   display: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip {
-  display: block;
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip {
   z-index: 9999;
+  display: block;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.helper {
-  height: 40px;
-  width: 40px;
-  right: 30px;
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.helper {
   position: absolute;
+  right: 30px;
+  width: 40px;
+  height: 40px;
   background-image: url("../images/ToolTipBall.png");
-  background-size: 100%;
   background-position: center;
+  background-size: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents {
-  width: 300px;
-  padding: 5px;
-  color: #444444;
-  background-color: white;
-  font-weight: normal;
-  font-size: 13px;
-  border-radius: 8px;
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents {
   position: absolute;
   z-index: 99999999;
+  width: 300px;
   box-sizing: border-box;
+  padding: 5px;
   border: 10px outset var(--greyUp3);
-  visibility: hidden;
+  border-radius: 8px;
+  background-color: white;
+  color: #444;
+  font-size: 13px;
+  font-weight: normal;
   opacity: 0;
-  transition: opacity 0.8s;
   pointer-events: none;
+  transition: opacity 0.8s;
+  visibility: hidden;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents h3 {
+  text-shadow: -1px -1px 2px var(--white), 1px 1px 2px var(--black);
+  width: calc((100% + 2 * 5px)/0.7);
+  padding: 0;
+  border: none;
+  margin: -5px 0 0 -5px;
   background: linear-gradient(270deg, #999999, #cccccc, #999999);
   color: black !important;
-  padding: 0px;
-  max-height: 25px;
+  font-family: Benguiat;
+  font-size: 20px;
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  font-size: 20px;
-  border: none;
-  min-height: 25px;
-  font-family: Benguiat;
-  width: calc((100% + 2 * 5px)/0.7);
+  text-transform: uppercase;
   transform: scaleX(0.7);
   transform-origin: left;
-  margin: -5px 0 0 -5px;
-  text-transform: uppercase;
-  text-shadow: -1px -1px 2px var(--white), 1px 1px 2px var(--black);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents span {
-  font-family: "MercuryG2";
-  font-size: 11px;
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p,
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li,
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents span {
   text-shadow: 0 0 0 var(--black);
+  font-family: 'MercuryG2';
+  font-size: 11px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p.stuntName, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li.stuntName, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents span.stuntName {
-  font-family: "Benguiat";
-  font-weight: normal;
-  font-variant: small-caps;
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p.stuntName,
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li.stuntName,
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents span.stuntName {
+  text-shadow: 0 0 0 var(--black), 0 0 2px var(--black);
+  font-family: 'Benguiat';
   font-size: 13px;
-  text-shadow: 0 0 0px var(--black), 0 0 2px var(--black);
+  font-variant: small-caps;
+  font-weight: normal;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p.stuntCost, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li.stuntCost, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents span.stuntCost {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p.stuntCost,
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li.stuntCost,
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents span.stuntCost {
   text-shadow: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p {
   margin: 5px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents p:not(:first-of-type()) {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p:not(:first-of-type()) {
   text-indent: 15px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents li {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li {
   margin: 10px 0;
   text-indent: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents i {
   position: absolute;
-  width: 50px;
-  height: 50px;
   overflow: hidden;
+  width: 50px;
+  height: 50px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip > .tipContents i::after {
-  content: '';
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents i::after {
   position: absolute;
   width: 50px;
   height: 50px;
+  border: 10px outset #ddd;
   background-color: white;
-  border: 10px outset #DDD;
+  content: '';
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.hideTooltip > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.hideTooltip > .tipContents {
   display: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents {
   border-color: #ffc400;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents i::after {
   border-color: #ffc400;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents h3 {
   background: linear-gradient(270deg, #ffd64d, #ffedb3, #ffd64d);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.knack.generic > .tipContents h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.generic > .tipContents h3 {
   background: linear-gradient(270deg, #b3b3b3, #f2f2f2, #b3b3b3);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
   top: 50%;
   transform: translate(0, -50%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
   top: 50%;
   margin-top: -25px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i::after, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i::after {
   top: 50%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
   left: calc(50% + 5px + 10px);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
   right: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i::after {
   transform: translate(50%, -50%) rotate(-45deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents {
   right: calc(50% + 5px + 10px);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i {
   right: -50px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i::after {
   transform: translate(-50px, -50%) rotate(-45deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents {
   bottom: 40px;
   transform: translate(-50%, 0%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i {
   margin-top: -7px;
   transform: scale(0.8);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i::after, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i::after, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i::after {
   top: 50%;
   transform: translate(-15%, -90%) rotate(45deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpLeft.immortal:not(.short) > .tipContents, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp.immortal:not(.short) > .tipContents, body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpRight.immortal:not(.short) > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft.immortal:not(.short) > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp.immortal:not(.short) > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight.immortal:not(.short) > .tipContents {
   bottom: 75px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents {
   left: 0%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i {
   left: calc(80% - 20px / 0.8);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents {
   left: 50%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i {
   left: calc(50% - 20px / 0.8);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents {
   left: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i {
   left: calc(20% - 20px / 0.8);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .tooltip:hover > .tipContents {
-  visibility: visible;
+.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip:hover > .tipContents {
   opacity: 1;
+  visibility: visible;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout:not(.mirrorContainer) {
+.vtt.game.system-scion .app.window-app.scion.sheet * .popout:not(.mirrorContainer) {
   position: absolute;
-  overflow: hidden;
   z-index: 10;
-  border: 10px outset var(--greyUp1);
-  background-image: url("../images/textures/stoneGrey.jpg");
+  overflow: hidden;
   box-sizing: content-box;
+  border: 10px outset var(--greyUp1);
   border-radius: 40px;
+  background-image: url("../images/textures/stoneGrey.jpg");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .popout > div {
+.vtt.game.system-scion .app.window-app.scion.sheet * .popout > div {
   padding: 15px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot {
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot {
   --dotSize: 16px;
   --dotBright: #444;
   --dotDark: #0a0a0a;
   display: block;
-  height: var(--dotSize);
   width: var(--dotSize);
-  margin: 0;
+  height: var(--dotSize);
   padding: 0;
   border-radius: 50%;
+  margin: 0;
   background: radial-gradient(var(--dotBright), var(--dotDark));
   box-shadow: 1px 1px 2px var(--dotDark);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="general"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='general'] {
   --dotBright: #fff;
   --dotDark: #333;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="physical"], body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="mental"], body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="social"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='physical'], .vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='mental'], .vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='social'] {
   --dotBright: #999;
   --dotDark: #0a0a0a;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="unassigned"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='unassigned'] {
   --scaleFactor: 0.5;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="unassigned"]::after {
-  content: "";
-  height: var(--dotSize);
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='unassigned']::after {
+  display: block;
   width: calc(var(--dotSize) / var(--scaleFactor));
   min-width: calc(var(--dotSize) / var(--scaleFactor));
   max-width: calc(var(--dotSize) / var(--scaleFactor));
+  height: var(--dotSize);
   margin-left: calc(-0.5 * var(--dotSize));
-  display: block;
-  font-family: "Marcellus SC";
-  font-weight: bold;
-  font-size: var(--dotSize);
   color: var(--white);
-  text-shadow: var(--textShadowStrong);
+  content: '';
+  font-family: 'Marcellus SC';
+  font-size: var(--dotSize);
+  font-weight: bold;
   text-align: center;
   text-align-last: center;
+  text-shadow: var(--textShadowStrong);
   transform: scaleX(var(--scaleFactor));
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="unassigned"][data-types*="physical"]::after {
-  content: "P";
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='unassigned'][data-types*='physical']::after {
+  content: 'P';
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="unassigned"][data-types*="social"]::after {
-  content: "S";
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='unassigned'][data-types*='social']::after {
+  content: 'S';
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[data-types*="unassigned"][data-types*="mental"]::after {
-  content: "M";
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[data-types*='unassigned'][data-types*='mental']::after {
+  content: 'M';
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .dot[class*="-invalid"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * .dot[class*='-invalid'] {
   --dotBright: #900;
-  --dotDark: #ff0000;
+  --dotDark: #f00;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'] {
   --numDots: 5;
   --dotSize: 16px;
-  --colGap: 0px;
+  --colGap: 0.1px;
   --dotContainerWidth: calc(var(--dotSize) * var(--numDots) + var(--colGap) * (var(--numDots) - 1));
   display: flex;
-  height: var(--dotSize);
-  max-height: var(--dotSize);
-  min-height: var(--dotSize);
   width: 100%;
+  height: var(--dotSize);
+  align-items: center;
+  justify-content: space-between;
   margin: 2px 0;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].noLabel {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'].noLabel {
   width: var(--dotContainerWidth);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].space5 {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'].space5 {
   --colGap: 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] > .label {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'] > .label {
   display: inline-block;
-  text-align: left;
-  text-align-last: left;
-  justify-self: flex-start;
-  margin: 0;
-  padding: 0;
   height: var(--dotSize);
-  min-height: var(--dotSize);
-  max-height: var(--dotSize);
   flex-grow: 1;
   flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  justify-self: flex-start;
+  text-align: left;
+  text-align-last: left;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] > .dotContainer {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'] > .dotContainer {
   --dotContainerWidth: calc(var(--dotSize) * var(--numDots) + var(--colGap) * (var(--numDots) - 1));
+  grid-template-columns: var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize);
   display: inline-grid;
-  height: var(--dotSize);
-  max-height: var(--dotSize);
-  min-height: var(--dotSize);
   width: var(--dotContainerWidth);
-  max-width: var(--dotContainerWidth);
   min-width: var(--dotContainerWidth);
+  max-width: var(--dotContainerWidth);
+  height: var(--dotSize);
   flex-grow: 0;
   flex-shrink: 0;
-  justify-self: flex-end;
-  grid-template-columns: var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize);
-  grid-template-rows: var(--dotSize);
   grid-column-gap: var(--colGap);
+  grid-template-rows: var(--dotSize);
+  justify-self: flex-end;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] > .dotContainer.blanks {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'] > .dotContainer.blanks {
   margin-right: calc(-1 * var(--dotContainerWidth));
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"] > .dotContainer.blanks .dot {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'] > .dotContainer.blanks .dot {
   --dotBright: transparent;
   --dotDark: transparent;
   box-shadow: inset 1px 1px 1px var(--blackFade60), inset -1px -1px 1px var(--white);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].dots10 {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'].dots10 {
   --numDots: 10;
   --dotContainerWidth: calc(var(--dotSize) * var(--numDots) + var(--colGap) * (var(--numDots) - 1));
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class~="dotline"].dots10 > .dotContainer {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class~='dotline'].dots10 > .dotContainer {
   grid-template-columns: var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize) var(--dotSize);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .bubble {
+.vtt.game.system-scion .app.window-app.scion.sheet * .bubble {
   overflow: hidden;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * .bubble p {
+.vtt.game.system-scion .app.window-app.scion.sheet * .bubble p {
   margin: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'] {
   display: inline-block;
-  height: 100px;
   width: 80px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
+  height: 100px;
   filter: hue-rotate(var(--colorPurviewRotate));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="sun"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'][class*='sun'] {
   background-image: url("../images/purviews/sun.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="passion"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'][class*='passion'] {
   background-image: url("../images/purviews/passion.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="geasa"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'][class*='geasa'] {
   background-image: url("../images/purviews/geasa.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="beauty"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'][class*='beauty'] {
   background-image: url("../images/purviews/beauty.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="fortune"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'][class*='fortune'] {
   background-image: url("../images/purviews/fortune.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="metamorphosis"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'][class*='metamorphosis'] {
   background-image: url("../images/purviews/metamorphosis.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"][class*="prosperity"] {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'][class*='prosperity'] {
   background-image: url("../images/purviews/prosperity.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet * [class|="purview"] span.text {
+.vtt.game.system-scion .app.window-app.scion.sheet * [class|='purview'] span.text {
   display: block;
   margin-top: 110%;
-  text-align: center;
-  font-family: Oswald;
-  text-transform: uppercase;
   margin-top: 95px;
+  font-family: Oswald;
   font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor {
+.vtt.game.system-scion .app.window-app.scion.sheet * .width10 {
+  width: 10%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height10 {
+  height: 10%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width20 {
+  width: 20%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height20 {
+  height: 20%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width30 {
+  width: 30%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height30 {
+  height: 30%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width40 {
+  width: 40%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height40 {
+  height: 40%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width50 {
+  width: 50%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height50 {
+  height: 50%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width60 {
+  width: 60%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height60 {
+  height: 60%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width70 {
+  width: 70%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height70 {
+  height: 70%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width80 {
+  width: 80%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height80 {
+  height: 80%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width90 {
+  width: 90%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height90 {
+  height: 90%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .width100 {
+  width: 100%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * .height100 {
+  height: 100%;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet.actor {
   /* #region Header Styles */
   /* #endregion */
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor header.window-header {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor header.window-header {
   width: 480px !important;
   margin-left: 140px !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor header.window-header.collapsed {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor header.window-header.collapsed {
   position: absolute !important;
   height: 120px !important;
   width: 100px !important;
@@ -2089,16 +2309,16 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor header.window-he
   padding: 0 !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor header.window-header.collapsed a.header-button {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor header.window-header.collapsed a.header-button {
   display: none !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active {
   height: 100%;
   width: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs {
   border: none;
   pointer-events: all;
   position: relative;
@@ -2107,7 +2327,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor section#characte
   margin-top: 10px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs .item {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs .item {
   margin: 0 0.25rem;
   font-weight: bold;
   font-size: 0.75rem;
@@ -2115,22 +2335,21 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor section#characte
   color: var(--accentUp4);
   background-color: var(--accentDown1);
   border-radius: 2rem;
-  box-shadow: 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3), 0px 0px 4px var(--accentDown3);
+  box-shadow: 0 0 4px var(--accentDown3), 0 0 4px var(--accentDown3), 0 0 4px var(--accentDown3);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs .item:hover {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs .item:hover {
   background-color: var(--accentUp4);
   color: var(--accentDown1);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs .item.active {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor section#characterSheet section.sheet-body section.tab.active nav.tabs .item.active {
   background-color: var(--accentUp2);
   color: var(--accentDown3);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .title {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor .title {
   width: calc(100% / var(--fontScaleTitle));
-  max-height: var(--maxHeightTitle);
   padding: var(--paddingTitle);
   color: var(--colorTitle);
   background: var(--bgTitle);
@@ -2147,7 +2366,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .title {
   border: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .surTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor .surTitle {
   width: calc(100% / var(--fontScaleH2));
   padding: var(--paddingH2);
   color: var(--colorH2);
@@ -2165,7 +2384,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .surTitle {
   border: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .subTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor .subTitle {
   width: calc(100% / var(--fontScaleH3));
   padding: var(--paddingH3);
   color: var(--colorH3);
@@ -2183,256 +2402,257 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor .subTitle {
   border: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor div.closeButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor div.closeButton {
   margin-right: 100px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette {
-  grid-area: menu;
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette {
+  position: absolute;
+  z-index: 2;
+  top: -65px;
+  left: -65px;
   display: block;
   width: 200px;
   height: 200px;
-  position: absolute;
-  left: -65px;
-  top: -65px;
-  z-index: 2;
-  background-image: var(--menuImage);
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 50%;
-  pointer-events: all;
   border: none;
+  border-radius: 50%;
+  content: '';
+  grid-area: menu;
+  pointer-events: all;
   transition: 0.5s;
+  background-position: center;
+  background-image: var(--menuImage);
+  background-repeat: no-repeat;
+  background-size: 50%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette:not(.collapsed):hover {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette:not(.collapsed):hover {
   background-size: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette:not(.collapsed):hover div.circleMenuContainer {
-  transform: scale(1) rotate(0deg);
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette:not(.collapsed):hover div.circleMenuContainer {
   opacity: 1;
+  transform: scale(1) rotate(0deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette .menuText {
-  display: block !important;
-  height: auto !important;
-  width: 200px !important;
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette .menuText {
   position: relative;
+  display: block !important;
+  width: 200px !important;
+  height: auto !important;
+  color: var(--colorMenuGlow);
+  letter-spacing: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(2);
+  transition: 0.25s !important;
   margin-top: -20px;
   margin-left: -50px !important;
-  color: var(--colorMenuGlow);
   font-family: var(--fontFamilyMenu);
   font-size: var(--fontSizeMenu);
   font-weight: bold;
   text-align: center;
   text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
   text-transform: uppercase;
-  letter-spacing: 10px;
-  opacity: 0;
-  transform: scale(2);
-  transition: 0.25s !important;
-  pointer-events: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer {
   position: relative;
-  width: 250px;
-  height: 250px;
   top: -25px;
   left: -25px;
+  width: 250px;
+  height: 250px;
   padding: 0;
   border-radius: 50%;
   list-style: none;
-  transform: scale(0.3) rotate(-125deg);
   opacity: 0;
+  transform: scale(0.3) rotate(-125deg);
   transition: 0.5s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > * {
-  display: block;
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > * {
   position: absolute;
   top: 50%;
   left: 50%;
+  display: block;
   width: 100px;
   height: 100px;
   margin: -50px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(1) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(1) {
   transform: rotate(135deg) translate(125px) rotate(-135deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(2) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(2) {
   transform: rotate(180deg) translate(125px) rotate(-180deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(3) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(3) {
   transform: rotate(225deg) translate(125px) rotate(-225deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(4) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(4) {
   transform: rotate(270deg) translate(125px) rotate(-270deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(5) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(5) {
   transform: rotate(315deg) translate(125px) rotate(-315deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(6) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(6) {
   transform: rotate(360deg) translate(125px) rotate(-360deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(7) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(7) {
   transform: rotate(405deg) translate(125px) rotate(-405deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(8) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer > *:nth-of-type(8) {
   transform: rotate(450deg) translate(125px) rotate(-450deg);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(1) > .menuButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(1) > .menuButton {
   animation-delay: 0.2s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(2) > .menuButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(2) > .menuButton {
   animation-delay: 0.4s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(3) > .menuButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(3) > .menuButton {
   animation-delay: 0.6s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(4) > .menuButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(4) > .menuButton {
   animation-delay: 0.8s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(5) > .menuButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer:nth-child(5) > .menuButton {
   animation-delay: 1s;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer div, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer a {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer div,
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer a {
   display: inline-block;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-position: center;
   transition: 0.5s;
+  background-position: center;
+  background-size: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton {
-  display: inline-block;
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton {
   position: relative;
-  height: 100%;
+  display: inline-block;
   width: 100%;
-  transition: 0.5s;
+  height: 100%;
   animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
+  transition: 0.5s;
 }
 
 @keyframes slowBob {
   from {
-    top: 0px;
+    top: 0;
   }
   to {
     top: 10px;
   }
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton:hover {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton:hover {
   transform: scale(1.2);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconMain {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconMain {
   background-image: url("../images/actor-sheet/menu/IconMain.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconChargen {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconChargen {
   background-image: url("../images/actor-sheet/menu/IconChargen.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconSettings {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconSettings {
   background-image: url("../images/actor-sheet/menu/IconSettings.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconExperience {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconExperience {
   background-image: url("../images/actor-sheet/menu/IconExperience.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconHeritage {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon.iconHeritage {
   background-image: url("../images/actor-sheet/menu/IconHeritage.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover {
   /* filter: drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)); */
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover + .menuText {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable .menuRosette div.circleMenuContainer .menuButtonContainer .menuButton .menuIcon:hover + .menuText {
   letter-spacing: normal;
-  transform: scale(1);
   opacity: 1;
+  transform: scale(1);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet {
-  height: 100%;
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet {
   width: 100%;
+  height: 100%;
   padding: 40px 60px 60px 40px;
-  transform-origin: 50px 50px;
-  transform: scale(1, 1) rotate3d(1, -1, 0, 0deg);
+  grid: 'header' 90px 'body' 560px;
+  opacity: 1;
   perspective: 100px;
-  transition-property: transform, perspective;
+  transform: scale(1, 1) rotate3d(1, -1, 0, 0deg);
+  transform-origin: 50px 50px;
   transition-delay: 0s;
   transition-duration: 0.5s;
+  transition-property: transform, perspective;
   transition-timing-function: ease;
   background-color: transparent;
   background-image: var(--bgActorSheet);
-  background-size: 100%;
   background-repeat: no-repeat;
-  opacity: 1;
-  grid: "header" 90px "body" 560px;
+  background-size: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet.collapsed {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet.collapsed {
+  perspective: 1000px;
   transform: scale3d(0.5, 0.5, 0.5) rotate3d(1, -1, 0, -70deg);
   transform: scale(0, 0) rotate3d(1, -1, 0, 90deg);
-  perspective: 1000px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header {
+  grid: '. surTitle .' 24px '. title .' 50px 'subTitle subTitle subTitle' 16px / 90px 470px 90px;
   grid-area: header;
-  grid: ". surTitle ." 24px ". title ." 50px "subTitle subTitle subTitle" 16px / 90px 470px 90px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header div {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header div {
   pointer-events: all;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header .divineTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header .divineTitle {
   grid-area: surTitle;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header .charName {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header .charName {
   grid-area: title;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header .patronage {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .header .patronage {
   grid-area: subTitle;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body {
   grid-area: body;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenOne .deed {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenOne .deed {
   margin: 3px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenOne .deed label {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenOne .deed label {
   width: 100px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block {
   background: var(--accentUp4Fade50);
   border-radius: 25px;
   border: 2px solid var(--accentDown2);
@@ -2441,126 +2661,119 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   overflow: hidden;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block > h2.alignLeft {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block > h2.alignLeft {
   text-indent: 12px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer {
   padding: 0 0 3px 3px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"] {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"] {
   margin: 3px;
   align-content: start;
   align-self: start;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span {
   margin: 2px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill:not(.empty) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill:not(.empty) {
   box-shadow: 1px 1px 3px var(--greyDown2);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill.pantheon {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="skills"] > span.skill.pantheon {
   filter: invert(100%);
   border-style: inset;
   border-color: var(--greyUp3);
   box-shadow: 1px 1px 3px var(--greyUp2);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] {
-  min-height: 84px;
-}
-
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .connectionDescription {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .connectionDescription {
   margin: 0 0 auto 0 !important;
   height: 50px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary {
   display: inline-block;
   padding: 3px;
   margin: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary:nth-child(4) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .pathContainer .path-block .pathContainer *[class*="subBlock"][class*="details"] .conditionContainer .conditionSummary:nth-child(4) {
   background-color: var(--accentDown2);
   color: white;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .skillSummary {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .skillSummary {
   transform: scale(0.75);
   margin-left: 5%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .skillSummary .skills {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .skillSummary .skills {
   flex: 0 1 33%;
   margin: 0 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .skillSummary .skills .dotline {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenTwo .skillSummary .skills .dotline {
   margin: 3px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid {
   --gridHeight: calc(560px - 26px - 10px - 5px - 32px);
   grid: "skillHeader skillHeader specHeader specHeader attrHeader attrHeader" 26px "skills skills specialties specialties attributes attributes" calc(var(--gridHeight) - 130px - 26px) "unassignedSkills unassignedSkills unassignedSkills unassignedAttrs unassignedAttrs unassignedAttrs" 130px/100px 100px 1fr 1fr 1fr 100px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2 {
   text-indent: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2.skillHeader {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2.skillHeader {
   grid-area: skillHeader;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2.specHeader {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2.specHeader {
   grid-area: specHeader;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2.attrHeader {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid h2.attrHeader {
   grid-area: attrHeader;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .skills {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .skills {
   grid-area: skills;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .skills .dotline-labelled {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .skills .dotline-labelled {
   margin: 2px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties {
   grid-area: specialties;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties .specialty {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties .specialty {
   width: 100%;
   height: 16px;
-  min-height: 16px;
-  max-height: 16px;
   margin: 2px;
   font-size: 14px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties .specialty .specialtyInput {
-  min-height: 16px;
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties .specialty .specialtyInput {
   margin: -2px 4px;
   border-width: 2px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties .specialty .specialtyInput.placeholder {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .specialties .specialty .specialtyInput.placeholder {
   font-size: 12px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes {
   grid-area: attributes;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block {
   margin: 0;
   border: 3px solid var(--accent);
   border-radius: 25px;
@@ -2570,7 +2783,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   overflow: hidden;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .attribute-block h3 {
   font-size: 16px;
   background: var(--bgH2);
   margin-left: -10px;
@@ -2578,60 +2791,60 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   width: 120%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .favoredApproach h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .favoredApproach h3 {
   font-size: var(--fontSizeBody);
   margin: 5px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .favoredApproach select {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .attributes .favoredApproach select {
   width: 80%;
   margin: 0px 5px 5px 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots {
   flex: 0 0 50%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots h2 {
   font-size: calc(var(--fontSizeH2) * 0.75);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedSkillDots {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedSkillDots {
   grid-area: unassignedSkills;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots {
   grid-area: unassignedAttrs;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots > div {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots > div {
   margin: 3px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots label {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenThree .grid .unassignedDots.unassignedAttrDots label {
   width: 75px;
   min-width: 75px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour {
   grid: "heading heading heading" 32px "dotsbin dotsbin dotsbin" 34px "calling1 calling2 calling3" 1fr "footer footer footer" 150px / 1fr 1fr 1fr;
   column-gap: 20px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > h1 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > h1 {
   grid-area: heading;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer {
   grid-area: dotsbin;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots {
   align-content: flex-start;
   margin: 3px 0 0 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > h2 {
   width: auto;
   flex-basis: auto;
   margin-right: 5px;
@@ -2640,29 +2853,27 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   text-shadow: var(--textShadowTitle);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > .dotline {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > .dotline {
   height: 26px;
   width: 50%;
-  min-height: 26px;
-  max-height: 26px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > .dotline > .dotBin {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .unassignedDotsContainer > .unassignedCallingDots > .dotline > .dotBin {
   transform: scale(1.5);
   transform-origin: left;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .dot[data-types*="general"] {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .dot[data-types*="general"] {
   --dotBright: #999;
   --dotDark: #0a0a0a;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .dot[data-types*="unassigned"] {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .dot[data-types*="unassigned"] {
   --dotBright: var(--accentUp4);
   --dotDark: var(--accentDown4);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling {
   transition: 0.5s;
   transform: translateY(0px) scale(1);
   position: relative;
@@ -2672,74 +2883,69 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   background-repeat: no-repeat;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(3) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(3) {
   grid-area: calling1;
   z-index: 49;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(4) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(4) {
   grid-area: calling2;
   z-index: 50;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(5) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:nth-of-type(5) {
   grid-area: calling3;
   z-index: 49;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:not(.glow) {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling:not(.glow) {
   /* filter: drop-shadow(3px 3px 3px var(--black)); */
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling > .gu-transit,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling .gu-unselectable > *,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling > .calling {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling > .gu-transit,
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling .gu-unselectable > *,
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling > .calling {
   display: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling span.knack.empty {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling span.knack.empty {
   pointer-events: none;
   background-image: url("../images/bubbles/knack-empty.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling .dotline {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling .dotline {
   margin-top: 15px;
   margin-bottom: 15px;
   transform: scale(1.5);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling h1 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling h1 {
   margin-top: 10px;
   border: none;
   font-size: calc(var(--fontSizeH1) * 1.5);
   text-transform: capitalize;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling h2 {
   pointer-events: none;
   background: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling div.knacksBackground {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling div.knacksBackground {
   height: 100px;
-  min-height: 100px;
-  max-height: 100px;
   margin-bottom: -100px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling div.knacks {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling div.knacks {
   height: 180px;
-  min-height: 180px;
-  max-height: 180px;
   margin-top: -130px;
   margin-bottom: -60px;
   padding-top: 30px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling div.keywords .contentEditable {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour > .calling div.keywords .contentEditable {
   flex: 0.4 0.4 40%;
   height: 14px;
-  min-height: 14px;
   margin: 2px;
   border-width: 2px;
   border-color: var(--greyUp1);
@@ -2748,6 +2954,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   font-size: 14px;
   font-weight: bold;
   font-variant: small-caps;
+  line-height: 0.75;
   text-indent: 0;
   text-transform: lowercase;
   text-shadow: 0 0 0 var(--black);
@@ -2757,16 +2964,15 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   background-position: bottom;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour #callingsList.popout {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour #callingsList.popout {
   width: 150px;
   height: 580px;
   left: 94%;
   top: 70px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.calling, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour h1.gu-mirror.callingHeader.handle {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.calling, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour h1.gu-mirror.callingHeader.handle {
   height: 40px;
-  min-height: 40px;
   width: 120px;
   margin: 5px 0;
   display: block;
@@ -2784,18 +2990,17 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   text-align: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.calling.patron, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour h1.gu-mirror.callingHeader.handle.patron {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.calling.patron, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour h1.gu-mirror.callingHeader.handle.patron {
   background-image: url("../images/bubbles/calling-patron.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.calling.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour h1.gu-mirror.callingHeader.handle.invalid {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.calling.invalid, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour h1.gu-mirror.callingHeader.handle.invalid {
   background-image: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack {
   display: block;
   height: 20px;
-  min-height: 20px;
   width: 176px;
   margin: 5px 0;
   color: var(--black);
@@ -2807,33 +3012,34 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   font-family: Oswald;
   font-size: 12px;
   font-weight: normal;
+  line-height: 1.5;
   text-transform: uppercase;
   text-shadow: var(--textShadowTitle);
   text-align: center;
+  filter: drop-shadow(2px 2px 2px black);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack:not(.invalid).generic {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack:not(.invalid).generic {
   background-image: url("../images/bubbles/knack-generic.png");
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack:not(.invalid).immortal {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack:not(.invalid).immortal {
   background-image: url("../images/bubbles/knack-immortal.png");
   height: 50px;
-  min-height: 50px;
+  line-height: 3;
   font-size: 16px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack.invalid {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour span.knack.invalid {
   background-image: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout {
   overflow: visible;
   padding: 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout > h1 {
-  min-height: 28px;
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout > h1 {
   margin: 0 0 5px 0;
   color: var(--black);
   font-family: Benguiat;
@@ -2844,37 +3050,37 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   border: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout > div {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout > div {
   padding: 0 0 10px 0;
   justify-content: space-around;
   height: calc(100% - 28px - 5px);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom {
   --panelWidth: 380px;
   width: var(--panelWidth);
   left: calc(50% - 0.5*(var(--panelWidth) + 2 * (var(--borderWidth) + 5px) + 15px));
   border-width: var(--borderWidth);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop > div, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom > div {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop > div, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom > div {
   padding-bottom: 0px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatBottom {
   --borderWidth: 10px;
   top: calc(100% - 210px);
   z-index: 60;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatTop {
   --borderWidth: 4px;
   bottom: calc(100% - 235px);
   z-index: 40;
   padding: 2px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatLeft, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatRight {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatLeft, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatRight {
   --panelHeight: 350px;
   height: var(--panelHeight);
   width: 180px;
@@ -2883,88 +3089,86 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   z-index: 48;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatLeft {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatLeft {
   left: -180px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatRight {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout.floatRight {
   right: -150px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack.immortal {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack.immortal {
   margin: 3px 2px;
   height: 20px;
-  min-height: 20px;
   font-size: 12px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack.invalid, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack.immortal.invalid {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack.invalid, .vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .knacksList.popout span.knack.immortal.invalid {
   height: 16px;
-  min-height: 16px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .footer {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.chargen-body .chargenFour .footer {
   grid-area: footer;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body {
   grid: "skills skills paths paths" 210px "skills skills callings callings" 80px "skills skills deeds deeds" 100px "attributes attributes attributes attributes" 100px ". . . ." 30px ". virtues virtues ." 40px/100px 90px 1fr 100px;
   column-gap: 0.5rem;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills {
   grid-area: skills;
   flex-flow: column nowrap;
   justify-content: space-between;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills .specSummary {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills .specSummary {
   font-size: calc(var(--fontSizeBody) * 0.75);
   margin: -5px 0 0 15px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills .dotGrabBin {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills .dotGrabBin {
   flex-wrap: wrap;
   height: auto;
   justify-content: flex-end;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills .dotDropBin {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .skills .dotDropBin {
   margin-bottom: 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths {
   grid-area: paths;
   grid: "heading" 1.5rem "originpath" 5rem "rolepath" 5rem "pantheonpath" 5rem;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .heading {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .heading {
   grid-area: heading;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .originpath {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .originpath {
   grid-area: originpath;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .rolepath {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .rolepath {
   grid-area: rolepath;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pantheonpath {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pantheonpath {
   grid-area: pantheonpath;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble {
-  height: 22.8px;
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble {
   width: 290.4px;
+  height: 22.8px;
+  box-sizing: content-box;
   padding: 3.6px 4.8px;
   margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x10.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
   text-align: center;
-  box-sizing: content-box;
+  background-image: url("../images/bubbles/Bubble1x10.png");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   font-family: "Poiret One";
   font-weight: bold;
   font-size: 14px;
@@ -2972,56 +3176,57 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   text-align-last: left;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble .bubbleWrap::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble .bubbleWrap::before {
   width: 18.3px;
   height: 22.8px;
+  content: '';
   float: left;
   shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble::before {
   width: 18.3px;
   height: 22.8px;
+  content: '';
   float: right;
   shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble span, body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble p {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble span,
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble p {
   display: block;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble .bubbleTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .paths .pathBubble .bubbleTitle {
   display: block;
   grid-area: title;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .callings {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .callings {
   grid-area: callings;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .deeds {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .deeds {
   grid-area: deeds;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .attributes {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .attributes {
   grid-area: attributes;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .attributes .arena-block {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .attributes .arena-block {
   margin: 5px 17px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .virtues {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .virtues {
   grid-area: virtues;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .virtues > div {
+.vtt.game.system-scion .app.window-app.scion.sheet.actor.major form.editable section#characterSheet .sheet-body section.front-body .virtues > div {
   border-radius: 1rem;
   background-color: var(--accentFade50);
   border: 3px outset var(--accent);
@@ -3030,13 +3235,13 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.actor.major form.edita
   padding: 0 10px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item header.window-header {
+.vtt.game.system-scion .app.window-app.scion.sheet.item header.window-header {
   height: 20px;
   margin-top: -20px;
   margin-bottom: -10px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable {
   height: 100%;
   width: 100%;
   padding: 20px 20px 60px 20px;
@@ -3049,7 +3254,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable {
   box-sizing: border-box;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable::after {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable::after {
   content: "";
   position: absolute;
   pointer-events: none;
@@ -3064,17 +3269,17 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable::af
   z-index: 1;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable h1, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .h1, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable h2, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable h1, .vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .h1, .vtt.game.system-scion .app.window-app.scion.sheet.item form.editable h2, .vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .h2 {
   width: 103%;
   margin: 5px 0;
   margin-left: -2%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable h1, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .h1 {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable h1, .vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .h1 {
   border: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable h2, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable h2, .vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .h2 {
   color: black;
   background: var(--whiteFade50);
   border-bottom: 2px solid black;
@@ -3083,61 +3288,62 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable h2,
   text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable div.closeButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable div.closeButton {
   margin-bottom: 0;
   right: -413px;
   top: 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition {
-  height: 57px;
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition {
   width: 207px;
+  height: 57px;
+  box-sizing: content-box;
   padding: 9px 9px;
   margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x3.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
   text-align: center;
-  box-sizing: content-box;
+  background-image: url("../images/bubbles/Bubble1x3.png");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   justify-content: start;
   margin: 4px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap::before {
   width: 24px;
   height: 57px;
+  content: '';
   float: left;
   shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition::before {
   width: 24px;
   height: 57px;
+  content: '';
   float: right;
   shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition span, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition p {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition span,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition p {
   display: block;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleTitle {
   display: block;
   grid-area: title;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap {
   height: 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap .bubbleTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap .bubbleTitle {
   height: 25%;
   margin: 0;
   padding: 0;
@@ -3149,7 +3355,7 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bu
   text-transform: uppercase;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap .bubbleBody {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.condition .bubbleWrap .bubbleBody {
   height: 75%;
   margin: 0;
   padding: 0;
@@ -3160,104 +3366,104 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bu
   font-weight: normal;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connnection.group,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.access {
-  height: 30.4px;
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connnection.group,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.access {
   width: 188.8px;
+  height: 30.4px;
+  box-sizing: content-box;
   padding: 4.8px 5.6px;
   margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x5.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
   text-align: center;
-  box-sizing: content-box;
+  background-image: url("../images/bubbles/Bubble1x5.png");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connnection.group .bubbleWrap::before,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.access .bubbleWrap::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connnection.group .bubbleWrap::before,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.access .bubbleWrap::before {
   width: 16px;
   height: 30.4px;
+  content: '';
   float: left;
   shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connnection.group::before,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.access::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connnection.group::before,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.access::before {
   width: 16px;
   height: 30.4px;
+  content: '';
   float: right;
   shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connnection.group span, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connnection.group p,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.access span,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.access p {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connnection.group span,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connnection.group p,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.access span,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.access p {
   display: block;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connnection.group .bubbleTitle,
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.access .bubbleTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connnection.group .bubbleTitle,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.access .bubbleTitle {
   display: block;
   grid-area: title;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.contact {
-  height: 30.4px;
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.contact {
   width: 227.2px;
+  height: 30.4px;
+  box-sizing: content-box;
   padding: 4.8px 6.4px;
   margin: 4px;
-  background-image: url("../images/bubbles/Bubble1x6.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-origin: border-box;
   text-align: center;
-  box-sizing: content-box;
+  background-image: url("../images/bubbles/Bubble1x6.png");
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.contact .bubbleWrap::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.contact .bubbleWrap::before {
   width: 24.4px;
   height: 30.4px;
+  content: '';
   float: left;
   shape-outside: polygon(0% 100%, 0% 0%, 100% 0%, 0% 50%, 100% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.contact::before {
-  content: "";
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.contact::before {
   width: 24.4px;
   height: 30.4px;
+  content: '';
   float: right;
   shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.contact span, body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.contact p {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.contact span,
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.contact p {
   display: block;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item form.editable .bubble.connection.contact .bubbleTitle {
+.vtt.game.system-scion .app.window-app.scion.sheet.item form.editable .bubble.connection.contact .bubbleTitle {
   display: block;
   grid-area: title;
   text-align: center;
   text-align-last: center;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable h2 {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable h2 {
   background: var(--whiteFade70);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .contentEditable:not(.h2) {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .contentEditable:not(.h2) {
   --padding: 5px;
-  min-height: none;
-  max-height: none;
   font-size: 14px;
   text-indent: 0;
   padding: var(--padding);
@@ -3266,26 +3472,25 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editabl
   background-color: var(--blackFade75) !important;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .contentEditable:not(.h2).placeholder {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .contentEditable:not(.h2).placeholder {
   font-size: 12px;
   /* line-height: 16px; */
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathDescription .contentEditable {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathDescription .contentEditable {
   height: calc(var(--lineHeight) * 3 + var(--padding));
   margin-bottom: 5px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathSkills:not(.mirrorContainer) {
-  min-height: 28px;
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills:not(.mirrorContainer) {
   margin-bottom: 6px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill {
   margin: 2px calc((100% - 3 * 120px) / 6);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill.invalid {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill.invalid {
   background: none;
   border-color: transparent;
   color: var(--greyDown3);
@@ -3294,63 +3499,62 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editabl
   box-shadow: none;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill.pantheon {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill.pantheon {
   filter: invert(100%);
   border-style: inset;
   border-color: var(--greyUp3);
   box-shadow: 3px 3px 3px var(--greyUp2), 3px 3px 3px var(--greyUp2), 3px 3px 3px var(--greyUp2);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathSkills#skillList {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills#skillList {
   width: 150px;
   height: 480px;
   left: 94%;
   top: 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathSkills#skillList span.skill {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills#skillList span.skill {
   margin: 2px 0;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathConnections .contentEditable {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathConnections .contentEditable {
   height: calc(var(--lineHeight) * 3 + var(--padding));
   padding: 2px var(--padding) 12px var(--padding);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .pathCondition {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathCondition {
   padding-left: 10px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable h3, body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable .h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable h3, .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .h3 {
   text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.path form.editable div.closeButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable div.closeButton {
   right: -443px;
   top: 14px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable h1 {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable h1 {
   font-size: 24px;
   height: 24px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable h3 {
   display: inline-block;
   width: calc(100% - 30px);
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable input.toggleBox {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable input.toggleBox {
   height: 30px;
   width: 30px;
   margin: -36px 0 0 24px;
   float: left;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable div#conditionDescription, body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable div#conditionResolution {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable div#conditionDescription, .vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable div#conditionResolution {
   height: 55px;
   display: block;
-  max-height: 60px;
   font-size: 14px;
   text-indent: 0;
   padding: 5px;
@@ -3361,12 +3565,12 @@ body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.ed
   padding-top: 2px;
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable div#conditionDescription {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable div#conditionDescription {
   height: 40px;
-  max-height: 40px;
+  /* max-height: 40px; */
 }
 
-body.vtt.game.system-scion div.app.window-app.scion.sheet.item.condition form.editable div.closeButton {
+.vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable div.closeButton {
   right: -348px;
   top: 10px;
 }

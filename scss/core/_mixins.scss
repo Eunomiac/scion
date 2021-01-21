@@ -3,30 +3,30 @@
 /* General-Purpose Mixins */
 @mixin element-invisible {
     position: absolute;
+    overflow: hidden;
 
     width: 1px;
     height: 1px;
-    margin: -1px;
-    border: 0;
     padding: 0;
+    border: 0;
+    margin: -1px;
 
     clip: rect(0 0 0 0);
-    overflow: hidden;
 }
 @mixin placeholderText {
     color: var(--colorPlaceholder);
     font: {
         family: var(--fontFamilyPlaceholder);
         size: var(--fontSizePlaceholder);
-    style: var(--fontStylePlaceholder);
+        style: var(--fontStylePlaceholder);
         variant: var(--fontVariantPlaceholder);
         weight: var(--fontWeightPlaceholder);
     }
     // line-height: var(--lineHeightPlaceholder);
     text: {
-        transform: var(--textTransformPlaceholder);
         indent: var(--textIndentPlaceholder);
         shadow: var(--textShadowPlaceholder);
+        transform: var(--textTransformPlaceholder);
     }
 }
 @mixin repeat($rep-val, $rep-count, $propertyName, $delim: comma) {
@@ -39,20 +39,20 @@
 } 
 @mixin on-circle($item-count, $inner-circle-size, $outer-circle-size, $item-size, $initial-rotation) {
     position: relative;
-    width:  $outer-circle-size;
-    height: $outer-circle-size;
     top: -($outer-circle-size - $inner-circle-size)/2;
     left: -($outer-circle-size - $inner-circle-size)/2;
+    width: $outer-circle-size;
+    height: $outer-circle-size;
     padding: 0;
-    border-radius: 50%; 
-    list-style: none;       
+    border-radius: 50%;
+    list-style: none;
 
     > * {
-        display: block;
         position: absolute;
-        top:  50%; 
+        top: 50%;
         left: 50%;
-        width:  $item-size;
+        display: block;
+        width: $item-size;
         height: $item-size;
         margin: -($item-size / 2);
 
@@ -90,12 +90,12 @@
     }
     #{$propertyName}: $fullShadow;
 }
-@mixin embossed-text($distance: 1px, $blur: 0px, $colorBright: var(--white), $colorDark: var(--black), $propertyName: text-shadow) {
+@mixin embossed-text($distance: 1px, $blur: 0, $colorBright: var(--white), $colorDark: var(--black), $propertyName: text-shadow) {
     $shadowBright: #{$distance * -1} #{$distance * -1} #{$blur} #{$colorBright};
     $shadowDark: #{$distance} #{$distance} #{$blur} #{$colorDark};
     #{$propertyName}: join(#{$shadowBright}, #{$shadowDark}, $separator: comma);
 }
-@mixin box-shadow($distance: 0px, $size: 5px, $color: $c-black, $isInset: false, $repeats: 3) {
+@mixin box-shadow($distance: 0, $size: 5px, $color: $c-black, $isInset: false, $repeats: 3) {
     $shadowPart: $distance $distance $size $color;
     @if $isInset { $shadowPart: inset $shadowPart; }
     $shadowFull: ();
@@ -109,46 +109,47 @@
 }
 @mixin bg-stoneTablet() {
     background: {
-        image: var(--bgItemSheet);
-        size: 100% 100%;
         position: center;
+        image: var(--bgItemSheet);
         repeat: no-repeat;
+        size: 100% 100%;
     }
+
     &::after {
-        content: "";
         position: absolute;
-        pointer-events: none;
         top: 0;
         left: 0;
-        height: 100%;
         width: 100%;
+        height: 100%;
+        content: '';
+        pointer-events: none;
         background: {
-            image: var(--bgItemOverlay);
-            size: 100% 100%;
             position: center;
+            image: var(--bgItemOverlay);
             repeat: no-repeat;
+            size: 100% 100%;
         }      
     }
 }
-@mixin bubble($bubbleSize: 6, $bubbleHeight: 24px, $bubbleMargin: 4px, $isShowingTestBG: false) {
+@mixin bubble($bubbleSize: 6, $bubbleHeight: 24px, $bubbleMargin: 4px) {
     $sizeRatio: $bubbleHeight / 100px; // Raw Image Height = 100px.
     $paddingLookup: (
-       2: 12px,
-       3: 12px,
-       4: 14px,
-       5: 14px,
-       6: 16px,
-       8: 16px,
-       10: 16px
+        2: 12px,
+        3: 12px,
+        4: 14px,
+        5: 14px,
+        6: 16px,
+        8: 16px,
+        10: 16px
     );
     $indentLookup: (
-       2: 112px,
-       3: 212px,
-       4: 292px,
-       5: 392px,
-       6: 446px,
-       8: 646px,
-       10: 846px
+        2: 112px,
+        3: 212px,
+        4: 292px,
+        5: 392px,
+        6: 446px,
+        8: 646px,
+        10: 846px
     );
  
     $bubbleWidth: $bubbleSize * (100px * $sizeRatio);
@@ -161,71 +162,60 @@
  
     $middleWidth: map-get($indentLookup, $bubbleSize) * $sizeRatio;
     $topIndent: ($innerWidth - $middleWidth) / 2;
-    $bgImage: url("../images/bubbles/Bubble1x#{$bubbleSize}.png");
+    $bgImage: url('../images/bubbles/Bubble1x#{$bubbleSize}.png');
     
-    @if ($isShowingTestBG) {
-       $bgImage: url("../images/bubbles/TestBubble1x#{$bubbleSize}.png");
-    }
+    width: $innerWidth;
  
     height: $innerHeight;
-    width: $innerWidth;
+    box-sizing: content-box;
     padding: $vertPad $horizPad;
     margin: $bubbleMargin;
+    text-align: center;
  
     background: {
-       image: $bgImage;
-       size: 100% 100%;
-       repeat: no-repeat;
-       origin: border-box;
+        image: $bgImage;
+        origin: border-box;
+        repeat: no-repeat;
+        size: 100% 100%;
     }
-    text-align: center;
-    box-sizing: content-box;
     // filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5)); 
      
     .bubbleWrap::before {
-       content: "";
-       width: $topIndent;
-       height: $innerHeight;
-       float: left;
-       shape-outside: polygon(
-          0% 100%,
-          0% 0%,
-          100% 0%,
-          0% 50%,
-          100% 100%
-          );
-    }    
-      
-      &::before {
-        content: "";
         width: $topIndent;
         height: $innerHeight;
+        content: '';
+        float: left;
+        shape-outside: polygon(0% 100%,
+        0% 0%,
+        100% 0%,
+        0% 50%,
+        100% 100%);
+    }    
+      
+    &::before {
+        width: $topIndent;
+        height: $innerHeight;
+        content: '';
         float: right;
         shape-outside: polygon(100% 100%, 100% 0%, 0% 0%, 100% 50%, 0% 100%);
-      }
+    }
      
-     span, p {
+    span,
+    p {
         display: block;
         text: {
-           align: center;
-           align-last: center;
+            align: center;
+            align-last: center;
         }
-        @if ($isShowingTestBG) {
-           background: rgba(0, 255, 255, 0.5);
-           box-shadow: inset 0 0 1px purple, inset 0 0 1px purple, inset 0 0 1px purple;
-        }
-     }
-     .bubbleTitle {
+    }
+
+    .bubbleTitle {
         display: block;
         grid-area: title;
-        @if ($isShowingTestBG) {
-           background: rgba(255, 145, 0, 0.5);
-           box-shadow: inset 0 0 1px green, inset 0 0 1px green, inset 0 0 1px green;
-        }
         text: {
-           align: center;
-           align-last: center;
+            align: center;
+            align-last: center;
         }
-     }
-  }
+    }
+}
 /* #endregion */

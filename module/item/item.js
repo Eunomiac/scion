@@ -1,11 +1,11 @@
 import {U, MIX, MIXINS} from "../modules.js";
-// import "../external/dragula.min.js";
+// import "../external/dragula.min.js"
 
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
  */
-export class ScionItem extends Item {
+export default class ScionItem extends Item {
     // Getters: Data Retrieval    
     get ent() { return typeof this.entity === "string" ? this : this.entity }
     get sht() { return this.ent.sheet }
@@ -31,7 +31,6 @@ export class ScionItem extends Item {
         const {data} = this.data;
         const actorData = this.actor?.data ?? {};
     }
-
 
     getActorItems(itemType) { return this.actor?.items.filter((item) => item.type === itemType) }
 }

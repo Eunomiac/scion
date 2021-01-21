@@ -1,12 +1,12 @@
 // import {THROW} from "../data/utils.js";
-// import _$1 from "../external/underscore/underscore-esm-min.js";
+// import _$1 from "../external/underscore/underscore-esm-min";
 import {_, U, SCION, MIX, MIXINS} from "../modules.js";
 
 /**
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export class ScionActor extends Actor {
+export default class ScionActor extends Actor {
     // Getters: Data Retrieval
     get ent() { return typeof this.entity === "string" ? this : this.entity }
     get sht() { return this.ent.sheet }
@@ -115,6 +115,7 @@ export class ScionActor extends Actor {
     }
 
     async updatePathConditionLinks() {
+        const updatePromises = [];
         for (const pathType of ["origin", "role", "pantheon"]) {
             const pathUpdateData = {};
             const pathItem = this[`${pathType}Path`];
@@ -122,14 +123,13 @@ export class ScionActor extends Actor {
                 const conditionItem = this.conditions.find((item) => item.eData.type === conditionType && item.eData.linkedItem === pathType);
                 if (conditionItem) {
                     U.LOG(U.IsDebug() && {conditionItem, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Linking ${conditionType} Condition ...`, this.name);
-                    await conditionItem.update({"data.linkedItem": pathItem.id});
+                    updatePromises.push(conditionItem.update({"data.linkedItem": pathItem.id}));
                     pathUpdateData[`data.conditions.${conditionType}`] = conditionItem.id;
                 }
             }
-            U.LOG(U.IsDebug() && {pathUpdateData, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Conditions Linked! Updating ${U.TCase(pathType)} Path Data ...`, this.name);
-            await pathItem.update(pathUpdateData);
-            U.LOG(U.IsDebug() && {pathUpdateData, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Path Updated!`, this.name);
+            updatePromises.push(pathItem.update(pathUpdateData));
         }
+        return Promise.all(updatePromises);
     }
 
     async updatePantheon(pantheon) {
@@ -407,7 +407,6 @@ export class ScionActor extends Actor {
         });
     }
     // #endregion
-    
     
     /* #endregion */
 

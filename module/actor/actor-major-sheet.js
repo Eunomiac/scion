@@ -1,10 +1,9 @@
 import {_, U, SCION, itemCategories, Dragger} from "../modules.js";
-import {ScionActorSheet} from "./actor-sheet.js";
+import ScionActorSheet from "./actor-sheet.js";
 import "../external/dragula.min.js";
 import {THROW} from "../data/utils.js";
 
-
-export class MajorActorSheet extends ScionActorSheet {
+export default class MajorActorSheet extends ScionActorSheet {
     static get classDefaultOptions() {
         return {
             classes: [...super.defaultOptions.classes, "major"],
@@ -386,7 +385,7 @@ export class MajorActorSheet extends ScionActorSheet {
                     await remCalling(source);
                 }
             });
-            callingDragger.on("drop", async (element, target, source) => await addCalling(element, target, source));
+            callingDragger.on("drop", async (element, target, source) => addCalling(element, target, source));
             callingDragger.on("over", (element, target) => {this.currentlyOver = target; addHoverGlow(element, target)});
             callingDragger.on("out", (element, target) => {this.currentlyOver = null; remHoverGlow(element, target)});
             
@@ -395,14 +394,12 @@ export class MajorActorSheet extends ScionActorSheet {
                 this.render();
             });
 
-            const isKnackTargetDroppable = (element, target, source) => {
-                return source.classList.contains("knackBin") && target.classList.contains("knackBin") && (
-                    (source.dataset.binid === target.dataset.binid)
+            const isKnackTargetDroppable = (element, target, source) => source.classList.contains("knackBin") && target.classList.contains("knackBin") && (
+                (source.dataset.binid === target.dataset.binid)
                 || (target.classList.contains("knackDrop")
                     && ["any", target.dataset.calling].includes(element.dataset.calling)
                     && this.actor.unassignedKnackDots[target.dataset.calling] >= (SCION.KNACKS.list[element.dataset.knack].tier === "immortal" ? 2 : 1))
-                );
-            };
+            );
             const addKnack = async (knackElement, targetBin, sourceBin) => {
                 const knackData = U.Clone(knackElement.dataset);
                 const targetData = U.Clone(targetBin.dataset);
@@ -476,9 +473,9 @@ export class MajorActorSheet extends ScionActorSheet {
                     });
                 }, 500);
             });      
-            knackDragger.on("remove", async (...args) => await removeKnack.bind(this)(...args));
-            knackDragger.on("cancel", async (...args) => await cancelKnack.bind(this)(...args));
-            knackDragger.on("drop", async (...args) => await addKnack.bind(this)(...args));
+            knackDragger.on("remove", async (...args) => removeKnack.bind(this)(...args));
+            knackDragger.on("cancel", async (...args) => cancelKnack.bind(this)(...args));
+            knackDragger.on("drop", async (...args) => addKnack.bind(this)(...args));
 
             // #endregion
 
@@ -536,7 +533,6 @@ export class MajorActorSheet extends ScionActorSheet {
                     });
                 });
             }); */
-
 
             // #endregion
             

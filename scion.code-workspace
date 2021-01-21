@@ -24,14 +24,14 @@
 			"README.md": true,
 			"package.json": true,
 			"package-lock.json": true,
-			".prettierrc.js": true,
-			".gitignore": true,
+			".prettierrc.js": false,
+			".gitignore": false,
 			".npmignore": true,
 			"gulpfile.js": true,
 			"scss/canvas": true,
 			"scss/window": true,
 			"module/external": false,
-			".eslintignore": true
+			".eslintignore": false
 		},
 		"explorerExclude.backup": null
 		

@@ -1,7 +1,7 @@
 import {MIX, ItemMixins as MIXINS, SCION, U, _} from "../modules.js";
-import {ScionItemSheet} from "./item-sheet.js";
+import ScionItemSheet from "./item-sheet.js";
 
-export class BirthrightItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
+export default class BirthrightItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             "classes": [...super.defaultOptions.classes, "birthright"],

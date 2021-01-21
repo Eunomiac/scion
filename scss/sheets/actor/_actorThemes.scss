@@ -1,203 +1,199 @@
 $pantheonThemes: (
-    "aesir": (
-        "typography": (  
-            "Title": (
-                "fontFamily": 'Amarante'
+    'aesir': (
+        'typography': (  
+            'Title': (
+                'fontFamily': 'Amarante'
             ),
-            "H1": (
-                "fontFamily": 'Amarante'
+            'H1': (
+                'fontFamily': 'Amarante'
             )
         )
     ),
-    "deva": (),
-    "kami": (),
-    "loa": (
-        "colors": (
-            "MenuGlow": #dd0000,
-            "PurviewRotate": 225deg
+    'deva': (),
+    'kami': (),
+    'loa': (
+        'colors': (
+            'MenuGlow': #d00,
+            'PurviewRotate': 225deg
         ),
-        "typography": (  
-            "Title": (
-                "fontFamily": 'Finger Paint',
-                "fontSize": 2rem
+        'typography': (  
+            'Title': (
+                'fontFamily': 'Finger Paint',
+                'fontSize': 2rem
             ),
-            "H1": (
-                "fontFamily": 'Finger Paint'
+            'H1': (
+                'fontFamily': 'Finger Paint'
             )
         )
     ),
-    "manitou": (),
-    "netjer": (
-        "colors": (
-            "Title": #554a39,
-            "H1": #554a39,
-            "H2": #6e4a28,
-            "H3": #6e4a28,
-            "accent": #836a07,
-            "Highlight": #f6f0e2,
-            "Shadow": #2d2d2f,
-            "MenuGlow": #ffdd00,
-            "PurviewRotate": 245deg
+    'manitou': (),
+    'netjer': (
+        'colors': (
+            'Title': #554a39,
+            'H1': #554a39,
+            'H2': #6e4a28,
+            'H3': #6e4a28,
+            'accent': #836a07,
+            'Highlight': #f6f0e2,
+            'Shadow': #2d2d2f,
+            'MenuGlow': #fd0,
+            'PurviewRotate': 245deg
         ),
-        "BGs": (),
-        "typography": (
-            "Title": (
-                "fontFamily": 'Carolingia',
-                "fontSize": 40px,
-                "fontVariant": small-caps,
-                "fontWeight": bold,
-                "lineHeight": 50px
+        'BGs': (),
+        'typography': (
+            'Title': (
+                'fontFamily': 'Carolingia',
+                'fontSize': 40px,
+                'fontVariant': small-caps,
+                'fontWeight': bold
             ),
-            "H1": (
-                "fontFamily": 'Gothic Ultra',
-                "fontSize": 32px,
-                "lineHeight": 36px,
-                "fontVariant": none
+            'H1': (
+                'fontFamily': 'Alberta',
+                'lineHeight': 1
             ),
-            "H2": (
-                "fontFamily": 'Carolingia',
-                "fontSize": 24px
+            'H2': (
+                'fontFamily': 'Alberta',
+                'lineHeight': 1.5
             ),
-            "H3": (
-                "fontFamily": 'Carolingia',
-                "fontSize": 20px,
-                "lineHeight": 16px
+            'H3': (
+                'fontFamily': 'Khaleefa',
+                'fontSize': 24px
             )
         )
     ),
-    "shen": (),
-    "teotl": (),
-    "theoi": (
-        "colors": (
-            "Title": #000fb8,
-            "H1": #000fb8,
-            "H2": #4757ff,
-            "H3": #000b85,
-            "accent": #8e52ff,
-            "MenuGlow": #00ffff,
-            "PurviewRotate": 100deg
+    'shen': (),
+    'teotl': (),
+    'theoi': (
+        'colors': (
+            'Title': #000fb8,
+            'H1': #000fb8,
+            'H2': #4757ff,
+            'H3': #000b85,
+            'accent': #8e52ff,
+            'MenuGlow': #0ff,
+            'PurviewRotate': 100deg
         ),
-        "BGs": (),
-        "typography": (  
-            "Title": (
-                "fontFamily": 'Poiret One',
-                "fontWeight": bold
+        'BGs': (),
+        'typography': (  
+            'Title': (
+                'fontFamily': 'Poiret One',
+                'fontWeight': bold
             ),
-            "H1": (
-                "fontFamily": 'Poiret One',
-                "fontWeight": bold,
-                "fontVariant": small-caps
+            'H1': (
+                'fontFamily': 'Poiret One',
+                'fontWeight': bold,
+                'fontVariant': small-caps
             ),
-            "H2": (
-                "fontFamily": 'Roman Font 7'
+            'H2': (
+                'fontFamily': 'Roman Font 7'
             ),
-            "H3": (
-                "fontFamily": 'Poiret One',
-                "fontSize": 20px,
-                "fontVariant": small-caps,
-                "fontWeight": normal,
-                "textShadow": (shadow-glow, 5, 1px, var(--colorH2))
+            'H3': (
+                'fontFamily': 'Poiret One',
+                'fontSize': 20px,
+                'fontVariant': small-caps,
+                'fontWeight': normal,
+                'textShadow': (shadow-glow, 5, 1px, var(--colorH2))
             ),
-            "Body": (
-                "fontFamily": 'Poiret One',
-                "textShadow": (shadow-glow, 6, 0px, var(--black))
+            'Body': (
+                'fontFamily': 'Poiret One',
+                'textShadow': (shadow-glow, 6, 0, var(--black))
             ),
-            "Strong": (
-                "fontWeight": normal,
-                "textShadow": (shadow-glow, 9, 1px, var(--black))
+            'Strong': (
+                'fontWeight': normal,
+                'textShadow': (shadow-glow, 9, 1px, var(--black))
             ),
-            "Weak": (
-                "textShadow": (shadow-glow, 6, 0px, var(--greyUp2))
+            'Weak': (
+                'textShadow': (shadow-glow, 6, 0, var(--greyUp2))
             ),
-            "Placeholder": (
-                "textShadow": none
+            'Placeholder': (
+                'textShadow': none
             )
         )
     ),   
-    "tuathaDeDanann": (
-        "colors": (
-            "Title": #296f17,
-            "H1": #296f17,
-            "H2": #0d3005,
-            "H3": #19430e,
-            "accent": #25951f,
-            "MenuGlow": #00ff00,
-            "PurviewRotate": 330deg
+    'tuathaDeDanann': (
+        'colors': (
+            'Title': #296f17,
+            'H1': #296f17,
+            'H2': #0d3005,
+            'H3': #19430e,
+            'accent': #25951f,
+            'MenuGlow': #0f0,
+            'PurviewRotate': 330deg
         ),
-        "BGs": (),
-        "typography": (  
-            "Title": (
-                "fontFamily": 'Berkshire Swash',
-                "fontSize": 40px
+        'BGs': (),
+        'typography': (  
+            'Title': (
+                'fontFamily': 'Berkshire Swash',
+                'fontSize': 40px
             ),
-            "H1": (
-                "fontFamily": 'Berkshire Swash',
-                "fontVariant": normal
+            'H1': (
+                'fontFamily': 'Berkshire Swash',
+                'fontVariant': normal
             ),
-            "H2": (
-                "fontFamily": 'Della Respira'
+            'H2': (
+                'fontFamily': 'Della Respira'
             ),
-            "H3": (
-                "fontFamily": 'Della Respira',
-                "fontStyle": italic,
-                "fontWeight": bold
+            'H3': (
+                'fontFamily': 'Della Respira',
+                'fontStyle': italic,
+                'fontWeight': bold
             )
         )
     ),
-    "nemetondevos": (),
-    "orisha": (
-        "colors": (
-            "Title": #000fb8,
-            "H1": #000fb8,
-            "H2": #4757ff,
-            "H3": #000b85,
-            "accent": #8e52ff,
-            "MenuGlow": #00ffff,
-            "PurviewRotate": 100deg
+    'nemetondevos': (),
+    'orisha': (
+        'colors': (
+            'Title': #000fb8,
+            'H1': #000fb8,
+            'H2': #4757ff,
+            'H3': #000b85,
+            'accent': #8e52ff,
+            'MenuGlow': #0ff,
+            'PurviewRotate': 100deg
         ),
-        "BGs": (),
-        "typography": (  
-            "Title": (
-                "fontFamily": 'Poiret One',
-                "fontWeight": bold
+        'BGs': (),
+        'typography': (  
+            'Title': (
+                'fontFamily': 'Poiret One',
+                'fontWeight': bold
             ),
-            "H1": (
-                "fontFamily": 'Poiret One',
-                "fontWeight": bold,
-                "fontVariant": small-caps
+            'H1': (
+                'fontFamily': 'Poiret One',
+                'fontWeight': bold,
+                'fontVariant': small-caps
             ),
-            "H2": (
-                "fontFamily": 'Elektra'
+            'H2': (
+                'fontFamily': 'Elektra'
             ),
-            "H3": (
-                "fontFamily": 'Poiret One',
-                "fontSize": 20px,
-                "fontVariant": small-caps,
-                "fontWeight": normal,
-                "textShadow": (shadow-glow, 5, 1px, var(--colorH2))
+            'H3': (
+                'fontFamily': 'Poiret One',
+                'fontSize': 20px,
+                'fontVariant': small-caps,
+                'fontWeight': normal,
+                'textShadow': (shadow-glow, 5, 1px, var(--colorH2))
             ),
-            "Body": (
-                "fontFamily": 'Poiret One',
-                "textShadow": (shadow-glow, 6, 0px, var(--black))
+            'Body': (
+                'fontFamily': 'Poiret One',
+                'textShadow': (shadow-glow, 6, 0, var(--black))
             ),
-            "Strong": (
-                "fontWeight": normal,
-                "textShadow": (shadow-glow, 9, 1px, var(--black))
+            'Strong': (
+                'fontWeight': normal,
+                'textShadow': (shadow-glow, 9, 1px, var(--black))
             )
         )
     ),
-    "yazata": (),
-    "teros": ()
+    'yazata': (),
+    'teros': ()
 );
 
-@each $pantheon, $themeMap in $pantheonThemes {
+@each $pantheon, $themeMap in $pantheonThemes { 
     .#{$pantheon} {    
-        --bgActorSheet: url("../images/actor-sheet/backgrounds/bgActor-#{$pantheon}.png");
-        --menuImage: url("../images/actor-sheet/menu/rosette-#{$pantheon}.png");
-        @if type-of($themeMap) == "map" {
-            @include set-colors(map-get($themeMap, "colors"), $defaultColors);
-            @include set-BGs(map-get($themeMap, "BGs"), $defaultBGs);
-            @include set-typography(map-get($themeMap, "typography"), $defaultTypography);
+        --bgActorSheet: url('../images/actor-sheet/backgrounds/bgActor-#{$pantheon}.png');
+        --menuImage: url('../images/actor-sheet/menu/rosette-#{$pantheon}.png');
+        @if type-of($themeMap) == 'map' {
+            @include set-colors(map-get($themeMap, 'colors'), $default-colors);
+            @include set-BGs(map-get($themeMap, 'BGs'), $default-BGs);
+            @include set-typography(map-get($themeMap, 'typography'), $default-typography);
         }
     }    
 }

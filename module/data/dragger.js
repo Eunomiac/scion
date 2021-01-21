@@ -1,6 +1,6 @@
 import {U} from "../modules.js";
 
-export class Dragger extends Draggable {
+export default class Dragger extends Draggable {
     constructor(app, element, handle, collapsibleElements, {width: collapsedWidth, height: collapsedHeight} = {}, delayedCollapsibles = []) {
         super(app, element, handle, false);
         this.collapsibles = collapsibleElements;

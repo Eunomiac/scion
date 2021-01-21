@@ -1,7 +1,7 @@
 import {_, U, handlebarTemplates, itemCategories} from "../modules.js";
-import {ScionActorSheet} from "./actor-sheet.js";
+import ScionActorSheet from "./actor-sheet.js";
 
-export class GroupActorSheet extends ScionActorSheet {
+export default class GroupActorSheet extends ScionActorSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             classes: [...super.defaultOptions.classes, "group"],

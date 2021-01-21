@@ -41,7 +41,7 @@ function watchUpdates() {
 /*  Export Tasks
 /* ----------------------------------------- */
 
-exports["default"] = gulp.series(
+exports.default = gulp.series(
     compileScss,
     watchUpdates
 );

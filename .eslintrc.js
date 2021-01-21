@@ -13,12 +13,18 @@ const defaultRules = {
     "consistent-return": ["warn", {"treatUndefinedAsUnspecified": true}],
     "curly": "warn",
     "default-case": "warn",
-    "dot-location": ["warn", "object"],
+    // "dot-location": ["warn", "object"],
     "dot-notation": ["warn"],
     "eol-last": 0,
     "eqeqeq": ["warn", "always"],
     "function-call-argument-newline": ["warn", "consistent"],
     "function-paren-newline": "warn",
+    "import/extensions": ["warn", {
+        "js": "always",
+        "scss": "never",
+        "css": "never"
+    }],
+    "import/named": 0,
     "indent": [
         "warn",
         4,
@@ -143,7 +149,6 @@ const deploymentRules = {
     "no-unused-vars": "error"
 };
 
-
 const allRulesActive = {};
 for (const [rule, value] of Object.entries(defaultRules)) {
     allRulesActive[rule] = value === 0 ? "warn" : value;
@@ -151,10 +156,8 @@ for (const [rule, value] of Object.entries(defaultRules)) {
 
 const rules = Object.assign(Object.assign(ALLRULESACTIVE ? allRulesActive : defaultRules), Object.assign(ISDEPLOYING ? deploymentRules : {}));
 
-
 module.exports = {
     // #region BASIC SETTINGS
-    "parser": "babel-eslint",
     "env": {
         "es6": true,
         "es2020": true,
@@ -165,7 +168,10 @@ module.exports = {
     },
     "plugins": [],
     "extends": [
-        ALLRULESACTIVE ? "eslint:all" : "eslint:recommended"
+        ALLRULESACTIVE ? "eslint:all" : "eslint:recommended",
+        "airbnb-base",
+        
+        "prettier" // must go at the bottom
     ],
     "parserOptions": {
         "ecmaVersion": 2020,

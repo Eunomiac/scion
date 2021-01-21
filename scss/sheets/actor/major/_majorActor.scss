@@ -1,6 +1,5 @@
 form.editable {
-    .menuRosette {
-        grid-area: menu;
+    .menuRosette {        
         $menuOpenSize: 200px;
         $menuButtonCircleSize: $menuOpenSize * 1.25;
         $menuButtonFullSize: 120px;
@@ -8,54 +7,63 @@ form.editable {
         $numButtons: 5;
         $numButtonsMod: 5;
         
-        $iconMain: url("../images/actor-sheet/menu/IconMain.png");
-        $iconChargen: url("../images/actor-sheet/menu/IconChargen.png");
-        $iconExperience: url("../images/actor-sheet/menu/IconExperience.png");
-        $iconSettings: url("../images/actor-sheet/menu/IconSettings.png");
-        $iconHeritage: url("../images/actor-sheet/menu/IconHeritage.png");
+        $iconMain: url('../images/actor-sheet/menu/IconMain.png');
+        $iconChargen: url('../images/actor-sheet/menu/IconChargen.png');
+        $iconExperience: url('../images/actor-sheet/menu/IconExperience.png');
+        $iconSettings: url('../images/actor-sheet/menu/IconSettings.png');
+        $iconHeritage: url('../images/actor-sheet/menu/IconHeritage.png');
         
         $menuButtonSize: $menuButtonFullSize + $menuButtonMargin;
 
-        content: "";
+        position: absolute;
+        z-index: 2;
+        top: -65px;
+        left: -65px;
         display: block;
         width: $menuOpenSize;
         height: $menuOpenSize;
-        position: absolute;
-        left: -65px;
-        top: -65px;
-        z-index: 2;
-
-        background: {
-            image: var(--menuImage);
-            size: 50%;
-            repeat: no-repeat;
-            position: center;
-        }
+        border: none;
 
         border-radius: 50%;
+
+        content: '';
+        grid-area: menu;
         pointer-events: all;
-        border: none;
         transition: 0.5s;
+
+        background: {
+            position: center;
+            image: var(--menuImage);
+            repeat: no-repeat;
+            size: 50%;
+        }
 
         &:not(.collapsed):hover {
             background-size: 100%;
     
             div.circleMenuContainer {
-                transform: scale(1) rotate(0deg);
                 opacity: 1;
+                transform: scale(1) rotate(0deg);
             }
         }
+
         .menuText {
-            display: block !important;
-            height: auto !important;
-            width: $menuButtonSize * 2 !important;
             position: relative;
+            display: block !important;
+            width: $menuButtonSize * 2 !important;
+            height: auto !important;
+            
+            color: var(--colorMenuGlow);
+            letter-spacing: 10px;
+
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(2);
+            transition: 0.25s !important;
             margin: {
                 top: -20px;
                 left: $menuButtonSize / -2 !important;
             }
-            
-            color: var(--colorMenuGlow);
             font: {
                 family: var(--fontFamilyMenu);
                 size: var(--fontSizeMenu);
@@ -66,12 +74,6 @@ form.editable {
                 shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
                 transform: uppercase;
             }
-            letter-spacing: 10px;
-
-            opacity: 0;
-            transform: scale(2);
-            transition: 0.25s !important;
-            pointer-events: none;
         }
     
         div.circleMenuContainer {
@@ -82,8 +84,8 @@ form.editable {
                 $item-size: $menuButtonSize,
                 $initial-rotation: 135
             );
-            transform: scale(0.3) rotate(-125deg);
             opacity: 0;
+            transform: scale(0.3) rotate(-125deg);
             transition: 0.5s;
     
             .menuButtonContainer {
@@ -92,28 +94,31 @@ form.editable {
                         animation-delay: $i * 1s / $numButtons;
                     }
                 }
-                div, a {
+
+                div,
+                a {
                     display: inline-block;
                     width: 100%;
                     height: 100%;
-                    background: {
-                        size: 100%;
-                        position: center;
-                    }
                     transition: 0.5s;
+                    background: {
+                        position: center;
+                        size: 100%;
+                    }
                 }
+
                 .menuButton {
-                    display: inline-block;
                     position: relative;
-                    height: 100%;
+                    display: inline-block;
                     width: 100%;
+                    height: 100%;
+                    animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
                     transition: 0.5s;
         
                     @keyframes slowBob {
-                        from { top: 0px; }
+                        from { top: 0; }
                         to { top: 10px; }
                     }
-                    animation: slowBob 2s cubic-bezier(0.36, 0, 0.63, 1) infinite alternate;
 
                     &:hover { transform: scale(1.2); }
         
@@ -128,88 +133,80 @@ form.editable {
 
                         &:hover + .menuText {
                             letter-spacing: normal;
-                            transform: scale(1);
                             opacity: 1;
+                            transform: scale(1);
                         }
                     }
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-    section#characterSheet {        
-        height: 100%;
+
+    section#characterSheet {
         width: 100%;
+        height: 100%;
         padding: 40px 60px 60px 40px;
 
-        transform-origin: 50px 50px;
-        transform: scale(1, 1) rotate3d(1, -1, 0, 0deg);
+        grid: 'header' 90px
+            'body' 560px;
+
+        opacity: 1;
         perspective: 100px;
+        transform: scale(1, 1) rotate3d(1, -1, 0, 0deg);
+
+        transform-origin: 50px 50px;
 
         transition: {
-            property: transform, perspective;
             delay: 0s;
             duration: 0.5s;
+            property: transform, perspective;
             timing-function: ease;
         }
 
         &.collapsed {
+            perspective: 1000px;
             transform: scale3d(0.5, 0.5, 0.5) rotate3d(1, -1, 0, -70deg);
             transform: scale(0, 0) rotate3d(1, -1, 0, 90deg);
-            perspective: 1000px;
         }
         
         background: {
             color: transparent;
-            image: var(--bgActorSheet); 
-            size: 100%;
+            image: var(--bgActorSheet);
             repeat: no-repeat;
+            size: 100%;
         }
 
-        @if $isTestingLayout {
-            @if map-get($isShowing, "sheetPadding") {
+        @if $isTesting-layout {
+            @if map-get($isTesting-display, 'sheetPadding') {
                 background: {
                     color: white;
-                    image: url("../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png");
-                    size: 100%;
+                    image: url('../images/actor-sheet/backgrounds/ActorSheetFrame-Padding.png');
                     repeat: no-repeat;
+                    size: 100%;
                 }
-            } @else if map-get($isShowing, "sheetFrame") {        
+            } @else if map-get($isTesting-display, 'sheetFrame') {        
                 background: {
                     color: white;
-                    image: url("../images/actor-sheet/backgrounds/ActorSheetFrame.png");
-                    size: 100%;
+                    image: url('../images/actor-sheet/backgrounds/ActorSheetFrame.png');
                     repeat: no-repeat;
+                    size: 100%;
                 }
             }
-            @if map-get($isShowing, "sheetBorders") {
+            @if map-get($isTesting-display, 'sheetBorders') {
                 @include box-shadow(2px, lime, true);
+
                 > * { @include box-shadow(6px, orange, true);
+
                     > * { @include box-shadow(4px, cyan, true);
                         > * { @include box-shadow(2px, red, true); }
                     }
                 }
             }    
-            @if map-get($isShowing, "sheetBGShade") {
+            @if map-get($isTesting-display, 'sheetBGShade') {
                 @include bg-shade(lime);
+
                 > * { @include bg-shade(orange);
+
                     > * { @include bg-shade(cyan); 
                         > * { @include bg-shade(red); }
                     }
@@ -217,17 +214,12 @@ form.editable {
             }
         }
 
-        opacity: 1;        
-
-        grid: "header" 90px
-            "body" 560px;
-
         .header {
-            grid-area: header;
-            grid: ". surTitle ." 24px
-                ". title ." 50px
-                "subTitle subTitle subTitle" 16px
+            grid: '. surTitle .' 24px
+                '. title .' 50px
+                'subTitle subTitle subTitle' 16px
                 / 90px 470px 90px;
+            grid-area: header;
             
             div { pointer-events: all; }
 
@@ -238,8 +230,8 @@ form.editable {
 
         .sheet-body {
             grid-area: body;
-            section.chargen-body { @import "sheets/actor/major/majorActor-chargen"; }
-            section.front-body { @import "sheets/actor/major/majorActor-front"; }
+            section.chargen-body { @import 'sheets/actor/major/majorActor-chargen'; }
+            section.front-body { @import 'sheets/actor/major/majorActor-front'; }
         }
     }
 }

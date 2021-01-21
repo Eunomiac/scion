@@ -1,7 +1,7 @@
 import {MIX, ItemMixins as MIXINS, SCION, U, _} from "../../modules.js";
-import {BirthrightItemSheet} from "../item-birthright-sheet.js";
+import BirthrightItemSheet from "../item-birthright-sheet.js";
 
-export class RelicItemSheet extends BirthrightItemSheet {
+export default class RelicItemSheet extends BirthrightItemSheet {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             "classes": [...super.defaultOptions.classes, "relic"],

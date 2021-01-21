@@ -1,20 +1,20 @@
 // #region Import Modules
 import {_, U, SCION, handlebarTemplates, testChars} from "./modules.js";
 
-import {ScionActor} from "./actor/actor.js";
-import {MajorActorSheet} from "./actor/actor-major-sheet.js";
-import {MinorActorSheet} from "./actor/actor-minor-sheet.js";
-import {GroupActorSheet} from "./actor/actor-group-sheet.js";
+import ScionActor from "./actor/actor.js";
+import MajorActorSheet from "./actor/actor-major-sheet.js";
+import MinorActorSheet from "./actor/actor-minor-sheet.js";
+import GroupActorSheet from "./actor/actor-group-sheet.js";
 
-import {ScionItem} from "./item/item.js";
-import {PathItemSheet} from "./item/item-path-sheet.js";
-import {ConditionItemSheet} from "./item/item-condition-sheet.js";
-import {CultItemSheet} from "./item/birthrights/birthright-cult-sheet.js";
-import {CovenantItemSheet} from "./item/birthrights/birthright-covenant-sheet.js";
-import {CreatureItemSheet} from "./item/birthrights/birthright-creature-sheet.js";
-import {FollowerItemSheet} from "./item/birthrights/birthright-follower-sheet.js";
-import {GuideItemSheet} from "./item/birthrights/birthright-guide-sheet.js";
-import {RelicItemSheet} from "./item/birthrights/birthright-relic-sheet.js";
+import ScionItem from "./item/item.js";
+import PathItemSheet from "./item/item-path-sheet.js";
+import ConditionItemSheet from "./item/item-condition-sheet.js";
+import CultItemSheet from "./item/birthrights/birthright-cult-sheet.js";
+import CovenantItemSheet from "./item/birthrights/birthright-covenant-sheet.js";
+import CreatureItemSheet from "./item/birthrights/birthright-creature-sheet.js";
+import FollowerItemSheet from "./item/birthrights/birthright-follower-sheet.js";
+import GuideItemSheet from "./item/birthrights/birthright-guide-sheet.js";
+import RelicItemSheet from "./item/birthrights/birthright-relic-sheet.js";
 
 import "./external/gl-matrix-min.js";
 // #endregion
@@ -101,7 +101,7 @@ const createTestChar = async (name) => {
         while (callingPointsLeft) {
             const availableKnacks = Object.keys(SCION.KNACKS.list).filter((knackName) => {
                 const knack = SCION.KNACKS.list[knackName];
-                return !chosenKnacks.some((knack) => knack.name === knackName)
+                return !chosenKnacks.some((knackData) => knackData.name === knackName)
                     && ["any", calling].includes(knack.calling)
                     && (callingPointsLeft >= 2 || knack.tier === "heroic");
             }).map((knackName) => ({name: knackName, assignment: calling, ...SCION.KNACKS.list[knackName]}));
@@ -121,7 +121,6 @@ const createTestChar = async (name) => {
         return itemData;
     });
     // #endregion
-
 
     U.LOG(U.IsDebug() && {
         attrPriorities: actorData.attributes.priorities,
@@ -143,8 +142,11 @@ const createTestChar = async (name) => {
     return thisActor;
 };
 const createSigChars = async () => {
-    for (const sigName of Object.keys(testChars.sigChars)) {await createTestChar(sigName)}
-    return true;
+    const updatePromises = [];
+    for (const sigName of Object.keys(testChars.sigChars)) {
+        updatePromises.push(createTestChar(sigName));
+    }
+    return Promise.all(updatePromises);
 };
 // #region Hook: Initialization
 Hooks.once("init", async () => {
@@ -173,11 +175,11 @@ Hooks.once("init", async () => {
         },
         debug: {
             isDebugging: true,
-            isDebuggingDragula: false,
+            isDebuggingDragula: true,
             isFullDebugConsole: true,
             watchList: []
         },
-        createSigChars: createSigChars
+        createSigChars
     };
 
     U.LOG(U.IsDebug() && "INITIALIZING SCION.JS ...");
@@ -256,7 +258,7 @@ Hooks.once("init", async () => {
             }
             return bundle;
         },
-        math: function(v1, operator, v2, options) {
+        math(v1, operator, v2, options) {
             switch (operator) {
                 case "+": return U.Int(v1) + U.Int(v2);
                 case "-": return U.Int(v1) - U.Int(v2);
@@ -265,13 +267,13 @@ Hooks.once("init", async () => {
                 case "*": return U.Int(v1) * U.Int(v2);
                 case "/": return U.Int(U.Float(v1) / U.Float(v2));
                 case "%": return U.Int(v1) % U.Int(v2);
-                case "**": case "^": return U.Int(Math.pow(U.Float(v1), U.Float(v2)));
+                case "**": case "^": return U.Int(U.Float(v1) ** U.Float(v2));
                 case "min": return Math.max(U.Int(v1), U.Int(v2));
                 case "max": return Math.min(U.Int(v1), U.Int(v2));
                 default: return U.Int(v1);
             }
         },
-        test: function(v1, operator, v2) {
+        test(v1, operator, v2) {
             /* eslint-disable eqeqeq */
             switch (operator) {
                 case "==": return v1 == v2;
@@ -295,7 +297,7 @@ Hooks.once("init", async () => {
             }
         },
         article: (val) => U.ParseArticles(val),
-        case: function(v1, operator) {
+        case(v1, operator) {
             switch (U.LCase(operator.charAt(0))) {
                 case "l": return U.LCase(v1);
                 case "u": return U.UCase(v1);

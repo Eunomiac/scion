@@ -1,100 +1,377 @@
 @function importGoogleFonts($fontMap) {
-    $googleFontURL: "https://fonts.googleapis.com/css2?";
+    $googleFontURL: 'https://fonts.googleapis.com/css2?';
     @each $font, $weights in $fontMap {
-        $fontDef: "family=" + $font + ":wght@";
+        $fontDef: 'family=' + $font + ':wght@';
         @each $weight in $weights {
-            $fontDef: $fontDef + $weight + ";";
+            $fontDef: $fontDef + $weight + ';';
         }
-        $googleFontURL: $googleFontURL + str-slice($fontDef, 1, -2) + "&";
+        $googleFontURL: $googleFontURL + str-slice($fontDef, 1, -2) + '&';
     }
-    $googleFontURL: $googleFontURL + "display=swap";
+    $googleFontURL: $googleFontURL + 'display=swap';
 
     @return $googleFontURL;
 }
 
 @function getFonts() {
-    $fontString: "";
+    $fontString: '';
     @each $font, $weights in $fontMap {
-        $fontString: $fontString + "|" + $font;
+        $fontString: $fontString + '|' + $font;
     }
     @return $fontString;
 }
 
 @import url(importGoogleFonts((
     "Berkshire+Swash": (400),
-    "Della+Respira": (400),
-    "Overlock+SC": (400),
-    "Marcellus+SC": (400),
-    "Amarante": (400),
-    "Finger+Paint": (400),
-    "Grenze+Gotisch": (400),
-    "Pirata+One": (400),
-    "Poiret+One": (400),
-    "Righteous": (400),
-    "Reem+Kufi": (400),
-    "Yatra+One":  (400),
-    "Julius+Sans+One": (400),
-    "Voltaire": (400)
+    'Della+Respira': (400),
+    'Overlock+SC': (400),
+    'Marcellus+SC': (400),
+    'Amarante': (400),
+    'Finger+Paint': (400),
+    'Grenze+Gotisch': (400),
+    'Pirata+One': (400),
+    'Poiret+One': (400),
+    'Righteous': (400),
+    'Reem+Kufi': (400),
+    'Yatra+One':  (400),
+    'Julius+Sans+One': (400),
+    'Voltaire': (400)
 )));
 
 // Official Scion Fonts
-@font-face { font-family: "Crud"; src: url(../fonts/official/Crud.ttf); }
+@font-face { font-family: 'Crud';
+    src: url(../fonts/official/Crud.ttf); }
 
 @font-face {
+    font-display: swap;
     font-family: 'Benguiat';
+    font-style: italic;
+    font-weight: bold;
     src: url('../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff2') format('woff2'),
         url('../fonts/body/Benguiat/hinted-Benguiat-BoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
 }
 @font-face {
+    font-display: swap;
     font-family: 'Benguiat';
+    font-style: normal;
+    font-weight: normal;
     src: url('../fonts/body/Benguiat/hinted-Benguiat.woff2') format('woff2'),
         url('../fonts/body/Benguiat/hinted-Benguiat.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 @font-face {
+    font-display: swap;
     font-family: 'Benguiat';
+    font-style: italic;
+    font-weight: normal;
     src: url('../fonts/body/Benguiat/hinted-Benguiat-Italic.woff2') format('woff2'),
         url('../fonts/body/Benguiat/hinted-Benguiat-Italic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
 }
 @font-face {
+    font-display: swap;
     font-family: 'Benguiat';
+    font-style: normal;
+    font-weight: bold;
     src: url('../fonts/body/Benguiat/hinted-Benguiat-Bold.woff2') format('woff2'),
         url('../fonts/body/Benguiat/hinted-Benguiat-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
 }
 
-@font-face { font-family: "MercuryG2"; src: url(../fonts/official/MercuryTextG2.otf); }
+@font-face { font-family: 'MercuryG2';
+    src: url(../fonts/official/MercuryTextG2.otf); }
+
+// Testing/Unknown Fonts
+@font-face {
+    font-display: swap;
+    font-family: 'Grail New Condensed';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-GrailNewCondensed.woff2') format('woff2'),
+        url('../fonts/hinted-GrailNewCondensed.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Eire';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Eire.woff2') format('woff2'),
+        url('../fonts/hinted-Eire.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Alexandria';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Alexandria.woff2') format('woff2'),
+        url('../fonts/hinted-Alexandria.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Grail New';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-GrailNewRegular.woff2') format('woff2'),
+        url('../fonts/hinted-GrailNewRegular.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Grail';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/hinted-GrailLight.woff2') format('woff2'),
+        url('../fonts/hinted-GrailLight.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Oh Mighty Isis Expanded';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-OhMightyIsisExpanded.woff2') format('woff2'),
+        url('../fonts/hinted-OhMightyIsisExpanded.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Alberta';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Alberta.woff2') format('woff2'),
+        url('../fonts/hinted-Alberta.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'elektra';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-elektra.woff2') format('woff2'),
+        url('../fonts/hinted-elektra.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'AntiqueRow';
+    font-style: italic;
+    font-weight: normal;
+    src: url('../fonts/hinted-AntiqueRow.woff2') format('woff2'),
+        url('../fonts/hinted-AntiqueRow.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Paradise';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-ParadisePlain.woff2') format('woff2'),
+        url('../fonts/hinted-ParadisePlain.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Stonehenge';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-Stonehenge.woff2') format('woff2'),
+        url('../fonts/hinted-Stonehenge.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Sherwood';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-SherwoodRegular.woff2') format('woff2'),
+        url('../fonts/hinted-SherwoodRegular.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Paradox';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-Paradox-Light.woff2') format('woff2'),
+        url('../fonts/hinted-Paradox-Light.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Zanzabar';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Zanzabar.woff2') format('woff2'),
+        url('../fonts/hinted-Zanzabar.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Grail';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/hinted-GrailLight.woff2') format('woff2'),
+        url('../fonts/hinted-GrailLight.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Grail New';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-GrailNewRegular.woff2') format('woff2'),
+        url('../fonts/hinted-GrailNewRegular.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Grail New Condensed';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-GrailNewCondensed.woff2') format('woff2'),
+        url('../fonts/hinted-GrailNewCondensed.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Paradise';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-ParadisePlain.woff2') format('woff2'),
+        url('../fonts/hinted-ParadisePlain.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Oh Mighty Isis Expanded';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-OhMightyIsisExpanded.woff2') format('woff2'),
+        url('../fonts/hinted-OhMightyIsisExpanded.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'AntiqueRow';
+    font-style: italic;
+    font-weight: normal;
+    src: url('../fonts/hinted-AntiqueRow.woff2') format('woff2'),
+        url('../fonts/hinted-AntiqueRow.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Alberta';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Alberta.woff2') format('woff2'),
+        url('../fonts/hinted-Alberta.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Alexandria';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Alexandria.woff2') format('woff2'),
+        url('../fonts/hinted-Alexandria.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Eire';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Eire.woff2') format('woff2'),
+        url('../fonts/hinted-Eire.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Paradox';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-Paradox-Light.woff2') format('woff2'),
+        url('../fonts/hinted-Paradox-Light.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Stonehenge';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-Stonehenge.woff2') format('woff2'),
+        url('../fonts/hinted-Stonehenge.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Sherwood';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/hinted-SherwoodRegular.woff2') format('woff2'),
+        url('../fonts/hinted-SherwoodRegular.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'elektra';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-elektra.woff2') format('woff2'),
+        url('../fonts/hinted-elektra.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Zanzabar';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/hinted-Zanzabar.woff2') format('woff2'),
+        url('../fonts/hinted-Zanzabar.woff') format('woff');
+}
 
 // Netjer Fonts
-@font-face { font-family: "Bootle"; src: url(../fonts/netjer/bootle.ttf); }
-@font-face { font-family: "Carolingia"; src: url(../fonts/netjer/carolingia.ttf); }
-@font-face { font-family: "Gothic Ultra"; src: url(../fonts/netjer/gothic_ultra_ot.otf); }
-@font-face { font-family: "Khaleefa"; src: url(../fonts/netjer/Khaleefa.otf); }
-@font-face { font-family: "Zanzabar"; src: url(../fonts/netjer/Zanzabar.otf); }
+@font-face { font-family: 'Bootle';
+    src: url(../fonts/netjer/bootle.ttf); }
+@font-face { font-family: 'Carolingia';
+    src: url(../fonts/netjer/carolingia.ttf); }
+@font-face { font-family: 'Gothic Ultra';
+    src: url(../fonts/netjer/gothic_ultra_ot.otf); }
+@font-face { font-family: 'Khaleefa';
+    src: url(../fonts/netjer/Khaleefa.otf); }
+@font-face { font-family: 'Zanzabar';
+    src: url(../fonts/netjer/Zanzabar.otf); }
 
 // Teotl Fonts
-@font-face { font-family: "Goodfish"; src: url(../fonts/teotl/goodfish.ttf); }
-@font-face { font-family: "Kirsty"; src: url(../fonts/teotl/Kirsty.ttf); }
-@font-face { font-family: "Kirsty"; font-weight: bold; src: url(../fonts/teotl/KirstyBold.ttf); }
-@font-face { font-family: "Kirsty"; font-style: italic; src: url(../fonts/teotl/KirstyItalic.ttf); }
-@font-face { font-family: "Kirsty"; font-weight: bold; font-style: italic; src: url(../fonts/teotl/KirstyBoldItalic.ttf); }
-@font-face { font-family: "Voga"; src: url(../fonts/teotl/Voga-Medium.otf); }
+@font-face { font-family: 'Goodfish';
+    src: url(../fonts/teotl/goodfish.ttf); }
+@font-face { font-family: 'Kirsty';
+    src: url(../fonts/teotl/Kirsty.ttf); }
+@font-face { font-family: 'Kirsty';
+    font-weight: bold;
+    src: url(../fonts/teotl/KirstyBold.ttf); }
+@font-face { font-family: 'Kirsty';
+    font-style: italic;
+    src: url(../fonts/teotl/KirstyItalic.ttf); }
+@font-face { font-family: 'Kirsty';
+    font-style: italic;
+    font-weight: bold;
+    src: url(../fonts/teotl/KirstyBoldItalic.ttf); }
+@font-face { font-family: 'Voga';
+    src: url(../fonts/teotl/Voga-Medium.otf); }
 
 // Theoi Fonts
-@font-face { font-family: "Stein Antik"; src: url(../fonts/theoi/SteinAntik-Bold.ttf); }
-@font-face { font-family: "Dacian Donarium"; src: url(../fonts/theoi/DacianDonarium.ttf); }
-@font-face { font-family: "Roman Font 7"; src: url(../fonts/theoi/RomanFont7.ttf) format("truetype"); }
-@font-face { font-family: "Diogenes"; src: url(../fonts/theoi/Diogenes.ttf) format("truetype"); }
-@font-face { font-family: "Adonais"; src: url(../fonts/theoi/Adonais.ttf); }
-@font-face { font-family: "Basileus"; src: url(../fonts/theoi/Basileus.ttf); }
-@font-face { font-family: "CapitalisTypOasis"; src: url(../fonts/theoi/CapitalisTypOasis.ttf) format("truetype"); }
+@font-face { font-family: 'Stein Antik';
+    src: url(../fonts/theoi/SteinAntik-Bold.ttf); }
+@font-face { font-family: 'Dacian Donarium';
+    src: url(../fonts/theoi/DacianDonarium.ttf); }
+@font-face { font-family: 'Roman Font 7';
+    src: url(../fonts/theoi/RomanFont7.ttf) format('truetype'); }
+@font-face { font-family: 'Diogenes';
+    src: url(../fonts/theoi/Diogenes.ttf) format('truetype'); }
+@font-face { font-family: 'Adonais';
+    src: url(../fonts/theoi/Adonais.ttf); }
+@font-face { font-family: 'Basileus';
+    src: url(../fonts/theoi/Basileus.ttf); }
+@font-face { font-family: 'CapitalisTypOasis';
+    src: url(../fonts/theoi/CapitalisTypOasis.ttf) format('truetype'); }

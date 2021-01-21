@@ -1,6 +1,6 @@
 // #region Import Modules
 import {GetType, THROW} from "../data/utils.js";
-import {_, U, popoutData, SCION} from "../modules.js";
+import {_, U, popoutData, SCION} from "../modules.js"; // eslint-disable-line import/no-cycle
 import "../external/clamp.min.js";
 
 // #region CLASS FACTORIES: Applying Mixins
@@ -185,7 +185,7 @@ export const DotDragger = (superClass) => class extends superClass {
                 await extraFunc.bind(this)(...extraArgs, ...args);
             }
         };
-        dragger.on(listener, async (...args) => await listenFunc.bind(this)(...args));
+        dragger.on(listener, async (...args) => listenFunc.bind(this)(...args));
     }
     getDragTypes(dot, sourceBin, targetBin) {
         const returnVal = {

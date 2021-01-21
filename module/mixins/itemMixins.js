@@ -34,8 +34,7 @@ export const applyMixins = (superclass) => new MixinBuilder(superclass);
 // #region BASIC MIXINS
 export const ActorLink = (superClass) => class extends superClass {
     prepareData() {
-        if (super.prepareData)
-            super.prepareData();
+        if (super.prepareData) {super.prepareData()}
     }
 };
 // #endregion

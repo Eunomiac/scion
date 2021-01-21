@@ -1,8 +1,8 @@
 import "../external/dragula.min.js";
 import {MIX, ItemMixins as MIXINS, SCION, U, _} from "../modules.js";
-import {ScionItemSheet} from "./item-sheet.js";
+import ScionItemSheet from "./item-sheet.js";
 
-export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
+export default class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             "classes": [...super.defaultOptions.classes, "path"],
@@ -41,7 +41,6 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
     }
 
     get suspensionCondition() {
-        
         return this.item.getActorItems("condition").find((item) => item.subtype === "pathSuspension" && item.eData.linkedItem === this.item.id);
     }
 
@@ -138,7 +137,6 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
                                       type}, "on CLONED", "PathItemSheet: DRAGULA", {"groupStyle": "l4"});
             });
         }
-
 
        // #endregion
 
