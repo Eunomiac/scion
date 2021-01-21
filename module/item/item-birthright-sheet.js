@@ -11,6 +11,10 @@ export class BirthrightItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdi
         });
     }
 
+    get template() {
+        return `systems/scion/templates/item/birthrights/item-birthright-${this.object.data.type}-sheet.hbs`;
+    }
+
     getData() {
         const data = super.getData();
         return data;

@@ -22,7 +22,7 @@
         variant: var(--fontVariantPlaceholder);
         weight: var(--fontWeightPlaceholder);
     }
-    line-height: var(--lineHeightPlaceholder);
+    // line-height: var(--lineHeightPlaceholder);
     text: {
         transform: var(--textTransformPlaceholder);
         indent: var(--textIndentPlaceholder);
@@ -180,7 +180,7 @@
     }
     text-align: center;
     box-sizing: content-box;
-    filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5)); 
+    // filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5)); 
      
     .bubbleWrap::before {
        content: "";

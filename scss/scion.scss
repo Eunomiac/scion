@@ -1,3 +1,6 @@
+@import 'core/reset';
+
+
 $isTestingLayout: true;
 $isShowing: (
     "sheetFrame": false,
@@ -25,11 +28,15 @@ $isShowing: (
 @import 'core/mixins';
 @import 'core/dragula';
 
+$defaultPadding: 5px;
+$lineHeight-Short: 1;
+$lineHeight-Medium: 1.2;
+$lineHeight-Tall: 1.5;
+
 @import 'sheets/baseTheme';   
 @import 'sheets/actor/actorThemes';    
 
 body.vtt.game.system-scion {  
-    $defaultPadding: 5px;
     @import 'core/window';
 
     /* #region SHEET STYLES */
@@ -42,18 +49,7 @@ body.vtt.game.system-scion {
             @import 'sheets/actor/actorLayout';
             @import 'sheets/actor/actorFormat';
 
-            /* #region MAJOR ACTOR SHEETS */
-            &.major {
-                form.editable {
-                    @import 'sheets/actor/major/majorActor';
-
-                    section.sheet-body {
-                        section.chargen-body { @import "sheets/actor/major/majorActor-chargen"; }
-                        section.front-body { @import "sheets/actor/major/majorActor-front"; }
-                    }
-                }
-            }
-            /* #endregion */
+            &.major { @import 'sheets/actor/major/majorActor'; }
         }
         /* #endregion */ 
 
@@ -62,15 +58,15 @@ body.vtt.game.system-scion {
             @import 'sheets/item/itemLayout';
             @import 'sheets/item/itemFormat';
 
-            &.path form.editable.main { @import 'sheets/item/types/pathItem'; }
-            &.condition form.editable.main { @import 'sheets/item/types/conditionItem'; }
-            &.birthright {
-                &.creature form.editable.main { @import 'sheets/item/types/creatureItem'; }
-                &.covenant form.editable.main { @import 'sheets/item/types/covenantItem'; }
-                &.cult form.editable.main { @import 'sheets/item/types/cultItem'; }
-                &.follower form.editable.main { @import 'sheets/item/types/followerItem'; }
-                &.guide form.editable.main { @import 'sheets/item/types/guideItem'; }
-                &.relic form.editable.main { @import 'sheets/item/types/relicItem'; }
+            &.path { @import 'sheets/item/types/pathItem'; }
+            &.condition { @import 'sheets/item/types/conditionItem'; }
+            &.birthright { @import 'sheets/item/types/birthrightItem'; 
+                &.creature { @import 'sheets/item/types/birthrights/creatureBirthright'; }
+                &.covenant { @import 'sheets/item/types/birthrights/covenantBirthright'; }
+                &.cult { @import 'sheets/item/types/birthrights/cultBirthright'; }
+                &.follower { @import 'sheets/item/types/birthrights/followerBirthright'; }
+                &.guide { @import 'sheets/item/types/birthrights/guideBirthright'; }
+                &.relic { @import 'sheets/item/types/birthrights/relicBirthright'; }
             }
         }
         /* #endregion */ 

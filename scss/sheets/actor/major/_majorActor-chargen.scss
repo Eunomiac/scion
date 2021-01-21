@@ -49,7 +49,7 @@
                 font-size: 14px;
                 .specialtyInput {
                     min-height: 16px;
-                    line-height: 16px;
+                    // line-height: 16px;
                     margin: -2px 4px;
                     border-width: 2px;
                     &.placeholder {
@@ -98,40 +98,6 @@
                 > div { margin: 3px 0; }
                 label { width: 75px; min-width: 75px; }
             }
-            div.reportBox {
-                display: none !important;
-                background-color: white !important;
-                width: 320px !important;
-                height: 80px !important;
-                min-height: 80px !important;
-                max-height: 80px !important;
-                vertical-align: bottom !important;
-                position: absolute;
-                bottom: 20px;
-                margin: 0;
-                padding: 5px;
-                outline: 3px solid green;
-                padding-top: 3px;
-                span.reportLine {
-                    display: block !important;
-                    height: 12px !important;
-                    min-height: 12px !important;
-                    max-height: 12px !important;
-                    margin: 2px 0px !important;
-                    padding: 0 !important;
-                    font: {
-                        size: 12px !important;
-                        family: "Overlock SC" !important;
-                        weight: bold !important;
-                    }
-                    line-height: 12px !important;
-                    text: {
-                        align: right !important;
-                        align-last: right !important;
-                        shadow: none !important;
-                    }
-                }
-            }
         }
     }
 }
@@ -148,7 +114,7 @@
         > .unassignedCallingDots {
             align-content: flex-start;
             margin: 3px 0 0 5px;
-            line-height: 26px;
+            // line-height: 26px;
             > h2 {
                 width: auto;
                 flex-basis: auto;
@@ -163,7 +129,7 @@
                 width: 50%;
                 min-height: 26px;
                 max-height: 26px;
-                line-height: 26px;
+                // line-height: 26px;
                 > .dotBin {
                     transform: scale(1.5);
                     transform-origin: left;
@@ -200,7 +166,7 @@
             repeat: no-repeat;
         }
 
-        &:not(.glow) { filter: drop-shadow(3px 3px 3px var(--black)); }
+        &:not(.glow) { /* filter: drop-shadow(3px 3px 3px var(--black)); */ }
 
         > .gu-transit,
         .gu-unselectable > *,
@@ -254,7 +220,7 @@
                     weight: bold;
                     variant: small-caps;
                 }
-                line-height: 13px;
+                // line-height: 13px;
                 text: {
                     indent: 0;
                     transform: lowercase;
@@ -266,7 +232,7 @@
                     repeat: no-repeat;
                     position: bottom;
                 }
-                filter: drop-shadow(1px 1px 1px var(--black));
+                // filter: drop-shadow(1px 1px 1px var(--black));
             }
         }
 
@@ -298,13 +264,13 @@
             size: 24px;
             weight: normal;
         }
-        line-height: 37px;
+        // line-height: 37px;
         text: {
             transform: uppercase;
             shadow: var(--textShadowTitle);
             align: center;
         }                
-        filter: drop-shadow(2px 2px 2px black);
+        // filter: drop-shadow(2px 2px 2px black);
 
         &.patron {
             background-image: url("../images/bubbles/calling-patron.png");
@@ -333,13 +299,13 @@
             size: 12px;
             weight: normal;
         }
-        line-height: 20px;
+        // line-height: 20px;
         text: {
             transform: uppercase;
             shadow: var(--textShadowTitle);
             align: center;
         }                
-        filter: drop-shadow(2px 2px 2px black);
+        // filter: drop-shadow(2px 2px 2px black);
         &:not(.invalid) {
             &.generic {
                 background-image: url("../images/bubbles/knack-generic.png");
@@ -348,7 +314,7 @@
                 background-image: url("../images/bubbles/knack-immortal.png");
                 height: 50px;
                 min-height: 50px;
-                line-height: 50px;
+                // line-height: 50px;
                 font-size: 16px;
             }
         }
@@ -370,7 +336,7 @@
                 size: 36px;
                 variant: small-caps;
             }
-            line-height: 24px;
+            // line-height: 24px;
             text: {
                 transform: lowercase;
             }
@@ -406,12 +372,12 @@
             margin: 3px 2px;
             height: 20px;
             min-height: 20px;
-            line-height: 20px;
+            // line-height: 20px;
             font-size: 12px;
             &.invalid {
                 height: 16px;
                 min-height: 16px;
-                line-height: 16px;
+                // line-height: 16px;
             }
         }
     }

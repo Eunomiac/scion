@@ -4,7 +4,7 @@
         <span class="skill noFlex 
             {{~#if (test (lookup ../pathSkillsCount [skill]) "==" 2)}} invalid
             {{~else}}{{#if (test [skill] "in" ../data/skills)}} invalid{{/if~}}
-            {{~/if}}" data-skill="{{skill}}">{{loc label}}</span>
+            {{~/if}}" data-skill="{{skill}}">{{loc (concat label ".name")}}</span>
         {{/each}}
     </div>
 </div>

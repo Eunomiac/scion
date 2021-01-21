@@ -48,7 +48,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                         event,
                         element,
                         "... dataset": dataSet,
-                        [`${U.TCase(this.type)}.Items`]: this.actor.items,
+                        [`${U.TCase(this.entity.type)}.Items`]: this.actor.items,
                         item
                     }, `on CLICK: Open ItemSheet ${item.name}`, "MIXIN: PopoutControl", {groupStyle: "l3"});
                     this.popoutSheet(item.sheet, popoutData[item.type]);
@@ -147,7 +147,7 @@ export const DotDragger = (superClass) => class extends superClass {
                     } else {
                         await this.actor.update(updateData);
                     }
-                    U.LOG(U.IsDebug() && {targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
+                    // U.LOG(U.IsDebug() && {targetTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Dropped!", "onDotDrop");
                 }
             },
             remove: async (dot, x, sourceBin) => {
@@ -173,7 +173,7 @@ export const DotDragger = (superClass) => class extends superClass {
                         await this.actor.update(updateData);
                     }
                 }
-                U.LOG(U.IsDebug() && {dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
+                // U.LOG(U.IsDebug() && {dotTypes, sourceTypes, updateData, ACTOR: this.actor.fullLogReport}, "Dot Removed!", "onDropRemove");
             }
         };
     }
@@ -268,14 +268,26 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
         super.activateListeners(html);
 
         if (this.options.editable) {
-            const checkForPlaceholder = (element) => {
-                const innerText = element.innerText.trim();
-                if (!innerText && "placeholder" in element.dataset) {
-                    element.classList.add("placeholder");
-                    element.innerHTML = element.dataset.placeholder;
+            const setContent = (element, content) => {
+                if (!["number", "string"].includes(typeof content)) {
+                    content = "";
                 } else {
-                    element.classList.remove("placeholder");
+                    content = `${content}`.trim();
                 }
+                if (content) {
+                    element.classList.remove("placeholder");
+                    if (element.classList.contains("quote")) {
+                        content = `"${content}"`;
+                    }
+                } else {
+                    if ("placeholder" in element.dataset) {
+                        element.classList.add("placeholder");
+                        content = element.dataset.placeholder;
+                    } else {
+                        content = " ";
+                    }
+                }
+                element.innerHTML = _.escape(content);
             };
             // #region ON-EVENT FUNCTIONS
             const _onEditKeyDown = (event) => {
@@ -305,50 +317,43 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
             const _onEditClickOff = async (event) => {
                 event.preventDefault();
                 const element = event.currentTarget;
-                const dataSet = element.dataset;
+                const {dataset} = element;
+                const elementText = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
+                this.clamp(element);
+                setContent(element, elementText);
                 element.setAttribute("contenteditable", false);
                 element.removeEventListener("keydown", _onEditKeyDown);
-                this.clamp(element);
 
-                if ("field" in dataSet) {
-                    const elementVal = element.innerText.replace(/^\s*"?|"?\s*$/gu, "").trim();
-                    let entityVal = elementVal;
-                    if ("fieldindex" in dataSet) {
-                        entityVal = getProperty(this.entity, dataSet.field.replace(/^(data\.)+/gu, "data.data."));
-                        entityVal[U.Int(dataSet.fieldindex)] = elementVal;
-                    }
-                    await this.entity.update({[dataSet.field]: entityVal});
-                    // await this.entity.processUpdateQueue();
-                    if (entityVal && element.classList.contains("quote")) {
-                        element.innerHTML = _.escape(`"${entityVal}"`);
+                if ("field" in dataset) {
+                    if ("fieldindex" in dataset) {
+                        const fieldVal = getProperty(this.entity, dataset.field.replace(/^(data\.)+/gu, "data.data."));
+                        fieldVal[U.Int(dataset.fieldindex)] = elementText;
+                        await this.entity.update({[dataset.field]: fieldVal});
+                    } else {
+                        await this.entity.update({[dataset.field]: elementText});
                     }
                 }
-                checkForPlaceholder(element);
             };
             // #endregion
 
             // #region INITIALIZATION
             html.find("div.contentEditable").each((i, element) => {
-                const dataSet = element.dataset;
+                const {dataset} = element;
                 element.setAttribute("contenteditable", false);
                 element.addEventListener("click", _onEditClickOn.bind(this));
                 element.addEventListener("focus", _onEditFocus.bind(this));
                 element.addEventListener("blur", _onEditClickOff.bind(this));
                 this.clamp(element);
+                let elementText;
 
                 // If dataset includes a field, fill the element with the current data:
-                if ("field" in dataSet) {
-                    let entityVal = getProperty(this.entity.data, dataSet.field);
-                    if (dataSet.fieldindex !== undefined && Array.isArray(entityVal)) {
-                        entityVal = entityVal[U.Int(dataSet.fieldindex)];
-                    }
-                    if (!entityVal || (typeof entityVal === "object" && _.isEmpty(entityVal))) {
-                        element.innerHTML = "&nbsp;";
-                    } else {
-                        element.innerHTML = (element.classList.contains("quote") ? _.escape(`"${entityVal}"`) : `${entityVal}`).trim();
+                if ("field" in dataset) {
+                    elementText = getProperty(this.entity.data, dataset.field);
+                    if (dataset.fieldindex !== undefined && Array.isArray(elementText)) {
+                        elementText = elementText[U.Int(dataset.fieldindex)];
                     }
                 }
-                checkForPlaceholder(element);
+                setContent(element, elementText);
             });
             // #endregion
         }

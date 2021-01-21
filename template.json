@@ -26,8 +26,7 @@
                 "pathPriorities": ["origin", "role", "pantheon"],
                 "purviews": {},
                 "birthrights": {
-                    "assignableGeneralDots": {"xp": 0, "other": 0},
-                    "list": {}
+                    "assignableGeneralDots": {"xp": 0, "other": 7}
                 },
                 "callings": {
                     "assignableGeneralDots": {"xp": 0, "other": 2},
@@ -197,7 +196,12 @@
             "templates": ["BASE", "DOTLINE"]
         },
         "creature": {
-            "templates": ["BASE", "DOTLINE"]
+            "templates": ["BASE", "DOTLINE"],
+            "isIntelligent": false,
+            "primaryActions": [],
+            "tricks": [],
+            "knacks": [],
+            "flairs": []
         },
         "guide": {
             "templates": ["BASE", "DOTLINE"]

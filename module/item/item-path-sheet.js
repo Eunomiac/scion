@@ -80,7 +80,11 @@ export class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichEdit) {
             "copy": true,
             "removeOnSpill": true,
             "mirrorContainer": skillMirror,
-            "sheetElem": this.sheetElem
+            "sheetElement": this.sheetElem
+        });
+        U.LOG({
+            skillMirror,
+            sheetElem: this.sheetElem
         });
         pathSkillDragger.on("cancel", (element, container, source) => {
             if (source.classList.contains("pathSkills")) {

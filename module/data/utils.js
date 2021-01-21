@@ -52,7 +52,7 @@ const groupStyles = {
     log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 12px; font-weight: bold; padding: 2px;",
     debug: "color: black; background-color: grey; font-family: 'Fira Code'; font-size: 12px; font-weight: bold; padding: 2px;",
     error: "color: #FAA; background-color: #A00; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 5px;",
-    trace: "color: gold; width: 400px; min-width: 400px; background-color: #550; font-family: Oswald; font-size: 14px; line-height: 14px; font-weight: bold; padding: 2px 400px 2px 10px;",
+    trace: "color: gold; width: 400px; min-width: 400px; background-color: #550; font-family: Oswald; font-size: 14px; : 1; font-weight: bold; padding: 2px 400px 2px 10px;",
     l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 5px;",
     l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; font-weight: bold; padding: 0 5px;",
     l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 12px; font-weight: bold; padding: 0 2px;",

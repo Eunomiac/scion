@@ -204,14 +204,14 @@ export class MajorActorSheet extends ScionActorSheet {
         // #endregion
 
         // #region RETURN
-        U.LOG({
-            "SHEET CONTEXT": data,
-            "ACTOR LOG": this.actor.fullLogReport,
-            "Instances": {
-                sheet: this,
-                entity: this.ent
-            }
-        }, this.actor.name, "MajorActorSheet", {isLoud: true});
+        // U.LOG({
+        //     "SHEET CONTEXT": data,
+        //     "ACTOR LOG": this.actor.fullLogReport,
+        //     "Instances": {
+        //         sheet: this,
+        //         entity: this.ent
+        //     }
+        // }, this.actor.name, "MajorActorSheet", {isLoud: true});
 
         return data;
         // #endregion

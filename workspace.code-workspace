@@ -30,7 +30,7 @@
 			"gulpfile.js": true,
 			"scss/canvas": true,
 			"scss/window": true,
-			"module/external": false,
+			"module/external": true,
 			".eslintignore": true
 		},
 		"explorerExclude.backup": null

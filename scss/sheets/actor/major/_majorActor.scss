@@ -1,6 +1,4 @@
-
-
-& {
+form.editable {
     .menuRosette {
         grid-area: menu;
         $menuOpenSize: 200px;
@@ -41,7 +39,6 @@
 
         &:not(.collapsed):hover {
             background-size: 100%;
-            // transform: translate(-20px, -20px);
     
             div.circleMenuContainer {
                 transform: scale(1) rotate(0deg);
@@ -85,7 +82,7 @@
                 $item-size: $menuButtonSize,
                 $initial-rotation: 135
             );
-            transform: scale(0.3) rotate(-125deg) translate(0);
+            transform: scale(0.3) rotate(-125deg);
             opacity: 0;
             transition: 0.5s;
     
@@ -127,7 +124,7 @@
                         &.iconExperience { background-image: $iconExperience; }
                         &.iconHeritage { background-image: $iconHeritage; }
                         
-                        &:hover { filter: drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)); }
+                        &:hover { /* filter: drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)) drop-shadow(0 0 10px var(--colorMenuGlow)); */ }
 
                         &:hover + .menuText {
                             letter-spacing: normal;
@@ -241,6 +238,8 @@
 
         .sheet-body {
             grid-area: body;
+            section.chargen-body { @import "sheets/actor/major/majorActor-chargen"; }
+            section.front-body { @import "sheets/actor/major/majorActor-front"; }
         }
     }
 }

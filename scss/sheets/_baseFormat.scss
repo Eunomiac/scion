@@ -221,13 +221,13 @@
     }
 
     .blur {
-        filter: blur(3px) opacity(0.75) !important;
+        // filter: blur(3px) opacity(0.75) !important;
         transform-origin: 0% 0% !important;
         transform: scale(75%) !important;
     }
 
     .glow {
-        filter: drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2));
+        // filter: drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2)) drop-shadow(0 0 5px var(--accentUp2));
     }
 
     .fader {
@@ -270,7 +270,7 @@
             border: 4px inset var(--grey);
             @include box-shadow(3px, 3px, var(--grey), true);
             opacity: 0.75;
-            filter: blur(0.5px);
+            // filter: blur(0.5px);
         }
     }
     /* #endregion */
@@ -290,7 +290,7 @@
         font-size: 20px;
         text-align: center;
         text-align-last: center;
-        line-height: 30px;
+        // line-height: 30px;
         border: 3px outset white;
         height: 36px;
         width: 36px;
@@ -319,7 +319,7 @@
     .tooltip {
         display: block;
         z-index: 9999;
-        filter: drop-shadow(5px 5px 10px black);
+        // filter: drop-shadow(5px 5px 10px black);
 
         &.helper {
             height: 40px;
@@ -348,7 +348,7 @@
             opacity: 0; 
             transition: opacity 0.8s;
             pointer-events: none;
-            filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.75));
+            // filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.75));
             h3 {
                 background: $c-greyBG;
                 color: black !important;
@@ -360,7 +360,7 @@
                 font-size: 20px;
                 border: none;
                 min-height: 25px;
-                line-height: 25px;
+                // line-height: var(--lineHeightBody);
                 font-family: Benguiat;
                 width: calc((100% + 2 * 5px)/#{$scaleFactor});
                 transform: scaleX(#{$scaleFactor});
@@ -372,7 +372,7 @@
             p, li, span {
                 font-family: "MercuryG2";
                 font-size: 11px;
-                line-height: 13px;
+                // line-height: var(--lineHeightHeader);
                 @include text-shadow((1 0 0 0 var(--black)));
                 &.stuntName { 
                     font: {
@@ -489,7 +489,7 @@
         box-sizing: content-box;
         border-radius: 40px;
 
-        filter: drop-shadow(0px 0px 6px black);
+        // filter: drop-shadow(0px 0px 6px black);
                  
     }
 
@@ -533,7 +533,7 @@
                 margin-left: calc(-0.5 * var(--dotSize));
                 
                 display: block;
-                line-height: var(--dotSize);
+                // line-height: var(--dotSize);
                 font-family: "Marcellus SC";
                 font-weight: bold;
                 font-size: var(--dotSize);
