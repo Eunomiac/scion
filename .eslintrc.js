@@ -1,40 +1,22 @@
 const ISDEPLOYING = false;
 const ALLRULESACTIVE = false;
 
-const defaultRules = {
-    "accessor-pairs": ["warn"],
-    "array-callback-return": "warn",
-    "array-element-newline": ["warn", "consistent"],
-    "block-scoped-var": "warn",
-    "brace-style": ["warn", "1tbs", {"allowSingleLine": true}],
-    "capitalized-comments": "off",
-    "class-methods-use-this": 0,
-    "comma-dangle": ["warn", "never"],
-    "consistent-return": ["warn", {"treatUndefinedAsUnspecified": true}],
-    "curly": "warn",
-    "default-case": "warn",
-    // "dot-location": ["warn", "object"],
-    "dot-notation": ["warn"],
-    "eol-last": 0,
-    "eqeqeq": ["warn", "always"],
-    "function-call-argument-newline": ["warn", "consistent"],
+const prettierConflictRules = { // Re-Enable These When Not Using Prettier 
+    "array-element-newline": ["warn", "consistent",],
+    "brace-style": ["warn", "1tbs", {"allowSingleLine": true,},],
+    "comma-dangle": ["warn", "never",],
+    "function-call-argument-newline": ["warn", "consistent",],
     "function-paren-newline": "warn",
-    "import/extensions": ["warn", {
-        "js": "always",
-        "scss": "never",
-        "css": "never"
-    }],
-    "import/named": 0,
     "indent": [
         "warn",
         4,
         {
             "ArrayExpression": "first",
-            "CallExpression": {"arguments": "first"},
+            "CallExpression": {"arguments": "first",},
             "FunctionDeclaration": {"parameters": "first",
-                                    "body": 1},
+                                    "body": 1,},
             "FunctionExpression": {"parameters": "first",
-                                   "body": 1},
+                                   "body": 1,},
             "ImportDeclaration": "first",
             "MemberExpression": 1,
             "ObjectExpression": "first",
@@ -43,11 +25,53 @@ const defaultRules = {
             "flatTernaryExpressions": true,
             "ignoreComments": true,
             "offsetTernaryExpressions": true,
-            "outerIIFEBody": 1
-        }
+            "outerIIFEBody": 1,
+        },
     ],
+    "linebreak-style": ["warn", "windows",],
+    "multiline-ternary": ["warn", "always-multiline",],
+    "no-confusing-arrow": ["warn", {"allowParens": true,},],
+    "no-extra-parens": [
+        "warn",
+        "all",
+        {
+            "conditionalAssign": false,
+            "enforceForArrowConditionals": false,
+            "nestedBinaryExpressions": false,
+        },
+    ],
+    "no-floating-decimal": "warn",
+    "no-mixed-operators": "warn",   
+    "no-mixed-spaces-and-tabs": ["warn", "smart-tabs",],
+    "no-multi-spaces": "warn",
+    "no-multi-str": "warn",
+    "no-multiple-empty-lines": "warn",    
+    "nonblock-statement-body-position": ["warn", "below",],
+    "object-curly-spacing": ["warn", "never",],
+    "operator-linebreak": ["warn", "before",],
+    "padded-blocks": ["warn", "never",],
+    "semi": ["warn", "always", {"omitLastInOneLineBlock": true,},],
+    "space-before-function-paren": ["warn", {"anonymous": "never", "named": "never", "asyncArrow": "always",},],
+};
+const defaultRules = {
+    "accessor-pairs": ["warn",],
+    "array-callback-return": "warn",
+    "block-scoped-var": "warn",
+    "capitalized-comments": "off",
+    "class-methods-use-this": 0,
+    "consistent-return": ["warn", {"treatUndefinedAsUnspecified": true,},],
+    "curly": "warn",
+    "default-case": "warn",
+    "dot-notation": ["warn",],
+    "eol-last": 0,
+    "eqeqeq": ["warn", "always",],
+    "import/extensions": ["warn", {
+        "js": "always",
+        "scss": "never",
+        "css": "never",
+    },],
+    "import/named": 0,
     "line-comment-position": "off",
-    "linebreak-style": ["warn", "windows"],
     "lines-between-class-members": 0,
     "max-classes-per-file": 0,
     "max-len": "off",
@@ -55,11 +79,9 @@ const defaultRules = {
     "max-params": "off",
     "max-statements": "off",
     "multiline-comment-style": 0,
-    "multiline-ternary": ["warn", "always-multiline"],
-    "new-cap": ["error", {"capIsNewExceptionPattern": "[A-Z]+"}],
-    "no-confusing-arrow": ["warn", {"allowParens": true}],
+    "new-cap": ["error", {"capIsNewExceptionPattern": "[A-Z]+",},],
     "no-console": 0,
-    "no-constant-condition": ["warn", {"checkLoops": false}],
+    "no-constant-condition": ["warn", {"checkLoops": false,},],
     "no-continue": 0,
     "no-else-return": 0,
     "no-empty-function": 0,
@@ -67,16 +89,6 @@ const defaultRules = {
     "no-eval": "warn",
     "no-extend-native": 0,
     "no-extra-bind": "warn",
-    "no-extra-parens": [
-        "warn",
-        "all",
-        {
-            "conditionalAssign": false,
-            "enforceForArrowConditionals": false,
-            "nestedBinaryExpressions": false
-        }
-    ],
-    "no-floating-decimal": "warn",
     "no-implicit-coercion": "warn",
     "no-implicit-globals": "warn",
     "no-implied-eval": "warn",
@@ -87,19 +99,14 @@ const defaultRules = {
     "no-lone-blocks": "warn",
     "no-lonely-if": 0,
     "no-loop-func": 0,
-    "no-magic-numbers": "off",
-    "no-mixed-operators": "warn",
-    "no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
-    "no-multi-spaces": "warn",
-    "no-multi-str": "warn",
-    "no-multiple-empty-lines": "warn",
+    "no-magic-numbers": "off", 
     "no-new": 0,
     "no-param-reassign": 0,
     "no-plusplus": 0,
     // "no-prototype-builtins": 0,
     "no-restricted-globals": 0,
     "no-restricted-syntax": 0,
-    "no-tabs": ["warn", {"allowIndentationTabs": true}],
+    "no-tabs": ["warn", {"allowIndentationTabs": true,},],
     "no-template-curly-in-string": "warn",
     "no-ternary": "off",
     "no-trailing-spaces": 0,
@@ -111,50 +118,44 @@ const defaultRules = {
     "no-useless-constructor": "warn",
     "no-useless-escape": 0,
     "no-void": 0,
-    "nonblock-statement-body-position": ["warn", "below"],
     "object-curly-newline": 0,
-    "object-curly-spacing": ["warn", "never"],
     "one-var": [
         "warn",
         {"var": "always",
          "let": "consecutive",
-         "const": "never"}
+         "const": "never",},
     ],
     "one-var-declaration-per-line": 0,
-    "operator-linebreak": ["warn", "before"],
-    "padded-blocks": ["warn", "never"],
     "prefer-arrow-callback": "warn",
-    "prefer-const": ["warn", {"destructuring": "all"}],
+    "prefer-const": ["warn", {"destructuring": "all",},],
     "prefer-destructuring": "warn",
     "prefer-object-spread": "warn",
-    "quotes": ["warn", "double"],
+    "quotes": ["warn", "double", {"avoidEscape": true, "allowTemplateLiterals": false,},], // Options necessary to work with Prettier.
     "radix": 0,
-    "semi": ["warn", "always", {"omitLastInOneLineBlock": true}],
     "sort-keys": [
         "warn",
         "asc",
         {"caseSensitive": true,
          "natural": true,
-         "minKeys": 20}
+         "minKeys": 20,},
     ],
-    "space-before-function-paren": ["warn", {"anonymous": "never", "named": "never", "asyncArrow": "always"}]
 };
 const deploymentRules = {
-    "multiline-comment-style": ["warn", "starred-block"],
+    "multiline-comment-style": ["warn", "starred-block",],
     "no-console": "error",
     "no-debugger": "error",
     "no-empty-function": "error",
     "no-prototype-builtins": "error",
     "no-trailing-spaces": "error",
-    "no-unused-vars": "error"
+    "no-unused-vars": "error",
 };
 
 const allRulesActive = {};
-for (const [rule, value] of Object.entries(defaultRules)) {
+for (const [rule, value,] of Object.entries(defaultRules,)) {
     allRulesActive[rule] = value === 0 ? "warn" : value;
 }
 
-const rules = Object.assign(Object.assign(ALLRULESACTIVE ? allRulesActive : defaultRules), Object.assign(ISDEPLOYING ? deploymentRules : {}));
+const rules = Object.assign(Object.assign(ALLRULESACTIVE ? allRulesActive : defaultRules,), Object.assign(ISDEPLOYING ? deploymentRules : {},),);
 
 module.exports = {
     // #region BASIC SETTINGS
@@ -164,14 +165,14 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "jest": true,
-        "jquery": true
+        "jquery": true,
     },
     "plugins": [],
     "extends": [
         ALLRULESACTIVE ? "eslint:all" : "eslint:recommended",
         "airbnb-base",
         
-        "prettier" // must go at the bottom
+        "prettier", // must go at the bottom
     ],
     "parserOptions": {
         "ecmaVersion": 2020,
@@ -180,8 +181,8 @@ module.exports = {
         "codeFrame": false,
         "ecmaFeatures": {
             "jsx": false,
-            "impliedStrict": true
-        }
+            "impliedStrict": true,
+        },
     },
 
     /*
@@ -234,7 +235,7 @@ module.exports = {
         "loadTemplates": "readonly",
         "mergeObject": "readonly",
         "setProperty": "readonly",
-        "ui": "readonly"
-    }
+        "ui": "readonly",
+    },
     // #endregion
 };

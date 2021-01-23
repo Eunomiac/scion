@@ -26,81 +26,21 @@ export default class ScionActor extends Actor {
 
     prepareData() {
         super.prepareData();
-        // console.log({"ACTOR: THIS.ACTOR": this.actor});
         if (this.data.type === "major") {
             this._prepareMajorCharData();
         }
     }
 
     async _prepareMajorCharData() {
-        if (!this.isPreparingCharData) {
+        if (!this.isPreparingCharData && !CONFIG.isInitializing) {
             this.isPreparingCharData = true;
-            // #region PREPARE BASE OWNED ITEMS
-            const itemCreationData = [];
-
-            /*
-             * Find the first Path Item of each type, if it exists;
-             * ... if it doesn't exist, add its creation data to pathData
-             * ... if it does exist, increment data.pathSkillCount accordingly
-             */
-
-            ["origin", "role", "pantheon"].forEach((pathType) => {
-                if (!this.ownedItems.find((item) => item.data.type === pathType)) {
-                    itemCreationData.push(...[
-                        {
-                            name: U.Loc(`scion.path.${pathType}`),
-                            type: "path",
-                            data: {
-                                type: pathType,
-                                title: null,
-                                skills: [],
-                                connections: [],
-                                conditions: {
-                                    pathSuspension: null,
-                                    pathRevocation: null
-                                }
-                            }
-                        },
-                        ...["pathSuspension", "pathRevocation"].map((conditionType) => (
-                            {
-                                name: U.Loc(`scion.condition.${conditionType}`),
-                                type: "condition",
-                                data: {
-                                    type: conditionType,
-                                    title: null,
-                                    effects: [],
-                                    isPersistent: true,
-                                    resolution: "",
-                                    linkedItem: pathType
-                                }
-                            }
-                        ))
-                    ]);
-                }
-            });
-
-            if (itemCreationData.length) {
-                if (this.eData.testItemCreateData?.length) {
-                    itemCreationData.length = 0;
-                    itemCreationData.push(...this.eData.testItemCreateData);
-                }
-                U.LOG(U.IsDebug() && {itemCreationData, "ACTOR": this.fullLogReport}, "Item Creation Data Found: Creating Items", this.name);
-                await this.createOwnedItem(itemCreationData);
-                itemCreationData.length = 0;
-                U.LOG(U.IsDebug() && {items: this.ownedItems, "ACTOR": this.fullLogReport}, "... Items Created; Updating Path Links ...", this.name);
-                await this.updatePathConditionLinks();
-                U.LOG(U.IsDebug() && {items: this.ownedItems, "ACTOR": this.fullLogReport}, "... Path Links Updated; Updating Pantheon ...", this.name);
-                await this.updatePantheon(true);
-                await this.update({["data.wasPantheonUpdated"]: true});
-                U.LOG(U.IsDebug() && {"eData.pantheon": this.data.data.pantheon, "ACTOR": this.fullLogReport}, "... Pantheon Updated: DONE!", this.name);
-            } else if (!this.eData.wasPantheonUpdated) {
+            if (!this.eData.wasPantheonUpdated) {
                 U.LOG(U.IsDebug() && {
                     "eData.pantheon": this.data.data.pantheon,
                     "this.eData.wasPantheonUpdated": this.data.data.wasPantheonUpdated,
                     "ACTOR": this.fullLogReport
                 }, "Pantheon NOT Updated: Updating Pantheon...", this.name);
                 await this.updatePantheon(true);
-                await this.update({["data.wasPantheonUpdated"]: true});
                 U.LOG(U.IsDebug() && {
                     "eData.pantheon": this.data.data.pantheon,
                     "this.eData.wasPantheonUpdated": this.eData.wasPantheonUpdated,
@@ -114,70 +54,39 @@ export default class ScionActor extends Actor {
         return false;
     }
 
-    async updatePathConditionLinks() {
-        const updatePromises = [];
-        for (const pathType of ["origin", "role", "pantheon"]) {
-            const pathUpdateData = {};
-            const pathItem = this[`${pathType}Path`];
-            for (const conditionType of ["pathSuspension", "pathRevocation"]) {
-                const conditionItem = this.conditions.find((item) => item.eData.type === conditionType && item.eData.linkedItem === pathType);
-                if (conditionItem) {
-                    U.LOG(U.IsDebug() && {conditionItem, "ACTOR": this.fullLogReport}, `... ... [updateConditionLinks: ${pathType}] Linking ${conditionType} Condition ...`, this.name);
-                    updatePromises.push(conditionItem.update({"data.linkedItem": pathItem.id}));
-                    pathUpdateData[`data.conditions.${conditionType}`] = conditionItem.id;
-                }
-            }
-            updatePromises.push(pathItem.update(pathUpdateData));
-        }
-        return Promise.all(updatePromises);
-    }
-
     async updatePantheon(pantheon) {
+        const updatePromises = [];
         if (pantheon === true || (pantheon && pantheon !== this.data.data.pantheon)) {
-            const updateData = {};
-            pantheon = pantheon && pantheon in SCION.PANTHEONS ? pantheon : this.data.data.pantheon;
+            pantheon = pantheon in SCION.PANTHEONS ? pantheon : this.data.data.pantheon;
             const panthPath = this.paths.find((path) => path.data.data.type === "pantheon");
+            if (!panthPath) {
+                return;
+            }
             const newSkills = Object.assign([], panthPath.data.data.skills, SCION.PANTHEONS[pantheon].assetSkills);
-            updateData["data.skills"] = newSkills;
-            U.LOG(U.IsDebug() && {pantheon, panthPath, updateData, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Updating Pantheon Path Skills ...", this.name);
-            await panthPath.update(updateData);
-            U.LOG(U.IsDebug() && {pantheon, panthPath, updateData, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Pantheon Path Updated, Proceeding to Update Skills ...", this.name);
+            updatePromises.push(...[
+                this.update({"data.wasPantheonUpdated": true}),
+                panthPath.update({"data.skills": newSkills})
+            ]);
+            U.LOG(U.IsDebug() && {pantheon, panthPath, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Updating Pantheon Path Skills ...", this.name);
+            await Promise.all(updatePromises);
+            U.LOG(U.IsDebug() && {pantheon, panthPath, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Pantheon Path Updated, Proceeding to Update Skills ...", this.name);
             await this.updateTraits();
         }
     }
 
-    async writeUpdates() {
-        const data = U.Clone(this.eData);
-        await this.update({data});
-        return true;
+    getSkillValsUpdate(newAssignedSkillVals = this.skillsCorrection) {
+        return U.KeyMapObj(newAssignedSkillVals, (skill) => `data.skills.list.${skill}.assigned`, (value) => value);
     }
-
-    queueSkillValsUpdate(newAssignedSkillVals = this.skillsCorrection) {
-        for (const [skill, value] of Object.entries(newAssignedSkillVals)) {
-            this.eData.skills.list[skill].assigned = value;
-        }
-        // this.queueUpdateData(U.KeyMapObj(
-        //     newAssignedSkillVals,
-        //     (skill) => `data.skills.list.${skill}.assigned`,
-        //     (val) => val
-        // ));
-    }
-    queueAttrValsUpdate(newAssignedAttrVals = this.attributesCorrection) {
-        for (const [attribute, value] of Object.entries(newAssignedAttrVals)) {
-            this.eData.attributes.list[attribute].assigned = value;
-        }
-        // this.queueUpdateData(U.KeyMapObj(
-        //     newAssignedAttrVals,
-        //     (attribute) => `data.attributes.list.${attribute}.assigned`,
-        //     (val) => val
-        // ));
+    getAttrValsUpdate(newAssignedAttrVals = this.attributesCorrection) {
+        return U.KeyMapObj(newAssignedAttrVals, (attribute) => `data.attributes.list.${attribute}.assigned`, (value) => value);
     }
 
     async updateTraits() {
-        this.queueSkillValsUpdate();
-        this.queueAttrValsUpdate();
-        await this.writeUpdates();
-        // await this.processUpdateQueue();
+        const updateData = {
+            ...this.getSkillValsUpdate(),
+            ...this.getAttrValsUpdate()
+        };
+        await this.update(updateData);
         return true;
     }
 

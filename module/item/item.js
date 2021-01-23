@@ -1,4 +1,5 @@
 import {U, MIX, MIXINS} from "../modules.js";
+import ScionActor from "../actor/actor.js";
 // import "../external/dragula.min.js"
 
 /**
@@ -6,6 +7,7 @@ import {U, MIX, MIXINS} from "../modules.js";
  * @extends {Item}
  */
 export default class ScionItem extends Item {
+
     // Getters: Data Retrieval    
     get ent() { return typeof this.entity === "string" ? this : this.entity }
     get sht() { return this.ent.sheet }
@@ -25,7 +27,7 @@ export default class ScionItem extends Item {
 
     prepareData() {
         super.prepareData();
-
+        
         // console.log({"ITEM: THIS.ACTOR": this.actor});
         // Get the Item's data, as well as the owning Actor, if there is one
         const {data} = this.data;

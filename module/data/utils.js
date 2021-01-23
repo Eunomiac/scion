@@ -29,7 +29,7 @@ const noCapTitleCase = [
     "so",
     "the",
     "an",
-    "a"
+    "a",
 ];
 const loremIpsumText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ultricies 
 nibh sed massa euismod lacinia. Aliquam nec est ac nunc ultricies scelerisque porta vulputate odio. 
@@ -59,7 +59,7 @@ const groupStyles = {
     l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 5px;",
     l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; font-weight: bold; padding: 0 5px;",
     l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 12px; font-weight: bold; padding: 0 2px;",
-    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 2px;"
+    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 2px;",
 };
 const logStyles = {
     data: "color: black; background-color: white; font-family: Oswald; font-size: 14px; padding: 0px 5px;",
@@ -73,9 +73,9 @@ const logStyles = {
     l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; padding: 0 5px;",
     l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; padding: 0 5px;",
     l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 12px; padding: 0 2px;",
-    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; padding: 0 2px;"
+    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; padding: 0 2px;",
 };
-const stackTraceBlacklist = [/jquery\.min\.js/u];
+const stackTraceBlacklist = [/jquery\.min\.js/u,];
 /*
  *const testStack = `Error
  *    at stackTrace (http://localhost:30000/systems/scion/module/data/utils.js:33:25)
@@ -109,18 +109,18 @@ const stackTraceBlacklist = [/jquery\.min\.js/u];
  *console.log(testStackMapped);
  */
 const delayedLogQueue = [];
-const isDebugging = (tag, {isLoud}) => isLoud || game.scion?.debug.isDebugging || (tag && game.scion?.debug.watchList.includes(tag));
+const isDebugging = (tag, {isLoud,},) => isLoud || game.scion?.debug.isDebugging || (tag && game.scion?.debug.watchList.some((watchTag) => new RegExp(watchTag).test(tag)));
 const stackTrace = () => {
     const stackString = new Error().stack;
     const stack = stackString
-        .replace(/(\n\s+at\s+)(http:[^\n]+)(\n?)/gu, "$1<Anonymous> ($2)$3")
-        .split(/\n\s+at\s+/gu)
-        .slice(1)
-        .filter((line) => !stackTraceBlacklist.some((regex) => regex.test(line)))
-        .map((line) => line.replace(/http:\/\/localhost:[^:]*?(\/scion\/(module\/)?|\/scripts\/)/gu, ""))
-        .map((line) => (line.match(/^([^(]+)(?: \(|)([^())]*)\)?$/u) || []).slice(1, 3))
-        .map(([name, loc]) => [name, ...(loc ?? "").replace(":", "=").split("=")]);
-    while (stack.length && (stack[0] || []).join(" ").includes("utils.js")) {
+        .replace(/(\n\s+at\s+)(http:[^\n]+)(\n?)/gu, "$1<Anonymous> ($2)$3",)
+        .split(/\n\s+at\s+/gu,)
+        .slice(1,)
+        .filter((line,) => !stackTraceBlacklist.some((regex,) => regex.test(line,),),)
+        .map((line,) => line.replace(/http:\/\/localhost:[^:]*?(\/scion\/(module\/)?|\/scripts\/)/gu, "",),)
+        .map((line,) => (line.match(/^([^(]+)(?: \(|)([^())]*)\)?$/u,) || []).slice(1, 3,),)
+        .map(([name, loc,],) => [name, ...(loc ?? "").replace(":", "=",).split("=",),],);
+    while (stack.length && (stack[0] || []).join(" ",).includes("utils.js",)) {
         stack.shift();
     }
     return [
@@ -128,109 +128,109 @@ const stackTrace = () => {
         Object.assign(
             KeyMapObj(
                 stack,
-                (k, v) => `${v[0]} (${v[1]})`,
-                (v) => _.last(v)
+                (k, v,) => `${v[0]} (${v[1]})`,
+                (v,) => _.last(v,),
             ),
-            {"traceString:": stackString.replace(/ +/gu, " ").replace(/Error/u, "")}
-        )
+            {"traceString:": stackString.replace(/ +/gu, " ",).replace(/Error/u, "",),},
+        ),
     ];
 };
-const logLine = (output, title, {style, groupStyle, isGrouping}) => {
+const logLine = (output, title, {style, groupStyle, isGrouping,},) => {
     if (isGrouping && game.scion.debug.isFullDebugConsole) {
         if (game.scion.debug.isFullDebugConsole) {
-            console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle]);
+            console.groupCollapsed(`%c ${isGrouping}`, groupStyles[groupStyle],);
         } else {
-            console.groupCollapsed(isGrouping);
+            console.groupCollapsed(isGrouping,);
         }
     }
     if (output !== undefined) {
         if (game.scion.debug.isFullDebugConsole) {
-            console.log(`%c ${title}`, logStyles[style], output);
+            console.log(`%c ${title}`, logStyles[style], output,);
         } else {
             console.log(
                 title,
-                _.pick(output, (v, k) => Object.prototype.hasOwnProperty.call(output, k))
+                _.pick(output, (v, k,) => Object.prototype.hasOwnProperty.call(output, k,),),
             );
         }
     } else {
-        console.log(`No Output for ${title}`);
+        console.log(`No Output for ${title}`,);
     }
 };
-const logStackTrace = (stack) => {
+const logStackTrace = (stack,) => {
     if (stack) {
-        const [stackRef, stackData] = stack;
-        Object.entries(stackData).forEach(([locRef, lineRef], i) => {
-            const style = (/foundry\.js/u.test(locRef) && "traceFoundry") || (locRef === "traceString:" && "traceString") || "traceLocal";
+        const [stackRef, stackData,] = stack;
+        Object.entries(stackData,).forEach(([locRef, lineRef,], i,) => {
+            const style = (/foundry\.js/u.test(locRef,) && "traceFoundry") || (locRef === "traceString:" && "traceString") || "traceLocal";
             if (i === 0) {
-                logLine(lineRef, locRef, {style, groupStyle: "trace", isGrouping: `STACK TRACE [${stackRef.shift()}]: ${stackRef.join(" at ")}`});
+                logLine(lineRef, locRef, {style, groupStyle: "trace", isGrouping: `STACK TRACE [${stackRef.shift()}]: ${stackRef.join(" at ",)}`,},);
             } else {
-                logLine(lineRef, locRef, {style});
+                logLine(lineRef, locRef, {style,},);
             }
-        });
+        },);
         console.groupEnd();
     }
 };
-const logGroup = (outputs, groupTitle, tag, {style, groupStyle}, stack) => {
-    if (["number", "string"].includes(typeof outputs)) {
-        logGroup({}, outputs, tag, {style, groupStyle}, stack);
+const logGroup = (outputs, groupTitle, tag, {style, groupStyle,}, stack,) => {
+    if (["number", "string",].includes(typeof outputs,)) {
+        logGroup({}, outputs, tag, {style, groupStyle,}, stack,);
     } else if (game.scion.debug.isFullDebugConsole) {
-        if (Array.isArray(outputs)) {
-            outputs = outputs.map((x, i) => ({[`${i}. ${JSON.stringify(x)}`]: ""}));
+        if (Array.isArray(outputs,)) {
+            outputs = outputs.map((x, i,) => ({[`${i}. ${JSON.stringify(x,)}`]: "",}),);
         }
-        outputs = Object.entries(outputs);
-        (([lineTitle, lineOutput]) => {
-            logLine(lineOutput, lineTitle, {style, groupStyle, isGrouping: _.compact([tag && `[${tag}]`, groupTitle]).join(" ")});
-        })(outputs.shift() || [null, null]);
-        outputs.forEach(([lineTitle, lineOutput]) => {
-            logLine(lineOutput, lineTitle, {style});
-        });
-        logStackTrace(stack);
+        outputs = Object.entries(outputs,);
+        (([lineTitle, lineOutput,],) => {
+            logLine(lineOutput, lineTitle, {style, groupStyle, isGrouping: _.compact([tag && `[${tag}]`, groupTitle,],).join(" ",),},);
+        })(outputs.shift() || [null, null,],);
+        outputs.forEach(([lineTitle, lineOutput,],) => {
+            logLine(lineOutput, lineTitle, {style,},);
+        },);
+        logStackTrace(stack,);
         console.groupEnd();
     } else {
-        console.log(groupTitle, outputs);
+        console.log(groupTitle, outputs,);
     }
 };
-export const IsDebug = () => Boolean(game.scion?.debug.isDebugging);
+export const IsDebug = () => Boolean(game.scion?.debug.isDebugging,);
 export const LOG = (
-    outputs = {title: Object},
+    outputs = {title: Object,},
     groupTitle = "",
     tag = undefined,
-    {style = "log", groupStyle = "data", isLoud = false} = {},
-    stack = stackTrace()
+    {style = "log", groupStyle = "data", isLoud = false,} = {},
+    stack = stackTrace(),
 ) => {
-    if (isDebugging(tag, {isLoud})) {
+    if (isDebugging(tag, {isLoud,},)) {
         if (CONFIG.isHoldingLogs) {
-            delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud}, stack]);
+            delayedLogQueue.push([outputs, groupTitle, tag, {style, groupStyle, isLoud,}, stack,],);
         } else {
-            logGroup(outputs, groupTitle, tag, {style, groupStyle}, stack);
+            logGroup(outputs, groupTitle, tag, {style, groupStyle,}, stack,);
         }
     }
 };
 export const ReleaseLogs = () => {
     CONFIG.isHoldingLogs = false;
-    const logQueue = [...delayedLogQueue];
+    const logQueue = [...delayedLogQueue,];
     delayedLogQueue.length = 0;
-    logQueue.forEach((log) => LOG(...log));
+    logQueue.forEach((log,) => LOG(...log,),);
 };
-export const DB = (data, tag, {isLoud = false} = {}) => LOG(data, tag ? `[DB: ${tag}]` : "[DB]", null, {groupStyle: "debug", style: "debug", isLoud});
-export const THROW = (data, tag, {isLoud = true} = {}) =>
-    LOG(data, tag ? `[${tag} ERROR]` : "[ERROR]", null, {groupStyle: "error", style: "error", isLoud}) && false;
+export const DB = (data, tag, {isLoud = false,} = {},) => LOG(data, tag ? `[DB: ${tag}]` : "[DB]", null, {groupStyle: "debug", style: "debug", isLoud,},);
+export const THROW = (data, tag, {isLoud = true,} = {},) =>
+    LOG(data, tag ? `[${tag} ERROR]` : "[ERROR]", null, {groupStyle: "error", style: "error", isLoud,},) && false;
 // #endregion
 
 // #region LOGIC FUNCTIONS // null, String, Number, Boolean, Array, Set, HTMLElement, Object
 
-export const GetType = (val) => {
-    if (_.isUndefined(val)) {
+export const GetType = (val,) => {
+    if (_.isUndefined(val,)) {
         return "undefined";
     }
-    const tVal = getType(val);
+    const tVal = getType(val,);
     if (tVal === "Object" && typeof val === "function") {
         return "Function";
     }
     return tVal;
 };
-export const Equal = (val1, val2) => {
-    const [tVal1, tVal2] = [GetType(val1), GetType(val2)];
+export const Equal = (val1, val2,) => {
+    const [tVal1, tVal2,] = [GetType(val1,), GetType(val2,),];
     if (tVal1 === tVal2) {
         switch (tVal1) {
             case "null":
@@ -241,10 +241,10 @@ export const Equal = (val1, val2) => {
             case "Array":
             case "Set":
             case "Object":
-                return _.isEqual(val1, val2);
+                return _.isEqual(val1, val2,);
             default: {
                 try {
-                    return JSON.stringify(val1) === JSON.stringify(val2);
+                    return JSON.stringify(val1,) === JSON.stringify(val2,);
                 } catch {
                     return false;
                 }
@@ -256,60 +256,60 @@ export const Equal = (val1, val2) => {
 // #endregion
 
 // #region STRING FUNCTIONS: Capitalization, Parsing, Localization
-export const UCase = (str) => `${str}`.toUpperCase();
-export const LCase = (str) => `${str}`.toLowerCase();
-export const SCase = (str) => `${`${str}`.slice(0, 1).toUpperCase()}${`${str}`.slice(1)}`;
-export const TCase = (str) =>
+export const UCase = (str,) => `${str}`.toUpperCase();
+export const LCase = (str,) => `${str}`.toLowerCase();
+export const SCase = (str,) => `${`${str}`.slice(0, 1,).toUpperCase()}${`${str}`.slice(1,)}`;
+export const TCase = (str,) =>
     `${str}`
-        .split(/\s/u)
-        .map((x, i) => (i && noCapTitleCase.includes(`${x}`.toLowerCase()) ? `${x}`.toLowerCase() : SCase(x)))
-        .join(" ")
-        .replace(/\s+/gu, " ")
+        .split(/\s/u,)
+        .map((x, i,) => (i && noCapTitleCase.includes(`${x}`.toLowerCase(),) ? `${x}`.toLowerCase() : SCase(x,)),)
+        .join(" ",)
+        .replace(/\s+/gu, " ",)
         .trim();
-export const Loc = (locRef, formatDict = {}) => {
-    if (/^"?scion\./u.test(JSON.stringify(locRef))) {
-        for (const [key, val] of Object.entries(formatDict)) {
-            formatDict[key] = Loc(val);
+export const Loc = (locRef, formatDict = {},) => {
+    if (/^"?scion\./u.test(JSON.stringify(locRef,),)) {
+        for (const [key, val,] of Object.entries(formatDict,)) {
+            formatDict[key] = Loc(val,);
         }
-        return game.i18n.format(locRef, formatDict) || "";
+        return game.i18n.format(locRef, formatDict,) || "";
     }
     return locRef;
 };
-export const ParseArticles = (str) => `${str}`.replace(/\b(a|A)\s([aeiouAEIOU])/gu, "$1n $2");
-export const LoremIpsum = (numWords = 200) => {
-    const loremIpsumWords = loremIpsumText.replace(/\n/gu, "").split(/ /u);
+export const ParseArticles = (str,) => `${str}`.replace(/\b(a|A)\s([aeiouAEIOU])/gu, "$1n $2",);
+export const LoremIpsum = (numWords = 200,) => {
+    const loremIpsumWords = loremIpsumText.replace(/\n/gu, "",).split(/ /u,);
     while (loremIpsumWords.length < numWords) {
-        loremIpsumWords.push(...loremIpsumWords);
+        loremIpsumWords.push(...loremIpsumWords,);
     }
     loremIpsumWords.length = numWords;
-    loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "")}.`;
-    return loremIpsumWords.join(" ");
+    loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "",)}.`;
+    return loremIpsumWords.join(" ",);
 };
 // #endregion
 
 // #region NUMBER FUNCTIONS: Parsing
-export const Int = (num) => parseInt(`${Math.round(parseFloat(`${num}`) || 0)}`);
-export const Float = (num, sigDigits = 2) => Math.round((parseFloat(`${num}`) || 0) * 10 ** sigDigits) / 10 ** sigDigits;
-export const Rand = (n1, n2) => Math.round(Math.random() * (Math.max(Int(n2), Int(n1)) - Math.min(Int(n2), Int(n1)))) + Math.min(Int(n2), Int(n1));
+export const Int = (num,) => parseInt(`${Math.round(parseFloat(`${num}`,) || 0,)}`,);
+export const Float = (num, sigDigits = 2,) => Math.round((parseFloat(`${num}`,) || 0) * 10 ** sigDigits,) / 10 ** sigDigits;
+export const Rand = (n1, n2,) => Math.round(Math.random() * (Math.max(Int(n2,), Int(n1,),) - Math.min(Int(n2,), Int(n1,),)),) + Math.min(Int(n2,), Int(n1,),);
 // #endregion
 
 // #region ARRAY FUNCTIONS: Last
-export const Last = (arr) => (Array.isArray(arr) && arr.length ? arr[arr.length - 1] : undefined);
-export const Insert = (arr, val, index) => {
-    arr[Int(index)] = val;
+export const Last = (arr,) => (Array.isArray(arr,) && arr.length ? arr[arr.length - 1] : undefined);
+export const Insert = (arr, val, index,) => {
+    arr[Int(index,)] = val;
     return arr;
 };
-export const Change = (arr, findFunc = (e, i, a) => true, changeFunc = (e, i, a) => e) => {
-    const index = arr.findIndex(findFunc);
+export const Change = (arr, findFunc = (e, i, a,) => true, changeFunc = (e, i, a,) => e,) => {
+    const index = arr.findIndex(findFunc,);
     if (index >= 0) {
-        arr[index] = changeFunc(arr[index], index, arr);
+        arr[index] = changeFunc(arr[index], index, arr,);
         return arr;
     } else {
         return false;
     }
 };
-export const Remove = (arr, findFunc = (e, i, a) => true) => {
-    const index = arr.findIndex(findFunc);
+export const Remove = (arr, findFunc = (e, i, a,) => true,) => {
+    const index = arr.findIndex(findFunc,);
     if (index >= 0) {
         delete arr[index];
         for (let i = index; i < arr.length - 1; i++) {
@@ -330,82 +330,82 @@ export const Remove = (arr, findFunc = (e, i, a) => true) => {
 // #endregion
 
 // #region OBJECT FUNCTIONS: Dot Notation, MapObject, MakeDictionary
-export const KeyMapObj = (obj, keyFunc = (x) => x, valFunc = undefined) => {
+export const KeyMapObj = (obj, keyFunc = (x,) => x, valFunc = undefined,) => {
     /*
      * An object-equivalent Array.map() function, which accepts mapping functions to transform both keys and values.
      *      If only one function is provided, it's assumed to be mapping the values and will receive (v, k) args.
      */
-    [valFunc, keyFunc] = [valFunc, keyFunc].filter((x) => typeof x === "function");
-    keyFunc = keyFunc || ((k) => k);
+    [valFunc, keyFunc,] = [valFunc, keyFunc,].filter((x,) => typeof x === "function",);
+    keyFunc = keyFunc || ((k,) => k);
     const newObj = {};
-    Object.entries(obj).forEach(([key, val]) => {
-        newObj[keyFunc(key, val)] = valFunc(val, key);
-    });
+    Object.entries(obj,).forEach(([key, val,],) => {
+        newObj[keyFunc(key, val,)] = valFunc(val, key,);
+    },);
     return newObj;
 };
-export const Clone = (obj) => {
+export const Clone = (obj,) => {
     let cloneObj;
     try {
-        cloneObj = JSON.parse(JSON.stringify(obj));
+        cloneObj = JSON.parse(JSON.stringify(obj,),);
     } catch (err) {
         // THROW({obj, err}, "ERROR: U.Clone()");
-        cloneObj = {...obj};
+        cloneObj = {...obj,};
     }
     return cloneObj;
 };
-export const Merge = (target, source, {isMergingArrays = true, isOverwritingArrays = true} = {}) => {
-    target = Clone(target);
-    const isObject = (obj) => obj && typeof obj === "object";
+export const Merge = (target, source, {isMergingArrays = true, isOverwritingArrays = true,} = {},) => {
+    target = Clone(target,);
+    const isObject = (obj,) => obj && typeof obj === "object";
 
-    if (!isObject(target) || !isObject(source)) {
+    if (!isObject(target,) || !isObject(source,)) {
         return source;
     }
 
-    Object.keys(source).forEach((key) => {
+    Object.keys(source,).forEach((key,) => {
         const targetValue = target[key];
         const sourceValue = source[key];
 
-        if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
+        if (Array.isArray(targetValue,) && Array.isArray(sourceValue,)) {
             if (isOverwritingArrays) {
                 target[key] = sourceValue;
             } else if (isMergingArrays) {
-                target[key] = targetValue.map((x, i) =>
-                    (sourceValue.length <= i ? x : Merge(x, sourceValue[i], {isMergingArrays, isOverwritingArrays})));
+                target[key] = targetValue.map((x, i,) =>
+                    (sourceValue.length <= i ? x : Merge(x, sourceValue[i], {isMergingArrays, isOverwritingArrays,},)),);
                 if (sourceValue.length > targetValue.length) {
-                    target[key] = target[key].concat(sourceValue.slice(targetValue.length));
+                    target[key] = target[key].concat(sourceValue.slice(targetValue.length,),);
                 }
             } else {
-                target[key] = targetValue.concat(sourceValue);
+                target[key] = targetValue.concat(sourceValue,);
             }
-        } else if (isObject(targetValue) && isObject(sourceValue)) {
-            target[key] = Merge({...targetValue}, sourceValue, {isMergingArrays, isOverwritingArrays});
+        } else if (isObject(targetValue,) && isObject(sourceValue,)) {
+            target[key] = Merge({...targetValue,}, sourceValue, {isMergingArrays, isOverwritingArrays,},);
         } else {
             target[key] = sourceValue;
         }
-    });
+    },);
 
     return target;
 };
-export const Filter = (obj, testFunc = (v, k) => true) =>
-    Object.keys(obj).reduce((newObj, key) => Object.assign(newObj, testFunc(obj[key], key) ? {[key]: obj[key]} : {}), {});
-export const Expand = (obj) => {
+export const Filter = (obj, testFunc = (v, k,) => true,) =>
+    Object.keys(obj,).reduce((newObj, key,) => Object.assign(newObj, testFunc(obj[key], key,) ? {[key]: obj[key],} : {},), {},);
+export const Expand = (obj,) => {
     const expObj = {};
-    for (let [key, val] of Object.entries(obj)) {
-        if (getType(val) === "Object") {
-            val = Expand(val);
+    for (let [key, val,] of Object.entries(obj,)) {
+        if (getType(val,) === "Object") {
+            val = Expand(val,);
         }
-        setProperty(expObj, key, val);
+        setProperty(expObj, key, val,);
     }
     return expObj;
 };
-export const Flatten = (obj) => {
+export const Flatten = (obj,) => {
     const flatObj = {};
-    for (const [key, val] of Object.entries(obj)) {
-        if (getType(val) === "Object") {
-            if (isObjectEmpty(val)) {
+    for (const [key, val,] of Object.entries(obj,)) {
+        if (getType(val,) === "Object") {
+            if (isObjectEmpty(val,)) {
                 flatObj[key] = val;
             } else {
-                for (const [subKey, subVal] of Object.entries(Flatten(val))) {
+                for (const [subKey, subVal,] of Object.entries(Flatten(val,),)) {
                     flatObj[`${key}.${subKey}`] = subVal;
                 }
             }
@@ -418,42 +418,42 @@ export const Flatten = (obj) => {
 export const SumVals = (...objs) => {
     const valKey = objs.pop();
     if (typeof valKey === "object") {
-        objs.push(valKey);
+        objs.push(valKey,);
     }
     return objs.reduce(
-        (tot, obj) => tot + Object.values(obj).reduce((subTot, val) => subTot + (typeof val === "object" && valKey in val ? val[valKey] : val), 0),
-        0
+        (tot, obj,) => tot + Object.values(obj,).reduce((subTot, val,) => subTot + (typeof val === "object" && valKey in val ? val[valKey] : val), 0,),
+        0,
     );
 };
-export const MakeDict = (objRef, valFunc = (v) => v, keyFunc = (k) => k) => {
+export const MakeDict = (objRef, valFunc = (v,) => v, keyFunc = (k,) => k,) => {
     const newDict = {};
-    for (const key of Object.keys(objRef)) {
+    for (const key of Object.keys(objRef,)) {
         const val = objRef[key];
-        const newKey = keyFunc(key, val);
-        let newVal = valFunc(val, key);
-        if (typeof newVal === "object" && !Array.isArray(newVal)) {
-            const newValProp = ((nVal) => ["label", "name", "value"].find((x) => x in nVal))(newVal);
+        const newKey = keyFunc(key, val,);
+        let newVal = valFunc(val, key,);
+        if (typeof newVal === "object" && !Array.isArray(newVal,)) {
+            const newValProp = ((nVal,) => ["label", "name", "value",].find((x,) => x in nVal,))(newVal,);
             newVal = newValProp && newVal[newValProp];
         }
-        if (["string", "number"].includes(typeof newVal)) {
-            newDict[newKey] = Loc(newVal);
+        if (["string", "number",].includes(typeof newVal,)) {
+            newDict[newKey] = Loc(newVal,);
         }
     }
     return newDict;
 };
 
-export const NestedValues = (obj, flatVals = []) => {
+export const NestedValues = (obj, flatVals = [],) => {
     if (obj && typeof obj === "object") {
-        for (const key of Object.keys(obj)) {
+        for (const key of Object.keys(obj,)) {
             const val = obj[key];
             if (val && typeof val === "object") {
-                flatVals.push(...NestedValues(val));
+                flatVals.push(...NestedValues(val,),);
             } else {
-                flatVals.push(val);
+                flatVals.push(val,);
             }
         }
         return flatVals;
     }
-    return [obj].flat();
+    return [obj,].flat();
 };
 // #endregion

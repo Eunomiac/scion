@@ -19,7 +19,7 @@ $pantheonThemes: (
         'typography': (  
             'Title': (
                 'fontFamily': 'Finger Paint',
-                'fontSize': 2rem
+                /* 'fontSize': 2rem */
             ),
             'H1': (
                 'fontFamily': 'Finger Paint'
@@ -43,21 +43,21 @@ $pantheonThemes: (
         'typography': (
             'Title': (
                 'fontFamily': 'Carolingia',
-                'fontSize': 40px,
+                /* 'fontSize': 40px,
                 'fontVariant': small-caps,
-                'fontWeight': bold
+                'fontWeight': bold */
             ),
             'H1': (
                 'fontFamily': 'Alberta',
-                'lineHeight': 1
+                /* 'lineHeight': 1 */
             ),
             'H2': (
                 'fontFamily': 'Alberta',
-                'lineHeight': 1.5
+                /* 'lineHeight': 1.5 */
             ),
             'H3': (
                 'fontFamily': 'Khaleefa',
-                'fontSize': 24px
+                /* 'fontSize': 24px */
             )
         )
     ),
@@ -77,36 +77,36 @@ $pantheonThemes: (
         'typography': (  
             'Title': (
                 'fontFamily': 'Poiret One',
-                'fontWeight': bold
+                /* 'fontWeight': bold */
             ),
             'H1': (
                 'fontFamily': 'Poiret One',
-                'fontWeight': bold,
-                'fontVariant': small-caps
+                /* 'fontWeight': bold,
+                'fontVariant': small-caps */
             ),
             'H2': (
                 'fontFamily': 'Roman Font 7'
             ),
             'H3': (
                 'fontFamily': 'Poiret One',
-                'fontSize': 20px,
+                /* 'fontSize': 20px,
                 'fontVariant': small-caps,
                 'fontWeight': normal,
-                'textShadow': (shadow-glow, 5, 1px, var(--colorH2))
+                'textShadow': (shadow-glow, 5, 1px, var(--colorH2)) */
             ),
             'Body': (
                 'fontFamily': 'Poiret One',
-                'textShadow': (shadow-glow, 6, 0, var(--black))
+                /* 'textShadow': (shadow-glow, 6, 0, var(--black)) */
             ),
             'Strong': (
-                'fontWeight': normal,
-                'textShadow': (shadow-glow, 9, 1px, var(--black))
+                /* 'fontWeight': normal,
+                'textShadow': (shadow-glow, 9, 1px, var(--black)) */
             ),
             'Weak': (
-                'textShadow': (shadow-glow, 6, 0, var(--greyUp2))
+                /* 'textShadow': (shadow-glow, 6, 0, var(--greyUp2)) */
             ),
             'Placeholder': (
-                'textShadow': none
+                /* 'textShadow': none */
             )
         )
     ),   
@@ -124,19 +124,19 @@ $pantheonThemes: (
         'typography': (  
             'Title': (
                 'fontFamily': 'Berkshire Swash',
-                'fontSize': 40px
+                /* 'fontSize': 40px */
             ),
             'H1': (
                 'fontFamily': 'Berkshire Swash',
-                'fontVariant': normal
+                /* 'fontVariant': normal */
             ),
             'H2': (
                 'fontFamily': 'Della Respira'
             ),
             'H3': (
                 'fontFamily': 'Della Respira',
-                'fontStyle': italic,
-                'fontWeight': bold
+                /* 'fontStyle': italic,
+                'fontWeight': bold */
             )
         )
     ),
@@ -155,30 +155,30 @@ $pantheonThemes: (
         'typography': (  
             'Title': (
                 'fontFamily': 'Poiret One',
-                'fontWeight': bold
+                /* 'fontWeight': bold */
             ),
             'H1': (
                 'fontFamily': 'Poiret One',
-                'fontWeight': bold,
-                'fontVariant': small-caps
+                /* 'fontWeight': bold,
+                'fontVariant': small-caps */
             ),
             'H2': (
                 'fontFamily': 'Elektra'
             ),
             'H3': (
                 'fontFamily': 'Poiret One',
-                'fontSize': 20px,
+                /* 'fontSize': 20px,
                 'fontVariant': small-caps,
                 'fontWeight': normal,
-                'textShadow': (shadow-glow, 5, 1px, var(--colorH2))
+                'textShadow': (shadow-glow, 5, 1px, var(--colorH2)) */
             ),
             'Body': (
                 'fontFamily': 'Poiret One',
-                'textShadow': (shadow-glow, 6, 0, var(--black))
+                /* 'textShadow': (shadow-glow, 6, 0, var(--black)) */
             ),
             'Strong': (
                 'fontWeight': normal,
-                'textShadow': (shadow-glow, 9, 1px, var(--black))
+                /* 'textShadow': (shadow-glow, 9, 1px, var(--black)) */
             )
         )
     ),

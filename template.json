@@ -6,7 +6,8 @@
                 "concept": "",
                 "description": "",
                 "imageURL": "",
-                "testItemCreateData": []
+                "testItemCreateData": [],
+                "isFullyInitialized": false
             },
             "PC": {
                 "playerName": ""
@@ -114,7 +115,8 @@
                 "title": "",
                 "type": "",
                 "description": "",
-                "details": ""
+                "details": "",
+                "isFullyInitialized": false
             },
             "CONNECTION": {
                 "description": "",

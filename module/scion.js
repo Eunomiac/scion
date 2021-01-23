@@ -17,137 +17,11 @@ import GuideItemSheet from "./item/birthrights/birthright-guide-sheet.js";
 import RelicItemSheet from "./item/birthrights/birthright-relic-sheet.js";
 
 import "./external/gl-matrix-min.js";
+import { randomID } from "../../../../../../../../../../Program Files/FoundryVTT/resources/app/public/scripts/foundry.js";
+import { random } from "./external/underscore/underscore-esm-min.js";
 // #endregion
 
-const createTestChar = async (name) => {
-    game.actors.entries.find((actor) => actor.name === name)?.delete();
-    const defaultActorData = testChars.actorData;
-    const sigCharActorData = testChars.sigChars[name]?.actorData ?? {};
-    const actorData = U.Merge(defaultActorData, sigCharActorData);
-    const defaultItemData = testChars.itemCreateData;
-    const sigCharItemData = testChars.sigChars[name]?.itemCreateData ?? [];
-    const itemCreateData = U.Merge(defaultItemData, sigCharItemData);
 
-    // #region Determine Path Skills & Randomly Assign Available Skill Dots
-    const skills = Object.keys(SCION.SKILLS.list);
-    const baseSkillVals = U.KeyMapObj(SCION.SKILLS.list, () => 0);
-    const pathSkills = {
-        origin: [],
-        role: [],
-        pantheon: SCION.PANTHEONS[actorData.pantheon].assetSkills
-    };
-    ["origin", "role", "pantheon"].forEach((pathType) => {
-        const baseVal = U.Clone(actorData.pathPriorities).reverse().findIndex((path) => path === pathType) + 1;
-        const skillsToAdd = 3 - pathSkills[pathType].length;
-        for (let i = 0; i < skillsToAdd; i++) {
-            const availableSkills = skills.filter((skill) => Object.values(pathSkills).flat().filter((pathSkill) => pathSkill === skill).length < 2 && !pathSkills[pathType].includes(skill));
-            pathSkills[pathType].push(_.sample(availableSkills));
-        }
-        for (const skill of pathSkills[pathType]) {baseSkillVals[skill] += baseVal}
-    });
-    let assignableSkillDots = U.Rand(0, Object.values(actorData.skills.assignableDots).reduce((tot, val) => tot + val, 0));
-    while (assignableSkillDots) {
-        const availableSkills = skills.filter((skill) => (baseSkillVals[skill] + actorData.skills.list[skill].assigned) < 5);
-        actorData.skills.list[_.sample(availableSkills)].assigned++;
-        assignableSkillDots--;
-    }
-    // #endregion
-
-    // #region Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
-    const attributes = Object.keys(SCION.ATTRIBUTES.list);
-    const baseAttrVals = U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => (SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(k) ? 3 : 1));
-    const priorityAttrs = {
-        primary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[0]],
-        secondary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[1]],
-        tertiary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[2]]
-    };
-    ["primary", "secondary", "tertiary"].forEach((priority) => {
-        let assignableArenaDots = U.Rand(0, actorData.attributes.assignableArenaDots[priority]);
-        while (assignableArenaDots) {
-            const availableAttrs = priorityAttrs[priority].filter((attr) => (baseAttrVals[attr] + actorData.attributes.list[attr].assigned) < 5);
-            actorData.attributes.list[_.sample(availableAttrs)].assigned++;
-            assignableArenaDots--;
-        }
-    });
-    let assignableGeneralAttrDots = U.Rand(0, Object.values(actorData.attributes.assignableGeneralDots).reduce((tot, val) => tot + val, 0));
-    while (assignableGeneralAttrDots) {
-        const availableAttrs = attributes.filter((attr) => (baseAttrVals[attr] + actorData.attributes.list[attr].assigned) < 5);
-        actorData.attributes.list[_.sample(availableAttrs)].assigned++;
-        assignableGeneralAttrDots--;
-    }
-    // #endregion
-
-    // #region Randomly Select Callings, Assign Dots, Select Keywords
-    let callingSlot = 0;
-    const callings = U.KeyMapObj(_.uniq([
-        _.sample(SCION.GODS[actorData.patron].callings),
-        ..._.sample(Object.keys(SCION.CALLINGS.list), 4)
-    ]).slice(0, 3), (k, calling) => calling, (calling) => ({
-        name: calling,
-        value: 1,
-        slot: callingSlot++,
-        keywordsChosen: _.sample(U.Loc(`scion.calling.${calling}.keywords`).split(", "), 3),
-        keywordsUsed: []
-    }));
-    let randomCalling = _.sample(Object.keys(callings));
-    for (let i = 0; i < 2; i++) {
-        callings[randomCalling].value++;
-        randomCalling = _.sample(Object.keys(callings));
-    }
-    const chosenKnacks = [];
-    for (const calling of Object.keys(callings)) {
-        callings[calling].keywordsChosen.length = callings[calling].value;
-        let callingPointsLeft = callings[calling].value;
-        while (callingPointsLeft) {
-            const availableKnacks = Object.keys(SCION.KNACKS.list).filter((knackName) => {
-                const knack = SCION.KNACKS.list[knackName];
-                return !chosenKnacks.some((knackData) => knackData.name === knackName)
-                    && ["any", calling].includes(knack.calling)
-                    && (callingPointsLeft >= 2 || knack.tier === "heroic");
-            }).map((knackName) => ({name: knackName, assignment: calling, ...SCION.KNACKS.list[knackName]}));
-            chosenKnacks.unshift(_.sample(availableKnacks));
-            callingPointsLeft -= SCION.KNACKS.list[chosenKnacks[0].name].tier === "immortal" ? 2 : 1;
-        }
-    }
-    callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
-    actorData.callings.list = callings;
-    actorData.knacks.list = chosenKnacks;
-
-    // #endregion
-
-    // #region Update itemCreationData with selected path skills, and assign to actorData for later item creation
-    actorData.testItemCreateData = itemCreateData.map((itemData) => {
-        if (itemData.type === "path") {itemData.data.skills = pathSkills[itemData.data.type]}
-        return itemData;
-    });
-    // #endregion
-
-    U.LOG(U.IsDebug() && {
-        attrPriorities: actorData.attributes.priorities,
-        favoredApproach: actorData.attributes.favoredApproach,
-        attributes: actorData.attributes,
-        pathPriorities: actorData.pathPriorities,
-        pathSkills,
-        baseSkillVals,
-        skills: actorData.skills,
-        items: actorData.testItemCreateData,
-        "ACTOR DATA": actorData
-    }, `Creating Test Character: ${name} ...`, "TEST CHARACTER CREATION", {style: "data"});
-    const thisActor = await Actor.create({
-        name,
-        type: "major",
-        data: actorData
-    });
-    U.LOG(U.IsDebug() && thisActor, `... ${thisActor.name} Created!`, "TEST CHARACTER CREATION", {style: "data"});
-    return thisActor;
-};
-const createSigChars = async () => {
-    const updatePromises = [];
-    for (const sigName of Object.keys(testChars.sigChars)) {
-        updatePromises.push(createTestChar(sigName));
-    }
-    return Promise.all(updatePromises);
-};
 // #region Hook: Initialization
 Hooks.once("init", async () => {
     CONFIG.isHoldingLogs = true;
@@ -174,13 +48,41 @@ Hooks.once("init", async () => {
             relic: RelicItemSheet
         },
         debug: {
-            isDebugging: true,
+            isDebugging: false,
             isDebuggingDragula: true,
             isFullDebugConsole: true,
-            watchList: []
-        },
-        createSigChars
+            watchList: ["Rhys"]
+        }
     };
+
+    window.scion = {
+        report: () => {
+            game.actors.entries.forEach((actor) => {
+                const fullReportData = actor.fullLogReport;
+                const reportData = {
+                    ..._.pick(fullReportData, (v, k) => k.startsWith(".*.")),
+                    INSTANCE: actor,
+                    "... data": actor.data,
+                    ..._.omit(fullReportData, (v, k) => k.startsWith(".") || k.startsWith("this")),
+                    "ITEM REPORT": {
+                        ids: _.groupBy(Array.from(actor.items), (item) => item.subtype), // (item) => `id: ${item.id}, type: ${item.subtype}, link: ${item.data.data.linkedItem}`),
+                        data: _.groupBy(Array.from(actor.items).map((item) => ({id: item.id, link: item.data.data.linkedItem ?? null, ...item.data.data})), (item) => item.type),
+                        instances: _.groupBy(Array.from(actor.items, (item) => item.subtype))
+                    }
+                };
+                U.LOG(reportData, `REPORT: ${actor.name}`, actor.id, {isLoud: true});
+            });
+        },
+        getActor: (name) => game.actors.entries.find((actor) => new RegExp(`^${name}`).test(actor.name)),
+        getActorItems: (name) => {
+            const actor = game.actors.entries.find((entity) => new RegExp(`^${name}`).test(entity.name));
+            U.LOG({
+                "ITEM REPORT": Array.from(actor.items).map((item) => ({id: item.id, linkedTo: item.data.data.linkedItem ?? null, ...item.data.data})),
+                "...items": actor.items
+            }, "ACTOR ITEMS", actor.name, {isLoud: true});
+        },
+        createSigChars: testChars.createSigChars
+    }
 
     U.LOG(U.IsDebug() && "INITIALIZING SCION.JS ...");
 
@@ -420,3 +322,56 @@ Hooks.once("ready", async () => {
     CONFIG.isInitializing = false;
 });
 // #endregion
+Hooks.on("createActor", (actor, options) => {
+    actor.createItemData = actor.createItemData ?? [];
+    switch (actor.data.type) {
+        case "major": {
+            if (actor.paths?.length === 3) {
+                return true;
+            }
+            const pathsData = ["origin", "role", "pantheon"].map((pathType) => (
+                    {
+                        name: U.Loc(`scion.path.${pathType}`),
+                        type: "path",
+                        data: {
+                            type: pathType,
+                            linkID: randomID(),
+                            linkedItemIDs: {
+                                pathSuspension: randomID(),
+                                pathRevocation: randomID()
+                            }
+                        }
+                    }
+                ));
+            pathsData.forEach((pathData) => {
+                actor.createItemData.push(...[
+                    pathData,
+                    ...["pathSuspension", "pathRevocation"].map((conditionType, index) => (
+                        {
+                            name: U.Loc(`scion.condition.${conditionType}`),
+                            type: "condition",
+                            data: {
+                                type: conditionType,
+                                linkID: pathData.data.linkedItemIDs[conditionType],
+                                linkedItemIDs: {
+                                    path: pathData.linkID
+                                },
+                                title: conditionType.slice(4),
+                                effects: [],
+                                isPersistent: true,
+                                resolution: ""
+                            }
+                        }
+                    ))
+                ]);
+            });
+            if (actor.createItemData.length === 9) {
+                U.LOG({actor, options, createItemData: actor.createItemData}, "Creating Path Items", `HOOK: createActor("${actor.name}")`);
+                actor.createOwnedItem(actor.createItemData);
+            }
+            break;
+        }
+        default: return true;
+    }
+    return true;
+});

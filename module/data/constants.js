@@ -1,5 +1,5 @@
 import * as _ from "../external/underscore/underscore-esm-min.js";
-import {LoremIpsum, Rand} from "./utils.js";
+import {Clone, KeyMapObj, Loc, LoremIpsum, Merge, Rand,} from "./utils.js";
 
 // #region TEST CODE FOR VSC "Run Code" EXTENSION
 /*
@@ -40,182 +40,182 @@ import {LoremIpsum, Rand} from "./utils.js";
  *  }
  */
 // #endregion
-const scionSystemData = {
+const SCION = {
     TIERS: {
         mortal: "scion.tier.mortal",
         hero: "scion.tier.hero",
         demigod: "scion.tier.demigod",
-        god: "scion.tier.god"
+        god: "scion.tier.god",
     },
     PANTHEONS: {
         aesir: {
             label: "scion.pantheon.name.aesir",
             description: "scion.pantheon.description.aesir",
-            assetSkills: ["closeCombat", "occult"],
+            assetSkills: ["closeCombat", "occult",],
             pantheonPurview: "wyrd",
-            virtues: ["fatalism", "audacity"],
+            virtues: ["fatalism", "audacity",],
             scentTheDivine: "scion.pantheon.scentTheDivine.aesir",
             religion: "scion.pantheon.religion.aesir",
-            members: ["baldr", "bragi", "freya", "freyr", "frigg", "heimdall", "hel", "loki", "njörðr", "odin", "sif", "skaði", "thor", "tyr"],
+            members: ["baldr", "bragi", "freya", "freyr", "frigg", "heimdall", "hel", "loki", "njörðr", "odin", "sif", "skaði", "thor", "tyr",],
             bookRef: "scion.book.hero",
-            bookPage: 46
+            bookPage: 46,
         },
         deva: {
             label: "scion.pantheon.name.deva",
             description: "scion.pantheon.description.deva",
-            assetSkills: ["athletics", "survival"],
+            assetSkills: ["athletics", "survival",],
             pantheonPurview: "yoga",
-            virtues: ["conscience", "duty"],
+            virtues: ["conscience", "duty",],
             scentTheDivine: "scion.pantheon.scentTheDivine.deva",
             religion: "scion.pantheon.religion.deva",
-            members: ["agni", "durga", "ganesha", "indra", "kali", "karttikeya", "lakshmi", "parvati", "sarasvati", "shiva", "surya", "varuna", "vishnu", "vishvakarman", "yamaraja"],
+            members: ["agni", "durga", "ganesha", "indra", "kali", "karttikeya", "lakshmi", "parvati", "sarasvati", "shiva", "surya", "varuna", "vishnu", "vishvakarman", "yamaraja",],
             bookRef: "scion.book.hero",
-            bookPage: 58
+            bookPage: 58,
         },
         kami: {
             label: "scion.pantheon.name.kami",
             description: "scion.pantheon.description.kami",
-            assetSkills: ["culture", "persuasion"],
+            assetSkills: ["culture", "persuasion",],
             pantheonPurview: "yaoyorozuNoKamigami",
-            virtues: ["sincerety", "rightAction"],
+            virtues: ["sincerety", "rightAction",],
             scentTheDivine: "scion.pantheon.scentTheDivine.kami",
             religion: "scion.pantheon.religion.kami",
-            members: ["amaNoUzume", "amaterasu", "benzaiten", "bishamon", "ebisu", "fukurokuju", "hachiman", "hotei", "inari", "kisshōten", "ōkuninushi", "omoikane", "sarutahiko", "susanoO", "takemikazuchi", "tsukiyomi"],
+            members: ["amaNoUzume", "amaterasu", "benzaiten", "bishamon", "ebisu", "fukurokuju", "hachiman", "hotei", "inari", "kisshōten", "ōkuninushi", "omoikane", "sarutahiko", "susanoO", "takemikazuchi", "tsukiyomi",],
             bookRef: "scion.book.hero",
-            bookPage: 70
+            bookPage: 70,
         },
         loa: {
             label: "scion.pantheon.name.loa",
             description: "scion.pantheon.description.loa",
-            assetSkills: ["medicine", "subterfuge"],
+            assetSkills: ["medicine", "subterfuge",],
             pantheonPurview: "cheval",
-            virtues: ["tradition", "innovation"],
+            virtues: ["tradition", "innovation",],
             scentTheDivine: "scion.pantheon.scentTheDivine.loa",
             religion: "scion.pantheon.religion.loa",
-            members: ["baronCimetière", "baronLaCroix", "baronSamedi", "damballa", "ezili", "kalfu", "lasyren", "ogou", "papaLegba"],
+            members: ["baronCimetière", "baronLaCroix", "baronSamedi", "damballa", "ezili", "kalfu", "lasyren", "ogou", "papaLegba",],
             bookRef: "scion.book.hero",
-            bookPage: 32
+            bookPage: 32,
         },
         manitou: {
             label: "scion.pantheon.name.manitou",
             description: "scion.pantheon.description.manitou",
-            assetSkills: ["medicine", "occult"],
+            assetSkills: ["medicine", "occult",],
             pantheonPurview: "dodaem",
-            virtues: ["pride", "dream"],
+            virtues: ["pride", "dream",],
             scentTheDivine: "scion.pantheon.scentTheDivine.manitou",
             religion: "scion.pantheon.religion.manitou",
-            members: ["biboonike", "cheebyAubOozoo", "geezhigoQuae", "ioskeha", "maudjeeKawiss", "muzzuKumikQuae", "nana", "pukawiss", "tawiscara", "winonah"],
+            members: ["biboonike", "cheebyAubOozoo", "geezhigoQuae", "ioskeha", "maudjeeKawiss", "muzzuKumikQuae", "nana", "pukawiss", "tawiscara", "winonah",],
             bookRef: "scion.book.hero",
-            bookPage: 82
+            bookPage: 82,
         },
         netjer: {
             label: "scion.pantheon.name.netjer",
             description: "scion.pantheon.description.netjer",
-            assetSkills: ["academics", "occult"],
+            assetSkills: ["academics", "occult",],
             pantheonPurview: "heku",
-            virtues: ["balance", "justice"],
+            virtues: ["balance", "justice",],
             scentTheDivine: "scion.pantheon.scentTheDivine.netjer",
             religion: "scion.pantheon.religion.netjer",
-            members: ["anubis", "atum", "bastet", "hathor", "horus", "isis", "osiris", "ptah", "ra", "set", "sobek", "thoth", "upuaut"],
+            members: ["anubis", "atum", "bastet", "hathor", "horus", "isis", "osiris", "ptah", "ra", "set", "sobek", "thoth", "upuaut",],
             bookRef: "scion.book.hero",
-            bookPage: 94
+            bookPage: 94,
         },
         shen: {
             label: "scion.pantheon.name.shen",
             description: "scion.pantheon.description.shen",
-            assetSkills: ["academics", "leadership"],
+            assetSkills: ["academics", "leadership",],
             pantheonPurview: "tianming",
-            virtues: ["yin", "yang"],
+            virtues: ["yin", "yang",],
             scentTheDivine: "scion.pantheon.scentTheDivine.shen",
             religion: "scion.pantheon.religion.shen",
-            members: ["changE", "confucius", "doumu", "erlang", "fuxi", "guanYu", "guanshiyinPusa", "huangdi", "laozi", "nuwā", "princeNezha", "sunWukong", "yandiShennongshi"],
+            members: ["changE", "confucius", "doumu", "erlang", "fuxi", "guanYu", "guanshiyinPusa", "huangdi", "laozi", "nuwā", "princeNezha", "sunWukong", "yandiShennongshi",],
             bookRef: "scion.book.hero",
-            bookPage: 118
+            bookPage: 118,
         },
         teotl: {
             label: "scion.pantheon.name.teotl",
             description: "scion.pantheon.description.teotl",
-            assetSkills: ["culture", "empathy"],
+            assetSkills: ["culture", "empathy",],
             pantheonPurview: "nextlahualli",
-            virtues: ["hunger", "sacrifice"],
+            virtues: ["hunger", "sacrifice",],
             scentTheDivine: "scion.pantheon.scentTheDivine.teotl",
             religion: "scion.pantheon.religion.teotl",
-            members: ["chalchihuitlicue", "chantico", "chicoAndCenteo", "huehuecoyotl", "huītzilōpōchtli", "ītzpāpālōtl", "mictecacihuatl", "quetzalcoatl", "tezcatlipoca", "tlāloc", "xīpeTotēc", "xochipilli", "xochiquetzal", "xolotl"],
+            members: ["chalchihuitlicue", "chantico", "chicoAndCenteo", "huehuecoyotl", "huītzilōpōchtli", "ītzpāpālōtl", "mictecacihuatl", "quetzalcoatl", "tezcatlipoca", "tlāloc", "xīpeTotēc", "xochipilli", "xochiquetzal", "xolotl",],
             bookRef: "scion.book.hero",
-            bookPage: 130
+            bookPage: 130,
         },
         theoi: {
             label: "scion.pantheon.name.theoi",
             description: "scion.pantheon.description.theoi",
-            assetSkills: ["empathy", "persuasion"],
+            assetSkills: ["empathy", "persuasion",],
             pantheonPurview: "metamorphosis",
-            virtues: ["egotism", "kinship"],
+            virtues: ["egotism", "kinship",],
             scentTheDivine: "scion.pantheon.scentTheDivine.theoi",
             religion: "scion.pantheon.religion.theoi",
-            members: ["aphrodite", "apollo", "ares", "artemis", "athena", "demeter", "dionysus", "epona", "hades", "hecate", "hephaestus", "hera", "hermes", "hestia", "persephone", "poseidon", "zeus"],
+            members: ["aphrodite", "apollo", "ares", "artemis", "athena", "demeter", "dionysus", "epona", "hades", "hecate", "hephaestus", "hera", "hermes", "hestia", "persephone", "poseidon", "zeus",],
             bookRef: "scion.book.hero",
-            bookPage: 142
+            bookPage: 142,
         },
         tuathaDeDanann: {
             label: "scion.pantheon.name.tuathaDeDanann",
             description: "scion.pantheon.description.tuathaDeDanann",
-            assetSkills: ["closeCombat", "culture"],
+            assetSkills: ["closeCombat", "culture",],
             pantheonPurview: "geasa",
-            virtues: ["honor", "prowess"],
+            virtues: ["honor", "prowess",],
             scentTheDivine: "scion.pantheon.scentTheDivine.tuathaDeDanann",
             religion: "scion.pantheon.religion.tuathaDeDanann",
-            members: ["aengus", "brigid", "dianCécht", "donn", "ériu", "goibniu", "lugh", "macLir", "midir", "nuada", "ogma", "theDagda", "morrigan"],
+            members: ["aengus", "brigid", "dianCécht", "donn", "ériu", "goibniu", "lugh", "macLir", "midir", "nuada", "ogma", "theDagda", "morrigan",],
             bookRef: "scion.book.hero",
-            bookPage: 154
+            bookPage: 154,
         },
         nemetondevos: {
             label: "scion.pantheon.name.nemetondevos",
             description: "scion.pantheon.description.nemetondevos",
-            assetSkills: ["closeCombat", "survival"],
+            assetSkills: ["closeCombat", "survival",],
             pantheonPurview: "nemeton",
-            virtues: ["memory", "purgation"],
+            virtues: ["memory", "purgation",],
             scentTheDivine: "scion.pantheon.scentTheDivine.nemetondevos",
             religion: "scion.pantheon.religion.nemetondevos",
-            members: ["andarta", "belenos", "cernunnos", "esos", "gobannos", "nantosuelta", "nehalAndNodens", "sulis", "taranis"],
+            members: ["andarta", "belenos", "cernunnos", "esos", "gobannos", "nantosuelta", "nehalAndNodens", "sulis", "taranis",],
             bookRef: "scion.book.motw",
-            bookPage: 38
+            bookPage: 38,
         },
         orisha: {
             label: "scion.pantheon.name.orisha",
             description: "scion.pantheon.description.orisha",
-            assetSkills: ["medicine", "subterfuge"],
+            assetSkills: ["medicine", "subterfuge",],
             pantheonPurview: "cheval",
-            virtues: ["tradition", "innovation"],
+            virtues: ["tradition", "innovation",],
             scentTheDivine: "scion.pantheon.scentTheDivine.orisha",
             religion: "scion.pantheon.religion.orisha",
-            members: ["erinle", "èshùElègbará", "ìbejì", "morèmi", "obàtálá", "odùduwà", "ògún", "òrìshàOko", "òrúnmìlà", "òsanyìn", "oshóssí", "òshun", "oyaIyansan", "shàngó", "sònpònná", "yemojaOboto"],
+            members: ["erinle", "èshùElègbará", "ìbejì", "morèmi", "obàtálá", "odùduwà", "ògún", "òrìshàOko", "òrúnmìlà", "òsanyìn", "oshóssí", "òshun", "oyaIyansan", "shàngó", "sònpònná", "yemojaOboto",],
             bookRef: "scion.book.hero",
-            bookPage: 106
+            bookPage: 106,
         },
         yazata: {
             label: "scion.pantheon.name.yazata",
             description: "scion.pantheon.description.yazata",
-            assetSkills: ["integrity", "leadership"],
+            assetSkills: ["integrity", "leadership",],
             pantheonPurview: "asha",
-            virtues: ["honesty", "freeWill"],
+            virtues: ["honesty", "freeWill",],
             scentTheDivine: "scion.pantheon.scentTheDivine.yazata",
             religion: "scion.pantheon.religion.yazata",
-            members: ["anahita", "ashi", "atar", "haoma", "hvareKhshaeta", "mangha", "mithra", "rashnu", "sraosha", "tishtrya", "vanant", "vataVayu", "verethragna", "zam", "zarathustra"],
+            members: ["anahita", "ashi", "atar", "haoma", "hvareKhshaeta", "mangha", "mithra", "rashnu", "sraosha", "tishtrya", "vanant", "vataVayu", "verethragna", "zam", "zarathustra",],
             bookRef: "scion.book.motw",
-            bookPage: 50
+            bookPage: 50,
         },
         teros: {
             label: "scion.pantheon.name.teros",
             description: "scion.pantheon.description.teros",
-            assetSkills: ["science", "technology"],
+            assetSkills: ["science", "technology",],
             pantheonPurview: "demiurgy",
-            virtues: ["nostalgia", "vision"],
+            virtues: ["nostalgia", "vision",],
             scentTheDivine: "scion.pantheon.scentTheDivine.teros",
             religion: "scion.pantheon.religion.teros",
-            members: ["aeva", "ytar", "amnis", "badaris", "kuros", "demosia", "hesbon", "skaft", "versak"],
+            members: ["aeva", "ytar", "amnis", "badaris", "kuros", "demosia", "hesbon", "skaft", "versak",],
             bookRef: "scion.book.motw",
-            bookPage: 80
-        }
+            bookPage: 80,
+        },
     },
     GODS: {
         /* eslint-disable sort-keys */
@@ -225,8 +225,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.baldr",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["guardian", "liminal", "lover"],
-            purviews: ["beauty", "passion:Love|Peace", "health", "epicStamina", "sun"]
+            callings: ["guardian", "liminal", "lover",],
+            purviews: ["beauty", "passion:Love|Peace", "health", "epicStamina", "sun",],
         },
         bragi: {
             label: "scion.pantheon.god.bragi",
@@ -234,8 +234,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.bragi",
             bookRef: "scion.book.motw",
             bookPage: 63,
-            callings: ["creator", "guardian", "sage"],
-            purviews: ["artistry:Storytelling|Poetry|Song", "epicDexterity", "fortune", "passion:Joy"]
+            callings: ["creator", "guardian", "sage",],
+            purviews: ["artistry:Storytelling|Poetry|Song", "epicDexterity", "fortune", "passion:Joy",],
         },
         freya: {
             label: "scion.pantheon.god.freya",
@@ -243,8 +243,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.freya",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["lover", "guardian", "sage"],
-            purviews: ["beauty", "epicStamina", "fertility", "fortune", "passion:Love|Lust", "war"]
+            callings: ["lover", "guardian", "sage",],
+            purviews: ["beauty", "epicStamina", "fertility", "fortune", "passion:Love|Lust", "war",],
         },
         freyr: {
             label: "scion.pantheon.god.freyr",
@@ -252,8 +252,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.freyr",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["lover", "warrior", "leader"],
-            purviews: ["beauty", "fertility", "order", "war", "wild"]
+            callings: ["lover", "warrior", "leader",],
+            purviews: ["beauty", "fertility", "order", "war", "wild",],
         },
         frigg: {
             label: "scion.pantheon.god.frigg",
@@ -261,8 +261,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.frigg",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["guardian", "lover", "sage"],
-            purviews: ["beasts:Falcon", "fortune", "order", "wild"]
+            callings: ["guardian", "lover", "sage",],
+            purviews: ["beasts:Falcon", "fortune", "order", "wild",],
         },
         heimdall: {
             label: "scion.pantheon.god.heimdall",
@@ -270,8 +270,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.heimdall",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["creator", "guardian", "hunter"],
-            purviews: ["artistry:Horns", "beauty", "epicStamina", "journeys"]
+            callings: ["creator", "guardian", "hunter",],
+            purviews: ["artistry:Horns", "beauty", "epicStamina", "journeys",],
         },
         hel: {
             label: "scion.pantheon.god.hel",
@@ -279,8 +279,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hel",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["guardian", "judge", "liminal"],
-            purviews: ["death", "forge", "frost", "health", "passion:Fear|Disgust"]
+            callings: ["guardian", "judge", "liminal",],
+            purviews: ["death", "forge", "frost", "health", "passion:Fear|Disgust",],
         },
         loki: {
             label: "scion.pantheon.god.loki",
@@ -288,8 +288,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.loki",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["liminal", "lover", "trickster"],
-            purviews: ["chaos", "deception", "epicStrength", "fire"]
+            callings: ["liminal", "lover", "trickster",],
+            purviews: ["chaos", "deception", "epicStrength", "fire",],
         },
         njörðr: {
             label: "scion.pantheon.god.njörðr",
@@ -297,8 +297,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.njörðr",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["creator", "hunter", "liminal"],
-            purviews: ["fertility", "fire", "journeys", "prosperity", "sky", "water"]
+            callings: ["creator", "hunter", "liminal",],
+            purviews: ["fertility", "fire", "journeys", "prosperity", "sky", "water",],
         },
         odin: {
             label: "scion.pantheon.god.odin",
@@ -306,8 +306,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.odin",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["leader", "sage", "trickster"],
-            purviews: ["artistry:Poetry", "death", "deception", "epicStamina", "fortune", "journeys", "war"]
+            callings: ["leader", "sage", "trickster",],
+            purviews: ["artistry:Poetry", "death", "deception", "epicStamina", "fortune", "journeys", "war",],
         },
         sif: {
             label: "scion.pantheon.god.sif",
@@ -315,8 +315,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sif",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["creator", "guardian", "lover"],
-            purviews: ["beauty", "earth", "fertility", "order"]
+            callings: ["creator", "guardian", "lover",],
+            purviews: ["beauty", "earth", "fertility", "order",],
         },
         skaði: {
             label: "scion.pantheon.god.skaði",
@@ -324,8 +324,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.skaði",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["hunter", "judge", "warrior"],
-            purviews: ["earth", "epicDexterity", "frost", "journeys", "order"]
+            callings: ["hunter", "judge", "warrior",],
+            purviews: ["earth", "epicDexterity", "frost", "journeys", "order",],
         },
         thor: {
             label: "scion.pantheon.god.thor",
@@ -333,8 +333,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.thor",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["guardian", "leader", "warrior"],
-            purviews: ["epicStamina", "epicStrength", "fertility", "sky"]
+            callings: ["guardian", "leader", "warrior",],
+            purviews: ["epicStamina", "epicStrength", "fertility", "sky",],
         },
         tyr: {
             label: "scion.pantheon.god.tyr",
@@ -342,8 +342,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.tyr",
             bookRef: "scion.book.hero",
             bookPage: 46,
-            callings: ["judge", "leader", "warrior"],
-            purviews: ["epicStamina", "order", "passion:Courage", "war"]
+            callings: ["judge", "leader", "warrior",],
+            purviews: ["epicStamina", "order", "passion:Courage", "war",],
         },
         agni: {
             label: "scion.pantheon.god.agni",
@@ -351,8 +351,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.agni",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["guardian", "liminal", "sage"],
-            purviews: ["epicStrength", "epicDexterity", "fire", "journeys", "prosperity", "water"]
+            callings: ["guardian", "liminal", "sage",],
+            purviews: ["epicStrength", "epicDexterity", "fire", "journeys", "prosperity", "water",],
         },
         durga: {
             label: "scion.pantheon.god.durga",
@@ -360,8 +360,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.durga",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["guardian", "hunter", "warrior"],
-            purviews: ["deception", "epicStrength", "epicDexterity", "epicStamina", "fertility", "war"]
+            callings: ["guardian", "hunter", "warrior",],
+            purviews: ["deception", "epicStrength", "epicDexterity", "epicStamina", "fertility", "war",],
         },
         ganesha: {
             label: "scion.pantheon.god.ganesha",
@@ -369,8 +369,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ganesha",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["guardian", "liminal", "sage"],
-            purviews: ["artistry:Dance|Writing", "beasts:Elephants", "chaos", "fortune", "journeys", "prosperity"]
+            callings: ["guardian", "liminal", "sage",],
+            purviews: ["artistry:Dance|Writing", "beasts:Elephants", "chaos", "fortune", "journeys", "prosperity",],
         },
         indra: {
             label: "scion.pantheon.god.indra",
@@ -378,8 +378,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.indra",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["guardian", "leader", "warrior"],
-            purviews: ["beasts:Cattle", "epicStrength", "epicDexterity", "fertility", "order", "sky", "war", "wild"]
+            callings: ["guardian", "leader", "warrior",],
+            purviews: ["beasts:Cattle", "epicStrength", "epicDexterity", "fertility", "order", "sky", "war", "wild",],
         },
         kali: {
             label: "scion.pantheon.god.kali",
@@ -387,8 +387,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.kali",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["guardian", "liminal", "warrior"],
-            purviews: ["epicStrength", "epicDexterity", "epicStamina", "artistry:Dance", "chaos", "darkness", "death", "deception", "fire"]
+            callings: ["guardian", "liminal", "warrior",],
+            purviews: ["epicStrength", "epicDexterity", "epicStamina", "artistry:Dance", "chaos", "darkness", "death", "deception", "fire",],
         },
         karttikeya: {
             label: "scion.pantheon.god.karttikeya",
@@ -396,8 +396,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.karttikeya",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["leader", "sage", "warrior"],
-            purviews: ["beauty", "epicStrength", "epicDexterity", "epicStamina", "stars", "war"]
+            callings: ["leader", "sage", "warrior",],
+            purviews: ["beauty", "epicStrength", "epicDexterity", "epicStamina", "stars", "war",],
         },
         lakshmi: {
             label: "scion.pantheon.god.lakshmi",
@@ -405,8 +405,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.lakshmi",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["judge", "leader", "lover"],
-            purviews: ["beauty", "epicStrength", "earth", "fertility", "fortune", "order", "passion:Joy|Love", "prosperity"]
+            callings: ["judge", "leader", "lover",],
+            purviews: ["beauty", "epicStrength", "earth", "fertility", "fortune", "order", "passion:Joy|Love", "prosperity",],
         },
         parvati: {
             label: "scion.pantheon.god.parvati",
@@ -414,8 +414,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.parvati",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["creator", "lover", "trickster"],
-            purviews: ["epicStrength", "epicStamina", "artistry:Dance", "beauty", "earth", "fertility", "frost", "passion:Devotion|Love"]
+            callings: ["creator", "lover", "trickster",],
+            purviews: ["epicStrength", "epicStamina", "artistry:Dance", "beauty", "earth", "fertility", "frost", "passion:Devotion|Love",],
         },
         sarasvati: {
             label: "scion.pantheon.god.sarasvati",
@@ -423,8 +423,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sarasvati",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["creator", "healer", "sage"],
-            purviews: ["artistry:All", "epicStrength", "epicDexterity", "health", "water"]
+            callings: ["creator", "healer", "sage",],
+            purviews: ["artistry:All", "epicStrength", "epicDexterity", "health", "water",],
         },
         shiva: {
             label: "scion.pantheon.god.shiva",
@@ -432,8 +432,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.shiva",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["hunter", "lover", "sage"],
-            purviews: ["artistry:Dance", "beasts:Monkeys", "chaos", "death", "deception", "epicStrength", "epicDexterity", "epicStamina", "epicStrength", "fertility", "fire", "Moon", "Sky"]
+            callings: ["hunter", "lover", "sage",],
+            purviews: ["artistry:Dance", "beasts:Monkeys", "chaos", "death", "deception", "epicStrength", "epicDexterity", "epicStamina", "epicStrength", "fertility", "fire", "Moon", "Sky",],
         },
         surya: {
             label: "scion.pantheon.god.surya",
@@ -441,8 +441,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.surya",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["healer", "leader", "sage"],
-            purviews: ["epicStrength", "epicDexterity", "fire", "health", "journeys", "stars", "sun"]
+            callings: ["healer", "leader", "sage",],
+            purviews: ["epicStrength", "epicDexterity", "fire", "health", "journeys", "stars", "sun",],
         },
         varuna: {
             label: "scion.pantheon.god.varuna",
@@ -450,8 +450,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.varuna",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["guardian", "judge", "leader"],
-            purviews: ["epicStrength", "darkness", "fertility", "order", "sky", "sun", "water"]
+            callings: ["guardian", "judge", "leader",],
+            purviews: ["epicStrength", "darkness", "fertility", "order", "sky", "sun", "water",],
         },
         vishnu: {
             label: "scion.pantheon.god.vishnu",
@@ -459,8 +459,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.vishnu",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["guardian", "lover", "trickster"],
-            purviews: ["artistry:Dance|Wind Instruments", "beauty", "deception", "epicStamina", "epicStrength", "epicDexterity", "order", "passion:Hope"]
+            callings: ["guardian", "lover", "trickster",],
+            purviews: ["artistry:Dance|Wind Instruments", "beauty", "deception", "epicStamina", "epicStrength", "epicDexterity", "order", "passion:Hope",],
         },
         vishvakarman: {
             label: "scion.pantheon.god.vishvakarman",
@@ -468,8 +468,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.vishvakarman",
             bookRef: "scion.book.motw",
             bookPage: 64,
-            callings: ["creator", "guardian", "liminal"],
-            purviews: ["artistry:All", "beasts:Doves", "chaos", "forge", "order", "prosperity"]
+            callings: ["creator", "guardian", "liminal",],
+            purviews: ["artistry:All", "beasts:Doves", "chaos", "forge", "order", "prosperity",],
         },
         yamaraja: {
             label: "scion.pantheon.god.yamaraja",
@@ -477,8 +477,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.yamaraja",
             bookRef: "scion.book.hero",
             bookPage: 58,
-            callings: ["judge", "leader", "liminal"],
-            purviews: ["epicDexterity", "epicStamina", "darkness", "death", "journeys", "order"]
+            callings: ["judge", "leader", "liminal",],
+            purviews: ["epicDexterity", "epicStamina", "darkness", "death", "journeys", "order",],
         },
         amaNoUzume: {
             label: "scion.pantheon.god.amaNoUzume",
@@ -486,8 +486,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.amaNoUzume",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["liminal", "lover", "trickster"],
-            purviews: ["artistry:Dance|Singing", "deception", "passion:Lust|Mirth"]
+            callings: ["liminal", "lover", "trickster",],
+            purviews: ["artistry:Dance|Singing", "deception", "passion:Lust|Mirth",],
         },
         amaterasu: {
             label: "scion.pantheon.god.amaterasu",
@@ -495,8 +495,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.amaterasu",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["judge", "leader", "sage"],
-            purviews: ["epicStrength", "fertility", "order", "prosperity", "sun"]
+            callings: ["judge", "leader", "sage",],
+            purviews: ["epicStrength", "fertility", "order", "prosperity", "sun",],
         },
         benzaiten: {
             label: "scion.pantheon.god.benzaiten",
@@ -504,8 +504,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.benzaiten",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["creator", "lover", "sage"],
-            purviews: ["artistry", "beast:Snake", "beauty", "fertility", "fortune", "stars"]
+            callings: ["creator", "lover", "sage",],
+            purviews: ["artistry", "beast:Snake", "beauty", "fertility", "fortune", "stars",],
         },
         bishamon: {
             label: "scion.pantheon.god.bishamon",
@@ -513,8 +513,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.bishamon",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["guardian", "sage", "warrior"],
-            purviews: ["epicDexterity", "fortune", "prosperity", "war"]
+            callings: ["guardian", "sage", "warrior",],
+            purviews: ["epicDexterity", "fortune", "prosperity", "war",],
         },
         ebisu: {
             label: "scion.pantheon.god.ebisu",
@@ -522,8 +522,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ebisu",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["hunter", "liminal", "trickster"],
-            purviews: ["beasts:Fish|Sharks|Whales", "epicStamina", "fortune", "prosperity", "wild"]
+            callings: ["hunter", "liminal", "trickster",],
+            purviews: ["beasts:Fish|Sharks|Whales", "epicStamina", "fortune", "prosperity", "wild",],
         },
         fukurokuju: {
             label: "scion.pantheon.god.fukurokuju",
@@ -531,8 +531,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.fukurokuju",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["healer", "lover", "sage"],
-            purviews: ["beasts:Deer|Turtle|Crane", "epicStamina", "health", "fortune"]
+            callings: ["healer", "lover", "sage",],
+            purviews: ["beasts:Deer|Turtle|Crane", "epicStamina", "health", "fortune",],
         },
         hachiman: {
             label: "scion.pantheon.god.hachiman",
@@ -540,8 +540,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hachiman",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["leader", "sage", "warrior"],
-            purviews: ["artistry:All", "beasts:Dove", "order", "prosperity", "war"]
+            callings: ["leader", "sage", "warrior",],
+            purviews: ["artistry:All", "beasts:Dove", "order", "prosperity", "war",],
         },
         hotei: {
             label: "scion.pantheon.god.hotei",
@@ -549,8 +549,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hotei",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["guardian", "liminal", "sage"],
-            purviews: ["chaos", "fortune", "journeys", "passion:Joy"]
+            callings: ["guardian", "liminal", "sage",],
+            purviews: ["chaos", "fortune", "journeys", "passion:Joy",],
         },
         inari: {
             label: "scion.pantheon.god.inari",
@@ -558,8 +558,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.inari",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["creator", "healer", "liminal"],
-            purviews: ["beasts:Fox", "fertility", "fortune", "health", "journeys", "prosperity"]
+            callings: ["creator", "healer", "liminal",],
+            purviews: ["beasts:Fox", "fertility", "fortune", "health", "journeys", "prosperity",],
         },
         kisshōten: {
             label: "scion.pantheon.god.kisshōten",
@@ -567,8 +567,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.kisshōten",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["guardian", "healer", "lover"],
-            purviews: ["beauty", "fortune", "health"]
+            callings: ["guardian", "healer", "lover",],
+            purviews: ["beauty", "fortune", "health",],
         },
         ōkuninushi: {
             label: "scion.pantheon.god.ōkuninushi",
@@ -576,8 +576,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ōkuninushi",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["creator", "leader", "liminal"],
-            purviews: ["beasts:All", "earth", "darkness", "fortune", "prosperity"]
+            callings: ["creator", "leader", "liminal",],
+            purviews: ["beasts:All", "earth", "darkness", "fortune", "prosperity",],
         },
         omoikane: {
             label: "scion.pantheon.god.omoikane",
@@ -585,8 +585,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.omoikane",
             bookRef: "scion.book.motw",
             bookPage: 65,
-            callings: ["judge", "sage", "trickster"],
-            purviews: ["artistry:Rhetoric", "deception", "order", "prosperity", "sky"]
+            callings: ["judge", "sage", "trickster",],
+            purviews: ["artistry:Rhetoric", "deception", "order", "prosperity", "sky",],
         },
         sarutahiko: {
             label: "scion.pantheon.god.sarutahiko",
@@ -594,8 +594,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sarutahiko",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["lover", "sage", "warrior"],
-            purviews: ["beasts:Monkeys", "earth", "journeys"]
+            callings: ["lover", "sage", "warrior",],
+            purviews: ["beasts:Monkeys", "earth", "journeys",],
         },
         susanoO: {
             label: "scion.pantheon.god.susanoO",
@@ -603,8 +603,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.susanoO",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["creator", "trickster", "warrior"],
-            purviews: ["artistry:Poetry", "chaos", "death", "epicStrength", "forge", "sky", "water"]
+            callings: ["creator", "trickster", "warrior",],
+            purviews: ["artistry:Poetry", "chaos", "death", "epicStrength", "forge", "sky", "water",],
         },
         takemikazuchi: {
             label: "scion.pantheon.god.takemikazuchi",
@@ -612,8 +612,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.takemikazuchi",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["guardian", "leader", "warrior"],
-            purviews: ["beasts:Deer", "epicDexterity", "epicStamina", "epicStrength", "sky:Thunder", "war"]
+            callings: ["guardian", "leader", "warrior",],
+            purviews: ["beasts:Deer", "epicDexterity", "epicStamina", "epicStrength", "sky:Thunder", "war",],
         },
         tsukiyomi: {
             label: "scion.pantheon.god.tsukiyomi",
@@ -621,8 +621,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.tsukiyomi",
             bookRef: "scion.book.hero",
             bookPage: 70,
-            callings: ["healer", "liminal", "judge"],
-            purviews: ["artistry", "darkness", "moon", "order"]
+            callings: ["healer", "liminal", "judge",],
+            purviews: ["artistry", "darkness", "moon", "order",],
         },
         baronCimetière: {
             label: "scion.pantheon.god.baronCimetière",
@@ -630,8 +630,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.baronCimetière",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["judge", "guardian", "sage"],
-            purviews: ["darkness", "death", "epicStamina", "health"]
+            callings: ["judge", "guardian", "sage",],
+            purviews: ["darkness", "death", "epicStamina", "health",],
         },
         baronLaCroix: {
             label: "scion.pantheon.god.baronLaCroix",
@@ -639,8 +639,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.baronLaCroix",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["judge", "guardian", "sage"],
-            purviews: ["death", "epicStamina", "fortune", "health"]
+            callings: ["judge", "guardian", "sage",],
+            purviews: ["death", "epicStamina", "fortune", "health",],
         },
         baronSamedi: {
             label: "scion.pantheon.god.baronSamedi",
@@ -648,8 +648,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.baronSamedi",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["judge", "lover", "trickster"],
-            purviews: ["chaos", "death", "epicStamina", "fertility", "health"]
+            callings: ["judge", "lover", "trickster",],
+            purviews: ["chaos", "death", "epicStamina", "fertility", "health",],
         },
         damballa: {
             label: "scion.pantheon.god.damballa",
@@ -657,8 +657,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.damballa",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["creator", "leader", "sage"],
-            purviews: ["beasts:Snakes", "earth", "fertility", "order", "sky", "water"]
+            callings: ["creator", "leader", "sage",],
+            purviews: ["beasts:Snakes", "earth", "fertility", "order", "sky", "water",],
         },
         ezili: {
             label: "scion.pantheon.god.ezili",
@@ -666,8 +666,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ezili",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["healer", "lover", "sage"],
-            purviews: ["beasts:Bees", "beauty", "fertility", "fortune", "frost", "health", "passion:Love", "prosperity", "water"]
+            callings: ["healer", "lover", "sage",],
+            purviews: ["beasts:Bees", "beauty", "fertility", "fortune", "frost", "health", "passion:Love", "prosperity", "water",],
         },
         kalfu: {
             label: "scion.pantheon.god.kalfu",
@@ -675,8 +675,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.kalfu",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["liminal", "sage", "trickster"],
-            purviews: ["chaos", "darkness", "fortune", "journeys", "moon"]
+            callings: ["liminal", "sage", "trickster",],
+            purviews: ["chaos", "darkness", "fortune", "journeys", "moon",],
         },
         lasyren: {
             label: "scion.pantheon.god.lasyren",
@@ -684,8 +684,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.lasyren",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["creator", "guardian", "leader"],
-            purviews: ["beasts:Cetaceans", "epicStrength", "epicStamina", "fertility", "frost", "journeys", "water"]
+            callings: ["creator", "guardian", "leader",],
+            purviews: ["beasts:Cetaceans", "epicStrength", "epicStamina", "fertility", "frost", "journeys", "water",],
         },
         ogou: {
             label: "scion.pantheon.god.ogou",
@@ -693,8 +693,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ogou",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["creator", "hunter", "warrior"],
-            purviews: ["earth", "epicStrength", "epicStamina", "forge", "passion:Fear", "war"]
+            callings: ["creator", "hunter", "warrior",],
+            purviews: ["earth", "epicStrength", "epicStamina", "forge", "passion:Fear", "war",],
         },
         papaLegba: {
             label: "scion.pantheon.god.papaLegba",
@@ -702,8 +702,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.papaLegba",
             bookRef: "scion.book.motw",
             bookPage: 32,
-            callings: ["liminal", "lover", "trickster"],
-            purviews: ["artistry:Storytelling", "chaos", "deception", "epicDexterity", "fortune", "journeys"]
+            callings: ["liminal", "lover", "trickster",],
+            purviews: ["artistry:Storytelling", "chaos", "deception", "epicDexterity", "fortune", "journeys",],
         },
         biboonike: {
             label: "scion.pantheon.god.biboonike",
@@ -711,8 +711,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.biboonike",
             bookRef: "scion.book.motw",
             bookPage: 65,
-            callings: ["hunter", "liminal", "trickster"],
-            purviews: ["chaos", "darkness", "frost", "sky", "wild"]
+            callings: ["hunter", "liminal", "trickster",],
+            purviews: ["chaos", "darkness", "frost", "sky", "wild",],
         },
         cheebyAubOozoo: {
             label: "scion.pantheon.god.cheebyAubOozoo",
@@ -720,8 +720,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.cheebyAubOozoo",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["hunter", "judge", "liminal"],
-            purviews: ["artistry:Song|Music", "beasts:Wolf", "darkness", "death", "epicStamina", "order"]
+            callings: ["hunter", "judge", "liminal",],
+            purviews: ["artistry:Song|Music", "beasts:Wolf", "darkness", "death", "epicStamina", "order",],
         },
         geezhigoQuae: {
             label: "scion.pantheon.god.geezhigoQuae",
@@ -729,8 +729,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.geezhigoQuae",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["guardian", "healer", "sage"],
-            purviews: ["beasts:Crane|Turtle", "moon", "order", "sky", "stars"]
+            callings: ["guardian", "healer", "sage",],
+            purviews: ["beasts:Crane|Turtle", "moon", "order", "sky", "stars",],
         },
         ioskeha: {
             label: "scion.pantheon.god.ioskeha",
@@ -738,8 +738,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ioskeha",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["creator", "leader", "warrior"],
-            purviews: ["forge", "sun", "sky", "order", "beasts:diurnal mammals and birds|insects|fish", "health", "passion:All light emotions"]
+            callings: ["creator", "leader", "warrior",],
+            purviews: ["forge", "sun", "sky", "order", "beasts:diurnal mammals and birds|insects|fish", "health", "passion:All light emotions",],
         },
         maudjeeKawiss: {
             label: "scion.pantheon.god.maudjeeKawiss",
@@ -747,8 +747,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.maudjeeKawiss",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["hunter", "leader", "warrior"],
-            purviews: ["beasts:Bear|Eagle", "epicDexterity", "epicStrength", "war"]
+            callings: ["hunter", "leader", "warrior",],
+            purviews: ["beasts:Bear|Eagle", "epicDexterity", "epicStrength", "war",],
         },
         muzzuKumikQuae: {
             label: "scion.pantheon.god.muzzuKumikQuae",
@@ -756,8 +756,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.muzzuKumikQuae",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["healer", "hunter", "sage"],
-            purviews: ["beasts:All", "earth", "fertility", "sky", "water", "wild"]
+            callings: ["healer", "hunter", "sage",],
+            purviews: ["beasts:All", "earth", "fertility", "sky", "water", "wild",],
         },
         nana: {
             label: "scion.pantheon.god.nana",
@@ -765,8 +765,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.nana",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["hunter", "trickster", "warrior"],
-            purviews: ["beasts:Rabbit", "chaos", "epicDexterity", "fortune", "journeys"]
+            callings: ["hunter", "trickster", "warrior",],
+            purviews: ["beasts:Rabbit", "chaos", "epicDexterity", "fortune", "journeys",],
         },
         pukawiss: {
             label: "scion.pantheon.god.pukawiss",
@@ -774,8 +774,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.pukawiss",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["lover", "sage", "trickster"],
-            purviews: ["epicDexterity", "artistry:Dance|Acting|Storytelling", "passion:Mirth", "fortune", "deception"]
+            callings: ["lover", "sage", "trickster",],
+            purviews: ["epicDexterity", "artistry:Dance|Acting|Storytelling", "passion:Mirth", "fortune", "deception",],
         },
         tawiscara: {
             label: "scion.pantheon.god.tawiscara",
@@ -783,8 +783,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.tawiscara",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["creator", "trickster", "warrior"],
-            purviews: ["chaos", "deception", "darkness", "death", "passion:All dark emotions", "forge", "war"]
+            callings: ["creator", "trickster", "warrior",],
+            purviews: ["chaos", "deception", "darkness", "death", "passion:All dark emotions", "forge", "war",],
         },
         winonah: {
             label: "scion.pantheon.god.winonah",
@@ -792,8 +792,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.winonah",
             bookRef: "scion.book.hero",
             bookPage: 82,
-            callings: ["guardian", "healer", "lover"],
-            purviews: ["epicStamina", "fortune", "health", "passion:All", "prosperity"]
+            callings: ["guardian", "healer", "lover",],
+            purviews: ["epicStamina", "fortune", "health", "passion:All", "prosperity",],
         },
         anubis: {
             label: "scion.pantheon.god.anubis",
@@ -801,8 +801,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.anubis",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["guardian", "judge", "liminal"],
-            purviews: ["beast:Jackal", "darkness", "death", "order"]
+            callings: ["guardian", "judge", "liminal",],
+            purviews: ["beast:Jackal", "darkness", "death", "order",],
         },
         atum: {
             label: "scion.pantheon.god.atum",
@@ -810,8 +810,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.atum",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["creator", "healer", "sage"],
-            purviews: ["artistry:Dance|Pottery", "beasts:Ram", "earth", "health", "water"]
+            callings: ["creator", "healer", "sage",],
+            purviews: ["artistry:Dance|Pottery", "beasts:Ram", "earth", "health", "water",],
         },
         bastet: {
             label: "scion.pantheon.god.bastet",
@@ -819,8 +819,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.bastet",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["guardian", "hunter", "warrior"],
-            purviews: ["artistry:Dance|Music", "beasts:Cats|Lions", "epicDexterity", "fertility", "fortune", "health", "moon", "sun", "war"]
+            callings: ["guardian", "hunter", "warrior",],
+            purviews: ["artistry:Dance|Music", "beasts:Cats|Lions", "epicDexterity", "fertility", "fortune", "health", "moon", "sun", "war",],
         },
         hathor: {
             label: "scion.pantheon.god.hathor",
@@ -828,8 +828,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hathor",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["creator", "lover", "healer"],
-            purviews: ["artistry:Music|Dance", "beasts:Cow", "beauty", "fertility", "fortune", "passion:Love", "sky"]
+            callings: ["creator", "lover", "healer",],
+            purviews: ["artistry:Music|Dance", "beasts:Cow", "beauty", "fertility", "fortune", "passion:Love", "sky",],
         },
         horus: {
             label: "scion.pantheon.god.horus",
@@ -837,8 +837,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.horus",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["guardian", "leader", "warrior"],
-            purviews: ["beasts:Falcon", "moon", "order", "sky", "sun", "war"]
+            callings: ["guardian", "leader", "warrior",],
+            purviews: ["beasts:Falcon", "moon", "order", "sky", "sun", "war",],
         },
         isis: {
             label: "scion.pantheon.god.isis",
@@ -846,8 +846,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.isis",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["guardian", "healer", "trickster"],
-            purviews: ["beasts:Kite|Serpent", "death", "deception", "fertility", "fortune", "health", "stars"]
+            callings: ["guardian", "healer", "trickster",],
+            purviews: ["beasts:Kite|Serpent", "death", "deception", "fertility", "fortune", "health", "stars",],
         },
         osiris: {
             label: "scion.pantheon.god.osiris",
@@ -855,8 +855,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.osiris",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["creator", "judge", "leader"],
-            purviews: ["beasts:Ram|Centipede", "death", "earth", "fertility", "order"]
+            callings: ["creator", "judge", "leader",],
+            purviews: ["beasts:Ram|Centipede", "death", "earth", "fertility", "order",],
         },
         ptah: {
             label: "scion.pantheon.god.ptah",
@@ -864,8 +864,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ptah",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["creator", "liminal", "sage"],
-            purviews: ["beasts:Bull", "fire", "forge", "prosperity"]
+            callings: ["creator", "liminal", "sage",],
+            purviews: ["beasts:Bull", "fire", "forge", "prosperity",],
         },
         ra: {
             label: "scion.pantheon.god.ra",
@@ -873,8 +873,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ra",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["creator", "judge", "leader"],
-            purviews: ["beasts:Falcon|Scarab|Ram", "death", "epicStamina", "fire", "journeys", "order", "sun"]
+            callings: ["creator", "judge", "leader",],
+            purviews: ["beasts:Falcon|Scarab|Ram", "death", "epicStamina", "fire", "journeys", "order", "sun",],
         },
         set: {
             label: "scion.pantheon.god.set",
@@ -882,8 +882,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.set",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["guardian", "leader", "trickster"],
-            purviews: ["beasts:Salawa|Fish", "chaos", "earth", "epicStrength", "journeys", "sky", "war"]
+            callings: ["guardian", "leader", "trickster",],
+            purviews: ["beasts:Salawa|Fish", "chaos", "earth", "epicStrength", "journeys", "sky", "war",],
         },
         sobek: {
             label: "scion.pantheon.god.sobek",
@@ -891,8 +891,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sobek",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["guardian", "hunter", "lover"],
-            purviews: ["beasts:Crocodile", "epicStamina", "passion:Lust", "fertility", "water"]
+            callings: ["guardian", "hunter", "lover",],
+            purviews: ["beasts:Crocodile", "epicStamina", "passion:Lust", "fertility", "water",],
         },
         thoth: {
             label: "scion.pantheon.god.thoth",
@@ -900,8 +900,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.thoth",
             bookRef: "scion.book.hero",
             bookPage: 94,
-            callings: ["guardian", "liminal", "sage"],
-            purviews: ["beasts:Baboon|Ibis", "deception", "fortune", "health", "moon", "order"]
+            callings: ["guardian", "liminal", "sage",],
+            purviews: ["beasts:Baboon|Ibis", "deception", "fortune", "health", "moon", "order",],
         },
         upuaut: {
             label: "scion.pantheon.god.upuaut",
@@ -909,8 +909,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.upuaut",
             bookRef: "scion.book.motw",
             bookPage: 66,
-            callings: ["hunter", "liminal", "warrior"],
-            purviews: ["beasts:Wolves", "death", "epicDexterity", "epicStamina", "journeys", "war"]
+            callings: ["hunter", "liminal", "warrior",],
+            purviews: ["beasts:Wolves", "death", "epicDexterity", "epicStamina", "journeys", "war",],
         },
         changE: {
             label: "scion.pantheon.god.changE",
@@ -918,8 +918,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.changE",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["healer", "lover", "trickster"],
-            purviews: ["beasts:Rabbits|Toads", "beauty", "epicStamina", "health", "moon"]
+            callings: ["healer", "lover", "trickster",],
+            purviews: ["beasts:Rabbits|Toads", "beauty", "epicStamina", "health", "moon",],
         },
         confucius: {
             label: "scion.pantheon.god.confucius",
@@ -927,8 +927,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.confucius",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["judge", "leader", "sage"],
-            purviews: ["artistry:All", "order", "passion:Filiality"]
+            callings: ["judge", "leader", "sage",],
+            purviews: ["artistry:All", "order", "passion:Filiality",],
         },
         doumu: {
             label: "scion.pantheon.god.doumu",
@@ -936,8 +936,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.doumu",
             bookRef: "scion.book.motw",
             bookPage: 67,
-            callings: ["judge", "leader", "sage"],
-            purviews: ["beasts:Boars", "fortune", "order", "prosperity", "stars"]
+            callings: ["judge", "leader", "sage",],
+            purviews: ["beasts:Boars", "fortune", "order", "prosperity", "stars",],
         },
         erlang: {
             label: "scion.pantheon.god.erlang",
@@ -945,8 +945,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.erlang",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["guardian", "hunter", "warrior"],
-            purviews: ["epicStamina", "epicStrength", "forge", "war", "water"]
+            callings: ["guardian", "hunter", "warrior",],
+            purviews: ["epicStamina", "epicStrength", "forge", "war", "water",],
         },
         fuxi: {
             label: "scion.pantheon.god.fuxi",
@@ -954,8 +954,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.fuxi",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["creator", "hunter", "sage"],
-            purviews: ["artistry:Musical Instruments|Writing", "beasts:All", "fertility", "forge", "fortune", "health", "order", "sun"]
+            callings: ["creator", "hunter", "sage",],
+            purviews: ["artistry:Musical Instruments|Writing", "beasts:All", "fertility", "forge", "fortune", "health", "order", "sun",],
         },
         guanYu: {
             label: "scion.pantheon.god.guanYu",
@@ -963,8 +963,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.guanYu",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["guardian", "leader", "warrior"],
-            purviews: ["artistry:Historical Fiction", "epicStrength", "epicStamina", "order", "passion:Loyalty", "prosperity", "sky", "war"]
+            callings: ["guardian", "leader", "warrior",],
+            purviews: ["artistry:Historical Fiction", "epicStrength", "epicStamina", "order", "passion:Loyalty", "prosperity", "sky", "war",],
         },
         guanshiyinPusa: {
             label: "scion.pantheon.god.guanshiyinPusa",
@@ -972,8 +972,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.guanshiyinPusa",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["guardian", "healer", "sage"],
-            purviews: ["deception", "epicStamina", "health", "journeys", "passion:Mercy", "water"]
+            callings: ["guardian", "healer", "sage",],
+            purviews: ["deception", "epicStamina", "health", "journeys", "passion:Mercy", "water",],
         },
         huangdi: {
             label: "scion.pantheon.god.huangdi",
@@ -981,8 +981,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.huangdi",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["creator", "leader", "sage"],
-            purviews: ["beasts:All", "death", "earth", "forge", "health", "order", "prosperity", "war"]
+            callings: ["creator", "leader", "sage",],
+            purviews: ["beasts:All", "death", "earth", "forge", "health", "order", "prosperity", "war",],
         },
         laozi: {
             label: "scion.pantheon.god.laozi",
@@ -990,8 +990,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.laozi",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["leader", "sage", "trickster"],
-            purviews: ["artistry:Poetry", "chaos", "darkness", "epicStamina", "health", "order", "water"]
+            callings: ["leader", "sage", "trickster",],
+            purviews: ["artistry:Poetry", "chaos", "darkness", "epicStamina", "health", "order", "water",],
         },
         nuwā: {
             label: "scion.pantheon.god.nuwā",
@@ -999,8 +999,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.nuwā",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["creator", "guardian", "healer"],
-            purviews: ["earth", "fertility", "forge", "health", "moon", "sky"]
+            callings: ["creator", "guardian", "healer",],
+            purviews: ["earth", "fertility", "forge", "health", "moon", "sky",],
         },
         princeNezha: {
             label: "scion.pantheon.god.princeNezha",
@@ -1008,8 +1008,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.princeNezha",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["guardian", "trickster", "warrior"],
-            purviews: ["artistry:Animation", "epicStamina", "epicStrength", "health", "war"]
+            callings: ["guardian", "trickster", "warrior",],
+            purviews: ["artistry:Animation", "epicStamina", "epicStrength", "health", "war",],
         },
         sunWukong: {
             label: "scion.pantheon.god.sunWukong",
@@ -1017,8 +1017,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sunWukong",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["liminal", "trickster", "warrior"],
-            purviews: ["artistry:Opera", "beasts:Monkey", "chaos", "deception", "epicDexterity", "epicStamina", "epicStrength", "journeys", "war"]
+            callings: ["liminal", "trickster", "warrior",],
+            purviews: ["artistry:Opera", "beasts:Monkey", "chaos", "deception", "epicDexterity", "epicStamina", "epicStrength", "journeys", "war",],
         },
         yandiShennongshi: {
             label: "scion.pantheon.god.yandiShennongshi",
@@ -1026,8 +1026,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.yandiShennongshi",
             bookRef: "scion.book.hero",
             bookPage: 118,
-            callings: ["healer", "leader", "sage"],
-            purviews: ["artistry:Storytelling", "epicStamina", "fertility", "fire", "forge", "health", "prosperity"]
+            callings: ["healer", "leader", "sage",],
+            purviews: ["artistry:Storytelling", "epicStamina", "fertility", "fire", "forge", "health", "prosperity",],
         },
         chalchihuitlicue: {
             label: "scion.pantheon.god.chalchihuitlicue",
@@ -1035,8 +1035,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.chalchihuitlicue",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["creator", "guardian", "leader"],
-            purviews: ["beasts:Aquatic Animal", "fertility", "water"]
+            callings: ["creator", "guardian", "leader",],
+            purviews: ["beasts:Aquatic Animal", "fertility", "water",],
         },
         chantico: {
             label: "scion.pantheon.god.chantico",
@@ -1044,8 +1044,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.chantico",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["healer", "liminal", "sage"],
-            purviews: ["fire", "forge", "order", "prosperity"]
+            callings: ["healer", "liminal", "sage",],
+            purviews: ["fire", "forge", "order", "prosperity",],
         },
         chicoAndCenteo: {
             label: "scion.pantheon.god.chicoAndCenteo",
@@ -1053,8 +1053,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.chicoAndCenteo",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["healer", "guardian", "judge"],
-            purviews: ["earth", "fertility", "prosperity"]
+            callings: ["healer", "guardian", "judge",],
+            purviews: ["earth", "fertility", "prosperity",],
         },
         huehuecoyotl: {
             label: "scion.pantheon.god.huehuecoyotl",
@@ -1062,8 +1062,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.huehuecoyotl",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["lover", "sage", "trickster"],
-            purviews: ["chaos", "epicDexterity", "passion:All"]
+            callings: ["lover", "sage", "trickster",],
+            purviews: ["chaos", "epicDexterity", "passion:All",],
         },
         huītzilōpōchtli: {
             label: "scion.pantheon.god.huītzilōpōchtli",
@@ -1071,8 +1071,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.huītzilōpōchtli",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["guardian", "leader", "warrior"],
-            purviews: ["beasts:Eagle|Hummingbird", "death", "epicStrength", "prosperity", "sun", "war"]
+            callings: ["guardian", "leader", "warrior",],
+            purviews: ["beasts:Eagle|Hummingbird", "death", "epicStrength", "prosperity", "sun", "war",],
         },
         ītzpāpālōtl: {
             label: "scion.pantheon.god.ītzpāpālōtl",
@@ -1080,8 +1080,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ītzpāpālōtl",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["hunter", "lover", "warrior"],
-            purviews: ["beasts:All", "darkness", "death", "fertility", "stars", "war"]
+            callings: ["hunter", "lover", "warrior",],
+            purviews: ["beasts:All", "darkness", "death", "fertility", "stars", "war",],
         },
         mictecacihuatl: {
             label: "scion.pantheon.god.mictecacihuatl",
@@ -1089,8 +1089,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.mictecacihuatl",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["guardian", "leader", "sage"],
-            purviews: ["beasts:Bats|Owls|Spiders", "darkness", "death", "passion:All"]
+            callings: ["guardian", "leader", "sage",],
+            purviews: ["beasts:Bats|Owls|Spiders", "darkness", "death", "passion:All",],
         },
         quetzalcoatl: {
             label: "scion.pantheon.god.quetzalcoatl",
@@ -1098,8 +1098,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.quetzalcoatl",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["creator", "liminal", "sage"],
-            purviews: ["artistry:Writing|Feathers", "beasts:All", "fertility", "journeys", "order", "sky", "stars"]
+            callings: ["creator", "liminal", "sage",],
+            purviews: ["artistry:Writing|Feathers", "beasts:All", "fertility", "journeys", "order", "sky", "stars",],
         },
         tezcatlipoca: {
             label: "scion.pantheon.god.tezcatlipoca",
@@ -1107,8 +1107,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.tezcatlipoca",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["hunter", "leader", "trickster"],
-            purviews: ["beasts:Jaguar|Turkey", "chaos", "darkness", "deception", "earth", "fortune", "war"]
+            callings: ["hunter", "leader", "trickster",],
+            purviews: ["beasts:Jaguar|Turkey", "chaos", "darkness", "deception", "earth", "fortune", "war",],
         },
         tlāloc: {
             label: "scion.pantheon.god.tlāloc",
@@ -1116,8 +1116,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.tlāloc",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["guardian", "healer", "hunter"],
-            purviews: ["death", "earth", "fertility", "frost", "health", "sky"]
+            callings: ["guardian", "healer", "hunter",],
+            purviews: ["death", "earth", "fertility", "frost", "health", "sky",],
         },
         xīpeTotēc: {
             label: "scion.pantheon.god.xīpeTotēc",
@@ -1125,8 +1125,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.xīpeTotēc",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["creator", "healer", "hunter"],
-            purviews: ["fertility", "forge", "health", "war"]
+            callings: ["creator", "healer", "hunter",],
+            purviews: ["fertility", "forge", "health", "war",],
         },
         xochipilli: {
             label: "scion.pantheon.god.xochipilli",
@@ -1134,8 +1134,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.xochipilli",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["guardian", "lover", "trickster"],
-            purviews: ["artistry:All", "beauty", "fortune", "passion:All", "prosperity"]
+            callings: ["guardian", "lover", "trickster",],
+            purviews: ["artistry:All", "beauty", "fortune", "passion:All", "prosperity",],
         },
         xochiquetzal: {
             label: "scion.pantheon.god.xochiquetzal",
@@ -1143,8 +1143,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.xochiquetzal",
             bookRef: "scion.book.hero",
             bookPage: 130,
-            callings: ["creator", "guardian", "lover"],
-            purviews: ["artistry:All", "beauty", "epicDexterity", "fertility", "fortune", "passion:All", "prosperity"]
+            callings: ["creator", "guardian", "lover",],
+            purviews: ["artistry:All", "beauty", "epicDexterity", "fertility", "fortune", "passion:All", "prosperity",],
         },
         xolotl: {
             label: "scion.pantheon.god.xolotl",
@@ -1152,8 +1152,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.xolotl",
             bookRef: "scion.book.motw",
             bookPage: 67,
-            callings: ["creator", "hunter", "liminal"],
-            purviews: ["beasts:Dogs", "chaos", "darkness", "death", "earth", "journeys"]
+            callings: ["creator", "hunter", "liminal",],
+            purviews: ["beasts:Dogs", "chaos", "darkness", "death", "earth", "journeys",],
         },
         aphrodite: {
             label: "scion.pantheon.god.aphrodite",
@@ -1161,8 +1161,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.aphrodite",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["creator", "guardian", "lover"],
-            purviews: ["beauty", "fertility", "passion:Desire|Love", "prosperity"]
+            callings: ["creator", "guardian", "lover",],
+            purviews: ["beauty", "fertility", "passion:Desire|Love", "prosperity",],
         },
         apollo: {
             label: "scion.pantheon.god.apollo",
@@ -1170,8 +1170,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.apollo",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["healer", "judge", "sage"],
-            purviews: ["artistry", "epicDexterity", "health", "sun"]
+            callings: ["healer", "judge", "sage",],
+            purviews: ["artistry", "epicDexterity", "health", "sun",],
         },
         ares: {
             label: "scion.pantheon.god.ares",
@@ -1179,8 +1179,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ares",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["guardian", "lover", "warrior"],
-            purviews: ["chaos", "fertility", "order", "passion:Rage|Valor", "prosperity", "war"]
+            callings: ["guardian", "lover", "warrior",],
+            purviews: ["chaos", "fertility", "order", "passion:Rage|Valor", "prosperity", "war",],
         },
         artemis: {
             label: "scion.pantheon.god.artemis",
@@ -1188,8 +1188,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.artemis",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["guardian", "healer", "hunter"],
-            purviews: ["beasts:All", "epicDexterity", "health", "moon", "wild"]
+            callings: ["guardian", "healer", "hunter",],
+            purviews: ["beasts:All", "epicDexterity", "health", "moon", "wild",],
         },
         athena: {
             label: "scion.pantheon.god.athena",
@@ -1197,8 +1197,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.athena",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["guardian", "sage", "warrior"],
-            purviews: ["artistry:Weaving", "beasts:Owl", "epicDexterity", "order", "war"]
+            callings: ["guardian", "sage", "warrior",],
+            purviews: ["artistry:Weaving", "beasts:Owl", "epicDexterity", "order", "war",],
         },
         demeter: {
             label: "scion.pantheon.god.demeter",
@@ -1206,8 +1206,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.demeter",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["creator", "guardian", "judge"],
-            purviews: ["earth", "epicStamina", "fertility", "order"]
+            callings: ["creator", "guardian", "judge",],
+            purviews: ["earth", "epicStamina", "fertility", "order",],
         },
         dionysus: {
             label: "scion.pantheon.god.dionysus",
@@ -1215,8 +1215,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.dionysus",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["liminal", "lover", "sage"],
-            purviews: ["artistry:Theatre", "chaos", "deception", "fertility", "passion:Ecstasy", "wild"]
+            callings: ["liminal", "lover", "sage",],
+            purviews: ["artistry:Theatre", "chaos", "deception", "fertility", "passion:Ecstasy", "wild",],
         },
         epona: {
             label: "scion.pantheon.god.epona",
@@ -1224,8 +1224,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.epona",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["guardian", "trickster", "warrior"],
-            purviews: ["beasts:Horses", "fertility", "order", "war"]
+            callings: ["guardian", "trickster", "warrior",],
+            purviews: ["beasts:Horses", "fertility", "order", "war",],
         },
         hades: {
             label: "scion.pantheon.god.hades",
@@ -1233,8 +1233,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hades",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["judge", "leader", "liminal"],
-            purviews: ["darkness", "death", "earth", "prosperity"]
+            callings: ["judge", "leader", "liminal",],
+            purviews: ["darkness", "death", "earth", "prosperity",],
         },
         hecate: {
             label: "scion.pantheon.god.hecate",
@@ -1242,8 +1242,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hecate",
             bookRef: "scion.book.motw",
             bookPage: 68,
-            callings: ["healer", "liminal", "sage"],
-            purviews: ["beasts:Dogs", "darkness", "fortune", "journeys", "moon", "stars", "wild"]
+            callings: ["healer", "liminal", "sage",],
+            purviews: ["beasts:Dogs", "darkness", "fortune", "journeys", "moon", "stars", "wild",],
         },
         hephaestus: {
             label: "scion.pantheon.god.hephaestus",
@@ -1251,8 +1251,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hephaestus",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["creator", "sage", "trickster"],
-            purviews: ["epicStamina", "fire", "forge", "fortune"]
+            callings: ["creator", "sage", "trickster",],
+            purviews: ["epicStamina", "fire", "forge", "fortune",],
         },
         hera: {
             label: "scion.pantheon.god.hera",
@@ -1260,8 +1260,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hera",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["judge", "leader", "lover"],
-            purviews: ["beauty", "fertility", "health", "order", "passion:Fidelity", "prosperity"]
+            callings: ["judge", "leader", "lover",],
+            purviews: ["beauty", "fertility", "health", "order", "passion:Fidelity", "prosperity",],
         },
         hermes: {
             label: "scion.pantheon.god.hermes",
@@ -1269,8 +1269,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hermes",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["liminal", "sage", "trickster"],
-            purviews: ["death", "deception", "epicDexterity", "journeys", "prosperity"]
+            callings: ["liminal", "sage", "trickster",],
+            purviews: ["death", "deception", "epicDexterity", "journeys", "prosperity",],
         },
         hestia: {
             label: "scion.pantheon.god.hestia",
@@ -1278,8 +1278,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hestia",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["guardian", "healer", "judge"],
-            purviews: ["fire", "fortune", "order", "prosperity"]
+            callings: ["guardian", "healer", "judge",],
+            purviews: ["fire", "fortune", "order", "prosperity",],
         },
         persephone: {
             label: "scion.pantheon.god.persephone",
@@ -1287,8 +1287,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.persephone",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["judge", "leader", "liminal"],
-            purviews: ["death", "fertility", "health"]
+            callings: ["judge", "leader", "liminal",],
+            purviews: ["death", "fertility", "health",],
         },
         poseidon: {
             label: "scion.pantheon.god.poseidon",
@@ -1296,8 +1296,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.poseidon",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["guardian", "hunter", "leader"],
-            purviews: ["beasts:Horse", "epicStrength", "earth", "water"]
+            callings: ["guardian", "hunter", "leader",],
+            purviews: ["beasts:Horse", "epicStrength", "earth", "water",],
         },
         zeus: {
             label: "scion.pantheon.god.zeus",
@@ -1305,8 +1305,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.zeus",
             bookRef: "scion.book.hero",
             bookPage: 142,
-            callings: ["leader", "lover", "trickster"],
-            purviews: ["deception", "epicStrength", "epicStamina", "fortune", "order", "sky"]
+            callings: ["leader", "lover", "trickster",],
+            purviews: ["deception", "epicStrength", "epicStamina", "fortune", "order", "sky",],
         },
         aengus: {
             label: "scion.pantheon.god.aengus",
@@ -1314,8 +1314,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.aengus",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["guardian", "lover", "trickster"],
-            purviews: ["beasts:Bird", "beauty", "deception", "moon", "passion:Love"]
+            callings: ["guardian", "lover", "trickster",],
+            purviews: ["beasts:Bird", "beauty", "deception", "moon", "passion:Love",],
         },
         brigid: {
             label: "scion.pantheon.god.brigid",
@@ -1323,8 +1323,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.brigid",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["healer", "sage", "trickster"],
-            purviews: ["artistry:Poetry", "fertility", "fire", "forge", "health"]
+            callings: ["healer", "sage", "trickster",],
+            purviews: ["artistry:Poetry", "fertility", "fire", "forge", "health",],
         },
         dianCécht: {
             label: "scion.pantheon.god.dianCécht",
@@ -1332,8 +1332,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.dianCécht",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["creator", "healer", "judge"],
-            purviews: ["fertility", "health", "water"]
+            callings: ["creator", "healer", "judge",],
+            purviews: ["fertility", "health", "water",],
         },
         donn: {
             label: "scion.pantheon.god.donn",
@@ -1341,8 +1341,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.donn",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["leader", "liminal", "trickster"],
-            purviews: ["darkness", "death", "journeys", "sky"]
+            callings: ["leader", "liminal", "trickster",],
+            purviews: ["darkness", "death", "journeys", "sky",],
         },
         ériu: {
             label: "scion.pantheon.god.ériu",
@@ -1350,8 +1350,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ériu",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["guardian", "judge", "leader"],
-            purviews: ["earth", "fertility", "order", "prosperity"]
+            callings: ["guardian", "judge", "leader",],
+            purviews: ["earth", "fertility", "order", "prosperity",],
         },
         goibniu: {
             label: "scion.pantheon.god.goibniu",
@@ -1359,8 +1359,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.goibniu",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["creator", "sage", "warrior"],
-            purviews: ["artistry:Brewing", "epicStamina", "forge", "health"]
+            callings: ["creator", "sage", "warrior",],
+            purviews: ["artistry:Brewing", "epicStamina", "forge", "health",],
         },
         lugh: {
             label: "scion.pantheon.god.lugh",
@@ -1368,8 +1368,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.lugh",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["creator", "leader", "warrior"],
-            purviews: ["artistry:All", "epicDexterity", "epicStrength", "forge", "health", "order", "prosperity", "war"]
+            callings: ["creator", "leader", "warrior",],
+            purviews: ["artistry:All", "epicDexterity", "epicStrength", "forge", "health", "order", "prosperity", "war",],
         },
         macLir: {
             label: "scion.pantheon.god.macLir",
@@ -1377,8 +1377,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.macLir",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["guardian", "liminal", "trickster"],
-            purviews: ["deception", "journeys", "prosperity", "stars", "water"]
+            callings: ["guardian", "liminal", "trickster",],
+            purviews: ["deception", "journeys", "prosperity", "stars", "water",],
         },
         midir: {
             label: "scion.pantheon.god.midir",
@@ -1386,8 +1386,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.midir",
             bookRef: "scion.book.motw",
             bookPage: 68,
-            callings: ["deception", "earth", "fortune"],
-            purviews: ["passion:Single-Mindedness"]
+            callings: ["deception", "earth", "fortune",],
+            purviews: ["passion:Single-Mindedness",],
         },
         nuada: {
             label: "scion.pantheon.god.nuada",
@@ -1395,8 +1395,8 @@ const scionSystemData = {
             mantle: false,
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["leader", "sage", "warrior"],
-            purviews: ["order", "prosperity", "war"]
+            callings: ["leader", "sage", "warrior",],
+            purviews: ["order", "prosperity", "war",],
         },
         ogma: {
             label: "scion.pantheon.god.ogma",
@@ -1404,8 +1404,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ogma",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["guardian", "sage", "warrior"],
-            purviews: ["artistry:Oration|Poetry", "epicStrength", "fortune", "wild"]
+            callings: ["guardian", "sage", "warrior",],
+            purviews: ["artistry:Oration|Poetry", "epicStrength", "fortune", "wild",],
         },
         theDagda: {
             label: "scion.pantheon.god.theDagda",
@@ -1413,8 +1413,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.theDagda",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["guardian", "leader", "sage"],
-            purviews: ["epicStamina", "epicStrength", "fertility", "forge", "prosperity", "war"]
+            callings: ["guardian", "leader", "sage",],
+            purviews: ["epicStamina", "epicStrength", "fertility", "forge", "prosperity", "war",],
         },
         morrigan: {
             label: "scion.pantheon.god.morrigan",
@@ -1422,8 +1422,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.morrigan",
             bookRef: "scion.book.hero",
             bookPage: 154,
-            callings: ["liminal", "lover", "sage"],
-            purviews: ["beasts:Crows|Cattle|Horses", "chaos", "death", "epicDexterity", "fortune", "prosperity", "war"]
+            callings: ["liminal", "lover", "sage",],
+            purviews: ["beasts:Crows|Cattle|Horses", "chaos", "death", "epicDexterity", "fortune", "prosperity", "war",],
         },
         andarta: {
             label: "scion.pantheon.god.andarta",
@@ -1431,8 +1431,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.andarta",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["hunter", "leader", "warrior"],
-            purviews: ["epicDexterity", "epicStamina", "fortune", "passion:Bravery", "war"]
+            callings: ["hunter", "leader", "warrior",],
+            purviews: ["epicDexterity", "epicStamina", "fortune", "passion:Bravery", "war",],
         },
         belenos: {
             label: "scion.pantheon.god.belenos",
@@ -1440,8 +1440,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.belenos",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["healer", "liminal", "sage"],
-            purviews: ["death", "health", "stars", "sun"]
+            callings: ["healer", "liminal", "sage",],
+            purviews: ["death", "health", "stars", "sun",],
         },
         cernunnos: {
             label: "scion.pantheon.god.cernunnos",
@@ -1449,8 +1449,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.cernunnos",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["creator", "guardian", "sage"],
-            purviews: ["beasts:All Wild Animals", "prosperity", "wild"]
+            callings: ["creator", "guardian", "sage",],
+            purviews: ["beasts:All Wild Animals", "prosperity", "wild",],
         },
         esos: {
             label: "scion.pantheon.god.esos",
@@ -1458,8 +1458,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.esos",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["creator", "liminal", "trickster"],
-            purviews: ["artistry:Woodcarving", "epicStrength", "forge"]
+            callings: ["creator", "liminal", "trickster",],
+            purviews: ["artistry:Woodcarving", "epicStrength", "forge",],
         },
         gobannos: {
             label: "scion.pantheon.god.gobannos",
@@ -1467,8 +1467,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.gobannos",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["creator", "lover", "warrior"],
-            purviews: ["epicStamina", "forge", "journeys", "prosperity"]
+            callings: ["creator", "lover", "warrior",],
+            purviews: ["epicStamina", "forge", "journeys", "prosperity",],
         },
         nantosuelta: {
             label: "scion.pantheon.god.nantosuelta",
@@ -1476,8 +1476,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.nantosuelta",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["guardian", "lover", "sage"],
-            purviews: ["beasts:Bees|Birds", "fertility", "fire"]
+            callings: ["guardian", "lover", "sage",],
+            purviews: ["beasts:Bees|Birds", "fertility", "fire",],
         },
         nehalAndNodens: {
             label: "scion.pantheon.god.nehalAndNodens",
@@ -1485,8 +1485,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.nehalAndNodens",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["guardian", "healer", "liminal"],
-            purviews: ["beasts:Dogs|Marine Life", "fertility:Nehalennia ONLY", "health", "journeys", "prosperity", "water"]
+            callings: ["guardian", "healer", "liminal",],
+            purviews: ["beasts:Dogs|Marine Life", "fertility:Nehalennia ONLY", "health", "journeys", "prosperity", "water",],
         },
         sulis: {
             label: "scion.pantheon.god.sulis",
@@ -1494,8 +1494,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sulis",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["guardian", "healer", "judge"],
-            purviews: ["earth", "health", "water"]
+            callings: ["guardian", "healer", "judge",],
+            purviews: ["earth", "health", "water",],
         },
         taranis: {
             label: "scion.pantheon.god.taranis",
@@ -1503,8 +1503,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.taranis",
             bookRef: "scion.book.motw",
             bookPage: 38,
-            callings: ["judge", "liminal", "warrior"],
-            purviews: ["chaos", "epicStrength", "sky"]
+            callings: ["judge", "liminal", "warrior",],
+            purviews: ["chaos", "epicStrength", "sky",],
         },
         erinle: {
             label: "scion.pantheon.god.erinle",
@@ -1512,8 +1512,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.erinle",
             bookRef: "scion.book.motw",
             bookPage: 66,
-            callings: ["hunter", "liminal", "lover"],
-            purviews: ["beauty", "epicStamina", "epicStrength", "passion:Love", "prosperity", "water"]
+            callings: ["hunter", "liminal", "lover",],
+            purviews: ["beauty", "epicStamina", "epicStrength", "passion:Love", "prosperity", "water",],
         },
         èshùElègbará: {
             label: "scion.pantheon.god.èshùElègbará",
@@ -1521,8 +1521,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.èshùElègbará",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["liminal", "lover", "trickster"],
-            purviews: ["artistry:Storytelling", "chaos", "deception", "epicDexterity", "fortune", "journeys"]
+            callings: ["liminal", "lover", "trickster",],
+            purviews: ["artistry:Storytelling", "chaos", "deception", "epicDexterity", "fortune", "journeys",],
         },
         ìbejì: {
             label: "scion.pantheon.god.ìbejì",
@@ -1530,8 +1530,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ìbejì",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["healer", "judge", "trickster"],
-            purviews: ["artistry:Dance", "beasts:Monkeys", "death", "fertility", "fortune", "prosperity"]
+            callings: ["healer", "judge", "trickster",],
+            purviews: ["artistry:Dance", "beasts:Monkeys", "death", "fertility", "fortune", "prosperity",],
         },
         morèmi: {
             label: "scion.pantheon.god.morèmi",
@@ -1539,8 +1539,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.morèmi",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["guardian", "lover", "trickster"],
-            purviews: ["beauty", "deception", "fertility", "fire", "passion:All"]
+            callings: ["guardian", "lover", "trickster",],
+            purviews: ["beauty", "deception", "fertility", "fire", "passion:All",],
         },
         obàtálá: {
             label: "scion.pantheon.god.obàtálá",
@@ -1548,8 +1548,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.obàtálá",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["creator", "judge", "leader"],
-            purviews: ["artistry:Sculpture", "health", "order", "sky"]
+            callings: ["creator", "judge", "leader",],
+            purviews: ["artistry:Sculpture", "health", "order", "sky",],
         },
         odùduwà: {
             label: "scion.pantheon.god.odùduwà",
@@ -1557,8 +1557,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.odùduwà",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["creator", "leader", "warrior"],
-            purviews: ["darkness", "earth", "order", "war"]
+            callings: ["creator", "leader", "warrior",],
+            purviews: ["darkness", "earth", "order", "war",],
         },
         ògún: {
             label: "scion.pantheon.god.ògún",
@@ -1566,8 +1566,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ògún",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["creator", "hunter", "warrior"],
-            purviews: ["earth", "epicStrength", "epicStamina", "forge", "passion:Fear", "war"]
+            callings: ["creator", "hunter", "warrior",],
+            purviews: ["earth", "epicStrength", "epicStamina", "forge", "passion:Fear", "war",],
         },
         òrìshàOko: {
             label: "scion.pantheon.god.òrìshàOko",
@@ -1575,8 +1575,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.òrìshàOko",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["hunter", "judge", "sage"],
-            purviews: ["beasts:Beasts of Burden|Birds", "fertility", "fortune", "order", "prosperity"]
+            callings: ["hunter", "judge", "sage",],
+            purviews: ["beasts:Beasts of Burden|Birds", "fertility", "fortune", "order", "prosperity",],
         },
         òrúnmìlà: {
             label: "scion.pantheon.god.òrúnmìlà",
@@ -1584,8 +1584,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.òrúnmìlà",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["healer", "judge", "sage"],
-            purviews: ["fortune", "sky", "stars", "wild"]
+            callings: ["healer", "judge", "sage",],
+            purviews: ["fortune", "sky", "stars", "wild",],
         },
         òsanyìn: {
             label: "scion.pantheon.god.òsanyìn",
@@ -1593,8 +1593,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.òsanyìn",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["healer", "hunter", "sage"],
-            purviews: ["beasts:Birds", "epicStamina", "fertility", "fortune", "health", "wild"]
+            callings: ["healer", "hunter", "sage",],
+            purviews: ["beasts:Birds", "epicStamina", "fertility", "fortune", "health", "wild",],
         },
         oshóssí: {
             label: "scion.pantheon.god.oshóssí",
@@ -1602,8 +1602,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.oshóssí",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["hunter", "liminal", "judge"],
-            purviews: ["beasts", "epicDexterity", "prosperity", "wild"]
+            callings: ["hunter", "liminal", "judge",],
+            purviews: ["beasts", "epicDexterity", "prosperity", "wild",],
         },
         òshun: {
             label: "scion.pantheon.god.òshun",
@@ -1611,8 +1611,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.òshun",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["healer", "lover", "sage"],
-            purviews: ["beasts:Bees", "beauty", "fertility", "fortune", "frost", "health", "passion:Love", "prosperity", "water"]
+            callings: ["healer", "lover", "sage",],
+            purviews: ["beasts:Bees", "beauty", "fertility", "fortune", "frost", "health", "passion:Love", "prosperity", "water",],
         },
         oyaIyansan: {
             label: "scion.pantheon.god.oyaIyansan",
@@ -1620,8 +1620,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.oyaIyansan",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["guardian", "liminal", "warrior"],
-            purviews: ["beasts:Bull", "epicDexterity", "epicStrength", "death", "prosperity", "sky", "water"]
+            callings: ["guardian", "liminal", "warrior",],
+            purviews: ["beasts:Bull", "epicDexterity", "epicStrength", "death", "prosperity", "sky", "water",],
         },
         shàngó: {
             label: "scion.pantheon.god.shàngó",
@@ -1629,8 +1629,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.shàngó",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["leader", "lover", "warrior"],
-            purviews: ["artistry:Dance|Drums", "beauty", "epicStrength", "fire", "order", "passion", "prosperity", "sky", "war"]
+            callings: ["leader", "lover", "warrior",],
+            purviews: ["artistry:Dance|Drums", "beauty", "epicStrength", "fire", "order", "passion", "prosperity", "sky", "war",],
         },
         sònpònná: {
             label: "scion.pantheon.god.sònpònná",
@@ -1638,8 +1638,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sònpònná",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["healer", "hunter", "liminal"],
-            purviews: ["death", "earth", "health", "passion:Spite", "wild"]
+            callings: ["healer", "hunter", "liminal",],
+            purviews: ["death", "earth", "health", "passion:Spite", "wild",],
         },
         yemojaOboto: {
             label: "scion.pantheon.god.yemojaOboto",
@@ -1647,8 +1647,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.yemojaOboto",
             bookRef: "scion.book.hero",
             bookPage: 106,
-            callings: ["creator", "guardian", "leader"],
-            purviews: ["beasts:Cetaceans", "epicStrength", "epicStamina", "fertility", "frost", "journeys", "water"]
+            callings: ["creator", "guardian", "leader",],
+            purviews: ["beasts:Cetaceans", "epicStrength", "epicStamina", "fertility", "frost", "journeys", "water",],
         },
         anahita: {
             label: "scion.pantheon.god.anahita",
@@ -1656,8 +1656,8 @@ const scionSystemData = {
             mantle: false,
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["creator", "healer", "warrior"],
-            purviews: ["beauty", "health", "water", "war", "wild"]
+            callings: ["creator", "healer", "warrior",],
+            purviews: ["beauty", "health", "water", "war", "wild",],
         },
         ashi: {
             label: "scion.pantheon.god.ashi",
@@ -1665,8 +1665,8 @@ const scionSystemData = {
             mantle: false,
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["judge", "sage", "warrior"],
-            purviews: ["earth", "fortune", "prosperity", "war"]
+            callings: ["judge", "sage", "warrior",],
+            purviews: ["earth", "fortune", "prosperity", "war",],
         },
         atar: {
             label: "scion.pantheon.god.atar",
@@ -1674,8 +1674,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.atar",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "judge", "liminal"],
-            purviews: ["artistry:Innovation", "beauty", "fire", "forge", "health", "passion:Devotion"]
+            callings: ["guardian", "judge", "liminal",],
+            purviews: ["artistry:Innovation", "beauty", "fire", "forge", "health", "passion:Devotion",],
         },
         haoma: {
             label: "scion.pantheon.god.haoma",
@@ -1683,8 +1683,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.haoma",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["healer", "leader", "sage"],
-            purviews: ["beauty", "epicStrength", "fertility", "health"]
+            callings: ["healer", "leader", "sage",],
+            purviews: ["beauty", "epicStrength", "fertility", "health",],
         },
         hvareKhshaeta: {
             label: "scion.pantheon.god.hvareKhshaeta",
@@ -1692,8 +1692,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hvareKhshaeta",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "hunter", "leader"],
-            purviews: ["beauty", "epicDexterity", "epicStamina", "sun"]
+            callings: ["guardian", "hunter", "leader",],
+            purviews: ["beauty", "epicDexterity", "epicStamina", "sun",],
         },
         mangha: {
             label: "scion.pantheon.god.mangha",
@@ -1701,8 +1701,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.mangha",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["creator", "leader", "sage"],
-            purviews: ["beasts:Bovines", "fertility", "fortune", "moon", "prosperity"]
+            callings: ["creator", "leader", "sage",],
+            purviews: ["beasts:Bovines", "fertility", "fortune", "moon", "prosperity",],
         },
         mithra: {
             label: "scion.pantheon.god.mithra",
@@ -1710,8 +1710,8 @@ const scionSystemData = {
             mantle: false,
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "judge", "leader"],
-            purviews: ["death", "order", "sun"]
+            callings: ["guardian", "judge", "leader",],
+            purviews: ["death", "order", "sun",],
         },
         rashnu: {
             label: "scion.pantheon.god.rashnu",
@@ -1719,8 +1719,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.rashnu",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "judge", "liminal"],
-            purviews: ["death", "epicStrength", "journeys", "order"]
+            callings: ["guardian", "judge", "liminal",],
+            purviews: ["death", "epicStrength", "journeys", "order",],
         },
         sraosha: {
             label: "scion.pantheon.god.sraosha",
@@ -1728,8 +1728,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.sraosha",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "judge", "sage"],
-            purviews: ["artistry:Song", "death", "epicDexterity", "epicStamina", "epicStrength", "journeys", "war"]
+            callings: ["guardian", "judge", "sage",],
+            purviews: ["artistry:Song", "death", "epicDexterity", "epicStamina", "epicStrength", "journeys", "war",],
         },
         tishtrya: {
             label: "scion.pantheon.god.tishtrya",
@@ -1737,8 +1737,8 @@ const scionSystemData = {
             mantle: false,
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "healer", "warrior"],
-            purviews: ["beasts:Horses", "fertility", "health", "sky", "stars", "water"]
+            callings: ["guardian", "healer", "warrior",],
+            purviews: ["beasts:Horses", "fertility", "health", "sky", "stars", "water",],
         },
         vanant: {
             label: "scion.pantheon.god.vanant",
@@ -1746,8 +1746,8 @@ const scionSystemData = {
             mantle: false,
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "hunter", "judge"],
-            purviews: ["epicDexterity", "epicStamina", "epicStrength", "journeys", "stars"]
+            callings: ["guardian", "hunter", "judge",],
+            purviews: ["epicDexterity", "epicStamina", "epicStrength", "journeys", "stars",],
         },
         vataVayu: {
             label: "scion.pantheon.god.vataVayu",
@@ -1755,8 +1755,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.vataVayu",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["creator", "liminal", "trickster"],
-            purviews: ["chaos", "death", "epicDexterity", "sky", "wild"]
+            callings: ["creator", "liminal", "trickster",],
+            purviews: ["chaos", "death", "epicDexterity", "sky", "wild",],
         },
         verethragna: {
             label: "scion.pantheon.god.verethragna",
@@ -1764,8 +1764,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.verethragna",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["guardian", "leader", "warrior"],
-            purviews: ["beasts", "epicDexterity", "epicStamina", "epicStrength", "fertility", "health", "journeys", "war"]
+            callings: ["guardian", "leader", "warrior",],
+            purviews: ["beasts", "epicDexterity", "epicStamina", "epicStrength", "fertility", "health", "journeys", "war",],
         },
         zam: {
             label: "scion.pantheon.god.zam",
@@ -1773,8 +1773,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.zam",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["creator", "guardian", "healer"],
-            purviews: ["beauty", "earth", "epicStamina", "wild"]
+            callings: ["creator", "guardian", "healer",],
+            purviews: ["beauty", "earth", "epicStamina", "wild",],
         },
         zarathustra: {
             label: "scion.pantheon.god.zarathustra",
@@ -1782,8 +1782,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.zarathustra",
             bookRef: "scion.book.motw",
             bookPage: 50,
-            callings: ["healer", "leader", "sage"],
-            purviews: ["artistry:Poetry", "journeys", "order"]
+            callings: ["healer", "leader", "sage",],
+            purviews: ["artistry:Poetry", "journeys", "order",],
         },
         aeva: {
             label: "scion.pantheon.god.aeva",
@@ -1791,8 +1791,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.aeva",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["creator", "guardian", "liminal"],
-            purviews: ["artistry:Music", "death", "fertility", "forge", "health", "order", "passion:Dread", "stars"]
+            callings: ["creator", "guardian", "liminal",],
+            purviews: ["artistry:Music", "death", "fertility", "forge", "health", "order", "passion:Dread", "stars",],
         },
         ytar: {
             label: "scion.pantheon.god.ytar",
@@ -1800,8 +1800,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.ytar",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["creator", "trickster", "sage"],
-            purviews: ["chaos", "darkness", "deception", "epicStrength", "forge", "journeys", "passion:Joy", "stars"]
+            callings: ["creator", "trickster", "sage",],
+            purviews: ["chaos", "darkness", "deception", "epicStrength", "forge", "journeys", "passion:Joy", "stars",],
         },
         amnis: {
             label: "scion.pantheon.god.amnis",
@@ -1809,8 +1809,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.amnis",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["creator", "leader", "healer"],
-            purviews: ["fertility", "forge", "health", "journeys", "order", "prosperity", "water"]
+            callings: ["creator", "leader", "healer",],
+            purviews: ["fertility", "forge", "health", "journeys", "order", "prosperity", "water",],
         },
         badaris: {
             label: "scion.pantheon.god.badaris",
@@ -1818,8 +1818,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.badaris",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["creator", "liminal", "sage"],
-            purviews: ["artistry:Travelogues", "beasts:Marine Life", "epicStamina", "forge", "journeys", "passion:Wanderlust", "water"]
+            callings: ["creator", "liminal", "sage",],
+            purviews: ["artistry:Travelogues", "beasts:Marine Life", "epicStamina", "forge", "journeys", "passion:Wanderlust", "water",],
         },
         kuros: {
             label: "scion.pantheon.god.kuros",
@@ -1827,8 +1827,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.kuros",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["liminal", "lover", "sage"],
-            purviews: ["beauty", "epicDexterity", "journeys", "order", "passion:Love", "sky", "stars"]
+            callings: ["liminal", "lover", "sage",],
+            purviews: ["beauty", "epicDexterity", "journeys", "order", "passion:Love", "sky", "stars",],
         },
         demosia: {
             label: "scion.pantheon.god.demosia",
@@ -1836,8 +1836,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.demosia",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["guardian", "judge", "trickster"],
-            purviews: ["beasts:Nocturnal Animals", "darkness", "deception", "frost", "moon"]
+            callings: ["guardian", "judge", "trickster",],
+            purviews: ["beasts:Nocturnal Animals", "darkness", "deception", "frost", "moon",],
         },
         hesbon: {
             label: "scion.pantheon.god.hesbon",
@@ -1845,8 +1845,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.hesbon",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["guardian", "hunter", "liminal"],
-            purviews: ["beasts:Predators", "chaos", "earth", "epicDexterity", "epicStrength", "fertility", "fortune", "passion:Fury", "wild"]
+            callings: ["guardian", "hunter", "liminal",],
+            purviews: ["beasts:Predators", "chaos", "earth", "epicDexterity", "epicStrength", "fertility", "fortune", "passion:Fury", "wild",],
         },
         skaft: {
             label: "scion.pantheon.god.skaft",
@@ -1854,8 +1854,8 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.skaft",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["creator", "guardian", "sage"],
-            purviews: ["artistry:All", "earth", "epicStamina", "fire", "forge", "passion:Curiosity", "prosperity"]
+            callings: ["creator", "guardian", "sage",],
+            purviews: ["artistry:All", "earth", "epicStamina", "fire", "forge", "passion:Curiosity", "prosperity",],
         },
         versak: {
             label: "scion.pantheon.god.versak",
@@ -1863,16 +1863,16 @@ const scionSystemData = {
             mantle: "scion.pantheon.mantle.versak",
             bookRef: "scion.book.motw",
             bookPage: 80,
-            callings: ["guardian", "judge", "liminal"],
-            purviews: ["beauty", "death", "fire", "order", "passion:Pride", "sky", "sun"]
-        }
+            callings: ["guardian", "judge", "liminal",],
+            purviews: ["beauty", "death", "fire", "order", "passion:Pride", "sky", "sun",],
+        },
         /* eslint-enable sort-keys */
     },
     GENESES: {
         born: "scion.genesis.born",
         created: "scion.genesis.created",
         incarnation: "scion.genesis.incarnation",
-        chosen: "scion.genesis.chosen"
+        chosen: "scion.genesis.chosen",
     },
     ATTRIBUTES: {
         min: 1,
@@ -1880,26 +1880,26 @@ const scionSystemData = {
         priorities: {
             primary: {
                 label: "scion.game.primary",
-                startingDots: 6
+                startingDots: 6,
             },
             secondary: {
                 label: "scion.game.secondary",
-                startingDots: 4
+                startingDots: 4,
             },
             tertiary: {
                 label: "scion.game.tertiary",
-                startingDots: 2
-            }
+                startingDots: 2,
+            },
         },
         arenas: {
-            social: ["presence", "manipulation", "composure"],
-            mental: ["intellect", "cunning", "resolve"],
-            physical: ["might", "dexterity", "stamina"]
+            social: ["presence", "manipulation", "composure",],
+            mental: ["intellect", "cunning", "resolve",],
+            physical: ["might", "dexterity", "stamina",],
         },
         approaches: {
-            force: ["presence", "intellect", "might"],
-            finesse: ["manipulation", "cunning", "dexterity"],
-            resilience: ["composure", "resolve", "stamina"]
+            force: ["presence", "intellect", "might",],
+            finesse: ["manipulation", "cunning", "dexterity",],
+            resilience: ["composure", "resolve", "stamina",],
         },
         list: {
             presence: "scion.attribute.presence",
@@ -1910,8 +1910,8 @@ const scionSystemData = {
             resolve: "scion.attribute.resolve",
             might: "scion.attribute.might",
             dexterity: "scion.attribute.dexterity",
-            stamina: "scion.attribute.stamina"
-        }
+            stamina: "scion.attribute.stamina",
+        },
     },
     SKILLS: {
         min: 0,
@@ -1932,8 +1932,8 @@ const scionSystemData = {
             science: "scion.skill.science",
             subterfuge: "scion.skill.subterfuge",
             survival: "scion.skill.survival",
-            technology: "scion.skill.technology"
-        }
+            technology: "scion.skill.technology",
+        },
     },
     CALLINGS: {
         min: 1,
@@ -1943,12 +1943,12 @@ const scionSystemData = {
             "value": 0,
             "slot": null,
             "keywordsChosen": [],
-            "keywordsUsed": []
+            "keywordsUsed": [],
         },
         list: {
             creator: {
-                skills: [ "academics", "culture", "technology" ],
-                fateRoles: [ "apprentice", "jinx", "rival" ],
+                skills: [ "academics", "culture", "technology", ],
+                fateRoles: [ "apprentice", "jinx", "rival", ],
                 knacks: {
                     heroic: [
                         "flawlesslyPlatonicIdeal",
@@ -1957,19 +1957,19 @@ const scionSystemData = {
                         "reverseEngineer",
                         "theUnlimitedQuartermaster",
                         "weGoAllNight",
-                        "wirelessInterface"
+                        "wirelessInterface",
                     ] ,
                     immortal: [
                         "afternoonOfFortnights",
                         "liftedFromDust",
                         "raiseThePillarsOfTheEarth",
-                        "touchOfTheMuses"
-                    ]
-                }
+                        "touchOfTheMuses",
+                    ],
+                },
             },
             guardian: {
-                skills: [ "athletics", "closeCombat", "empathy" ],
-                fateRoles: [ "canary", "martyr", "nemesis" ],
+                skills: [ "athletics", "closeCombat", "empathy", ],
+                fateRoles: [ "canary", "martyr", "nemesis", ],
                 knacks: {
                     heroic: [
                         "aFortress",
@@ -1977,19 +1977,19 @@ const scionSystemData = {
                         "aSentinel",
                         "aTalisman",
                         "aVigil",
-                        "aWarning"
+                        "aWarning",
                     ] ,
                     immortal: [
                         "byYourSide",
                         "eternalGuardian",
                         "livingPillar",
-                        "theyCannotBeTouched"
-                    ]
-                }
+                        "theyCannotBeTouched",
+                    ],
+                },
             },
             healer: {
-                skills: [ "empathy", "medicine", "science" ],
-                fateRoles: [ "boonCompanion", "canary", "rival" ],
+                skills: [ "empathy", "medicine", "science", ],
+                fateRoles: [ "boonCompanion", "canary", "rival", ],
                 knacks: {
                     heroic: [
                         "combatMedic",
@@ -1998,19 +1998,19 @@ const scionSystemData = {
                         "immunizationBooster",
                         "instantDiagnosis",
                         "surgeonWithTheHandsOfGod",
-                        "theBareMinimum"
+                        "theBareMinimum",
                     ] ,
                     immortal: [
                         "breathOfLife",
                         "internalRefinery",
                         "panacea",
-                        "reconstruction"
-                    ]
-                }
+                        "reconstruction",
+                    ],
+                },
             },
             hunter: {
-                skills: [ "athletics", "firearms", "survival" ],
-                fateRoles: [ "boonCompanion", "paramour", "rival" ],
+                skills: [ "athletics", "firearms", "survival", ],
+                fateRoles: [ "boonCompanion", "paramour", "rival", ],
                 knacks: {
                     heroic: [
                         "apexPredator",
@@ -2019,19 +2019,19 @@ const scionSystemData = {
                         "keeneyedPredator",
                         "mostDangerousPrey",
                         "silenceInTheWoods",
-                        "worryingHound"
+                        "worryingHound",
                     ] ,
                     immortal: [
                         "alwaysThere",
                         "perfectCamouflage",
                         "relentless",
-                        "sendThePack"
-                    ]
-                }
+                        "sendThePack",
+                    ],
+                },
             },
             judge: {
-                skills: [ "academics", "culture", "persuasion" ],
-                fateRoles: [ "balm", "traitor", "worshipper" ],
+                skills: [ "academics", "culture", "persuasion", ],
+                fateRoles: [ "balm", "traitor", "worshipper", ],
                 knacks: {
                     heroic: [
                         "eyeForAnEye",
@@ -2040,19 +2040,19 @@ const scionSystemData = {
                         "objection",
                         "onTheCase",
                         "quickStudy",
-                        "theTruthArises"
+                        "theTruthArises",
                     ] ,
                     immortal: [
                         "boundByOath",
                         "iAmTheLaw",
                         "terrorOfTheGuilty",
-                        "thePainOfDishonesty"
-                    ]
-                }
+                        "thePainOfDishonesty",
+                    ],
+                },
             },
             leader: {
-                skills: [ "culture", "empathy", "leadership" ],
-                fateRoles: [ "boonCompanion", "traitor", "worshipper" ],
+                skills: [ "culture", "empathy", "leadership", ],
+                fateRoles: [ "boonCompanion", "traitor", "worshipper", ],
                 knacks: {
                     heroic: [
                         "captainOfIndustry",
@@ -2061,18 +2061,18 @@ const scionSystemData = {
                         "grandEntrance",
                         "inspirationalAura",
                         "lighthouseOfSociety",
-                        "perfectPoise"
+                        "perfectPoise",
                     ] ,
                     immortal: [
                         "invulnerableMaster",
                         "masterfulEfficiency",
-                        "notTodayFriends"
-                    ]
-                }
+                        "notTodayFriends",
+                    ],
+                },
             },
             liminal: {
-                skills: [ "athletics", "pilot", "subterfuge" ],
-                fateRoles: [ "canary", "jinx", "unrequitedParamour" ],
+                skills: [ "athletics", "pilot", "subterfuge", ],
+                fateRoles: [ "canary", "jinx", "unrequitedParamour", ],
                 knacks: {
                     heroic: [
                         "beyondMemory",
@@ -2081,19 +2081,19 @@ const scionSystemData = {
                         "flatlander",
                         "neitherTheMinuteNorTheHour",
                         "unerringDelivery",
-                        "unobtrusiveVisitor"
+                        "unobtrusiveVisitor",
                     ] ,
                     immortal: [
                         "enforcingTheBoundary",
                         "pierceTheVeil",
                         "stepSideways",
-                        "theLongRoadToAnywhere"
-                    ]
-                }
+                        "theLongRoadToAnywhere",
+                    ],
+                },
             },
             lover: {
-                skills: [ "culture", "empathy", "persuasion" ],
-                fateRoles: [ "balm", "paramour", "unrequitedParamour", "rival" ],
+                skills: [ "culture", "empathy", "persuasion", ],
+                fateRoles: [ "balm", "paramour", "unrequitedParamour", "rival", ],
                 knacks: {
                     heroic: [
                         "fluidAppeal",
@@ -2102,19 +2102,19 @@ const scionSystemData = {
                         "notAFighter",
                         "onYourSide",
                         "perfectPartner",
-                        "soothingPresence"
+                        "soothingPresence",
                     ] ,
                     immortal: [
                         "centerOfAttention",
                         "forYouIWill",
                         "heartsAflame",
-                        "loversOath"
-                    ]
-                }
+                        "loversOath",
+                    ],
+                },
             },
             sage: {
-                skills: [ "academics", "occult", "subterfuge" ],
-                fateRoles: [ "apprentice", "jinx", "traitor" ],
+                skills: [ "academics", "occult", "subterfuge", ],
+                fateRoles: [ "apprentice", "jinx", "traitor", ],
                 knacks: {
                     heroic: [
                         "blockadeOfReason",
@@ -2123,19 +2123,19 @@ const scionSystemData = {
                         "omniglotTranslation",
                         "palaceOfMemory",
                         "presenceOfMagic",
-                        "speedReading"
+                        "speedReading",
                     ] ,
                     immortal: [
                         "cipher",
                         "eternalGenius",
                         "immortalMastermind",
-                        "overworldKnowledge"
-                    ]
-                }
+                        "overworldKnowledge",
+                    ],
+                },
             },
             trickster: {
-                skills: [ "culture", "persuasion", "subterfuge" ],
-                fateRoles: [ "boonCompanion", "nemesis", "traitor" ],
+                skills: [ "culture", "persuasion", "subterfuge", ],
+                fateRoles: [ "boonCompanion", "nemesis", "traitor", ],
                 knacks: {
                     heroic: [
                         "blatherAndSkite",
@@ -2144,16 +2144,16 @@ const scionSystemData = {
                         "rumorMiller",
                         "smokeAndMirrors",
                         "takesOneToKnowOne",
-                        "wasntMe"
+                        "wasntMe",
                     ] ,
                     immortal: [
-                        "doppelganger", "oneMansTrash", "surprise", "wovenFromLies"
-                    ]
-                }
+                        "doppelganger", "oneMansTrash", "surprise", "wovenFromLies",
+                    ],
+                },
             },
             warrior: {
-                skills: [ "athletics", "closeCombat", "firearms" ],
-                fateRoles: [ "balm", "nemesis", "rival" ],
+                skills: [ "athletics", "closeCombat", "firearms", ],
+                fateRoles: [ "balm", "nemesis", "rival", ],
                 knacks: {
                     heroic: [
                         "closeTheGap",
@@ -2163,21 +2163,21 @@ const scionSystemData = {
                         "tempered",
                         "theBiggestThreat",
                         "trickShot",
-                        "trimarkisia"
+                        "trimarkisia",
                     ] ,
                     immortal: [
                         "armyOfOne",
                         "hurlToTheMoon",
                         "perfectDefense",
-                        "theyreEverywhere"
-                    ]
-                }
-            }
+                        "theyreEverywhere",
+                    ],
+                },
+            },
         },
         listTitan: {            
             adversary: {
-                skills: [ "culture", "persuasion", "subterfuge" ],
-                fateRoles: [ "jinx", "nemesis", "traitor" ],
+                skills: [ "culture", "persuasion", "subterfuge", ],
+                fateRoles: [ "jinx", "nemesis", "traitor", ],
                 knacks: {
                     heroic: [
                         "allThoseLovelyEnemies",
@@ -2186,7 +2186,7 @@ const scionSystemData = {
                         "letsContainMultitudes",
                         "nothingIsInevitable",
                         "suddenButInevitable",
-                        "trueFriendship"
+                        "trueFriendship",
                     ] ,
                     immortal: [
                         "atYourSideInYourWay",
@@ -2196,795 +2196,795 @@ const scionSystemData = {
                         "fromHellsHeart",
                         "nothingIsForbidden",
                         "oppositionWithoutLimit",
-                        "satisfactionOrTheKnife"
-                    ]
-                }
+                        "satisfactionOrTheKnife",
+                    ],
+                },
             },          
             destroyer: {
-                skills: [ "athletics", "closeCombat", "science" ],
-                fateRoles: [ "canary", "nemesis", "rival" ],
+                skills: [ "athletics", "closeCombat", "science", ],
+                fateRoles: [ "canary", "nemesis", "rival", ],
                 knacks: {
                     heroic: [] ,
-                    immortal: []
-                }
+                    immortal: [],
+                },
             },          
             monster: {
-                skills: [ "athletics", "medicine", "survival" ],
-                fateRoles: [ "nemesis", "rival", "traitor" ],
+                skills: [ "athletics", "medicine", "survival", ],
+                fateRoles: [ "nemesis", "rival", "traitor", ],
                 knacks: {
                     heroic: [] ,
-                    immortal: []
-                }
+                    immortal: [],
+                },
             },          
             primeval: {
-                skills: [ "academics", "occult", "survival" ],
-                fateRoles: [ "balm", "nemesis", "worshipper" ],
+                skills: [ "academics", "occult", "survival", ],
+                fateRoles: [ "balm", "nemesis", "worshipper", ],
                 knacks: {
                     heroic: [] ,
-                    immortal: []
-                }
+                    immortal: [],
+                },
             },          
             tyrant: {
-                skills: [ "empathy", "leadership", "persuasion" ],
-                fateRoles: [ "apprentice", "rival", "worshipper" ],
+                skills: [ "empathy", "leadership", "persuasion", ],
+                fateRoles: [ "apprentice", "rival", "worshipper", ],
                 knacks: {
                     heroic: [] ,
-                    immortal: []
-                }
-            }
-        }
+                    immortal: [],
+                },
+            },
+        },
     },
     KNACKS: {
         actorDefault: {
             "name": "",
-            "assignment": false
+            "assignment": false,
         },
         list: {
             aFortress: {
                 calling: "guardian",
                 tier: "heroic",
                 effect: {},
-                stunts: ["getOutOfHere", "secondWind", "myTurn"]
+                stunts: ["getOutOfHere", "secondWind", "myTurn",],
             },
             aPurpose: {
                 calling: "guardian",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             aSentinel: {
                 calling: "guardian",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             aTalisman: {
                 calling: "guardian",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             aVigil: {
                 calling: "guardian",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             aWarning: {
                 calling: "guardian",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             afternoonOfFortnights: {
                 calling: "creator",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             alwaysThere: {
                 calling: "hunter",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             apexPredator: {
                 calling: "hunter",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             armyOfOne: {
                 calling: "warrior",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             auraOfGreatness: {
                 calling: "any",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             beyondMemory: {
                 calling: "liminal",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             blatherAndSkite: {
                 calling: "trickster",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             blockadeOfReason: {
                 calling: "sage",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             bornToBeKings: {
                 calling: "any",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             boundByOath: {
                 calling: "judge",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             breathOfLife: {
                 calling: "healer",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             byYourSide: {
                 calling: "guardian",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             captainOfIndustry: {
                 calling: "leader",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             centerOfAttention: {
                 calling: "lover",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             cipher: {
                 calling: "sage",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             cloakOfDread: {
                 calling: "leader",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             closeTheGap: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: ["charge", "inescapable", "surefooted"]
+                stunts: ["charge", "inescapable", "surefooted",],
             },
             combatMedic: {
                 calling: "healer",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             completePrivacy: {
                 calling: "liminal",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             damageConversion: {
                 calling: "healer",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             deathByTeacup: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             doctorsKit: {
                 calling: "healer",
                 tier: "heroic",
                 effect: {},
-                stunts: ["icePack", "swiftBandaging", "emergencyOperation"]
+                stunts: ["icePack", "swiftBandaging", "emergencyOperation",],
             },
             doppelganger: {
                 calling: "trickster",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             enforcingTheBoundary: {
                 calling: "liminal",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             enhancedImpact: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             eternalGenius: {
                 calling: "sage",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             eternalGuardian: {
                 calling: "guardian",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             experiencedTraveler: {
                 calling: "liminal",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             eyeForAnEye: {
                 calling: "judge",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             eyesInTheBlinds: {
                 calling: "hunter",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             flatlander: {
                 calling: "liminal",
                 tier: "heroic",
                 effect: {},
-                stunts: ["glimpseTheOtherSide", "stutterTime", "bendSpace"]
+                stunts: ["glimpseTheOtherSide", "stutterTime", "bendSpace",],
             },
             flawlesslyPlatonicIdeal: {
                 calling: "creator",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             fluidAppeal: {
                 calling: "lover",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             forYouIWill: {
                 calling: "lover",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             goodListener: {
                 calling: "leader",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             grandEntrance: {
                 calling: "leader",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             heartsAflame: {
                 calling: "lover",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             hurlToTheMoon: {
                 calling: "warrior",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             iAmAFire: {
                 calling: "lover",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             iAmTheLaw: {
                 calling: "judge",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             immortalMastermind: {
                 calling: "sage",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             immunizationBooster: {
                 calling: "healer",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             inSheepsClothing: {
                 calling: "trickster",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             indisputableAnalysis: {
                 calling: "judge",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             innateToolkit: {
                 calling: "creator",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             inspirationalAura: {
                 calling: "leader",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             instantDiagnosis: {
                 calling: "healer",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             internalCompass: {
                 calling: "hunter",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             internalRefinery: {
                 calling: "healer",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             invulnerableMaster: {
                 calling: "leader",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             keeneyedPredator: {
                 calling: "hunter",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             lieDetector: {
                 calling: "judge",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             liftedFromDust: {
                 calling: "creator",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             lightFingered: {
                 calling: "trickster",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             lighthouseOfSociety: {
                 calling: "leader",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             livingPillar: {
                 calling: "guardian",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             loversIntuition: {
                 calling: "lover",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             loversOath: {
                 calling: "lover",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             masterOfTheWorld: {
                 calling: "sage",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             masterOfWeapons: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             masterfulEfficiency: {
                 calling: "leader",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             mostDangerousPrey: {
                 calling: "hunter",
                 tier: "heroic",
                 effect: {},
-                stunts: ["stalk", "snare"]
+                stunts: ["stalk", "snare",],
             },
             neitherTheMinuteNorTheHour: {
                 calling: "liminal",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             notAFighter: {
                 calling: "lover",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             notTodayFriends: {
                 calling: "leader",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             objection: {
                 calling: "judge",
                 tier: "heroic",
                 effect: {},
-                stunts: ["terrify"]
+                stunts: ["terrify",],
             },
             officeHours: {
                 calling: "sage",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             omniglotTranslation: {
                 calling: "sage",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             onTheCase: {
                 calling: "judge",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             onYourSide: {
                 calling: "lover",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             oneMansTrash: {
                 calling: "trickster",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             overworldKnowledge: {
                 calling: "sage",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             palaceOfMemory: {
                 calling: "sage",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             panacea: {
                 calling: "healer",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             perfectCamouflage: {
                 calling: "hunter",
                 tier: "immortal",
                 effect: {},
-                stunts: ["vanish"]
+                stunts: ["vanish",],
             },
             perfectDefense: {
                 calling: "warrior",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             perfectPartner: {
                 calling: "lover",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             perfectPoise: {
                 calling: "leader",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             perfectRendition: {
                 calling: "creator",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             pierceTheVeil: {
                 calling: "liminal",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             presenceOfMagic: {
                 calling: "sage",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             quickStudy: {
                 calling: "judge",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             raiseThePillarsOfTheEarth: {
                 calling: "creator",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             reconstruction: {
                 calling: "healer",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             relentless: {
                 calling: "hunter",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             reverseEngineer: {
                 calling: "creator",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             rumorMiller: {
                 calling: "trickster",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             scentTheDivine: {
                 calling: "any",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             sendThePack: {
                 calling: "hunter",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             silenceInTheWoods: {
                 calling: "hunter",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             smokeAndMirrors: {
                 calling: "trickster",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             somebodysWatchingMe: {
                 calling: "any",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             soothingPresence: {
                 calling: "lover",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             speedReading: {
                 calling: "sage",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             stepSideways: {
                 calling: "liminal",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             surgeonWithTheHandsOfGod: {
                 calling: "healer",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             surprise: {
                 calling: "trickster",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             takesOneToKnowOne: {
                 calling: "trickster",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             tempered: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             terrorOfTheGuilty: {
                 calling: "judge",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             theBareMinimum: {
                 calling: "healer",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             theBiggestThreat: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             theLongRoadToAnywhere: {
                 calling: "liminal",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             thePainOfDishonesty: {
                 calling: "judge",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             theTruthArises: {
                 calling: "judge",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             theUnlimitedQuartermaster: {
                 calling: "creator",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             theyCannotBeTouched: {
                 calling: "guardian",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             theyreEverywhere: {
                 calling: "warrior",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             touchOfTheMuses: {
                 calling: "creator",
                 tier: "immortal",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             trickShot: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             trimarkisia: {
                 calling: "warrior",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             unerringDelivery: {
                 calling: "liminal",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             unobtrusiveVisitor: {
                 calling: "liminal",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             wasntMe: {
                 calling: "trickster",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             weGoAllNight: {
                 calling: "creator",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             wirelessInterface: {
                 calling: "creator",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             worryingHound: {
                 calling: "hunter",
                 tier: "heroic",
                 effect: {},
-                stunts: []
+                stunts: [],
             },
             wovenFromLies: {
                 calling: "trickster",
                 tier: "immortal",
                 effect: {},
-                stunts: []
-            }
-        }
+                stunts: [],
+            },
+        },
     },
     STUNTS: {
         bendSpace: {
@@ -2992,113 +2992,113 @@ const scionSystemData = {
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         charge: {
             source: "KNACKS.closeTheGap",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         emergencyOperation: {
             source: "KNACKS.doctorsKit",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         getOutOfHere: {
             source: "KNACKS.aFortress",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         glimpseTheOtherSide: {
             source: "KNACKS.flatlander",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         icePack: {
             source: "KNACKS.doctorsKit",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         inescapable: {
             source: "KNACKS.closeTheGap",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         myTurn: {
             source: "KNACKS.aFortress",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         secondWind: {
             source: "KNACKS.aFortress",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         snare: {
             source: "KNACKS.mostDangerousPrey",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         stalk: {
             source: "KNACKS.mostDangerousPrey",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         stutterTime: {
             source: "KNACKS.flatlander",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         sureFooted: {
             source: "KNACKS.closeTheGap",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         swiftBandaging: {
             source: "KNACKS.doctorsKit",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         terrify: {
             source: "KNACKS.objection",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
+            excludeTags: [],
         },
         vanish: {
             source: "KNACKS.perfectCamouflage",
             cost: {},
             effect: {},
             applyTags: [],
-            excludeTags: []
-        }
+            excludeTags: [],
+        },
     },
     FATEROLES: {
         apprentice: "scion.faterole.apprentice",
@@ -3112,7 +3112,7 @@ const scionSystemData = {
         rival: "scion.faterole.rival",
         traitor: "scion.faterole.traitor",
         unrequitedParamour: "scion.faterole.unrequitedParamour",
-        worshipper: "scion.faterole.worshipper"
+        worshipper: "scion.faterole.worshipper",
     },
     PURVIEWS: {
         pantheon: {
@@ -3129,7 +3129,7 @@ const scionSystemData = {
             cheval: "scion.purview.cheval",
             asha: "scion.purview.asha",
             dvoeverie: "scion.purview.dvoeverie",
-            qut: "scion.purview.qut"
+            qut: "scion.purview.qut",
         },
         general: {
             artistry: "scion.purview.artistry",
@@ -3159,101 +3159,104 @@ const scionSystemData = {
             sun: "scion.purview.sun",
             war: "scion.purview.war",
             water: "scion.purview.water",
-            wild: "scion.purview.wild"
-        }
-    }
+            wild: "scion.purview.wild",
+        },
+    },
 };
 const handlebarTemplates = {
     chargen: {
         template: () => "systems/scion/templates/actor/chargen/actor-chargen.hbs",
-        "step-one": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-one.hbs"},
-        "step-two": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-two.hbs"},
-        "step-three": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-three.hbs"},
-        "step-four": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-four.hbs"},
-        "step-five": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-five.hbs"},
-        "step-six": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-six.hbs"},
-        "step-seven": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-seven.hbs"}
+        "step-one": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-one.hbs",},
+        "step-two": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-two.hbs",},
+        "step-three": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-three.hbs",},
+        "step-four": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-four.hbs",},
+        "step-five": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-five.hbs",},
+        "step-six": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-six.hbs",},
+        "step-seven": {template: () => "systems/scion/templates/actor/chargen/actor-chargen-step-seven.hbs",},
     },
     partials: {
-        path: {template: () => "systems/scion/templates/actor/partials/path-block.hbs"},
-        calling: {template: () => "systems/scion/templates/actor/partials/calling-block.hbs"},
-        pathCondition: {template: () => "systems/scion/templates/item/partials/path-condition-block.hbs"}
+        path: {template: () => "systems/scion/templates/actor/partials/path-block.hbs",},
+        calling: {template: () => "systems/scion/templates/actor/partials/calling-block.hbs",},
+        pathCondition: {template: () => "systems/scion/templates/item/partials/path-condition-block.hbs",},
     },
     popouts: {
-        skillList: {template: () => "systems/scion/templates/item/popouts/skilllist-popout.hbs"},
-        callingsList: {template: () => "systems/scion/templates/actor/popouts/callingslist-popout.hbs"},
-        knacksList: {template: () => "systems/scion/templates/actor/popouts/knackslist-popout.hbs"}
+        skillList: {template: () => "systems/scion/templates/popouts/skilllist-popout.hbs",},
+        callingsList: {template: () => "systems/scion/templates/popouts/callingslist-popout.hbs",},
+        knacksList: {template: () => "systems/scion/templates/popouts/knackslist-popout.hbs",},
+        creatureTagsList: {template: () => "systems/scion/templates/popouts/creaturetagslist-popout.hbs",},
+        qualitiesList: {template: () => "systems/scion/templates/popouts/qualitieslist-popout.hbs",},
+        flairsList: {template: () => "systems/scion/templates/popouts/flairslist-popout.hbs",},
     },
-    tooltips: {template: () => "systems/scion/templates/tooltips/tooltip-contents.hbs"}
+    tooltips: {template: () => "systems/scion/templates/tooltips/tooltip-contents.hbs",},
 };
 const itemCategories = {
-    paths: ["path"],
-    knacks: ["knack"],
-    purviews: ["purview"],
-    boons: ["boon"],
-    birthrights: ["relic", "follower", "creature", "guide", "cult", "covenant"],
-    conditions: ["condition"]
+    paths: ["path",],
+    knacks: ["knack",],
+    purviews: ["purview",],
+    boons: ["boon",],
+    birthrights: ["relic", "follower", "creature", "guide", "cult", "covenant",],
+    conditions: ["condition",],
 };
 const popoutData = {
-    path: {leftSpacing: -500, rightSpacing: -500}
+    path: {leftSpacing: -500, rightSpacing: -500,},
 };
 const testChars = {
     get actorData() {
-        const pantheon = _.sample(Object.keys(scionSystemData.PANTHEONS));
+        const pantheon = _.sample(Object.keys(SCION.PANTHEONS,),);
         return {
-            genesis: _.sample(["born", "created", "chosen", "incarnation"]),
+            genesis: _.sample(["born", "created", "chosen", "incarnation",],),
             concept: "I am a test character!",
             pantheon,
-            patron: _.sample(scionSystemData.PANTHEONS[pantheon].members),
+            patron: _.sample(SCION.PANTHEONS[pantheon].members,),
             divineTitle: "Test Char",
             attributes: {
-                priorities: _.shuffle(["social", "mental", "physical"]),
-                favoredApproach: _.sample(["force", "finesse", "resilience"]),
-                assignableGeneralDots: {xp: Rand(1, 10), other: 1},
-                assignableArenaDots: {"primary": 6, "secondary": 4, "tertiary": 2},
+                priorities: _.shuffle(["social", "mental", "physical",],),
+                favoredApproach: _.sample(["force", "finesse", "resilience",],),
+                assignableGeneralDots: {xp: Rand(1, 10,), other: 1,},
+                assignableArenaDots: {"primary": 6, "secondary": 4, "tertiary": 2,},
                 list: {
-                    presence: {assigned: 0, modifiers: []},
-                    manipulation: {assigned: 0, modifiers: []},
-                    composure: {assigned: 0, modifiers: []},
-                    intellect: {assigned: 0, modifiers: []},
-                    cunning: {assigned: 0, modifiers: []},
-                    resolve: {assigned: 0, modifiers: []},
-                    might: {assigned: 0, modifiers: []},
-                    dexterity: {assigned: 0, modifiers: []},
-                    stamina: {assigned: 0, modifiers: []}
-                }
+                    presence: {assigned: 0, modifiers: [],},
+                    manipulation: {assigned: 0, modifiers: [],},
+                    composure: {assigned: 0, modifiers: [],},
+                    intellect: {assigned: 0, modifiers: [],},
+                    cunning: {assigned: 0, modifiers: [],},
+                    resolve: {assigned: 0, modifiers: [],},
+                    might: {assigned: 0, modifiers: [],},
+                    dexterity: {assigned: 0, modifiers: [],},
+                    stamina: {assigned: 0, modifiers: [],},
+                },
             },
             skills: {
-                assignableDots: {"xp": Rand(5, 20), "other": 5},
-                assignableSpecs: Rand(0, 3),
+                assignableDots: {"xp": Rand(5, 20,), "other": 5,},
+                assignableSpecs: Rand(0, 3,),
                 list: {
-                    academics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    athletics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    closeCombat: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    culture: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    empathy: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    firearms: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    integrity: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    leadership: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    medicine: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    occult: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    persuasion: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    pilot: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    science: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    subterfuge: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    survival: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    technology: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}}
-                }
+                    academics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    athletics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    closeCombat: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    culture: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    empathy: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    firearms: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    integrity: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    leadership: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    medicine: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    occult: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    persuasion: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    pilot: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    science: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    subterfuge: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    survival: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                    technology: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {},},},
+                },
             },
-            pathPriorities: _.shuffle(["role", "origin", "pantheon"]),
+            pathPriorities: _.shuffle(["role", "origin", "pantheon",],),
             callings: {
-                assignableGeneralDots: {xp: 0, other: 2},
-                list: {}
+                assignableGeneralDots: {xp: 0, other: 2,},
+                list: {},
             },
             knacks: {
-                assignableExtraKnacks: {xp: 0, other: 0},
-                list: []
-            }
+                assignableExtraKnacks: {xp: 0, other: 0,},
+                list: [],
+            },
         };
     },
     get itemCreateData() {
@@ -3266,25 +3269,25 @@ const testChars = {
                     title: "Test Origin Path Title",
                     skills: [],
                     connections: [],
-                    connectionDescription: LoremIpsum(Rand(10, 200)),
+                    connectionDescription: LoremIpsum(Rand(10, 200,),),
                     conditions: {
                         pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
+                        pathRevocation: null,
+                    },
+                },
+            },/* 
             {
                 name: "Suspension",
                 type: "condition",
                 data: {
                     title: "Origin Suspended",
                     type: "pathSuspension",
-                    description: LoremIpsum(Rand(10, 200)),
-                    resolution: LoremIpsum(Rand(10, 200)),
+                    description: LoremIpsum(Rand(10, 200,),),
+                    resolution: LoremIpsum(Rand(10, 200,),),
                     effects: [],
                     isPersistent: false,
-                    linkedItem: "origin"
-                }
+                    linkedItem: "origin",
+                },
             },
             {
                 name: "Revocation",
@@ -3292,13 +3295,13 @@ const testChars = {
                 data: {
                     title: "Origin Revoked!",
                     type: "pathRevocation",
-                    description: LoremIpsum(Rand(10, 200)),
-                    resolution: LoremIpsum(Rand(10, 200)),
+                    description: LoremIpsum(Rand(10, 200,),),
+                    resolution: LoremIpsum(Rand(10, 200,),),
                     effects: [],
                     isPersistent: true,
-                    linkedItem: "origin"
-                }
-            },
+                    linkedItem: "origin",
+                },
+            }, */
             {
                 name: "Role",
                 type: "path",
@@ -3307,25 +3310,25 @@ const testChars = {
                     title: "Test Role Path Title",
                     skills: [],
                     connections: [],
-                    connectionDescription: LoremIpsum(Rand(10, 200)),
+                    connectionDescription: LoremIpsum(Rand(10, 200,),),
                     conditions: {
                         pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
+                        pathRevocation: null,
+                    },
+                },
+            },/* 
             {
                 name: "Suspension",
                 type: "condition",
                 data: {
                     title: "Role Suspended",
                     type: "pathSuspension",
-                    description: LoremIpsum(Rand(10, 200)),
-                    resolution: LoremIpsum(Rand(10, 200)),
+                    description: LoremIpsum(Rand(10, 200,),),
+                    resolution: LoremIpsum(Rand(10, 200,),),
                     effects: [],
                     isPersistent: false,
-                    linkedItem: "role"
-                }
+                    linkedItem: "role",
+                },
             },
             {
                 name: "Revocation",
@@ -3333,13 +3336,13 @@ const testChars = {
                 data: {
                     title: "Role Revoked!",
                     type: "pathRevocation",
-                    description: LoremIpsum(Rand(10, 200)),
-                    resolution: LoremIpsum(Rand(10, 200)),
+                    description: LoremIpsum(Rand(10, 200,),),
+                    resolution: LoremIpsum(Rand(10, 200,),),
                     effects: [],
                     isPersistent: true,
-                    linkedItem: "role"
-                }
-            },
+                    linkedItem: "role",
+                },
+            }, */
             {
                 name: "Pantheon",
                 type: "path",
@@ -3348,25 +3351,25 @@ const testChars = {
                     title: "Test Pantheon Path Title",
                     skills: [],
                     connections: [],
-                    connectionDescription: LoremIpsum(Rand(10, 200)),
+                    connectionDescription: LoremIpsum(Rand(10, 200,),),
                     conditions: {
                         pathSuspension: null,
-                        pathRevocation: null
-                    }
-                }
-            },
+                        pathRevocation: null,
+                    },
+                },
+            },/* 
             {
                 name: "Suspension",
                 type: "condition",
                 data: {
                     title: "Pantheon Suspended",
                     type: "pathSuspension",
-                    description: LoremIpsum(Rand(10, 200)),
-                    resolution: LoremIpsum(Rand(10, 200)),
+                    description: LoremIpsum(Rand(10, 200,),),
+                    resolution: LoremIpsum(Rand(10, 200,),),
                     effects: [],
                     isPersistent: false,
-                    linkedItem: "pantheon"
-                }
+                    linkedItem: "pantheon",
+                },
             },
             {
                 name: "Revocation",
@@ -3374,13 +3377,13 @@ const testChars = {
                 data: {
                     title: "Pantheon Revoked!",
                     type: "pathRevocation",
-                    description: LoremIpsum(Rand(10, 200)),
-                    resolution: LoremIpsum(Rand(10, 200)),
+                    description: LoremIpsum(Rand(10, 200,),),
+                    resolution: LoremIpsum(Rand(10, 200,),),
                     effects: [],
                     isPersistent: true,
-                    linkedItem: "pantheon"
-                }
-            }
+                    linkedItem: "pantheon",
+                },
+            }, */
         ];
     },
     sigChars: {
@@ -3390,98 +3393,179 @@ const testChars = {
                 concept: "Lead Singer and All Around Good Lad",
                 pantheon: "tuathaDeDanann",
                 patron: "aengus",
-                divineTitle: "Bright Eyes"
+                divineTitle: "Bright Eyes",
             },
             itemCreateData: [
                 {
                     data: {
                         title: "Carefree Wanderer with Luck On His Side",
-                        connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots"
-                    }
-                },
-                {
-                    data: {
-                        title: "Interesting Times",
-                        description: "2's on any d10's count as 1's when determining botches.",
-                        resolution: "Rhys suffers the effect of a botch."
-                    }
-                },
-                {
-                    data: {
-                        title: "Knife in the Back"
-                    }
+                        connectionDescription: "Hoboes, Vagrants, Criminals, Transport Networks, Urban Safe Spots",
+                    },
                 },
                 {
                     data: {
                         title: "No Heaven Frontman",
-                        connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth"
-                    }
-                },
-                {
-                    data: {
-                        title: "Tone Deaf",
-                        description: "-2 penalty to all Culture (Music) rolls.",
-                        resolution: "Rhys suffers significant consequences from failing a Culture (Music) roll."
-                    }
-                },
-                {
-                    data: {
-                        title: "Nickelback 2.0"
-                    }
+                        connectionDescription: "Paparazzi, Media, Celebrities, The Promise (Cult), Exclusive Areas, Wealth",
+                    },
                 },
                 {
                     data: {
                         title: "Scion of Aengus, Step-Scion of the Morrigan",
-                        connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle"
-                    }
-                },
-                {
-                    data: {
-                        title: "Murder of Crows",
-                        description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
-                        resolution: "Rhys follows the command, or makes a major sacrifice to the Morrigan."
-                    }
-                },
-                {
-                    data: {
-                        title: "Forced to Choose"
-                    }
+                        connectionDescription: "Adoring Fans, Obsessed Goths, Accompaniment, Age Is No Obstacle",
+                    },
                 }
-            ]
+            ],
         },
         "Horace Farrow": {
             actorData: {
                 genesis: "born",
                 pantheon: "netjer",
                 patron: "horus",
-                divineTitle: "The Tempered Lawgiver"
-            }
+                divineTitle: "The Tempered Lawgiver",
+            },
         },
         "Brigitte De La Croix": {
             actorData: {
                 genesis: "chosen",
                 pantheon: "loa",
                 patron: "baronSamedi",
-                divineTitle: "Who Waits With Those In Darkness"
-            }
+                divineTitle: "Who Waits With Those In Darkness",
+            },
         },
         "Adonis Rhodes": {
             actorData: {
                 genesis: "born",
                 pantheon: "theoi",
                 patron: "aphrodite",
-                divineTitle: "Steward of the Heart"
-            }
+                divineTitle: "Steward of the Heart",
+            },
         },
         "Erik Donner": {
             actorData: {
                 genesis: "born",
                 pantheon: "aesir",
                 patron: "thor",
-                divineTitle: "Guardian of Midgard"
-            }
-        }
+                divineTitle: "Guardian of Midgard",
+            },
+        },
     }
 };
+testChars.createTestChar = async (name,) => {
+    game.actors.entries.find((actor,) => actor.name === name,)?.delete();
+    const defaultActorData = testChars.actorData;
+    const sigCharActorData = testChars.sigChars[name]?.actorData ?? {};
+    const actorData = Merge(defaultActorData, sigCharActorData,);
+    const defaultItemData = testChars.itemCreateData;
+    const sigCharItemData = testChars.sigChars[name]?.itemCreateData ?? [];
+    const itemCreateData = Merge(defaultItemData, sigCharItemData,);
 
-export {scionSystemData, handlebarTemplates, itemCategories, popoutData, testChars};
+    // #region Determine Path Skills & Randomly Assign Available Skill Dots
+    const skills = Object.keys(SCION.SKILLS.list,);
+    const baseSkillVals = KeyMapObj(SCION.SKILLS.list, () => 0,);
+    const pathSkills = {
+        origin: [],
+        role: [],
+        pantheon: SCION.PANTHEONS[actorData.pantheon].assetSkills,
+    };
+    ["origin", "role", "pantheon",].forEach((pathType,) => {
+        const baseVal = Clone(actorData.pathPriorities,).reverse().findIndex((path,) => path === pathType,) + 1;
+        const skillsToAdd = 3 - pathSkills[pathType].length;
+        for (let i = 0; i < skillsToAdd; i++) {
+            const availableSkills = skills.filter((skill,) => Object.values(pathSkills,).flat().filter((pathSkill,) => pathSkill === skill,).length < 2 && !pathSkills[pathType].includes(skill,),);
+            pathSkills[pathType].push(_.sample(availableSkills,),);
+        }
+        for (const skill of pathSkills[pathType]) {baseSkillVals[skill] += baseVal}
+    },);
+    let assignableSkillDots = Rand(0, Object.values(actorData.skills.assignableDots,).reduce((tot, val,) => tot + val, 0,),);
+    while (assignableSkillDots) {
+        const availableSkills = skills.filter((skill,) => (baseSkillVals[skill] + actorData.skills.list[skill].assigned) < 5,);
+        actorData.skills.list[_.sample(availableSkills,)].assigned++;
+        assignableSkillDots--;
+    }
+    // #endregion
+
+    // #region Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
+    const attributes = Object.keys(SCION.ATTRIBUTES.list,);
+    const baseAttrVals = KeyMapObj(SCION.ATTRIBUTES.list, (v, k,) => (SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(k,) ? 3 : 1),);
+    const priorityAttrs = {
+        primary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[0]],
+        secondary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[1]],
+        tertiary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[2]],
+    };
+    ["primary", "secondary", "tertiary",].forEach((priority,) => {
+        let assignableArenaDots = Rand(0, actorData.attributes.assignableArenaDots[priority],);
+        while (assignableArenaDots) {
+            const availableAttrs = priorityAttrs[priority].filter((attr,) => (baseAttrVals[attr] + actorData.attributes.list[attr].assigned) < 5,);
+            actorData.attributes.list[_.sample(availableAttrs,)].assigned++;
+            assignableArenaDots--;
+        }
+    },);
+    let assignableGeneralAttrDots = Rand(0, Object.values(actorData.attributes.assignableGeneralDots,).reduce((tot, val,) => tot + val, 0,),);
+    while (assignableGeneralAttrDots) {
+        const availableAttrs = attributes.filter((attr,) => (baseAttrVals[attr] + actorData.attributes.list[attr].assigned) < 5,);
+        actorData.attributes.list[_.sample(availableAttrs,)].assigned++;
+        assignableGeneralAttrDots--;
+    }
+    // #endregion
+
+    // #region Randomly Select Callings, Assign Dots, Select Keywords
+    let callingSlot = 0;
+    const callings = KeyMapObj(_.uniq([
+        _.sample(SCION.GODS[actorData.patron].callings,),
+        ..._.sample(Object.keys(SCION.CALLINGS.list,), 4,),
+    ],).slice(0, 3,), (k, calling,) => calling, (calling,) => ({
+        name: calling,
+        value: 1,
+        slot: callingSlot++,
+        keywordsChosen: _.sample(Loc(`scion.calling.${calling}.keywords`,).split(", ",), 3,),
+        keywordsUsed: [],
+    }),);
+    let randomCalling = _.sample(Object.keys(callings,),);
+    for (let i = 0; i < 2; i++) {
+        callings[randomCalling].value++;
+        randomCalling = _.sample(Object.keys(callings,),);
+    }
+    const chosenKnacks = [];
+    for (const calling of Object.keys(callings,)) {
+        callings[calling].keywordsChosen.length = callings[calling].value;
+        let callingPointsLeft = callings[calling].value;
+        while (callingPointsLeft) {
+            const availableKnacks = Object.keys(SCION.KNACKS.list,).filter((knackName,) => {
+                const knack = SCION.KNACKS.list[knackName];
+                return !chosenKnacks.some((knackData,) => knackData.name === knackName,)
+                    && ["any", calling,].includes(knack.calling,)
+                    && (callingPointsLeft >= 2 || knack.tier === "heroic");
+            },).map((knackName,) => ({name: knackName, assignment: calling, ...SCION.KNACKS.list[knackName],}),);
+            chosenKnacks.unshift(_.sample(availableKnacks,),);
+            callingPointsLeft -= SCION.KNACKS.list[chosenKnacks[0].name].tier === "immortal" ? 2 : 1;
+        }
+    }
+    callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen,),];
+    actorData.callings.list = callings;
+    actorData.knacks.list = chosenKnacks;
+
+    // #endregion
+
+    // #region Update itemCreationData with selected path skills, and assign to actorData for later item creation
+    actorData.testItemCreateData = itemCreateData.map((itemData,) => {
+        if (itemData.type === "path") {itemData.data.skills = pathSkills[itemData.data.type]}
+        return itemData;
+    },);
+    // #endregion
+
+    const thisActor = await Actor.create({
+        name,
+        type: "major",
+        data: actorData,
+    },);
+    return thisActor;
+};
+testChars.createSigChars = async () => {
+    const updatePromises = [];
+    for (const sigName of Object.keys(testChars.sigChars)) {
+        updatePromises.push(testChars.createTestChar(sigName));
+    }
+    return Promise.all(updatePromises);
+}
+
+export {SCION, handlebarTemplates, itemCategories, popoutData, testChars,};
