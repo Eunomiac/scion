@@ -6,8 +6,7 @@
                 "concept": "",
                 "description": "",
                 "imageURL": "",
-                "testItemCreateData": [],
-                "isFullyInitialized": false
+                "testItemCreateData": []
             },
             "PC": {
                 "playerName": ""
@@ -95,6 +94,7 @@
     "Item": {
         "types": [
             "path",
+            "calling",
             "connectionGroup",
             "connectionContact",
             "connectionAccess",
@@ -115,44 +115,57 @@
                 "title": "",
                 "type": "",
                 "description": "",
-                "details": "",
-                "isFullyInitialized": false
+                "details": ""
+            },
+            "PARENTITEM": {
+                "items": {}
+            },
+            "SUBITEM": {
+                "parentItemID": null,
+                "isLinked": false
             },
             "CONNECTION": {
                 "description": "",
                 "details": "",
                 "pastUsage": ""
             },
-            "DOTLINE": {
-                "dotline": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 5
-                }
+            "TRAIT": {
+                "min": 0,
+                "value": 0,
+                "max": 5
             }
         },
         "path": {
-            "templates": ["BASE"],
+            "templates": ["BASE", "PARENTITEM"],
             "skills": [],
             "connectionDescription": "",
             "connections": [],
-            "conditions": {
-                "pathSuspension": null,
-                "pathRevocation": null
-            },
             "timesInvoked": 0,
             "effect": "",
             "obligation": "",
             "enabledKnacks": {
                 "heroic": [],
                 "immortal": []
+            },
+            "items": {
+                "conditions": {
+                    "pathSuspension": null,
+                    "pathRevocation": null
+                },
+                "knacks": []
             }
         },
+        "calling": {
+            "templates": ["BASE", "TRAIT"],
+            "min": 1,
+            "keywordsChosen": [],
+            "keywordsUsed": []
+        },
         "connectionGroup": {
-            "templates": ["BASE", "CONNECTION"]
+            "templates": ["BASE", "SUBITEM", "CONNECTION"]
         },
         "connectionContact": {
-            "templates": ["BASE", "CONNECTION", "DOTLINE"],
+            "templates": ["BASE", "SUBITEM", "CONNECTION", "TRAIT"],
             "relationship": "",
             "actorID": "",
             "points": {
@@ -164,20 +177,19 @@
                 "current": [],
                 "previous": []
             },
-            "dotline.min": 1
+            "min": 1
         },
         "connectionAccess": {
-            "templates": ["BASE", "CONNECTION"]
+            "templates": ["BASE", "SUBITEM", "CONNECTION"]
         },
         "condition": {
-            "templates": ["BASE"],
+            "templates": ["BASE", "SUBITEM"],
             "effects": [],
             "isPersistent": false,
-            "resolution": "",
-            "linkedItem": false
+            "resolution": ""
         },
         "fatebinding": {
-            "templates": ["BASE", "DOTLINE"]
+            "templates": ["BASE", "TRAIT"]
         },
         "knack": {
             "templates": ["BASE"]
@@ -189,16 +201,16 @@
             "templates": ["BASE"]
         },
         "covenant": {
-            "templates": ["BASE", "DOTLINE"]
+            "templates": ["BASE", "TRAIT"]
         },
         "cult": {
-            "templates": ["BASE", "DOTLINE"]
+            "templates": ["BASE", "TRAIT"]
         },
         "follower": {
-            "templates": ["BASE", "DOTLINE"]
+            "templates": ["BASE", "TRAIT"]
         },
         "creature": {
-            "templates": ["BASE", "DOTLINE"],
+            "templates": ["BASE", "TRAIT"],
             "isIntelligent": false,
             "primaryActions": [],
             "tricks": [],
@@ -206,10 +218,10 @@
             "flairs": []
         },
         "guide": {
-            "templates": ["BASE", "DOTLINE"]
+            "templates": ["BASE", "TRAIT"]
         },
         "relic": {
-            "templates": ["BASE", "DOTLINE"]
+            "templates": ["BASE", "TRAIT"]
         }
     }
 }

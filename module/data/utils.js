@@ -48,32 +48,59 @@ vehicula, diam ut sagittis semper, purus massa mattis dolor, in posuere.`;
 // #endregion
 
 // #region CONSOLE LOGGING
+// const groupStyles = {
+//     data: "color: black; background-color: white; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0px 5px;",
+//     info: "color: black; background-color: grey; font-family: Voltaire; font-size: 14px; font-weight: bold; padding: 0px 5px;",
+//     log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 12px; font-weight: bold; padding: 2px;",
+//     debug: "color: black; background-color: grey; font-family: 'Fira Code'; font-size: 12px; font-weight: bold; padding: 2px;",
+//     error: "color: #FAA; background-color: #A00; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 5px;",
+//     trace:
+//         "color: gold; width: 400px; min-width: 400px; background-color: #550; font-family: Oswald; font-size: 14px; : 1; font-weight: bold; padding: 2px 400px 2px 10px;",
+//     l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 5px;",
+//     l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; font-weight: bold; padding: 0 5px;",
+//     l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 14px; font-weight: bold; padding: 0 2px;",
+//     l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 12px; font-weight: bold; padding: 0 2px;",
+// };
+// const logStyles = {
+//     data: "color: black; background-color: white; font-family: Oswald; font-size: 14px; padding: 0px 5px;",
+//     info: "color: black; background-color: grey; font-family: Voltaire; font-size: 12px; padding: 0px 5px;",
+//     log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 10px; padding: 2px;",
+//     debug: "color: black; background-color: grey; font-family: 'Fira Code'; font-size: 10px; padding: 2px;",
+//     error: "color: #FAA; background-color: #A00; font-family: 'Fira Code'; font-size: 14px; padding: 2px;",
+//     traceFoundry: "color: white; background-color: transparent; font-family: 'Fira Code'; font-size: 10px;",
+//     traceLocal: "color: black; background-color: #FFF; font-family: 'Fira Code'; font-weight: bold; font-size: 12px; padding: 2px 3px 0px 3px;",
+//     traceString: "color: #999; background-color: black; font-family: 'Fira Code'; font-size: 10px; padding: 0 3px;",
+//     l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; padding: 0 5px;",
+//     l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; padding: 0 5px;",
+//     l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 14px; padding: 0 2px;",
+//     l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 12px; padding: 0 2px;",
+// };
 const groupStyles = {
-    data: "color: black; background-color: white; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0px 5px;",
-    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 14px; font-weight: bold; padding: 0px 5px;",
+    data: "color: black; background-color: white; font-family: 'Carrois Gothic SC'; font-size: 16px; font-weight: bold; padding: 0px 5px;",
+    info: "color: black; background-color: grey; font-family: 'Century Gothic'; font-size: 14px; font-weight: bold; padding: 0px 5px;",
     log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 12px; font-weight: bold; padding: 2px;",
     debug: "color: black; background-color: grey; font-family: 'Fira Code'; font-size: 12px; font-weight: bold; padding: 2px;",
-    error: "color: #FAA; background-color: #A00; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 5px;",
+    error: "color: #FAA; background-color: #A00; font-family: 'Carrois Gothic SC'; font-size: 16px; font-weight: bold; padding: 0 5px;",
     trace:
-        "color: gold; width: 400px; min-width: 400px; background-color: #550; font-family: Oswald; font-size: 14px; : 1; font-weight: bold; padding: 2px 400px 2px 10px;",
-    l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 5px;",
-    l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; font-weight: bold; padding: 0 5px;",
-    l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 12px; font-weight: bold; padding: 0 2px;",
-    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; font-weight: bold; padding: 0 2px;",
+        "color: gold; width: 400px; min-width: 400px; background-color: #550; font-family: 'Carrois Gothic SC'; font-size: 14px; : 1; font-weight: bold; padding: 2px 400px 2px 10px;",
+    l1: "color: cyan; background-color: #003; font-family: 'Century Gothic'; font-size: 16px; font-weight: bold; padding: 0 5px;",
+    l2: "color: khaki; background-color: #663; font-family: 'Century Gothic'; font-size: 14px; font-weight: bold; padding: 0 5px;",
+    l3: "color: lime; background-color: #030; font-family: 'Carrois Gothic SC'; font-size: 12px; font-weight: bold; padding: 0 2px;",
+    l4: "color: magenta; background-color: #303; font-family: 'Carrois Gothic SC'; font-size: 12px; font-weight: bold; padding: 0 2px;",
 };
 const logStyles = {
-    data: "color: black; background-color: white; font-family: Oswald; font-size: 14px; padding: 0px 5px;",
-    info: "color: black; background-color: grey; font-family: Voltaire; font-size: 12px; padding: 0px 5px;",
+    data: "color: black; background-color: white; font-family: 'Carrois Gothic SC'; font-size: 16px; font-weight: bold; padding: 0px 5px;",
+    info: "color: black; background-color: grey; font-family: 'Century Gothic'; font-size: 12px; padding: 0px 5px;",
     log: "color: white; background-color: black; font-family: 'Fira Code'; font-size: 10px; padding: 2px;",
     debug: "color: black; background-color: grey; font-family: 'Fira Code'; font-size: 10px; padding: 2px;",
     error: "color: #FAA; background-color: #A00; font-family: 'Fira Code'; font-size: 14px; padding: 2px;",
     traceFoundry: "color: white; background-color: transparent; font-family: 'Fira Code'; font-size: 10px;",
     traceLocal: "color: black; background-color: #FFF; font-family: 'Fira Code'; font-weight: bold; font-size: 12px; padding: 2px 3px 0px 3px;",
     traceString: "color: #999; background-color: black; font-family: 'Fira Code'; font-size: 10px; padding: 0 3px;",
-    l1: "color: cyan; background-color: #003; font-family: Oswald; font-size: 16px; padding: 0 5px;",
-    l2: "color: lime; background-color: #030; font-family: Oswald; font-size: 14px; padding: 0 5px;",
-    l3: "color: khaki; background-color: #330; font-family: Voltaire; font-size: 12px; padding: 0 2px;",
-    l4: "color: magenta; background-color: #303; font-family: Oswald; font-size: 16px; padding: 0 2px;",
+    l1: "color: cyan; background-color: #003; font-family: 'Century Gothic'; font-size: 16px; font-weight: bold; padding: 0 5px;",
+    l2: "color: khaki; background-color: #663; font-family: 'Century Gothic'; font-size: 14px; font-weight: bold; padding: 0 5px;",
+    l3: "color: lime; background-color: #030; font-family: 'Carrois Gothic SC'; font-size: 12px; font-weight: bold; padding: 0 2px;",
+    l4: "color: magenta; background-color: #303; font-family: 'Carrois Gothic SC'; font-size: 12px; font-weight: bold; padding: 0 2px;",
 };
 const stackTraceBlacklist = [/jquery\.min\.js/u,];
 /*
@@ -215,6 +242,10 @@ export const ReleaseLogs = () => {
 export const DB = (data, tag, {isLoud = false,} = {},) => LOG(data, tag ? `[DB: ${tag}]` : "[DB]", null, {groupStyle: "debug", style: "debug", isLoud,},);
 export const THROW = (data, tag, {isLoud = true,} = {},) =>
     LOG(data, tag ? `[${tag} ERROR]` : "[ERROR]", null, {groupStyle: "error", style: "error", isLoud,},) && false;
+// #endregion
+
+// #region FLOW OF CONTROL FUNCTIONS // Sleep
+export const Sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // #endregion
 
 // #region LOGIC FUNCTIONS // null, String, Number, Boolean, Array, Set, HTMLElement, Object

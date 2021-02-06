@@ -33,7 +33,7 @@ export default class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichE
             U.IsDebug() && {
                 "this PathItemSheet": this,
                 "... .getData() [Sheet Context]": data,
-                "... .eData": data.data,
+                "... .$data": data.data,
                 "... .actor": this.actor,
                 "... .conditions": data.conditions,
             },
@@ -46,11 +46,12 @@ export default class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichE
     }
 
     get suspensionCondition() {
-        return this.item.getActorItems("condition").find((item) => item.subtype === "pathSuspension" && item.eData.linkedItem === this.item.id);
+        this._suspensionCondition = this._suspensionCondition ?? game.item.get(this.$data.conditions.pathSuspension)
+        return this.item.getActorItems("condition").find((item) => item.$subtype === "pathSuspension" && item.$data.linkedItem === this.item.id);
     }
 
     get revocationCondition() {
-        return this.item.getActorItems("condition").find((item) => item.subtype === "pathRevocation" && item.eData.linkedItem === this.item.id);
+        return this.item.getActorItems("condition").find((item) => item.$subtype === "pathRevocation" && item.$data.linkedItem === this.item.id);
     }
 
     activateListeners(html) {

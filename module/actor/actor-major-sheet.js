@@ -155,7 +155,7 @@ export default class MajorActorSheet extends ScionActorSheet {
         data.skillSpecialties = this.actor.specialties;
 
         // ATTRIBUTES
-        data.arenaPriorities = this.actor.eData.attributes.priorities;
+        data.arenaPriorities = this.actor.$data.attributes.priorities;
         data.arenas = U.KeyMapObj(SCION.ATTRIBUTES.arenas, (arenaAttrs) => U.KeyMapObj(arenaAttrs, (i, attrName) => attrName, (attrName) => this.actor.attrVals[attrName]));
         data.unassignedAttributeDots = {...this.actor.unassignedArenaAttrDots, general: this.actor.unassignedGeneralAttrDots};
         data.isUnassignedAttributeDots = Boolean(U.SumVals(data.unassignedAttributeDots));
@@ -168,7 +168,7 @@ export default class MajorActorSheet extends ScionActorSheet {
         const actorAssignableCallingDots = this.actor.assignableCallingDots;
         data.callings = {
             available: {
-                patron: this.eData.patron ? SCION.GODS[this.eData.patron].callings : [],
+                patron: this.$data.patron ? SCION.GODS[this.$data.patron].callings : [],
                 get other() { return Object.keys(SCION.CALLINGS.list).filter((calling) => !this.patron.includes(calling)) }
             },
             callings: actorCallingData,
@@ -208,7 +208,7 @@ export default class MajorActorSheet extends ScionActorSheet {
         //     "ACTOR LOG": this.actor.fullLogReport,
         //     "Instances": {
         //         sheet: this,
-        //         entity: this.ent
+        //         entity: this.$entity
         //     }
         // }, this.actor.name, "MajorActorSheet", {isLoud: true});
 
@@ -223,8 +223,8 @@ export default class MajorActorSheet extends ScionActorSheet {
         const mergedUpdateData = U.Expand(Object.assign(
             U.Flatten({
                 data: {
-                    callings: {list: U.Clone(this.eData.callings.list)},
-                    knacks: {list: U.Clone(this.eData.knacks.list)}
+                    callings: {list: U.Clone(this.$data.callings.list)},
+                    knacks: {list: U.Clone(this.$data.knacks.list)}
                 }
             }),
             U.Flatten(updateData)
@@ -328,7 +328,7 @@ export default class MajorActorSheet extends ScionActorSheet {
                     const {calling} = callingElement.dataset;
                     const {slot: targetSlot, calling: targetCalling} = targetBin.dataset;
                     const {slot: sourceSlot, calling: sourceCalling} = sourceBin.dataset;
-                    const updateData = {"data.callings.list": U.Clone(this.eData.callings.list)};
+                    const updateData = {"data.callings.list": U.Clone(this.$data.callings.list)};
                     if (sourceCalling && sourceCalling !== "empty") {
                         updateData["data.callings.list"][sourceCalling].slot = U.Int(targetSlot);
                         updateData["data.callings.list"][targetCalling].slot = U.Int(sourceSlot);                               
@@ -342,7 +342,7 @@ export default class MajorActorSheet extends ScionActorSheet {
                 }
             };
             const remCalling = async (callingBin) => {
-                const updateData = {"data.callings.list": U.Clone(this.eData.callings.list)};
+                const updateData = {"data.callings.list": U.Clone(this.$data.callings.list)};
                 updateData["data.callings.list"][callingBin.dataset.calling].slot = null;
                 await this.processCallingUpdate(updateData);
             };
@@ -406,7 +406,7 @@ export default class MajorActorSheet extends ScionActorSheet {
                 const sourceData = U.Clone(sourceBin.dataset);
                 if (targetData.binid !== sourceData.binid) {
                     const updateData = {
-                        "data.knacks.list": U.Clone(this.eData.knacks.list)
+                        "data.knacks.list": U.Clone(this.$data.knacks.list)
                     };
                     const {knack: knackName} = knackData;
                     const knackIndex = updateData["data.knacks.list"].findIndex((knack) => knack.name === knackName);
@@ -420,7 +420,7 @@ export default class MajorActorSheet extends ScionActorSheet {
             };
             const remKnack = async (knackName) => {
                 const updateData = {
-                    "data.knacks.list": U.Clone(this.eData.knacks.list)
+                    "data.knacks.list": U.Clone(this.$data.knacks.list)
                 };                
                 U.Remove(updateData["data.knacks.list"], (knack) => knack.name === knackName);
                 await this.processCallingUpdate(updateData);
@@ -524,15 +524,7 @@ export default class MajorActorSheet extends ScionActorSheet {
             this.addDragListener(chargenFourDotDragger, "remove");
             // #endregion
 
-            /* ["drag", "dragend", "drop", "cancel", "remove", "shadow", "over", "out", "cloned"].forEach((event) => {
-                [callingDragger, knackDragger, chargenThreeDotDragger, chargenFourDotDragger].forEach((dragger) => {
-                    dragger.on(event, (...args) => {
-                        if (game.scion.debug.isDebuggingDragula === true || Array.isArray(game.scion.debug.isDebuggingDragula) && game.scion.debug.isDebuggingDragula.includes(event)) {
-                            console.log([event, args]);
-                        }
-                    });
-                });
-            }); */
+            
 
             // #endregion
             

@@ -6,24 +6,8 @@ import {_, U, SCION, MIX, MIXINS} from "../modules.js";
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export default class ScionActor extends Actor {
-    // Getters: Data Retrieval
-    get ent() { return typeof this.entity === "string" ? this : this.entity }
-    get sht() { return this.ent.sheet }
-    get eID() { return this.ent._id }
-    get eData() { return this.ent.data.data }
-    get subtype() { return this.eData.type }
-    get sheetElem() {
-        this._sheet = this._sheet ?? $(`[id$='${this.eID}']`)[0];
-        return this._sheet;
-    }
-    get ownedItems() { return this.ent.data.items }
-    get actor() { return super.actor ?? this }
-
-    // get eData() { return this.data.data }
-    // get subtype() { return this.eData.type }
-    // get ownedItems() { return this.data.items }
-
+export default class ScionActor extends MIX(Actor).with(MIXINS.Accessors, MIXINS.OwnedItemBuilder) {
+    
     prepareData() {
         super.prepareData();
         if (this.data.type === "major") {
@@ -34,18 +18,8 @@ export default class ScionActor extends Actor {
     async _prepareMajorCharData() {
         if (!this.isPreparingCharData && !CONFIG.isInitializing) {
             this.isPreparingCharData = true;
-            if (!this.eData.wasPantheonUpdated) {
-                U.LOG(U.IsDebug() && {
-                    "eData.pantheon": this.data.data.pantheon,
-                    "this.eData.wasPantheonUpdated": this.data.data.wasPantheonUpdated,
-                    "ACTOR": this.fullLogReport
-                }, "Pantheon NOT Updated: Updating Pantheon...", this.name);
+            if (!this.$data.wasPantheonUpdated) {
                 await this.updatePantheon(true);
-                U.LOG(U.IsDebug() && {
-                    "eData.pantheon": this.data.data.pantheon,
-                    "this.eData.wasPantheonUpdated": this.eData.wasPantheonUpdated,
-                    "ACTOR": this.fullLogReport
-                }, "... Pantheon Updated: DONE!", this.name);
             }
             await this.updateTraits();
             this.isPreparingCharData = false;
@@ -67,9 +41,7 @@ export default class ScionActor extends Actor {
                 this.update({"data.wasPantheonUpdated": true}),
                 panthPath.update({"data.skills": newSkills})
             ]);
-            U.LOG(U.IsDebug() && {pantheon, panthPath, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Updating Pantheon Path Skills ...", this.name);
             await Promise.all(updatePromises);
-            U.LOG(U.IsDebug() && {pantheon, panthPath, "ACTOR": this.fullLogReport}, "... ... [updatePantheon] Pantheon Path Updated, Proceeding to Update Skills ...", this.name);
             await this.updateTraits();
         }
     }
@@ -104,9 +76,9 @@ export default class ScionActor extends Actor {
     // #region Basic Data Retrieval
     get paths() { return this.items.filter((item) => item.type === "path") }
     get skills() { return this.data.data.skills.list }
-    get attributes() { return this.eData.attributes.list }
+    get attributes() { return this.$data.attributes.list }
     get callings() {
-        return U.KeyMapObj(_.pick(this.eData.callings.list, (callingData) => (callingData?.name ?? "") in SCION.CALLINGS.list && Number.isInteger(callingData?.slot)), (calling, name) => (
+        return U.KeyMapObj(_.pick(this.$data.callings.list, (callingData) => (callingData?.name ?? "") in SCION.CALLINGS.list && Number.isInteger(callingData?.slot)), (calling, name) => (
             {
                 ...calling,
                 knacks: this.getAssignedCallingKnacks(calling.name),
@@ -117,17 +89,17 @@ export default class ScionActor extends Actor {
             }
         ));
     }
-    get knacks() { return this.eData.knacks.list }
+    get knacks() { return this.$data.knacks.list }
     get conditions() { return this.items.filter((item) => item.type === "condition") }
     // #endregion
 
     // #region Paths
     get originPath() { return this.paths.find((item) => item.data.data.type === "origin") }
-    get originPathConditions() { return U.KeyMapObj(this.originPath.eData.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
+    get originPathConditions() { return U.KeyMapObj(this.originPath.$data.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
     get rolePath() { return this.paths.find((item) => item.data.data.type === "role") }
-    get rolePathConditions() { return U.KeyMapObj(this.rolePath.eData.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
+    get rolePathConditions() { return U.KeyMapObj(this.rolePath.$data.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
     get pantheonPath() { return this.paths.find((item) => item.data.data.type === "pantheon") }
-    get pantheonPathConditions() { return U.KeyMapObj(this.pantheonPath.eData.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
+    get pantheonPathConditions() { return U.KeyMapObj(this.pantheonPath.$data.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
     get pathConditions() { return {origin: this.originPathConditions, role: this.rolePathConditions, pantheon: this.pantheonPathConditions} }
     get pathPriorities() { return this.data.data.pathPriorities }
     get pathSkills() { return U.KeyMapObj(_.indexBy(this.paths, (item) => item.data.data.type), (item) => item.data.data.skills) }
@@ -148,7 +120,7 @@ export default class ScionActor extends Actor {
     get derivedSkillVals() { return U.KeyMapObj(SCION.SKILLS.list, (v, k) => this.baseSkillVals[k] + this.assignedSkillVals[k]) }
     get skillVals() { return U.KeyMapObj(this.derivedSkillVals, (v) => Math.max(SCION.SKILLS.min, Math.min(v, SCION.SKILLS.max))) }
     get nonZeroSkillVals() { return _.pick(this.skillVals, (v) => v !== 0) }
-    get assignableSkillDots() { return U.SumVals(this.eData.skills.assignableDots) }
+    get assignableSkillDots() { return U.SumVals(this.$data.skills.assignableDots) }
     get unassignedSkillDots() { return Math.max(0, this.assignableSkillDots - U.SumVals(this.assignedSkillVals)) }
     get specialties() {
         return U.KeyMapObj(this.skills, (data, skill) => {
@@ -203,7 +175,7 @@ export default class ScionActor extends Actor {
     // #endregion
 
     // #region Attributes
-    get favoredApproach() { return this.eData.attributes.favoredApproach }
+    get favoredApproach() { return this.$data.attributes.favoredApproach }
     get favoredAttrs() { return this.favoredApproach ? SCION.ATTRIBUTES.approaches[this.favoredApproach] : [] }
 
     get baseAttrVals() { return U.KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => (this.favoredAttrs.includes(k) ? 3 : 1)) }
@@ -212,13 +184,13 @@ export default class ScionActor extends Actor {
     get attrVals() { return U.KeyMapObj(this.derivedAttrVals, (v) => Math.max(SCION.ATTRIBUTES.min, Math.min(v, SCION.ATTRIBUTES.max))) }
 
     convertAttrGroup(groupRef) {
-        if (Object.keys(SCION.ATTRIBUTES.arenas).includes(groupRef)) {return Object.keys(SCION.ATTRIBUTES.priorities)[this.eData.attributes.priorities.findIndex((arena) => arena === groupRef)]} else if (Object.keys(SCION.ATTRIBUTES.priorities).includes(groupRef)) {return this.eData.attributes.priorities[Object.keys(SCION.ATTRIBUTES.priorities).findIndex((priority) => priority === groupRef)]}
+        if (Object.keys(SCION.ATTRIBUTES.arenas).includes(groupRef)) {return Object.keys(SCION.ATTRIBUTES.priorities)[this.$data.attributes.priorities.findIndex((arena) => arena === groupRef)]} else if (Object.keys(SCION.ATTRIBUTES.priorities).includes(groupRef)) {return this.$data.attributes.priorities[Object.keys(SCION.ATTRIBUTES.priorities).findIndex((priority) => priority === groupRef)]}
         return U.THROW(groupRef, "ERROR: Invalid Attribute Group Reference");
     }
 
     get totalAssignedDotsByArena() { return U.KeyMapObj(SCION.ATTRIBUTES.arenas, (attrs) => attrs.reduce((tot, attr) => tot + this.assignedAttrVals[attr], 0)) }
-    get assignableArenaDots() { return U.KeyMapObj(this.eData.attributes.assignableArenaDots, (priority) => this.convertAttrGroup(priority), (v) => v) }
-    get assignableGeneralAttrDots() { return U.SumVals(this.eData.attributes.assignableGeneralDots) }
+    get assignableArenaDots() { return U.KeyMapObj(this.$data.attributes.assignableArenaDots, (priority) => this.convertAttrGroup(priority), (v) => v) }
+    get assignableGeneralAttrDots() { return U.SumVals(this.$data.attributes.assignableGeneralDots) }
     get assignedArenaAttrDots() { return U.KeyMapObj(this.totalAssignedDotsByArena, (val, arena) => Math.min(this.assignableArenaDots[arena], val)) }
     get assignedGeneralDotsByArena() { return U.KeyMapObj(this.totalAssignedDotsByArena, (val, arena) => Math.max(0, val - this.assignedArenaAttrDots[arena])) }
     get assignedGeneralAttrDots() { return U.SumVals(this.assignedGeneralDotsByArena) }
@@ -283,12 +255,12 @@ export default class ScionActor extends Actor {
     get immortalKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack.name].tier === "immortal") }
     get genericKnacks() { return this.knacks.filter((knack) => SCION.KNACKS.list[knack.name].calling === "any") }
 
-    get assignableCallingDots() { return U.SumVals(this.eData.callings.assignableGeneralDots) }
+    get assignableCallingDots() { return U.SumVals(this.$data.callings.assignableGeneralDots) }
     get unassignedCallingDots() { return Math.max(0, this.assignableCallingDots - Object.values(this.callings).reduce((tot, calling) => tot + calling.value - SCION.CALLINGS.min, 0)) }
     get assignableKnackDots() { 
         return {
             ...U.KeyMapObj(this.callings, (callingData) => callingData.value),
-            extra: U.SumVals(this.eData.knacks.assignableExtraKnacks)
+            extra: U.SumVals(this.$data.knacks.assignableExtraKnacks)
         };
     }
     get unassignedKnackDots() {
@@ -323,7 +295,7 @@ export default class ScionActor extends Actor {
         return U.Clone({
             "this ScionActor": this,
             "... data": this.data,
-            ".*. eData": U.Clone(this.eData),
+            ".*. $data": U.Clone(this.$data),
             ".*. items": U.Clone(this.data.items),
             ".*. paths": U.Clone(this.paths),
             ".*. conditions": U.Clone(this.conditions),

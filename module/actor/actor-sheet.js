@@ -1,30 +1,13 @@
 import {_, U, handlebarTemplates, MIX, ActorMixins as MIXINS} from "../modules.js";
 import "../external/gl-matrix-min.js";
 
-/**
- * Extend the basic ActorSheet with some very simple modifications
- * @extends {ActorSheet}
- */
-export default class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampText, MIXINS.EditableDivs, MIXINS.PopoutControl, MIXINS.CloseButton, MIXINS.DotDragger) {
-    // Getters: Data Retrieval
-    get ent() { return typeof this.entity === "string" ? this : this.entity }
-    get sht() { return this.ent.sheet }
-    get eID() { return this.ent._id }
-    get eData() { return this.ent.data.data }
-    get subtype() { return this.eData.type }
-    get sheetElem() {
-        this._sheet = this._sheet ?? $(`[id$='${this.eID}']`)[0];
-        return this._sheet;
-    }
-    get ownedItems() { return this.ent.data.items }
-    get actor() { 
-        if (super.actor ?? this._actor) {
-            return super.actor ?? this._actor;
-        }
-        this._actor = this.entity === "Actor" ? this : undefined;
-        return this._actor;
-    }
-
+export default class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.Accessors,
+                                                                  MIXINS.ClampText, 
+                                                                  MIXINS.EditableDivs, 
+                                                                  MIXINS.PopoutControl, 
+                                                                  MIXINS.CloseButton, 
+                                                                  MIXINS.DotDragger) {
+    
     static get defaultOptions() {
         /*
          *  super.defaultOptions = {
@@ -71,20 +54,9 @@ export default class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.ClampTe
     }
 
     getData() {
-        // console.log({"ACTORSHEET: THIS.ACTOR": this.actor});
         const data = super.getData();
         data.config = CONFIG.scion;
         data.blocks = handlebarTemplates;
         return data;
     }
-
-    /*
-     * activateListeners(html) {
-     *  super.activateListeners(html);
-     * 
-     *  if (this.options.editable) {
-     * 
-     *  }
-     * } 
-     */
 }

@@ -1,6 +1,5 @@
 // #region Import Modules
-import {GetType, THROW} from "../data/utils.js";
-import {_, U, popoutData, SCION} from "../modules.js"; // eslint-disable-line import/no-cycle
+import {_, U, popoutData, itemCategories, SCION} from "../modules.js"; // eslint-disable-line import/no-cycle
 import "../external/clamp.min.js";
 
 // #region CLASS FACTORIES: Applying Mixins
@@ -359,7 +358,41 @@ export const EditableDivs = (superClass) => class extends ClampText(superClass) 
         }
     }
 };
-/* jshint ignore:start */
+export const Accessors = (superClass) => class extends superClass {
+
+    get $entity() { return typeof this.entity === "string" ? this : this.entity }
+    get $sheet() { return this.$entity.sheet }
+    get $id() { return this.$entity._id }
+    get $base() { return this.$entity.data }
+    get $data() { return this.$base.data }
+    get $type() { return this.$base.type }
+    get $subtype() { return this.$data.type }
+    get $items() { return this.$entity.items ?? new Map(
+        Object.values(flattenObject(this.$data.items ?? {}))
+            .filter((val) => typeof val === "string")
+            .map((itemID) => [
+                itemID,
+                this.actor.items.find((item) => item.$id === itemID)
+            ])
+        );
+    }
+    get $category() { 
+        this._category = this._category ?? Object.keys(itemCategories).find((cat) => itemCategories[cat].includes(this.$entity.data.type));
+        return this._category;
+    }
+
+
+    get $sheetDOM() {
+        this._sheetDOM = this._sheetDOM ?? $(`[id$='${this.$id}']`)[0];
+        return this._sheetDOM;
+    }
+    
+    get actor() {
+        this._actor = this._actor ?? super.actor ?? (this.$entity.entity === "Actor" ? this.$entity : false);
+        return this._actor;
+    }
+};
+
 export const CloseButton = (superClass) => class extends superClass {
     activateListeners(html) {
         super.activateListeners(html);

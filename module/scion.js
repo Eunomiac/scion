@@ -17,8 +17,6 @@ import GuideItemSheet from "./item/birthrights/birthright-guide-sheet.js";
 import RelicItemSheet from "./item/birthrights/birthright-relic-sheet.js";
 
 import "./external/gl-matrix-min.js";
-import { randomID } from "../../../../../../../../../../Program Files/FoundryVTT/resources/app/public/scripts/foundry.js";
-import { random } from "./external/underscore/underscore-esm-min.js";
 // #endregion
 
 
@@ -26,6 +24,7 @@ import { random } from "./external/underscore/underscore-esm-min.js";
 Hooks.once("init", async () => {
     CONFIG.isHoldingLogs = true;
     CONFIG.isInitializing = true;
+    // CONFIG.debug.hooks = true;
     // console.clear();
     CONFIG.scion = SCION;
 
@@ -48,7 +47,7 @@ Hooks.once("init", async () => {
             relic: RelicItemSheet
         },
         debug: {
-            isDebugging: false,
+            isDebugging: true,
             isDebuggingDragula: true,
             isFullDebugConsole: true,
             watchList: ["Rhys"]
@@ -65,12 +64,12 @@ Hooks.once("init", async () => {
                     "... data": actor.data,
                     ..._.omit(fullReportData, (v, k) => k.startsWith(".") || k.startsWith("this")),
                     "ITEM REPORT": {
-                        ids: _.groupBy(Array.from(actor.items), (item) => item.subtype), // (item) => `id: ${item.id}, type: ${item.subtype}, link: ${item.data.data.linkedItem}`),
+                        ids: _.groupBy(Array.from(actor.items), (item) => item.$subtype), // (item) => `id: ${item.id}, type: ${item.$subtype}, link: ${item.data.data.linkedItem}`),
                         data: _.groupBy(Array.from(actor.items).map((item) => ({id: item.id, link: item.data.data.linkedItem ?? null, ...item.data.data})), (item) => item.type),
-                        instances: _.groupBy(Array.from(actor.items, (item) => item.subtype))
+                        instances: _.groupBy(Array.from(actor.items, (item) => item.$subtype))
                     }
                 };
-                U.LOG(reportData, `REPORT: ${actor.name}`, actor.id, {isLoud: true});
+                U.LOG(reportData, `"${actor.name}" (${actor.id})`, "ACTOR REPORT", {isLoud: true});
             });
         },
         getActor: (name) => game.actors.entries.find((actor) => new RegExp(`^${name}`).test(actor.name)),
@@ -219,7 +218,7 @@ Hooks.once("init", async () => {
                     switch (subCat) {
                         case "other": {
                             if (callings.length >= 2
-                                && !callings.some((calling) => SCION.GODS[actor.eData.patron].callings.includes(calling.name))) {
+                                && !callings.some((calling) => SCION.GODS[actor.$data.patron].callings.includes(calling.name))) {
                                 return "invalid";
                             }
                         }
@@ -326,52 +325,21 @@ Hooks.on("createActor", (actor, options) => {
     actor.createItemData = actor.createItemData ?? [];
     switch (actor.data.type) {
         case "major": {
-            if (actor.paths?.length === 3) {
-                return true;
-            }
-            const pathsData = ["origin", "role", "pantheon"].map((pathType) => (
-                    {
-                        name: U.Loc(`scion.path.${pathType}`),
-                        type: "path",
-                        data: {
-                            type: pathType,
-                            linkID: randomID(),
-                            linkedItemIDs: {
-                                pathSuspension: randomID(),
-                                pathRevocation: randomID()
-                            }
-                        }
-                    }
-                ));
-            pathsData.forEach((pathData) => {
-                actor.createItemData.push(...[
-                    pathData,
-                    ...["pathSuspension", "pathRevocation"].map((conditionType, index) => (
-                        {
-                            name: U.Loc(`scion.condition.${conditionType}`),
-                            type: "condition",
-                            data: {
-                                type: conditionType,
-                                linkID: pathData.data.linkedItemIDs[conditionType],
-                                linkedItemIDs: {
-                                    path: pathData.linkID
-                                },
-                                title: conditionType.slice(4),
-                                effects: [],
-                                isPersistent: true,
-                                resolution: ""
-                            }
-                        }
-                    ))
-                ]);
-            });
-            if (actor.createItemData.length === 9) {
-                U.LOG({actor, options, createItemData: actor.createItemData}, "Creating Path Items", `HOOK: createActor("${actor.name}")`);
-                actor.createOwnedItem(actor.createItemData);
-            }
+            U.LOG({createItemData: actor.createItemData}, "Creating 3x Owned Path Items ► 'Origin', 'Role', 'Pantheon'", `on.createActor: '${actor.name}'`, {groupStyle: "l3"});
+            actor.createItemData.push(...["origin", "role", "pantheon"].map((pathType) => (
+                {
+                    name: U.Loc(`scion.path.${pathType}`),
+                    type: "path",
+                    data: { type: pathType }
+                }
+            )));
+            actor.createOwnedItem(actor.createItemData);
             break;
         }
         default: return true;
     }
     return true;
 });
+
+
+Hooks.on("createOwnedItem", (actor, itemData) => actor.items.find((_item) => _item.$id === itemData._id)?.initSubItems());
