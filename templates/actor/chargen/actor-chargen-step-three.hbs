@@ -8,7 +8,12 @@
         <div class="skills padded flex-col">
             {{#each skillVals as |value skill|}}
                 <div class="dotline">
-                    <div class="label">{{loc (concat "scion.skill." skill ".name")}}</div>
+                    <div class="label">
+                        <span class="tooltip tipLeft">                            
+                            {{> (..blocks.tooltips.template) (lookup ../tooltips/skills skill)}}
+                            {{loc (concat "scion.skill." skill ".name")}}
+                        </span>
+                    </div>
                     <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>
                     <div class="chargenThreeDotBin dotBin dotContainer fader" data-types="skill|general" data-skill="{{skill}}" data-binid="{{skill}}" data-field="data.skills.list.{{skill}}.assigned">
                         {{#for value}}

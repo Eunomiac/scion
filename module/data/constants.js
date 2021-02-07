@@ -3190,6 +3190,7 @@ const itemCategories = {
     boons: ["boon"],
     birthrights: ["relic", "follower", "creature", "guide", "cult", "covenant"],
     conditions: ["condition"],
+    getCategory(ref) { return ref in this ? ref : _.findKey(this, (types) => types.includes(ref)) }
 };
 const popoutData = {
     path: {leftSpacing: -500, rightSpacing: -500},
@@ -3372,6 +3373,7 @@ testChars.createTestChar = async (name) => {
         }
         for (const skill of pathSkills[pathType]) {baseSkillVals[skill] += baseVal}
     });
+    console.log(pathSkills);
     let assignableSkillDots = Rand(0, Object.values(actorData.skills.assignableDots).reduce((tot, val) => tot + val, 0));
     while (assignableSkillDots) {
         const availableSkills = skills.filter((skill) => (baseSkillVals[skill] + actorData.skills.list[skill].assigned) < 5);
@@ -3448,13 +3450,12 @@ testChars.createTestChar = async (name) => {
         return itemData;
     });
     // #endregion
-
-    const thisActor = await Actor.create({
+    
+    return Actor.create({
         name,
         type: "major",
         data: actorData,
     });
-    return thisActor;
 };
 testChars.createSigChars = async (...names) => {
     if (names.length === 0) {
@@ -3464,7 +3465,6 @@ testChars.createSigChars = async (...names) => {
     for (const name of names) {
         LOG({name}, `Creating Actor '${name}'...`, "createTestChar()", {groupStyle: "data"});
         updatePromises.push(testChars.createTestChar(name));
-        await Sleep(5000); // eslint-disable-line no-await-in-loop
     }
     return Promise.all(updatePromises);
 }

@@ -667,83 +667,115 @@
         "skill": {
             "academics": {
                 "name": "Academics",
-                "description": "",
-                "shortdesc": "general knowledge of the humanities, including law and bureaucracy"
+                "tooltips": {
+                    "full": "<p>Academics represents the time a character spent studying the humanities. Characters with Academics generally have some knowledge of law and politics, allowing them to understand and even manipulate legal and political systems, as well as most bureaucracies.</p><ul><li><span class=\"strong\">Academics 1</span>: A basic grasp of fields like literature, art, and law. The character can navigate a library and probably turn up some useful information after a day or two.</li><li><span class=\"strong\">Academics 3</span>: Well-versed in political and literary writings, can easily quote famous thinkers. Focused research will usually unearth relevant information within a few hours.</li><li><span class=\"strong\">Academics 5</span>: An almost encyclopedic knowledge on just about every subject. The character can rattle off relevant information for any situation, and with time in the archives can uncover secrets that have eluded researchers for years.</li></ul><p>Academics + Intellect also represents the total number of languages a character can maintain fluency in without constant effort. This isn’t the number of languages they speak, only the number they can learn. They still need to study a language to pick it up.</p>",
+                    "short": "general knowledge of the humanities, including law and bureaucracy"
+                }
             },
             "athletics": {
                 "name": "Athletics",
-                "description": "",
-                "shortdesc": "physical training and prowess, including archaic ranged weapons such as javelins and bows"
+                "tooltips": {
+                    "full": "<p>Athletics represents the technique needed to properly leverage the power of the human body. Usually an Athletic character has spent some time in physical training, whether they be sports stars, fire fighters, or just fitness enthusiasts.</p><ul><li><span class=\"strong\">Athletics 1</span>: An irregular exerciser with moderate fitness. The character can run a mile without getting winded, and can climb or swim in ideal conditions without trouble.</li><li><span class=\"strong\">Athletics 3</span>: A trainer with excellent physical fitness. The character regularly runs miles each day without injury and probably plays a star role in several sports.</li><li><span class=\"strong\">Athletics 5</span>: One of the world’s greatest athletes, qualified for a major sports team or the Olympic games. The character can expect to excel at just about any physical task.</li></ul><p>Athletics + Might determines what characters can lift or break with an action (see Scion: Origin, p. 58). Breaking something in this way is likely a complex action as the character tears the object apart, but lifting is a simple action.</p>",
+                    "short": "physical training and prowess, including archaic ranged weapons such as javelins and bows"
+                }
             },
             "closeCombat": {
                 "name": "Close Combat",
-                "description": "",
-                "shortdesc": "fighting Skill with melee weapons and unarmed combat"
+                "tooltips": {
+                    "full": "<p>A character’s skill in Close Combat can determine how well they are able to fight in close quarters with a foe. Usually this means a background involving combat training or experience, whether at a wushu guan or out on the mean streets. Close Combat applies when wielding melee weapons or bare fists, even when grappling and subduing an opponent.</p><ul><li><span class=\"strong\">Close Combat 1</span>: Capable of handling themselves in a fight, holding their own with other amateur brawlers with minimal injury.</li><li><span class=\"strong\">Close Combat 3</span>: Very talented at using both fists and weaponry effectively. The character can easily take down multiple untrained opponents or skilled single combatants.</li><li><span class=\"strong\">Close Combat 5</span>: An efficient and terrifying force in combat. The character knows how to close distance and effortlessly dismantle the defenses of even battle-hardened warriors.</li></ul>",
+                    "short": "fighting Skill with melee weapons and unarmed combat"
+                }
             },
             "culture": {
                 "name": "Culture",
-                "description": "",
-                "shortdesc": "expertise with cultural and social practices including proper etiquette"
+                "tooltips": {
+                    "full": "<p>A character’s Culture Skill represents their exposure to different societies and cultural ideas. A character with this background has spent time appreciating art, language, and religion from around the world, and can easily identify faux pas and social hierarchies for groups ranging from foreign companies to insular internet forums.</p><ul><li><span class=\"strong\">Culture 1</span>: A basic understanding of cultural expression around the world. The character is less likely to make a faux pas in groups he has read about or spent time in.</li><li><span class=\"strong\">Culture 3</span>: A comfortable grasp of the nuances of almost every mortal culture. The character can steer their friends away from gauche behavior even after only a short exposure to a group.</li><li><span class=\"strong\">Culture 5</span>: A cultural prodigy with perfect insight into the artwork and mores of worldwide cultures. The character can pass himself off as a native mere moments after entering a new society.</li></ul>",
+                    "short": "expertise with cultural and social practices including proper etiquette"
+                }
             },
             "empathy": {
                 "name": "Empathy",
-                "description": "",
-                "shortdesc": "ability to work out motivations and emotions and manipulate that understanding"
+                "tooltips": {
+                    "full": "<p>Empathy allows characters to work out the motivations and emotions of those they interact with, and manipulate those feelings to their advantage. This Skill is just as useful for those who want to make friends as it is for those who want to profile serial killers.</p><ul><li><span class=\"strong\">Empathy 1</span>: Sensitive to the emotional cues of others. The character can usually tell when someone is hiding something, if they are paying attention.</li><li><span class=\"strong\">Empathy 3</span>: The character can easily spot lies and read between the lines, and is talented at knowing just what to say and when.</li><li><span class=\"strong\">Empathy 5</span>: A human lie detector who can assemble a full psychological profile for an individual based on the merest of clues.</li></ul>",
+                    "short": "ability to work out motivations and emotions and manipulate that understanding"
+                }
             },
             "firearms": {
                 "name": "Firearms",
-                "description": "",
-                "shortdesc": "experience with modern projectile weapons, including accuracy and maintenance"
+                "tooltips": {
+                    "full": "<p>The Firearms skill represents a character’s training and experience with modern projectile weapons like guns (bows and javelins fall under Athletics). It also represents their ability to repair and maintain such weapons.</p><ul><li><span class=\"strong\">Firearms 1</span>: Can make simpler short range shots, and maintain most weapons.</li><li><span class=\"strong\">Firearms 3</span>: A trained marksman who can hit their target even in rain or low light. They are comfortable drawing quickly, and firing in close quarters. With the right equipment and circumstances they can make long-distance shots.</li><li><span class=\"strong\">Firearms 5</span>: An expert shooter with experience in both firefights and sniping. The character can repair broken guns with the appropriate parts and tools, and modify weapons to better suit their needs. </li></ul>",
+                    "short": "experience with modern projectile weapons, including accuracy and maintenance"
+                }
             },
             "integrity": {
                 "name": "Integrity",
-                "description": "",
-                "shortdesc": "ability to resist social influences and keep intentions hidden"
+                "tooltips": {
+                    "full": "<p>Integrity reflects a character’s emotional fortitude against outside influence or to resist Leadership or Persuasion. A character uses Integrity to resist emotional swaying and to hide her own emotions and intentions from others. Integrity can be represented by some training techniques in military, special operations, or performing arts, or it could be an innate Skill of certain characters.</p><ul><li><span class=\"strong\">Integrity 1</span>: Simply stubborn, or the character is just not easily swayed.</li><li><span class=\"strong\">Integrity 3</span>: A dependable person, either with formal training in resisting influence or a keen and cunning mind capable of determining what the influencer’s true aim is.</li><li><span class=\"strong\">Integrity 5</span>: An expert with long experience and formal training in resisting mind-control or torture techniques, unable to be broken or swayed in a direction they don’t ultimately wish to go in. </li></ul>",
+                    "short": "ability to resist social influences and keep intentions hidden"
+                }
             },
             "leadership": {
                 "name": "Leadership",
-                "description": "",
-                "shortdesc": "effective management of large groups and ability to take command"
+                "tooltips": {
+                    "full": "<p>Leadership is a knowledge of the techniques needed to effectively lead and coordinate groups. Characters with this skill can look at the bigger picture in order to make sure every member of the team is contributing in the most effective way possible. These characters radiate a confidence that lets them take control of a situation.</p><ul><li><span class=\"strong\">Leadership 1</span>: The character has spent some time managing others, and can get a group of individuals to work and think as a team with time and effort.</li><li><span class=\"strong\">Leadership 3</span>: The character has spent extensive time leading others, and people are inclined to set aside personal interest for the greater good under his command.</li><li><span class=\"strong\">Leadership 5</span>: The character can lead armies into battle with genius strategies, and expect total loyalty. He can be certain that his orders will always be understood, and carried out to the letter if possible. </li></ul>",
+                    "short": "effective management of large groups and ability to take command"
+                }
             },
             "medicine": {
                 "name": "Medicine",
-                "description": "",
-                "shortdesc": "diagnose and treat injury and disease"
+                "tooltips": {
+                    "full": "<p>Skill in Medicine represents a character’s knowledge about the operation of the bodies of living things. Their experience allows them to diagnose and treat any living creatures, so long as they bear some resemblance to creatures she has encountered before.</p><ul><li><span class=\"strong\">Medicine 1</span>: Basic first aid. The character can judge at a glance if a creature is in physical distress.</li><li><span class=\"strong\">Medicine 3</span>: The character can treat even serious injuries, and stabilize what might otherwise be a fatal wound. With the right facilities, they can diagnose diseases and administer ongoing care.</li><li><span class=\"strong\">Medicine 5</span>: A master surgeon and physician, able to save lives regularly with quick and accurate application of aid. The character can perform transplants and lifesaving excisions even in extremely challenging conditions. </li></ul>",
+                    "short": "diagnose and treat injury and disease"
+                }
             },
             "occult": {
                 "name": "Occult",
-                "description": "",
-                "shortdesc": "knowledge of the supernatural elements of the World"
+                "tooltips": {
+                    "full": "<p>The Occult Skill represents knowledge of the supernatural elements of The World and beyond, such as cryptozoology, the secret histories of various pantheons, or mystical rituals (functional and otherwise).</p><ul><li><span class=\"strong\">Occult 1</span>: A passing interest in the mysteries of The World. The character can identify simple magical rituals and common paranormal phenomena.</li><li><span class=\"strong\">Occult 3</span>: The character can conduct more complex ceremonies and identify a wide range of magical creatures. They can identify many types of cults, and trace them back to their divine (or Titanic) patrons.</li><li><span class=\"strong\">Occult 5</span>: The character instantly recognizes all but the most obscure cults, rites, and spells. He easily converses with the souls of the dead, and can navigate the complex rules of Terra Incognitae. </li></ul>",
+                    "short": "knowledge of the supernatural elements of the World"
+                }
             },
             "persuasion": {
                 "name": "Persuasion",
-                "description": "",
-                "shortdesc": "ability to bring others around to your way of thinking"
+                "tooltips": {
+                    "full": "<p>The Persuasion skill represents a character’s talent at bringing others around to their way of thinking. Whether seducing or debating, whether she needs to change the way someone sees the world or force them into a compromise, the Scion is using Persuasion.</p><ul><li><span class=\"strong\">Persuasion 1</span>: The character can usually talk their way out of minor trouble, and convince others of their honesty if the truth’s on their side.</li><li><span class=\"strong\">Persuasion 3</span>: Silver-tongued. The character can draw sympathy from officers of the law, talk their way out of speeding tickets, and never fails to get a date on a Friday night.</li><li><span class=\"strong\">Persuasion 5</span>: Charisma just one step short of hypnosis. The character can convince even cynics to believe in them, and regularly receives preferential treatment. It’s hard to find someone they can’t win over. </li></ul>",
+                    "short": "ability to bring others around to your way of thinking"
+                }
             },
             "pilot": {
                 "name": "Pilot",
-                "description": "",
-                "shortdesc": "ability to control any method of transportation"
+                "tooltips": {
+                    "full": "<p>Characters use Pilot to control any method of transportation, such as a car, bus, boat, motorcycle, horse, plane, giant bird, or anything else he may have cause to ride on or in. It also measures his ability to acclimate to unfamiliar conveyances and make repairs on them.</p><ul><li><span class=\"strong\">Pilot 1</span>: The character can control most vehicles under normal circumstances. They can even ride a mount without fear of falling off.</li><li><span class=\"strong\">Pilot 3</span>: A deeper understanding of the forces involved in operating a vehicle. The character can do some trick driving, operate under difficult conditions, and pilot a complex vehicle like an airplane or submarine.</li><li><span class=\"strong\">Pilot 5</span>: A stunt driver’s dream. The character can perform precision driving maneuvers and jumps, fly a plane through a storm, and navigate by sonar underwater. </li></ul>",
+                    "short": "ability to control any method of transportation"
+                }
             },
             "science": {
                 "name": "Science",
-                "description": "",
-                "shortdesc": "knowledge to apply scientific understanding, including evaluation of physical evidence"
+                "tooltips": {
+                    "full": "<p>The Science Skill represents a character’s exposure to the philosophical underpinnings of the scientific method. Though they likely have some knowledge of modern scientific theories, this doesn’t necessarily mean that they have a PhD. They have just learned to look at the world in an orderly and quantifiable way. For this reason, it is entirely compatible with Occult.</p><ul><li><span class=\"strong\">Science 1</span>: The character can understand physical evidence, and separate useful data from background noise.</li><li><span class=\"strong\">Science 3</span>: The character can extrapolate from available data, incorporating all evidence into a comprehensive theory. They can also make simple compounds with access to the right materials and tools.</li><li><span class=\"strong\">Science 5</span>: The character can create and test hypotheses almost instantly, running thought experiments to deduce the most likely explanation. They can create advanced chemical reactions with household products, and repair machines on basic physical principles. </li></ul>",
+                    "short": "knowledge to apply scientific understanding, including evaluation of physical evidence"
+                }
             },
             "subterfuge": {
                 "name": "Subterfuge",
-                "description": "",
-                "shortdesc": "stealth, deception, and criminal expertise, including hiding, disguise, lockpicking, and forgery"
+                "tooltips": {
+                    "full": "<p>Subterfuge represents the character’s ability to deceive others, hide, and create disguises. It also helps them commit criminal acts such as forgeries, sleight of hand, and lockpicking. This can represent training with an organization of criminals or even spies.</p><ul><li><span class=\"strong\">Subterfuge 1</span>: Basic lies come easily to the character, and cheap locks do not present much of a challenge. They know enough to stay off the radar of local authorities.</li><li><span class=\"strong\">Subterfuge 3</span>: A master thief, extremely adept at criminal activities. They can spin complex lies and break into most safes. The constabulary is likely aware of and frustrated by their exploits.</li><li><span class=\"strong\">Subterfuge 5</span>: A legend in the underworld, the character can impersonate someone’s own mother and clean out a bank vault without anyone even knowing they were there. </li></ul>",
+                    "short": "stealth, deception, and criminal expertise, including hiding, disguise, lockpicking, and forgery"
+                }
             },
             "survival": {
                 "name": "Survival",
-                "description": "",
-                "shortdesc": "ability to survive in hostile environments, including navigation and animal handling"
+                "tooltips": {
+                    "full": "<p>The ability to understand and overcome the challenges of inhospitable environments is represented by the Survival skill. This often means finding food and shelter in the wild, crafting basic tools from things found in nature, navigating unknown territory, and taming local wildlife.</p><ul><li><span class=\"strong\">Survival 1</span>: The character can get the lay of the land in an unfamiliar place and she can expect to comfortably survive for several days, finding her food and water with some effort and building a basic shelter.</li><li><span class=\"strong\">Survival 3</span>: An affinity for the outdoors. The character can last months in the wilderness, making a sturdy shelter and tools, and comfortably finding food in the right places.</li><li><span class=\"strong\">Survival 5</span>: An expert at tracking and foraging. Even the most extreme elements do not dissuade her, and she can easily survive in blistering heat or a fierce blizzard. </li></ul>",
+                    "short": "ability to survive in hostile environments, including navigation and animal handling"
+                }
             },
             "technology": {
                 "name": "Technology",
-                "description": "",
-                "shortdesc": "expertise with modern mechanisms and software"
+                "tooltips": {
+                    "full": "<p>Technology represents the character’s comfort with the software and hardware that make up modern devices, whether they’re operating them, repairing them, or misusing them. Computers are the most obvious of these machines, and perhaps the most dangerous.</p><ul><li><span class=\"strong\">Technology 1</span>: The character can expect most modern devices to do what they want. They can use computers, and resolve common errors.</li><li><span class=\"strong\">Technology 3</span>: An excellent grasp of programming languages and electrical engineering. When anyone needs something fixed, they turn to the character.</li><li><span class=\"strong\">Technology 5</span>: A master hacker, who’s broken into government databases or built her own complex servers. They seldom buy any devices, certain they could assemble something better on their own.</li></ul>",
+                    "short": "expertise with modern mechanisms and software"
+                }
             }
         },
         "virtue": {
@@ -832,499 +864,747 @@
         "knack": {
             "aFortress": {
                 "name": "A Fortress",
-                "description": "At the start of a combat scene, roll your Knack Skill with 1 Enhancement. Gain the following Stunts which you may spend the resulting successes on, each time you successfully Defend (e.g. an attack targeting you does not hit)."
+                "tooltips": {
+                    "full": "<p>At the start of a combat scene, roll your Knack Skill with 1 Enhancement. Gain the following Stunts which you may spend the resulting successes on, each time you successfully Defend (e.g. an attack targeting you does not hit).</p>"
+                }
             },
             "aPurpose": {
                 "name": "A Purpose",
-                "description": "Dedicate yourself to an ideal of your choosing (fight for love and justice, defend the weak, save the World from invasion). When you take action to defend this ideal, gain +1 Enhancement to all applicable rolls and to any Stunts you may have gained from Knacks."
+                "tooltips": {
+                    "full": "<p>Dedicate yourself to an ideal of your choosing (fight for love and justice, defend the weak, save the World from invasion). When you take action to defend this ideal, gain +1 Enhancement to all applicable rolls and to any Stunts you may have gained from Knacks.</p>"
+                }
             },
             "aSentinel": {
                 "name": "A Sentinel",
-                "description": "Choose a person or group of trivial targets to be your charge. When you guard your charge, you both gain +1 Defense so long as you stay in the same range band. You also gain +1 Enhancement to rolls to keep track of or defend your charge."
+                "tooltips": {
+                    "full": "<p>Choose a person or group of trivial targets to be your charge. When you guard your charge, you both gain +1 Defense so long as you stay in the same range band. You also gain +1 Enhancement to rolls to keep track of or defend your charge.</p>"
+                }
             },
             "aTalisman": {
                 "name": "A Talisman",
-                "description": "Bless an object (usually belonging to someone you wish to protect, but not required) and make a Knack Skill roll. If any successes are achieved, it then grants the bearer 2 Enhancement to rolls made to defend or protect against a particular person, thing, or situation as defined at the time of blessing. If you are making a talisman for your charge, this happens automatically without needing to roll."
+                "tooltips": {
+                    "full": "<p>Bless an object (usually belonging to someone you wish to protect, but not required) and make a Knack Skill roll. If any successes are achieved, it then grants the bearer 2 Enhancement to rolls made to defend or protect against a particular person, thing, or situation as defined at the time of blessing. If you are making a talisman for your charge, this happens automatically without needing to roll.</p>"
+                }
             },
             "aVigil": {
                 "name": "A Vigil",
-                "description": "When you stand guard over a person, place, or thing, you do not need to eat or sleep so long as your vigil persists. This benefit extends so long as the protected target remains within your sight. You may do other things — talk, interact, move around, etc. — but must devote most of your time to keeping your vigil. You may only keep vigil over one thing at a time."
+                "tooltips": {
+                    "full": "<p>When you stand guard over a person, place, or thing, you do not need to eat or sleep so long as your vigil persists. This benefit extends so long as the protected target remains within your sight. You may do other things — talk, interact, move around, etc. — but must devote most of your time to keeping your vigil. You may only keep vigil over one thing at a time.</p>"
+                }
             },
             "aWarning": {
                 "name": "A Warning",
-                "description": "You sense the presence of danger before it emerges. Spend Momentum and double the successes on any roll to detect ambushes or to discern whether a person means harm. If you are protecting your charge, you do not need to pay the cost."
+                "tooltips": {
+                    "full": "<p>You sense the presence of danger before it emerges. Spend Momentum and double the successes on any roll to detect ambushes or to discern whether a person means harm. If you are protecting your charge, you do not need to pay the cost.</p>"
+                }
             },
             "afternoonOfFortnights": {
                 "name": "Afternoon of Fortnights",
-                "description": "When you begin a creative project, spend Momentum and make a Knack Skill roll. For each success earned on this roll you decrease the amount of time required to work on the project by one unit. This is measured in either units of dramatic time (a project that would take a whole session can be downgraded to a scene) or in in-game units of time (years become months, months become weeks, etc.) whichever is more appropriate for the game's approach."
+                "tooltips": {
+                    "full": "<p>When you begin a creative project, spend Momentum and make a Knack Skill roll. For each success earned on this roll you decrease the amount of time required to work on the project by one unit. This is measured in either units of dramatic time (a project that would take a whole session can be downgraded to a scene) or in in-game units of time (years become months, months become weeks, etc.) whichever is more appropriate for the game's approach.</p>"
+                }
             },
             "alwaysThere": {
                 "name": "Always There",
-                "description": "Anyone of a lower Tier cannot escape you. You always find them and can always track them down no matter how far they go."
+                "tooltips": {
+                    "full": "<p>Anyone of a lower Tier cannot escape you. You always find them and can always track them down no matter how far they go.</p>"
+                }
             },
             "apexPredator": {
                 "name": "Apex Predator",
-                "description": "When a target of lower Tier who you have been pursuing attacks you or otherwise attempts to hunt you in return, increase the difficulty of all Stunts they apply against you by 1. If this target is your quarry, increase it by an additional +1."
+                "tooltips": {
+                    "full": "<p>When a target of lower Tier who you have been pursuing attacks you or otherwise attempts to hunt you in return, increase the difficulty of all Stunts they apply against you by 1. If this target is your quarry, increase it by an additional +1.</p>"
+                }
             },
             "armyOfOne": {
                 "name": "Army of One",
-                "description": "When you fight outnumbered, you do not take any penalties or increased difficulty that being outnumbered would cause. You gain half your Legend, round up as an Enhancement to all attacks so long as there are more opponents present than you and your band. When fighting a greater force as a Feat of Scale, invoke your Legendary Title and imbue Legend instead of spending it."
+                "tooltips": {
+                    "full": "<p>When you fight outnumbered, you do not take any penalties or increased difficulty that being outnumbered would cause. You gain half your Legend, round up as an Enhancement to all attacks so long as there are more opponents present than you and your band. When fighting a greater force as a Feat of Scale, invoke your Legendary Title and imbue Legend instead of spending it.</p>"
+                }
             },
             "auraOfGreatness": {
                 "name": "Aura of Greatness",
-                "description": "Something about you affects everyone around. You can be radically inspirational, the perfect confidant, or horrifically scary, depending on your origin and demeanor. Choose one Social Skill (Leadership, Empathy, or Persuasion); you may add Enhancement 2 as a bonus to that type of roll once per session, reflecting your Godly heritage."
+                "tooltips": {
+                    "full": "<p>Something about you affects everyone around. You can be radically inspirational, the perfect confidant, or horrifically scary, depending on your origin and demeanor. Choose one Social Skill (Leadership, Empathy, or Persuasion); you may add Enhancement 2 as a bonus to that type of roll once per session, reflecting your Godly heritage.</p>"
+                }
             },
             "beyondMemory": {
                 "name": "Beyond Memory",
-                "description": "You bend the boundaries of cognition, fading from memory after an interaction. Anyone trying to describe you or recall the details of your interaction must make an Occult + Composure roll at Difficulty 2 to remember anything at all, with a 1-point Complication. If they fail to meet this Complication, your identity is safe, though the details of their interaction are not. If this is magically contested, make a Clash of Wills. You may spend Momentum and double successes on any Liminal Skill rolls to avoid passive detection, notice, or stealth otherwise; this does not work against active searching."
+                "tooltips": {
+                    "full": "<p>You bend the boundaries of cognition, fading from memory after an interaction. Anyone trying to describe you or recall the details of your interaction must make an Occult + Composure roll at Difficulty 2 to remember anything at all, with a 1-point Complication. If they fail to meet this Complication, your identity is safe, though the details of their interaction are not. If this is magically contested, make a Clash of Wills. You may spend Momentum and double successes on any Liminal Skill rolls to avoid passive detection, notice, or stealth otherwise; this does not work against active searching.</p>"
+                }
             },
             "blatherAndSkite": {
                 "name": "Blather and Skite",
-                "description": "When you spout nonsense at your target, they must spend a moment trying to figure out what the heck you just said — buying you or someone else more time to accomplish any kind of underhanded task: sneaking into a place, slipping past a posted sentry, lying your way through security, and so on. This works automatically on any character of same or lower Tier, but requires a Knack Skill roll to work on someone of higher Tier. For each success rolled, you buy five minutes of in-game time or one turn of combat (whichever is more immediately applicable) before enemies realize you've infiltrated and go on high alert. If you use this on one of your bandmates, you only succeed with the consent of the other character's player."
+                "tooltips": {
+                    "full": "<p>When you spout nonsense at your target, they must spend a moment trying to figure out what the heck you just said — buying you or someone else more time to accomplish any kind of underhanded task: sneaking into a place, slipping past a posted sentry, lying your way through security, and so on. This works automatically on any character of same or lower Tier, but requires a Knack Skill roll to work on someone of higher Tier. For each success rolled, you buy five minutes of in-game time or one turn of combat (whichever is more immediately applicable) before enemies realize you've infiltrated and go on high alert. If you use this on one of your bandmates, you only succeed with the consent of the other character's player.</p>"
+                }
             },
             "blockadeOfReason": {
                 "name": "Blockade of Reason",
-                "description": "You readily deflate the arguments of hucksters and con men with a sharp application of reason, or blunt denial (usually calling out the person for what they are trying to do). Targets of lower Tier cannot trick, coerce, swindle, or con you, and any supernatural attempts to do so trigger a Clash of Wills. You add 2 Enhancement to the Clash of Wills roll."
+                "tooltips": {
+                    "full": "<p>You readily deflate the arguments of hucksters and con men with a sharp application of reason, or blunt denial (usually calling out the person for what they are trying to do). Targets of lower Tier cannot trick, coerce, swindle, or con you, and any supernatural attempts to do so trigger a Clash of Wills. You add 2 Enhancement to the Clash of Wills roll.</p>"
+                }
             },
             "bornToBeKings": {
                 "name": "Born to be Kings",
-                "description": "Scions are masters at enforcing their will upon the World, if it means serving their parents diligently. The first time each Scene that the character would add points to the Momentum pool, they instead add 2."
+                "tooltips": {
+                    "full": "<p>Scions are masters at enforcing their will upon the World, if it means serving their parents diligently. The first time each Scene that the character would add points to the Momentum pool, they instead add 2.</p>"
+                }
             },
             "boundByOath": {
                 "name": "Bound by Oath",
-                "description": "When someone swears an oath to you to perform a task of your choosing, you bind it with your choice of swearing ceremony. As long as they work towards the sworn oath, they gain +1 Enhancement to all rolls until the task is complete. This bonus applies before the roll. If the target breaks your oath, the next roll they would make botches automatically."
+                "tooltips": {
+                    "full": "<p>When someone swears an oath to you to perform a task of your choosing, you bind it with your choice of swearing ceremony. As long as they work towards the sworn oath, they gain +1 Enhancement to all rolls until the task is complete. This bonus applies before the roll. If the target breaks your oath, the next roll they would make botches automatically.</p>"
+                }
             },
             "breathOfLife": {
                 "name": "Breath of Life",
-                "description": "If you touch a target within three minutes of their death, you can spend a point of Legend and bring them back to life with all Injuries filled. Any longer than three minutes and the target cannot be revived."
+                "tooltips": {
+                    "full": "<p>If you touch a target within three minutes of their death, you can spend a point of Legend and bring them back to life with all Injuries filled. Any longer than three minutes and the target cannot be revived.</p>"
+                }
             },
             "byYourSide": {
                 "name": "By Your Side",
-                "description": "Spend a point of Momentum to move to be next to someone you are protecting in an instant, regardless of the distance between you. You receive an innate warning whenever this Knack would come into play. If you are protecting your charge, you do not need to pay the cost."
+                "tooltips": {
+                    "full": "<p>Spend a point of Momentum to move to be next to someone you are protecting in an instant, regardless of the distance between you. You receive an innate warning whenever this Knack would come into play. If you are protecting your charge, you do not need to pay the cost.</p>"
+                }
             },
             "captainOfIndustry": {
                 "name": "Captain of Industry",
-                "description": "When you take charge of a group, roll Knack Skill. With two successes, you need only spend 2 Momentum to add an interval to a complex action. With five successes, you need only spend 1 Momentum."
+                "tooltips": {
+                    "full": "<p>When you take charge of a group, roll Knack Skill. With two successes, you need only spend 2 Momentum to add an interval to a complex action. With five successes, you need only spend 1 Momentum.</p>"
+                }
             },
             "centerOfAttention": {
                 "name": "Center of Attention",
-                "description": "You're where the people want to be. You are a centrifuge of social attention, automatically pulling anyone of lesser Tier than you into your social wake. If you are at a party and need to meet someone of political or social importance, they are there. If you need the attention of supernaturally powerful individuals, spend Momentum instead. At Storyguide discretion, you may need to make a Knack Skill roll to attract the attention of the Gods themselves — and this may not always work out the way you'd like it to."
+                "tooltips": {
+                    "full": "<p>You're where the people want to be. You are a centrifuge of social attention, automatically pulling anyone of lesser Tier than you into your social wake. If you are at a party and need to meet someone of political or social importance, they are there. If you need the attention of supernaturally powerful individuals, spend Momentum instead. At Storyguide discretion, you may need to make a Knack Skill roll to attract the attention of the Gods themselves — and this may not always work out the way you'd like it to.</p>"
+                }
             },
             "cipher": {
                 "name": "Cipher",
-                "description": "You are never stumped by any codes or encryptions set in place by a character of a lower Tier. When you converse in or read a foreign language, your communication is flawless, without a trace of an accent. You can turn out translations in your native language in a matter of minutes without needing to roll. If you are translating mystical runes or the handwriting of gods, you still do so swiftly, but must make a Knack Skill roll. When you create your own encryption, it also cannot be resolved by anyone of a lower Tier. You add your half your Legend, round up, in Enhancement to rolls to prevent decryption by your peers and those of higher Tiers. This bonus applies before you roll."
+                "tooltips": {
+                    "full": "<p>You are never stumped by any codes or encryptions set in place by a character of a lower Tier. When you converse in or read a foreign language, your communication is flawless, without a trace of an accent. You can turn out translations in your native language in a matter of minutes without needing to roll. If you are translating mystical runes or the handwriting of gods, you still do so swiftly, but must make a Knack Skill roll. When you create your own encryption, it also cannot be resolved by anyone of a lower Tier. You add your half your Legend, round up, in Enhancement to rolls to prevent decryption by your peers and those of higher Tiers. This bonus applies before you roll.</p>"
+                }
             },
             "cloakOfDread": {
                 "name": "Cloak of Dread",
-                "description": "You project an aura of menace that terrifies and intimidates anyone who would dare cross you. Spend Momentum and double your successes on any Knack Skill rolls to intimidate targets. Enemies of a lesser Tier and extras simply will not attack you."
+                "tooltips": {
+                    "full": "<p>You project an aura of menace that terrifies and intimidates anyone who would dare cross you. Spend Momentum and double your successes on any Knack Skill rolls to intimidate targets. Enemies of a lesser Tier and extras simply will not attack you.</p>"
+                }
             },
             "closeTheGap": {
                 "name": "Close the Gap",
-                "description": "The first time you make a combat movement roll, make a Knack Skill roll instead. Spend successes on the following Stunts for the rest of the fight:"
+                "tooltips": {
+                    "full": "<p>The first time you make a combat movement roll, make a Knack Skill roll instead. Spend successes on the following Stunts for the rest of the fight:</p>"
+                }
             },
             "combatMedic": {
                 "name": "Combat Medic",
-                "description": "When you tend to an ally's wounds in the heat of battle, once per turn remove any −1 Injury they may be suffering — including damage sustained to armor — without needing to roll. You may not make Mixed actions when utilizing this Knack."
+                "tooltips": {
+                    "full": "<p>When you tend to an ally's wounds in the heat of battle, once per turn remove any −1 Injury they may be suffering — including damage sustained to armor — without needing to roll. You may not make Mixed actions when utilizing this Knack.</p>"
+                }
             },
             "completePrivacy": {
                 "name": "Complete Privacy",
-                "description": "By reinforcing the importance of your personal boundaries, any interactions you take cannot be listened in on, your lips cannot be read, your phone can't be tapped, etc. by use of mundane means. Add +2 difficulty to attempts to tail you. This protects only against covert attempts to invade your privacy and offers no protection against airport security going through your luggage or rivals breaking into your apartment."
+                "tooltips": {
+                    "full": "<p>By reinforcing the importance of your personal boundaries, any interactions you take cannot be listened in on, your lips cannot be read, your phone can't be tapped, etc. by use of mundane means. Add +2 difficulty to attempts to tail you. This protects only against covert attempts to invade your privacy and offers no protection against airport security going through your luggage or rivals breaking into your apartment.</p>"
+                }
             },
             "damageConversion": {
                 "name": "Damage Conversion",
-                "description": "When you administer medical attention to a patient or yourself as an action, convert any Injuries one lower: Maimed becomes Injured, Injured becomes Bruised, and Bruised injuries heal completely."
+                "tooltips": {
+                    "full": "<p>When you administer medical attention to a patient or yourself as an action, convert any Injuries one lower: Maimed becomes Injured, Injured becomes Bruised, and Bruised injuries heal completely.</p>"
+                }
             },
             "deathByTeacup": {
                 "name": "Death by Teacup",
-                "description": "When you use an improvised weapon, it becomes as deadly as anything designed for the job. It takes on the profile of any existing weapon of a similar size or shape: A teacup becomes brass knuckles or a punch dagger; a shard of glass becomes a knife; a thrown shoe becomes a throwing hatchet, etc. It must appropriately fit something of a similar size and shape, as described in the examples listed. This benefit lasts until you no longer hold the object, or until it breaks, or until you are no longer using the object with any Warrior Skill — whichever comes first. In the case of thrown objects, the benefit extends until impact. A hurled shoe strikes with the force of a tomahawk and then becomes ordinary footwear when it hits the ground. This is compatible with Master of Weapons, though still adheres to the set limitations."
+                "tooltips": {
+                    "full": "<p>When you use an improvised weapon, it becomes as deadly as anything designed for the job. It takes on the profile of any existing weapon of a similar size or shape: A teacup becomes brass knuckles or a punch dagger; a shard of glass becomes a knife; a thrown shoe becomes a throwing hatchet, etc. It must appropriately fit something of a similar size and shape, as described in the examples listed. This benefit lasts until you no longer hold the object, or until it breaks, or until you are no longer using the object with any Warrior Skill — whichever comes first. In the case of thrown objects, the benefit extends until impact. A hurled shoe strikes with the force of a tomahawk and then becomes ordinary footwear when it hits the ground. This is compatible with Master of Weapons, though still adheres to the set limitations.</p>"
+                }
             },
             "doctorsKit": {
                 "name": "Doctor's Kit",
-                "description": "At the start of a combat scene, roll Knack Skill. Spend the resulting successes on the following Stunts whenever a bandmate or allied character in the same range band as you takes an Injury:"
+                "tooltips": {
+                    "full": "<p>At the start of a combat scene, roll Knack Skill. Spend the resulting successes on the following Stunts whenever a bandmate or allied character in the same range band as you takes an Injury:</p>"
+                }
             },
             "doppelganger": {
                 "name": "Doppelganger",
-                "description": "Make a Knack Skill roll and with any successes, make an exact copy of yourself. The copy has all your Attributes and Skills, Knacks and Boons, and is controlled by you. This doppelganger may be sent to perform any social or investigative task independently of you, though you are aware of the outcome (and the player is free to roleplay her character in two places at once). It cannot benefit from teamwork actions and dissipates into dust if attacked. Otherwise, the copy lasts for a number of days equal to your Trickster Calling."
+                "tooltips": {
+                    "full": "<p>Make a Knack Skill roll and with any successes, make an exact copy of yourself. The copy has all your Attributes and Skills, Knacks and Boons, and is controlled by you. This doppelganger may be sent to perform any social or investigative task independently of you, though you are aware of the outcome (and the player is free to roleplay her character in two places at once). It cannot benefit from teamwork actions and dissipates into dust if attacked. Otherwise, the copy lasts for a number of days equal to your Trickster Calling.</p>"
+                }
             },
             "enforcingTheBoundary": {
                 "name": "Enforcing the Boundary",
-                "description": "Make a Knack Skill roll — on a success, create a barrier of force that protects you and all allies within short range of you. It moves with you, but you may not take the Rush or Disengage actions. The force field lasts until the end of a fight scene, until you are Taken Out, or until you choose to end the effect — whichever comes first. While enforcing this boundary, characters under its protection may not be targeted by attacks by weapons or abilities with the Firearms or Arcing tags. It adds your Legend in Enhancement to any rolls you make to resist the Rush action. This applies before you roll."
+                "tooltips": {
+                    "full": "<p>Make a Knack Skill roll — on a success, create a barrier of force that protects you and all allies within short range of you. It moves with you, but you may not take the Rush or Disengage actions. The force field lasts until the end of a fight scene, until you are Taken Out, or until you choose to end the effect — whichever comes first. While enforcing this boundary, characters under its protection may not be targeted by attacks by weapons or abilities with the Firearms or Arcing tags. It adds your Legend in Enhancement to any rolls you make to resist the Rush action. This applies before you roll.</p>"
+                }
             },
             "enhancedImpact": {
                 "name": "Enhanced Impact",
-                "description": "Whenever you successfully deal Injury with your Knack Skill, you also knock the target back one range band. This does not do any extra damage, but can put someone in a tight spot."
+                "tooltips": {
+                    "full": "<p>Whenever you successfully deal Injury with your Knack Skill, you also knock the target back one range band. This does not do any extra damage, but can put someone in a tight spot.</p>"
+                }
             },
             "eternalGenius": {
                 "name": "Eternal Genius",
-                "description": "When you unravel a mystery or tackle a complex, scholarly problem on a massive Scale (untangling the secrets of quantum physics, solving a trickster God's cipher), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you unravel a mystery or tackle a complex, scholarly problem on a massive Scale (untangling the secrets of quantum physics, solving a trickster God's cipher), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale.</p>"
+                }
             },
             "eternalGuardian": {
                 "name": "Eternal Guardian",
-                "description": "When you protect a person, place, or thing that can be measured with Scale (standing guard at the entrance of your pantheon's afterlife, keeping a watchful eye on a city all night), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you protect a person, place, or thing that can be measured with Scale (standing guard at the entrance of your pantheon's afterlife, keeping a watchful eye on a city all night), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale.</p>"
+                }
             },
             "experiencedTraveler": {
                 "name": "Experienced Traveler",
-                "description": "When you travel to a new place, no matter how remote, you quickly pick up the social mores and behaviors, along with enough of the language to get by. Add +1 Enhancement to any applicable rolls to blend into the culture, if the Storyguide feels a need to call for a roll at all. This bonus applies before you roll. Additionally, when you attend a social ritual (such as a wedding or a funeral or a birthday party) you always know exactly the right social mores to follow, and how to appropriately dress. Even if you were not invited, you will not read as out of place."
+                "tooltips": {
+                    "full": "<p>When you travel to a new place, no matter how remote, you quickly pick up the social mores and behaviors, along with enough of the language to get by. Add +1 Enhancement to any applicable rolls to blend into the culture, if the Storyguide feels a need to call for a roll at all. This bonus applies before you roll. Additionally, when you attend a social ritual (such as a wedding or a funeral or a birthday party) you always know exactly the right social mores to follow, and how to appropriately dress. Even if you were not invited, you will not read as out of place.</p>"
+                }
             },
             "eyeForAnEye": {
                 "name": "Eye for an Eye",
-                "description": "When you suffer an Injury, spend Momentum and inflict the same Injury on the target that attacked you. The target must have attacked you directly; you cannot reflect attacks that targeted someone else. If the target does not have the ability to take a similar Injury (having your arm bitten by a giant snake, for example), inflict an Injury of similar severity instead, such as a festering, envenomed bite mark. This also applies to Critical Hits inflicted."
+                "tooltips": {
+                    "full": "<p>When you suffer an Injury, spend Momentum and inflict the same Injury on the target that attacked you. The target must have attacked you directly; you cannot reflect attacks that targeted someone else. If the target does not have the ability to take a similar Injury (having your arm bitten by a giant snake, for example), inflict an Injury of similar severity instead, such as a festering, envenomed bite mark. This also applies to Critical Hits inflicted.</p>"
+                }
             },
             "eyesInTheBlinds": {
                 "name": "Eyes in the Blinds",
-                "description": "Spend Momentum to invest a fraction of your power into a small token (a coin, a figurine, dice, an arrowhead, etc.). Place this token anywhere in a Field you are aware of, and for as long as it remains in place you have the power to observe the goings-on in the Field as if you were present. This lasts for the duration of a day in-game time, or for a session of play, whichever is longer. You do not have to deliver the token yourself, and may send an ally or animal companion to deliver it instead. If the token is destroyed or otherwise removed from the Field, the effect ends. The Difficulty to notice the token is equal to your Hunter Calling dots."
+                "tooltips": {
+                    "full": "<p>Spend Momentum to invest a fraction of your power into a small token (a coin, a figurine, dice, an arrowhead, etc.). Place this token anywhere in a Field you are aware of, and for as long as it remains in place you have the power to observe the goings-on in the Field as if you were present. This lasts for the duration of a day in-game time, or for a session of play, whichever is longer. You do not have to deliver the token yourself, and may send an ally or animal companion to deliver it instead. If the token is destroyed or otherwise removed from the Field, the effect ends. The Difficulty to notice the token is equal to your Hunter Calling dots.</p>"
+                }
             },
             "flatlander": {
                 "name": "Flatlander",
-                "description": "When you make a close combat, thrown, or ranged attack, you gain access and 1 Enhancement to apply any of the following Stunts to your action, in addition to the default set:"
+                "tooltips": {
+                    "full": "<p>When you make a close combat, thrown, or ranged attack, you gain access and 1 Enhancement to apply any of the following Stunts to your action, in addition to the default set:</p>"
+                }
             },
             "flawlesslyPlatonicIdeal": {
                 "name": "Flawlessly Platonic Ideal",
-                "description": "When you work to improve an object, you make it as flawless as possible. When creating an object using this Knack, you may ignore up to your Creator dots (1) in points of Flaws. In combat, you can upgrade light cover to heavy cover by making a Knack Skill roll. If materials are available, you may also spend Momentum and use an action to transform items that would not normally be protective (stacks of newspaper, empty cardboard boxes, curtains, etc.) into light cover."
+                "tooltips": {
+                    "full": "<p>When you work to improve an object, you make it as flawless as possible. When creating an object using this Knack, you may ignore up to your Creator dots (1) in points of Flaws. In combat, you can upgrade light cover to heavy cover by making a Knack Skill roll. If materials are available, you may also spend Momentum and use an action to transform items that would not normally be protective (stacks of newspaper, empty cardboard boxes, curtains, etc.) into light cover.</p>"
+                }
             },
             "fluidAppeal": {
                 "name": "Fluid Appeal",
-                "description": "When interacting with someone, gain knowledge of whatever floats their boat. At any subsequent interaction, you can shift your features to be more appealing, adding +2 Enhancement to any persuasive social action including but not limited to seduction. This bonus applies before the roll is made. Note that this does not conceal your identity in any way."
+                "tooltips": {
+                    "full": "<p>When interacting with someone, gain knowledge of whatever floats their boat. At any subsequent interaction, you can shift your features to be more appealing, adding +2 Enhancement to any persuasive social action including but not limited to seduction. This bonus applies before the roll is made. Note that this does not conceal your identity in any way.</p>"
+                }
             },
             "forYouIWill": {
                 "name": "For You, I Will",
-                "description": "Regain 1 point of spent Legend when you perform an impressive feat that positively impacts a character whom you love (which expressly includes the platonic bond of close friendship) — this can be a Storyguide character or a bandmate, but the feat must be suitably impressive depending on the target. What impresses an ordinary mortal is not the same as what impresses a Demigod."
+                "tooltips": {
+                    "full": "<p>Regain 1 point of spent Legend when you perform an impressive feat that positively impacts a character whom you love (which expressly includes the platonic bond of close friendship) — this can be a Storyguide character or a bandmate, but the feat must be suitably impressive depending on the target. What impresses an ordinary mortal is not the same as what impresses a Demigod.</p>"
+                }
             },
             "goodListener": {
                 "name": "Good Listener",
-                "description": "When you make casual conversation with an SGC, that character will reveal information or an important detail that the Leader is looking for, if they know it. Before using this ability, tell the Storyguide what you're seeking; if the SGC doesn't know it, you immediately become aware that the character isn't relevant to your quest. Even the most recalcitrant of characters eventually opens up and reveals a clue — this power requires no roll."
+                "tooltips": {
+                    "full": "<p>When you make casual conversation with an SGC, that character will reveal information or an important detail that the Leader is looking for, if they know it. Before using this ability, tell the Storyguide what you're seeking; if the SGC doesn't know it, you immediately become aware that the character isn't relevant to your quest. Even the most recalcitrant of characters eventually opens up and reveals a clue — this power requires no roll.</p>"
+                }
             },
             "grandEntrance": {
                 "name": "Grand Entrance",
-                "description": "When you make a first impression, roll your Knack Skill. On a success, the target remembers you favorably, granting you +1 Enhancement to all Social rolls made towards them until the end of the session."
+                "tooltips": {
+                    "full": "<p>When you make a first impression, roll your Knack Skill. On a success, the target remembers you favorably, granting you +1 Enhancement to all Social rolls made towards them until the end of the session.</p>"
+                }
             },
             "heartsAflame": {
                 "name": "Hearts Aflame",
-                "description": "When you inspire passion or promote relationships on an epic Scale (inspiring an audience of millions, changing a culture's attitudes on consent), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you inspire passion or promote relationships on an epic Scale (inspiring an audience of millions, changing a culture's attitudes on consent), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale.</p>"
+                }
             },
             "hurlToTheMoon": {
                 "name": "Hurl to the Moon",
-                "description": "Imbue a point of Legend instead of spending Legend to lift and throw objects with a Size rating higher than yours when performing a brute force Feat of Scale. Objects thrown this way can also be hurled to medium range. Outside of throwing a huge object, this Knack allows you to make all Thrown attacks at long range, regardless of the range tag on any weapon. You roll the attack as a normal for Thrown."
+                "tooltips": {
+                    "full": "<p>Imbue a point of Legend instead of spending Legend to lift and throw objects with a Size rating higher than yours when performing a brute force Feat of Scale. Objects thrown this way can also be hurled to medium range. Outside of throwing a huge object, this Knack allows you to make all Thrown attacks at long range, regardless of the range tag on any weapon. You roll the attack as a normal for Thrown.</p>"
+                }
             },
             "iAmAFire": {
                 "name": "I am a Fire",
-                "description": "You stoke the affection one person has towards another — including yourself — which impels them towards a relationship. If it is between two Storyguide characters, work with the Storyguide to determine how their suddenly passionate relationship takes shape. If the target is one of your bandmates, this Knack does not work unless you obtain permission from the character's player. If the target is yourself, you gain +1 Enhancement to all Social rolls involving your partner of choice until the end of the session."
+                "tooltips": {
+                    "full": "<p>You stoke the affection one person has towards another — including yourself — which impels them towards a relationship. If it is between two Storyguide characters, work with the Storyguide to determine how their suddenly passionate relationship takes shape. If the target is one of your bandmates, this Knack does not work unless you obtain permission from the character's player. If the target is yourself, you gain +1 Enhancement to all Social rolls involving your partner of choice until the end of the session.</p>"
+                }
             },
             "iAmTheLaw": {
                 "name": "I Am the Law",
-                "description": "When you reshape laws or challenge the structure of society on a wide Scale (rewriting a country's constitution, smashing the patriarchy), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you reshape laws or challenge the structure of society on a wide Scale (rewriting a country's constitution, smashing the patriarchy), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale.</p>"
+                }
             },
             "immortalMastermind": {
                 "name": "Immortal Mastermind",
-                "description": "When you make a plan of action and direct others to follow, it grants them 1 Enhancement to all actions. Anyone who doesn't follow your plan gains +1 Difficulty to all actions. Bandmates are not under any obligation to follow your every word, but do gain the benefit if they opt to participate. When dealing with an enemy, you are free to create a plan in order to bait your opposition into suffering the Difficulty — just as planned."
+                "tooltips": {
+                    "full": "<p>When you make a plan of action and direct others to follow, it grants them 1 Enhancement to all actions. Anyone who doesn't follow your plan gains +1 Difficulty to all actions. Bandmates are not under any obligation to follow your every word, but do gain the benefit if they opt to participate. When dealing with an enemy, you are free to create a plan in order to bait your opposition into suffering the Difficulty — just as planned.</p>"
+                }
             },
             "immunizationBooster": {
                 "name": "Immunization Booster",
-                "description": "Designate up to your Knack Skill in targets to be under your care. While under your protection, they get +2 Enhancement to all rolls to resist disease and poison, and to recover from injuries. Storyguide characters you protect in this way are automatically protected — that is, the Storyguide does not need to make rolls when they would be affected by disease or poison."
+                "tooltips": {
+                    "full": "<p>Designate up to your Knack Skill in targets to be under your care. While under your protection, they get +2 Enhancement to all rolls to resist disease and poison, and to recover from injuries. Storyguide characters you protect in this way are automatically protected — that is, the Storyguide does not need to make rolls when they would be affected by disease or poison.</p>"
+                }
             },
             "inSheepsClothing": {
                 "name": "In Sheep's Clothing",
-                "description": "When you disguise yourself, you do without needing to roll. You have the option to change your hair, skin, and eye color, apparent gender, and height within a few inches, but cannot assume the exact appearance of someone else. The disguise cannot be seen through, though your mannerisms and turn of phrase may give you away. At Storyguide discretion, Knack Skill rolls may be required to blend in."
+                "tooltips": {
+                    "full": "<p>When you disguise yourself, you do without needing to roll. You have the option to change your hair, skin, and eye color, apparent gender, and height within a few inches, but cannot assume the exact appearance of someone else. The disguise cannot be seen through, though your mannerisms and turn of phrase may give you away. At Storyguide discretion, Knack Skill rolls may be required to blend in.</p>"
+                }
             },
             "indisputableAnalysis": {
                 "name": "Indisputable Analysis",
-                "description": "You spend a moment observing the scene you wish to analyze and the player makes a Knack Skill roll. You then apply the successes on this roll as Enhancement to all rolls made to analyze and investigate the incident for the rest of the scene. These successes apply before you roll."
+                "tooltips": {
+                    "full": "<p>You spend a moment observing the scene you wish to analyze and the player makes a Knack Skill roll. You then apply the successes on this roll as Enhancement to all rolls made to analyze and investigate the incident for the rest of the scene. These successes apply before you roll.</p>"
+                }
             },
             "innateToolkit": {
                 "name": "Innate Toolkit",
-                "description": "You are always able to work your craft, regardless of whether or not you have the appropriate tools available. When you use your bare hands to build or create something that would otherwise require special equipment, you suffer no penalty or any kind of Injury. For example: If you were to pound your bare fist against a railroad spike like a hammer or plunge your exposed fingers into a heated forge, you would not break bones or suffer burns."
+                "tooltips": {
+                    "full": "<p>You are always able to work your craft, regardless of whether or not you have the appropriate tools available. When you use your bare hands to build or create something that would otherwise require special equipment, you suffer no penalty or any kind of Injury. For example: If you were to pound your bare fist against a railroad spike like a hammer or plunge your exposed fingers into a heated forge, you would not break bones or suffer burns.</p>"
+                }
             },
             "inspirationalAura": {
                 "name": "Inspirational Aura",
-                "description": "When you take charge of a group, roll Knack Skill. For every two successes rolled, reduce the Difficulty of all actions taken by the group you command by 1. You can inspire a number of people equal to her Leadership + Leader Calling, or can spend a point of Momentum to apply this to a much larger group, multiplying that number by 10 for each Momentum spent. The decrease in difficulty does not apply to you, though while you are inspiring others, you gain 2 Enhancement to apply to social rolls involving leadership, and any Stunts you may have gained from Knacks."
+                "tooltips": {
+                    "full": "<p>When you take charge of a group, roll Knack Skill. For every two successes rolled, reduce the Difficulty of all actions taken by the group you command by 1. You can inspire a number of people equal to her Leadership + Leader Calling, or can spend a point of Momentum to apply this to a much larger group, multiplying that number by 10 for each Momentum spent. The decrease in difficulty does not apply to you, though while you are inspiring others, you gain 2 Enhancement to apply to social rolls involving leadership, and any Stunts you may have gained from Knacks.</p>"
+                }
             },
             "instantDiagnosis": {
                 "name": "Instant Diagnosis",
-                "description": "When you spend time interacting with an ailing target, you diagnose what is wrong with him, as well as any other pertinent medical information. In the event that she is diagnosing a patient suffering from a supernatural disease, this may require a Knack Skill roll, which is opposed by whomever afflicted the victim."
+                "tooltips": {
+                    "full": "<p>When you spend time interacting with an ailing target, you diagnose what is wrong with him, as well as any other pertinent medical information. In the event that she is diagnosing a patient suffering from a supernatural disease, this may require a Knack Skill roll, which is opposed by whomever afflicted the victim.</p>"
+                }
             },
             "internalCompass": {
                 "name": "Internal Compass",
-                "description": "You always know your precise direction — whether that be navigating while on foot or driving a car, or working your way out of a petty God's labyrinthine prison. You do not ever have to roll to navigate somewhere, or to find your way out of being lost. If you are entrapped in a magical maze, make a Clash of Wills with 2 Enhancement."
+                "tooltips": {
+                    "full": "<p>You always know your precise direction — whether that be navigating while on foot or driving a car, or working your way out of a petty God's labyrinthine prison. You do not ever have to roll to navigate somewhere, or to find your way out of being lost. If you are entrapped in a magical maze, make a Clash of Wills with 2 Enhancement.</p>"
+                }
             },
             "internalRefinery": {
                 "name": "Internal Refinery",
-                "description": "When exposed to a poison or disease, make a Knack Skill roll. A success instantly cures yourself. By spending a point of Momentum, you then also generate one dose of a cure or antidote, which you can secrete and administer to another person."
+                "tooltips": {
+                    "full": "<p>When exposed to a poison or disease, make a Knack Skill roll. A success instantly cures yourself. By spending a point of Momentum, you then also generate one dose of a cure or antidote, which you can secrete and administer to another person.</p>"
+                }
             },
             "invulnerableMaster": {
                 "name": "Invulnerable Master",
-                "description": "While leading followers loyal to you (Storyguide characters, not bandmates), you can spend Momentum and shrug off a −1 Bruised injury or a −2 Injured injury when they're suffered."
+                "tooltips": {
+                    "full": "<p>While leading followers loyal to you (Storyguide characters, not bandmates), you can spend Momentum and shrug off a −1 Bruised injury or a −2 Injured injury when they're suffered.</p>"
+                }
             },
             "keeneyedPredator": {
                 "name": "Keen-Eyed Predator",
-                "description": "When you enter a Field, you extend your senses to determine what might await you. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question. The Storyguide must answer these questions honestly:<li>What kinds of hazards (such as terrain) are present?<li>Where is the nearest exit?<li>Where is the safest way in?<li>How many hostile enemies are present?<li>Who (or what) is the biggest threat?"
+                "tooltips": {
+                    "full": "<p>When you enter a Field, you extend your senses to determine what might await you. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question. The Storyguide must answer these questions honestly:<ul><li>What kinds of hazards (such as terrain) are present?</li><li>Where is the nearest exit?</li><li>Where is the safest way in?</li><li>How many hostile enemies are present?</li><li>Who (or what) is the biggest threat?</li></ul>"
+                }
             },
             "lieDetector": {
                 "name": "Lie Detector",
-                "description": "Anyone of a Tier lower than you suffers +2 Complication to lie to you. If you are currently casing and they are somehow involved, they simply cannot lie to you at all. The Storyguide should also notify you when a lie has been told, though it does not automatically reveal the truth, and also reveals nebulous truth, such as \"he has been convinced this is true\" — which should always be a means for characters to pursue the person who manipulated the target in the first place."
+                "tooltips": {
+                    "full": "<p>Anyone of a Tier lower than you suffers +2 Complication to lie to you. If you are currently casing and they are somehow involved, they simply cannot lie to you at all. The Storyguide should also notify you when a lie has been told, though it does not automatically reveal the truth, and also reveals nebulous truth, such as \"he has been convinced this is true\" — which should always be a means for characters to pursue the person who manipulated the target in the first place.</p>"
+                }
             },
             "liftedFromDust": {
                 "name": "Lifted from Dust",
-                "description": "When you work on a creative project that would cover a massive Scale (planning a city or designing a civilization), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you work on a creative project that would cover a massive Scale (planning a city or designing a civilization), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale.</p>"
+                }
             },
             "lightFingered": {
                 "name": "Light Fingered",
-                "description": "When you steal an object or pickpocket someone, you do so without needing to roll, so long as the object is something you can conceal in your hands. If you use this ability to lift something from a member of your band, you must do so with the consent of that character's player. You cannot steal an item that is currently in use. Stealing a weapon from an enemy would first require the Disarm or Seize stunt."
+                "tooltips": {
+                    "full": "<p>When you steal an object or pickpocket someone, you do so without needing to roll, so long as the object is something you can conceal in your hands. If you use this ability to lift something from a member of your band, you must do so with the consent of that character's player. You cannot steal an item that is currently in use. Stealing a weapon from an enemy would first require the Disarm or Seize stunt.</p>"
+                }
             },
             "lighthouseOfSociety": {
                 "name": "Lighthouse of Society",
-                "description": "In a tense, heated, or chaotic situation, you stand as a beacon of certain leadership. Your presence is a bulwark against fear and panic. As long as a crowd has not been frightened directly by magical means, you can get a group of people to act calm and do as you ask (such as evacuating a dangerous area) in an orderly fashion without needing to roll. A supernatural situation requires a Clash of Wills. For example, if an enemy Scion of Eris sows panic into a crowd of mortals so they'll bolt and trample each other, a roll would be made against her. If Poseidon creates a tidal wave that happens to scare people because natural disasters are terrifying, a roll would not be made against him."
+                "tooltips": {
+                    "full": "<p>In a tense, heated, or chaotic situation, you stand as a beacon of certain leadership. Your presence is a bulwark against fear and panic. As long as a crowd has not been frightened directly by magical means, you can get a group of people to act calm and do as you ask (such as evacuating a dangerous area) in an orderly fashion without needing to roll. A supernatural situation requires a Clash of Wills. For example, if an enemy Scion of Eris sows panic into a crowd of mortals so they'll bolt and trample each other, a roll would be made against her. If Poseidon creates a tidal wave that happens to scare people because natural disasters are terrifying, a roll would not be made against him.</p>"
+                }
             },
             "livingPillar": {
                 "name": "Living Pillar",
-                "description": "When you protect someone else with your body, you are immune to environmental hazards: The flames of a burning building do not scorch you, a landslide does not crush you, water cannot drown you, and so on. As long as you keep your charge close (within arm's reach), they benefit from the same immunity, but still need to eat, sleep, etc., so it's best to leave a hazardous area as quickly as possible."
+                "tooltips": {
+                    "full": "<p>When you protect someone else with your body, you are immune to environmental hazards: The flames of a burning building do not scorch you, a landslide does not crush you, water cannot drown you, and so on. As long as you keep your charge close (within arm's reach), they benefit from the same immunity, but still need to eat, sleep, etc., so it's best to leave a hazardous area as quickly as possible.</p>"
+                }
             },
             "loversIntuition": {
                 "name": "Lover's Intuition",
-                "description": "When touching another character, which may be as brief as a handshake, you gain an understanding of your target's romantic life. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question.<li>Who or what does the character love?<li>Who is the character romantically involved with? Who is the character close to?<li>Who would the character like to be romantically involved with?<p>This may be used on your bandmates with consent from the player."
+                "tooltips": {
+                    "full": "<p>When touching another character, which may be as brief as a handshake, you gain an understanding of your target's romantic life. Ask one question from the following list for free. You may roll your Knack Skill and spend one success per additional question.<ul><li>Who or what does the character love?</li><li>Who is the character romantically involved with? Who is the character close to?</li><li>Who would the character like to be romantically involved with?</li></ul><p>This may be used on your bandmates with consent from the player.</p>"
+                }
             },
             "loversOath": {
                 "name": "Lover's Oath",
-                "description": "You and a consenting partner enter into an agreement to bind yourselves together forever as lovers. Both parties spend a point of Legend (if applicable). From that moment on, it takes only a moment's concentration to know the location and general state (emotional wellbeing, health, etc.) of your partner. You have the option to accept Injuries for the other, and can imbue points of Legend for each other's abilities (assuming your partner has a pool of Legend to pull from). This is a pact that binds you together by Fate, and while it does not necessarily have to be made out of romantic love, ill fortune befalls those who mistreat their partner whom they have sworn an oath to before the Gods."
+                "tooltips": {
+                    "full": "<p>You and a consenting partner enter into an agreement to bind yourselves together forever as lovers. Both parties spend a point of Legend (if applicable). From that moment on, it takes only a moment's concentration to know the location and general state (emotional wellbeing, health, etc.) of your partner. You have the option to accept Injuries for the other, and can imbue points of Legend for each other's abilities (assuming your partner has a pool of Legend to pull from). This is a pact that binds you together by Fate, and while it does not necessarily have to be made out of romantic love, ill fortune befalls those who mistreat their partner whom they have sworn an oath to before the Gods.</p>"
+                }
             },
             "masterOfTheWorld": {
                 "name": "Master of the World",
-                "description": "While inside a Field, you may define up to three points of Enhancements or Complications (or a combination of each) that are readily apparent to your perceptions (which may be enhanced by other abilities) but not obvious to other observers. They must conform to the Features of the Field, however — it makes sense for a shotgun to be behind the bar, but not a rocket launcher. The hardwood floors of a burning building could be expected to be weak, but the flames can't be cold. Only three total Enhancements or Complications can be applied to a Field at a time, regardless of how many Scions possess this ability."
+                "tooltips": {
+                    "full": "<p>While inside a Field, you may define up to three points of Enhancements or Complications (or a combination of each) that are readily apparent to your perceptions (which may be enhanced by other abilities) but not obvious to other observers. They must conform to the Features of the Field, however — it makes sense for a shotgun to be behind the bar, but not a rocket launcher. The hardwood floors of a burning building could be expected to be weak, but the flames can't be cold. Only three total Enhancements or Complications can be applied to a Field at a time, regardless of how many Scions possess this ability.</p>"
+                }
             },
             "masterOfWeapons": {
                 "name": "Master of Weapons",
-                "description": "At the beginning of the session, choose one of your weapons to be your favored weapon. When you use your favored weapon, add a number of additional Tag points to it up to your Warrior Calling. These do not have to fit the weapon's existing profile: A sword can be made to strike at Far range, for example. Spend Momentum to switch the benefit to another weapon. Negative cost Tags cannot be purchased with this Knack."
+                "tooltips": {
+                    "full": "<p>At the beginning of the session, choose one of your weapons to be your favored weapon. When you use your favored weapon, add a number of additional Tag points to it up to your Warrior Calling. These do not have to fit the weapon's existing profile: A sword can be made to strike at Far range, for example. Spend Momentum to switch the benefit to another weapon. Negative cost Tags cannot be purchased with this Knack.</p>"
+                }
             },
             "masterfulEfficiency": {
                 "name": "Masterful Efficiency",
-                "description": "When you lead people in a task, make a Knack Skill roll. They increase in Scale by 1 for every success achieved, up to half your Legend rating, for one action (which may be part of an extended task, though not combat). A team of five people can build a skyscraper, or a small band of warriors can hold a chokepoint against an entire army, etc. You may spend Momentum for the task to increase Scale one for one above the number of successes achieved, again to a maximum of half your Legend rating."
+                "tooltips": {
+                    "full": "<p>When you lead people in a task, make a Knack Skill roll. They increase in Scale by 1 for every success achieved, up to half your Legend rating, for one action (which may be part of an extended task, though not combat). A team of five people can build a skyscraper, or a small band of warriors can hold a chokepoint against an entire army, etc. You may spend Momentum for the task to increase Scale one for one above the number of successes achieved, again to a maximum of half your Legend rating.</p>"
+                }
             },
             "mostDangerousPrey": {
                 "name": "Most Dangerous Prey",
-                "description": "Choose an enemy to be your quarry. When you pursue your quarry, gain Enhancement 1 to all rolls made against the target (including attack rolls) until the end of the session or until you catch them, whichever comes first. You gain access to the following Stunts, which may be applied to any attack action made against your quarry:"
+                "tooltips": {
+                    "full": "<p>Choose an enemy to be your quarry. When you pursue your quarry, gain Enhancement 1 to all rolls made against the target (including attack rolls) until the end of the session or until you catch them, whichever comes first. You gain access to the following Stunts, which may be applied to any attack action made against your quarry:</p>"
+                }
             },
             "neitherTheMinuteNorTheHour": {
                 "name": "Neither the Minute nor the Hour",
-                "description": "You make a prediction about the details of your target's inevitable death (which does not have to be true) and make an opposed Knack Skill roll. If successful, the target suffers a +1 Difficulty to all actions for the rest of the scene."
+                "tooltips": {
+                    "full": "<p>You make a prediction about the details of your target's inevitable death (which does not have to be true) and make an opposed Knack Skill roll. If successful, the target suffers a +1 Difficulty to all actions for the rest of the scene.</p>"
+                }
             },
             "notAFighter": {
                 "name": "Not a Fighter",
-                "description": "When you are engaged in a fight, as long as you do not make attacks, enemies will not target you directly with their attacks. Additionally, gain +1 Enhancement to disengage and withdrawal rolls. You must also have a partner or Followers present for this effect to apply."
+                "tooltips": {
+                    "full": "<p>When you are engaged in a fight, as long as you do not make attacks, enemies will not target you directly with their attacks. Additionally, gain +1 Enhancement to disengage and withdrawal rolls. You must also have a partner or Followers present for this effect to apply.</p>"
+                }
             },
             "notTodayFriends": {
                 "name": "Not Today, Friends",
-                "description": "When you command others or stir the hearts of many on a huge Scale (commanding an entire army, calling a whole city to your aid), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you command others or stir the hearts of many on a huge Scale (commanding an entire army, calling a whole city to your aid), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale.</p>"
+                }
             },
             "objection": {
                 "name": "Objection!",
-                "description": "You mark a target, and anyone targeting them with an action gains +1 Enhancement to all rolls. This bonus applies before you roll. Gain access to the following Stunt, which you may apply to any of your attack actions:"
+                "tooltips": {
+                    "full": "<p>You mark a target, and anyone targeting them with an action gains +1 Enhancement to all rolls. This bonus applies before you roll. Gain access to the following Stunt, which you may apply to any of your attack actions:</p>"
+                }
             },
             "officeHours": {
                 "name": "Office Hours",
-                "description": "When someone approaches you with a problem that you can solve, they gain +1 Enhancement to resolve it themselves if you work them through a solution. If you can't solve it, you gain the same bonus to all rolls to solve it on your own. These bonuses apply before rolls are made. Spend Momentum to impel a Storyguide Character to come to you with a problem in need of solving."
+                "tooltips": {
+                    "full": "<p>When someone approaches you with a problem that you can solve, they gain +1 Enhancement to resolve it themselves if you work them through a solution. If you can't solve it, you gain the same bonus to all rolls to solve it on your own. These bonuses apply before rolls are made. Spend Momentum to impel a Storyguide Character to come to you with a problem in need of solving.</p>"
+                }
             },
             "omniglotTranslation": {
                 "name": "Omniglot Translation",
-                "description": "When you converse in or read a foreign language, your communication is flawless, without a trace of an accent. You can turn out translations in your native language in a matter of minutes without needing to roll. If you are translating mystical runes or the handwriting of Gods, you still do so swiftly, but must make a Knack Skill roll."
+                "tooltips": {
+                    "full": "<p>When you converse in or read a foreign language, your communication is flawless, without a trace of an accent. You can turn out translations in your native language in a matter of minutes without needing to roll. If you are translating mystical runes or the handwriting of Gods, you still do so swiftly, but must make a Knack Skill roll.</p>"
+                }
             },
             "onTheCase": {
                 "name": "On the Case",
-                "description": "When you investigate an event or scene, you are casing. While casing, gain +1 Enhancement to rolls to discern motives and search for clues, which applies before you roll. Casing lasts until the end of the session."
+                "tooltips": {
+                    "full": "<p>When you investigate an event or scene, you are casing. While casing, gain +1 Enhancement to rolls to discern motives and search for clues, which applies before you roll. Casing lasts until the end of the session.</p>"
+                }
             },
             "onYourSide": {
                 "name": "On Your Side",
-                "description": "When you make a teamwork action with a person with whom you have a devoted, intimate, or romantic relationship, add your Lover dots in Enhancement to spend on Stunts including any you may have gained from Knacks."
+                "tooltips": {
+                    "full": "<p>When you make a teamwork action with a person with whom you have a devoted, intimate, or romantic relationship, add your Lover dots in Enhancement to spend on Stunts including any you may have gained from Knacks.</p>"
+                }
             },
             "oneMansTrash": {
                 "name": "One Man's Trash",
-                "description": "Spend Momentum and make an ordinary piece of junk seem extremely rare and valuable. This item will sell or trade as if it had real value. Anyone of lower Tier buys this deception instantly, squabbling over themselves for who will get to buy this unique thing. Targets of the same Tier or higher must make an Empathy roll to see through this lie, but face +Legend Difficulty to convince anyone else that it is not just trash."
+                "tooltips": {
+                    "full": "<p>Spend Momentum and make an ordinary piece of junk seem extremely rare and valuable. This item will sell or trade as if it had real value. Anyone of lower Tier buys this deception instantly, squabbling over themselves for who will get to buy this unique thing. Targets of the same Tier or higher must make an Empathy roll to see through this lie, but face +Legend Difficulty to convince anyone else that it is not just trash.</p>"
+                }
             },
             "overworldKnowledge": {
                 "name": "Overworld Knowledge",
-                "description": "Once per scene, make a Knack Skill roll. For each success, ask a question of the Storyguide relevant to the events transpiring — something you would know or have studied — and receive a truthful and applicable answer. For example, \"What stratagem is the enemy general using?\" or \"What are Kane Taoka's true motives?\" If you have remaining unasked questions, spend Momentum to roll over the remaining questions into the following scene."
+                "tooltips": {
+                    "full": "<p>Once per scene, make a Knack Skill roll. For each success, ask a question of the Storyguide relevant to the events transpiring — something you would know or have studied — and receive a truthful and applicable answer. For example, \"What stratagem is the enemy general using?\" or \"What are Kane Taoka's true motives?\" If you have remaining unasked questions, spend Momentum to roll over the remaining questions into the following scene.</p>"
+                }
             },
             "palaceOfMemory": {
                 "name": "Palace of Memory",
-                "description": "When you recall past events that you have experienced or studied, you are able to recall the details flawlessly, never missing out on any clues or dropping the ball on any details you might remember. This allows the player to bypass the need to roll to remember salient details or facts, and also to declare a narrative advantage she may have remembered without needing to invoke her Path. If you missed a Procedural Clue in a prior scene, you may attempt to rediscover it."
+                "tooltips": {
+                    "full": "<p>When you recall past events that you have experienced or studied, you are able to recall the details flawlessly, never missing out on any clues or dropping the ball on any details you might remember. This allows the player to bypass the need to roll to remember salient details or facts, and also to declare a narrative advantage she may have remembered without needing to invoke her Path. If you missed a Procedural Clue in a prior scene, you may attempt to rediscover it.</p>"
+                }
             },
             "panacea": {
                 "name": "Panacea",
-                "description": "When you work to cure a disease or fight an illness on a large Scale (curing cancer, stopping a God-driven plague), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you work to cure a disease or fight an illness on a large Scale (curing cancer, stopping a God-driven plague), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale.</p>"
+                }
             },
             "perfectCamouflage": {
                 "name": "Perfect Camouflage",
-                "description": "You blend in seamlessly with your surroundings, granting +3 Enhancement to avoid notice by the person you are pursuing, which applies before you roll. Targets of a lower Tier simply cannot spot you. Gain access to the following Stunt:"
+                "tooltips": {
+                    "full": "<p>You blend in seamlessly with your surroundings, granting +3 Enhancement to avoid notice by the person you are pursuing, which applies before you roll. Targets of a lower Tier simply cannot spot you. Gain access to the following Stunt:</p>"
+                }
             },
             "perfectDefense": {
                 "name": "Perfect Defense",
-                "description": "Once per fight, declare that an attack made against you by an enemy of the same Tier or lower does not affect you in any way. To do this a second time, spend Momentum. This may not be used more than twice a fight."
+                "tooltips": {
+                    "full": "<p>Once per fight, declare that an attack made against you by an enemy of the same Tier or lower does not affect you in any way. To do this a second time, spend Momentum. This may not be used more than twice a fight.</p>"
+                }
             },
             "perfectPartner": {
                 "name": "Perfect Partner",
-                "description": "You know how to work perfectly in sync with someone, down to the timed beats of their hearts. Double the usual benefit you would provide from any teamwork rolls."
+                "tooltips": {
+                    "full": "<p>You know how to work perfectly in sync with someone, down to the timed beats of their hearts. Double the usual benefit you would provide from any teamwork rolls.</p>"
+                }
             },
             "perfectPoise": {
                 "name": "Perfect Poise",
-                "description": "You cannot be shaken by panic or fear unless it is from another supernatural source — in which case, you gain 2 Enhancement to resist it (such as making Clash of Wills rolls) that applies before you roll. You also gain 1 Enhancement to all Social rolls involving grace, poise, or composure, and to keep a \"poker face.\" This also applies before you roll."
+                "tooltips": {
+                    "full": "<p>You cannot be shaken by panic or fear unless it is from another supernatural source — in which case, you gain 2 Enhancement to resist it (such as making Clash of Wills rolls) that applies before you roll. You also gain 1 Enhancement to all Social rolls involving grace, poise, or composure, and to keep a \"poker face.\" This also applies before you roll.</p>"
+                }
             },
             "perfectRendition": {
                 "name": "Perfect Rendition",
-                "description": "You are a master artist, able to illustrate or recreate an image of a person, place, or object you have seen with photo-perfect clarity, allowing you to flawlessly identify suspects, create detailed maps, or forge signatures. You do this without needing to roll, and can recreate these things in scant instances. If something you observed has been obscured by a supernatural power, make a Clash of Wills."
+                "tooltips": {
+                    "full": "<p>You are a master artist, able to illustrate or recreate an image of a person, place, or object you have seen with photo-perfect clarity, allowing you to flawlessly identify suspects, create detailed maps, or forge signatures. You do this without needing to roll, and can recreate these things in scant instances. If something you observed has been obscured by a supernatural power, make a Clash of Wills.</p>"
+                }
             },
             "pierceTheVeil": {
                 "name": "Pierce the Veil",
-                "description": "When you cross boundaries on an epic Scale (descending into the afterlife on foot, driving your way across the globe), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you cross boundaries on an epic Scale (descending into the afterlife on foot, driving your way across the globe), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale.</p>"
+                }
             },
             "presenceOfMagic": {
                 "name": "Presence of Magic",
-                "description": "You always know when you are near an object or place of true magical or sacred power. How this manifests is up to you. Ask the Storyguide if an object is magical or sacred, and she must tell you honestly \"yes\" or \"no.\" This bypasses the need to make any kind of Occult roll to identify a place or object of magical or sacred power."
+                "tooltips": {
+                    "full": "<p>You always know when you are near an object or place of true magical or sacred power. How this manifests is up to you. Ask the Storyguide if an object is magical or sacred, and she must tell you honestly \"yes\" or \"no.\" This bypasses the need to make any kind of Occult roll to identify a place or object of magical or sacred power.</p>"
+                }
             },
             "quickStudy": {
                 "name": "Quick Study",
-                "description": "You sweep your eyes over a crime scene and collects clue almost immediately. Halve the time you would need to perform an investigation. Quarter it if you are also casing."
+                "tooltips": {
+                    "full": "<p>You sweep your eyes over a crime scene and collects clue almost immediately. Halve the time you would need to perform an investigation. Quarter it if you are also casing.</p>"
+                }
             },
             "raiseThePillarsOfTheEarth": {
                 "name": "Raise the Pillars of the Earth",
-                "description": "Make a Creator Skill roll. With any successes, you create a small building, structure, or monument in a matter of minutes, which grows from nothing but rocks and dirt. To raise a creation in a scant instant, spend Momentum."
+                "tooltips": {
+                    "full": "<p>Make a Creator Skill roll. With any successes, you create a small building, structure, or monument in a matter of minutes, which grows from nothing but rocks and dirt. To raise a creation in a scant instant, spend Momentum.</p>"
+                }
             },
             "reconstruction": {
                 "name": "Reconstruction",
-                "description": "Once per day, make a Knack Skill roll. If any successes are achieved, remove any one Condition a target may face that is not necessarily an illness or ailment. Examples include ending a character's blindness, restoring a limb with a perfect prosthetic, and ending paralysis or PTSD. You may cure additional ailments by spending 1 Momentum each. As an additional effect, which does not cost Momentum, at the beginning of the session you have the option to reassign your Attribute dots in any order as long as they remain within the same original categories. You cannot move Resistance dots into Power dots, for example."
+                "tooltips": {
+                    "full": "<p>Once per day, make a Knack Skill roll. If any successes are achieved, remove any one Condition a target may face that is not necessarily an illness or ailment. Examples include ending a character's blindness, restoring a limb with a perfect prosthetic, and ending paralysis or PTSD. You may cure additional ailments by spending 1 Momentum each. As an additional effect, which does not cost Momentum, at the beginning of the session you have the option to reassign your Attribute dots in any order as long as they remain within the same original categories. You cannot move Resistance dots into Power dots, for example.</p>"
+                }
             },
             "relentless": {
                 "name": "Relentless",
-                "description": "When you pursue or hunt a target on a massive Scale or of great Size (chasing your target across dimensions, hunting a mountain-sized titanspawn), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you pursue or hunt a target on a massive Scale or of great Size (chasing your target across dimensions, hunting a mountain-sized titanspawn), imbue a point of Legend, rather than spending, to invoke your legendary Title as a Feat of Scale.</p>"
+                }
             },
             "reverseEngineer": {
                 "name": "Reverse Engineer",
-                "description": "When you take apart an object, you instantly gain an understanding of how to rebuild it, or create new versions."
+                "tooltips": {
+                    "full": "<p>When you take apart an object, you instantly gain an understanding of how to rebuild it, or create new versions.</p>"
+                }
             },
             "rumorMiller": {
                 "name": "Rumor Miller",
-                "description": "Your lies catch on like wildfire, and you need only make the smallest post on social media to get a wild rumor circulating. Make a Knack Skill roll — any successes delivers the rumor about the target to those who should hear it — his boss, his husband, his best friends, etc."
+                "tooltips": {
+                    "full": "<p>Your lies catch on like wildfire, and you need only make the smallest post on social media to get a wild rumor circulating. Make a Knack Skill roll — any successes delivers the rumor about the target to those who should hear it — his boss, his husband, his best friends, etc.</p>"
+                }
             },
             "scentTheDivine": {
                 "name": "Scent the Divine",
-                "description": "Having a touch of divinity, you have an innate sense of anything divine near you. With a sniff or a knowing listen, you may detect another Scion (or God, or Legendary Creature, etc.) of a particular pantheon."
+                "tooltips": {
+                    "full": "<p>Having a touch of divinity, you have an innate sense of anything divine near you. With a sniff or a knowing listen, you may detect another Scion (or God, or Legendary Creature, etc.) of a particular pantheon.</p>"
+                }
             },
             "sendThePack": {
                 "name": "Send the Pack",
-                "description": "Make a Knack Skill roll. On a success, designate a target that you can see with unaided sight. Friendly characters you designate up to your Legend can pursue them without ceasing and at no increased difficulty."
+                "tooltips": {
+                    "full": "<p>Make a Knack Skill roll. On a success, designate a target that you can see with unaided sight. Friendly characters you designate up to your Legend can pursue them without ceasing and at no increased difficulty.</p>"
+                }
             },
             "silenceInTheWoods": {
                 "name": "Silence in the Woods",
-                "description": "When pursuing a target, you make no noise at all, adding +2 Enhancement to avoid detection based on hearing/sound (including things that can perceive vibrations without specifically hearing) and to set up ambushes. This Enhancement applies before you roll. Recording equipment is also unable to pick up your sound."
+                "tooltips": {
+                    "full": "<p>When pursuing a target, you make no noise at all, adding +2 Enhancement to avoid detection based on hearing/sound (including things that can perceive vibrations without specifically hearing) and to set up ambushes. This Enhancement applies before you roll. Recording equipment is also unable to pick up your sound.</p>"
+                }
             },
             "smokeAndMirrors": {
                 "name": "Smoke and Mirrors",
-                "description": "Once per scene, when you would be Taken Out, you instead spend Momentum, negate the damage that would have taken you out and move one range band away from your attacker — but leave behind a brief afterimage of your outline, which crumbles into dust seconds later."
+                "tooltips": {
+                    "full": "<p>Once per scene, when you would be Taken Out, you instead spend Momentum, negate the damage that would have taken you out and move one range band away from your attacker — but leave behind a brief afterimage of your outline, which crumbles into dust seconds later.</p>"
+                }
             },
             "somebodysWatchingMe": {
                 "name": "Somebody's Watching Me",
-                "description": "A Scion's Godly parent has eyes and ears everywhere, and even if they don't Visit their child, they're often ready to lend a hand to aid their child in need. During a scene where the Scion would be in danger, their parent sends in reinforcements, usually resulting in either two Mooks or one Professional (see Scion: Origin p. 143 for more on Archetypes) to fight on their side. These allies leave at the end of the scene, however."
+                "tooltips": {
+                    "full": "<p>A Scion's Godly parent has eyes and ears everywhere, and even if they don't Visit their child, they're often ready to lend a hand to aid their child in need. During a scene where the Scion would be in danger, their parent sends in reinforcements, usually resulting in either two Mooks or one Professional (see Scion: Origin p. 143 for more on Archetypes) to fight on their side. These allies leave at the end of the scene, however.</p>"
+                }
             },
             "soothingPresence": {
                 "name": "Soothing Presence",
-                "description": "When you enter an initial social encounter, reduce Attitude by 1. For any other interaction in which you attempt to get someone else to relax, calm down, or be welcoming, you have 1 Enhancement to all applicable rolls and to apply to any Stunts you may have gained from Knacks."
+                "tooltips": {
+                    "full": "<p>When you enter an initial social encounter, reduce Attitude by 1. For any other interaction in which you attempt to get someone else to relax, calm down, or be welcoming, you have 1 Enhancement to all applicable rolls and to apply to any Stunts you may have gained from Knacks.</p>"
+                }
             },
             "speedReading": {
                 "name": "Speed Reading",
-                "description": "When you read materials for your research, you do so at lightning speed, devouring thick tomes in a matter of minutes and flipping through electronic documents in the blink of an eye. Halve the time you need to do any kind of academic research. Once a scene you may establish that you've read up on a subject and gain 1 Enhancement to the next applicable roll. This bonus applies before the roll."
+                "tooltips": {
+                    "full": "<p>When you read materials for your research, you do so at lightning speed, devouring thick tomes in a matter of minutes and flipping through electronic documents in the blink of an eye. Halve the time you need to do any kind of academic research. Once a scene you may establish that you've read up on a subject and gain 1 Enhancement to the next applicable roll. This bonus applies before the roll.</p>"
+                }
             },
             "stepSideways": {
                 "name": "Step Sideways",
-                "description": "When you take a Move action, cross the distance instantly. This movement ignores hazardous and difficult terrain and crosses distance where there may not be a safe place to walk — such as across a chasm. So long as you can see your destination and it is within a distance you can Move, you appear there unharmed. This may only be used to augment the reflexive Move action, and does not apply to Rush or Disengage."
+                "tooltips": {
+                    "full": "<p>When you take a Move action, cross the distance instantly. This movement ignores hazardous and difficult terrain and crosses distance where there may not be a safe place to walk — such as across a chasm. So long as you can see your destination and it is within a distance you can Move, you appear there unharmed. This may only be used to augment the reflexive Move action, and does not apply to Rush or Disengage.</p>"
+                }
             },
             "surgeonWithTheHandsOfGod": {
                 "name": "Surgeon with the Hands of God",
-                "description": "Halve the time you need to undertake any kind of medical procedure (such as surgery). You never face any increased Difficulty to treat a critically ill or injured patient."
+                "tooltips": {
+                    "full": "<p>Halve the time you need to undertake any kind of medical procedure (such as surgery). You never face any increased Difficulty to treat a critically ill or injured patient.</p>"
+                }
             },
             "surprise": {
                 "name": "Surprise!",
-                "description": "Voluntarily be Taken Out (for all intents and purposes, you appear to be dead or unconscious) and come back later, unharmed, at any point in time during the session to make a surprise attack or otherwise set up an ambush with +4 Enhancement, which applies before you roll. If someone has seen you pull this trick before, they resist the ambush as normal (you do not gain the bonus) and instead gain +4 Enhancement on combat rolls against you for the first round if they succeed. If it would better suit you, you may return dramatically in the middle of a social scene instead, adding the same Enhancement to the next most appropriate Social roll."
+                "tooltips": {
+                    "full": "<p>Voluntarily be Taken Out (for all intents and purposes, you appear to be dead or unconscious) and come back later, unharmed, at any point in time during the session to make a surprise attack or otherwise set up an ambush with +4 Enhancement, which applies before you roll. If someone has seen you pull this trick before, they resist the ambush as normal (you do not gain the bonus) and instead gain +4 Enhancement on combat rolls against you for the first round if they succeed. If it would better suit you, you may return dramatically in the middle of a social scene instead, adding the same Enhancement to the next most appropriate Social roll.</p>"
+                }
             },
             "takesOneToKnowOne": {
                 "name": "Takes One to Know One",
-                "description": "When you are the target of a scam or a lie, you recognize that a deception is taking place. You do not know what the truth is, but you instinctively understand that you are in the company of liars and cheaters. Whether or not you call out the cheat on his dishonest actions is up to you."
+                "tooltips": {
+                    "full": "<p>When you are the target of a scam or a lie, you recognize that a deception is taking place. You do not know what the truth is, but you instinctively understand that you are in the company of liars and cheaters. Whether or not you call out the cheat on his dishonest actions is up to you.</p>"
+                }
             },
             "tempered": {
                 "name": "Tempered",
-                "description": "When you wear no armor, you are considered to have the Armored (Soft) Tag. This benefit stacks with the increased difficulty of the inflict damage Stunt granted by any other armor you wear when you fight lesser foes (minor characters, or anyone a Tier lower than you)."
+                "tooltips": {
+                    "full": "<p>When you wear no armor, you are considered to have the Armored (Soft) Tag. This benefit stacks with the increased difficulty of the inflict damage Stunt granted by any other armor you wear when you fight lesser foes (minor characters, or anyone a Tier lower than you).</p>"
+                }
             },
             "terrorOfTheGuilty": {
                 "name": "Terror of the Guilty",
-                "description": "Anyone guilty of a wrongdoing of your choosing who is of lower Tier than you cannot bear to be in your presence and will flee in panic and terror or break down weeping and confessing. To apply this to anyone of the same Tier or higher, spend Momentum and win a Clash of Wills."
+                "tooltips": {
+                    "full": "<p>Anyone guilty of a wrongdoing of your choosing who is of lower Tier than you cannot bear to be in your presence and will flee in panic and terror or break down weeping and confessing. To apply this to anyone of the same Tier or higher, spend Momentum and win a Clash of Wills.</p>"
+                }
             },
             "theBareMinimum": {
                 "name": "The Bare Minimum",
-                "description": "You are always able to safely tend to someone's wounds even if you have no sanitary medical tools available. Even if all you have are twigs and dirt, you'll be able to perform surgery at no increased Difficulty and at no risk to your patient."
+                "tooltips": {
+                    "full": "<p>You are always able to safely tend to someone's wounds even if you have no sanitary medical tools available. Even if all you have are twigs and dirt, you'll be able to perform surgery at no increased Difficulty and at no risk to your patient.</p>"
+                }
             },
             "theBiggestThreat": {
                 "name": "The Biggest Threat",
-                "description": "When you make a show of force or intimidate your enemy, make a Knack Skill roll. On a success, the target must focus its efforts on dealing with you first, suffering +2 Difficulty to attack anyone else."
+                "tooltips": {
+                    "full": "<p>When you make a show of force or intimidate your enemy, make a Knack Skill roll. On a success, the target must focus its efforts on dealing with you first, suffering +2 Difficulty to attack anyone else.</p>"
+                }
             },
             "theLongRoadToAnywhere": {
                 "name": "The Long Road to Anywhere",
-                "description": "You make an extended journey without stopping but must rest upon arrival. When you arrive, you can ask hospitality of anyone of a lower Tier than you, and if they refuse you have the option to make the target suffer +2 Difficulty to all actions until you choose to remove the penalty."
+                "tooltips": {
+                    "full": "<p>You make an extended journey without stopping but must rest upon arrival. When you arrive, you can ask hospitality of anyone of a lower Tier than you, and if they refuse you have the option to make the target suffer +2 Difficulty to all actions until you choose to remove the penalty.</p>"
+                }
             },
             "thePainOfDishonesty": {
                 "name": "The Pain of Dishonesty",
-                "description": "Spend Momentum and anyone who lies directly to you suffers 1 Health damage or a −1 Injury Condition of your choosing. You choose whether or not to inflict the damage, automatically alerting you of the lie (though it does not automatically reveal the truth). You also know the severity of the lie, and therefore can choose not to harm someone who is lying to preserve someone's feelings as opposed to lying to obstruct a criminal investigation."
+                "tooltips": {
+                    "full": "<p>Spend Momentum and anyone who lies directly to you suffers 1 Health damage or a −1 Injury Condition of your choosing. You choose whether or not to inflict the damage, automatically alerting you of the lie (though it does not automatically reveal the truth). You also know the severity of the lie, and therefore can choose not to harm someone who is lying to preserve someone's feelings as opposed to lying to obstruct a criminal investigation.</p>"
+                }
             },
             "theTruthArises": {
                 "name": "The Truth Arises",
-                "description": "When you engage in conversation (or other such interaction) with an alleged perpetrator of a crime, make a Knack Skill roll. On a success, if the target is guilty, he will leak a piece of information that connects him to his crime. Before expending effort on using this Knack, let the Storyguide know, and she should tell you if the target does not have any valuable information to leak — which in itself can be helpful in an investigation."
+                "tooltips": {
+                    "full": "<p>When you engage in conversation (or other such interaction) with an alleged perpetrator of a crime, make a Knack Skill roll. On a success, if the target is guilty, he will leak a piece of information that connects him to his crime. Before expending effort on using this Knack, let the Storyguide know, and she should tell you if the target does not have any valuable information to leak — which in itself can be helpful in an investigation.</p>"
+                }
             },
             "theUnlimitedQuartermaster": {
                 "name": "The Unlimited Quartermaster",
-                "description": "You never need to roll to acquire mundane crafting supplies, as you always know where and how to find them. Unless the item is exceedingly rare (or being blocked from access by a rival), you get what you need with little complication — this does not make materials cost less, or arrive any faster should they need to be transported to you. If someone or something is preventing you from acquiring materials, make a Clash of Wills."
+                "tooltips": {
+                    "full": "<p>You never need to roll to acquire mundane crafting supplies, as you always know where and how to find them. Unless the item is exceedingly rare (or being blocked from access by a rival), you get what you need with little complication — this does not make materials cost less, or arrive any faster should they need to be transported to you. If someone or something is preventing you from acquiring materials, make a Clash of Wills.</p>"
+                }
             },
             "theyCannotBeTouched": {
                 "name": "They Cannot Be Touched",
-                "description": "Spend a point of Momentum and designate one person to be immune to all source of damage until the end of the session. This only applies if the character is someone you have a Bond with, or is of a lower Tier. If a target does not need to be protected (such as your best friend, the Warrior-Calling Scion), this Knack does not apply."
+                "tooltips": {
+                    "full": "<p>Spend a point of Momentum and designate one person to be immune to all source of damage until the end of the session. This only applies if the character is someone you have a Bond with, or is of a lower Tier. If a target does not need to be protected (such as your best friend, the Warrior-Calling Scion), this Knack does not apply.</p>"
+                }
             },
             "theyreEverywhere": {
                 "name": "They're Everywhere",
-                "description": "The Field you are fighting in becomes divine territory. When an enemy enters divine territory, you have the option to make one attack against them, regardless of which range band they have entered and which may not be boosted by any Knacks that allow you to make extra attacks. You use this ability even if you have already taken your action this round and may do so no matter how many enemies enter your divine territory, but you may only make one attack per enemy."
+                "tooltips": {
+                    "full": "<p>The Field you are fighting in becomes divine territory. When an enemy enters divine territory, you have the option to make one attack against them, regardless of which range band they have entered and which may not be boosted by any Knacks that allow you to make extra attacks. You use this ability even if you have already taken your action this round and may do so no matter how many enemies enter your divine territory, but you may only make one attack per enemy.</p>"
+                }
             },
             "touchOfTheMuses": {
                 "name": "Touch of the Muses",
-                "description": "When working on an artistic project, double the successes earned on each roll made by an artistic partner. You have the option to spend Momentum and lend this benefit to yourself."
+                "tooltips": {
+                    "full": "<p>When working on an artistic project, double the successes earned on each roll made by an artistic partner. You have the option to spend Momentum and lend this benefit to yourself.</p>"
+                }
             },
             "trickShot": {
                 "name": "Trick Shot",
-                "description": "When showing off with a ranged weapon, convert any additional Difficulty imposed because of your showmanship into Enhancement instead which may be spent on any Ranged Attack Stunt besides Inflict Damage. This applies before your roll."
+                "tooltips": {
+                    "full": "<p>When showing off with a ranged weapon, convert any additional Difficulty imposed because of your showmanship into Enhancement instead which may be spent on any Ranged Attack Stunt besides Inflict Damage. This applies before your roll.</p>"
+                }
             },
             "trimarkisia": {
                 "name": "Trimarkisia",
-                "description": "When the Keltoi marched on ancient Greece, the Greeks were baffled at how the invaders could replace their fallen soldiers almost immediately. One servant brought the wounded warrior to safety while a second took up the fight, using the trimarkisia, or \"three horsemen,\" technique.<p>Make a Knack Skill roll and gain temporary dots of the Followers Birthright (Scion: Hero, p. 203) equal to successes rolled, to a maximum of Followers 5. This represents your foresight in coordinating auxiliary forces and finding or recruiting backup whenever you need it. These Followers have the Heavy archetype and gain tags in the following order as their rating increases: Tough, Group, Knack (The Biggest Threat; Scion: Hero, p. 235), Savage, Mob."
+                "tooltips": {
+                    "full": "<p>When the Keltoi marched on ancient Greece, the Greeks were baffled at how the invaders could replace their fallen soldiers almost immediately. One servant brought the wounded warrior to safety while a second took up the fight, using the trimarkisia, or \"three horsemen,\" technique.<p>Make a Knack Skill roll and gain temporary dots of the Followers Birthright (Scion: Hero, p. 203) equal to successes rolled, to a maximum of Followers 5. This represents your foresight in coordinating auxiliary forces and finding or recruiting backup whenever you need it. These Followers have the Heavy archetype and gain tags in the following order as their rating increases: Tough, Group, Knack (The Biggest Threat; Scion: Hero, p. 235), Savage, Mob.</p>"
+                }
             },
             "unerringDelivery": {
                 "name": "Unerring Delivery",
-                "description": "Send a message via another person — a stranger you choose on the street, a spirit or ghost of your pantheon, etc. — to someone in an instant, which can be done even if you are not present in the World, or somewhere else where a simple text or email might not reach."
+                "tooltips": {
+                    "full": "<p>Send a message via another person — a stranger you choose on the street, a spirit or ghost of your pantheon, etc. — to someone in an instant, which can be done even if you are not present in the World, or somewhere else where a simple text or email might not reach.</p>"
+                }
             },
             "unobtrusiveVisitor": {
                 "name": "Unobtrusive Visitor",
-                "description": "When you would observe or infiltrate a location where you do not belong, spend a Momentum and blur the line between what is expected and unexpected. You take on the aspect of someone unassuming and invisible: a janitor, gardener, housekeeper, etc. So long as you collect information or remain an observer and do not take hostile action, anyone in the same Field as you overlooks your presence. This lasts until you take violent action, or until you leave the Field, whichever comes first."
+                "tooltips": {
+                    "full": "<p>When you would observe or infiltrate a location where you do not belong, spend a Momentum and blur the line between what is expected and unexpected. You take on the aspect of someone unassuming and invisible: a janitor, gardener, housekeeper, etc. So long as you collect information or remain an observer and do not take hostile action, anyone in the same Field as you overlooks your presence. This lasts until you take violent action, or until you leave the Field, whichever comes first.</p>"
+                }
             },
             "wasntMe": {
                 "name": "Wasn't Me",
-                "description": "When you do something with legal or social consequences, you delay the consequence by transferring blame to someone else of the same or lower Tier. This delay lasts until the end of the session by default, but may be delayed further by making a Knack Skill roll, and spending 1 success per scene of delay. To push blame onto a member of your band, you must do so with the consent of that character's player. Once the delay ends, anyone of higher Tier than you who had been duped by this Knack realizes they've been tricked, and will likely seek revenge."
+                "tooltips": {
+                    "full": "<p>When you do something with legal or social consequences, you delay the consequence by transferring blame to someone else of the same or lower Tier. This delay lasts until the end of the session by default, but may be delayed further by making a Knack Skill roll, and spending 1 success per scene of delay. To push blame onto a member of your band, you must do so with the consent of that character's player. Once the delay ends, anyone of higher Tier than you who had been duped by this Knack realizes they've been tricked, and will likely seek revenge.</p>"
+                }
             },
             "weGoAllNight": {
                 "name": "We Go All Night",
-                "description": "When working on a creative project, you can work without ceasing for a number of days equal to your Creator Knack Skill. After this period, you must rest for a day before resuming your work."
+                "tooltips": {
+                    "full": "<p>When working on a creative project, you can work without ceasing for a number of days equal to your Creator Knack Skill. After this period, you must rest for a day before resuming your work.</p>"
+                }
             },
             "wirelessInterface": {
                 "name": "Wireless Interface",
-                "description": "Electronic devices respond you without needing to touch them. They must be powered on and functional, but you can use a number of devices in the same Field as you equal to your Knack Skill with your hands free. If you try to do other things while communing with technology, you must make a mixed action roll."
+                "tooltips": {
+                    "full": "<p>Electronic devices respond you without needing to touch them. They must be powered on and functional, but you can use a number of devices in the same Field as you equal to your Knack Skill with your hands free. If you try to do other things while communing with technology, you must make a mixed action roll.</p>"
+                }
             },
             "worryingHound": {
                 "name": "Worrying Hound",
-                "description": "While pursuing a target, you do not face any increase in difficulty to track down your target, even if they were to take flight, hide in a body of water, or attempt to disappear into the back alleys of a crowded city. You always have some idea of where your target has gone, and gain +1 Enhancement to keep up with him and to apply any Stunts you may have access to from Hunter Knacks. When you hunt your quarry, add another +1 Enhancement."
+                "tooltips": {
+                    "full": "<p>While pursuing a target, you do not face any increase in difficulty to track down your target, even if they were to take flight, hide in a body of water, or attempt to disappear into the back alleys of a crowded city. You always have some idea of where your target has gone, and gain +1 Enhancement to keep up with him and to apply any Stunts you may have access to from Hunter Knacks. When you hunt your quarry, add another +1 Enhancement.</p>"
+                }
             },
             "wovenFromLies": {
                 "name": "Woven from Lies",
-                "description": "When you spin a story or craft an elaborate deception on an epic Scale (spreading a vicious rumor across the world via social media, convincing a whole society of people that you're someone you're not), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale."
+                "tooltips": {
+                    "full": "<p>When you spin a story or craft an elaborate deception on an epic Scale (spreading a vicious rumor across the world via social media, convincing a whole society of people that you're someone you're not), imbue a point of Legend, rather than spending, to invoke your Legendary Title as a Feat of Scale.</p>"
+                }
             }
         },
         "stunt": {

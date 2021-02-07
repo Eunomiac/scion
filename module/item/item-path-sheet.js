@@ -45,14 +45,8 @@ export default class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichE
         return data;
     }
 
-    get suspensionCondition() {
-        this._suspensionCondition = this._suspensionCondition ?? game.item.get(this.$data.conditions.pathSuspension)
-        return this.item.getActorItems("condition").find((item) => item.$subtype === "pathSuspension" && item.$data.linkedItem === this.item.id);
-    }
-
-    get revocationCondition() {
-        return this.item.getActorItems("condition").find((item) => item.$subtype === "pathRevocation" && item.$data.linkedItem === this.item.id);
-    }
+    get suspensionCondition() { return this.actor.items.get(this.$data.items.conditions.pathSuspension) }
+    get revocationCondition() { return this.actor.items.get(this.$data.items.conditions.pathRevocation) }
 
     activateListeners(html) {
         super.activateListeners(html);

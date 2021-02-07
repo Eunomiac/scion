@@ -368,14 +368,22 @@ export const Accessors = (superClass) => class extends superClass {
     get $type() { return this.$base.type }
     get $subtype() { return this.$data.type }
     get $items() { return this.$entity.items ?? new Map(
-        Object.values(flattenObject(this.$data.items ?? {}))
-            .filter((val) => typeof val === "string")
-            .map((itemID) => [
-                itemID,
-                this.actor.items.find((item) => item.$id === itemID)
-            ])
+        _.flatten(
+            Object.values(flattenObject(this.$data.items ?? {}))
+                .filter((val) => typeof val === "string")
+                .map((itemID) => {
+                    const item = this.actor.items.get(itemID);
+                    return [
+                        [itemID, item],
+                        [`${item.$category}.${item.$subtype}`, item]
+                    ];
+                }),
+            true)
         );
     }
+
+
+
     get $category() { 
         this._category = this._category ?? Object.keys(itemCategories).find((cat) => itemCategories[cat].includes(this.$entity.data.type));
         return this._category;
@@ -392,7 +400,31 @@ export const Accessors = (superClass) => class extends superClass {
         return this._actor;
     }
 };
-
+export const ToolTips = (superClass) => class extends superClass {
+    getTooltips(categories = ["skills", "knacks"]) {
+        categories = [categories].flat();
+        const toolTipData = {};
+        if (categories.includes("skills")) {
+            toolTipData.skills = U.KeyMapObj(SCION.SKILLS.list, (name) => U.Loc(`scion.skill.${name}.tooltips.full`));
+        }
+        if (categories.includes("knacks")) {
+            toolTipData.knacks = U.KeyMapObj(SCION.KNACKS.list, (data, name) => [
+                `<h3 class="alignCenter">${U.Loc(`scion.knack.${name}.name`)}</h3>`,
+                U.Loc(`scion.knack.${name}.tooltips.full`),
+                ...(data.stunts?.length 
+                    ? `<ul>${data.stunts.map((stunt) => [
+                        "<li>",
+                        `<span class="stuntName">${U.Loc(`scion.stunt.${stunt}.name`)}</span>`,
+                        `<span class="stuntCost">(${U.Loc(`scion.stunt.${stunt}.cost`)})</span>`,
+                        ` — ${U.Loc(`scion.stunt.${stunt}.effect`)}`,
+                        "</li>"
+                    ].join("")).join("")}</ul>`
+                    : "")
+                ].join(""));
+        }
+        return toolTipData;
+    }
+}
 export const CloseButton = (superClass) => class extends superClass {
     activateListeners(html) {
         super.activateListeners(html);

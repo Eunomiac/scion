@@ -6,7 +6,8 @@ export default class ScionActorSheet extends MIX(ActorSheet).with(MIXINS.Accesso
                                                                   MIXINS.EditableDivs, 
                                                                   MIXINS.PopoutControl, 
                                                                   MIXINS.CloseButton, 
-                                                                  MIXINS.DotDragger) {
+                                                                  MIXINS.DotDragger,
+                                                                  MIXINS.ToolTips) {
     
     static get defaultOptions() {
         /*

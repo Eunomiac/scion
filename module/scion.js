@@ -213,6 +213,21 @@ Hooks.once("init", async () => {
             const [cat, subCat] = categories.split(":");
             const actor = game.actors.get(options.data.root.actor._id);
             switch (cat) {
+                case "skill": {
+                    switch (subCat) {
+                        case "path": {
+                            if (actor.pathSkills[trait].includes(subTrait)) {
+                                return "invalid";
+                            }
+                            if (_.countBy(_.flatten(Object.values(actor.pathSkills)), (skill) => skill)[subTrait] >= 2) {
+                                return "invalid";
+                            }
+                            break
+                        }
+                        // no default
+                    }
+                    break;
+                }
                 case "calling": {
                     const callings = U.Clone(Object.values(actor.callings));
                     switch (subCat) {

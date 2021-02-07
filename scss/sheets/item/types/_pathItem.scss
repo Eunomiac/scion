@@ -6,59 +6,72 @@ form.editable {
     .contentEditable:not(.h2) {
         // --lineHeight: 14px;
         --padding: 5px;
+        padding: var(--padding);
+        border-color: var(--grey) !important;
+        margin: 0 10px;
+        background-color: var(--blackFade75) !important;
         // line-height: var(--lineHeight);
         // min-height: none;
         // max-height: none;
         font-size: 14px;
         text-indent: 0;
-        padding: var(--padding);
-        margin: 0 10px;
-        border-color: var(--grey) !important;
-        background-color: var(--blackFade75) !important;
         &.placeholder { font-size: 12px; /* line-height: 16px; */ }
     }
-    .pathDescription .contentEditable { height: calc(var(--lineHeight) * 3 + var(--padding)); margin-bottom: 5px; }
+
+    .pathDescription .contentEditable { height: calc(var(--lineHeight) * 3 + var(--padding));
+        margin-bottom: 5px; }
+
     .pathSkills:not(.mirrorContainer) {
-        // min-height: 28px;
+        min-height: 28px;
         margin-bottom: 6px;
     }
+
     .pathSkills {
         span.skill {
             margin: 2px calc((100% - 3 * 120px) / 6);
+
             &.invalid {
-                background: none;
                 border-color: transparent;
+                background: none;
+                box-shadow: none;
                 color: var(--greyDown3);
                 font-style: italic;
                 font-weight: bold;
-                box-shadow: none;
             }
+
             &.pantheon {
                 filter: invert(100%);
                 border: {
-                    style: inset;
                     color: var(--greyUp3);
+                    style: inset;
                 }
                 @include box-shadow(3px, 3px, var(--greyUp2));
             }
         }
+
         &#skillList {
+            top: 0;
+            left: 94%;
             width: 150px;
             height: 480px;
-            left: 94%;
-            top: 0;
             span.skill { margin: 2px 0; }
         }
     }
+
     .pathConnections .contentEditable { 
-        height: calc(var(--lineHeight) * 3 + var(--padding)); 
+        height: calc(var(--lineHeight) * 3 + var(--padding));
         padding: 2px var(--padding) 12px var(--padding);
     }
+
     .pathCondition {
         padding-left: 10px;
     }
-    h3, .h3 {
-       @include embossed-text(1px, 0px, var(--colorHighlight), var(--colorShadow));
+
+    h3,
+    .h3 {
+        @include embossed-text(1px, 0, var(--colorHighlight), var(--colorShadow));
     }
-    div.closeButton { right: -443px; top: 14px; }
+
+    div.closeButton { top: 14px;
+        right: -443px; }
 }

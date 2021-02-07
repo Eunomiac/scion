@@ -9,7 +9,7 @@ export const applyMixins = (superclass) => new MixinBuilder(superclass);
 // #endregion
 
 // #region BASIC MIXINS
-export const OwnedItemBuilder = (superClass) => class extends superClass {
+export const OwnedItemManager = (superClass) => class extends superClass {
 
     constructor(...args) {
         super(...args);
@@ -24,7 +24,7 @@ export const OwnedItemBuilder = (superClass) => class extends superClass {
             }
         }, 500);
     }
-    
+
     makeOwnedItem(itemDataSet) {
         this.pendingOwnedItems.push(..._.flatten([itemDataSet]));
         this._buildOwnedItems();
@@ -38,27 +38,16 @@ export const OwnedItemBuilder = (superClass) => class extends superClass {
     }
 
     async _linkSubItems() {
-        const [updateDataSet, updatePromises] = [{}, []];
+        const [updateDataSet, updateData] = [{}, []];
         this.$items.entries?.filter((item) => item.$data.isLinked === false).forEach((subitem) => {
             updateDataSet[subitem.$data.parentItemID] = updateDataSet[subitem.$data.parentItemID] ?? {};
             updateDataSet[subitem.$id] = updateDataSet[subitem.$id] ?? {};
-            updateDataSet[subitem.$data.parentItemID][`data.items.${subitem.$category}.${subitem.$subtype}`] = subitem.$id;
+            updateDataSet[subitem.$data.parentItemID][`data.items.${subitem.$category}._${subitem.$subtype}`] = subitem.$id;
             updateDataSet[subitem.$id]["data.isLinked"] = true;
         });
-        U.LOG({updateDataSet}, `Found ${Object.values(updateDataSet).length}x Sub Items on ${this.name} for ${Object.keys(updateDataSet).length}x Parent Items. Linking...`, "ScionActor.linkSubItems()", {groupStyle: "l4"});
-        for (const [itemID, updateData] of Object.entries(updateDataSet)) {
-            const item = this.$items.get(itemID);
-            if (item) {
-                // updatePromises.push(item.update(updateData)); 
-                U.LOG({item, updateData}, `Updating ${item.name}`, "LinkSubItems", {groupStyle: "l2"});               
-                await item.update(updateData);
-                await U.Sleep(1000);
-            } else {
-                throw new Error(`Item with ID '${itemID}' not found on Entity '${this.name}'`);
-            }
-        }
-        U.LOG("Finished!", null, null, {groupStyle: "l2"});
-        // return Promise.all(updatePromises);
+        Object.entries(updateDataSet).forEach(([itemID, itemData]) => updateData.push({...itemData, _id: itemID}));
+        U.LOG({updateDataSet, updateData}, `Found ${Object.values(updateDataSet).length}x Sub Items on ${this.name} for ${Object.keys(updateDataSet).length}x Parent Items. Linking...`, "ScionActor.linkSubItems()", {groupStyle: "l4"});
+        await this.updateEmbeddedEntity("OwnedItem", updateData);
     }
 };
 // #endregion

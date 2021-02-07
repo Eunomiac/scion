@@ -67,20 +67,6 @@ export default class MajorActorSheet extends ScionActorSheet {
         }
         return this._selectedCalling;
     }
-    get tooltipLines() {
-        this._tooltipLines = this._tooltipLines ?? {
-            knacks: U.KeyMapObj(SCION.KNACKS.list, (data, name) => ({
-                lines: [
-                    ["h3 class=\"alignCenter\"", U.Loc(`scion.knack.${name}.name`)],
-                    ...U.Loc(`scion.knack.${name}.description`).
-                        split("<").
-                        map((line) => (/^\w{0,2}>/u.test(line) ? [line.match(/^(\w{0,2})>/u)[1], line.replace(/^\w{0,2}>/gu, "")] : [line])),
-                    ...data.stunts.map((stunt) => ["li", `<span class="stuntName">${U.Loc(`scion.stunt.${stunt}.name`)}</span> <span class="stuntCost">(${U.Loc(`scion.stunt.${stunt}.cost`)})</span> — ${U.Loc(`scion.stunt.${stunt}.effect`)}`])
-                ]
-            }))
-        };
-        return this._tooltipLines;
-    }
     // #region GET DATA
     getData() {
         const data = super.getData();
@@ -105,16 +91,20 @@ export default class MajorActorSheet extends ScionActorSheet {
 
         // #region OWNED ITEM SORTING
         data.items = {};
-        for (const [itemCategory, itemTypes] of Object.entries(itemCategories)) {data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.type))}
+        for (const [itemCategory, itemTypes] of Object.entries(_.pick(itemCategories, (val) => Array.isArray(val)))) {
+            data.items[itemCategory] = this.actor.items.filter((item) => itemTypes.includes(item.$type))
+        }
         // #endregion
 
         // #region TOOLTIP DATA
-        data.tooltips = this.tooltipLines;
+        data.tooltips = this.getTooltips();
 
         // #endregion
 
         // #region FRONT PAGE
-        if (pantheon) {data.virtues = C.PANTHEONS[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`))}
+        if (pantheon) {
+            data.virtues = C.PANTHEONS[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`))
+        }
         // #endregion
 
         // #region CHARGEN
@@ -123,7 +113,9 @@ export default class MajorActorSheet extends ScionActorSheet {
         // #region STEP ONE
 
         // Update Patron List
-        if (pantheon) {actorData.charGen.patronList = U.MakeDict(C.PANTHEONS[pantheon].members, (v) => U.Loc(`scion.pantheon.god.${v}`), (k, v) => v)}
+        if (pantheon) {
+            actorData.charGen.patronList = U.MakeDict(C.PANTHEONS[pantheon].members, (v) => U.Loc(`scion.pantheon.god.${v}`), (k, v) => v)
+        }
         // #endregion
 
         // #region STEP TWO
@@ -131,7 +123,7 @@ export default class MajorActorSheet extends ScionActorSheet {
         // PATH PRIORITIES
         const pathItems = [];
         for (const pathType of actorData.pathPriorities) {
-            pathItems.push(data.items.paths.find((item) => item.data.data.type === pathType));
+            pathItems.push(data.items.paths.find((item) => item.$subtype === pathType));
         }
         data.items.paths = pathItems;
 
@@ -139,7 +131,7 @@ export default class MajorActorSheet extends ScionActorSheet {
         data.pathSkills = _.pick(this.actor.pathSkillVals, (v) => v > 0);
         data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS.list, () => 0);
         Object.values(data.items.paths).forEach((pathItem) => {
-            pathItem.data.data.skills.forEach((skill) => {
+            pathItem.$data.skills.forEach((skill) => {
                 data.pathSkillsCount[skill]++;
             });
         });

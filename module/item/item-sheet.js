@@ -8,7 +8,8 @@ export default class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.Accessors
                                                                 MIXINS.ClampText,
                                                                 MIXINS.EditableDivs,
                                                                 MIXINS.PopoutControl,
-                                                                MIXINS.CloseButton) {
+                                                                MIXINS.CloseButton,
+                                                                MIXINS.ToolTips) {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -19,13 +20,11 @@ export default class ScionItemSheet extends MIX(ItemSheet).with(MIXINS.Accessors
     }
 
     static RegisterSheet(label = "item", types = [], makeDefault = true) {
-        const locLabel = `scion.sheet.${label}Sheet`;
-        Items.registerSheet("scion", this, {makeDefault,
-                                            types,
-                                            "label": locLabel});
+        label = `scion.sheet.${label}Sheet`;
+        Items.registerSheet("scion", this, {makeDefault, types, label});
         U.LOG(U.IsDebug() && {"Sheet Registered": this.name,
                               types,
-                              "defaultOptions": this.defaultOptions}, `${U.TCase(label)} Sheet Registered`, "ScionItemSheet");
+                              "defaultOptions": this.defaultOptions}, `${U.TCase(U.Loc(label))} Sheet Registered`, "ScionItemSheet");
     }
 
     get template() { return `systems/scion/templates/item/item-${this.object.data.type}-sheet.hbs`; }

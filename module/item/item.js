@@ -6,7 +6,7 @@ import ScionActor from "../actor/actor.js";
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
  */
-export default class ScionItem extends MIX(Item).with(MIXINS.Accessors) {    
+export default class ScionItem extends MIX(Item).with(MIXINS.Accessors) {   
     initSubItems() {
         switch (this.$type) {
             case "path": {
@@ -27,4 +27,6 @@ export default class ScionItem extends MIX(Item).with(MIXINS.Accessors) {
             // no default
         }
     }
+
+    getSubItem(type, subtype) { return this.$items.get(`${itemCategories.getCategory(type)}.${subtype}`) }
 }

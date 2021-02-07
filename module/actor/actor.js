@@ -6,7 +6,7 @@ import {_, U, SCION, MIX, MIXINS} from "../modules.js";
  * Extend the base Actor entity by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
-export default class ScionActor extends MIX(Actor).with(MIXINS.Accessors, MIXINS.OwnedItemBuilder) {
+export default class ScionActor extends MIX(Actor).with(MIXINS.Accessors, MIXINS.OwnedItemManager) {
     
     prepareData() {
         super.prepareData();
@@ -74,9 +74,10 @@ export default class ScionActor extends MIX(Actor).with(MIXINS.Accessors, MIXINS
     
     /* #region GETTERS */
     // #region Basic Data Retrieval
-    get paths() { return this.items.filter((item) => item.type === "path") }
-    get skills() { return this.data.data.skills.list }
+    get paths() { return this.$items.filter((item) => item.$type === "path") }
+    get skills() { return this.$data.skills.list }
     get attributes() { return this.$data.attributes.list }
+    // get callings() { return this.$items.filter((item) => item.$type === "calling") }
     get callings() {
         return U.KeyMapObj(_.pick(this.$data.callings.list, (callingData) => (callingData?.name ?? "") in SCION.CALLINGS.list && Number.isInteger(callingData?.slot)), (calling, name) => (
             {
@@ -89,20 +90,21 @@ export default class ScionActor extends MIX(Actor).with(MIXINS.Accessors, MIXINS
             }
         ));
     }
+    // get knacks() { return this.$items.filter((item) => item.$type === "knack") }
     get knacks() { return this.$data.knacks.list }
-    get conditions() { return this.items.filter((item) => item.type === "condition") }
+    get conditions() { return this.$items.filter((item) => item.type === "condition") }
     // #endregion
 
     // #region Paths
-    get originPath() { return this.paths.find((item) => item.data.data.type === "origin") }
-    get originPathConditions() { return U.KeyMapObj(this.originPath.$data.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
-    get rolePath() { return this.paths.find((item) => item.data.data.type === "role") }
-    get rolePathConditions() { return U.KeyMapObj(this.rolePath.$data.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
-    get pantheonPath() { return this.paths.find((item) => item.data.data.type === "pantheon") }
-    get pantheonPathConditions() { return U.KeyMapObj(this.pantheonPath.$data.conditions, (id) => this.conditions.find((condition) => condition.id === id)) }
+    get originPath() { return this.paths.find((item) => item.$subtype === "origin") }
+    get originPathConditions() { return {pathSuspension: this.originPath.getSubItem("condition", "pathSuspension"), pathRevocation: this.originPath.getSubItem("condition", "pathRevocation")} }
+    get rolePath() { return this.paths.find((item) => item.$subtype === "role") }
+    get rolePathConditions() { return {pathSuspension: this.rolePath.getSubItem("condition", "pathSuspension"), pathRevocation: this.rolePath.getSubItem("condition", "pathRevocation")} }
+    get pantheonPath() { return this.paths.find((item) => item.$subtype === "pantheon") }
+    get pantheonPathConditions() { return {pathSuspension: this.pantheonPath.getSubItem("condition", "pathSuspension"), pathRevocation: this.pantheonPath.getSubItem("condition", "pathRevocation")} }
     get pathConditions() { return {origin: this.originPathConditions, role: this.rolePathConditions, pantheon: this.pantheonPathConditions} }
-    get pathPriorities() { return this.data.data.pathPriorities }
-    get pathSkills() { return U.KeyMapObj(_.indexBy(this.paths, (item) => item.data.data.type), (item) => item.data.data.skills) }
+    get pathPriorities() { return this.$data.pathPriorities }
+    get pathSkills() { return U.KeyMapObj(_.indexBy(this.paths, (item) => item.$subtype), (item) => item.$data.skills) }
     get pathSkillVals() {
         const pathSkillVals = U.KeyMapObj(SCION.SKILLS.list, () => 0);
         duplicate(this.pathPriorities).reverse().forEach((pathType, i) => {

@@ -18,7 +18,9 @@
             {{/if}}
             {{/each}}            
         </div>
-        {{> (blocks.popouts.skillList.template) }}
+        {{#with (bundle "blocks" blocks "tooltips" tooltips.skills "skills" data.skills) as |skillData|}}
+            {{> (../blocks.popouts.skillList.template) skillData }}
+        {{/with}}
         <div class="pathConnections width100 alignCenter">
             <h2>{{loc "scion.heading.path.pathConnections"}}</h2>
             <div id="connectionDescription" class="connectionDescription insetFrame contentEditable alignLeft" data-field="data.connectionDescription" data-placeholder="{{loc "scion.heading.path.pathConnectionsPrompt" "path" (concat "scion.path." data.type "Path")}}">{{data.connectionDescription}}</div>

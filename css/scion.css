@@ -3439,12 +3439,12 @@ body {
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .contentEditable:not(.h2) {
   --padding: 5px;
+  padding: var(--padding);
+  border-color: var(--grey) !important;
+  margin: 0 10px;
+  background-color: var(--blackFade75) !important;
   font-size: 14px;
   text-indent: 0;
-  padding: var(--padding);
-  margin: 0 10px;
-  border-color: var(--grey) !important;
-  background-color: var(--blackFade75) !important;
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .contentEditable:not(.h2).placeholder {
@@ -3458,6 +3458,7 @@ body {
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills:not(.mirrorContainer) {
+  min-height: 28px;
   margin-bottom: 6px;
 }
 
@@ -3466,26 +3467,26 @@ body {
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill.invalid {
-  background: none;
   border-color: transparent;
+  background: none;
+  box-shadow: none;
   color: var(--greyDown3);
   font-style: italic;
   font-weight: bold;
-  box-shadow: none;
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills span.skill.pantheon {
   filter: invert(100%);
-  border-style: inset;
   border-color: var(--greyUp3);
+  border-style: inset;
   box-shadow: 3px 3px 3px var(--greyUp2), 3px 3px 3px var(--greyUp2), 3px 3px 3px var(--greyUp2);
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills#skillList {
+  top: 0;
+  left: 94%;
   width: 150px;
   height: 480px;
-  left: 94%;
-  top: 0;
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills#skillList span.skill {
@@ -3501,13 +3502,14 @@ body {
   padding-left: 10px;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable h3, .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .h3 {
-  text-shadow: -1px -1px 0px var(--colorHighlight), 1px 1px 0px var(--colorShadow);
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable h3,
+.vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .h3 {
+  text-shadow: -1px -1px 0 var(--colorHighlight), 1px 1px 0 var(--colorShadow);
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable div.closeButton {
-  right: -443px;
   top: 14px;
+  right: -443px;
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.condition form.editable h1 {
