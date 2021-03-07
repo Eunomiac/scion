@@ -32,6 +32,21 @@ export const applyMixins = (superclass) => new MixinBuilder(superclass);
 /* #endregion */
 
 // #region BASIC MIXINS
+export const ItemHierarchy = (superClass) => class extends superClass {
+    /** A mixin for items to access and control their sub items
+     * 
+     *
+     */
 
+    get parentItem() { return (this._parentItem = this._parentItem ?? this.$items.get(this.$data.parentItemID) ?? null) }
+
+
+    createSubItem() {}
+    getSubItem(dotpath) {}
+    getSubItemCat(category) {}
+    updateSubItem() {}
+
+
+}
 
 // #endregion

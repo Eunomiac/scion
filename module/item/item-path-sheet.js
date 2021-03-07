@@ -15,10 +15,6 @@ export default class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichE
     getData() {
         const data = super.getData();
         data.skills = SCION.SKILLS.list;
-        data.tooltip = {
-            title: U.Loc("scion.path.tooltip.title", {path: `scion.path.${this.item.data.data.type}`}),
-            content: U.Loc(`scion.path.tooltip.content.${this.item.data.data.type}`),
-        };
 
         const allPathSkills = this.actor.paths.map((path) => path.data.data.skills).flat();
         data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS.list, (label, skill) =>
@@ -65,6 +61,7 @@ export default class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichE
         const skillSource = html.find("#pathSkillSource");
         const [skillMirror] = html.find("#pathSkillMirror");
         const skillDrops = html.find(".skillDrop");
+        U.LOG({$sheetDOM: this.$sheetDOM}, "Sheet DOM", null);
         const pathSkillDragger = dragula({
             containers: [...skillSource, ...skillDrops],
             moves: (element, source) =>
@@ -78,7 +75,7 @@ export default class PathItemSheet extends MIX(ScionItemSheet).with(MIXINS.RichE
             copy: true,
             removeOnSpill: true,
             mirrorContainer: skillMirror,
-            sheetElement: this.sheetElem,
+            // sheetElement: this.$sheetDOM,
         });
         pathSkillDragger.on("cancel", (element, container, source) => {
             if (source.classList.contains("pathSkills")) {

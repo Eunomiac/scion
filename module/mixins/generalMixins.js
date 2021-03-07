@@ -47,7 +47,7 @@ export const PopoutControl = (superClass) => class extends superClass {
                         event,
                         element,
                         "... dataset": dataSet,
-                        [`${U.TCase(this.entity.type)}.Items`]: this.actor.items,
+                        [`${U.TCase(this.$entity.type)}.Items`]: this.actor.items,
                         item
                     }, `on CLICK: Open ItemSheet ${item.name}`, "MIXIN: PopoutControl", {groupStyle: "l3"});
                     this.popoutSheet(item.sheet, popoutData[item.type]);
@@ -77,7 +77,19 @@ export const PopoutControl = (superClass) => class extends superClass {
 };
 export const ClampText = (superClass) => class extends superClass {
     clamp(element) {
-        if ("clamplines" in element.dataset) {$clamp(element, {clamp: U.Int(element.dataset.clamplines)})} else if ("clampheight" in element.dataset) {$clamp(element, {clamp: element.dataset.clampheight})} else {$clamp(element, {clamp: "auto"})}
+        if ("clamplines" in element.dataset) {
+            $clamp(element, {
+                clamp: U.Int(element.dataset.clamplines)
+            })
+        } else if ("clampheight" in element.dataset) {
+            $clamp(element, {
+                clamp: element.dataset.clampheight
+            })
+        } else {
+            $clamp(element, {clamp: "auto"})
+        }
+        
+
     }
     unClamp(element) { element.style.cssText = "" }
 
@@ -362,24 +374,17 @@ export const Accessors = (superClass) => class extends superClass {
 
     get $entity() { return typeof this.entity === "string" ? this : this.entity }
     get $sheet() { return this.$entity.sheet }
+    get $actor() { return (this._actor = this._actor ?? super.actor ?? (this.$entity.entity === "Actor" ? this.$entity : false)) }
     get $id() { return this.$entity._id }
     get $base() { return this.$entity.data }
     get $data() { return this.$base.data }
     get $type() { return this.$base.type }
     get $subtype() { return this.$data.type }
     get $items() { return this.$entity.items ?? new Map(
-        _.flatten(
             Object.values(flattenObject(this.$data.items ?? {}))
                 .filter((val) => typeof val === "string")
-                .map((itemID) => {
-                    const item = this.actor.items.get(itemID);
-                    return [
-                        [itemID, item],
-                        [`${item.$category}.${item.$subtype}`, item]
-                    ];
-                }),
-            true)
-        );
+                .map((itemID) => [itemID, this.actor.items.get(itemID)]),
+            true);
     }
 
 

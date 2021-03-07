@@ -1,5 +1,5 @@
 import * as _ from "../external/underscore/underscore-esm-min.js";
-import {Clone, KeyMapObj, Loc, LOG, LoremIpsum, Merge, Rand, Sleep} from "./utils.js";
+import {Clone, Flip, KeyMapObj, Loc, LOG, LoremIpsum, Merge, Rand, RandomWord, Sleep} from "./utils.js";
 
 // #region TEST CODE FOR VSC "Run Code" EXTENSION
 /*
@@ -1874,6 +1874,9 @@ const SCION = {
         incarnation: "scion.genesis.incarnation",
         chosen: "scion.genesis.chosen",
     },
+    PATHS: {
+        list: ["origin", "role", "pantheon"]
+    },
     ATTRIBUTES: {
         min: 1,
         max: 5,
@@ -3347,86 +3350,154 @@ const testChars = {
         }
     }
 };
-testChars.createTestChar = async (name) => {
-    game.actors.entries.find((actor) => actor.name === name)?.delete();
-    const defaultActorData = testChars.actorData;
-    const sigCharActorData = testChars.sigChars[name]?.actorData ?? {};
-    const actorData = Merge(defaultActorData, sigCharActorData);
-    const defaultItemData = testChars.itemCreateData;
-    const sigCharItemData = testChars.sigChars[name]?.itemCreateData ?? [];
-    const itemCreateData = Merge(defaultItemData, sigCharItemData);
 
-    // #region Determine Path Skills & Randomly Assign Available Skill Dots
-    const skills = Object.keys(SCION.SKILLS.list);
-    const baseSkillVals = KeyMapObj(SCION.SKILLS.list, () => 0);
+const setAssignableSkillDots = (actorData, bonusDots = {xp: 0, other: 0}) => {
+    actorData.skills.assignableDots.xp += bonusDots.xp || 0;
+    actorData.skills.assignableDots.other += bonusDots.other || 0;
+}
+const getAssignableSkillDots = (actorData) => Object.values(actorData.skills.assignableDots).reduce((tot, val) => tot + val, 0);
+const getSkillVals = (actorData) => {
+    // Initialize with "assigned" skill dots:
+    const skillVals = KeyMapObj(SCION.SKILLS.list, (k) => k, (v, k) => actorData.skills.list[k].assigned || 0);
+    // Add base value to path skills depending on priority (should maybe include a check for value <= 5)
+    actorData.testItemCreateData.filter((itemData) => itemData.type === "path")
+                                            .forEach((pathData) => {
+                                                const pathSkillsVal = Flip(actorData.pathPriorities).findIndex((pathName) => pathName === pathData.data.type) + 1;
+                                                pathData.data.skills.forEach((skill) => {skillVals[skill] += pathSkillsVal});
+                                            });
+    return skillVals;
+}
+
+
+const setAssignableAttributeDots = (actorData, bonusDots = {xp: 0, other: 0, primary: 0, secondary: 0, tertiary: 0}) => {
+    actorData.attributes.assignableGeneralDots.xp += bonusDots.xp || 0;
+    actorData.attributes.assignableGeneralDots.other += bonusDots.other || 0;
+    actorData.attributes.assignableArenaDots.primary += bonusDots.primary || 0;
+    actorData.attributes.assignableArenaDots.secondary += bonusDots.secondary || 0;
+    actorData.attributes.assignableArenaDots.tertiary += bonusDots.tertiary || 0;
+}
+const getAssignableAttributeDots = (actorData, category = "general") => ({
+        general: Object.values(actorData.attributes.assignableGeneralDots).reduce((tot, val) => tot + val, 0),
+        primary: actorData.attributes.assignableArenaDots.primary,
+        secondary: actorData.attributes.assignableArenaDots.secondary,
+        tertiary: actorData.attributes.assignableArenaDots.tertiary
+    }[category]);
+const getAttrVals = (actorData) => KeyMapObj(SCION.ATTRIBUTES.list, (v, attr) => 1 
+                                                                     + actorData.attributes.list[attr].assigned 
+                                                                     + SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(attr)
+                                                                        ? 2
+                                                                        : 0
+);
+const randomizePaths = (actorData) => {
     const pathSkills = {
         origin: [],
         role: [],
         pantheon: SCION.PANTHEONS[actorData.pantheon].assetSkills,
     };
+    // Cycle through path skills, selecting valid path skill for each.
     ["origin", "role", "pantheon"].forEach((pathType) => {
         const baseVal = Clone(actorData.pathPriorities).reverse().findIndex((path) => path === pathType) + 1;
         const skillsToAdd = 3 - pathSkills[pathType].length;
         for (let i = 0; i < skillsToAdd; i++) {
-            const availableSkills = skills.filter((skill) => Object.values(pathSkills).flat().filter((pathSkill) => pathSkill === skill).length < 2 && !pathSkills[pathType].includes(skill));
+            const availableSkills = Object.keys(SCION.SKILLS.list).filter((skill) => Object.values(pathSkills)
+                                                                  .flat()
+                                                                  .filter((pathSkill) => pathSkill === skill)
+                                                                  .length < 2 
+                                                                && !pathSkills[pathType].includes(skill));
             pathSkills[pathType].push(_.sample(availableSkills));
         }
-        for (const skill of pathSkills[pathType]) {baseSkillVals[skill] += baseVal}
     });
-    console.log(pathSkills);
-    let assignableSkillDots = Rand(0, Object.values(actorData.skills.assignableDots).reduce((tot, val) => tot + val, 0));
-    while (assignableSkillDots) {
-        const availableSkills = skills.filter((skill) => (baseSkillVals[skill] + actorData.skills.list[skill].assigned) < 5);
-        actorData.skills.list[_.sample(availableSkills)].assigned++;
-        assignableSkillDots--;
+    actorData.testItemCreateData = actorData.testItemCreateData.map((iData) => {
+        if (iData.type === "path") {
+            iData.data.skills = pathSkills[iData.data.type];
+        }
+        return iData;
+    });
+}
+const randomizeSkills = (actorData) => {
+    // Pre-assign 75% of assignable Skill Dots (to a max skill value of 5), leaving the remaining quarter to test dot assigning
+    const assignableSkillDots = getAssignableSkillDots(actorData);
+    let preassignedSkillDots = Math.ceil(0.75 * assignableSkillDots),
+        availableSkills = Object.keys(_.pick(getSkillVals(actorData), (val) => val < 5));
+    while (preassignedSkillDots && availableSkills.length) {
+        const randomSkill = _.sample(availableSkills);
+        actorData.skills.list[randomSkill].assigned++;
+        preassignedSkillDots--;
+        availableSkills = Object.keys(_.pick(getSkillVals(actorData), (val) => val < 5));
     }
-    // #endregion
+    return actorData;
+}
+const randomizeSpecialties = (actorData) => {
+    const specSkills = Object.keys(_.pick(getSkillVals(actorData), (val) => val >= 3));
+    specSkills.forEach((skill) => {
+        actorData.skills.list[skill].specialties.list[0] = RandomWord();
+    });
+}
 
-    // #region Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
-    const attributes = Object.keys(SCION.ATTRIBUTES.list);
-    const baseAttrVals = KeyMapObj(SCION.ATTRIBUTES.list, (v, k) => (SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(k) ? 3 : 1));
-    const priorityAttrs = {
-        primary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[0]],
-        secondary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[1]],
-        tertiary: SCION.ATTRIBUTES.arenas[actorData.attributes.priorities[2]],
-    };
-    ["primary", "secondary", "tertiary"].forEach((priority) => {
-        let assignableArenaDots = Rand(0, actorData.attributes.assignableArenaDots[priority]);
-        while (assignableArenaDots) {
-            const availableAttrs = priorityAttrs[priority].filter((attr) => (baseAttrVals[attr] + actorData.attributes.list[attr].assigned) < 5);
+const randomizeAttributePriorities = (actorData) => {
+    actorData.attributes.priorities = _.shuffle(Object.keys(SCION.ATTRIBUTES.arenas));
+}
+const randomizeFavoredApproach = (actorData) => {
+    actorData.attributes.favoredApproach = _.sample(Object.keys(SCION.ATTRIBUTES.approaches));
+}
+
+const randomizeAttributes = (actorData) => {  
+    // Assign one-half of available arena dots according to Attribute priority settings:
+    ["primary", "secondary", "tertiary"].forEach((priority, i) => {
+        const thisArena = actorData.attributes.priorities[i];
+        let preassignedArenaDots = Math.ceil(0.5 * getAssignableAttributeDots(actorData, priority)),
+            availableAttrs = SCION.ATTRIBUTES.arenas[thisArena].filter((attr) => getAttrVals(actorData)[attr] < 5);
+        while (preassignedArenaDots && availableAttrs.length) {
             actorData.attributes.list[_.sample(availableAttrs)].assigned++;
-            assignableArenaDots--;
+            preassignedArenaDots--;
+            availableAttrs = SCION.ATTRIBUTES.arenas[thisArena].filter((attr) => getAttrVals(actorData)[attr] < 5);
         }
     });
-    let assignableGeneralAttrDots = Rand(0, Object.values(actorData.attributes.assignableGeneralDots).reduce((tot, val) => tot + val, 0));
-    while (assignableGeneralAttrDots) {
-        const availableAttrs = attributes.filter((attr) => (baseAttrVals[attr] + actorData.attributes.list[attr].assigned) < 5);
+
+    // Assign one-half of available general dots:
+    let assignableGeneralAttrDots = Math.ceil(0.5 * getAssignableAttributeDots(actorData)),
+        availableAttrs = Object.keys(_.pick(getAttrVals(actorData), (val) => val < 5));
+    while (assignableGeneralAttrDots && availableAttrs.length) {
         actorData.attributes.list[_.sample(availableAttrs)].assigned++;
         assignableGeneralAttrDots--;
+        availableAttrs = Object.keys(_.pick(getAttrVals(actorData), (val) => val < 5));
     }
-    // #endregion
+}
 
-    // #region Randomly Select Callings, Assign Dots, Select Keywords
-    let callingSlot = 0;
-    const callings = KeyMapObj(_.uniq([
+
+const getCallings = (actorData) => actorData.testItemCreateData.filter((itemData) => itemData.type === "calling");
+/* const getActiveKnacks = (actorData) => {
+    const activeKnacks = getCallings(actorData).reduce((knacks, calling) => knacks.push(...calling.))
+}; */
+const getAllKnacks = (actorData) => {};
+const randomizeCallings = (actorData) => {
+    
+    // Select callings, create item creation data for calling items.
+    const callingChoices = _.shuffle(_.uniq([
         _.sample(SCION.GODS[actorData.patron].callings),
-        ..._.sample(Object.keys(SCION.CALLINGS.list), 4),
-    ]).slice(0, 3), (k, calling) => calling, (calling) => ({
-        name: calling,
-        value: 1,
-        slot: callingSlot++,
-        keywordsChosen: _.sample(Loc(`scion.calling.${calling}.keywords`).split(", "), 3),
-        keywordsUsed: [],
-    }));
-    let randomCalling = _.sample(Object.keys(callings));
-    for (let i = 0; i < 2; i++) {
-        callings[randomCalling].value++;
-        randomCalling = _.sample(Object.keys(callings));
+        ..._.sample(Object.keys(SCION.CALLINGS.list), 4)
+    ]).slice(0,3));
+    actorData.testItemCreateData.push(...callingChoices.map((calling) => ({
+        type: "calling",
+        title: Loc(`scion.calling.${calling}.name`),
+        value: 1
+    })));
+
+    // Assign calling dots.
+    let preassignedCallingDots = Object.values(actorData.callings.assignableGeneralDots).reduce((tot, val) => tot + val, 0),
+        availableCallings = getCallings(actorData).filter((calling) => calling.value < 5);
+    while (preassignedCallingDots && availableCallings.length) {
+        const thisCalling = _.sample(availableCallings);
+        thisCalling.value++;
+        preassignedCallingDots--;
+        availableCallings = getCallings(actorData).filter((calling) => calling.value < 5);
     }
+}
+
+const randomizeKnacks = (actorData) => {
     const chosenKnacks = [];
-    for (const calling of Object.keys(callings)) {
-        callings[calling].keywordsChosen.length = callings[calling].value;
-        let callingPointsLeft = callings[calling].value;
+    for (const calling of getCallings(actorData)) {
+        let callingPointsLeft = calling.value;
         while (callingPointsLeft) {
             const availableKnacks = Object.keys(SCION.KNACKS.list).filter((knackName) => {
                 const knack = SCION.KNACKS.list[knackName];
@@ -3438,24 +3509,66 @@ testChars.createTestChar = async (name) => {
             callingPointsLeft -= SCION.KNACKS.list[chosenKnacks[0].name].tier === "immortal" ? 2 : 1;
         }
     }
-    callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
-    actorData.callings.list = callings;
-    actorData.knacks.list = chosenKnacks;
+}
+
+const randomizeCallingKeywords = (actorData) => {
+    // callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
+}
+
+testChars.createTestChar = async (name) => {
+    game.actors.entries.find((actor) => actor.name === name)?.delete();
+    
+    const [defaultActorData, defaultItemData] = [testChars.actorData, testChars.itemCreateData];
+    const [sigCharActorData, sigCharItemData] = [testChars.sigChars[name]?.actorData ?? {}, testChars.sigChars[name]?.itemCreateData ?? {}];
+    const actorData = Merge(Merge(defaultActorData, sigCharActorData), {testItemCreateData: Merge(defaultItemData, sigCharItemData)});
+
+    // #region Data Manipulation: Before Actor Creation
+
+    // Initialize Assignable Dots
+    setAssignableSkillDots(actorData);
+    setAssignableAttributeDots(actorData);
+
+    // Determine Path Skills
+    randomizePaths(actorData);
+
+    // Randomly Assign Available Skill Dots & Specialties
+    randomizeSkills(actorData);
+    randomizeSpecialties(actorData);
+
+    // #region Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
+    randomizeAttributePriorities(actorData);
+    randomizeFavoredApproach(actorData);
+    randomizeAttributes(actorData);    
+    // #endregion
+
+    // #endregion
+
+    const actorInst = await Actor.create({
+        name,
+        type: "major",
+        data: actorData,
+    }); 
+
+    // #region Actor Manipulation: After Actor Creation
+
+
+    // #region Randomly Select Callings, Assign Dots, Select Keywords
+
+
+    // randomizeCallings(actorData);
+    // randomizeKnacks(actorData);
+    // randomizeCallingKeywords(actorData);
+    // #endregion
+
+
+
 
     // #endregion
 
     // #region Update itemCreationData with selected path skills, and assign to actorData for later item creation
-    actorData.testItemCreateData = itemCreateData.map((itemData) => {
-        if (itemData.type === "path") {itemData.data.skills = pathSkills[itemData.data.type]}
-        return itemData;
-    });
-    // #endregion
     
-    return Actor.create({
-        name,
-        type: "major",
-        data: actorData,
-    });
+    // #endregion
+    return actorInst;
 };
 testChars.createSigChars = async (...names) => {
     if (names.length === 0) {

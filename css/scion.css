@@ -1773,14 +1773,17 @@ body {
   display: none !important;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip {
+  position: relative;
   z-index: 9999;
   display: block;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.helper {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.helper,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.helper {
   position: absolute;
-  right: 30px;
+  left: 30px;
   width: 40px;
   height: 40px;
   background-image: url("../images/ToolTipBall.png");
@@ -1788,10 +1791,12 @@ body {
   background-size: 100%;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents {
+  --tipWidth: 300px;
   position: absolute;
   z-index: 99999999;
-  width: 300px;
+  width: var(--tipWidth);
   box-sizing: border-box;
   padding: 5px;
   border: 10px outset var(--greyUp3);
@@ -1806,7 +1811,10 @@ body {
   visibility: hidden;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents > h3.tipTitle,
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents h3:first-child.tipTitle,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents > h3.tipTitle,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents h3:first-child.tipTitle {
   text-shadow: -1px -1px 2px var(--white), 1px 1px 2px var(--black);
   width: calc((100% + 2 * 5px)/0.7);
   padding: 0;
@@ -1819,22 +1827,30 @@ body {
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
+  text-align: center;
+  text-indent: 0;
   text-transform: uppercase;
   transform: scaleX(0.7);
   transform-origin: left;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p,
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li,
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents span {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents p,
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents li,
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents span,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents p,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents li,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents span {
   text-shadow: 0 0 0 var(--black);
   font-family: 'MercuryG2';
   font-size: 11px;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p.stuntName,
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li.stuntName,
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents span.stuntName {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents p.stuntName,
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents li.stuntName,
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents span.stuntName,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents p.stuntName,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents li.stuntName,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents span.stuntName {
   text-shadow: 0 0 0 var(--black), 0 0 2px var(--black);
   font-family: 'Benguiat';
   font-size: 13px;
@@ -1842,33 +1858,41 @@ body {
   font-weight: normal;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p.stuntCost,
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li.stuntCost,
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents span.stuntCost {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents p.stuntCost,
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents li.stuntCost,
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents span.stuntCost,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents p.stuntCost,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents li.stuntCost,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents span.stuntCost {
   text-shadow: none;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents p,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents p {
   margin: 5px 0;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents p:not(:first-of-type()) {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents p:not(:first-of-type()),
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents p:not(:first-of-type()) {
   text-indent: 15px;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents li {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents li,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents li {
   margin: 10px 0;
   text-indent: 0;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents i {
   position: absolute;
   overflow: hidden;
   width: 50px;
   height: 50px;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip > div.tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip > div.tipContents i::after {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -1877,108 +1901,149 @@ body {
   content: '';
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.hideTooltip > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.hideTooltip > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.hideTooltip > .tipContents {
   display: none !important;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.skill > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.skill > .tipContents {
+  --tipWidth: 375px;
+}
+
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.knack.immortal > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.knack.immortal > .tipContents {
   border-color: #ffc400;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.knack.immortal > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.knack.immortal > .tipContents i::after {
   border-color: #ffc400;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.immortal > .tipContents h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.knack.immortal > .tipContents h3,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.knack.immortal > .tipContents h3 {
   background: linear-gradient(270deg, #ffd64d, #ffedb3, #ffd64d);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.knack.generic > .tipContents h3 {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.knack.generic > .tipContents h3,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.knack.generic > .tipContents h3 {
   background: linear-gradient(270deg, #b3b3b3, #f2f2f2, #b3b3b3);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipLeft > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipRight > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipLeft > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipRight > .tipContents {
   top: 50%;
   transform: translate(0, -50%);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipLeft > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipRight > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipLeft > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipRight > .tipContents i {
   top: 50%;
   margin-top: -25px;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipLeft > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipRight > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipLeft > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipRight > .tipContents i::after {
   top: 50%;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents {
-  left: calc(50% + 5px + 10px);
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipRight > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipRight > .tipContents {
+  left: calc(100% + 5px + 10px);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipRight > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipRight > .tipContents i {
   right: 100%;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipRight > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipRight > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipRight > .tipContents i::after {
   transform: translate(50%, -50%) rotate(-45deg);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents {
-  right: calc(50% + 5px + 10px);
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipLeft > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipLeft > .tipContents {
+  right: calc(100% + 5px + 10px);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipLeft > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipLeft > .tipContents i {
   right: -50px;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipLeft > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipLeft > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipLeft > .tipContents i::after {
   transform: translate(-50px, -50%) rotate(-45deg);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpLeft > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUp > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpRight > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpLeft > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUp > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpRight > .tipContents {
   bottom: 40px;
   transform: translate(-50%, 0%);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpLeft > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUp > .tipContents i, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpRight > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpLeft > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUp > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpRight > .tipContents i {
   margin-top: -7px;
   transform: scale(0.8);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i::after {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpLeft > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUp > .tipContents i::after, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpRight > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpLeft > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUp > .tipContents i::after,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpRight > .tipContents i::after {
   top: 50%;
   transform: translate(-15%, -90%) rotate(45deg);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft.immortal:not(.short) > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp.immortal:not(.short) > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight.immortal:not(.short) > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpLeft.immortal:not(.short) > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUp.immortal:not(.short) > .tipContents, .vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpRight.immortal:not(.short) > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpLeft.immortal:not(.short) > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUp.immortal:not(.short) > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpRight.immortal:not(.short) > .tipContents {
   bottom: 75px;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpLeft > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpLeft > .tipContents {
   left: 0%;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpLeft > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpLeft > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpLeft > .tipContents i {
   left: calc(80% - 20px / 0.8);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUp > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUp > .tipContents {
   left: 50%;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUp > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUp > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUp > .tipContents i {
   left: calc(50% - 20px / 0.8);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpRight > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpRight > .tipContents {
   left: 100%;
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip.tipUpRight > .tipContents i {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip.tipUpRight > .tipContents i,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip.tipUpRight > .tipContents i {
   left: calc(20% - 20px / 0.8);
 }
 
-.vtt.game.system-scion .app.window-app.scion.sheet * .tooltip:hover > .tipContents {
+.vtt.game.system-scion .app.window-app.scion.sheet * div.tooltip:hover > .tipContents,
+.vtt.game.system-scion .app.window-app.scion.sheet * span.tooltip:hover > .tipContents {
   opacity: 1;
   visibility: visible;
 }
@@ -3438,12 +3503,14 @@ body {
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .contentEditable:not(.h2) {
+  --lineHeight: 14px;
   --padding: 5px;
   padding: var(--padding);
   border-color: var(--grey) !important;
   margin: 0 10px;
   background-color: var(--blackFade75) !important;
   font-size: 14px;
+  line-height: var(--lineHeight);
   text-indent: 0;
 }
 
@@ -3453,7 +3520,7 @@ body {
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathDescription .contentEditable {
-  height: calc(var(--lineHeight) * 3 + var(--padding));
+  height: calc(var(--lineHeight) * 4 + var(--padding));
   margin-bottom: 5px;
 }
 
@@ -3485,6 +3552,7 @@ body {
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathSkills#skillList {
   top: 0;
   left: 94%;
+  overflow: visible;
   width: 150px;
   height: 480px;
 }
@@ -3494,8 +3562,8 @@ body {
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathConnections .contentEditable {
-  height: calc(var(--lineHeight) * 3 + var(--padding));
-  padding: 2px var(--padding) 12px var(--padding);
+  height: calc(var(--lineHeight) * 4 - var(--padding));
+  padding: var(--padding);
 }
 
 .vtt.game.system-scion .app.window-app.scion.sheet.item.path form.editable .pathCondition {

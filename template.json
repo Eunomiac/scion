@@ -156,8 +156,13 @@
             }
         },
         "calling": {
-            "templates": ["BASE", "TRAIT"],
+            "templates": ["BASE", "TRAIT", "PARENTITEM"],
             "min": 1,
+            "value": 1,
+            "items": {
+                "activeKnacks": [],
+                "purchasedKnacks": []
+            },
             "keywordsChosen": [],
             "keywordsUsed": []
         },
@@ -192,7 +197,7 @@
             "templates": ["BASE", "TRAIT"]
         },
         "knack": {
-            "templates": ["BASE"]
+            "templates": ["BASE", "SUBITEM"]
         },
         "purview": {
             "templates": ["BASE"]

@@ -1,6 +1,6 @@
 <form class="{{cssClass}} flex-col height100 main" autocomplete="off">
     <div class="closeButton">❌</div>
-    <div class="tooltip helper tipRight">{{> (blocks.tooltips.template) tooltip}}</div>
+    <div class="tooltip helper tipRight">{{> (blocks.tooltips.template) (lookup tooltips.paths data.type)}}</div>
     {{!-- Sheet Header --}}
     <section class="header width100">
         <h1 class="title alignCenter">{{loc (concat "scion.path." data.type "Path")}}</h1>
@@ -18,12 +18,13 @@
             {{/if}}
             {{/each}}            
         </div>
-        {{#with (bundle "blocks" blocks "tooltips" tooltips.skills "skills" data.skills) as |skillData|}}
+        {{log this}}
+        {{#with (bundle "actorID" actorID "blocks" blocks "tooltips" tooltips.skills "skills" skills "type" data.type) as |skillData|}}
             {{> (../blocks.popouts.skillList.template) skillData }}
         {{/with}}
         <div class="pathConnections width100 alignCenter">
             <h2>{{loc "scion.heading.path.pathConnections"}}</h2>
-            <div id="connectionDescription" class="connectionDescription insetFrame contentEditable alignLeft" data-field="data.connectionDescription" data-placeholder="{{loc "scion.heading.path.pathConnectionsPrompt" "path" (concat "scion.path." data.type "Path")}}">{{data.connectionDescription}}</div>
+            <div id="connectionDescription" class="connectionDescription insetFrame contentEditable alignLeft" data-clamplines="4" data-field="data.connectionDescription" data-placeholder="{{loc "scion.heading.path.pathConnectionsPrompt" "path" (concat "scion.path." data.type "Path")}}">{{data.connectionDescription}}</div>
         </div>
         <h2 class="alignCenter">{{loc "scion.heading.path.pathConditions"}}</h2>
         <div class="pathCondition flex-row alignCenter width100">

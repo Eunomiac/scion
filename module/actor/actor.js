@@ -30,7 +30,10 @@ export default class ScionActor extends MIX(Actor).with(MIXINS.Accessors, MIXINS
 
     async updatePantheon(pantheon) {
         const updatePromises = [];
-        if (pantheon === true || (pantheon && pantheon !== this.data.data.pantheon)) {
+        if (
+            (pantheon === true && this.data.data.pantheon in SCION.PANTHEONS) 
+         || (pantheon && pantheon in SCION.PANTHEONS && pantheon !== this.data.data.pantheon)
+        ) {
             pantheon = pantheon in SCION.PANTHEONS ? pantheon : this.data.data.pantheon;
             const panthPath = this.paths.find((path) => path.data.data.type === "pantheon");
             if (!panthPath) {

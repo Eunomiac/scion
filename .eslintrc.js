@@ -106,6 +106,7 @@ const defaultRules = {
     // "no-prototype-builtins": 0,
     "no-restricted-globals": 0,
     "no-restricted-syntax": 0,
+    "no-return-assign": ["error", "except-parens"],
     "no-tabs": ["warn", {"allowIndentationTabs": true,},],
     "no-template-curly-in-string": "warn",
     "no-ternary": "off",

@@ -4,21 +4,20 @@ form.editable {
     }
     // .h2.contentEditable.placeholder { line-height: 24px; }
     .contentEditable:not(.h2) {
-        // --lineHeight: 14px;
+        --lineHeight: 14px;
         --padding: 5px;
         padding: var(--padding);
         border-color: var(--grey) !important;
         margin: 0 10px;
         background-color: var(--blackFade75) !important;
-        // line-height: var(--lineHeight);
-        // min-height: none;
-        // max-height: none;
         font-size: 14px;
+        line-height: var(--lineHeight);
         text-indent: 0;
         &.placeholder { font-size: 12px; /* line-height: 16px; */ }
     }
 
-    .pathDescription .contentEditable { height: calc(var(--lineHeight) * 3 + var(--padding));
+    .pathDescription .contentEditable { 
+        height: calc(var(--lineHeight) * 4 + var(--padding));
         margin-bottom: 5px; }
 
     .pathSkills:not(.mirrorContainer) {
@@ -52,6 +51,7 @@ form.editable {
         &#skillList {
             top: 0;
             left: 94%;
+            overflow: visible;
             width: 150px;
             height: 480px;
             span.skill { margin: 2px 0; }
@@ -59,8 +59,8 @@ form.editable {
     }
 
     .pathConnections .contentEditable { 
-        height: calc(var(--lineHeight) * 3 + var(--padding));
-        padding: 2px var(--padding) 12px var(--padding);
+        height: calc(var(--lineHeight) * 4 - var(--padding));
+        padding: var(--padding);
     }
 
     .pathCondition {

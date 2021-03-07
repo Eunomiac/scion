@@ -45,6 +45,149 @@ sollicitudin interdum. Sed id lacus porttitor nisi vestibulum tincidunt. Nulla f
 feugiat finibus magna in pretium. Proin consectetur lectus nisi, non commodo lectus tempor et. Cras 
 viverra, mi in consequat aliquet, justo mauris fringilla tellus, at accumsan magna metus in eros. Sed 
 vehicula, diam ut sagittis semper, purus massa mattis dolor, in posuere.`;
+const randomWords = [
+    "aboveboard", "account", "achiever", "acoustics", "act", "action", "activity", "actor", "addition", "adjustment", 
+    "advertisement", "advice", "afterglow", "afterimage", "afterlife", "aftermath", "afternoon", "afterthought", 
+    "agreement", "air", "aircraft", "airfield", "airlift", "airline", "airmen", "airplane", "airport", "airtime", "alarm", 
+    "allover", "allspice", "alongside", "also", "amount", "amusement", "anger", "angle", "animal", "another", "ants", 
+    "anyhow", "anymore", "anyone", "anyplace", "anytime", "anywhere", "apparatus", "apparel", "appliance", "approval", 
+    "arch", "argument", "arithmetic", "arm", "army", "around", "art", "ashtray", "attack", "attraction", "aunt", 
+    "authority", "babies", "baby", "babysitter", "back", "backache", "backbone", "backbreaker", "backdrop", "backfire", 
+    "background", "backhand", "backlash", "backlog", "backpack", "backside", "backslap", "backslide", "backspace", 
+    "backspin", "backstroke", "backtrack", "backward", "badge", "bag", "bait", "balance", "ball", "ballroom", "bankbook", 
+    "bankroll", "base", "baseball", "basin", "basket", "basketball", "bat", "bath", "battle", "beachcomb", "bead", "bear", 
+    "because", "become", "bed", "bedrock", "bedroll", "bedroom", "beds", "bee", "beef", "beginner", "behavior", "belief", 
+    "believe", "bell", "bellboy", "bellhop", "bells", "below", "berry", "bike", "bikes", "bird", "birds", "birth", 
+    "birthday", "bit", "bite", "blackball", "blackberries", "blackbird", "blackboard", "blackjack", "blacklist", 
+    "blackmail", "blackout", "blacksmith", "blacktop", "blade", "blood", "blow", "blowgun", "bluebell", "blueberry", 
+    "bluebird", "bluefish", "bluegrass", "blueprint", "board", "boardwalk", "boat", "bodyguard", "bomb", "bone", "book", 
+    "bookcase", "bookend", "bookkeeper", "bookmark", "bookmobile", "books", "bookseller", "bookshelf", "bookworm", "boot", 
+    "border", "bottle", "boundary", "bowlegs", "bowtie", "box", "boy", "brainchild", "brake", "branch", "brass", "breath", 
+    "brick", "bridge", "brother", "bubble", "bucket", "bugspray", "building", "bulb", "burst", "bushes", "business", 
+    "butter", "butterball", "buttercup", "butterfingers", "buttermilk", "butternut", "butterscotch", "button", "bypass", 
+    "cabbage", "cabdriver", "cable", "cactus", "cake", "cakes", "calculator", "calendar", "camera", "camp", "can", 
+    "cancan", "candlelight", "candlestick", "cannon", "cannot", "canvas", "cap", "caption", "car", "card", "cardsharp", 
+    "care", "carefree", "careworn", "carfare", "carload", "carpenter", "carpool", "carport", "carriage", "cars", 
+    "carsick", "cart", "cartwheel", "cast", "cat", "cats", "cattle", "catwalk", "cause", "cave", "caveman", "celery", 
+    "cellar", "cemetery", "cent", "centercut", "chalk", "chance", "change", "channel", "cheese", "cheeseburger", 
+    "cherries", "cherry", "chess", "chicken", "chickens", "children", "chin", "church", "circle", "clam", "class", 
+    "clockwise", "cloth", "clover", "club", "coach", "coal", "coast", "coat", "cobweb", "coffeemaker", "coil", "collar", 
+    "color", "comeback", "committee", "commonplace", "commonwealth", "company", "comparison", "competition", "condition", 
+    "connection", "control", "cook", "copper", "corn", "cornmeal", "cough", "country", "courthouse", "cover", "cow", 
+    "cows", "crack", "cracker", "crate", "crayon", "cream", "creator", "creature", "credit", "crewcut", "crib", "crime", 
+    "crook", "crossbow", "crossbreed", "crosscut", "crossover", "crosswalk", "crow", "crowd", "crown", "cub", "cup", 
+    "current", "curtain", "curve", "cushion", "dad", "dairymaid", "daisywheel", "daughter", "day", "daybed", "daybook", 
+    "daybreak", "daydream", "daylight", "daytime", "deadend", "deadline", "death", "debt", "decision", "deer", "degree", 
+    "design", "desire", "desk", "destruction", "detail", "development", "digestion", "dime", "dinner", "dinosaurs", 
+    "direction", "dirt", "discovery", "discussion", "dishcloth", "dishpan", "dishwasher", "dishwater", "diskdrive", 
+    "distance", "distribution", "division", "dock", "doctor", "dog", "dogs", "doll", "dolls", "donkey", "door", 
+    "doorstop", "downtown", "downunder", "drain", "drawbridge", "drawer", "dress", "drink", "driveway", "driving", "drop", 
+    "duck", "duckbill", "duckpin", "ducks", "dust", "ear", "earache", "earring", "earth", "earthquake", "earthward", 
+    "earthworm", "edge", "education", "effect", "egg", "egghead", "eggnog", "eggs", "eggshell", "elbow", "end", "engine", 
+    "error", "event", "everything", "example", "exchange", "existence", "expansion", "experience", "expert", "eye", 
+    "eyeballs", "eyecatching", "eyeglasses", "eyelash", "eyelid", "eyes", "eyesight", "eyewitness", "face", "fact", 
+    "fairies", "fall", "fang", "farm", "fatherland", "fear", "feeling", "field", "finger", "fire", "fireball", "fireboat", 
+    "firebomb", "firebreak", "firecracker", "firefighter", "firehouse", "fireman", "fireproof", "fireworks", "fish", 
+    "fishbowl", "fisherman", "fisheye", "fishhook", "fishmonger", "fishnet", "fishpond", "fishtail", "flag", "flame", 
+    "flavor", "flesh", "flight", "flock", "floor", "flower", "flowers", "fly", "fog", "fold", "food", "foot", "football", 
+    "foothill", "footlights", "footlocker", "footprints", "forbearer", "force", "forearm", "forebear", "forebrain", 
+    "forecast", "foreclose", "foreclosure", "foredoom", "forefather", "forefeet", "forefinger", "forefoot", "forego", 
+    "foregone", "forehand", "forehead", "foreknowledge", "foreleg", "foreman", "forepaws", "foresee", "foreshadow", 
+    "forestall", "forethought", "foretold", "forever", "forewarn", "foreword", "forget", "fork", "forklift", "form", 
+    "fowl", "frame", "friction", "friend", "friends", "frog", "frogs", "front", "fruit", "fruitcup", "fuel", "furniture", 
+    "gate", "gearshift", "geese", "ghost", "giants", "giraffe", "girl", "girls", "glass", "glassmaking", "glove", "gold", 
+    "goodbye", "goodnight", "government", "governor", "grade", "grain", "grandaunt", "granddaughter", "grandfather", 
+    "grandmaster", "grandmother", "grandnephew", "grandparent", "grandson", "grandstand", "granduncle", "grape", "grass", 
+    "grassland", "graveyard", "grip", "ground", "group", "growth", "guide", "guitar", "gumball", "gun", "hair", "haircut", 
+    "hall", "hamburger", "hammer", "hand", "handbook", "handgun", "handmade", "handout", "hands", "harbor", "harmony", 
+    "hat", "hate", "head", "headache", "headlight", "headline", "headquarters", "health", "heat", "hereafter", "hereby", 
+    "herein", "hereupon", "highchair", "highland", "highway", "hill", "himself", "history", "hobbies", "hole", "holiday", 
+    "home", "homemade", "hometown", "honey", "honeybee", "honeydew", "honeysuckle", "hook", "hookup", "hope", "horn", 
+    "horse", "horseback", "horsefly", "horsehair", "horseman", "horseplay", "horsepower", "horseradish", "horses", "hose", 
+    "hospital", "hot", "hour", "house", "houseboat", "household", "housekeeper", "houses", "housetop", "however", "humor", 
+    "hydrant", "ice", "icicle", "idea", "impulse", "income", "increase", "industry", "ink", "insect", "inside", 
+    "instrument", "insurance", "intake", "interest", "invention", "iron", "island", "itself", "jail", "jailbait", "jam", 
+    "jar", "jeans", "jelly", "jellybean", "jellyfish", "jetliner", "jetport", "jewel", "join", "judge", "juice", "jump", 
+    "jumpshot", "kettle", "key", "keyboard", "keyhole", "keynote", "keypad", "keypunch", "keystone", "keystroke", 
+    "keyword", "kick", "kiss", "kittens", "kitty", "knee", "knife", "knot", "knowledge", "laborer", "lace", "ladybug", 
+    "lake", "lamp", "land", "language", "laugh", "leather", "leg", "legs", "letter", "letters", "lettuce", "level", 
+    "library", "lifeblood", "lifeguard", "lifelike", "lifeline", "lifelong", "lifetime", "lifework", "limelight", 
+    "limestone", "limit", "line", "linen", "lip", "liquid", "loaf", "lock", "locket", "longhand", "look", "loss", "love", 
+    "low", "lukewarm", "lumber", "lunch", "lunchroom", "machine", "magic", "maid", "mailbox", "mainline", "man", "marble", 
+    "mark", "market", "mask", "mass", "match", "matchbox", "meal", "meantime", "meanwhile", "measure", "meat", "meeting", 
+    "memory", "men", "metal", "mice", "middle", "milk", "mind", "mine", "minister", "mint", "minute", "mist", "mitten", 
+    "mom", "money", "monkey", "month", "moon", "moonbeam", "moonlight", "moonlit", "moonscape", "moonshine", "moonstruck", 
+    "moonwalk", "moreover", "morning", "mother", "motion", "motorcycle", "mountain", "mouth", "move", "muscle", "name", 
+    "nation", "nearby", "neck", "need", "needle", "nerve", "nest", "nevermore", "newsboy", "newsbreak", "newscaster", 
+    "newsdealer", "newsletter", "newsman", "newspaper", "newsprint", "newsreel", "newsroom", "night", "nightfall", 
+    "nobody", "noise", "noisemaker", "north", "northeast", "nose", "note", "notebook", "nowhere", "number", "nursemaid", 
+    "nut", "nutcracker", "oatmeal", "observation", "ocean", "offer", "office", "oil", "oneself", "onetime", "orange", 
+    "oranges", "order", "oven", "overboard", "overcoat", "overflow", "overland", "pacemaker", "page", "pail", "pan", 
+    "pancake", "paper", "parcel", "part", "partner", "party", "passbook", "passenger", "passkey", "Passover", "passport", 
+    "payment", "peace", "pear", "pen", "pencil", "peppermint", "person", "pest", "pet", "pets", "pickle", "pickup", 
+    "picture", "pie", "pies", "pig", "pigs", "pin", "pinhole", "pinstripe", "pinup", "pinwheel", "pipe", "pizzas", 
+    "place", "plane", "planes", "plant", "plantation", "plants", "plastic", "plate", "play", "playback", "playground", 
+    "playhouse", "playthings", "pleasure", "plot", "plough", "pocket", "point", "poison", "pollution", "ponytail", 
+    "popcorn", "porter", "position", "postcard", "pot", "potato", "powder", "power", "price", "produce", "profit", 
+    "property", "prose", "protest", "pull", "pump", "punishment", "purpose", "push", "quarter", "quartz", "queen", 
+    "question", "quicksand", "quiet", "quill", "quilt", "quince", "quiver", "rabbit", "rabbits", "racquetball", "rail", 
+    "railroad", "railway", "rain", "raincheck", "raincoat", "rainstorm", "rainwater", "rake", "range", "rat", "rate", 
+    "rattlesnake", "rattletrap", "ray", "reaction", "reading", "reason", "receipt", "recess", "record", "regret", 
+    "relation", "religion", "repairman", "representative", "request", "respect", "rest", "reward", "rhythm", "rice", 
+    "riddle", "rifle", "ring", "rings", "river", "riverbanks", "road", "robin", "rock", "rod", "roll", "roof", "room", 
+    "root", "rose", "route", "rub", "rubberband", "rule", "run", "sack", "sail", "sailboat", "salesclerk", "salt", "sand", 
+    "sandlot", "sandstone", "saucepan", "scale", "scapegoat", "scarecrow", "scarf", "scene", "scent", "school", 
+    "schoolbook", "schoolboy", "schoolbus", "schoolhouse", "science", "scissors", "screw", "sea", "seashore", "seat", 
+    "secretary", "seed", "selection", "self", "sense", "servant", "shade", "shadyside", "shake", "shame", "shape", 
+    "sharecropper", "sharpshooter", "sheep", "sheepskin", "sheet", "shelf", "ship", "shirt", "shock", "shoe", "shoelace", 
+    "shoemaker", "shoes", "shop", "shortbread", "show", "showoff", "showplace", "side", "sidekick", "sidewalk", "sign", 
+    "silk", "silver", "silversmith", "sink", "sister", "sisterhood", "sisters", "sixfold", "size", "skate", "skateboard", 
+    "skin", "skintight", "skirt", "sky", "skylark", "skylight", "slave", "sleep", "sleet", "slip", "slope", "slowdown", 
+    "slumlord", "smash", "smell", "smile", "smoke", "snail", "snails", "snake", "snakes", "snakeskin", "sneeze", "snow", 
+    "snowball", "snowbank", "snowbird", "snowdrift", "snowshovel", "soap", "society", "sock", "soda", "sofa", "softball", 
+    "somebody", "someday", "somehow", "someone", "someplace", "something", "sometimes", "somewhat", "somewhere", "son", 
+    "song", "songs", "sort", "sound", "soundproof", "soup", "southeast", "southwest", "soybean", "space", "spacewalk", 
+    "spade", "spark", "spearmint", "spiders", "spillway", "spokesperson", "sponge", "spoon", "spot", "spring", "spy", 
+    "square", "squirrel", "stage", "stagehand", "stamp", "standby", "standoff", "standout", "standpoint", "star", 
+    "starfish", "start", "statement", "station", "steam", "steamship", "steel", "stem", "step", "stepson", "stew", 
+    "stick", "sticks", "stitch", "stocking", "stockroom", "stomach", "stone", "stop", "stoplight", "stopwatch", "store", 
+    "story", "stove", "stranger", "straw", "stream", "street", "stretch", "string", "stronghold", "structure", 
+    "substance", "subway", "sugar", "suggestion", "suit", "summer", "sun", "sunbaked", "sunbathe", "sundial", "sundown", 
+    "sunfish", "sunflower", "sunglasses", "sunlit", "sunray", "sunroof", "sunup", "supercargo", "supercharge", 
+    "supercool", "superego", "superfine", "supergiant", "superhero", "superhighways", "superhuman", "superimpose", 
+    "supermarket", "supermen", "supernatural", "superpower", "superscript", "supersensitive", "supersonic", "superstar", 
+    "superstrong", "superstructure", "supertanker", "superweapon", "superwoman", "support", "surprise", "sweater", 
+    "sweetheart", "sweetmeat", "swim", "swing", "system", "table", "tablecloth", "tablespoon", "tabletop", "tableware", 
+    "tail", "tailcoat", "tailgate", "taillight", "taillike", "tailpiece", "tailspin", "takeoff", "takeout", "takeover", 
+    "talebearer", "taleteller", "talk", "tank", "tapeworm", "taproom", "taproot", "target", "taskmaster", "taste", "tax", 
+    "taxicab", "taxpayer", "teaching", "teacup", "team", "teammate", "teamwork", "teapot", "teaspoon", "teenager", 
+    "teeth", "telltale", "temper", "tendency", "tenderfoot", "tenfold", "tent", "territory", "test", "textbook", 
+    "texture", "theory", "therefore", "thing", "things", "thought", "thread", "thrill", "throat", "throne", "throwaway", 
+    "throwback", "thumb", "thunder", "thunderbird", "thunderstorm", "ticket", "tiger", "time", "timekeeper", "timesaving", 
+    "timeshare", "timetable", "tin", "title", "toad", "toe", "toes", "together", "tomatoes", "tongue", "toolbox", "tooth", 
+    "toothbrush", "toothpaste", "toothpick", "top", "touch", "touchdown", "town", "township", "toy", "toys", "trade", 
+    "trail", "train", "trains", "tramp", "transport", "tray", "treatment", "tree", "trees", "trick", "trip", "trouble", 
+    "trousers", "truck", "trucks", "tub", "turkey", "turn", "turnabout", "turnaround", "turnbuckle", "turndown", 
+    "turnkey", "turnoff", "turntable", "twig", "twist", "typewriter", "umbrella", "uncle", "underachieve", "underage", 
+    "underarm", "underbelly", "underbid", "undercharge", "underclothes", "undercover", "undercut", "underdevelop", 
+    "underestimate", "underexpose", "underfoot", "underground", "underwear", "unit", "upbeat", "upbringing", "upcoming", 
+    "update", "upend", "upgrade", "upheaval", "uphill", "uphold", "upkeep", "upland", "uplift", "upload", "upmarket", 
+    "upon", "uppercase", "upperclassman", "uppercut", "uproar", "uproot", "upset", "upshot", "upside", "upstage", 
+    "upstairs", "upstanding", "upstart", "upstate", "upstream", "uptake", "upthrust", "uptight", "uptime", "uptown", 
+    "upward", "upwind", "use", "vacation", "value", "van", "vase", "vegetable", "veil", "vein", "verse", "vessel", "vest", 
+    "view", "visitor", "voice", "volcano", "volleyball", "voyage", "waistline", "walk", "walkways", "wall", "walleyed", 
+    "wallpaper", "war", "wardroom", "warfare", "warmblooded", "warpath", "wash", "washbowl", "washcloth", "washhouse", 
+    "washout", "washrag", "washroom", "washstand", "washtub", "waste", "wastebasket", "wasteland", "wastepaper", 
+    "wastewater", "watch", "watchband", "watchdog", "watchmaker", "watchman", "watchtower", "watchword", "water", 
+    "watercolor", "watercooler", "watercraft", "waterfall", "waterfront", "waterline", "waterlog", "watermelon", 
+    "waterpower", "waterproof", "waterscape", "watershed", "waterside", "waterspout", "watertight", "wave", "wavelike", 
+    "waves", "wax", "waxwork", "way", "waybill", "wayfarer", "waylaid", "wayside", "wayward", "wealth", "weather", 
+    "weathercock", "weatherman", "weatherproof", "week", "weekday", "weekend", "weeknight", "weight", "whatever", 
+    "whatsoever", "wheel", "wheelchair", "wheelhouse", "whip", "whistle", "whitecap", "whitefish", "whitewall", 
+    "whitewash", "widespread", "wilderness", "wind", "window", "wine", "wing", "winter", "wipeout", "wire", "wish", 
+    "without", "woman", "women", "wood", "woodshop", "wool", "word", "work", "worm", "wound", "wren", "wrench", "wrist", 
+    "writer", "writing", "yak", "yam", "yard", "yarn", "year", "yoke", "zebra", "zephyr", "zinc", "zipper", "zoo"
+];
 // #endregion
 
 // #region CONSOLE LOGGING
@@ -298,7 +441,7 @@ export const TCase = (str,) =>
         .replace(/\s+/gu, " ",)
         .trim();
 export const Loc = (locRef, formatDict = {},) => {
-    if (/^"?scion\./u.test(JSON.stringify(locRef,),)) {
+    if (/^"?scion\./u.test(JSON.stringify(locRef)) && typeof game.i18n.localize(locRef) === "string") {
         for (const [key, val,] of Object.entries(formatDict,)) {
             formatDict[key] = Loc(val,);
         }
@@ -316,6 +459,7 @@ export const LoremIpsum = (numWords = 200,) => {
     loremIpsumWords[loremIpsumWords.length - 1] = `${loremIpsumWords[loremIpsumWords.length - 1].replace(/[^a-zA-Z]$/u, "",)}.`;
     return loremIpsumWords.join(" ",);
 };
+export const RandomWord = (numWords = 1) => new Array(numWords).fill(" ").map(() => _.sample(randomWords)).join(" ");
 // #endregion
 
 // #region NUMBER FUNCTIONS: Parsing
@@ -326,11 +470,12 @@ export const Rand = (n1, n2,) => Math.round(Math.random() * (Math.max(Int(n2,), 
 
 // #region ARRAY FUNCTIONS: Last
 export const Last = (arr,) => (Array.isArray(arr,) && arr.length ? arr[arr.length - 1] : undefined);
-export const Insert = (arr, val, index,) => {
+export const Flip = (arr) => Clone(arr).reverse();
+/* MUTATOR */ export const Insert = (arr, val, index,) => {
     arr[Int(index,)] = val;
     return arr;
 };
-export const Change = (arr, findFunc = (e, i, a,) => true, changeFunc = (e, i, a,) => e,) => {
+/* MUTATOR */ export const Change = (arr, findFunc = (e, i, a) => true, changeFunc = (e, i, a,) => e,) => {
     const index = arr.findIndex(findFunc,);
     if (index >= 0) {
         arr[index] = changeFunc(arr[index], index, arr,);
@@ -339,19 +484,20 @@ export const Change = (arr, findFunc = (e, i, a,) => true, changeFunc = (e, i, a
         return false;
     }
 };
-export const Remove = (arr, findFunc = (e, i, a,) => true,) => {
-    const index = arr.findIndex(findFunc,);
+export const Remove = (arr, findFunc = (e, i, a) => true) => {
+    const index = arr.findIndex(findFunc);
     if (index >= 0) {
+        const elem = arr[index];
         delete arr[index];
         for (let i = index; i < arr.length - 1; i++) {
             arr[i] = arr[i + 1];
         }
         arr.length -= 1;
-        return arr;
-    } else {
-        return false;
+        return elem;
     }
+    return false;
 };
+
 
 // const testArray = [0, 1, 2, 3, 4, 5];
 // const findFunc = (e, i) => i > 3;
@@ -366,12 +512,13 @@ export const KeyMapObj = (obj, keyFunc = (x,) => x, valFunc = undefined,) => {
      * An object-equivalent Array.map() function, which accepts mapping functions to transform both keys and values.
      *      If only one function is provided, it's assumed to be mapping the values and will receive (v, k) args.
      */
-    [valFunc, keyFunc,] = [valFunc, keyFunc,].filter((x,) => typeof x === "function",);
-    keyFunc = keyFunc || ((k,) => k);
+    [valFunc, keyFunc] = [valFunc, keyFunc].filter((x,) => typeof x === "function" || typeof x === "boolean");
+    keyFunc = keyFunc || ((k) => k);
+    valFunc = valFunc || ((v) => v);
     const newObj = {};
-    Object.entries(obj,).forEach(([key, val,],) => {
-        newObj[keyFunc(key, val,)] = valFunc(val, key,);
-    },);
+    Object.entries(obj).forEach(([key, val]) => {
+        newObj[keyFunc(key, val)] = valFunc(val, key);
+    });
     return newObj;
 };
 export const Clone = (obj,) => {

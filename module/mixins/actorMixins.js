@@ -9,7 +9,17 @@ export const applyMixins = (superclass) => new MixinBuilder(superclass);
 // #endregion
 
 // #region BASIC MIXINS
+
 export const OwnedItemManager = (superClass) => class extends superClass {
+    /** A mixin to handle owned items WITH support for creating nested subitems
+     *    Bundles and debounces mass subitem creation.
+     *    
+     * 
+     * 
+     * 
+     * 
+     * 
+     * */
 
     constructor(...args) {
         super(...args);
@@ -42,7 +52,7 @@ export const OwnedItemManager = (superClass) => class extends superClass {
         this.$items.entries?.filter((item) => item.$data.isLinked === false).forEach((subitem) => {
             updateDataSet[subitem.$data.parentItemID] = updateDataSet[subitem.$data.parentItemID] ?? {};
             updateDataSet[subitem.$id] = updateDataSet[subitem.$id] ?? {};
-            updateDataSet[subitem.$data.parentItemID][`data.items.${subitem.$category}._${subitem.$subtype}`] = subitem.$id;
+            updateDataSet[subitem.$data.parentItemID][`data.items.${subitem.$category}.${subitem.$subtype}`] = subitem.$id;
             updateDataSet[subitem.$id]["data.isLinked"] = true;
         });
         Object.entries(updateDataSet).forEach(([itemID, itemData]) => updateData.push({...itemData, _id: itemID}));

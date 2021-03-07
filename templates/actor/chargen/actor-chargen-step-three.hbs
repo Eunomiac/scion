@@ -9,8 +9,8 @@
             {{#each skillVals as |value skill|}}
                 <div class="dotline">
                     <div class="label">
-                        <span class="tooltip tipLeft">                            
-                            {{> (..blocks.tooltips.template) (lookup ../tooltips/skills skill)}}
+                        <span class="tooltip tipLeft">
+                            {{> (../blocks/tooltips/template) (lookup ../tooltips/skills skill)}}
                             {{loc (concat "scion.skill." skill ".name")}}
                         </span>
                     </div>
@@ -53,7 +53,7 @@
                         {{#with (lookup ../arenas arena) as |attributes|}}
                         {{#each attributes as |value attribute|}}  
                         <div class="dotline">
-                            <div class="label">{{loc (concat "scion.attribute." attribute)}}</div>
+                            <div class="label">{{loc (concat "scion.attribute." attribute ".name")}}</div>
                             <div class="dotContainer blanks">{{#for 5}}<span class="dot"></span>{{/for}}</div>
                             <div class="chargenThreeDotBin dotBin dotContainer fader" data-types="attribute|{{arena}}" data-attribute="{{attribute}}" data-binid="{{attribute}}" data-field="data.attributes.list.{{attribute}}.assigned">
                             {{#for value}}

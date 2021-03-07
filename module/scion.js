@@ -209,9 +209,17 @@ Hooks.once("init", async () => {
         },
         checkInvalid: (...args) => {
             const options = args.pop();
+            const actorID = U.Remove(args, (val) => typeof val === "string" && game.actors.get(val)) || options.data.root.actor?._id;
             const [categories, trait, subTrait] = args;
             const [cat, subCat] = categories.split(":");
-            const actor = game.actors.get(options.data.root.actor._id);
+            U.LOG({args, options, actorID, parsed: {
+                categories,
+                cat,
+                subCat,
+                trait,
+                subTrait
+            }}, "checkInvalid", "checkInvalid", {groupStyle: "l3"});
+            const actor = game.actors.get(actorID);
             switch (cat) {
                 case "skill": {
                     switch (subCat) {

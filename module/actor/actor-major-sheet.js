@@ -96,101 +96,108 @@ export default class MajorActorSheet extends ScionActorSheet {
         }
         // #endregion
 
-        // #region TOOLTIP DATA
+        // #region TOOLTIP DATA, CONFIG DATA
         data.tooltips = this.getTooltips();
-
-        // #endregion
-
-        // #region FRONT PAGE
-        if (pantheon) {
-            data.virtues = C.PANTHEONS[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`))
-        }
-        // #endregion
-
-        // #region CHARGEN
         actorData.charGen = actorData.charGen ?? {};
-
-        // #region STEP ONE
-
-        // Update Patron List
-        if (pantheon) {
-            actorData.charGen.patronList = U.MakeDict(C.PANTHEONS[pantheon].members, (v) => U.Loc(`scion.pantheon.god.${v}`), (k, v) => v)
-        }
         // #endregion
 
-        // #region STEP TWO
+        if (actorData.pantheon) {
+            // #region FRONT PAGE
+            data.virtues = C.PANTHEONS[pantheon].virtues.map((virtue) => U.Loc(`scion.virtue.${virtue}`))
+            // #endregion
 
-        // PATH PRIORITIES
-        const pathItems = [];
-        for (const pathType of actorData.pathPriorities) {
-            pathItems.push(data.items.paths.find((item) => item.$subtype === pathType));
-        }
-        data.items.paths = pathItems;
+            // #region CHARGEN
 
-        // PATH SKILL COUNTS
-        data.pathSkills = _.pick(this.actor.pathSkillVals, (v) => v > 0);
-        data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS.list, () => 0);
-        Object.values(data.items.paths).forEach((pathItem) => {
-            pathItem.$data.skills.forEach((skill) => {
-                data.pathSkillsCount[skill]++;
-            });
-        });
-        // #endregion
+            // #region STEP ONE
+            // Update Patron List
+            actorData.charGen.patronList = U.MakeDict(C.PANTHEONS[pantheon].members, (v) => U.Loc(`scion.pantheon.god.${v}`), (k, v) => v);
+            // #endregion
 
-        // #region STEP THREE
-
-        // SKILLS
-        data.skillVals = this.actor.skillVals;
-        data.unassignedSkillDots = this.actor.unassignedSkillDots;
-
-        // SPECIALTIES
-        data.skillSpecialties = this.actor.specialties;
-
-        // ATTRIBUTES
-        data.arenaPriorities = this.actor.$data.attributes.priorities;
-        data.arenas = U.KeyMapObj(SCION.ATTRIBUTES.arenas, (arenaAttrs) => U.KeyMapObj(arenaAttrs, (i, attrName) => attrName, (attrName) => this.actor.attrVals[attrName]));
-        data.unassignedAttributeDots = {...this.actor.unassignedArenaAttrDots, general: this.actor.unassignedGeneralAttrDots};
-        data.isUnassignedAttributeDots = Boolean(U.SumVals(data.unassignedAttributeDots));
-
-        // #endregion
-        
-        // #region STEP FOUR       
-        const actorCallingData = U.Clone(this.actor.callings);
-        const actorKnackData = U.Clone(this.actor.knacks);
-        const actorAssignableCallingDots = this.actor.assignableCallingDots;
-        data.callings = {
-            available: {
-                patron: this.$data.patron ? SCION.GODS[this.$data.patron].callings : [],
-                get other() { return Object.keys(SCION.CALLINGS.list).filter((calling) => !this.patron.includes(calling)) }
-            },
-            callings: actorCallingData,
-            genericKnacks: this.actor.getAvailableCallingKnacks("any"),
-            knacks: actorKnackData,
-            selected: this.selectedCalling,
-            chargen: this.actor.orderedCallings,
-            get numChosen() { return Object.keys(this.callings).filter((key) => key && key in SCION.CALLINGS.list).length },
-            get unassignedCallingDots() { return Math.max(0, actorAssignableCallingDots - Object.values(this.callings).reduce((tot, val) => tot + val.value - 1, 0)) },
-            get areAllCallingsChosen() { return this.numChosen === 3 },
-            get areAllDotsAssigned() { return this.unassignedCallingDots === 0 },
-            get areAllKnacksFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKnacksFull, true) },
-            get areAllKeywordsFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKeywordsFull, true) },
-            get areCallingsDone() { return this.areAllCallingsChosen && this.areAllKnacksFull && this.areAllKeywordsFull },
-            get groupedKnacks() {
-                const knackData = {
-                    all: [],
-                    extra: this.knacks.filter((knack) => knack.assignment === "extra")
-                };
-                Object.keys(this.callings).forEach((callingName) => {
-                    knackData[callingName] = this.knacks.filter((knack) => knack.assignment === callingName);
-                    knackData.all.push(...knackData[callingName]);
-                });
-                knackData.all.push(...knackData.extra);
-                knackData.overflow = this.knacks.filter((knack) => knackData.all.every((aKnack) => aKnack.name !== knack.name));
-                return knackData;
+            // #region STEP TWO
+            // PATH PRIORITIES
+            const pathItems = [];
+            for (const pathType of actorData.pathPriorities) {
+                pathItems.push(data.items.paths.find((item) => item.$subtype === pathType));
             }
-        };
-        
-        // #endregion
+            data.items.paths = pathItems;
+
+            // PATH SKILL COUNTS
+            data.pathSkills = _.pick(this.actor.pathSkillVals, (v) => v > 0);
+            data.pathSkillsCount = U.KeyMapObj(SCION.SKILLS.list, () => 0);
+            Object.values(data.items.paths).forEach((pathItem) => {
+                pathItem.$data.skills.forEach((skill) => {
+                    data.pathSkillsCount[skill]++;
+                });
+            });
+            // #endregion
+
+            // #region STEP THREE
+            // SKILLS
+            data.skillVals = this.actor.skillVals;
+            data.unassignedSkillDots = this.actor.unassignedSkillDots;
+
+            // SPECIALTIES
+            data.skillSpecialties = this.actor.specialties;
+
+            // ATTRIBUTES
+            data.arenaPriorities = this.actor.$data.attributes.priorities;
+            data.arenas = U.KeyMapObj(SCION.ATTRIBUTES.arenas, (arenaAttrs) => U.KeyMapObj(arenaAttrs, (i, attrName) => attrName, (attrName) => this.actor.attrVals[attrName]));
+            data.unassignedAttributeDots = {...this.actor.unassignedArenaAttrDots, general: this.actor.unassignedGeneralAttrDots};
+            data.isUnassignedAttributeDots = Boolean(U.SumVals(data.unassignedAttributeDots));
+            // #endregion
+
+            if (actorData.patron) {        
+            // #region STEP FOUR  
+                /**
+                 * REQUIRED CALLING DATA:
+                 * - Selected Calling Items
+                 * - Order of Calling Item Display
+                 * - Assignable Calling Dots
+                 * 
+                 * CALLING ITEM CONTAINS GETTERS FOR:
+                 * - calling-specific knacks
+                 * - assigned knacks (registered as owned items to the Calling)
+                 * 
+                 * 
+                 */
+                
+                const actorCallingData = U.Clone(this.actor.callings);
+                const actorKnackData = U.Clone(this.actor.knacks);
+                const actorAssignableCallingDots = this.actor.assignableCallingDots;
+                data.callings = {
+                    available: {
+                        patron: this.$data.patron ? SCION.GODS[this.$data.patron].callings : [],
+                        get other() { return Object.keys(SCION.CALLINGS.list).filter((calling) => !this.patron.includes(calling)) }
+                    },
+                    callings: actorCallingData,
+                    genericKnacks: this.actor.getAvailableCallingKnacks("any"),
+                    knacks: actorKnackData,
+                    selected: this.selectedCalling,
+                    chargen: this.actor.orderedCallings,
+                    get numChosen() { return Object.keys(this.callings).filter((key) => key && key in SCION.CALLINGS.list).length },
+                    get unassignedCallingDots() { return Math.max(0, actorAssignableCallingDots - Object.values(this.callings).reduce((tot, val) => tot + val.value - 1, 0)) },
+                    get areAllCallingsChosen() { return this.numChosen === 3 },
+                    get areAllDotsAssigned() { return this.unassignedCallingDots === 0 },
+                    get areAllKnacksFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKnacksFull, true) },
+                    get areAllKeywordsFull() { return Object.values(actorCallingData).reduce((result, calling) => result && calling.areKeywordsFull, true) },
+                    get areCallingsDone() { return this.areAllCallingsChosen && this.areAllKnacksFull && this.areAllKeywordsFull },
+                    get groupedKnacks() {
+                        const knackData = {
+                            all: [],
+                            extra: this.knacks.filter((knack) => knack.assignment === "extra")
+                        };
+                        Object.keys(this.callings).forEach((callingName) => {
+                            knackData[callingName] = this.knacks.filter((knack) => knack.assignment === callingName);
+                            knackData.all.push(...knackData[callingName]);
+                        });
+                        knackData.all.push(...knackData.extra);
+                        knackData.overflow = this.knacks.filter((knack) => knackData.all.every((aKnack) => aKnack.name !== knack.name));
+                        return knackData;
+                    }
+                };        
+            // #endregion
+            }
+        }
 
         // #endregion
 
@@ -285,7 +292,7 @@ export default class MajorActorSheet extends ScionActorSheet {
             const pathDragger = dragula({
                 containers: [pathContainer],
                 mirrorContainer: pathMirror,
-                sheetElement: this.sheetElem
+                sheetElement: this.$sheetDOM
             });
             pathDragger.on("drop", async () => {
                 await this.actor.update({
@@ -293,6 +300,10 @@ export default class MajorActorSheet extends ScionActorSheet {
                         map((element) => this.entity.items.get(element.dataset.itemid).data.data.type)
                 });
             });
+
+
+
+            
             // #endregion
 
             // #region [GEN DRAG] SORTING ATTRIBUTE PRIORITIES
@@ -302,7 +313,7 @@ export default class MajorActorSheet extends ScionActorSheet {
                 containers: [arenaContainer],
                 moves: (e, s, handle) => handle.classList.contains("handle"),
                 mirrorContainer: arenaMirror,
-                sheetElement: this.sheetElem
+                sheetElement: this.$sheetDOM
             });
 
             arenaDragger.on("drop", async () => {
@@ -314,6 +325,39 @@ export default class MajorActorSheet extends ScionActorSheet {
             // #endregion
 
             // #region [GEN DRAG] CALLING SELECTION
+            const callingSource = html.find("#callingsSource");
+            const [callingMirror] = html.find("#callingsMirror");
+            const callingDrop = html.find(".callingDrop");
+            const callingDragger = dragula({
+                containers: [...callingSource, ...callingDrop],
+                moves: (element, source, handle) => handle.classList.contains("callingHandle") && !element.classList.contains("invalid"),                    
+                accepts: (element, target, source) => {
+                    if (source.id === "callingsSource") {
+                        const callings = Object.keys(this.actor.callings);
+                        return target.classList.contains("callingDrop")
+                            && callings.length < 3
+                            && !callings.includes(element.dataset.calling);
+                    } else if (source.classList.contains("callingDrop")) {
+                        return target.classList.contains("callingDrop");
+                    }
+                    return false;
+                },
+                direction: "horizontal",
+                copy: true,
+                removeOnSpill: true,
+                mirrorContainer: callingMirror,
+                sheetElement: this.$sheetDOM
+            });
+
+            callingDragger.on("drop", async () => {
+                await this.actor.update({
+                    "data.callingsOrder": Array.from(pathContainer.children).
+                        map((element) => this.entity.items.get(element.dataset.itemid).data.data.type)
+                });
+            });
+
+            
+
 
             const addCalling = async (callingElement, targetBin, sourceBin) => {
                 if (targetBin.dataset.binid !== sourceBin.dataset.binid) {
@@ -349,29 +393,6 @@ export default class MajorActorSheet extends ScionActorSheet {
                 }
             };
 
-            const callingSource = html.find("#callingsSource");
-            const [callingMirror] = html.find("#callingsMirror");
-            const callingDrop = html.find(".callingDrop");
-            const callingDragger = dragula({
-                containers: [...callingSource, ...callingDrop],
-                moves: (element, source, handle) => handle.classList.contains("callingHandle") && !element.classList.contains("invalid"),                    
-                accepts: (element, target, source) => {
-                    if (source.id === "callingsSource") {
-                        const callings = Object.keys(this.actor.callings);
-                        return target.classList.contains("callingDrop")
-                            && callings.length < 3
-                            && !callings.includes(element.dataset.calling);
-                    } else if (source.classList.contains("callingDrop")) {
-                        return target.classList.contains("callingDrop");
-                    }
-                    return false;
-                },
-                direction: "horizontal",
-                copy: true,
-                removeOnSpill: true,
-                mirrorContainer: callingMirror,
-                sheetElement: this.sheetElem
-            });
             callingDragger.on("cancel", async (element, __, source) => {
                 if (source.classList.contains("callingDrop") && this.currentlyOver?.dataset.calling !== element.dataset.calling) {
                     await remCalling(source);
@@ -440,7 +461,7 @@ export default class MajorActorSheet extends ScionActorSheet {
                 copy: true,
                 removeOnSpill: true,
                 mirrorContainer: knackMirror,
-                sheetElement: this.sheetElem
+                sheetElement: this.$sheetDOM
             });     
             knackDragger.on("drag", (element, knackSourceBin) => {
                 callingDrop.each((i, callingBin) => {
@@ -488,7 +509,7 @@ export default class MajorActorSheet extends ScionActorSheet {
                 copy: true,
                 removeOnSpill: true,
                 mirrorContainer: chargenThreeDotMirror,
-                sheetElement: this.sheetElem
+                sheetElement: this.$sheetDOM
             });
             this.addDragListener(chargenThreeDotDragger, "drag", {extraArgs: [chargenThreeDotBins]});
             this.addDragListener(chargenThreeDotDragger, "dragend", {extraArgs: [chargenThreeDotBins]});
@@ -507,7 +528,7 @@ export default class MajorActorSheet extends ScionActorSheet {
                 copy: true,
                 removeOnSpill: true,
                 mirrorContainer: chargenFourDotMirror,
-                sheetElement: this.sheetElem
+                sheetElement: this.$sheetDOM
             });
 
             this.addDragListener(chargenFourDotDragger, "drag", {extraArgs: [chargenFourDotBins]});
