@@ -1,5 +1,5 @@
 import * as _ from "../external/underscore/underscore-esm-min.js";
-import {Clone, Flip, KeyMapObj, Loc, LOG, LoremIpsum, Merge, Rand, RandomWord, Sleep} from "./utils.js";
+import {Clone, Flip, KeyMapObj, Loc, LOG, LoremIpsum, Merge, Rand, RandomWord, Sleep, SCase} from "./utils.js";
 
 // #region TEST CODE FOR VSC "Run Code" EXTENSION
 /*
@@ -3198,114 +3198,128 @@ const itemCategories = {
 const popoutData = {
     path: {leftSpacing: -500, rightSpacing: -500},
 };
-const testChars = {
-    get actorData() {
-        const pantheon = _.sample(Object.keys(SCION.PANTHEONS));
-        return {
-            genesis: _.sample(["born", "created", "chosen", "incarnation"]),
-            concept: "I am a test character!",
-            pantheon,
-            patron: _.sample(SCION.PANTHEONS[pantheon].members),
-            divineTitle: "Test Char",
-            attributes: {
-                priorities: _.shuffle(["social", "mental", "physical"]),
-                favoredApproach: _.sample(["force", "finesse", "resilience"]),
-                assignableGeneralDots: {xp: Rand(1, 10), other: 1},
-                assignableArenaDots: {"primary": 6, "secondary": 4, "tertiary": 2},
-                list: {
-                    presence: {assigned: 0, modifiers: []},
-                    manipulation: {assigned: 0, modifiers: []},
-                    composure: {assigned: 0, modifiers: []},
-                    intellect: {assigned: 0, modifiers: []},
-                    cunning: {assigned: 0, modifiers: []},
-                    resolve: {assigned: 0, modifiers: []},
-                    might: {assigned: 0, modifiers: []},
-                    dexterity: {assigned: 0, modifiers: []},
-                    stamina: {assigned: 0, modifiers: []},
-                },
-            },
-            skills: {
-                assignableDots: {"xp": Rand(5, 20), "other": 5},
-                assignableSpecs: Rand(0, 3),
-                list: {
-                    academics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    athletics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    closeCombat: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    culture: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    empathy: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    firearms: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    integrity: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    leadership: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    medicine: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    occult: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    persuasion: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    pilot: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    science: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    subterfuge: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    survival: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                    technology: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
-                },
-            },
-            pathPriorities: _.shuffle(["role", "origin", "pantheon"]),
-            callings: {
-                assignableGeneralDots: {xp: 0, other: 2},
-                list: {},
-            },
-            knacks: {
-                assignableExtraKnacks: {xp: 0, other: 0},
-                list: [],
-            },
-        };
-    },
-    get itemCreateData() {
-        return [
-            {
-                name: "Origin",
-                type: "path",
+const randomNames = {
+    first: ["Aaden", "Aaliyah", "Aarav", "Abagail", "Abbigail", "Abby", "Abdiel", "Abdullah", "Abigail", "Abigayle", "Abram", "Abril", "Ace", "Ada", "Adam", "Adan", "Addison", "Addisyn", "Addyson", "Adelaide", "Adison", "Adonis", "Adrian", "Adriana", "Adrianna", "Adriel", "Aedan", "Ahmad", "Aidan", "Aidyn", "Aimee", "Ainsley", "Akira", "Alaina", "Alani", "Alanna", "Alannah", "Alayna", "Albert", "Alberto", "Aleah", "Alena", "Alessandro", "Alex", "Alexa", "Alexandra", "Alexandria", "Alexis", "Alfred", "Alfredo", "Ali", "Alia", "Alisa", "Alisha", "Alison", "Alissa", "Alisson", "Alivia", "Aliyah", "Aliza", "Allen", "Allie", "Allison", "Allisson", "Ally", "Allyson", "Alondra", "Alonso", "Alvin", "Alyson", "Alyvia", "Amanda", "Amara", "Amare", "Amari", "Amaris", "Amber", "Amelie", "Amina", "Amiya", "Amy", "Amya", "Anabel", "Anabelle", "Anastasia", "Anaya", "Anderson", "Andre", "Andrew", "Angel", "Angela", "Angelica", "Angelina", "Angeline", "Angelique", "Angelo", "Anika", "Aniya", "Ann", "Annabel", "Annabella", "Annabelle", "Annalise", "Anne", "Annie", "Annika", "Ansley", "Anton", "Antonio", "Antwan", "Anya", "April", "Araceli", "Ariana", "Arianna", "Ariel", "Ariella", "Arielle", "Arjun", "Armando", "Armani", "Arnav", "Aron", "Arturo", "Aryan", "Ashanti", "Asher", "Ashlee", "Ashly", "Ashlyn", "Ashton", "Asia", "Aspen", "Athena", "Aubree", "Audrey", "August", "Augustus", "Aurora", "Austin", "Autumn", "Ava", "Averi", "Averie", "Avery", "Ayaan", "Aydin", "Azul", "Bailee", "Bailey", "Barbara", "Baron", "Baylee", "Beau", "Beckett", "Belen", "Belinda", "Bella", "Ben", "Benjamin", "Bentley", "Bernard", "Bianca", "Billy", "Blaine", "Blaze", "Bo", "Bobby", "Boston", "Bradley", "Brady", "Braeden", "Braedon", "Braelyn", "Branden", "Braxton", "Brayan", "Brayden", "Braydon", "Braylen", "Braylon", "Brendan", "Brenden", "Brendon", "Brennan", "Brennen", "Brent", "Brett", "Bria", "Brian", "Briana", "Brice", "Bridger", "Bridget", "Brielle", "Brittany", "Brock", "Broderick", "Brooklynn", "Brooks", "Bruce", "Bruno", "Bryan", "Bryant", "Bryce", "Brycen", "Brynlee", "Bryson", "Byron", "Caden", "Cael", "Caiden", "Caitlin", "Cale", "Caleb", "Cali", "Callie", "Callum", "Calvin", "Cameron", "Camila", "Camille", "Campbell", "Camren", "Camron", "Camryn", "Cannon", "Cara", "Carina", "Carissa", "Carlee", "Carleigh", "Carley", "Carlie", "Carlos", "Carmen", "Caroline", "Carolyn", "Carson", "Carter", "Casey", "Cash", "Cassandra", "Cassie", "Cassius", "Catalina", "Cecelia", "Cecilia", "Cedric", "Celia", "Cesar", "Chace", "Chad", "Chaim", "Chana", "Chance", "Chandler", "Chanel", "Charlee", "Charles", "Charlize", "Chase", "Chaya", "Chaz", "Cherish", "Cheyanne", "Christian", "Christina", "Christine", "Christopher", "Ciara", "Cierra", "Clara", "Clarence", "Clarissa", "Clark", "Claudia", "Clay", "Clayton", "Clinton", "Cloe", "Colin", "Collin", "Colten", "Colton", "Conner", "Conor", "Conrad", "Cooper", "Cora", "Corey", "Corinne", "Cornelius", "Cortez", "Courtney", "Cristal", "Cristina", "Cristofer", "Cristopher", "Cruz", "Crystal", "Cullen", "Curtis", "Cynthia", "Cyrus", "Daisy", "Dakota", "Dale", "Dalia", "Dallas", "Dalton", "Damari", "Damarion", "Damaris", "Damian", "Damon", "Dane", "Dangelo", "Dania", "Danica", "Daniel", "Daniella", "Danielle", "Danna", "Dante", "Darian", "Darien", "Dario", "Darion", "Darius", "Darrell", "Dashawn", "Davian", "Davin", "Davion", "Davon", "Dawson", "Dax", "Dayana", "Dayanara", "Deacon", "Dean", "Deandre", "Deanna", "Declan", "Delaney", "Demarion", "Demetrius", "Denise", "Denisse", "Dennis", "Denzel", "Derick", "Destiney", "Destiny", "Devin", "Devon", "Devyn", "Diana", "Diego", "Dillan", "Dillon", "Dixie", "Dominic", "Dominik", "Dominique", "Donavan", "Donna", "Donovan", "Donte", "Douglas", "Drake", "Dulce", "Dylan", "Ean", "Eddie", "Eden", "Edgar", "Edith", "Eduardo", "Efrain", "Eileen", "Elaina", "Elaine", "Eleanor", "Elena", "Elianna", "Eliezer", "Elijah", "Elisabeth", "Elise", "Eliza", "Elizabeth", "Ella", "Elle", "Ellen", "Ellis", "Elvis", "Elyse", "Emanuel", "Emelia", "Emerson", "Emery", "Emilia", "Emiliano", "Emilie", "Emilio", "Emma", "Emmalee", "Emmett", "Emmy", "Enrique", "Erick", "Erik", "Erika", "Erin", "Essence", "Esteban", "Esther", "Estrella", "Ethen", "Eva", "Evelin", "Evelyn", "Everett", "Evie", "Ezekiel", "Ezequiel", "Fabian", "Faith", "Fernando", "Finley", "Finn", "Finnegan", "Fiona", "Fletcher", "Francesca", "Francis", "Francisco", "Franco", "Frank", "Frankie", "Franklin", "Frida", "Gabriel", "Gabriela", "Gabriella", "Gabrielle", "Gael", "Gauge", "Gaven", "Gavin", "Gemma", "George", "Georgia", "Geovanni", "Gerald", "Gerardo", "German", "Gia", "Giada", "Giana", "Giancarlo", "Gianna", "Gideon", "Gilbert", "Gina", "Giovani", "Giovanna", "Giovanni", "Giselle", "Gisselle", "Glenn", "Gloria", "Gordon", "Grace", "Gracelyn", "Grady", "Gregory", "Greta", "Gretchen", "Guadalupe", "Guillermo", "Gunnar", "Gustavo", "Hadassah", "Hailey", "Hailie", "Haleigh", "Haley", "Halle", "Hamza", "Hana", "Hannah", "Harley", "Harmony", "Harold", "Harper", "Harrison", "Harry", "Hassan", "Haven", "Hayden", "Hayley", "Heath", "Heather", "Hector", "Heidi", "Helen", "Henry", "Hezekiah", "Hillary", "Holden", "Hope", "Howard", "Hugh", "Humberto", "Hunter", "Ibrahim", "Ignacio", "Iliana", "Imani", "Immanuel", "India", "Ireland", "Irene", "Iris", "Irvin", "Isabela", "Isabell", "Isabelle", "Isaiah", "Isiah", "Isis", "Ismael", "Itzel", "Ivan", "Ivy", "Iyana", "Izabella", "Izabelle", "Izaiah", "Izayah", "Jabari", "Jace", "Jacey", "Jackson", "Jacoby", "Jacqueline", "Jacquelyn", "Jada", "Jade", "Jadiel", "Jadon", "Jadyn", "Jaeden", "Jagger", "Jaida", "Jaiden", "Jaidyn", "Jaime", "Jair", "Jakayla", "Jake", "Jakob", "Jakobe", "Jalen", "Jaliyah", "Jamal", "Jamar", "Jamarcus", "Jamari", "Jamarion", "James", "Jameson", "Jamie", "Jamir", "Jamison", "Jamya", "Jane", "Janelle", "Janet", "Janiya", "Jaquan", "Jaqueline", "Jarrett", "Jasiah", "Jaslene", "Jaslyn", "Jason", "Javier", "Jax", "Jaxon", "Jaxson", "Jayce", "Jaydan", "Jayden", "Jaydon", "Jayla", "Jaylah", "Jaylen", "Jaylene", "Jaylin", "Jaylynn", "Jayvion", "Jayvon", "Jazlene", "Jazlyn", "Jazmin", "Jazmine", "Jeffery", "Jeffrey", "Jenna", "Jenny", "Jensen", "Jeremiah", "Jeremy", "Jerimiah", "Jessica", "Jessie", "Jesus", "Jett", "Jewel", "Jimena", "Joanna", "Joaquin", "Joe", "Joey", "Johan", "Johanna", "John", "Johnathan", "Johnny", "Jolie", "Jon", "Jonah", "Jonas", "Jonathan", "Jonathon", "Jordan", "Jorden", "Jordin", "Jordon", "Jordyn", "Jorge", "Joselyn", "Josephine", "Josh", "Joshua", "Josie", "Josue", "Jovani", "Jovanny", "Jovany", "Judah", "Judith", "Julian", "Julianna", "Julien", "Juliet", "Julio", "Julius", "June", "Junior", "Justice", "Justin", "Justine", "Kade", "Kadence", "Kaeden", "Kael", "Kaelyn", "Kaia", "Kaila", "Kaitlin", "Kaitlynn", "Kaiya", "Kaleb", "Kaleigh", "Kali", "Kaliyah", "Kallie", "Kamari", "Kamden", "Kameron", "Kamora", "Kamren", "Kamron", "Kareem", "Karen", "Karla", "Karlee", "Karley", "Karli", "Karly", "Karsyn", "Kasey", "Kash", "Kassandra", "Kassidy", "Katherine", "Kathleen", "Kathy", "Katie", "Kayden", "Kayla", "Kaylah", "Kaylee", "Kayleigh", "Kaylen", "Kayley", "Kaylie", "Kaylin", "Kaylyn", "Keagan", "Keely", "Keenan", "Keira", "Keith", "Kellen", "Kelsey", "Kelsie", "Kelvin", "Kendal", "Kendall", "Kendrick", "Kenna", "Kennedi", "Kenneth", "Kenzie", "Keshawn", "Keyon", "Khalil", "Khloe", "Kian", "Kiana", "Kiera", "Kieran", "Kierra", "Kiley", "Kimberly", "Kimora", "King", "Kingston", "Kinsley", "Kirsten", "Kobe", "Kody", "Koen", "Kolby", "Kole", "Kolten", "Konner", "Krista", "Kristen", "Kristian", "Kristin", "Kristina", "Kristopher", "Krystal", "Kyan", "Kylee", "Kylie", "Kyson", "Laci", "Lainey", "Lance", "Landen", "Landyn", "Lane", "Larissa", "Larry", "Lawrence", "Laylah", "Lea", "Leah", "Leanna", "Leila", "Leilani", "Leland", "Leon", "Leonardo", "Leonidas", "Leroy", "Leslie", "Leticia", "Levi", "Lewis", "Libby", "Liberty", "Lila", "Lilah", "Lilia", "Lilian", "Liliana", "Lillian", "Lilliana", "Lily", "Lilyana", "Lina", "Linda", "Livia", "Lizbeth", "Lizeth", "Logan", "London", "Londyn", "Lorelai", "Lorenzo", "Lucian", "Luciano", "Lucy", "Luna", "Lydia", "Lyla", "Lyric", "Macey", "Macie", "Mackenzie", "Macy", "Madalyn", "Madalynn", "Maddison", "Maddox", "Madeleine", "Madeline", "Madelyn", "Madilyn", "Madison", "Madyson", "Maeve", "Magdalena", "Maggie", "Maia", "Makaila", "Makayla", "Makhi", "Malakai", "Malcolm", "Malia", "Malik", "Maliyah", "Mallory", "Manuel", "Mara", "Marc", "Marcel", "Marcelo", "Marcos", "Marcus", "Mareli", "Margaret", "Maria", "Mariah", "Mariam", "Maribel", "Marilyn", "Marin", "Marina", "Mario", "Marisa", "Marisol", "Maritza", "Mariyah", "Marlee", "Marley", "Marlie", "Marques", "Marshall", "Martha", "Marvin", "Maryjane", "Mason", "Mateo", "Mathew", "Mathias", "Matias", "Matilda", "Matteo", "Matthew", "Matthias", "Mauricio", "Maverick", "Max", "Maximillian", "Maximus", "Maxwell", "Mayra", "Mckayla", "Mckenna", "Mckenzie", "Meghan", "Mekhi", "Melissa", "Melody", "Melvin", "Memphis", "Mercedes", "Messiah", "Mia", "Miah", "Micah", "Michael", "Michaela", "Micheal", "Miguel", "Mikaela", "Mike", "Mila", "Milagros", "Miles", "Miley", "Milo", "Mina", "Miracle", "Mireya", "Miriam", "Misael", "Mohamed", "Moises", "Mollie", "Molly", "Monique", "Morgan", "Moses", "Moshe", "Mya", "Myah", "Mylee", "Myles", "Nadia", "Naima", "Nancy", "Naomi", "Nash", "Nasir", "Natalia", "Natalie", "Nataly", "Natasha", "Nathalia", "Nathaly", "Nathan", "Nathaniel", "Nathen", "Nehemiah", "Neil", "Nelson", "Nevaeh", "Neveah", "Nicholas", "Nick", "Nickolas", "Nico", "Nicolas", "Nicole", "Nigel", "Niko", "Nikolai", "Nina", "Noah", "Noe", "Noelle", "Nolan", "Nyasia", "Octavio", "Olive", "Omar", "Omari", "Oswaldo", "Pablo", "Paige", "Paisley", "Paityn", "Paloma", "Pamela", "Paris", "Parker", "Patrick", "Paula", "Paulina", "Payton", "Peter", "Peyton", "Philip", "Phoenix", "Pierre", "Piper", "Porter", "Pranav", "Presley", "Prince", "Priscilla", "Quincy", "Quinn", "Quinten", "Quintin", "Quinton", "Raegan", "Raiden", "Ralph", "Ramiro", "Ramon", "Randall", "Raul", "Raven", "Ray", "Rayna", "Rayne", "Reagan", "Rebekah", "Reece", "Reed", "Regan", "Regina", "Reilly", "Reina", "Remington", "Rene", "Renee", "Rex", "Rey", "Reynaldo", "Ricardo", "Richard", "Rigoberto", "Rihanna", "Riley", "Rishi", "River", "Robert", "Roderick", "Rodrigo", "Rogelio", "Roger", "Romeo", "Ronald", "Ronan", "Ronin", "Ronnie", "Rory", "Roselyn", "Rosemary", "Rowan", "Roy", "Royce", "Rubi", "Ruby", "Rudy", "Russell", "Ruth", "Ryan", "Ryann", "Ryker", "Rylee", "Ryleigh", "Rylie", "Saige", "Salvador", "Sam", "Samantha", "Samir", "Sammy", "Samuel", "Saniyah", "Santiago", "Sara", "Sarahi", "Sarai", "Sariah", "Saul", "Savanna", "Savannah", "Savion", "Sawyer", "Scarlet", "Sebastian", "Selena", "Selina", "Semaj", "Serena", "Seth", "Shamar", "Shania", "Shaniya", "Shannon", "Shaun", "Shayla", "Shaylee", "Shayna", "Shelby", "Sheldon", "Sherlyn", "Shiloh", "Shirley", "Shyann", "Shyanne", "Sidney", "Siena", "Sierra", "Simeon", "Sincere", "Skyla", "Skylar", "Skyler", "Slade", "Sloane", "Sofia", "Solomon", "Sonia", "Sophia", "Sophie", "Spencer", "Stanley", "Stella", "Stephanie", "Stephany", "Stephen", "Sterling", "Steven", "Sullivan", "Summer", "Susan", "Sydnee", "Sylvia", "Tabitha", "Talia", "Taliyah", "Tamara", "Tania", "Taniya", "Taniyah", "Tanya", "Tate", "Tatiana", "Taylor", "Teagan", "Teresa", "Terrance", "Tess", "Tessa", "Thaddeus", "Theodore", "Tiana", "Tianna", "Tiffany", "Timothy", "Tobias", "Toby", "Todd", "Tomas", "Tommy", "Tony", "Tori", "Trace", "Travis", "Trent", "Trevin", "Trevon", "Trevor", "Tripp", "Tristan", "Tristen", "Tristian", "Tristin", "Troy", "Tucker", "Ty", "Tyrell", "Tyrese", "Tyrone", "Tyshawn", "Ulises", "Uriel", "Urijah", "Valentina", "Valeria", "Valerie", "Van", "Vance", "Veronica", "Vicente", "Victor", "Victoria", "Violet", "Virginia", "Vivian", "Viviana", "Walker", "Walter", "Warren", "Waylon", "Wayne", "Will", "William", "Willie", "Winston", "Wyatt", "Xzavier", "Yadiel", "Yael", "Yahir", "Yamilet", "Yaretzi", "Yazmin", "Yuliana", "Yurem", "Zachariah", "Zachery", "Zack", "Zackery", "Zaid", "Zain", "Zaire", "Zander", "Zaria", "Zariah", "Zavier", "Zayden", "Zoe", "Zoey", "Zoie"],
+    init: ["A.", "B.", "C.", "D.", "E.", "F.", "G.", "H.", "I.", "J.", "K.", "L.", "M.", "N.", "O.", "P.", "Q.", "R.", "S.", "T.", "U.", "V.", "W.", "X.", "Y.", "Z."],
+    last: ["Abbott", "Acevedo", "Adams", "Adkins", "Aguilar", "Aguirre", "Ali", "Allen", "Allison", "Alvarado", "Alvarez", "Andersen", "Anderson", "Andrade", "Andrews", "Anthony", "Archer", "Arias", "Armstrong", "Arnold", "Arroyo", "Atkins", "Atkinson", "Austin", "Avery", "Avila", "Ayers", "Baird", "Baker", "Baldwin", "Ball", "Ballard", "Banks", "Barajas", "Barber", "Barker", "Barnes", "Barnett", "Barr", "Barrera", "Barrett", "Barry", "Bartlett", "Barton", "Bass", "Bates", "Bauer", "Baxter", "Bean", "Beasley", "Beck", "Becker", "Bell", "Beltran", "Bender", "Benitez", "Benson", "Bentley", "Benton", "Berg", "Berger", "Bernard", "Best", "Bird", "Bishop", "Black", "Blackburn", "Blackwell", "Blair", "Blake", "Blanchard", "Blankenship", "Bolton", "Bond", "Bonilla", "Booker", "Boone", "Booth", "Bowen", "Bowers", "Bowman", "Boyd", "Boyer", "Boyle", "Bradford", "Bradshaw", "Brady", "Branch", "Bray", "Brennan", "Brewer", "Bridges", "Briggs", "Bright", "Brock", "Brooks", "Brown", "Bryan", "Bryant", "Buchanan", "Buck", "Buckley", "Bullock", "Burch", "Burgess", "Burnett", "Burns", "Burton", "Bush", "Butler", "Byrd", "Cabrera", "Cain", "Calderon", "Callahan", "Camacho", "Campbell", "Campos", "Cantrell", "Cardenas", "Carey", "Carney", "Carpenter", "Carr", "Carrillo", "Carroll", "Carson", "Carter", "Case", "Casey", "Castaneda", "Castillo", "Castro", "Cervantes", "Chambers", "Chan", "Chandler", "Chang", "Chapman", "Chase", "Chavez", "Chen", "Cherry", "Choi", "Christian", "Chung", "Church", "Cisneros", "Clark", "Clarke", "Clay", "Clayton", "Clements", "Cline", "Cobb", "Cochran", "Coffey", "Cohen", "Cole", "Coleman", "Collins", "Colon", "Combs", "Compton", "Conley", "Conner", "Conrad", "Contreras", "Conway", "Cook", "Cooke", "Cooley", "Cooper", "Copeland", "Cordova", "Cortez", "Costa", "Cowan", "Cox", "Crane", "Crosby", "Cross", "Cruz", "Cummings", "Cunningham", "Curtis", "Dalton", "Daniel", "Daniels", "Daugherty", "Davenport", "David", "Davidson", "Davies", "Davila", "Davis", "Dawson", "Day", "Dean", "Decker", "Delacruz", "Deleon", "Delgado", "Dennis", "Diaz", "Dickson", "Dillon", "Dixon", "Dodson", "Dominguez", "Donaldson", "Donovan", "Dougherty", "Downs", "Doyle", "Drake", "Duarte", "Dudley", "Duke", "Duncan", "Dunlap", "Dunn", "Duran", "Durham", "Dyer", "Eaton", "Edwards", "Elliott", "Ellis", "Ellison", "English", "Erickson", "Escobar", "Esparza", "Espinoza", "Estrada", "Evans", "Everett", "Farley", "Farmer", "Farrell", "Faulkner", "Ferguson", "Fernandez", "Ferrell", "Fields", "Figueroa", "Finley", "Fischer", "Fisher", "Fitzgerald", "Fitzpatrick", "Fletcher", "Flores", "Flowers", "Floyd", "Flynn", "Foley", "Forbes", "Ford", "Foster", "Fowler", "Fox", "Francis", "Franco", "Franklin", "Frazier", "Frederick", "Freeman", "French", "Frey", "Friedman", "Fritz", "Frost", "Fry", "Frye", "Fuentes", "Fuller", "Gaines", "Gallagher", "Gallegos", "Galloway", "Galvan", "Gamble", "Gardner", "Garner", "Garrett", "Garrison", "Garza", "Gentry", "George", "Gibbs", "Gibson", "Gilbert", "Giles", "Gill", "Gillespie", "Gilmore", "Glass", "Glenn", "Glover", "Gomez", "Gonzales", "Gonzalez", "Good", "Goodman", "Goodwin", "Gould", "Grant", "Graves", "Greene", "Greer", "Gregory", "Griffin", "Griffith", "Grimes", "Gross", "Guerrero", "Gutierrez", "Haas", "Hahn", "Hale", "Haley", "Hall", "Hamilton", "Hampton", "Hancock", "Haney", "Hanna", "Hansen", "Hanson", "Harding", "Hardy", "Harmon", "Harper", "Harrell", "Harrington", "Harris", "Harrison", "Hart", "Hartman", "Hatfield", "Hawkins", "Hayden", "Haynes", "Hays", "Heath", "Hebert", "Henderson", "Hendrix", "Henry", "Hensley", "Henson", "Herman", "Herrera", "Herring", "Hess", "Hester", "Hickman", "Hicks", "Higgins", "Hill", "Hines", "Hinton", "Ho", "Hodge", "Hodges", "Hoffman", "Hogan", "Holden", "Holder", "Holland", "Holloway", "Holmes", "Holt", "Hood", "Hooper", "Hoover", "Horne", "House", "Houston", "Howard", "Howe", "Howell", "Hubbard", "Hudson", "Huerta", "Huff", "Hull", "Hunter", "Hurst", "Ibarra", "Ingram", "Irwin", "Jackson", "Jacobs", "Jacobson", "James", "Jarvis", "Jefferson", "Jenkins", "Jensen", "Jimenez", "Johns", "Johnson", "Jones", "Jordan", "Joseph", "Joyce", "Juarez", "Kaiser", "Kane", "Kaufman", "Keith", "Keller", "Kelley", "Kelly", "Kennedy", "Key", "Khan", "Kim", "King", "Kirby", "Kirk", "Kline", "Knapp", "Knight", "Koch", "Kramer", "Krueger", "Lam", "Lamb", "Lambert", "Landry", "Lane", "Lang", "Lara", "Larsen", "Larson", "Lawrence", "Le", "Leach", "Leblanc", "Leon", "Leonard", "Lester", "Levy", "Lewis", "Li", "Lin", "Lindsey", "Little", "Livingston", "Lloyd", "Logan", "Long", "Lopez", "Love", "Lowe", "Lowery", "Lozano", "Lucas", "Luna", "Lutz", "Lynch", "Lyons", "Macdonald", "Macias", "Mack", "Madden", "Maddox", "Mahoney", "Maldonado", "Malone", "Mann", "Manning", "Marks", "Marsh", "Martin", "Martinez", "Massey", "Mata", "Mathews", "Mathis", "Maxwell", "May", "Mayer", "Maynard", "Mayo", "Mays", "Mcbride", "Mccall", "Mccarthy", "Mcclain", "Mcclure", "Mcconnell", "Mccormick", "Mccoy", "Mccullough", "Mcdaniel", "Mcdonald", "Mcdowell", "Mcfarland", "Mcgee", "Mcgrath", "Mcguire", "Mcintosh", "Mcintyre", "Mckay", "Mckee", "Mckinney", "Mcknight", "Mclaughlin", "Mclean", "Mcmillan", "Mcneil", "Mcpherson", "Meadows", "Medina", "Mejia", "Melton", "Mendez", "Mendoza", "Mercado", "Mercer", "Merritt", "Meyer", "Meyers", "Meza", "Michael", "Middleton", "Miles", "Miller", "Mills", "Miranda", "Mitchell", "Molina", "Monroe", "Montes", "Montgomery", "Montoya", "Moody", "Moon", "Mooney", "Moore", "Mora", "Morales", "Moran", "Morgan", "Morrison", "Morrow", "Morse", "Morton", "Moses", "Mosley", "Moss", "Moyer", "Mueller", "Mullen", "Munoz", "Murillo", "Murphy", "Murray", "Nash", "Navarro", "Neal", "Nelson", "Newman", "Newton", "Nguyen", "Nichols", "Nicholson", "Nixon", "Noble", "Nolan", "Norman", "Norris", "Norton", "Novak", "Nunez", "Obrien", "Ochoa", "Oconnell", "Oconnor", "Odonnell", "Oliver", "Olsen", "Olson", "Oneal", "Oneill", "Orozco", "Orr", "Ortega", "Ortiz", "Osborn", "Owen", "Owens", "Pace", "Pacheco", "Padilla", "Page", "Palmer", "Park", "Parker", "Parks", "Parrish", "Parsons", "Patel", "Patrick", "Patterson", "Patton", "Payne", "Pearson", "Peck", "Pena", "Pennington", "Perez", "Perkins", "Perry", "Petersen", "Peterson", "Pham", "Phelps", "Phillips", "Pierce", "Pitts", "Pollard", "Ponce", "Poole", "Pope", "Porter", "Potter", "Potts", "Powers", "Pratt", "Preston", "Price", "Prince", "Proctor", "Pugh", "Ramirez", "Ramos", "Ramsey", "Randall", "Randolph", "Rangel", "Rasmussen", "Ray", "Raymond", "Reed", "Reese", "Reeves", "Reilly", "Reyes", "Reynolds", "Rhodes", "Rice", "Rich", "Richard", "Richards", "Richardson", "Richmond", "Riddle", "Riggs", "Riley", "Rios", "Ritter", "Rivas", "Rivera", "Rivers", "Roach", "Robbins", "Roberson", "Roberts", "Robertson", "Robinson", "Robles", "Rocha", "Rodgers", "Rodriguez", "Rogers", "Rojas", "Rollins", "Roman", "Romero", "Rosales", "Rosario", "Rose", "Ross", "Roth", "Rowland", "Roy", "Rubio", "Rush", "Russell", "Russo", "Ryan", "Salas", "Salazar", "Salinas", "Sampson", "Sanchez", "Sanders", "Sandoval", "Sanford", "Santana", "Santiago", "Saunders", "Savage", "Sawyer", "Schaefer", "Schmidt", "Schmitt", "Schneider", "Schwartz", "Scott", "Sellers", "Serrano", "Sexton", "Shaffer", "Shannon", "Sharp", "Shaw", "Shea", "Shepard", "Shepherd", "Sheppard", "Sherman", "Shields", "Short", "Silva", "Simmons", "Simon", "Simpson", "Sims", "Singh", "Singleton", "Skinner", "Sloan", "Small", "Smith", "Snyder", "Solis", "Solomon", "Sosa", "Soto", "Sparks", "Spence", "Stafford", "Stanley", "Stanton", "Stein", "Stephens", "Stephenson", "Stevens", "Stevenson", "Stewart", "Stone", "Stout", "Strickland", "Stuart", "Suarez", "Sullivan", "Summers", "Sutton", "Swanson", "Sweeney", "Tanner", "Tapia", "Tate", "Taylor", "Terrell", "Terry", "Thompson", "Thornton", "Todd", "Torres", "Townsend", "Tran", "Travis", "Trevino", "Trujillo", "Tucker", "Turner", "Tyler", "Valdez", "Valenzuela", "Vance", "Vargas", "Vaughn", "Vazquez", "Vega", "Velasquez", "Velazquez", "Velez", "Villa", "Villanueva", "Villarreal", "Villegas", "Vincent", "Wade", "Wagner", "Walker", "Wall", "Waller", "Walter", "Walton", "Wang", "Ward", "Ware", "Warner", "Warren", "Washington", "Waters", "Watkins", "Watson", "Weaver", "Webb", "Weber", "Webster", "Weeks", "Weiss", "Wells", "Werner", "West", "Wheeler", "Whitaker", "White", "Whitehead", "Whitney", "Wiggins", "Wilcox", "Wiley", "Wilkerson", "Wilkins", "Wilkinson", "Williams", "Wilson", "Winters", "Wise", "Wolf", "Wolfe", "Wong", "Wood", "Woodard", "Woodward", "Wright", "Wu", "Wyatt", "Yang", "Yates", "Yoder", "York", "Young", "Zamora", "Zavala", "Zhang", "Zimmerman", "Zuniga"],
+    get name() {
+        const nameParts = [];
+        nameParts.push(_.sample(this.first));
+        if (Math.random() * 10 >= 9)
+            {nameParts.push(_.sample(this.init));}
+        if (Math.random() * 30 >= 29)
+            {nameParts.push(`${_.sample(this.last)}-${_.sample(this.last)}`);}
+        else
+            {nameParts.push(_.sample(this.last));}
+        return nameParts.join(" ");
+    }
+};
+
+
+const initializeActorData = (isAddingBonusDots = false, customData = {}) => {
+    let pantheon, pathPriorities;
+    return Merge({
+        genesis: _.sample(Object.keys(SCION.GENESES)),
+        concept: "I am a test character!",
+        pantheon: (pantheon = _.sample(Object.keys(SCION.PANTHEONS))),
+        patron: _.sample(SCION.PANTHEONS[pantheon].members),
+        divineTitle: `Test Char #${game.actors.entries.length + 1}`,
+        pathPriorities: (pathPriorities = _.shuffle(SCION.PATHS.list)),
+        skills: {
+            assignableDots: {xp: isAddingBonusDots ? Rand(5, 20) : 0, other: 5},
+            assignableSpecs: 0,
+            list: {
+                academics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                athletics: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                closeCombat: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                culture: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                empathy: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                firearms: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                integrity: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                leadership: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                medicine: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                occult: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                persuasion: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                pilot: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                science: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                subterfuge: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                survival: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+                technology: {assigned: 0, modifiers: [], specialties: {assigned: 0, list: {}}},
+            }
+        },
+        attributes: {
+            priorities: _.shuffle(Object.keys(SCION.ATTRIBUTES.arenas)),
+            favoredApproach: _.sample(Object.keys(SCION.ATTRIBUTES.approaches)),
+            assignableGeneralDots: {xp: isAddingBonusDots ? Rand(1, 10) : 0, other: 1},
+            assignableArenaDots: {"primary": 6, "secondary": 4, "tertiary": 2},
+            list: {
+                presence: {assigned: 0, modifiers: []},
+                manipulation: {assigned: 0, modifiers: []},
+                composure: {assigned: 0, modifiers: []},
+                intellect: {assigned: 0, modifiers: []},
+                cunning: {assigned: 0, modifiers: []},
+                resolve: {assigned: 0, modifiers: []},
+                might: {assigned: 0, modifiers: []},
+                dexterity: {assigned: 0, modifiers: []},
+                stamina: {assigned: 0, modifiers: []},
+            }
+        },
+        callings: {
+            assignableGeneralDots: {xp: 0, other: 2}
+        },
+        knacks: {
+            assignableExtraKnacks: {xp: 0, other: 0}
+        },
+        tempCreateData: {
+            pathUpdates: KeyMapObj(pathPriorities, (i, path) => path, (path) => ({
                 data: {
-                    type: "origin",
-                    title: "Test Origin Path Title",
+                    title: `Test ${SCase(path)} Path Title`,
+                    type: path,
                     skills: [],
-                    connections: [],
-                    connectionDescription: LoremIpsum(Rand(10, 200)),
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null,
-                    },
-                },
-            },
-            {
-                name: "Role",
-                type: "path",
-                data: {
-                    type: "role",
-                    title: "Test Role Path Title",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: LoremIpsum(Rand(10, 200)),
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null,
-                    },
-                },
-            },
-            {
-                name: "Pantheon",
-                type: "path",
-                data: {
-                    type: "pantheon",
-                    title: "Test Pantheon Path Title",
-                    skills: [],
-                    connections: [],
-                    connectionDescription: LoremIpsum(Rand(10, 200)),
-                    conditions: {
-                        pathSuspension: null,
-                        pathRevocation: null,
-                    }
+                    connectionDescription: LoremIpsum(Rand(10, 200))
                 }
-            }                
-        ];
-    },
+            }))
+        }
+    }, customData);
+};
+
+const setAssignableSkillDots = (actorData, bonusDots = {xp: 0, other: 0}) => {
+    actorData.skills.assignableDots.xp += bonusDots.xp || 0;
+    actorData.skills.assignableDots.other += bonusDots.other || 0;
+}
+const setAssignableAttributeDots = (actorData, bonusDots = {xp: 0, other: 0, primary: 0, secondary: 0, tertiary: 0}) => {
+    actorData.attributes.assignableGeneralDots.xp += bonusDots.xp || 0;
+    actorData.attributes.assignableGeneralDots.other += bonusDots.other || 0;
+    actorData.attributes.assignableArenaDots.primary += bonusDots.primary || 0;
+    actorData.attributes.assignableArenaDots.secondary += bonusDots.secondary || 0;
+    actorData.attributes.assignableArenaDots.tertiary += bonusDots.tertiary || 0;
+}
+const getAssignableSkillDots = (actorData) => Object.values(actorData.skills.assignableDots).reduce((tot, val) => tot + val, 0);
+const getAssignableAttributeDots = (actorData, category = "general") => ({
+    general: Object.values(actorData.attributes.assignableGeneralDots).reduce((tot, val) => tot + val, 0),
+    primary: actorData.attributes.assignableArenaDots.primary,
+    secondary: actorData.attributes.assignableArenaDots.secondary,
+    tertiary: actorData.attributes.assignableArenaDots.tertiary
+}[category]);
+const getSkillVals = (actorData) => {
+    // Initialize with "assigned" skill dots:
+    const skillVals = KeyMapObj(SCION.SKILLS.list, false, (v, k) => actorData.skills.list[k].assigned || 0);
+    // Add base value to path skills depending on priority (should maybe include a check for value <= 5)
+    Object.entries(actorData.tempCreateData.pathUpdates ?? {}).forEach(([pathType, pathData]) => {
+                                                const pathSkillsVal = Flip(actorData.pathPriorities).findIndex((pathName) => pathName === pathType) + 1;
+                                                pathData.data.skills.forEach((skill) => {skillVals[skill] += pathSkillsVal});
+                                            });
+    return skillVals;
+};
+const getAttrVals = (actorData) => KeyMapObj(SCION.ATTRIBUTES.list, (v, attr) => 1 
+                                                                 + actorData.attributes.list[attr].assigned 
+                                                                 + SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(attr)
+                                                                    ? 2
+                                                                    : 0
+);
+
+
+const testChars = {    
     sigChars: {
         "Rhys Callaghan": {
             actorData: {
@@ -3314,6 +3328,80 @@ const testChars = {
                 pantheon: "tuathaDeDanann",
                 patron: "aengus",
                 divineTitle: "Bright Eyes",
+                pathPriorities: ["role", "pantheon", "origin"],
+                attributes: {
+                    priorities: ["social", "mental", "physical"],
+                    favoredApproach: "resilience"
+                },
+                tempCreateData: {
+                    pathUpdates: {
+                        origin: {
+                            data: {
+                                title: "Carefree Wanderer With Luck On His Side",
+                                skills: ["empathy", "persuasion", "subterfuge"],
+                                connectionDescription: LoremIpsum(Rand(10, 200))
+                            }
+                        },
+                        role: {
+                            data: {
+                                title: "No Heaven Frontman",
+                                skills: ["athletics", "culture", "persuasion"],
+                                connectionDescription: LoremIpsum(Rand(10, 200))
+                            }
+                        },
+                        pantheon: {
+                            data: {
+                                title: "Scion of Aengus, Step-Scion of the Morrigan",
+                                skills: ["closeCombat", "culture", "subterfuge"],
+                                connectionDescription: LoremIpsum(Rand(10, 200))
+                            }
+                        }                        
+                    },
+                    pathConditionUpdates: {
+                        origin: {
+                            suspension: {
+                                data: {
+                                    title: "Interesting Times",
+                                    description: "2's on any d10s count as 1's when determining botches.",
+                                    resolution: "Resolved when Rhys suffers the effect of a botch."
+                                }
+                            },
+                            revocation: {
+                                data: {
+                                    title: "Karmic Betrayal"
+                                }
+                            }
+                        },
+                        role: {
+                            suspension: {
+                                data: {
+                                    title: "Tone Deaf",
+                                    description: "-2 penalty to all Culture (Music) rolls.",
+                                    resolution: "Resolved when Rhys suffers significant consequences from failing a Culture (Music) roll."
+                                }
+                            },
+                            revocation: {
+                                data: {
+                                    title: "Nickelback 2.0"
+                                }
+                            }
+                        },
+                        pantheon: {
+                            suspension: {
+                                data: {
+                                    title: "Murder of Crows",
+                                    description: "Ominous crows invoke Rhys’ geas to give him a command on behalf of the Morrigan.",
+                                    resolution: "Resolved when Rhys follows the command, or makes a major sacrifice to the Morrigan."
+                                }
+                            },
+                            revocation: {
+                                data: {
+                                    title: "Enemies For Life"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "Horace Farrow": {
@@ -3321,7 +3409,7 @@ const testChars = {
                 genesis: "born",
                 pantheon: "netjer",
                 patron: "horus",
-                divineTitle: "The Tempered Lawgiver",
+                divineTitle: "The Tempered Lawgiver"
             }
         },
         "Brigitte De La Croix": {
@@ -3329,7 +3417,7 @@ const testChars = {
                 genesis: "chosen",
                 pantheon: "loa",
                 patron: "baronSamedi",
-                divineTitle: "Who Waits With Those In Darkness",
+                divineTitle: "Who Waits With Those In Darkness"
             }
         },
         "Adonis Rhodes": {
@@ -3337,7 +3425,7 @@ const testChars = {
                 genesis: "born",
                 pantheon: "theoi",
                 patron: "aphrodite",
-                divineTitle: "Steward of the Heart",
+                divineTitle: "Steward of the Heart"
             }
         },
         "Erik Donner": {
@@ -3345,58 +3433,40 @@ const testChars = {
                 genesis: "born",
                 pantheon: "aesir",
                 patron: "thor",
-                divineTitle: "Guardian of Midgard",
+                divineTitle: "Guardian of Midgard"
             }
         }
     }
 };
 
-const setAssignableSkillDots = (actorData, bonusDots = {xp: 0, other: 0}) => {
-    actorData.skills.assignableDots.xp += bonusDots.xp || 0;
-    actorData.skills.assignableDots.other += bonusDots.other || 0;
-}
-const getAssignableSkillDots = (actorData) => Object.values(actorData.skills.assignableDots).reduce((tot, val) => tot + val, 0);
-const getSkillVals = (actorData) => {
-    // Initialize with "assigned" skill dots:
-    const skillVals = KeyMapObj(SCION.SKILLS.list, (k) => k, (v, k) => actorData.skills.list[k].assigned || 0);
-    // Add base value to path skills depending on priority (should maybe include a check for value <= 5)
-    actorData.testItemCreateData.filter((itemData) => itemData.type === "path")
-                                            .forEach((pathData) => {
-                                                const pathSkillsVal = Flip(actorData.pathPriorities).findIndex((pathName) => pathName === pathData.data.type) + 1;
-                                                pathData.data.skills.forEach((skill) => {skillVals[skill] += pathSkillsVal});
-                                            });
-    return skillVals;
-}
 
 
-const setAssignableAttributeDots = (actorData, bonusDots = {xp: 0, other: 0, primary: 0, secondary: 0, tertiary: 0}) => {
-    actorData.attributes.assignableGeneralDots.xp += bonusDots.xp || 0;
-    actorData.attributes.assignableGeneralDots.other += bonusDots.other || 0;
-    actorData.attributes.assignableArenaDots.primary += bonusDots.primary || 0;
-    actorData.attributes.assignableArenaDots.secondary += bonusDots.secondary || 0;
-    actorData.attributes.assignableArenaDots.tertiary += bonusDots.tertiary || 0;
-}
-const getAssignableAttributeDots = (actorData, category = "general") => ({
-        general: Object.values(actorData.attributes.assignableGeneralDots).reduce((tot, val) => tot + val, 0),
-        primary: actorData.attributes.assignableArenaDots.primary,
-        secondary: actorData.attributes.assignableArenaDots.secondary,
-        tertiary: actorData.attributes.assignableArenaDots.tertiary
-    }[category]);
-const getAttrVals = (actorData) => KeyMapObj(SCION.ATTRIBUTES.list, (v, attr) => 1 
-                                                                     + actorData.attributes.list[attr].assigned 
-                                                                     + SCION.ATTRIBUTES.approaches[actorData.attributes.favoredApproach].includes(attr)
-                                                                        ? 2
-                                                                        : 0
-);
+
+
+
+
+
 const randomizePaths = (actorData) => {
     const pathSkills = {
         origin: [],
         role: [],
         pantheon: SCION.PANTHEONS[actorData.pantheon].assetSkills,
     };
+    actorData.tempCreateData = Merge({
+        pathUpdates: {
+            origin: {data: {}},
+            role: {data: {}},
+            pantheon: {data: {}}
+        }
+    }, actorData.tempCreateData ?? {});
+    Object.entries(actorData.tempCreateData.pathUpdates).forEach(([path, pathData]) => {
+        pathSkills[path] = pathData.data.skills ?? [];
+    });
+    pathSkills.pantheon = _.uniq([...SCION.PANTHEONS[actorData.pantheon].assetSkills, ...actorData.tempCreateData.pathUpdates.pantheon.data.skills]).slice(0, 3);
+    
     // Cycle through path skills, selecting valid path skill for each.
-    ["origin", "role", "pantheon"].forEach((pathType) => {
-        const baseVal = Clone(actorData.pathPriorities).reverse().findIndex((path) => path === pathType) + 1;
+    SCION.PATHS.list.forEach((pathType) => {
+        const baseVal = Flip(actorData.pathPriorities).findIndex((path) => path === pathType) + 1;
         const skillsToAdd = 3 - pathSkills[pathType].length;
         for (let i = 0; i < skillsToAdd; i++) {
             const availableSkills = Object.keys(SCION.SKILLS.list).filter((skill) => Object.values(pathSkills)
@@ -3406,13 +3476,9 @@ const randomizePaths = (actorData) => {
                                                                 && !pathSkills[pathType].includes(skill));
             pathSkills[pathType].push(_.sample(availableSkills));
         }
+        actorData.tempCreateData.pathUpdates[pathType].data.skills = pathSkills[pathType];
     });
-    actorData.testItemCreateData = actorData.testItemCreateData.map((iData) => {
-        if (iData.type === "path") {
-            iData.data.skills = pathSkills[iData.data.type];
-        }
-        return iData;
-    });
+    LOG({actorData: Clone(actorData)}, "Path Randomization", actorData.name, {style: "l3"});
 }
 const randomizeSkills = (actorData) => {
     // Pre-assign 75% of assignable Skill Dots (to a max skill value of 5), leaving the remaining quarter to test dot assigning
@@ -3434,16 +3500,9 @@ const randomizeSpecialties = (actorData) => {
     });
 }
 
-const randomizeAttributePriorities = (actorData) => {
-    actorData.attributes.priorities = _.shuffle(Object.keys(SCION.ATTRIBUTES.arenas));
-}
-const randomizeFavoredApproach = (actorData) => {
-    actorData.attributes.favoredApproach = _.sample(Object.keys(SCION.ATTRIBUTES.approaches));
-}
-
 const randomizeAttributes = (actorData) => {  
     // Assign one-half of available arena dots according to Attribute priority settings:
-    ["primary", "secondary", "tertiary"].forEach((priority, i) => {
+    Object.keys(SCION.ATTRIBUTES.priorities).forEach((priority, i) => {
         const thisArena = actorData.attributes.priorities[i];
         let preassignedArenaDots = Math.ceil(0.5 * getAssignableAttributeDots(actorData, priority)),
             availableAttrs = SCION.ATTRIBUTES.arenas[thisArena].filter((attr) => getAttrVals(actorData)[attr] < 5);
@@ -3515,14 +3574,44 @@ const randomizeCallingKeywords = (actorData) => {
     // callings[randomCalling].keywordsUsed = [_.sample(callings[randomCalling].keywordsChosen)];
 }
 
+const updatePaths = async (actor, updateData) => {
+    const [updateDataSet, fullUpdateData] = [{}, []];
+    Object.entries(updateData.pathUpdates ?? {}).forEach(([path, pathData]) => {
+        const pathItem = actor.paths.find((item) => item.$subtype === path);
+        if (pathItem) {
+            fullUpdateData.push({...pathData, _id: pathItem.$id});
+        }
+    });
+    Object.entries(updateData.pathConditionUpdates ?? {}).forEach(([path, conditionUpdates]) => {
+        const pathItem = actor.paths.find((item) => item.$subtype === path);
+        if (pathItem) {
+            const pathSubItems = pathItem.$items;
+            Object.entries(conditionUpdates).forEach(([condition, conditionData]) => {
+                const conditionItem = Array.from(pathItem.$items).find(([id, item]) => item.$subtype.endsWith(SCase(condition)))[1];
+                if (conditionItem) {
+                    fullUpdateData.push({...conditionData, _id: conditionItem.$id});
+                }
+            });
+        }
+    });
+    LOG({fullUpdateData}, `Updating ${fullUpdateData.length} Sub Items`, actor.name, {groupStyle: "l1"});
+    await actor.updateEmbeddedEntity("OwnedItem", fullUpdateData);
+    return actor;
+}
+
 testChars.createTestChar = async (name) => {
-    game.actors.entries.find((actor) => actor.name === name)?.delete();
-    
-    const [defaultActorData, defaultItemData] = [testChars.actorData, testChars.itemCreateData];
-    const [sigCharActorData, sigCharItemData] = [testChars.sigChars[name]?.actorData ?? {}, testChars.sigChars[name]?.itemCreateData ?? {}];
-    const actorData = Merge(Merge(defaultActorData, sigCharActorData), {testItemCreateData: Merge(defaultItemData, sigCharItemData)});
+    const customActorData = {};
+    if (name) {
+        game.actors.entries.find((actor) => actor.name === name)?.delete();
+        Object.assign(customActorData, testChars.sigChars[name]?.actorData ?? {});
+    } else {
+        name = randomNames.name;
+    }
 
     // #region Data Manipulation: Before Actor Creation
+
+    // Initialize Actor Data
+    const actorData = initializeActorData(true, customActorData, name);
 
     // Initialize Assignable Dots
     setAssignableSkillDots(actorData);
@@ -3535,39 +3624,33 @@ testChars.createTestChar = async (name) => {
     randomizeSkills(actorData);
     randomizeSpecialties(actorData);
 
-    // #region Determine Attribute Arenas, Favored Approach & Randomly Assign Available Skill Dots
-    randomizeAttributePriorities(actorData);
-    randomizeFavoredApproach(actorData);
-    randomizeAttributes(actorData);    
-    // #endregion
+    // Assign Available Attribute Dots
+    randomizeAttributes(actorData);
 
     // #endregion
 
+    const postCreateData = Clone(actorData.tempCreateData);
+    delete actorData.tempCreateData;
     const actorInst = await Actor.create({
         name,
         type: "major",
         data: actorData,
-    }); 
+    });
+    
+    await Sleep(5000);
 
     // #region Actor Manipulation: After Actor Creation
 
+    // Update Path Skills & Conditions
+    await updatePaths(actorInst, postCreateData);
 
-    // #region Randomly Select Callings, Assign Dots, Select Keywords
-
-
+    // Randomly Select Callings, Assign Dots, Select Keywords
     // randomizeCallings(actorData);
     // randomizeKnacks(actorData);
     // randomizeCallingKeywords(actorData);
-    // #endregion
-
-
-
 
     // #endregion
 
-    // #region Update itemCreationData with selected path skills, and assign to actorData for later item creation
-    
-    // #endregion
     return actorInst;
 };
 testChars.createSigChars = async (...names) => {
@@ -3579,7 +3662,25 @@ testChars.createSigChars = async (...names) => {
         LOG({name}, `Creating Actor '${name}'...`, "createTestChar()", {groupStyle: "data"});
         updatePromises.push(testChars.createTestChar(name));
     }
+    for (let i = 0; i < 5; i++) {
+        LOG("Creating Test Character", null, "createTestChar()", {groupStyle: "data"});
+        updatePromises.push(testChars.createTestChar());        
+    }
     return Promise.all(updatePromises);
+};
+testChars.createTestChars = async (numChars = 10) => {
+    await testChars.deleteAllChars();
+    const names = Object.keys(testChars.sigChars);
+    numChars -= names.length;
+    for (const name of names) {
+        LOG({name}, `Creating Actor '${name}'...`, "createTestChar()", {groupStyle: "data"});
+        await testChars.createTestChar(name);
+    }
+    for (let i = 0; i < numChars; i++) {
+        LOG("Creating Test Character", null, "createTestChar()", {groupStyle: "data"});
+        await testChars.createTestChar();
+    }
 }
+testChars.deleteAllChars = async () => game.actors.entries.forEach(async (actor) => actor.delete());
 
 export {SCION, handlebarTemplates, itemCategories, popoutData, testChars};

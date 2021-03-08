@@ -18,10 +18,9 @@
             {{/if}}
             {{/each}}            
         </div>
-        {{log this}}
-        {{#with (bundle "actorID" actorID "blocks" blocks "tooltips" tooltips.skills "skills" skills "type" data.type) as |skillData|}}
-            {{> (../blocks.popouts.skillList.template) skillData }}
-        {{/with}}
+        {{!-- {{#with (bundle "actorID" actorID "blocks" blocks "tooltips" tooltips.skills "skills" skills "type" data.type) as |skillData|}} --}}
+            {{> (blocks.popouts.skillList.template) (bundle "actorID" actorID "blocks" blocks "tooltips" tooltips.skills "skills" skills "type" data.type) }}
+        {{!-- {{/with}} --}}
         <div class="pathConnections width100 alignCenter">
             <h2>{{loc "scion.heading.path.pathConnections"}}</h2>
             <div id="connectionDescription" class="connectionDescription insetFrame contentEditable alignLeft" data-clamplines="4" data-field="data.connectionDescription" data-placeholder="{{loc "scion.heading.path.pathConnectionsPrompt" "path" (concat "scion.path." data.type "Path")}}">{{data.connectionDescription}}</div>
@@ -29,9 +28,7 @@
         <h2 class="alignCenter">{{loc "scion.heading.path.pathConditions"}}</h2>
         <div class="pathCondition flex-row alignCenter width100">
             {{#each conditions as |condition type|}}
-                {{#with ../blocks as | blocks |}}
-                {{> (blocks.partials.pathCondition.template) condition}}
-                {{/with}}
+                {{> (../blocks.partials.pathCondition.template) condition}}
             {{/each}}
         </div>
     </section>

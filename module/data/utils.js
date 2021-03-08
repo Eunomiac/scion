@@ -450,8 +450,10 @@ export const Loc = (locRef, formatDict = {},) => {
     return locRef;
 };
 export const ParseArticles = (str,) => `${str}`.replace(/\b(a|A)\s([aeiouAEIOU])/gu, "$1n $2",);
-export const LoremIpsum = (numWords = 200,) => {
-    const loremIpsumWords = loremIpsumText.replace(/\n/gu, "",).split(/ /u,);
+export const LoremIpsum = (numWords = 200) => {
+    const loremIpsumWords = loremIpsumText.replace(/\n/gu, "",).split(/ /u).slice(Rand(0, 100));
+    loremIpsumWords[0] = SCase(loremIpsumWords[0]);
+    loremIpsumWords.push(...loremIpsumWords);
     while (loremIpsumWords.length < numWords) {
         loremIpsumWords.push(...loremIpsumWords,);
     }

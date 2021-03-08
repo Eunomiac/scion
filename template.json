@@ -5,8 +5,7 @@
             "BASE": {
                 "concept": "",
                 "description": "",
-                "imageURL": "",
-                "testItemCreateData": []
+                "imageURL": ""
             },
             "PC": {
                 "playerName": ""
@@ -113,9 +112,7 @@
         "templates": {
             "BASE": {
                 "title": "",
-                "type": "",
-                "description": "",
-                "details": ""
+                "type": ""
             },
             "PARENTITEM": {
                 "items": {}

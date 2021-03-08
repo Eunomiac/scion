@@ -100,7 +100,7 @@
                           {{#with (lookup ../arenas arena) as |attributes|}}
                           {{#each attributes as |value attribute|}}  
                           <div class="dotline">
-                              <div class="label">{{loc (concat "scion.attribute." attribute)}}</div>
+                              <div class="label">{{loc (concat "scion.attribute." attribute ".name")}}</div>
                               <div class="dotContainer">
                               {{#for value}}
                                   <span class="dot"></span>

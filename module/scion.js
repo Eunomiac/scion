@@ -53,7 +53,6 @@ Hooks.once("init", async () => {
             watchList: ["Rhys"]
         }
     };
-
     window.scion = {
         report: () => {
             game.actors.entries.forEach((actor) => {
@@ -80,7 +79,9 @@ Hooks.once("init", async () => {
                 "...items": actor.items
             }, "ACTOR ITEMS", actor.name, {isLoud: true});
         },
-        createSigChars: testChars.createSigChars
+        createSigChars: testChars.createSigChars,
+        deleteAllChars: testChars.deleteAllChars,
+        createTestChars: testChars.createTestChars
     }
 
     U.LOG(U.IsDebug() && "INITIALIZING SCION.JS ...");
@@ -212,13 +213,6 @@ Hooks.once("init", async () => {
             const actorID = U.Remove(args, (val) => typeof val === "string" && game.actors.get(val)) || options.data.root.actor?._id;
             const [categories, trait, subTrait] = args;
             const [cat, subCat] = categories.split(":");
-            U.LOG({args, options, actorID, parsed: {
-                categories,
-                cat,
-                subCat,
-                trait,
-                subTrait
-            }}, "checkInvalid", "checkInvalid", {groupStyle: "l3"});
             const actor = game.actors.get(actorID);
             switch (cat) {
                 case "skill": {
